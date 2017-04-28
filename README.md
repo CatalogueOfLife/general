@@ -191,15 +191,14 @@ Action:
 
 CoL Portal
 With a changed database model the portal as it is will be dysfunctional. Consider the least intrusive and resource efficient way to revive the essential features within the new infrastructure, for example:
- A) Update the current PHP portal code to 
- 
+
+ 1. Update the current PHP portal code to 
     - Use the new database model for SQL queries
     - or instead use the new API
     - Deal with deleted taxa in visualisation
     - Resolve stable taxon ids
     - Show and mark provisional data
-
- B) Rewrite the portal in the same framework used for the Nomenclator
+ 2. Rewrite the portal in the same framework used for the Nomenclator
     - Reuse the existing portal url layout, html & css
     - Consider if internationalisation is needed
 
