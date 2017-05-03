@@ -3,6 +3,10 @@
 The main entities represented in the Catalogue of Life and a clarification of their semantics.
 The entities are used to establish an API primarily and the actual storage model might differ.
 
+## Exchange format
+This model will be mapped to a modified exchange format based on the previous i4Life "Checklist exhcange format", see [exchange format specs](EXCHANGE-FORMAT.md).
+
+
 # Nomenclature
 ## Name
 A scientific name is a surprisingly ambigous term. 
@@ -69,8 +73,6 @@ A person that is an author of scientific names.
 The actual name string of the author can vary similar to scientific names due to spelling, transliteration, aliases, marriage or other name changes over time.
 e.g., "Carlolus Linnaus", "Carl Linnaus", "Carl von Linné", etc.  
 
-#### Properties
-
  - firstName: the preffered full first name(s) separated by whitespace
  - lastName: full last name incl prefixes like "van" if existing
  - aliases: list of alternative representations (LastName, FirstNames)
@@ -81,8 +83,22 @@ e.g., "Carlolus Linnaus", "Carl Linnaus", "Carl von Linné", etc.
  - collections: collection codes known to host type specimens
 
 ## Literature
-*TBD*
+Modelling and maintaining literature data can get pretty complex if fully atomized. 
+Use cases are needed to justify a fully atomized data model over a very simplistic one like the Catalogue of Life is using right now:
 
+  - authors: Complete author string
+  - year: Year(s) of publication
+  - title: Title of the publication
+  - text: Additional information pertaining to the publication
+  - uri: Link other than DOI to online version
+  - doi: DOI of publication
+
+### Normalized alternative
+A more normalized structure would separate out journals and book series which reduces the work of actively managing these entities in a nomeclator a lot.
+It would also allow better linking to BHL for articles, as matching by journal, volume and page is least ambiguous.
+
+ **TBD**
+  
 > RICH:
 > 2) Reference
 > Conceptual entity representing any form of information assertion made by one or more Agent instances, asserted at a particular time.  
@@ -94,12 +110,35 @@ e.g., "Carlolus Linnaus", "Carl Linnaus", "Carl von Linné", etc.
 > the link between the Reference instance and the AgentName instance).  In other words, the same Reference cannot have both "Carolus Linnaeus" and "Carl von Linné" 
 > as separate linked AgentName instances, if both of those AgentNames refer to the same Agent instance).  An useful analogy is that "Agent is to Reference" as "Location is to Event".  
 > Whereas an Event is a "date-stamped location" (with various metadata), a Reference is a "date-stamped Agent" (with various metadata).
+
 ## Type
 
 
+
 # Taxonomy
+Entities primarily related to taxonomic opinions, not the scientific name itself.
+These entities are therefore only treated in the Catalogue of Life, but not in the nomenclator.
+
 ## Taxon
 mint identifiers and detail scope
+
+CREATE TABLE `taxon_detail` (
+  `taxon_id` int(10) unsigned NOT NULL,
+  `author_string_id` int(10) unsigned DEFAULT NULL COMMENT 'Link to author citation of the taxon',
+  `scientific_name_status_id` tinyint(2) unsigned NOT NULL,
+  `scrutiny_id` int(10) unsigned DEFAULT NULL,
+  `additional_data` text COMMENT 'Optional free text field describing the taxon',
+  `taxon_guid` varchar(255) DEFAULT NULL,
+  `name_guid` varchar(255) DEFAULT NULL,
+  `has_preholocene` smallint(1) DEFAULT NULL DEFAULT '0',
+  `has_modern` smallint(1) DEFAULT NULL DEFAULT '1',
+  `is_extinct` smallint(1) DEFAULT NULL DEFAULT '0',
+  PRIMARY KEY (`taxon_id`),
+  KEY `author_string_id` (`author_string_id`),
+  KEY `taxononomic_status_id` (`scientific_name_status_id`),
+  KEY `scrutiny_id` (`scrutiny_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Details pertaining to species and infraspecies';
+
 
 ### Taxon Name Usage (TNU)
 > RICH:
@@ -132,12 +171,40 @@ which we consider to belong to the genus “Aus”, we can collapse these down t
     - Xus cus Jones 1900
 
 ## Vernacular Name
-Included in the system. The issue is relation with nomenclator
+Vernacular or common names that are used for a given taxon. Any taxon can have multiple vernacular names, even for the same language.
+Properties of a common name are:
+
+ - name: the vernacular name itself
+ - language: the language of the name
+ - country: the country the name is used in
+ - source: a source reference where the name was listed
 
 ## Distribution
+An species range distribution often based on experts knowledge. 
+A single distribution record for a species should cover only one known area.
 
-## Species information: environment, fossil/extinct, geological age
+ - area: the named area, preferrably an area code from a given standard
+ - standard: the standard the given code is based on. If missing the area is taken as free text. One out of: tdwg, iho, eez, iso
+ - status: alien, alien-domesticated, domesticated, native, native-domesticated or uncertain
+ - source: a source reference where the name was listed
 
+## Environment information:
+A very coarse environment/habitat classification of species is maintained using a single property from a controlled vocabulary:
+
+ - lifezone: brackish, freshwater, marine or terrestrial
+
+
+## Recent and fossil taxa
+For palaeo taxa it is desirable to indicate whether an organism is known from fossils and the geological time range of these.
+
+For recent taxa ideally we also want to know whether is is considered currently extinct, but known to have existed during the holocene.
+As species go extinct rather quickly these days and true extinction of species is difficult to assess, we propose to leave this job to other initiatives like the IUCN 
+and only track whether an organism is known from the holocene. The following properties are proposed:
+
+ - livingPeriodStart: Earliest geological time in millions of years an organism is known to have lived on Earth
+ - livingPeriodEnd: Latest geological time in millions of years an organism is known to have lived on Earth
+ - preholocene: true if organism is known from before the Holocene, i.e. before ~11.700 years before now
+ - holocene: true if organism is known from the Holocene, i.e. after the ice age from ~11.700 years to now
 
 # Other
 
@@ -145,6 +212,30 @@ Included in the system. The issue is relation with nomenclator
 if possible tie to Authors
 
 ## Source metadata (GSD)
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL COMMENT 'Full name of the source database',
+  `abbreviated_name` varchar(50) DEFAULT NULL COMMENT 'Abbreviated name of the source database',
+  `group_name_in_english` varchar(255) DEFAULT NULL COMMENT 'Name in English of the group(s) treated in the database',
+  `authors_and_editors` varchar(255) DEFAULT NULL COMMENT 'Optional author(s) and editor(s) of the source database',
+  `organisation` varchar(500) DEFAULT NULL COMMENT 'Optional organisation which has compiled or is owning the source database',
+  `contact_person` varchar(255) DEFAULT NULL COMMENT 'Optional contact person of the source database',
+  `version` varchar(25) DEFAULT NULL COMMENT 'Optional version number of the source database',
+  `release_date` date DEFAULT NULL COMMENT 'Optional most recent release date of the source database',
+  `abstract` text COMMENT 'Optional free text field describing the source database',
+  `taxonomic_coverage` text,
+  `is_new` tinyint(1) NOT NULL,
+  `coverage` varchar(255) DEFAULT NULL,
+  `completeness` varchar(10) DEFAULT NULL,
+  `confidence` tinyint(1) DEFAULT NULL,
 
+CREATE TABLE `taxonomic_coverage` (
+  `source_database_id` int(10) NOT NULL,
+  `taxon_id` int(10) NOT NULL,
+  `sector` tinyint(2) NOT NULL,
+  `point_of_attachment` tinyint(1) NOT NULL DEFAULT '0',
+  KEY `source_database_id` (`source_database_id`),
+  KEY `sector` (`sector`),
+  KEY `taxon_id` (`taxon_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
