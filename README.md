@@ -2,7 +2,7 @@
 
 The CoL+ project addresses two primary concerns:
 
- 1) The broadening of covered names so the catalogue can act as a taxonomic backbone for GBIF and similar global activities. This includes both filling true taxonomic gaps with provisional data and adding objective synonymies for existing groups.
+ 1) The broadening of covered names so the catalogue can act as a taxonomic backbone for GBIF and similar global activities. This includes both filling true taxonomic gaps with provisional data and adding homotypic synonymies for existing groups.
 
  1) The migration of essential features of the existing CoL to a new infrastructure to address current sustainability and hosting issues. This includes automation of the assembly process as much as possible to free editorial resources and to reduce latency for updated GSD data to show up in the catalogue.
 
@@ -20,13 +20,11 @@ Nevertheless CoL+ tries to show some path forward by
  - Pilot migration to existing taxonomic editing environments (e.g. Species Files)
  - Pilot migration to a new CoL GSD editor
 
-Actions:
-
- - Inventory of GSD source formats and system used to manage data (OB: YR)
- - Review current standard format, DWC-A, WFO profile, TCS in order to define a simple exchange format that meets requirements.
-
 ## Unified Nomenclator
-CoL+ will create a unified and broadened nomenclator of scientific names across all life that provides an authoritative view and single place of editorial efforts. It is intended to track objective information that can be verified from literature and thus lends itself well to collaborative editing and review. This allows much better scaling to complete the coverage of all original and subsequently recombined names and tie them to their publication.
+CoL+ will create a unified and broadened nomenclator of scientific names across all life that provides an authoritative view and single place of editorial efforts. 
+It is intended to track objective information that can be verified from literature and thus lends itself well to collaborative editing and review. 
+This allows much better scaling to complete the coverage of all original and subsequently recombined names and tie them to their publication.
+
 #### Names covered
 There are different kind of scientific names with different syntactical structures. 
 In the first iteration the nomenclator tries to be comprehensive for all:
@@ -56,11 +54,6 @@ Other options to be considered include:
  - Nomenclatural code alone
  - Nothing at all
 
-Action points
-
- - Define relevant data entities, e.g. name, author, reference (MD,RP)
- - Need to involve contributors and users of what they actually want in relation to the nomenclature
- - We need something that organises the data if there is no taxonomic scrutiny available.The implementation is not clear as yet.
 
 #### Open editorial web-interface
 
@@ -70,9 +63,6 @@ Action points
  - Supports annotation (github issues)
  - Incentivisation strategies
 
-Action:
-
- - A plan will be developed to frame governance, content solicitation from new sources, rules regarding the editorial process.(OB,MD, DR)
  
 #### Webservice API
 
@@ -95,11 +85,7 @@ A simple way to expose changes since a given date is a possible solution to be e
 
 Consider editorial blocking of virus & bacteria names as these are well managed externally already.
 
-Action:
-
- - Consult existing nomenclators how to best exchange information (MD)
-
-#### Extract content for review
+#### Suggest content for review
 Many interesting facts about a name are building up relations with existing data. 
 These can often be discovered by software and proposed to the system for later, manual review.
 
@@ -109,6 +95,7 @@ These can often be discovered by software and proposed to the system for later, 
    - Action:  Scope possible sources and mechanisms for linking literature to a name record.	
  - Suggest links to type specimens in GBIF or JSTOR
  - Suggest original name by looking at shared terminal epithets from the same original author within a family. Implemented already in the GBIF Backbone building.
+
 
 ## Taxonomic web editor
 Some GSDs have expressed the wish and need to work in a convenient, collaborative online environment. 
@@ -131,7 +118,6 @@ An extended editor out of scope for CoL+ should also be managing additional spec
  - Distribution ranges
  - Environment information
 
-ACTION:  Establish API and Pilot with existing (willing) partner
 
 ## New CoL assembly process
 Integrating source data both from a GSD and a non complete, e.g. regional source should be an automated and repeatable process as much as possible. 
@@ -168,10 +154,6 @@ Key features of the assembly process are:
  - Final integrity checks and validation
  - Point reviewers to flagged issues.
 
-Action:
-
- - Document the current GSD assembly process including the editorial process and processes across the multiple locations where assembly occurs. Document how IRMNG genera and regional lists get integrated (OB: DM, LA, YR)
- - Define rules for a stable taxonID. Understanding when a taxon changes sufficiently to warrant an identifier change  (RP, MD, DR, DE, TB)
 ![](taxon-concept-changes.jpg)
 
 ## Migration of current Portal, API & DVD
@@ -185,11 +167,7 @@ With the introduction of stable taxon identifiers that will resolve forever even
 Annual or quarterly snapshots will be preserved as backups and as a source for generating future metrics not yet perceived, 
 but they will not be exposed anymore through the webservices or the portal.
 
-Action:
-
- - Lead discussion if stable taxon ids are sufficient to support a single, dynamic system (OB, MD, Global Team)
-
-CoL Portal
+#### CoL Portal
 With a changed database model the portal as it is will be dysfunctional. Consider the least intrusive and resource efficient way to revive the essential features within the new infrastructure, for example:
 
  1. Update the current PHP portal code to 
@@ -202,11 +180,6 @@ With a changed database model the portal as it is will be dysfunctional. Conside
     - Reuse the existing portal url layout, html & css
     - Consider if internationalisation is needed
 
-Action:
-
- - Lead discussion if internationalisation is crucial and document URLs to be kept in a potential new implementation (OB)
- - Evaluate what’s needed for the PHP portal to be adapted to the new data model
-
 #### CoL Webservices
 Similar to the existing portal the webservices should be continued to not break existing users. 
 In case the new webservices provide all essential features in a different way consider to deprecate the current API 
@@ -214,14 +187,5 @@ at some stage and help users to migrate to the new version.
 
 If the old webservices have to stay as they are it would be best to adapt the current codebase to the new infrastructure as for the portal above.
 
-Action:
-
- - Document the essential current webservices and their usage in order to assess consequences of deprecation (OB)
- - Decide whether the existing list matching and 4D4life services need to be migrated (OB)
-
 #### Annual Checklist DVD
 Annual checklist DVD will still be produced. 
-
-Action:
-
- - Document the DVD process and the required data input (OB)
