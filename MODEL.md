@@ -26,11 +26,11 @@ Author spelling, transliterations, epither gender, additional infrageneric or in
 Listed here are 7 distinct names with some of their string representations:
 
  1. Aus bus Linnaeus 1758
-   - Aus bus Linn. 1758
-   - Aus bus Linn 1758
-   - Aus bus L.
-   - Aus ba Linn 1758.
-   - Aus (Hus) bus L.
+    - Aus bus Linn. 1758
+    - Aus bus Linn 1758
+    - Aus bus L.
+    - Aus ba Linn 1758.
+    - Aus (Hus) bus L.
  2. Xus bus (Linn, 1758) 
     - Xus bus (Linn) Smith 
  3. Xus cus Smith, 1850
