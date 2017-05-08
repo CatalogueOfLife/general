@@ -7,8 +7,23 @@ The entities are used to establish an API primarily and the actual storage model
 This model will be mapped to a modified exchange format based on the previous i4Life "Checklist exhcange format", see [exchange format specs](EXCHANGE-FORMAT.md).
 
 
+## Common properties
+There are some common properties all/most entities share, mostly related to comments and an audit log.
+These will not be mentioned in the specific entities below.
+
+ - modified: timestamp of last change
+ - modifiedBy: Contributor
+ - comments: list of comments attached to the entity
+ - sources: list of Reference used, backing the current state of the entity
+ 
+## Versioning
+TODO:
+
+
+
+
 # Nomenclature
-## Name
+## ScientificName
 A scientific name is a surprisingly ambigous term. 
 CoL deals and categorizes the following types of names:
 
@@ -94,25 +109,42 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
 [TCS](https://github.com/tdwg/tcs) and [DwC](https://github.com/tdwg/dwc) from TDWG deal with names.
 
 
+### Rank
+There is the need to deal with old ranks not accepted anymore.
+The list given is intended to be interoperable between name providers for bacteria, viruses, fungi, plants, and animals. 
+It is not assumed that in each taxonomic group all ranks have to be used. 
+The enumeration attempts to strike a balance between listing all possible rank terms, and remaining comprehensible. 
+Not included in the list are the botanical "notho-" ranks, which are used to designate hybrids (nothospecies, nothogenus) as this information is handled by the Name.notho property already.
+
+Sources:
+
+ - [GBIF](https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/Rank.java)
+ - [TCS](https://github.com/tdwg/tcs/blob/master/TCS101/v101.xsd#L860) 
+ - [TaxCat2](http://mansfeld.ipk-gatersleben.de/apex/f?p=185:78:::NO::P77_TAXCAT,P77_DB_CHECKBOX1,77_TAXCAT2RAD,77_SHOWRAD:%25,,0,s_All) 
+
+
 ### Name properties
- - scientificName: full string incl authorship
+ - scientificName: full string incl authorship and rank marker for infragenerics and infraspecfics
+ - canonicalName: plain name made from 1-3 name epithets only, exluding authors and rank markers
  - nomenclaturalCode: [Algae, Fungi and Plants](http://www.iapt-taxon.org/nomen/), [Animals](http://www.nhm.ac.uk/hosted-sites/iczn/code/), [Bacteria](https://www.ncbi.nlm.nih.gov/books/NBK8817/), [Virus](https://talk.ictvonline.org/information/w/ictv-information/383/ictv-code)
- - monomial: for monomials at higher rank than genus, e.g. a family name
+ - uninomial: for names at higher rank than genus, e.g. a family name
  - genus: the genus part of a name
  - infragenericEpithet: the infrageneric epithet. Used only as the terminal epithet for names at infrageneric ranks, not for species
  - specificEpithet
  - infraspecificEpithet
- - rank
+ - rank: rank of the name from enumeration above
+ - notho: the part of the name which is considered a hybrid; generic, infrageneric, specific, infraspecific (see [GBIF](https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/NamePart.java#L24)
  - authorship: full string
  - originalAuthors: list of NameAuthor entities
  - originalYear: year of original name publication
- - combinationAuthors: list of NameAuthor entities
+ - combinationAuthors: list of NameAuthor entities excluding ex- authors
  - combinationYear: year of combination publication, usually the same as publishedIn reference
  - publishedIn: Reference the name was published in
  - publishedInPage: exact first page of the treatment within above reference
  - publishedInLink: URL to the first page of the treatment, e.g. in BHL, BioStor or Zenodo
  - originalName: link to the original name. In case of [replacement names](https://en.wikipedia.org/wiki/Nomen_novum) it points back to the replaced synonym.
  - isReplacement: flag to indicate that this name is a replacement name
+ - isCodeCompliant: flag to indicate that this name is available/validly published
  - remark: notes for remarks on the name
 
 TODO: handle suppressed names, name status & other nom acts. 
@@ -171,25 +203,17 @@ Entities primarily related to taxonomic opinions, not the scientific name itself
 These entities are therefore only treated in the Catalogue of Life, but not in the nomenclator.
 
 ## Taxon
-mint identifiers and detail scope
+For taxon concept identity discussion see issue#6
 
-CREATE TABLE `taxon_detail` (
-  `taxon_id` int(10) unsigned NOT NULL,
-  `author_string_id` int(10) unsigned DEFAULT NULL COMMENT 'Link to author citation of the taxon',
-  `scientific_name_status_id` tinyint(2) unsigned NOT NULL,
-  `scrutiny_id` int(10) unsigned DEFAULT NULL,
-  `additional_data` text COMMENT 'Optional free text field describing the taxon',
-  `taxon_guid` varchar(255) DEFAULT NULL,
-  `name_guid` varchar(255) DEFAULT NULL,
-  `has_preholocene` smallint(1) DEFAULT NULL DEFAULT '0',
-  `has_modern` smallint(1) DEFAULT NULL DEFAULT '1',
-  `is_extinct` smallint(1) DEFAULT NULL DEFAULT '0',
-  PRIMARY KEY (`taxon_id`),
-  KEY `author_string_id` (`author_string_id`),
-  KEY `taxononomic_status_id` (`scientific_name_status_id`),
-  KEY `scrutiny_id` (`scrutiny_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Details pertaining to species and infraspecies';
-
+ - taxonId
+ - name: Name
+ - status: accepted, doubtful, synoym, heterotypicSynonym, homotypicSynonym
+ - accepted: accepted Taxon in case of synonyms
+ - parent: Taxon to establish taxonomic hierarchy. Not used for synonyms
+ - accordingTo: Reference that describes the taxon concept
+ - remarks: taxonomic notes
+ 
+TODO: scrutiny, accordingTo vs plain list of references as sources
 
 
 ### Synonymy
@@ -205,6 +229,10 @@ which we consider to belong to the genus “Aus”, we can collapse these down t
     - Xus bus subsp. cus Smith 1850
  2. Xus dus Pyle 2000
     - Xus cus Jones 1900
+
+### Pro parte synonyms, splits & merges
+TODO:
+
 
 ## Vernacular Name
 Vernacular or common names that are used for a given taxon. Any taxon can have multiple vernacular names, even for the same language.
