@@ -11,6 +11,7 @@ This model will be mapped to a modified exchange format based on the previous i4
 There are some common properties all/most entities share, mostly related to comments and an audit log.
 These will not be mentioned in the specific entities below.
 
+ - key
  - modified: timestamp of last change
  - modifiedBy: Contributor
  - comments: list of comments attached to the entity
@@ -42,24 +43,32 @@ Lexical variations exist for various reasons.
 Author spelling, transliterations, epither gender, additional infrageneric or infraspecific indications, cited species authors in infraspecific names are common reasons.
 Listed here are 7 distinct names with some of their string representations:
 
+```
  1. Aus bus Linnaeus 1758
     - Aus bus Linn. 1758
     - Aus bus Linn 1758
     - Aus bus L.
     - Aus ba Linn 1758.
     - Aus (Hus) bus L.
+    
  2. Xus bus (Linn, 1758) 
     - Xus bus (Linn) Smith 
+    
  3. Xus cus Smith, 1850
     - Xus cus Sm.
+    
  4. Xus cus Jones 1900
+ 
  5. Xus bus cus Smith 1850
     - Xus bus subsp. cus Smith 1850
+    
  6. Xus dus Pyle 2000
+ 
  7. Foo bar var. lion Smith 1850
     - Foo bar L. var. lion Smith
     - Foo bar subsp. dar var. lion Smith 1850
     - Foo bar Lin. subsp. dar Mill. var. lion Smith 1850
+```
 
 New names (**sp./gen. nov.**), new recombinations of the same epithet (**comb. nov.**), a name at a new rank (**stat. nov.**) 
 or replacement names (**nom. nov.**) are all treated as distinct names. 
@@ -78,17 +87,19 @@ Original names are not necessarily Code-compliant original descriptions, but usu
 
 The above names can be clustered into four sets of homotypic synonym groups, shown with canonical authorship:
 
+```
  1. Aus bus Linnaeus 1758
     - Aus ba Linnaeus 1758 [orthographic variant]
-    - Xus bus (Linnaeus 1758) Smith 1850 [alternate combination]
- 
+    - Xus bus (Linnaeus 1758) Smith 1850 [alternate combination] 
+    
  2. Xus cus Smith 1850
     - Xus bus subsp. cus Smith 1850 [alternate rank]
- 
+    
  3. Xus cus Jones 1900 (heterotypic homonym of Xus cus Smith 1850)
     - Xus dus Pyle 2000 [replacement name for Xus cus Jones]
-
+    
  4. Foo bar var. lion Smith 1850
+```
 
 #### comb. nov. in ICZN vs ICN
 
@@ -221,14 +232,17 @@ Assuming that the homonyms Xus cus Smith 1850 and Xus cus Jones 1900 are for com
 and that we now regard Xus cus Smith 1850 as a subjective junior heterotypic synonym of Aus bus Linnaeus 1758, 
 which we consider to belong to the genus “Aus”, we can collapse these down to two Accepted names (homotypic and heterotypic synonymy included indented under each):
 
+```
  1. Xus bus (Linnaeus 1758) Smith 1850
     - Aus bus Linnaeus 1758
     - Aus buus Linnaeus 1758
     - Xus bus (Linnaeus 1758) Smith 1850
     - Xus cus Smith 1850
     - Xus bus subsp. cus Smith 1850
+
  2. Xus dus Pyle 2000
     - Xus cus Jones 1900
+```
 
 ### Pro parte synonyms, splits & merges
 TODO:
@@ -275,34 +289,26 @@ and only track whether an organism is known from the holocene. The following pro
 # Other
 
 ## Contributor
-A contributor with a system login. If possible tie to Authors and allow ORCID and other external linkages
+A contributor with a system login. Also to be used for bots modifying data.
+If possible tie to Authors and allow ORCID and other external linkages
 
 
 ## Source metadata (GSD)
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL COMMENT 'Full name of the source database',
-  `abbreviated_name` varchar(50) DEFAULT NULL COMMENT 'Abbreviated name of the source database',
-  `group_name_in_english` varchar(255) DEFAULT NULL COMMENT 'Name in English of the group(s) treated in the database',
-  `authors_and_editors` varchar(255) DEFAULT NULL COMMENT 'Optional author(s) and editor(s) of the source database',
-  `organisation` varchar(500) DEFAULT NULL COMMENT 'Optional organisation which has compiled or is owning the source database',
-  `contact_person` varchar(255) DEFAULT NULL COMMENT 'Optional contact person of the source database',
-  `version` varchar(25) DEFAULT NULL COMMENT 'Optional version number of the source database',
-  `release_date` date DEFAULT NULL COMMENT 'Optional most recent release date of the source database',
-  `abstract` text COMMENT 'Optional free text field describing the source database',
-  `taxonomic_coverage` text,
-  `is_new` tinyint(1) NOT NULL,
-  `coverage` varchar(255) DEFAULT NULL,
-  `completeness` varchar(10) DEFAULT NULL,
-  `confidence` tinyint(1) DEFAULT NULL,
+TODO: review current fields:
 
-CREATE TABLE `taxonomic_coverage` (
-  `source_database_id` int(10) NOT NULL,
-  `taxon_id` int(10) NOT NULL,
-  `sector` tinyint(2) NOT NULL,
-  `point_of_attachment` tinyint(1) NOT NULL DEFAULT '0',
-  KEY `source_database_id` (`source_database_id`),
-  KEY `sector` (`sector`),
-  KEY `taxon_id` (`taxon_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+ - name: Full name of the source database
+ - abbreviatedName: Abbreviated name of the source database
+ - groupName: Name in English of the group(s) treated in the database
+ - authorsAndEditors: Optional author(s) and editor(s) of the source database
+ - organisation: Optional organisation which has compiled or is owning the source database
+ - contactPerson: Optional contact person of the source database
+ - version: Optional version number of the source database ???
+ - releaseDate: Optional most recent release date of the source database
+ - abstract: Optional free text field describing the source database
+ - taxonomicCoverage
+ - isNew
+ - coverage
+ - completeness
+ - confidence
 
 
