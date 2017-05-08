@@ -18,6 +18,8 @@ CoL deals and categorizes the following types of names:
 
 A name includes it's authorship. Two homonyms with different authors therefore represent two different name entities.
 
+### Lexical variations
+
 The same name can usually be represented by many different strings which we refer to as lexical variations. 
 For each name a standard representation, the canonical form, exists.
 
@@ -44,15 +46,20 @@ Listed here are 7 distinct names with some of their string representations:
     - Foo bar subsp. dar var. lion Smith 1850
     - Foo bar Lin. subsp. dar Mill. var. lion Smith 1850
 
-Recombinations of the same epithet are treated as distinct names. 
+New names (**sp./gen. nov.**), new recombinations of the same epithet (**comb. nov.**), a name at a new rank (**stat. nov.**) 
+or replacement names (**nom. nov.**) are all treated as distinct names. 
 
-### Homotypic groups
+### Homotypic group & original name
 Names based on the same type can be clustered together as a homotypic group of names.
-The first, originally published name, the protonym or basionym in botany, is used to represent such a group 
-as it is a clean proxy to the type specimen other than for replacement names.
-Protonyms are not necessarily Code-compliant original descriptions, but usually they are. 
+A homotypic group not only includes all subsequent recombinations, but also any [replacement name](https://en.wikipedia.org/wiki/Nomen_novum) if existing.
+These names are homotypic synonyms, also called nomenclatural or objective synonyms.
 
-A homotypic group not only includes all subsequent recombinations, but also any replacement names if existing.
+The first, originally published name is used to represent such a group as it is a clean proxy to the type specimen,
+therefore every name in a homotypic group points back to the same original name.
+
+Protonym in zoology and basionym in botany are terms for a very similar concept, but they do not include replacement names and are rather code specific 
+so we will refer to *original name* here instead, inline with Darwin Core terminology.
+Original names are not necessarily Code-compliant original descriptions, but usually they are. 
 
 The above names can be clustered into four sets of homotypic synonym groups, shown with canonical authorship:
 
@@ -68,23 +75,66 @@ The above names can be clustered into four sets of homotypic synonym groups, sho
 
  4. Foo bar var. lion Smith 1850
 
-## Author
-A person that is an author of scientific names. 
+#### comb. nov. in ICZN vs ICN
+
+One of the most notable differences between [ICN](http://www.iapt-taxon.org/nomen/) 
+and [ICZN](http://www.nhm.ac.uk/hosted-sites/iczn/code/) is the way names are cited when a species is placed in a different genus from the one it was originally published in (a comb. nov.). 
+Botanists have a convention of always citing the authors of the original combination in brackets followed by the names of the authors of the combination. 
+Zoologists don't follow this convention, they simply place the author of the original combination in brackets for the new combination and don't cite the authors who were first to make the new combination. 
+This difference is cosmetic. Indeed [ICZN Recommendation 51G](http://www.nhm.ac.uk/hosted-sites/iczn/code/index.jsp?article=51) is that new combinations in zoology should be quoted in a similar way to the way they are quoted in botany.
+
+*Basionym* is a well established term in the ICN where it is defined that 
+a "basionym provides the final epithet, name, or stem of the new combination or name at new rank" (ICN Art. 6.10 & Art. 41).
+It is the orginal combination of a name as viewed from a new combination. The basionym is therefore always relative to a new combination. 
+A name can't be a basionym in its own right only relative to another name. 
+ICZN does not mention the term basionym but the notion is clearly present in zoological nomenclature as zoologists also have the concept of the new recombination of a name. 
+
+
+### Standards
+[TCS](https://github.com/tdwg/tcs) and [DwC](https://github.com/tdwg/dwc) from TDWG deal with names.
+
+
+### Name properties
+ - scientificName: full string incl authorship
+ - nomenclaturalCode: [Algae, Fungi and Plants](http://www.iapt-taxon.org/nomen/), [Animals](http://www.nhm.ac.uk/hosted-sites/iczn/code/), [Bacteria](https://www.ncbi.nlm.nih.gov/books/NBK8817/), [Virus](https://talk.ictvonline.org/information/w/ictv-information/383/ictv-code)
+ - monomial: for monomials at higher rank than genus, e.g. a family name
+ - genus: the genus part of a name
+ - infragenericEpithet: the infrageneric epithet. Used only as the terminal epithet for names at infrageneric ranks, not for species
+ - specificEpithet
+ - infraspecificEpithet
+ - rank
+ - authorship: full string
+ - originalAuthors: list of NameAuthor entities
+ - originalYear: year of original name publication
+ - combinationAuthors: list of NameAuthor entities
+ - combinationYear: year of combination publication, usually the same as publishedIn reference
+ - publishedIn: Reference the name was published in
+ - publishedInPage: exact first page of the treatment within above reference
+ - publishedInLink: URL to the first page of the treatment, e.g. in BHL, BioStor or Zenodo
+ - originalName: link to the original name. In case of [replacement names](https://en.wikipedia.org/wiki/Nomen_novum) it points back to the replaced synonym.
+ - isReplacement: flag to indicate that this name is a replacement name
+ - remark: notes for remarks on the name
+
+TODO: handle suppressed names, name status & other nom acts. 
+
+
+## NameAuthor
+A person that is an author of scientific names. Not to be used for Reference authors.
 The actual name string of the author can vary similar to scientific names due to spelling, transliteration, aliases, marriage or other name changes over time.
 e.g., "Carlolus Linnaus", "Carl Linnaus", "Carl von Linné", etc.  
 
- - firstName: the preffered full first name(s) separated by whitespace
- - lastName: full last name incl prefixes like "van" if existing
- - aliases: list of alternative representations (LastName, FirstNames)
+ - firstname: the preffered full first name(s) separated by whitespace
+ - surname: full last name incl prefixes like "van" if existing
+ - aliases: list of alternative representations (surname, firstname)
  - yearOfBirth
  - yearOfDeath
  - areaOfInterest: list of groups of higher taxa
  - biography: short description of the persons (work) life
  - collections: collection codes known to host type specimens
 
-## Literature
-Modelling and maintaining literature data can get pretty complex if fully atomized. 
-Use cases are needed to justify a fully atomized data model over a very simplistic one like the Catalogue of Life is using right now:
+## Reference
+Modelling and maintaining literature data can become a major burden. 
+Currently the Catalogue of Life is using a very simplistic model useful when aggregating but not managing literature:
 
   - authors: Complete author string
   - year: Year(s) of publication
@@ -93,25 +143,26 @@ Use cases are needed to justify a fully atomized data model over a very simplist
   - uri: Link other than DOI to online version
   - doi: DOI of publication
 
-### Normalized alternative
-A more normalized structure would separate out journals and book series which reduces the work of actively managing these entities in a nomeclator a lot.
-It would also allow better linking to BHL for articles, as matching by journal, volume and page is least ambiguous.
+### Standards
+There are various standards existing so sharing becomes simpler and with tools ready to be used. Specifically for JSON Rod Page put together a nice overview:
+https://github.com/rdmpage/bibliographic-metadata-json
 
- **TBD**
-  
-> RICH:
-> 2) Reference
-> Conceptual entity representing any form of information assertion made by one or more Agent instances, asserted at a particular time.  
-> The "information assertion" is wide open, and can include any form of static documentation (e.g., publication).  
-> Reference instances are linked to AgentName instances (rather than directly to Agent instances), 
-> because it's useful to track the orthography of an author name as it actually appears in the documented reference (e.g., byline of a publication).  
-> Agent "authors" associated with a single Reference have a specific "role" in the association (e.g., "author", "editor", "artist", etc.), 
-> and is represented as an ordered list. Business Rules ensure that there can only be one Agent-Reference link as an author (with Agent inherited through 
-> the link between the Reference instance and the AgentName instance).  In other words, the same Reference cannot have both "Carolus Linnaeus" and "Carl von Linné" 
-> as separate linked AgentName instances, if both of those AgentNames refer to the same Agent instance).  An useful analogy is that "Agent is to Reference" as "Location is to Event".  
-> Whereas an Event is a "date-stamped location" (with various metadata), a Reference is a "date-stamped Agent" (with various metadata).
+From that BibJSON is very appealing for the API model:
+http://okfnlabs.org/bibjson/
+
+### Treatments
+Treatments are the section of a publication that deals with a single scientific name. They are a unit of citation below articles. [Plazi](http://www.plazi.org) is based on them 
+and Taxon Name Usages (TNU) in [GNUB](http://globalnames.org/docs/gnub/) correspond to treatments.
+
+The ability to link to the treatment of a name is very useful. 
+As every name has its own treatment it makes sense to attach treatment specific attributes to the [Name](#Name properties) itself.
+
 
 ## Type
+
+TODO: model type designations, both type specimen and type species
+
+
 
 
 
@@ -139,21 +190,6 @@ CREATE TABLE `taxon_detail` (
   KEY `scrutiny_id` (`scrutiny_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Details pertaining to species and infraspecies';
 
-
-### Taxon Name Usage (TNU)
-> RICH:
-> Unique combination of ReferenceID + ProtonymID (recursive to TNU representing Protonym; see below) + TaxonRank.  
-> The addition of TaxonRank for uniqueness is important for Autonyms/Nominotypical names, such as Aus (Aus) bus subs. bus, 
-> where the same Protonyms for the genus-group name "Aus" and species-group name "bus" are each used twice within the same TNU, 
-> one for each of two different ranks (Genus/Subgenus; Species/subspecies).  
-> Core properties of each TNU include NameString (terminal epithet only), rank (controlled vocabulary), 
-> recursive link to TNU representing the "valid" treatment of the name within the usage (self-referential for names treated as valid, 
-> FK to the senior synonym as treated within the same Reference for heterortypic synonyms), recursive link to TNU representing the direct "parent" treatment 
-> (e.g., a TNU for a species links to a TNU for a genus treatment within the same Reference to yield the binomen Genus + Species). 
-> TNUs are extremely powerful anchor-points to taxon names (via Protonyms and arrays of protonyms) and taxon concepts (specific taxon definitions, 
-> which allow disambiguation of different concepts that have the same name).  
-> It's simultaneously a convenient way to capture all spelling variants and build an index to literature treatments of names e.g., in BHL. 
-> They also serve as the perfect backbone for cross-linking nomenclatural acts as governed by the various Codes of Nomenclature (all of which happen within the context of TNUs).	
 
 
 ### Synonymy
@@ -206,10 +242,13 @@ and only track whether an organism is known from the holocene. The following pro
  - preholocene: true if organism is known from before the Holocene, i.e. before ~11.700 years before now
  - holocene: true if organism is known from the Holocene, i.e. after the ice age from ~11.700 years to now
 
+
+
 # Other
 
 ## Contributor
-if possible tie to Authors
+A contributor with a system login. If possible tie to Authors and allow ORCID and other external linkages
+
 
 ## Source metadata (GSD)
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
