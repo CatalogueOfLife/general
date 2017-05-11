@@ -190,8 +190,18 @@ Currently the Catalogue of Life is using a very simplistic model useful when agg
 There are various standards existing so sharing becomes simpler and with tools ready to be used. Specifically for JSON Rod Page put together a nice overview:
 https://github.com/rdmpage/bibliographic-metadata-json
 
-From that BibJSON is very appealing for the API model:
+#### CrossRef JSON
+https://github.com/CrossRef/rest-api-doc/blob/master/api_format.md
+is this the same or a close flavor as citeproc json???
+
+#### BibJSON
+BibJSON used by BioStor & BioNames
 http://okfnlabs.org/bibjson/
+
+#### CSL JSON / Citeproc-js
+http://citeproc-js.readthedocs.io/en/latest/csl-json/markup.html
+https://aurimasv.github.io/z2csl/typeMap.xml
+
 
 ### Treatments
 Treatments are the section of a publication that deals with a single scientific name. They are a unit of citation below articles. [Plazi](http://www.plazi.org) is based on them 

@@ -1,0 +1,329 @@
+#%RAML 1.0
+title: Unified Nomenclator API
+documentation:
+- title: Introduction
+  content: |
+    The unified nomenclator developed by [Catalogue of Life plus](https://github.com/Sp2000/colplus) tracks scientific names across all life and ties them to literature and types.
+    It tracks recombinations and provides a place for collaborative editorial efforts and review.
+version: v1
+baseUri: https://api.sciname.org
+protocols: [ HTTPS ]
+securitySchemes:
+  basic:
+    type: Basic Authentication
+    description: |
+      Supported for authenticating all API requests.
+  oauth_2_0:
+    description: |
+      Supported for authenticating all API requests.
+    type: OAuth 2.0
+    describedBy:
+      headers:
+        Authorization:
+          description: |
+             Used to send a valid OAuth 2 access token. Do not use
+             with the "access_token" query string parameter.
+          type: string
+      queryParameters:
+        access_token:
+          description: |
+             Used to send a valid OAuth 2 access token. Do not use with
+             the "Authorization" header.
+          type: string
+      responses:
+        401:
+          description: |
+              Bad or expired token. This can happen if the user or system
+              revoked or expired an access token. To fix, re-authenticate
+              the user.
+        403:
+          description: |
+              Bad OAuth request (wrong consumer key, bad nonce, expired
+              timestamp...). Unfortunately, re-authenticating the user won't help here.
+    settings:
+      authorizationUri: https://www.sciname.com/oauth2/authorize
+      accessTokenUri: https://api.sciname.com/oauth2/token
+      authorizationGrants: [ authorization_code, implicit ]
+mediaType:  application/json
+types:
+  Versioned:
+    type: object
+    description: >
+      The common properties for versioned objects.
+    properties:
+      key:
+        type: integer
+        description: the primary key for the object for all its versions
+      version:
+        type: integer
+        description: specific version of the object in chronological order starting with 1 when the object was created
+      created:
+        type: datetime
+        description: timestamp the specific version was created
+      createdBy:
+        type: string
+        description: contributor key that created the specific version
+  ScientificName:
+    type: Versioned
+    description: fdfd
+    properties:
+      key:
+        type: integer
+        description: the unique key, i.e. scientificNameID
+      scientificName:
+         type: string
+         description: full string incl authorship and rank marker for infragenerics and infraspecfics
+      canonicalName:
+        type: string
+        description: plain name made from 1-3 name epithets only, exluding authors and rank markers
+      nomenclaturalCode:
+        enum: [AlgaeFungiPlants, Animals, Bacteria, Virus]
+        description: >
+          [Algae, Fungi and Plants](http://www.iapt-taxon.org/nomen/),
+          [Animals](http://www.nhm.ac.uk/hosted-sites/iczn/code/),
+          [Bacteria](https://www.ncbi.nlm.nih.gov/books/NBK8817/),
+          [Virus](https://talk.ictvonline.org/information/w/ictv-information/383/ictv-code)
+      uninomial:
+        type: string
+        description: for names at higher rank than genus, e.g. a family name
+      genus:
+        type: string
+        description: the genus part of a name
+      infragenericEpithet:
+        type: string
+        description: the infrageneric epithet. Used only as the terminal epithet for names at infrageneric ranks, not for species
+      specificEpithet:
+        type: string
+        description:
+      infraspecificEpithet:
+        type: string
+        description:
+      rank:
+        type: string
+        description: rank of the name from enumeration above
+      notho:
+        enum: [ generic, infrageneric, specific, infraspecific ]
+        description: the part of the name which is considered a hybrid;  see [GBIF](https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/NamePart.java#L24)
+      authorship:
+        type: string
+        description: full string
+      originalAuthors:
+        type: NameAuthor[]
+        description: list of NameAuthor entities
+      originalYear:
+        type: string
+        description: year of original name publication
+      combinationAuthors:
+        type: NameAuthor[]
+        description: list of NameAuthor entities excluding ex- authors
+      combinationYear:
+        type: string
+        description: year of combination publication, usually the same as publishedIn reference
+      publishedIn:
+        type: string
+        description: Reference the name was published in
+      publishedInPage:
+        type: string
+        description: exact first page of the treatment within above reference
+      publishedInLink:
+        type: string
+        description: URL to the first page of the treatment, e.g. in BHL, BioStor or Zenodo
+      originalNameKey:
+        type: integer
+        description: link to the original name. In case of [replacement names](https://en.wikipedia.org/wiki/Nomen_novum) it points back to the replaced synonym.
+      isReplacement:
+        type: boolean
+        description: flag to indicate that this name is a replacement name
+      isCodeCompliant:
+        type: boolean
+        description: flag to indicate that this name is available/validly published
+      remark:
+        type: string
+        description: notes for general remarks on the name
+  NameAuthor:
+    type: Versioned
+    description: >
+      A person that is an author of scientific names. Not to be used for Reference authors.
+      The actual name string of the author can vary similar to scientific names due to spelling, transliteration, aliases, marriage or other name changes over time.
+      e.g., "Carlolus Linnaus", "Carl Linnaus", "Carl von Linné", etc.
+    properties:
+      firstname:
+        type: string[]
+        description: the preffered full first name(s) separated by whitespace
+      surname:
+        type: string
+        description: full last name incl prefixes like "van" if existing
+      aliases:
+        type: string[]
+        description: list of alternative representations (surname, firstname)
+      yearOfBirth:
+        type: integer
+        description: year the person was born
+        minimum: 1500
+        maximum: 2020
+      yearOfDeath:
+        type: integer
+        description: year the person died
+        minimum: 1500
+        maximum: 2020
+      areaOfInterest:
+        type: string[]
+        description: list of higher taxa
+      biography:
+        type: string
+        description: short description of the persons (work) life
+      collections:
+        type: string[]
+        description: collection codes known to host type specimens for species described by the author
+  Reference:
+    type: Versioned
+    description: >
+      tbd
+    properties:
+  Type:
+    type: Versioned
+    description: >
+      tbd
+    properties:
+  Contributor:
+    type: object
+    description: >
+      A contributor to the system.
+      Most of the time a human user but can also be bots which are augmenting data for review.
+    properties:
+      key:
+        type: string
+        description: the lower case account name and primary key of the contributor
+      name:
+        type: string
+        description: full real world name
+      email:
+        type: string
+        description: a users email address
+      orcid:
+        type: string
+        description: ORCID identifier
+        required: false
+      avatarUrl:
+        type: string
+        description: link to an avatar thumbnail image
+      homepage:
+        type: string
+        description: URL to external user homepage
+      type:
+        type: string
+        enum: [user, bot]
+        description: type of contributor
+      created:
+        type: datetime
+        description: timestamp the contributor was registered
+      status:
+        type: string
+        enum: [unverified, active, blocked]
+        description: contributors state
+  Comment:
+    type: object
+    description: >
+      tbd
+    properties:
+  Change:
+    type: object
+    description: >
+      A description of a change between two object versions
+    properties:
+      key:
+        type: integer
+        description: the primary key of the change
+      objectKey:
+        type: integer
+        description: the key of the object that was changed
+      objectType:
+        type: string
+        enum: [ScientificName, NameAuthor, Reference, Type]
+        description: the type of object that was changed
+      diff:
+        type: object
+        description: the changes as the diff between previous and new version
+      modified:
+        type: datetime
+        description: timestamp of change
+      modifiedBy:
+        type: Contributor
+        description: the contributor responsible for the change
+
+
+/name:
+  description: pageable list of all names with optional filtering
+  get:
+    responses:
+      200:
+        body: ScientificName[]
+  /{key}:
+    description: get name by its key, the scientificNameID
+    uriParameters:
+      key:
+        type: integer
+    get:
+      responses:
+        200:
+          body: ScientificName
+    /activity:
+      description: get list of recent changes and comments
+      get:
+        responses:
+          200:
+            body: (Comment | Change)[]
+    /synonyms:
+      description: get list of all homotypic synonyms
+      get:
+        responses:
+          200:
+            body: ScientificName[]
+    /sources:
+      description: get list of all source references for this name
+      get:
+        responses:
+          200:
+            body: Reference[]
+/activity:
+  description: get list of recent activity in the entire system
+  get:
+    responses:
+      200:
+        body: (Comment | Change)[]
+/reference:
+  description: literature references
+  /search:
+    description: search for references
+    get:
+      queryParameters:
+        q:
+          type: string
+          description: query string
+      responses:
+        200:
+          body: Reference[]
+  /{key}:
+    description: get reference by its key
+    uriParameters:
+      key:
+        type: integer
+    get:
+      responses:
+        200:
+          body: Reference
+/contributor/{key}:
+  description: get contributor
+  uriParameters:
+    key:
+      type: integer
+  get:
+    responses:
+      200:
+        body: (Comment | Change)[]
+  /activity:
+    description: get list of recent activity from the contributor
+    get:
+      responses:
+        200:
+          body: (Comment | Change)[]
