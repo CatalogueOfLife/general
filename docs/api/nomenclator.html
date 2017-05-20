@@ -1,0 +1,2002 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Unified Nomenclator API (vv1</title>
+    <link href="screen.css" rel="stylesheet" media="screen" />
+    <link href="print.css" rel="stylesheet" media="print" />
+    <link href="highlight.css" rel="stylesheet" >
+    <script src="highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        .clear { clear: both}
+        .highlight table td { padding: 5px; }
+        .highlight table pre { margin: 0; }
+        .highlight, .highlight .w {
+            color: #f8f8f2;
+            background-color: #272822;
+        }
+        .highlight .err {
+            color: #151515;
+            background-color: #ac4142;
+        }
+        .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+            color: #505050;
+        }
+        .highlight .cp {
+            color: #f4bf75;
+        }
+        .highlight .nt {
+            color: #f4bf75;
+        }
+        .highlight .o, .highlight .ow {
+            color: #d0d0d0;
+        }
+        .highlight .p, .highlight .pi {
+            color: #d0d0d0;
+        }
+        .highlight .gi {
+            color: #90a959;
+        }
+        .highlight .gd {
+            color: #ac4142;
+        }
+        .highlight .gh {
+            color: #6a9fb5;
+            background-color: #151515;
+            font-weight: bold;
+        }
+        .highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+            color: #aa759f;
+        }
+        .highlight .kc {
+            color: #d28445;
+        }
+        .highlight .kt {
+            color: #d28445;
+        }
+        .highlight .kd {
+            color: #d28445;
+        }
+        .highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+            color: #90a959;
+        }
+        .highlight .sr {
+            color: #75b5aa;
+        }
+        .highlight .si {
+            color: #8f5536;
+        }
+        .highlight .se {
+            color: #8f5536;
+        }
+        .highlight .nn {
+            color: #f4bf75;
+        }
+        .highlight .nc {
+            color: #f4bf75;
+        }
+        .highlight .no {
+            color: #f4bf75;
+        }
+        .highlight .na {
+            color: #6a9fb5;
+        }
+        .highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+            color: #90a959;
+        }
+        .highlight .ss {
+            color: #90a959;
+        }
+    </style>
+    <script src="slate.js"></script>
+</head>
+
+<body class="index" data-languages="[]">
+<a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="navbar.png" />
+      </span>
+</a>
+<div class="tocify-wrapper">
+        <img src="col-logo.png" />
+    <div class="lang-selector">
+    </div>
+    <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+    <ul class="search-results"></ul>
+    <div id="toc" class="tocify">
+    </div>
+    <ul class="toc-footer">
+    </ul>
+</div>
+<div class="page-wrapper">
+    <div class="dark-box"></div>
+
+    <div class="content">
+
+        <h1 id="introduction">Unified Nomenclator API (vv1)</h1>
+        <h3><code>https://api.col.plus</code></h3>
+
+    
+
+            <h2 id="documentation-0">Introduction</h2>
+            <p><p>The unified nomenclator developed by <a href="https://github.com/Sp2000/colplus">Catalogue of Life plus</a> tracks scientific names across all life and ties them to literature and types.
+It tracks recombinations and provides a place for collaborative editorial efforts and review.</p>
+</p>
+
+
+            <h1 id="model">Data Model</h1>
+                    <h2 id="model-Error">Error</h2>
+
+    <pre><code class="json">{
+  "status": 404,
+  "message": "Name 467324, version 7 not found"
+}
+</code></pre>
+
+    <p><p>An error response.</p>
+</p>
+
+                        <table><thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Pattern</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead><tbody>
+                            <tr>
+                                <td>status</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>http status code</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>message</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>Error message</p>
+</td>
+                            </tr>
+                        </tbody></table>
+                    <h2 id="model-Name">Name</h2>
+
+    <pre><code class="json">{
+  "key": 21242,
+  "scientificName": "Crepicnema parvula (Jacoby, 1885)",
+  "canonicalName": "Crepicnema parvula",
+  "nomenclaturalCode": "Animals",
+  "genus": "Crepicnema",
+  "specificEpithet": "parvula",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
+  "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
+  "originalYear": 1885,
+  "publishedInKey": 786,
+  "publishedInPage": "5",
+  "publishedInLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
+  "originalNameKey": 8673,
+  "isOriginalName": false,
+  "isReplacement": false,
+  "isCodeCompliant": true,
+  "version": 11,
+  "created": "2017-01-28T16:41:41.090Z",
+  "createdBy": "charles.d"
+}
+</code></pre>
+
+    <p><p>fdfd</p>
+</p>
+
+                        <table><thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Pattern</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead><tbody>
+                            <tr>
+                                <td>created</td>
+                                <td>datetime</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>timestamp the object was created</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>createdBy</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>contributor key that created the object</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>key</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the primary key for the object for all its versions</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>version</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>specific version of the object in chronological order starting with 1 when the object was created</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>scientificName</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>full string incl authorship and rank marker for infragenerics and infraspecfics</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>canonicalName</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>plain name made from 1-3 name epithets only, exluding authors and rank markers</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>nomenclaturalCode</td>
+                                <td>enum</td>
+                                <td>AlgaeFungiPlants, Animals, Bacteria, Virus</td>
+                                <td>yes</td>
+                                <td><p><a href="http://www.iapt-taxon.org/nomen/">Algae, Fungi and Plants</a>, <a href="http://www.nhm.ac.uk/hosted-sites/iczn/code/">Animals</a>, <a href="https://www.ncbi.nlm.nih.gov/books/NBK8817/">Bacteria</a>, <a href="https://talk.ictvonline.org/information/w/ictv-information/383/ictv-code">Virus</a></p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>uninomial</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>for names at higher rank than genus, e.g. a family name</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>genus</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>the genus part of a name</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>infragenericEpithet</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>the infrageneric epithet. Used only as the terminal epithet for names at infrageneric ranks, not for species</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>specificEpithet</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>infraspecificEpithet</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>rank</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>rank of the name from enumeration above</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>notho</td>
+                                <td>enum</td>
+                                <td>generic, infrageneric, specific, infraspecific</td>
+                                <td>no</td>
+                                <td><p>the part of the name which is considered a hybrid;  see <a href="https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/NamePart.java#L24">GBIF</a></p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>authorship</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>full string</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>originalAuthors</td>
+                                <td><a href="#model-Author">Author[]</a></td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>list of NameAuthor entities</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>originalYear</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>year of original name publication</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>combinationAuthors</td>
+                                <td><a href="#model-Author">Author[]</a></td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>list of NameAuthor entities excluding ex- authors</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>combinationYear</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>year of combination publication, usually the same as publishedIn reference</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>publishedInKey</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>Key to reference in which the name was published</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>publishedInPage</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>exact first page of the treatment within above reference</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>publishedInLink</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>URL to the first page of the treatment, e.g. in BHL, BioStor or Zenodo</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>originalNameKey</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>link to the original name. In case of <a href="https://en.wikipedia.org/wiki/Nomen_novum">replacement names</a> it points back to the replaced synonym.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>isOriginalName</td>
+                                <td>boolean</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>true if the name was an original description, i.e. protonym or basionym</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>isReplacement</td>
+                                <td>boolean</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>flag to indicate that this name is a replacement name</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>isCodeCompliant</td>
+                                <td>boolean</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>flag to indicate that this name is available/validly published</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>remark</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>notes for general remarks on the name</p>
+</td>
+                            </tr>
+                        </tbody></table>
+                    <h2 id="model-NameResultSet">NameResultSet</h2>
+
+
+    <p><p>A paging resultset for Names.</p>
+</p>
+
+                        <table><thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Pattern</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead><tbody>
+                            <tr>
+                                <td>offset</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>The offset applied during request. Can be less than requested if the limit is reached.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>limit</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>The maximum number of records returned. Can be less than requested if the limit is reached.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>total</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>The total number of records available.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>results</td>
+                                <td><a href="#model-Name">Name[]</a></td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the resulting names</p>
+</td>
+                            </tr>
+                        </tbody></table>
+                    <h2 id="model-Author">Author</h2>
+
+    <pre><code class="json">{
+  "key": 1563,
+  "firstname": ["Augustin-Pyrame"],
+  "surname": "de Candolle",
+  "aliases": ["Augustin-Pyramus de Candolle", "DC."],
+  "yearOfBirth": 1778,
+  "yearOfDeath": 1841,
+  "areaOfInterest": ["Pteridophytes", "Mycology", "Bryophytes", "Spermatophytes"],
+  "biography": "Augustin Pyramus de Candolle also spelled Augustin Pyrame de Candolle (4 February 1778 – 9 September 1841) was a Swiss botanist. René Louiche Desfontaines launched de Candolle's botanical career by recommending him at an herbarium. Within a couple of years de Candolle had established a new genus, and he went on to document hundreds of plant families and create a new natural plant classification system. Although de Candolle's main focus was botany, he also contributed to related fields such as phytogeography, agronomy, paleontology, medical botany, and economic botany. Candolle originated the idea of Nature's war, which influenced Charles Darwin and the principle of natural selection.[1] de Candolle recognized that multiple species may develop similar characteristics that did not appear in a common evolutionary ancestor; this was later termed analogy. During his work with plants, de Candolle noticed that plant leaf movements follow a near-24-hour cycle in constant light, suggesting that an internal biological clock exists. Though many scientists doubted de Candolle's findings, experiments over a century later demonstrated that ″the internal biological clock″ indeed exists. Candolle's descendants continued his work on plant classification. Alphonse de Candolle and Casimir Pyrame de Candolle contributed to the Prodromus Systematis Naturalis Regni Vegetabilis, a catalog of plants begun by Augustin Pyramus de Candolle.",
+  "collections": [],
+  "version": 1,
+  "created": "2016-02-28T16:41:41.090Z",
+  "createdBy": "deko"
+}
+</code></pre>
+
+    <p><p>A person that is an author of scientific names. Not to be used for Reference authors. The actual name string of the author can vary similar to scientific names due to spelling, transliteration, aliases, marriage or other name changes over time. e.g., &ldquo;Carlolus Linnaus&rdquo;, &ldquo;Carl Linnaus&rdquo;, &ldquo;Carl von Linné&rdquo;, etc.</p>
+</p>
+
+                        <table><thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Pattern</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead><tbody>
+                            <tr>
+                                <td>created</td>
+                                <td>datetime</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>timestamp the object was created</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>createdBy</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>contributor key that created the object</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>key</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the primary key for the object for all its versions</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>version</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>specific version of the object in chronological order starting with 1 when the object was created</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>firstname</td>
+                                <td>string[]</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>the preffered full first name(s) separated by whitespace</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>surname</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>full last name incl prefixes like &ldquo;van&rdquo; if existing</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>aliases</td>
+                                <td>string[]</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>list of alternative representations (surname, firstname)</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>yearOfBirth</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>year the person was born</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>yearOfDeath</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>year the person died</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>areaOfInterest</td>
+                                <td>string[]</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>systematic groups of interest to the author</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>biography</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>short description of the persons (work) life</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>collections</td>
+                                <td>string[]</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>collection codes known to host type material for species described by the author</p>
+</td>
+                            </tr>
+                        </tbody></table>
+                    <h2 id="model-AuthorResultSet">AuthorResultSet</h2>
+
+
+    <p><p>A paging resultset for Authors.</p>
+</p>
+
+                        <table><thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Pattern</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead><tbody>
+                            <tr>
+                                <td>offset</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>The offset applied during request. Can be less than requested if the limit is reached.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>limit</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>The maximum number of records returned. Can be less than requested if the limit is reached.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>total</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>The total number of records available.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>results</td>
+                                <td><a href="#model-Author">Author[]</a></td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the resulting Authors</p>
+</td>
+                            </tr>
+                        </tbody></table>
+                    <h2 id="model-Reference">Reference</h2>
+
+    <pre><code class="json">{
+  "key": 432561,
+  "version": 3,
+  "created": "2016-02-28T16:41:41.090Z",
+  "createdBy": "markus",
+  "journalKey": 17,
+  "json": {
+    "DOI":"10.1038/nrd842",
+    "type":"article-journal",
+    "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
+    "title":"From the analyst's couch: Selective anticancer drugs",
+    "container-title":"Nature Reviews Drug Discovery",
+    "volume":"1",
+    "issue":"7",
+    "issued":{"date-parts":[[2002,7]]},
+    "page":"491-492"
+  }
+}
+</code></pre>
+
+    <p><p>A (literature) reference mostly given in <a href="https://github.com/citation-style-language/schema#csl-json-schema">CSL-JSON</a></p>
+</p>
+
+                        <table><thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Pattern</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead><tbody>
+                            <tr>
+                                <td>created</td>
+                                <td>datetime</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>timestamp the object was created</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>createdBy</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>contributor key that created the object</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>key</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the primary key for the object for all its versions</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>version</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>specific version of the object in chronological order starting with 1 when the object was created</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>journalKey</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>foreign key to the journal</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>json</td>
+                                <td>object</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the citation metadata as <a href="https://github.com/citation-style-language/schema#csl-json-schema">CSL-JSON</a>, see <a href="https://github.com/citation-style-language/schema/blob/master/csl-data.json">CSL JSON schema</a></p>
+</td>
+                            </tr>
+                        </tbody></table>
+                    <h2 id="model-ReferenceResultSet">ReferenceResultSet</h2>
+
+
+    <p><p>A paging resultset for References.</p>
+</p>
+
+                        <table><thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Pattern</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead><tbody>
+                            <tr>
+                                <td>offset</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>The offset applied during request. Can be less than requested if the limit is reached.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>limit</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>The maximum number of records returned. Can be less than requested if the limit is reached.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>total</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>The total number of records available.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>results</td>
+                                <td><a href="#model-Reference">Reference[]</a></td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the resulting References</p>
+</td>
+                            </tr>
+                        </tbody></table>
+                    <h2 id="model-Type">Type</h2>
+
+
+    <p><p>tbd</p>
+</p>
+
+                        <table><thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Pattern</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead><tbody>
+                            <tr>
+                                <td>created</td>
+                                <td>datetime</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>timestamp the object was created</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>createdBy</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>contributor key that created the object</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>key</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the primary key for the object for all its versions</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>version</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>specific version of the object in chronological order starting with 1 when the object was created</p>
+</td>
+                            </tr>
+                        </tbody></table>
+                    <h2 id="model-TypeResultSet">TypeResultSet</h2>
+
+
+    <p><p>A paging resultset for Types.</p>
+</p>
+
+                        <table><thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Pattern</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead><tbody>
+                            <tr>
+                                <td>offset</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>The offset applied during request. Can be less than requested if the limit is reached.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>limit</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>The maximum number of records returned. Can be less than requested if the limit is reached.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>total</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>The total number of records available.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>results</td>
+                                <td><a href="#model-Type">Type[]</a></td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the resulting Types</p>
+</td>
+                            </tr>
+                        </tbody></table>
+                    <h2 id="model-Contributor">Contributor</h2>
+
+
+    <p><p>A contributor to the system. Most of the time a human user but can also be bots which are augmenting data for review.</p>
+</p>
+
+                        <table><thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Pattern</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead><tbody>
+                            <tr>
+                                <td>key</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the lower case account name and primary key of the contributor</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>type</td>
+                                <td>enum</td>
+                                <td>user, bot</td>
+                                <td>yes</td>
+                                <td><p>type of contributor</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>name</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>full real world name</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>email</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>a users email address</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>orcid</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>ORCID identifier</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>avatarUrl</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>link to an avatar thumbnail image</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>homepage</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>URL to external user homepage</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>description</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>A short description of the contributor</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>created</td>
+                                <td>datetime</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>timestamp the contributor was registered</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>status</td>
+                                <td>enum</td>
+                                <td>unverified, active, blocked</td>
+                                <td>yes</td>
+                                <td><p>contributors state</p>
+</td>
+                            </tr>
+                        </tbody></table>
+                    <h2 id="model-ContributorResultSet">ContributorResultSet</h2>
+
+
+    <p><p>A paging resultset for Contributor.</p>
+</p>
+
+                        <table><thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Pattern</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead><tbody>
+                            <tr>
+                                <td>offset</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>The offset applied during request. Can be less than requested if the limit is reached.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>limit</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>The maximum number of records returned. Can be less than requested if the limit is reached.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>total</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>The total number of records available.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>results</td>
+                                <td><a href="#model-Contributor">Contributor[]</a></td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the resulting Contributor</p>
+</td>
+                            </tr>
+                        </tbody></table>
+                    <h2 id="model-Comment">Comment</h2>
+
+
+    <p><p>A user comment on some entity.</p>
+</p>
+
+                        <table><thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Pattern</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead><tbody>
+                            <tr>
+                                <td>created</td>
+                                <td>datetime</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>timestamp the object was created</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>createdBy</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>contributor key that created the object</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>key</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the primary key of the change</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>objectKey</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the key of the object that was commented on</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>objectType</td>
+                                <td>enum</td>
+                                <td>ScientificName, NameAuthor, Reference, Type</td>
+                                <td>yes</td>
+                                <td><p>the type of object that was commented on</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>text</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the comment in markdown</p>
+</td>
+                            </tr>
+                        </tbody></table>
+                    <h2 id="model-Change">Change</h2>
+
+
+    <p><p>A description of a change between two object versions</p>
+</p>
+
+                        <table><thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Pattern</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead><tbody>
+                            <tr>
+                                <td>created</td>
+                                <td>datetime</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>timestamp the object was created</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>createdBy</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>contributor key that created the object</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>key</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the primary key of the change</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>objectKey</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the key of the object that was changed</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>objectType</td>
+                                <td>enum</td>
+                                <td>ScientificName, NameAuthor, Reference, Type</td>
+                                <td>yes</td>
+                                <td><p>the type of object that was changed</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>diff</td>
+                                <td>object</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the changes as the diff between previous and new version</p>
+</td>
+                            </tr>
+                        </tbody></table>
+
+        <h1 id="authentication">Authentication</h1>
+
+                <h2 id="auth-basic">Basic Authentication</h2>
+    <p><p>Supported for authenticating all API requests.</p>
+</p>
+
+
+
+                <h2 id="auth-oauth_2_0">OAuth 2.0</h2>
+    <p><p>Supported for authenticating all API requests.</p>
+</p>
+
+
+
+
+    <h3 id="op1-request-header">Header</h3>
+    <table><thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Description</th>
+    </tr>
+    </thead><tbody>
+        <tr>
+            <td>Authorization</td>
+            <td>string</td>
+            <td>yes</td>
+            <td><p>Used to send a valid OAuth 2 access token. Do not use
+with the &ldquo;access_token&rdquo; query string parameter.</p>
+</td>
+        </tr>
+    </tbody></table>
+
+
+        <h3 id="op1-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>access_token</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>Used to send a valid OAuth 2 access token. Do not use with
+the &ldquo;Authorization&rdquo; header.</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op1-responses" class="clear">Response 401</h3>
+    <p><p>Bad or expired token. This can happen if the user or system
+revoked or expired an access token. To fix, re-authenticate
+the user.</p>
+</p>
+            <h3 id="op1-responses" class="clear">Response 403</h3>
+    <p><p>Bad OAuth request (wrong consumer key, bad nonce, expired
+timestamp&hellip;). Unfortunately, re-authenticating the user won&rsquo;t help here.</p>
+</p>
+
+                    TODO: SETTINGS
+
+
+    <h1 id="resource-1">/name</h1>
+
+    <p><p>pageable list of all names with optional filtering</p>
+</p>
+
+        <h2 id="res-1-get">GET /name</h2>
+
+    <p><p>Page through all names, optionally filtered</p>
+</p>
+
+    <pre><code class="http">
+GET /name HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3>Request</h3>
+        <p><code class="prettyprint">GET https://api.col.plus/name</code></p>
+
+
+
+        <h3 id="op2-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>offset</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of offset records</p>
+</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested page, defaulting to 1 for the first page</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op2-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Saturday, May 20, 2017 12:36:05 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">[{
+  "key": 21242,
+  "scientificName": "Crepicnema parvula (Jacoby, 1885)",
+  "canonicalName": "Crepicnema parvula",
+  "nomenclaturalCode": "Animals",
+  "genus": "Crepicnema",
+  "specificEpithet": "parvula",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
+  "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
+  "originalYear": 1885,
+  "publishedInKey": 786,
+  "publishedInPage": "5",
+  "publishedInLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
+  "originalNameKey": 8673,
+  "isOriginalName": false,
+  "isReplacement": false,
+  "isCodeCompliant": true,
+  "version": 11,
+  "created": "2017-01-28T16:41:41.090Z",
+  "createdBy": "charles.d"
+}
+,{
+  "key": 21242,
+  "scientificName": "Crepicnema parvula (Jacoby, 1885)",
+  "canonicalName": "Crepicnema parvula",
+  "nomenclaturalCode": "Animals",
+  "genus": "Crepicnema",
+  "specificEpithet": "parvula",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
+  "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
+  "originalYear": 1885,
+  "publishedInKey": 786,
+  "publishedInPage": "5",
+  "publishedInLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
+  "originalNameKey": 8673,
+  "isOriginalName": false,
+  "isReplacement": false,
+  "isCodeCompliant": true,
+  "version": 11,
+  "created": "2017-01-28T16:41:41.090Z",
+  "createdBy": "charles.d"
+}
+]</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Name">Name[]</a></p>
+        <h2 id="res-1-post">POST /name</h2>
+
+    <p><p>Create a new Name</p>
+</p>
+
+    <pre><code class="http">
+POST /name HTTP/1.1
+Host: api.col.plus
+access_token: 5757gh76
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "key": 21242,
+  "scientificName": "Crepicnema parvula (Jacoby, 1885)",
+  "canonicalName": "Crepicnema parvula",
+  "nomenclaturalCode": "Animals",
+  "genus": "Crepicnema",
+  "specificEpithet": "parvula",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
+  "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
+  "originalYear": 1885,
+  "publishedInKey": 786,
+  "publishedInPage": "5",
+  "publishedInLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
+  "originalNameKey": 8673,
+  "isOriginalName": false,
+  "isReplacement": false,
+  "isCodeCompliant": true,
+  "version": 11,
+  "created": "2017-01-28T16:41:41.090Z",
+  "createdBy": "charles.d"
+}
+</code>
+</pre>
+
+        <h3>Request</h3>
+        <p><code class="prettyprint">POST https://api.col.plus/name</code></p>
+
+    <h3 id="op3-request-header">Header</h3>
+    <table><thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Description</th>
+    </tr>
+    </thead><tbody>
+        <tr>
+            <td>access_token</td>
+            <td>string</td>
+            <td>yes</td>
+            <td><p>Access Token</p>
+</td>
+        </tr>
+    </tbody></table>
+
+    <h3 id="op3-request-body">Body</h3>
+            <p><code>application/json</code></p>
+            <p>Content: <a href="#model-Name">Name</a></p>
+
+
+
+            <h3 id="op3-responses" class="clear">Response 201</h3>
+    
+                <h3 id="op3-response-header-201">Header</h3>
+    <table><thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Description</th>
+    </tr>
+    </thead><tbody>
+        <tr>
+            <td>Location</td>
+            <td>string</td>
+            <td>yes</td>
+            <td><p>the absolute resource URL of the newly created object</p>
+</td>
+        </tr>
+    </tbody></table>
+<pre><code class="http">
+HTTP/1.1 201 Created
+Date: Saturday, May 20, 2017 12:36:05 PM CEST
+Content-Type: application/json
+Location: https://api.col.plus/...
+</code>
+    <code class="json">79508</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: integer</p>
+
+    <h1 id="resource-2">/name/{key}</h1>
+
+    <p><p>get name by its key, the scientificNameID</p>
+</p>
+
+        <h2 id="res-2-get">GET /{key}</h2>
+
+    <p><p>Get a Name by its key</p>
+</p>
+
+    <pre><code class="http">
+GET /name/{key} HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3>Request</h3>
+        <p><code class="prettyprint">GET https://api.col.plus/name/{key}</code></p>
+
+
+
+        <h3 id="op4-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+                <tr>
+                    <td>{key}</td>
+                    <td>integer</td>
+                    <td></td>
+                    <td>yes</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            <tr>
+                <td>version</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested specific version of the resource</p>
+</td>
+            </tr>
+            <tr>
+                <td>familyMember</td>
+                <td>enum</td>
+                <td>pia, markus, carla, toni
+[a-z+]</td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested family member</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op4-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Saturday, May 20, 2017 12:36:05 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "key": 21242,
+  "scientificName": "Crepicnema parvula (Jacoby, 1885)",
+  "canonicalName": "Crepicnema parvula",
+  "nomenclaturalCode": "Animals",
+  "genus": "Crepicnema",
+  "specificEpithet": "parvula",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
+  "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
+  "originalYear": 1885,
+  "publishedInKey": 786,
+  "publishedInPage": "5",
+  "publishedInLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
+  "originalNameKey": 8673,
+  "isOriginalName": false,
+  "isReplacement": false,
+  "isCodeCompliant": true,
+  "version": 11,
+  "created": "2017-01-28T16:41:41.090Z",
+  "createdBy": "charles.d"
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Name">Name</a></p>
+            <h3 id="op4-responses" class="clear">Response 404</h3>
+    
+<pre><code class="http">
+HTTP/1.1 404 Not Found
+Date: Saturday, May 20, 2017 12:36:05 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "status": 404,
+  "message": "Name 467324, version 7 not found"
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Error">Error</a></p>
+        <h2 id="res-2-put">PUT /{key}</h2>
+
+    <p><p>Update a Name</p>
+</p>
+
+    <pre><code class="http">
+PUT /name/{key} HTTP/1.1
+Host: api.col.plus
+access_token: 5757gh76
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "key": 21242,
+  "scientificName": "Crepicnema parvula (Jacoby, 1885)",
+  "canonicalName": "Crepicnema parvula",
+  "nomenclaturalCode": "Animals",
+  "genus": "Crepicnema",
+  "specificEpithet": "parvula",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
+  "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
+  "originalYear": 1885,
+  "publishedInKey": 786,
+  "publishedInPage": "5",
+  "publishedInLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
+  "originalNameKey": 8673,
+  "isOriginalName": false,
+  "isReplacement": false,
+  "isCodeCompliant": true,
+  "version": 11,
+  "created": "2017-01-28T16:41:41.090Z",
+  "createdBy": "charles.d"
+}
+</code>
+</pre>
+
+        <h3>Request</h3>
+        <p><code class="prettyprint">PUT https://api.col.plus/name/{key}</code></p>
+
+    <h3 id="op5-request-header">Header</h3>
+    <table><thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Description</th>
+    </tr>
+    </thead><tbody>
+        <tr>
+            <td>access_token</td>
+            <td>string</td>
+            <td>yes</td>
+            <td><p>Access Token</p>
+</td>
+        </tr>
+    </tbody></table>
+
+    <h3 id="op5-request-body">Body</h3>
+            <p><code>application/json</code></p>
+            <p>Content: <a href="#model-Name">Name</a></p>
+
+        <h3 id="op5-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+                <tr>
+                    <td>{key}</td>
+                    <td>integer</td>
+                    <td></td>
+                    <td>yes</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+        </tbody></table>
+
+
+            <h3 id="op5-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Saturday, May 20, 2017 12:36:05 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">7</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: integer</p>
+        <h2 id="res-2-delete">DELETE /{key}</h2>
+
+    <p><p>Delete a Name</p>
+</p>
+
+    <pre><code class="http">
+DELETE /name/{key} HTTP/1.1
+Host: api.col.plus
+access_token: 5757gh76
+</code>
+</pre>
+
+        <h3>Request</h3>
+        <p><code class="prettyprint">DELETE https://api.col.plus/name/{key}</code></p>
+
+    <h3 id="op6-request-header">Header</h3>
+    <table><thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Description</th>
+    </tr>
+    </thead><tbody>
+        <tr>
+            <td>access_token</td>
+            <td>string</td>
+            <td>yes</td>
+            <td><p>Access Token</p>
+</td>
+        </tr>
+    </tbody></table>
+
+
+        <h3 id="op6-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+                <tr>
+                    <td>{key}</td>
+                    <td>integer</td>
+                    <td></td>
+                    <td>yes</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+        </tbody></table>
+
+
+            <h3 id="op6-responses" class="clear">Response 204</h3>
+    
+
+    <h1 id="resource-3">/name/{key}/activity</h1>
+
+    <p><p>get list of recent changes and comments</p>
+</p>
+
+        <h2 id="res-3-get">GET /activity</h2>
+
+    
+
+    <pre><code class="http">
+GET /name/{key}/activity HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3>Request</h3>
+        <p><code class="prettyprint">GET https://api.col.plus/name/{key}/activity</code></p>
+
+
+
+
+
+            <h3 id="op7-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Saturday, May 20, 2017 12:36:05 PM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: (Comment | Change)[]</p>
+
+    <h1 id="resource-4">/name/{key}/synonyms</h1>
+
+    <p><p>get list of all homotypic synonyms</p>
+</p>
+
+        <h2 id="res-4-get">GET /synonyms</h2>
+
+    
+
+    <pre><code class="http">
+GET /name/{key}/synonyms HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3>Request</h3>
+        <p><code class="prettyprint">GET https://api.col.plus/name/{key}/synonyms</code></p>
+
+
+
+
+
+            <h3 id="op8-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Saturday, May 20, 2017 12:36:05 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">[{
+  "key": 21242,
+  "scientificName": "Crepicnema parvula (Jacoby, 1885)",
+  "canonicalName": "Crepicnema parvula",
+  "nomenclaturalCode": "Animals",
+  "genus": "Crepicnema",
+  "specificEpithet": "parvula",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
+  "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
+  "originalYear": 1885,
+  "publishedInKey": 786,
+  "publishedInPage": "5",
+  "publishedInLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
+  "originalNameKey": 8673,
+  "isOriginalName": false,
+  "isReplacement": false,
+  "isCodeCompliant": true,
+  "version": 11,
+  "created": "2017-01-28T16:41:41.090Z",
+  "createdBy": "charles.d"
+}
+,{
+  "key": 21242,
+  "scientificName": "Crepicnema parvula (Jacoby, 1885)",
+  "canonicalName": "Crepicnema parvula",
+  "nomenclaturalCode": "Animals",
+  "genus": "Crepicnema",
+  "specificEpithet": "parvula",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
+  "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
+  "originalYear": 1885,
+  "publishedInKey": 786,
+  "publishedInPage": "5",
+  "publishedInLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
+  "originalNameKey": 8673,
+  "isOriginalName": false,
+  "isReplacement": false,
+  "isCodeCompliant": true,
+  "version": 11,
+  "created": "2017-01-28T16:41:41.090Z",
+  "createdBy": "charles.d"
+}
+]</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Name">Name[]</a></p>
+
+    <h1 id="resource-5">/name/{key}/sources</h1>
+
+    <p><p>get list of all source references for this name</p>
+</p>
+
+        <h2 id="res-5-get">GET /sources</h2>
+
+    
+
+    <pre><code class="http">
+GET /name/{key}/sources HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3>Request</h3>
+        <p><code class="prettyprint">GET https://api.col.plus/name/{key}/sources</code></p>
+
+
+
+
+
+            <h3 id="op9-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Saturday, May 20, 2017 12:36:05 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">[{
+  "key": 432561,
+  "version": 3,
+  "created": "2016-02-28T16:41:41.090Z",
+  "createdBy": "markus",
+  "journalKey": 17,
+  "json": {
+    "DOI":"10.1038/nrd842",
+    "type":"article-journal",
+    "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
+    "title":"From the analyst's couch: Selective anticancer drugs",
+    "container-title":"Nature Reviews Drug Discovery",
+    "volume":"1",
+    "issue":"7",
+    "issued":{"date-parts":[[2002,7]]},
+    "page":"491-492"
+  }
+}
+,{
+  "key": 432561,
+  "version": 3,
+  "created": "2016-02-28T16:41:41.090Z",
+  "createdBy": "markus",
+  "journalKey": 17,
+  "json": {
+    "DOI":"10.1038/nrd842",
+    "type":"article-journal",
+    "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
+    "title":"From the analyst's couch: Selective anticancer drugs",
+    "container-title":"Nature Reviews Drug Discovery",
+    "volume":"1",
+    "issue":"7",
+    "issued":{"date-parts":[[2002,7]]},
+    "page":"491-492"
+  }
+}
+]</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Reference">Reference[]</a></p>
+
+    <h1 id="resource-6">/activity</h1>
+
+    <p><p>get list of recent activity in the entire system</p>
+</p>
+
+        <h2 id="res-6-get">GET /activity</h2>
+
+    
+
+    <pre><code class="http">
+GET /activity HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3>Request</h3>
+        <p><code class="prettyprint">GET https://api.col.plus/activity</code></p>
+
+
+
+
+
+            <h3 id="op10-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Saturday, May 20, 2017 12:36:05 PM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: (Comment | Change)[]</p>
+
+    <h1 id="resource-7">/contributor/{key}</h1>
+
+    <p><p>get contributor</p>
+</p>
+
+        <h2 id="res-7-get">GET /contributor/{key}</h2>
+
+    
+
+    <pre><code class="http">
+GET /contributor/{key} HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3>Request</h3>
+        <p><code class="prettyprint">GET https://api.col.plus/contributor/{key}</code></p>
+
+
+
+        <h3 id="op11-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+                <tr>
+                    <td>{key}</td>
+                    <td>integer</td>
+                    <td></td>
+                    <td>yes</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+        </tbody></table>
+
+
+            <h3 id="op11-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Saturday, May 20, 2017 12:36:05 PM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: (Comment | Change)[]</p>
+
+    <h1 id="resource-8">/contributor/{key}/activity</h1>
+
+    <p><p>get list of recent activity from the contributor</p>
+</p>
+
+        <h2 id="res-8-get">GET /activity</h2>
+
+    
+
+    <pre><code class="http">
+GET /contributor/{key}/activity HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3>Request</h3>
+        <p><code class="prettyprint">GET https://api.col.plus/contributor/{key}/activity</code></p>
+
+
+
+
+
+            <h3 id="op12-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Saturday, May 20, 2017 12:36:05 PM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: (Comment | Change)[]</p>
+
+
+        <aside class="success">
+            Remember — a happy kitten is an authenticated kitten!
+        </aside>
+
+
+    </div>
+
+    <div class="dark-box">
+        <div class="lang-selector">
+            <h2>&nbsp;&nbsp;&nbsp;&nbsp;Examples</h2>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,581 @@
+#%RAML 1.0
+title: Unified Nomenclator API
+documentation:
+- title: Introduction
+  content: |
+    The unified nomenclator developed by [Catalogue of Life plus](https://github.com/Sp2000/colplus) tracks scientific names across all life and ties them to literature and types.
+    It tracks recombinations and provides a place for collaborative editorial efforts and review.
+version: v1
+baseUri: https://api.col.plus
+protocols: [ HTTPS ]
+securitySchemes:
+  basic:
+    type: Basic Authentication
+    description: |
+      Supported for authenticating all API requests.
+  oauth_2_0:
+    description: |
+      Supported for authenticating all API requests.
+    type: OAuth 2.0
+    describedBy:
+      headers:
+        Authorization:
+          description: |
+             Used to send a valid OAuth 2 access token. Do not use
+             with the "access_token" query string parameter.
+          type: string
+      queryParameters:
+        access_token:
+          description: |
+             Used to send a valid OAuth 2 access token. Do not use with
+             the "Authorization" header.
+          type: string
+      responses:
+        401:
+          description: |
+              Bad or expired token. This can happen if the user or system
+              revoked or expired an access token. To fix, re-authenticate
+              the user.
+        403:
+          description: |
+              Bad OAuth request (wrong consumer key, bad nonce, expired
+              timestamp...). Unfortunately, re-authenticating the user won't help here.
+    settings:
+      authorizationUri: https://www.sciname.com/oauth2/authorize
+      accessTokenUri: https://api.sciname.com/oauth2/token
+      authorizationGrants: [ authorization_code, implicit ]
+mediaType:  application/json
+resourceTypes:
+  pageable:
+    description: A resource listing objects with paging.
+    get:
+      description: Page through all <<resourcePathName>>
+      is: [paged]
+      responses:
+        200:
+          body: <<resourcePathName | !uppercamelcase>>ResultSet
+  collection:
+    usage: Use this resourceType to represent a collection of items that offer a create method.
+    description: A collection of <<resourcePathName>>
+    get:
+      description: Page through all <<resourcePathName>>s, optionally filtered
+      is: [paged]
+      responses:
+        200:
+          body: <<resourcePathName | !uppercamelcase>>[]
+    post:
+      description: Create a new <<resourcePathName | !uppercamelcase>>
+      is: [secured, creating]
+      body: <<resourcePathName | !uppercamelcase>>
+
+  modifiable:
+    usage: A single, modifiable and versioned resource with read, update & delete methods.
+    get:
+      description: Get a <<class>> by its key
+      is: [versioned]
+      responses:
+        200:
+          body: <<class>>
+        404:
+          body: Error
+    put:
+      is:  [secured]
+      description: Update a <<class>>
+      body: <<resourcePathName | !uppercamelcase>>
+      responses:
+        200:
+          body:
+            type: integer
+            example: 7
+            description: the newly created object version
+    delete:
+      is:  [secured]
+      description: Delete a <<class>>
+      responses:
+        204:
+traits:
+  secured: # TODO
+      usage: Apply this to any method that needs to be secured
+      description: Some requests require authentication.
+      headers:
+        access_token:
+          description: Access Token
+          example: 5757gh76
+          required: true
+  versioned:
+    usage: Apply this to all versioned resource GET methods
+    description: Optional version parameter to retrieve a specific version.
+    queryParameters:
+      version:
+        type: integer
+        required: false
+        description: The requested specific version of the resource
+      familyMember:
+        type: string
+        enum: [pia, markus, carla, toni]
+        pattern: "[a-z+]"
+        required: false
+        description: The requested family member
+  paged:
+    usage: Apply this to any method that needs paging parameters
+    description: Paging parameters.
+    queryParameters:
+      offset:
+        type: integer
+        required: false
+        description: The requested number of offset records
+      limit:
+        type: integer
+        required: false
+        description: The requested page, defaulting to 1 for the first page
+  creating:
+    responses:
+      201:
+        headers:
+          Location:
+            type: string
+            example: http://api.col.plus/name/1234
+            description: the absolute resource URL of the newly created object
+        body:
+          type: integer
+          description: the newly created object key. In case of versioning the initial version=1
+          example: 79508
+types:
+  Error:
+    type: object
+    description: >
+      An error response.
+    properties:
+      status:
+        type: integer
+        description: http status code
+      message:
+        type: string
+        description: Error message
+    example: |
+      {
+        "status": 404,
+        "message": "Name 467324, version 7 not found"
+      }
+  ResultSet:
+    type: object
+    description: >
+      A paging resultset without the actual type specific result payload.
+    properties:
+      offset:
+        type: integer
+        description: >
+          The offset applied during request.
+          Can be less than requested if the limit is reached.
+      limit:
+        type: integer
+        description: >
+          The maximum number of records returned.
+          Can be less than requested if the limit is reached.
+      total:
+        type: integer
+        description: >
+          The total number of records available.
+  Created:
+    type: object
+    description: >
+      The common properties for objects created by contributors.
+    properties:
+      created:
+        type: datetime
+        description: timestamp the object was created
+        required: false
+      createdBy:
+        type: string
+        description: contributor key that created the object
+        required: false
+  Versioned:
+    type: Created
+    description: >
+      The common properties for versioned objects.
+    properties:
+      key:
+        type: integer
+        description: the primary key for the object for all its versions
+      version:
+        type: integer
+        description: specific version of the object in chronological order starting with 1 when the object was created
+  Name:
+    type: Versioned
+    description: fdfd
+    properties:
+      key:
+        type: integer
+        description: the unique key, i.e. scientificNameID
+      scientificName:
+         type: string
+         description: full string incl authorship and rank marker for infragenerics and infraspecfics
+      canonicalName:
+        type: string
+        description: plain name made from 1-3 name epithets only, exluding authors and rank markers
+        required: false
+      nomenclaturalCode:
+        enum: [AlgaeFungiPlants, Animals, Bacteria, Virus]
+        description: >
+          [Algae, Fungi and Plants](http://www.iapt-taxon.org/nomen/),
+          [Animals](http://www.nhm.ac.uk/hosted-sites/iczn/code/),
+          [Bacteria](https://www.ncbi.nlm.nih.gov/books/NBK8817/),
+          [Virus](https://talk.ictvonline.org/information/w/ictv-information/383/ictv-code)
+      uninomial:
+        type: string
+        description: for names at higher rank than genus, e.g. a family name
+        required: false
+      genus:
+        type: string
+        description: the genus part of a name
+        required: false
+      infragenericEpithet:
+        type: string
+        description: the infrageneric epithet. Used only as the terminal epithet for names at infrageneric ranks, not for species
+        required: false
+      specificEpithet:
+        type: string
+        description:
+        required: false
+      infraspecificEpithet:
+        type: string
+        description:
+        required: false
+      rank:
+        type: string
+        description: rank of the name from enumeration above
+      notho:
+        enum: [ generic, infrageneric, specific, infraspecific ]
+        description: the part of the name which is considered a hybrid;  see [GBIF](https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/NamePart.java#L24)
+        required: false
+      authorship:
+        type: string
+        description: full string
+        required: false
+      originalAuthors:
+        type: Author[]
+        description: list of NameAuthor entities
+        required: false
+      originalYear:
+        type: integer
+        description: year of original name publication
+        required: false
+      combinationAuthors:
+        type: Author[]
+        description: list of NameAuthor entities excluding ex- authors
+        required: false
+      combinationYear:
+        type: integer
+        description: year of combination publication, usually the same as publishedIn reference
+        required: false
+      publishedInKey:
+        type: integer
+        description: Key to reference in which the name was published
+        required: false
+      publishedInPage:
+        type: string
+        description: exact first page of the treatment within above reference
+        required: false
+      publishedInLink:
+        type: string
+        description: URL to the first page of the treatment, e.g. in BHL, BioStor or Zenodo
+        required: false
+      originalNameKey:
+        type: integer
+        description: link to the original name. In case of [replacement names](https://en.wikipedia.org/wiki/Nomen_novum) it points back to the replaced synonym.
+        required: false
+      isOriginalName:
+        type: boolean
+        description: true if the name was an original description, i.e. protonym or basionym
+      isReplacement:
+        type: boolean
+        description: flag to indicate that this name is a replacement name
+      isCodeCompliant:
+        type: boolean
+        description: flag to indicate that this name is available/validly published
+      remark:
+        type: string
+        description: notes for general remarks on the name
+        required: false
+    example: |
+      {
+        "key": 21242,
+        "scientificName": "Crepicnema parvula (Jacoby, 1885)",
+        "canonicalName": "Crepicnema parvula",
+        "nomenclaturalCode": "Animals",
+        "genus": "Crepicnema",
+        "specificEpithet": "parvula",
+        "rank": "species",
+        "authorship": "(Jacoby, 1885)",
+        "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
+        "originalYear": 1885,
+        "publishedInKey": 786,
+        "publishedInPage": "5",
+        "publishedInLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
+        "originalNameKey": 8673,
+        "isOriginalName": false,
+        "isReplacement": false,
+        "isCodeCompliant": true,
+        "version": 11,
+        "created": "2017-01-28T16:41:41.090Z",
+        "createdBy": "charles.d"
+      }
+  NameResultSet:
+    type: ResultSet
+    description: >
+      A paging resultset for Names.
+    properties:
+      results:
+        type: Name[]
+        description: the resulting names
+  Author:
+    type: Versioned
+    description: >
+      A person that is an author of scientific names. Not to be used for Reference authors.
+      The actual name string of the author can vary similar to scientific names due to spelling, transliteration, aliases, marriage or other name changes over time.
+      e.g., "Carlolus Linnaus", "Carl Linnaus", "Carl von Linné", etc.
+    properties:
+      firstname:
+        type: string[]
+        description: the preffered full first name(s) separated by whitespace
+        required: false
+      surname:
+        type: string
+        description: full last name incl prefixes like "van" if existing
+      aliases:
+        type: string[]
+        description: list of alternative representations (surname, firstname)
+        required: false
+      yearOfBirth:
+        type: integer
+        description: year the person was born
+        required: false
+        minimum: 1500
+        maximum: 2020
+      yearOfDeath:
+        type: integer
+        description: year the person died
+        required: false
+        minimum: 1500
+        maximum: 2020
+      areaOfInterest:
+        type: string[]
+        description: systematic groups of interest to the author
+        required: false
+      biography:
+        type: string
+        description: short description of the persons (work) life
+        required: false
+      collections:
+        type: string[]
+        description: collection codes known to host type material for species described by the author
+        required: false
+    example: |
+      {
+        "key": 1563,
+        "firstname": ["Augustin-Pyrame"],
+        "surname": "de Candolle",
+        "aliases": ["Augustin-Pyramus de Candolle", "DC."],
+        "yearOfBirth": 1778,
+        "yearOfDeath": 1841,
+        "areaOfInterest": ["Pteridophytes", "Mycology", "Bryophytes", "Spermatophytes"],
+        "biography": "Augustin Pyramus de Candolle also spelled Augustin Pyrame de Candolle (4 February 1778 – 9 September 1841) was a Swiss botanist. René Louiche Desfontaines launched de Candolle's botanical career by recommending him at an herbarium. Within a couple of years de Candolle had established a new genus, and he went on to document hundreds of plant families and create a new natural plant classification system. Although de Candolle's main focus was botany, he also contributed to related fields such as phytogeography, agronomy, paleontology, medical botany, and economic botany. Candolle originated the idea of Nature's war, which influenced Charles Darwin and the principle of natural selection.[1] de Candolle recognized that multiple species may develop similar characteristics that did not appear in a common evolutionary ancestor; this was later termed analogy. During his work with plants, de Candolle noticed that plant leaf movements follow a near-24-hour cycle in constant light, suggesting that an internal biological clock exists. Though many scientists doubted de Candolle's findings, experiments over a century later demonstrated that ″the internal biological clock″ indeed exists. Candolle's descendants continued his work on plant classification. Alphonse de Candolle and Casimir Pyrame de Candolle contributed to the Prodromus Systematis Naturalis Regni Vegetabilis, a catalog of plants begun by Augustin Pyramus de Candolle.",
+        "collections": [],
+        "version": 1,
+        "created": "2016-02-28T16:41:41.090Z",
+        "createdBy": "deko"
+      }
+  AuthorResultSet:
+    type: ResultSet
+    description: >
+      A paging resultset for Authors.
+    properties:
+      results:
+        type: Author[]
+        description: the resulting Authors
+  Reference:
+    type: Versioned
+    description: >
+      A (literature) reference mostly given in [CSL-JSON](https://github.com/citation-style-language/schema#csl-json-schema)
+    properties:
+      journalKey:
+        type: integer
+        description: foreign key to the journal
+      json:
+        type: object
+        description: >
+          the citation metadata as [CSL-JSON](https://github.com/citation-style-language/schema#csl-json-schema),
+          see [CSL JSON schema](https://github.com/citation-style-language/schema/blob/master/csl-data.json)
+    example: |
+      {
+        "key": 432561,
+        "version": 3,
+        "created": "2016-02-28T16:41:41.090Z",
+        "createdBy": "markus",
+        "journalKey": 17,
+        "json": {
+          "DOI":"10.1038/nrd842",
+          "type":"article-journal",
+          "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
+          "title":"From the analyst's couch: Selective anticancer drugs",
+          "container-title":"Nature Reviews Drug Discovery",
+          "volume":"1",
+          "issue":"7",
+          "issued":{"date-parts":[[2002,7]]},
+          "page":"491-492"
+        }
+      }
+  ReferenceResultSet:
+    type: ResultSet
+    description: >
+      A paging resultset for References.
+    properties:
+      results:
+        type: Reference[]
+        description: the resulting References
+  Type: #TODO
+    type: Versioned
+    description: >
+      tbd
+    properties:
+  TypeResultSet:
+    type: ResultSet
+    description: >
+      A paging resultset for Types.
+    properties:
+      results:
+        type: Type[]
+        description: the resulting Types
+  Contributor:
+    type: object
+    description: >
+      A contributor to the system.
+      Most of the time a human user but can also be bots which are augmenting data for review.
+    properties:
+      key:
+        type: string
+        description: the lower case account name and primary key of the contributor
+      type:
+        type: string
+        enum: [user, bot]
+        description: type of contributor
+      name:
+        type: string
+        description: full real world name
+      email:
+        type: string
+        description: a users email address
+      orcid:
+        type: string
+        description: ORCID identifier
+        required: false
+      avatarUrl:
+        type: string
+        description: link to an avatar thumbnail image
+      homepage:
+        type: string
+        description: URL to external user homepage
+      description:
+        type: string
+        description: A short description of the contributor
+      created:
+        type: datetime
+        description: timestamp the contributor was registered
+      status:
+        type: string
+        enum: [unverified, active, blocked]
+        description: contributors state
+  ContributorResultSet:
+    type: ResultSet
+    description: >
+      A paging resultset for Contributor.
+    properties:
+      results:
+        type: Contributor[]
+        description: the resulting Contributor
+  Comment:
+    type: Created
+    description: >
+      A user comment on some entity.
+    properties:
+      key:
+        type: integer
+        description: the primary key of the change
+      objectKey:
+        type: integer
+        description: the key of the object that was commented on
+      objectType:
+        type: string
+        enum: [ScientificName, NameAuthor, Reference, Type]
+        description: the type of object that was commented on
+      text:
+        type: string
+        description: the comment in markdown
+  Change: #TODO
+    type: Created
+    description: >
+      A description of a change between two object versions
+    properties:
+      key:
+        type: integer
+        description: the primary key of the change
+      objectKey:
+        type: integer
+        description: the key of the object that was changed
+      objectType:
+        type: string
+        enum: [ScientificName, NameAuthor, Reference, Type]
+        description: the type of object that was changed
+      diff:
+        type: object
+        description: the changes as the diff between previous and new version
+
+
+/name:
+  description: pageable list of all names with optional filtering
+  type: collection
+  /{key}:
+    description: get name by its key, the scientificNameID
+    type:  { modifiable: {class : "Name"} }
+    uriParameters:
+      key:
+        type: integer
+    /activity:
+      description: get list of recent changes and comments
+      get:
+        responses:
+          200:
+            body: (Comment | Change)[]
+    /synonyms:
+      description: get list of all homotypic synonyms
+      get:
+        responses:
+          200:
+            body: Name[]
+    /sources:
+      description: get list of all source references for this name
+      get:
+        responses:
+          200:
+            body: Reference[]
+/activity:
+  description: get list of recent activity in the entire system
+  get:
+    responses:
+      200:
+        body: (Comment | Change)[]
+/contributor/{key}:
+  description: get contributor
+  uriParameters:
+    key:
+      type: integer
+  get:
+    responses:
+      200:
+        body: (Comment | Change)[]
+  /activity:
+    description: get list of recent activity from the contributor
+    get:
+      responses:
+        200:
+          body: (Comment | Change)[]
