@@ -268,18 +268,6 @@ types:
         type: integer
         description: year of combination publication, usually the same as publishedIn reference
         required: false
-      publishedInKey:
-        type: integer
-        description: Key to reference in which the name was published
-        required: false
-      publishedInPage:
-        type: string
-        description: exact first page of the treatment within above reference
-        required: false
-      publishedInLink:
-        type: string
-        description: URL to the first page of the treatment, e.g. in BHL, BioStor or Zenodo
-        required: false
       originalNameKey:
         type: integer
         description: link to the original name. In case of [replacement names](https://en.wikipedia.org/wiki/Nomen_novum) it points back to the replaced synonym.
@@ -309,9 +297,6 @@ types:
         "authorship": "(Jacoby, 1885)",
         "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
         "originalYear": 1885,
-        "publishedInKey": 786,
-        "publishedInPage": "5",
-        "publishedInLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
         "originalNameKey": 8673,
         "isOriginalName": false,
         "isReplacement": false,
@@ -393,27 +378,154 @@ types:
       results:
         type: Author[]
         description: the resulting Authors
-  Reference:
-    type: Versioned
+  NomenclaturalActType:
+    type: string
+    enum: [description, typification, ruling, emendation]
     description: >
-      A (literature) reference mostly given in [CSL-JSON](https://github.com/citation-style-language/schema#csl-json-schema)
+      Coarse classification of nomenclatural acts.
+      "Description" covers original descriptions, new recombinations and changes in rank.
+      "Typification" is used for subsequent type designations.
+      "Ruling" acts are e.g. suppressed or conserved names.
+      "Emendation" are intentional changes in the original spelling of an available name.
+  NomenclaturalAct:
+    type: Versioned
+    description: A published act which affects the nomenclatural status of a scientific name or the typification of a nominal taxon.
     properties:
-      journalKey:
+      key:
         type: integer
-        description: foreign key to the journal
-      json:
+        description: the unique key, i.e. scientificNameID
+      nameKeys:
+         type: integer[]
+         description: keys to the names the act is about
+      type:
+         type: NomenclaturalActType[]
+         description: Coarse classification of acts.
+      description:
+        type: string
+        description: A desription of the details of the nomenclatural act
+        required: false
+      referenceKey:
+        type: integer
+        description: Key to reference in which the act was published
+        required: false
+      referencePage:
+        type: string
+        description: exact first page of the treatment within above reference
+        required: false
+      referenceLink:
+        type: string
+        description: URL to the first page of the treatment, e.g. in BHL, BioStor or Zenodo
+        required: false
+      bhlPageId:
+        type: integer
+        description: BHL PageID for the first page of the treatment
+        required: false
+    example: |
+      {
+        "key": 721141,
+        "type": ["description"],
+        "nameKeys": [78612],
+        "referenceKey": 786,
+        "referencePage": "5",
+        "referenceLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
+        "version": 2,
+        "created": "2017-01-28T16:41:41.090Z",
+        "createdBy": "carlos"
+      }
+  Serial:
+    type: Versioned
+    description: A journal or other series used as containers for references
+    properties:
+      aliases:
+        type: string[]
+        description: Alternative titles known for the serial
+        required: false
+      bph:
+        type: string
+        description: >
+          [BPH Online](http://huntbotanical.org/databases/show.php?1) identifier. Botanic periodicals published between 1665 and the present.
+        required: false
+      call:
+        type: string
+        description: library of congress classification number
+        required: false
+      tl2:
+        type: string
+        description: TL2 number
+        required: false
+      oclc:
+        type: integer
+        description: OCLC number
+        required: false
+      bhl:
+        type: integer
+        description: BHL title number
+        required: false
+      jstor:
+        type: string
+        description: link to JSTOR
+        required: false
+      firstYear:
+        type: integer
+        description: First year the serial was published
+        required: false
+      lastYear:
+        type: integer
+        description: Last year the serial was published. Empty for current journals
+        required: false
+      csl:
         type: object
         description: >
-          the citation metadata as [CSL-JSON](https://github.com/citation-style-language/schema#csl-json-schema),
+          the journal metadata as [CSL-JSON](https://github.com/citation-style-language/schema#csl-json-schema),
           see [CSL JSON schema](https://github.com/citation-style-language/schema/blob/master/csl-data.json)
+      notes:
+        type: string
+        description: Notes about the serial
+        required: false
     example: |
       {
         "key": 432561,
         "version": 3,
         "created": "2016-02-28T16:41:41.090Z",
         "createdBy": "markus",
-        "journalKey": 17,
-        "json": {
+        "bph": "460.06",
+        "tl2": "11.084",
+        "call": "QK1.J55",
+        "oclc": 1754397,
+        "bhl": 68922,
+        "firstYear": 1799,
+        "lastYear": 1804,
+        "csl": {
+          "call-number": "QK1.J55",
+          "type":"journal",
+          "title":"Journal für die Botanik",
+          "title-short":"J. Bot. (Schrader)",
+          "editor":[{"family":"Schrader","given":"H. A."}],
+          "publisher-place": "Göttingen"
+        }
+      }
+  Reference:
+    type: Versioned
+    description: >
+      A (literature) reference mostly given in [CSL-JSON](https://github.com/citation-style-language/schema#csl-json-schema)
+    properties:
+      serialKey:
+        type: integer
+        description: key to container serial
+        required: false
+      csl:
+        type: object
+        description: |
+          the citation metadata as [CSL-JSON](https://github.com/citation-style-language/schema#csl-json-schema),
+          see [CSL JSON schema](https://github.com/citation-style-language/schema/blob/master/csl-data.json).
+    example: |
+      {
+        "key": 432561,
+        "version": 3,
+        "created": "2016-02-28T16:41:41.090Z",
+        "createdBy": "markus",
+        "serialKey": 17,
+        "csl": {
           "DOI":"10.1038/nrd842",
           "type":"article-journal",
           "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
@@ -529,6 +641,9 @@ types:
       diff:
         type: object
         description: the changes as the diff between previous and new version
+      actKey:
+        type: integer
+        description: key to a published nomenclatural act that is the source for the change
 
 
 /name:
