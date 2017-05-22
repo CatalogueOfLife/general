@@ -1,29 +1,6 @@
-# Model entities for CoL plus 
-
-The main entities represented in the Catalogue of Life and a clarification of their semantics.
-The entities are used to establish an API primarily and the actual storage model might differ.
-
-## Exchange format
-This model will be mapped to a modified exchange format based on the previous i4Life "Checklist exhcange format", see [exchange format specs](EXCHANGE-FORMAT.md).
-
-
-## Common properties
-There are some common properties all/most entities share, mostly related to comments and an audit log.
-These will not be mentioned in the specific entities below.
-
- - key
- - modified: timestamp of last change
- - modifiedBy: Contributor
- - comments: list of comments attached to the entity
- - sources: list of Reference used, backing the current state of the entity
- 
-## Versioning
-TODO:
-
-
-
-
 # Nomenclature
+The Nomenclator API is designed in [RAML](https://github.com/Sp2000/colplus/blob/master/docs/api/nomenclator.raml) with the current draft being published at https://sp2000.github.io/colplus/api/nomenclator.html
+
 ## ScientificName
 A scientific name is a surprisingly ambigous term. 
 CoL deals and categorizes the following types of names:
