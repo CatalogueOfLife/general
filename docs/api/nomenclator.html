@@ -105,7 +105,7 @@
       </span>
 </a>
 <div class="tocify-wrapper">
-        <img src="col-logo.png" />
+        <img src="col-logo-trans.png" />
     <div class="lang-selector">
     </div>
     <div class="search">
@@ -137,6 +137,8 @@ It tracks recombinations and provides a place for collaborative editorial effort
                     <h2 id="model-RankType">RankType</h2>
 
 
+                        <p><strong>Enumeration</strong>: <em>kingdom</em>, <em>phylum</em>, <em>class</em>, <em>order</em>, <em>family</em>, <em>genus</em>, <em>species</em>, <em>subspecies</em></p>
+
     <p><p>Enumeration of all possible rank values. There is the need to deal with old ranks not accepted anymore. The list given is intended to be interoperable between name providers for bacteria, viruses, fungi, plants, and animals. The enumeration attempts to strike a balance between listing all possible rank terms, and remaining comprehensible. Not included in the list are the botanical &ldquo;notho-&rdquo; ranks, which are used to designate hybrids (nothospecies, nothogenus) as this information is handled by the Name.notho property already.
 Sources:</p>
 <ul>
@@ -151,13 +153,23 @@ Sources:</p>
                     <h2 id="model-NameType">NameType</h2>
 
 
+                        <p><strong>Enumeration</strong>: <em>scientific</em>, <em>virus</em>, <em>hybrid-formula</em>, <em>cultivar</em>, <em>otu</em>, <em>placeholder</em>, <em>none</em></p>
+
     <p><p>Classification of names, mostly based on their syntactic structure.</p>
 </p>
 
                     <h2 id="model-NomenclaturalActType">NomenclaturalActType</h2>
 
 
-    <p><p>Coarse classification of nomenclatural acts. &ldquo;Description&rdquo; covers original descriptions, new recombinations and changes in rank. &ldquo;Typification&rdquo; is used for subsequent type designations. &ldquo;Ruling&rdquo; acts are e.g. suppressed or conserved names. &ldquo;Emendation&rdquo; are intentional changes in the original spelling of an available name.</p>
+                        <p><strong>Enumeration</strong>: <em>description</em>, <em>typification</em>, <em>ruling</em>, <em>emendation</em></p>
+
+    <p><p>Coarse classification of nomenclatural acts.</p>
+<ul>
+<li><em>description</em> covers original descriptions, new recombinations and changes in rank.</li>
+<li><em>typification</em> is used for subsequent type designations.</li>
+<li><em>ruling</em> acts are e.g. suppressed or conserved names.</li>
+<li><em>emendation</em> are intentional changes in the original spelling of an available name.</li>
+</ul>
 </p>
 
                     <h2 id="model-Error">Error</h2>
@@ -167,6 +179,7 @@ Sources:</p>
   "message": "Name 467324, version 7 not found"
 }
 </code></pre>
+
 
     <p><p>An error response.</p>
 </p>
@@ -219,6 +232,7 @@ Sources:</p>
   "createdBy": "charles.d"
 }
 </code></pre>
+
 
     <p><p>A scientific name.
 CoL deals and categorizes the following types of names:</p>
@@ -501,6 +515,7 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                     <h2 id="model-NameResultSet">NameResultSet</h2>
 
 
+
     <p><p>A paging resultset for Names.</p>
 </p>
 
@@ -563,6 +578,7 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
   "createdBy": "deko"
 }
 </code></pre>
+
 
     <p><p>A person that is an author of scientific names. Not to be used for Reference authors. The actual name string of the author can vary similar to scientific names due to spelling, transliteration, aliases, marriage or other name changes over time. e.g., &ldquo;Carlolus Linnaus&rdquo;, &ldquo;Carl Linnaus&rdquo;, &ldquo;Carl von Linné&rdquo;, etc.</p>
 </p>
@@ -676,6 +692,7 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                     <h2 id="model-AuthorResultSet">AuthorResultSet</h2>
 
 
+
     <p><p>A paging resultset for Authors.</p>
 </p>
 
@@ -735,6 +752,7 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
   "createdBy": "carlos"
 }
 </code></pre>
+
 
     <p><p>A published act which affects the nomenclatural status of a scientific name or the typification of a nominal taxon.</p>
 </p>
@@ -861,6 +879,7 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
   }
 }
 </code></pre>
+
 
     <p><p>A journal or other series used as containers for references</p>
 </p>
@@ -998,6 +1017,7 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                     <h2 id="model-SerialResultSet">SerialResultSet</h2>
 
 
+
     <p><p>A paging resultset for Serials.</p>
 </p>
 
@@ -1064,6 +1084,7 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
   }
 }
 </code></pre>
+
 
     <p><p>A (literature) reference mostly given in <a href="https://github.com/citation-style-language/schema#csl-json-schema">CSL-JSON</a>.
 A reference can be linked to a serial, e.g. a journal, that defines the content for the CSL container attributes.</p>
@@ -1136,6 +1157,7 @@ see <a href="https://github.com/citation-style-language/schema/blob/master/csl-d
                     <h2 id="model-ReferenceResultSet">ReferenceResultSet</h2>
 
 
+
     <p><p>A paging resultset for References.</p>
 </p>
 
@@ -1182,6 +1204,7 @@ see <a href="https://github.com/citation-style-language/schema/blob/master/csl-d
                             </tr>
                         </tbody></table>
                     <h2 id="model-Type">Type</h2>
+
 
 
     <p><p>tbd</p>
@@ -1232,6 +1255,7 @@ see <a href="https://github.com/citation-style-language/schema/blob/master/csl-d
                     <h2 id="model-TypeResultSet">TypeResultSet</h2>
 
 
+
     <p><p>A paging resultset for Types.</p>
 </p>
 
@@ -1278,6 +1302,7 @@ see <a href="https://github.com/citation-style-language/schema/blob/master/csl-d
                             </tr>
                         </tbody></table>
                     <h2 id="model-Contributor">Contributor</h2>
+
 
 
     <p><p>A contributor to the system. Most of the time a human user but can also be bots which are augmenting data for review.</p>
@@ -1384,6 +1409,7 @@ see <a href="https://github.com/citation-style-language/schema/blob/master/csl-d
                     <h2 id="model-ContributorResultSet">ContributorResultSet</h2>
 
 
+
     <p><p>A paging resultset for Contributor.</p>
 </p>
 
@@ -1430,6 +1456,7 @@ see <a href="https://github.com/citation-style-language/schema/blob/master/csl-d
                             </tr>
                         </tbody></table>
                     <h2 id="model-Source">Source</h2>
+
 
 
     <p><p>Source (GSD) metadata</p>
@@ -1572,6 +1599,7 @@ see <a href="https://github.com/citation-style-language/schema/blob/master/csl-d
                     <h2 id="model-Comment">Comment</h2>
 
 
+
     <p><p>A user comment on some entity.</p>
 </p>
 
@@ -1634,6 +1662,7 @@ see <a href="https://github.com/citation-style-language/schema/blob/master/csl-d
                             </tr>
                         </tbody></table>
                     <h2 id="model-Change">Change</h2>
+
 
 
     <p><p>A description of a change between two object versions TODO: rework diff and object linkage</p>
@@ -1831,7 +1860,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -1954,7 +1983,7 @@ Content-Type: application/json
     </tbody></table>
 <pre><code class="http">
 HTTP/1.1 201 Created
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 Location: https://api.col.plus/...
 </code>
@@ -2017,7 +2046,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -2047,7 +2076,7 @@ Content-Type: application/json
     
 <pre><code class="http">
 HTTP/1.1 404 Not Found
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -2140,7 +2169,7 @@ Content-Type: application/json
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">7</code>
@@ -2228,7 +2257,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2259,7 +2288,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -2329,7 +2358,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -2400,7 +2429,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -2511,7 +2540,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2572,7 +2601,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -2680,7 +2709,7 @@ Content-Type: application/json
     </tbody></table>
 <pre><code class="http">
 HTTP/1.1 201 Created
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 Location: https://api.col.plus/...
 </code>
@@ -2744,7 +2773,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -2769,7 +2798,7 @@ Content-Type: application/json
     
 <pre><code class="http">
 HTTP/1.1 404 Not Found
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -2857,7 +2886,7 @@ Content-Type: application/json
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">7</code>
@@ -2945,7 +2974,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3006,7 +3035,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3085,7 +3114,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3146,7 +3175,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -3266,7 +3295,7 @@ Content-Type: application/json
     </tbody></table>
 <pre><code class="http">
 HTTP/1.1 201 Created
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 Location: https://api.col.plus/...
 </code>
@@ -3329,7 +3358,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3358,7 +3387,7 @@ Content-Type: application/json
     
 <pre><code class="http">
 HTTP/1.1 404 Not Found
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3450,7 +3479,7 @@ Content-Type: application/json
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">7</code>
@@ -3538,7 +3567,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3569,7 +3598,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -3723,7 +3752,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3784,7 +3813,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -3913,7 +3942,7 @@ Content-Type: application/json
     </tbody></table>
 <pre><code class="http">
 HTTP/1.1 201 Created
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 Location: https://api.col.plus/...
 </code>
@@ -3976,7 +4005,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4008,7 +4037,7 @@ Content-Type: application/json
     
 <pre><code class="http">
 HTTP/1.1 404 Not Found
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4103,7 +4132,7 @@ Content-Type: application/json
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">7</code>
@@ -4191,7 +4220,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -4279,7 +4308,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -4310,7 +4339,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -4361,7 +4390,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:50 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -4392,7 +4421,7 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, May 23, 2017 1:35:50 PM CEST
+Date: Tuesday, May 23, 2017 2:58:47 PM CEST
 Content-Type: application/json
 </code>
 </pre>
