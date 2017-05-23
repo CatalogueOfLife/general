@@ -421,7 +421,7 @@ under the License.
   font-weight: bold;
 }
 
-.content code, .content pre {
+.content code, .content pre.example {
   font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, serif;
   font-size: 12px;
   line-height: 1.5;
@@ -434,8 +434,8 @@ under the License.
 
 @font-face {
   font-family: 'slate';
-  src: url(slate.eot?-syv14m);
-  src: url(slate.eot?#iefix-syv14m) format("embedded-opentype"), url(slate.woff2?-syv14m) format("woff2"), url(slate.woff?-syv14m) format("woff"), url(slate.ttf?-syv14m) format("truetype"), url(slate.svg?-syv14m#slate) format("svg");
+  src: url('/fonts/slate.eot?-syv14m');
+  src: url('/fonts/slate.eot?#iefix-syv14m') format("embedded-opentype"), url('/fonts/slate.woff2?-syv14m') format("woff2"), url('/fonts/slate.woff?-syv14m') format("woff"), url('/fonts/slate.ttf?-syv14m') format("truetype"), url('/fonts/slate.svg?-syv14m#slate') format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -722,7 +722,7 @@ html, body {
   display: block;
   clear: both;
 }
-.content > h1, .content > h2, .content > h3, .content > h4, .content > h5, .content > h6, .content > p, .content > table, .content > ul, .content > ol, .content > aside, .content > dl {
+.content > h1, .content > h2, .content > h3, .content > h4, .content > h5, .content > h6, .content > p, .content > pre, .content > table, .content > ul, .content > ol, .content > aside, .content > dl {
   margin-right: 50%;
   padding: 0 28px;
   box-sizing: border-box;
@@ -854,7 +854,7 @@ html, body {
   background: linear-gradient(to top left, #F7E633 0%, #F1D32F 100%);
 }
 
-.content pre, .content blockquote {
+.content pre.example, .content blockquote.example {
   background-color: #292929;
   color: #fff;
   padding: 2em 28px;
@@ -865,15 +865,15 @@ html, body {
   box-sizing: border-box;
   text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
 }
-.content pre > p, .content blockquote > p {
+.content pre.example > p, .content blockquote.example > p {
   margin: 0;
 }
-.content pre a, .content blockquote a {
+.content pre.example a, .content blockquote.example a {
   color: #fff;
   text-decoration: none;
   border-bottom: dashed 1px #ccc;
 }
-.content blockquote > p {
+.content blockquote.example > p {
   background-color: #1c1c1c;
   border-radius: 5px;
   padding: 13px;
@@ -908,7 +908,7 @@ html, body {
     display: none;
   }
 
-  .content > h1, .content > h2, .content > h3, .content > h4, .content > h5, .content > h6, .content > p, .content > table, .content > ul, .content > ol, .content > aside, .content > dl {
+  .content > h1, .content > h2, .content > h3, .content > h4, .content > h5, .content > h6, .content > p, .content > pre, .content > table, .content > ul, .content > ol, .content > aside, .content > dl {
     margin-right: 0;
   }
 
@@ -920,12 +920,12 @@ html, body {
     display: none;
   }
 
-  .content pre, .content blockquote {
+  .content pre.example, .content blockquote.example {
     width: auto;
     float: none;
   }
 
-  .content > pre + h1, .content > blockquote + h1, .content > pre + h2, .content > blockquote + h2, .content > pre + h3, .content > blockquote + h3, .content > pre + h4, .content > blockquote + h4, .content > pre + h5, .content > blockquote + h5, .content > pre + h6, .content > blockquote + h6, .content > pre + p, .content > blockquote + p, .content > pre + table, .content > blockquote + table, .content > pre + ul, .content > blockquote + ul, .content > pre + ol, .content > blockquote + ol, .content > pre + aside, .content > blockquote + aside, .content > pre + dl, .content > blockquote + dl {
+  .content > pre.example + h1, .content > blockquote.example + h1, .content > pre.example + h2, .content > blockquote.example + h2, .content > pre.example + h3, .content > blockquote.example + h3, .content > pre.example + h4, .content > blockquote.example + h4, .content > pre.example + h5, .content > blockquote.example + h5, .content > pre.example + h6, .content > blockquote.example + h6, .content > pre.example + p, .content > blockquote.example + p, .content > pre.example + pre, .content > blockquote.example + pre, .content > pre.example + table, .content > blockquote.example + table, .content > pre.example + ul, .content > blockquote.example + ul, .content > pre.example + ol, .content > blockquote.example + ol, .content > pre.example + aside, .content > blockquote.example + aside, .content > pre.example + dl, .content > blockquote.example + dl {
     margin-top: 28px;
   }
 }
