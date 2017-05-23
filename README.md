@@ -65,7 +65,7 @@ Other options to be considered include:
 
  
 #### Webservice API
-
+ See [Nomenclator API draft](https://sp2000.github.io/colplus/api/nomenclator.html)
  - Lexical namestring matching service taking a name string and an optional classification hint to return matching names from the nomenclator. ACTION: Integrate GNI lexical services into the nomenclator (MD, DM)
  - Name search
  - Homotypic Name reconciliation service: Retrieve all (homotypic) names with the same original name

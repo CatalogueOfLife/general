@@ -47,16 +47,25 @@ securitySchemes:
 mediaType:  application/json
 resourceTypes:
   pageable:
-    description: A resource listing objects with paging.
     get:
-      description: Page through all <<resourcePathName>>
+      description: Page through all <<class>>
       is: [paged]
       responses:
         200:
-          body: <<resourcePathName | !uppercamelcase>>ResultSet
+          body: <<class>>ResultSet
+  searchable:
+    get:
+      description: Search through all <<class>>
+      is: [paged]
+      queryParameters:
+        q:
+          type: string
+          description: full text search query
+      responses:
+        200:
+          body: <<class>>ResultSet
   collection:
     usage: Use this resourceType to represent a collection of items that offer a create method.
-    description: A collection of <<resourcePathName>>
     get:
       description: Page through all <<resourcePathName>>s, optionally filtered
       is: [paged]
@@ -110,12 +119,6 @@ traits:
         type: integer
         required: false
         description: The requested specific version of the resource
-      familyMember:
-        type: string
-        enum: [pia, markus, carla, toni]
-        pattern: "[a-z+]"
-        required: false
-        description: The requested family member
   paged:
     usage: Apply this to any method that needs paging parameters
     description: Paging parameters.
@@ -141,6 +144,37 @@ traits:
           description: the newly created object key. In case of versioning the initial version=1
           example: 79508
 types:
+  RankType:
+    type: string
+    enum: ["kingdom", "phylum", "class", "order", "family", "genus", "species", "subspecies"]
+    description: >
+      Enumeration of all possible rank values.
+      There is the need to deal with old ranks not accepted anymore.
+      The list given is intended to be interoperable between name providers for bacteria, viruses, fungi, plants, and animals.
+      The enumeration attempts to strike a balance between listing all possible rank terms, and remaining comprehensible.
+      Not included in the list are the botanical "notho-" ranks, which are used to designate hybrids (nothospecies, nothogenus) as this information is handled by the Name.notho property already.
+
+      Sources:
+
+       - [GBIF](https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/Rank.java)
+       - [TCS](https://github.com/tdwg/tcs/blob/master/TCS101/v101.xsd#L860)
+       - [TaxCat2](http://mansfeld.ipk-gatersleben.de/apex/f?p=185:78:::NO::P77_TAXCAT,P77_DB_CHECKBOX1,77_TAXCAT2RAD,77_SHOWRAD:%25,,0,s_All)
+       - [NOMEN](https://raw.githubusercontent.com/SpeciesFileGroup/nomen/master/src/ontology/nomen.owl)
+
+       TODO: extract all values from sources
+  NameType:
+    type: string
+    enum: ["scientific", "virus", "hybrid-formula", "cultivar", "otu", "placeholder", "none"]
+    description: Classification of names, mostly based on their syntactic structure.
+  NomenclaturalActType:
+    type: string
+    enum: ["description", "typification", "ruling", "emendation"]
+    description: >
+      Coarse classification of nomenclatural acts.
+      "Description" covers original descriptions, new recombinations and changes in rank.
+      "Typification" is used for subsequent type designations.
+      "Ruling" acts are e.g. suppressed or conserved names.
+      "Emendation" are intentional changes in the original spelling of an available name.
   Error:
     type: object
     description: >
@@ -202,7 +236,98 @@ types:
         description: specific version of the object in chronological order starting with 1 when the object was created
   Name:
     type: Versioned
-    description: fdfd
+    description: |
+      A scientific name.
+      CoL deals and categorizes the following types of names:
+
+       - Linnaean names, i.e. mono-, bi- or trinomials
+       - Named hybrids and nothotaxa
+       - Virus names
+
+      A name includes it's authorship. Two homonyms with different authors therefore represent two different name entities.
+
+      ### Lexical variations
+
+      The same name can usually be represented by many different strings which we refer to as lexical variations.
+      For each name a standard representation, the canonical form, exists.
+
+      Lexical variations exist for various reasons.
+      Author spelling, transliterations, epither gender, additional infrageneric or infraspecific indications, cited species authors in infraspecific names are common reasons.
+      Listed here are 7 distinct names with some of their string representations:
+
+      ```
+       1. Aus bus Linnaeus 1758
+          - Aus bus Linn. 1758
+          - Aus bus Linn 1758
+          - Aus bus L.
+          - Aus ba Linn 1758.
+          - Aus (Hus) bus L.
+
+       2. Xus bus (Linn, 1758)
+          - Xus bus (Linn) Smith
+
+       3. Xus cus Smith, 1850
+          - Xus cus Sm.
+
+       4. Xus cus Jones 1900
+
+       5. Xus bus cus Smith 1850
+          - Xus bus subsp. cus Smith 1850
+
+       6. Xus dus Pyle 2000
+
+       7. Foo bar var. lion Smith 1850
+          - Foo bar L. var. lion Smith
+          - Foo bar subsp. dar var. lion Smith 1850
+          - Foo bar Lin. subsp. dar Mill. var. lion Smith 1850
+      ```
+
+      New names (**sp./gen. nov.**),
+      new recombinations of the same epithet (**comb. nov.**),
+      a name at a new rank (**stat. nov.**)
+      or replacement names (**nom. nov.**) are all treated as distinct names.
+
+      ### Homotypic group & original name
+      Names based on the same type can be clustered together as a homotypic group of names.
+      A homotypic group not only includes all subsequent recombinations, but also any [replacement name](https://en.wikipedia.org/wiki/Nomen_novum) if existing.
+      These names are homotypic synonyms, also called nomenclatural or objective synonyms.
+
+      The first, originally published name is used to represent such a group as it is a clean proxy to the type specimen,
+      therefore every name in a homotypic group points back to the same original name.
+
+      Protonym in zoology and basionym in botany are terms for a very similar concept, but they do not include replacement names and are rather code specific
+      so we will refer to *original name* here instead, inline with Darwin Core terminology.
+      Original names are not necessarily Code-compliant original descriptions, but usually they are.
+
+      The above names can be clustered into four sets of homotypic synonym groups, shown with canonical authorship:
+
+      ```
+       1. Aus bus Linnaeus 1758
+          - Aus ba Linnaeus 1758 [orthographic variant]
+          - Xus bus (Linnaeus 1758) Smith 1850 [alternate combination]
+
+       2. Xus cus Smith 1850
+          - Xus bus subsp. cus Smith 1850 [alternate rank]
+
+       3. Xus cus Jones 1900 (heterotypic homonym of Xus cus Smith 1850)
+          - Xus dus Pyle 2000 [replacement name for Xus cus Jones]
+
+       4. Foo bar var. lion Smith 1850
+      ```
+
+      #### comb. nov. in ICZN vs ICN
+
+      One of the most notable differences between [ICN](http://www.iapt-taxon.org/nomen/)
+      and [ICZN](http://www.nhm.ac.uk/hosted-sites/iczn/code/) is the way names are cited when a species is placed in a different genus from the one it was originally published in (a comb. nov.).
+      Botanists have a convention of always citing the authors of the original combination in brackets followed by the names of the authors of the combination.
+      Zoologists don't follow this convention, they simply place the author of the original combination in brackets for the new combination and don't cite the authors who were first to make the new combination.
+      This difference is cosmetic. Indeed [ICZN Recommendation 51G](http://www.nhm.ac.uk/hosted-sites/iczn/code/index.jsp?article=51) is that new combinations in zoology should be quoted in a similar way to the way they are quoted in botany.
+
+      *Basionym* is a well established term in the ICN where it is defined that
+      a "basionym provides the final epithet, name, or stem of the new combination or name at new rank" (ICN Art. 6.10 & Art. 41).
+      It is the orginal combination of a name as viewed from a new combination. The basionym is therefore always relative to a new combination.
+      A name can't be a basionym in its own right only relative to another name.
+      ICZN does not mention the term basionym but the notion is clearly present in zoological nomenclature as zoologists also have the concept of the new recombination of a name.
     properties:
       key:
         type: integer
@@ -215,12 +340,13 @@ types:
         description: plain name made from 1-3 name epithets only, exluding authors and rank markers
         required: false
       nomenclaturalCode:
-        enum: [AlgaeFungiPlants, Animals, Bacteria, Virus]
+        type: string
+        enum: ["ICN", "ICZN", "ICNB", "ICTV"]
         description: >
-          [Algae, Fungi and Plants](http://www.iapt-taxon.org/nomen/),
-          [Animals](http://www.nhm.ac.uk/hosted-sites/iczn/code/),
-          [Bacteria](https://www.ncbi.nlm.nih.gov/books/NBK8817/),
-          [Virus](https://talk.ictvonline.org/information/w/ictv-information/383/ictv-code)
+          [ICN](http://www.iapt-taxon.org/nomen/) Algae, Fungi and Plants,
+          [ICZN](http://www.nhm.ac.uk/hosted-sites/iczn/code/) Animals,
+          [ICNB](https://www.ncbi.nlm.nih.gov/books/NBK8817/) Bacteria,
+          [ICTV](https://talk.ictvonline.org/information/w/ictv-information/383/ictv-code) Virus
       uninomial:
         type: string
         description: for names at higher rank than genus, e.g. a family name
@@ -242,10 +368,11 @@ types:
         description:
         required: false
       rank:
-        type: string
+        type: RankType
         description: rank of the name from enumeration above
       notho:
-        enum: [ generic, infrageneric, specific, infraspecific ]
+        type: string
+        enum: [ "generic", "infrageneric", "specific", "infraspecific" ]
         description: the part of the name which is considered a hybrid;  see [GBIF](https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/NamePart.java#L24)
         required: false
       authorship:
@@ -290,7 +417,7 @@ types:
         "key": 21242,
         "scientificName": "Crepicnema parvula (Jacoby, 1885)",
         "canonicalName": "Crepicnema parvula",
-        "nomenclaturalCode": "Animals",
+        "nomenclaturalCode": "ICZN",
         "genus": "Crepicnema",
         "specificEpithet": "parvula",
         "rank": "species",
@@ -378,15 +505,6 @@ types:
       results:
         type: Author[]
         description: the resulting Authors
-  NomenclaturalActType:
-    type: string
-    enum: [description, typification, ruling, emendation]
-    description: >
-      Coarse classification of nomenclatural acts.
-      "Description" covers original descriptions, new recombinations and changes in rank.
-      "Typification" is used for subsequent type designations.
-      "Ruling" acts are e.g. suppressed or conserved names.
-      "Emendation" are intentional changes in the original spelling of an available name.
   NomenclaturalAct:
     type: Versioned
     description: A published act which affects the nomenclatural status of a scientific name or the typification of a nominal taxon.
@@ -504,10 +622,26 @@ types:
           "publisher-place": "Göttingen"
         }
       }
+  SerialResultSet:
+    type: ResultSet
+    description: >
+      A paging resultset for Serials.
+    properties:
+      results:
+        type: Serial[]
+        description: the resulting Serials
   Reference:
     type: Versioned
-    description: >
-      A (literature) reference mostly given in [CSL-JSON](https://github.com/citation-style-language/schema#csl-json-schema)
+    description: |
+      A (literature) reference mostly given in [CSL-JSON](https://github.com/citation-style-language/schema#csl-json-schema).
+      A reference can be linked to a serial, e.g. a journal, that defines the content for the CSL container attributes.
+
+      Treatments are the section of a publication that deals with a single scientific name.
+      They are a unit of citation below articles. [Plazi](http://www.plazi.org) is based on them
+      and Taxon Name Usages (TNU) in [GNUB](http://globalnames.org/docs/gnub/) correspond to treatments.
+
+      The ability to link to the treatment of a name is very useful. It is accomplished in the NomenclaturalAct class,
+      but not dealt with on the shared Reference instances.
     properties:
       serialKey:
         type: integer
@@ -577,6 +711,10 @@ types:
       email:
         type: string
         description: a users email address
+      authorKey:
+        type: integer
+        description: the author key in case the contributor is a name author himself
+        required: false
       orcid:
         type: string
         description: ORCID identifier
@@ -584,12 +722,15 @@ types:
       avatarUrl:
         type: string
         description: link to an avatar thumbnail image
+        required: false
       homepage:
         type: string
         description: URL to external user homepage
+        required: false
       description:
         type: string
         description: A short description of the contributor
+        required: false
       created:
         type: datetime
         description: timestamp the contributor was registered
@@ -605,6 +746,72 @@ types:
       results:
         type: Contributor[]
         description: the resulting Contributor
+  Source:
+    type: object
+    description: Source (GSD) metadata
+    properties:
+      name:
+        type: string
+        description: Full name of the source database
+      abbreviatedName:
+        type: string
+        description: Abbreviated name of the source database
+      abstract:
+        type: string
+        description: Optional free text field describing the source database
+        required: false
+      groupName:
+        type: string
+        description: Name in English of the group(s) treated in the database
+      authorsAndEditors:
+        type: string
+        description: Optional author(s) and editor(s) of the source database
+        required: false
+      organisation:
+        type: string
+        description: Optional organisation which has compiled or is owning the source database
+        required: false
+      contactPerson:
+        type: string
+        description: Optional contact person of the source database
+        required: false
+      version:
+        type: string
+        description: Optional version number of the source database ???
+        required: false
+      releaseDate:
+        type: string
+        description: Optional most recent release date of the source database
+        required: false
+      taxonomicCoverage:
+        type: string
+        description:
+        required: false
+      coverage:
+        type: string
+        description:
+        required: false
+      completeness:
+        type: string
+        description:
+        required: false
+      confidence:
+        type: string
+        description:
+        required: false
+      homepage:
+        type: string
+        description: Homepage of the source
+        required: false
+      dataFormat:
+        type: string
+        enum: ["dwca", "tcs", "xls", "other"]
+        description: data format
+        required: false
+      dataAccess:
+        type: string
+        description: URL to access the source data
+        required: false
   Comment:
     type: Created
     description: >
@@ -623,10 +830,11 @@ types:
       text:
         type: string
         description: the comment in markdown
-  Change: #TODO
+  Change:
     type: Created
     description: >
       A description of a change between two object versions
+      TODO: rework diff and object linkage
     properties:
       key:
         type: integer
@@ -644,53 +852,177 @@ types:
       actKey:
         type: integer
         description: key to a published nomenclatural act that is the source for the change
+        required: false
 
 
 /name:
-  description: pageable list of all names with optional filtering
   type: collection
   /{key}:
-    description: get name by its key, the scientificNameID
     type:  { modifiable: {class : "Name"} }
     uriParameters:
       key:
         type: integer
+        description: name key
     /activity:
-      description: get list of recent changes and comments
       get:
+        description: get list of recent changes and comments in chronological order
         responses:
           200:
             body: (Comment | Change)[]
     /synonyms:
-      description: get list of all homotypic synonyms
       get:
+        description: get list of all homotypic synonyms
         responses:
           200:
             body: Name[]
-    /sources:
-      description: get list of all source references for this name
+    /publishedIn:
       get:
+        description: return the reference where the name was first published, i.e. the original description or recombination
         responses:
           200:
-            body: Reference[]
+            body: Reference
+    /acts:
+      get:
+        description: list all nomenclatural acts for the name in chronological order
+        queryParameters:
+          homotypic:
+            type: boolean
+            description: if true include also all acts about any name from the homotypic group (i.e. protonym)
+            default: false
+        responses:
+          200:
+            body: NomenclaturalAct[]
+  /search:
+    type:  { searchable: {class : "Name"} }
+    get:
+      description: search all names
+      queryParameters:
+        rank:
+          type: string
+          description: filter by rank
+          required: false
+        type:
+          type: string
+          description: filter by name type
+          required: false
+/author:
+  type: collection
+  /{key}:
+    description: get author by its key
+    type:  { modifiable: {class : "Author"} }
+    uriParameters:
+      key:
+        type: integer
+        description: author key
+    /activity:
+      get:
+        description: get list of recent changes and comments in chronological order
+        responses:
+          200:
+            body: (Comment | Change)[]
+    /names:
+      type:  { pageable: {class : "Name"} }
+      get:
+        description: get list of all names that have been described by the author
+  /search:
+    type:  { searchable: {class : "Author"} }
+    get:
+      queryParameters:
+        q:
+          type: string
+          description: full text search on the complete author name and its aliases
+        year:
+          type: string
+          description: filter by year the authors were knwon to be alive
+/reference:
+  type: collection
+  /{key}:
+    type:  { modifiable: {class : "Reference"} }
+    uriParameters:
+      key:
+        type: integer
+        description: reference key
+    /activity:
+      get:
+        description: get list of recent changes and comments in chronological order
+        responses:
+          200:
+            body: (Comment | Change)[]
+    /names:
+      get:
+        description: get list of all distinct names from nomenclatural acts in this reference
+        responses:
+          200:
+            body: Name[]
+  /search:
+    type:  { searchable: {class : "Reference"} }
+    get:
+      description: search all references
+      queryParameters:
+        serialKey:
+          type: integer
+          description: filter by serial
+          required: false
+        type:
+          type: string
+          description: filter by reference type
+          required: false
+        year:
+          type: string
+          description: filter by year of publication
+          required: false
+        volume:
+          type: string
+          description: filter by serial volume
+          required: false
+        doi:
+          type: string
+          description: filter by DOI
+          required: false
+/serial:
+  type: collection
+  /{key}:
+    type:  { modifiable: {class : "Serial"} }
+    uriParameters:
+      key:
+        type: integer
+        description: serial key
+    /activity:
+      get:
+        description: get list of recent changes and comments in chronological order
+        responses:
+          200:
+            body: (Comment | Change)[]
+  /search:
+    type:  { searchable: {class : "Serial"} }
+    get:
+      queryParameters:
+        year:
+          type: string
+          description: filter by year of publication. The given year must be within the range the serial is known to be active.
+          required: false
+        issn:
+          type: string
+          description: filter by ISSN
+          required: false
 /activity:
-  description: get list of recent activity in the entire system
   get:
+    description: get list of recent activity in the entire system
     responses:
       200:
         body: (Comment | Change)[]
 /contributor/{key}:
-  description: get contributor
   uriParameters:
     key:
       type: integer
   get:
+    description: get contributor
     responses:
       200:
         body: (Comment | Change)[]
   /activity:
-    description: get list of recent activity from the contributor
     get:
+      description: get list of recent activity from the contributor
       responses:
         200:
           body: (Comment | Change)[]

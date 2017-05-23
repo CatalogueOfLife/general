@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Unified Nomenclator API (vv1</title>
+    <title>Unified Nomenclator API (v1</title>
     <link href="screen.css" rel="stylesheet" media="screen" />
     <link href="print.css" rel="stylesheet" media="print" />
     <link href="highlight.css" rel="stylesheet" >
@@ -122,7 +122,7 @@
 
     <div class="content">
 
-        <h1 id="introduction">Unified Nomenclator API (vv1)</h1>
+        <h1 id="introduction">Unified Nomenclator API (v1)</h1>
         <h3><code>https://api.col.plus</code></h3>
 
     
@@ -134,6 +134,32 @@ It tracks recombinations and provides a place for collaborative editorial effort
 
 
             <h1 id="model">Data Model</h1>
+                    <h2 id="model-RankType">RankType</h2>
+
+
+    <p><p>Enumeration of all possible rank values. There is the need to deal with old ranks not accepted anymore. The list given is intended to be interoperable between name providers for bacteria, viruses, fungi, plants, and animals. The enumeration attempts to strike a balance between listing all possible rank terms, and remaining comprehensible. Not included in the list are the botanical &ldquo;notho-&rdquo; ranks, which are used to designate hybrids (nothospecies, nothogenus) as this information is handled by the Name.notho property already.
+Sources:</p>
+<ul>
+<li><a href="https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/Rank.java">GBIF</a></li>
+<li><a href="https://github.com/tdwg/tcs/blob/master/TCS101/v101.xsd#L860">TCS</a></li>
+<li><a href="http://mansfeld.ipk-gatersleben.de/apex/f?p=185:78:::NO::P77_TAXCAT,P77_DB_CHECKBOX1,77_TAXCAT2RAD,77_SHOWRAD:%25,,0,s_All">TaxCat2</a></li>
+<li><a href="https://raw.githubusercontent.com/SpeciesFileGroup/nomen/master/src/ontology/nomen.owl">NOMEN</a></li>
+</ul>
+<p>TODO: extract all values from sources</p>
+</p>
+
+                    <h2 id="model-NameType">NameType</h2>
+
+
+    <p><p>Classification of names, mostly based on their syntactic structure.</p>
+</p>
+
+                    <h2 id="model-NomenclaturalActType">NomenclaturalActType</h2>
+
+
+    <p><p>Coarse classification of nomenclatural acts. &ldquo;Description&rdquo; covers original descriptions, new recombinations and changes in rank. &ldquo;Typification&rdquo; is used for subsequent type designations. &ldquo;Ruling&rdquo; acts are e.g. suppressed or conserved names. &ldquo;Emendation&rdquo; are intentional changes in the original spelling of an available name.</p>
+</p>
+
                     <h2 id="model-Error">Error</h2>
 
     <pre><code class="json">{
@@ -177,16 +203,13 @@ It tracks recombinations and provides a place for collaborative editorial effort
   "key": 21242,
   "scientificName": "Crepicnema parvula (Jacoby, 1885)",
   "canonicalName": "Crepicnema parvula",
-  "nomenclaturalCode": "Animals",
+  "nomenclaturalCode": "ICZN",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
   "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
   "originalYear": 1885,
-  "publishedInKey": 786,
-  "publishedInPage": "5",
-  "publishedInLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
   "originalNameKey": 8673,
   "isOriginalName": false,
   "isReplacement": false,
@@ -197,7 +220,82 @@ It tracks recombinations and provides a place for collaborative editorial effort
 }
 </code></pre>
 
-    <p><p>fdfd</p>
+    <p><p>A scientific name.
+CoL deals and categorizes the following types of names:</p>
+<ul>
+<li>Linnaean names, i.e. mono-, bi- or trinomials</li>
+<li>Named hybrids and nothotaxa</li>
+<li>Virus names</li>
+</ul>
+<p>A name includes it&rsquo;s authorship. Two homonyms with different authors therefore represent two different name entities.</p>
+<h3>Lexical variations</h3>
+<p>The same name can usually be represented by many different strings which we refer to as lexical variations.
+For each name a standard representation, the canonical form, exists.</p>
+<p>Lexical variations exist for various reasons.
+Author spelling, transliterations, epither gender, additional infrageneric or infraspecific indications, cited species authors in infraspecific names are common reasons.
+Listed here are 7 distinct names with some of their string representations:</p>
+<pre><code> 1. Aus bus Linnaeus 1758
+    - Aus bus Linn. 1758
+    - Aus bus Linn 1758
+    - Aus bus L.
+    - Aus ba Linn 1758.
+    - Aus (Hus) bus L.
+
+ 2. Xus bus (Linn, 1758)
+    - Xus bus (Linn) Smith
+
+ 3. Xus cus Smith, 1850
+    - Xus cus Sm.
+
+ 4. Xus cus Jones 1900
+
+ 5. Xus bus cus Smith 1850
+    - Xus bus subsp. cus Smith 1850
+
+ 6. Xus dus Pyle 2000
+
+ 7. Foo bar var. lion Smith 1850
+    - Foo bar L. var. lion Smith
+    - Foo bar subsp. dar var. lion Smith 1850
+    - Foo bar Lin. subsp. dar Mill. var. lion Smith 1850
+</code></pre>
+<p>New names (<strong>sp./gen. nov.</strong>),
+new recombinations of the same epithet (<strong>comb. nov.</strong>),
+a name at a new rank (<strong>stat. nov.</strong>)
+or replacement names (<strong>nom. nov.</strong>) are all treated as distinct names.</p>
+<h3>Homotypic group &amp; original name</h3>
+<p>Names based on the same type can be clustered together as a homotypic group of names.
+A homotypic group not only includes all subsequent recombinations, but also any <a href="https://en.wikipedia.org/wiki/Nomen_novum">replacement name</a> if existing.
+These names are homotypic synonyms, also called nomenclatural or objective synonyms.</p>
+<p>The first, originally published name is used to represent such a group as it is a clean proxy to the type specimen,
+therefore every name in a homotypic group points back to the same original name.</p>
+<p>Protonym in zoology and basionym in botany are terms for a very similar concept, but they do not include replacement names and are rather code specific
+so we will refer to <em>original name</em> here instead, inline with Darwin Core terminology.
+Original names are not necessarily Code-compliant original descriptions, but usually they are.</p>
+<p>The above names can be clustered into four sets of homotypic synonym groups, shown with canonical authorship:</p>
+<pre><code> 1. Aus bus Linnaeus 1758
+    - Aus ba Linnaeus 1758 [orthographic variant]
+    - Xus bus (Linnaeus 1758) Smith 1850 [alternate combination]
+
+ 2. Xus cus Smith 1850
+    - Xus bus subsp. cus Smith 1850 [alternate rank]
+
+ 3. Xus cus Jones 1900 (heterotypic homonym of Xus cus Smith 1850)
+    - Xus dus Pyle 2000 [replacement name for Xus cus Jones]
+
+ 4. Foo bar var. lion Smith 1850
+</code></pre>
+<h4>comb. nov. in ICZN vs ICN</h4>
+<p>One of the most notable differences between <a href="http://www.iapt-taxon.org/nomen/">ICN</a>
+and <a href="http://www.nhm.ac.uk/hosted-sites/iczn/code/">ICZN</a> is the way names are cited when a species is placed in a different genus from the one it was originally published in (a comb. nov.).
+Botanists have a convention of always citing the authors of the original combination in brackets followed by the names of the authors of the combination.
+Zoologists don&rsquo;t follow this convention, they simply place the author of the original combination in brackets for the new combination and don&rsquo;t cite the authors who were first to make the new combination.
+This difference is cosmetic. Indeed <a href="http://www.nhm.ac.uk/hosted-sites/iczn/code/index.jsp?article=51">ICZN Recommendation 51G</a> is that new combinations in zoology should be quoted in a similar way to the way they are quoted in botany.</p>
+<p><em>Basionym</em> is a well established term in the ICN where it is defined that
+a &ldquo;basionym provides the final epithet, name, or stem of the new combination or name at new rank&rdquo; (ICN Art. 6.10 &amp; Art. 41).
+It is the orginal combination of a name as viewed from a new combination. The basionym is therefore always relative to a new combination.
+A name can&rsquo;t be a basionym in its own right only relative to another name.
+ICZN does not mention the term basionym but the notion is clearly present in zoological nomenclature as zoologists also have the concept of the new recombination of a name.</p>
 </p>
 
                         <table><thead>
@@ -260,9 +358,9 @@ It tracks recombinations and provides a place for collaborative editorial effort
                             <tr>
                                 <td>nomenclaturalCode</td>
                                 <td>enum</td>
-                                <td>AlgaeFungiPlants, Animals, Bacteria, Virus</td>
+                                <td>ICN, ICZN, ICNB, ICTV</td>
                                 <td>yes</td>
-                                <td><p><a href="http://www.iapt-taxon.org/nomen/">Algae, Fungi and Plants</a>, <a href="http://www.nhm.ac.uk/hosted-sites/iczn/code/">Animals</a>, <a href="https://www.ncbi.nlm.nih.gov/books/NBK8817/">Bacteria</a>, <a href="https://talk.ictvonline.org/information/w/ictv-information/383/ictv-code">Virus</a></p>
+                                <td><p><a href="http://www.iapt-taxon.org/nomen/">ICN</a> Algae, Fungi and Plants, <a href="http://www.nhm.ac.uk/hosted-sites/iczn/code/">ICZN</a> Animals, <a href="https://www.ncbi.nlm.nih.gov/books/NBK8817/">ICNB</a> Bacteria, <a href="https://talk.ictvonline.org/information/w/ictv-information/383/ictv-code">ICTV</a> Virus</p>
 </td>
                             </tr>
                             <tr>
@@ -305,8 +403,8 @@ It tracks recombinations and provides a place for collaborative editorial effort
                             </tr>
                             <tr>
                                 <td>rank</td>
-                                <td>string</td>
-                                <td></td>
+                                <td><a href="#model-RankType">RankType</a></td>
+                                <td>kingdom, phylum, class, order, family, genus, species, subspecies</td>
                                 <td>yes</td>
                                 <td><p>rank of the name from enumeration above</p>
 </td>
@@ -357,30 +455,6 @@ It tracks recombinations and provides a place for collaborative editorial effort
                                 <td></td>
                                 <td>no</td>
                                 <td><p>year of combination publication, usually the same as publishedIn reference</p>
-</td>
-                            </tr>
-                            <tr>
-                                <td>publishedInKey</td>
-                                <td>integer</td>
-                                <td></td>
-                                <td>no</td>
-                                <td><p>Key to reference in which the name was published</p>
-</td>
-                            </tr>
-                            <tr>
-                                <td>publishedInPage</td>
-                                <td>string</td>
-                                <td></td>
-                                <td>no</td>
-                                <td><p>exact first page of the treatment within above reference</p>
-</td>
-                            </tr>
-                            <tr>
-                                <td>publishedInLink</td>
-                                <td>string</td>
-                                <td></td>
-                                <td>no</td>
-                                <td><p>URL to the first page of the treatment, e.g. in BHL, BioStor or Zenodo</p>
 </td>
                             </tr>
                             <tr>
@@ -647,29 +721,22 @@ It tracks recombinations and provides a place for collaborative editorial effort
 </td>
                             </tr>
                         </tbody></table>
-                    <h2 id="model-Reference">Reference</h2>
+                    <h2 id="model-NomenclaturalAct">NomenclaturalAct</h2>
 
     <pre><code class="json">{
-  "key": 432561,
-  "version": 3,
-  "created": "2016-02-28T16:41:41.090Z",
-  "createdBy": "markus",
-  "journalKey": 17,
-  "json": {
-    "DOI":"10.1038/nrd842",
-    "type":"article-journal",
-    "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
-    "title":"From the analyst's couch: Selective anticancer drugs",
-    "container-title":"Nature Reviews Drug Discovery",
-    "volume":"1",
-    "issue":"7",
-    "issued":{"date-parts":[[2002,7]]},
-    "page":"491-492"
-  }
+  "key": 721141,
+  "type": ["description"],
+  "nameKeys": [78612],
+  "referenceKey": 786,
+  "referencePage": "5",
+  "referenceLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
+  "version": 2,
+  "created": "2017-01-28T16:41:41.090Z",
+  "createdBy": "carlos"
 }
 </code></pre>
 
-    <p><p>A (literature) reference mostly given in <a href="https://github.com/citation-style-language/schema#csl-json-schema">CSL-JSON</a></p>
+    <p><p>A published act which affects the nomenclatural status of a scientific name or the typification of a nominal taxon.</p>
 </p>
 
                         <table><thead>
@@ -714,19 +781,355 @@ It tracks recombinations and provides a place for collaborative editorial effort
 </td>
                             </tr>
                             <tr>
-                                <td>journalKey</td>
-                                <td>integer</td>
+                                <td>nameKeys</td>
+                                <td>integer[]</td>
                                 <td></td>
                                 <td>yes</td>
-                                <td><p>foreign key to the journal</p>
+                                <td><p>keys to the names the act is about</p>
 </td>
                             </tr>
                             <tr>
-                                <td>json</td>
+                                <td>type</td>
+                                <td><a href="#model-NomenclaturalActType">NomenclaturalActType[]</a></td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>Coarse classification of acts.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>description</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>A desription of the details of the nomenclatural act</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>referenceKey</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>Key to reference in which the act was published</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>referencePage</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>exact first page of the treatment within above reference</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>referenceLink</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>URL to the first page of the treatment, e.g. in BHL, BioStor or Zenodo</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>bhlPageId</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>BHL PageID for the first page of the treatment</p>
+</td>
+                            </tr>
+                        </tbody></table>
+                    <h2 id="model-Serial">Serial</h2>
+
+    <pre><code class="json">{
+  "key": 432561,
+  "version": 3,
+  "created": "2016-02-28T16:41:41.090Z",
+  "createdBy": "markus",
+  "bph": "460.06",
+  "tl2": "11.084",
+  "call": "QK1.J55",
+  "oclc": 1754397,
+  "bhl": 68922,
+  "firstYear": 1799,
+  "lastYear": 1804,
+  "csl": {
+    "call-number": "QK1.J55",
+    "type":"journal",
+    "title":"Journal für die Botanik",
+    "title-short":"J. Bot. (Schrader)",
+    "editor":[{"family":"Schrader","given":"H. A."}],
+    "publisher-place": "Göttingen"
+  }
+}
+</code></pre>
+
+    <p><p>A journal or other series used as containers for references</p>
+</p>
+
+                        <table><thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Pattern</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead><tbody>
+                            <tr>
+                                <td>created</td>
+                                <td>datetime</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>timestamp the object was created</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>createdBy</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>contributor key that created the object</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>key</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the primary key for the object for all its versions</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>version</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>specific version of the object in chronological order starting with 1 when the object was created</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>aliases</td>
+                                <td>string[]</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>Alternative titles known for the serial</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>bph</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p><a href="http://huntbotanical.org/databases/show.php?1">BPH Online</a> identifier. Botanic periodicals published between 1665 and the present.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>call</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>library of congress classification number</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>tl2</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>TL2 number</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>oclc</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>OCLC number</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>bhl</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>BHL title number</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>jstor</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>link to JSTOR</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>firstYear</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>First year the serial was published</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>lastYear</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>Last year the serial was published. Empty for current journals</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>csl</td>
                                 <td>object</td>
                                 <td></td>
                                 <td>yes</td>
-                                <td><p>the citation metadata as <a href="https://github.com/citation-style-language/schema#csl-json-schema">CSL-JSON</a>, see <a href="https://github.com/citation-style-language/schema/blob/master/csl-data.json">CSL JSON schema</a></p>
+                                <td><p>the journal metadata as <a href="https://github.com/citation-style-language/schema#csl-json-schema">CSL-JSON</a>, see <a href="https://github.com/citation-style-language/schema/blob/master/csl-data.json">CSL JSON schema</a></p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>notes</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>Notes about the serial</p>
+</td>
+                            </tr>
+                        </tbody></table>
+                    <h2 id="model-SerialResultSet">SerialResultSet</h2>
+
+
+    <p><p>A paging resultset for Serials.</p>
+</p>
+
+                        <table><thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Pattern</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead><tbody>
+                            <tr>
+                                <td>offset</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>The offset applied during request. Can be less than requested if the limit is reached.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>limit</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>The maximum number of records returned. Can be less than requested if the limit is reached.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>total</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>The total number of records available.</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>results</td>
+                                <td><a href="#model-Serial">Serial[]</a></td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the resulting Serials</p>
+</td>
+                            </tr>
+                        </tbody></table>
+                    <h2 id="model-Reference">Reference</h2>
+
+    <pre><code class="json">{
+  "key": 432561,
+  "version": 3,
+  "created": "2016-02-28T16:41:41.090Z",
+  "createdBy": "markus",
+  "serialKey": 17,
+  "csl": {
+    "DOI":"10.1038/nrd842",
+    "type":"article-journal",
+    "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
+    "title":"From the analyst's couch: Selective anticancer drugs",
+    "container-title":"Nature Reviews Drug Discovery",
+    "volume":"1",
+    "issue":"7",
+    "issued":{"date-parts":[[2002,7]]},
+    "page":"491-492"
+  }
+}
+</code></pre>
+
+    <p><p>A (literature) reference mostly given in <a href="https://github.com/citation-style-language/schema#csl-json-schema">CSL-JSON</a>.
+A reference can be linked to a serial, e.g. a journal, that defines the content for the CSL container attributes.</p>
+<p>Treatments are the section of a publication that deals with a single scientific name.
+They are a unit of citation below articles. <a href="http://www.plazi.org">Plazi</a> is based on them
+and Taxon Name Usages (TNU) in <a href="http://globalnames.org/docs/gnub/">GNUB</a> correspond to treatments.</p>
+<p>The ability to link to the treatment of a name is very useful. It is accomplished in the NomenclaturalAct class,
+but not dealt with on the shared Reference instances.</p>
+</p>
+
+                        <table><thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Pattern</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead><tbody>
+                            <tr>
+                                <td>created</td>
+                                <td>datetime</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>timestamp the object was created</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>createdBy</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>contributor key that created the object</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>key</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the primary key for the object for all its versions</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>version</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>specific version of the object in chronological order starting with 1 when the object was created</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>serialKey</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>key to container serial</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>csl</td>
+                                <td>object</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>the citation metadata as <a href="https://github.com/citation-style-language/schema#csl-json-schema">CSL-JSON</a>,
+see <a href="https://github.com/citation-style-language/schema/blob/master/csl-data.json">CSL JSON schema</a>.</p>
 </td>
                             </tr>
                         </tbody></table>
@@ -922,6 +1325,14 @@ It tracks recombinations and provides a place for collaborative editorial effort
 </td>
                             </tr>
                             <tr>
+                                <td>authorKey</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>the author key in case the contributor is a name author himself</p>
+</td>
+                            </tr>
+                            <tr>
                                 <td>orcid</td>
                                 <td>string</td>
                                 <td></td>
@@ -933,7 +1344,7 @@ It tracks recombinations and provides a place for collaborative editorial effort
                                 <td>avatarUrl</td>
                                 <td>string</td>
                                 <td></td>
-                                <td>yes</td>
+                                <td>no</td>
                                 <td><p>link to an avatar thumbnail image</p>
 </td>
                             </tr>
@@ -941,7 +1352,7 @@ It tracks recombinations and provides a place for collaborative editorial effort
                                 <td>homepage</td>
                                 <td>string</td>
                                 <td></td>
-                                <td>yes</td>
+                                <td>no</td>
                                 <td><p>URL to external user homepage</p>
 </td>
                             </tr>
@@ -949,7 +1360,7 @@ It tracks recombinations and provides a place for collaborative editorial effort
                                 <td>description</td>
                                 <td>string</td>
                                 <td></td>
-                                <td>yes</td>
+                                <td>no</td>
                                 <td><p>A short description of the contributor</p>
 </td>
                             </tr>
@@ -1015,6 +1426,146 @@ It tracks recombinations and provides a place for collaborative editorial effort
                                 <td></td>
                                 <td>yes</td>
                                 <td><p>the resulting Contributor</p>
+</td>
+                            </tr>
+                        </tbody></table>
+                    <h2 id="model-Source">Source</h2>
+
+
+    <p><p>Source (GSD) metadata</p>
+</p>
+
+                        <table><thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Pattern</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead><tbody>
+                            <tr>
+                                <td>name</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>Full name of the source database</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>abbreviatedName</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>Abbreviated name of the source database</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>abstract</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>Optional free text field describing the source database</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>groupName</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>yes</td>
+                                <td><p>Name in English of the group(s) treated in the database</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>authorsAndEditors</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>Optional author(s) and editor(s) of the source database</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>organisation</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>Optional organisation which has compiled or is owning the source database</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>contactPerson</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>Optional contact person of the source database</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>version</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>Optional version number of the source database ???</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>releaseDate</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>Optional most recent release date of the source database</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>taxonomicCoverage</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>coverage</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>completeness</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>confidence</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>homepage</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>Homepage of the source</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>dataFormat</td>
+                                <td>enum</td>
+                                <td>dwca, tcs, xls, other</td>
+                                <td>no</td>
+                                <td><p>data format</p>
+</td>
+                            </tr>
+                            <tr>
+                                <td>dataAccess</td>
+                                <td>string</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>URL to access the source data</p>
 </td>
                             </tr>
                         </tbody></table>
@@ -1085,7 +1636,7 @@ It tracks recombinations and provides a place for collaborative editorial effort
                     <h2 id="model-Change">Change</h2>
 
 
-    <p><p>A description of a change between two object versions</p>
+    <p><p>A description of a change between two object versions TODO: rework diff and object linkage</p>
 </p>
 
                         <table><thead>
@@ -1145,6 +1696,14 @@ It tracks recombinations and provides a place for collaborative editorial effort
                                 <td><p>the changes as the diff between previous and new version</p>
 </td>
                             </tr>
+                            <tr>
+                                <td>actKey</td>
+                                <td>integer</td>
+                                <td></td>
+                                <td>no</td>
+                                <td><p>key to a published nomenclatural act that is the source for the change</p>
+</td>
+                            </tr>
                         </tbody></table>
 
         <h1 id="authentication">Authentication</h1>
@@ -1158,7 +1717,6 @@ It tracks recombinations and provides a place for collaborative editorial effort
                 <h2 id="auth-oauth_2_0">OAuth 2.0</h2>
     <p><p>Supported for authenticating all API requests.</p>
 </p>
-
 
 
 
@@ -1219,15 +1777,11 @@ timestamp&hellip;). Unfortunately, re-authenticating the user won&rsquo;t help h
                     TODO: SETTINGS
 
 
-    <h1 id="resource-1">/name</h1>
 
-    <p><p>pageable list of all names with optional filtering</p>
-</p>
+        <h1 id="resource-1">/name</h1>
 
-        <h2 id="res-1-get">GET /name</h2>
+    
 
-    <p><p>Page through all names, optionally filtered</p>
-</p>
 
     <pre><code class="http">
 GET /name HTTP/1.1
@@ -1235,8 +1789,9 @@ Host: api.col.plus
 </code>
 </pre>
 
-        <h3>Request</h3>
-        <p><code class="prettyprint">GET https://api.col.plus/name</code></p>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/name</h3>
+    <p><p>Page through all names, optionally filtered</p>
+</p>
 
 
 
@@ -1276,23 +1831,20 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, May 22, 2017 12:22:03 PM CEST
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
   "key": 21242,
   "scientificName": "Crepicnema parvula (Jacoby, 1885)",
   "canonicalName": "Crepicnema parvula",
-  "nomenclaturalCode": "Animals",
+  "nomenclaturalCode": "ICZN",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
   "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
   "originalYear": 1885,
-  "publishedInKey": 786,
-  "publishedInPage": "5",
-  "publishedInLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
   "originalNameKey": 8673,
   "isOriginalName": false,
   "isReplacement": false,
@@ -1305,16 +1857,13 @@ Content-Type: application/json
   "key": 21242,
   "scientificName": "Crepicnema parvula (Jacoby, 1885)",
   "canonicalName": "Crepicnema parvula",
-  "nomenclaturalCode": "Animals",
+  "nomenclaturalCode": "ICZN",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
   "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
   "originalYear": 1885,
-  "publishedInKey": 786,
-  "publishedInPage": "5",
-  "publishedInLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
   "originalNameKey": 8673,
   "isOriginalName": false,
   "isReplacement": false,
@@ -1327,10 +1876,6 @@ Content-Type: application/json
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-Name">Name[]</a></p>
-        <h2 id="res-1-post">POST /name</h2>
-
-    <p><p>Create a new Name</p>
-</p>
 
     <pre><code class="http">
 POST /name HTTP/1.1
@@ -1342,16 +1887,13 @@ Content-Type: application/json
   "key": 21242,
   "scientificName": "Crepicnema parvula (Jacoby, 1885)",
   "canonicalName": "Crepicnema parvula",
-  "nomenclaturalCode": "Animals",
+  "nomenclaturalCode": "ICZN",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
   "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
   "originalYear": 1885,
-  "publishedInKey": 786,
-  "publishedInPage": "5",
-  "publishedInLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
   "originalNameKey": 8673,
   "isOriginalName": false,
   "isReplacement": false,
@@ -1363,8 +1905,9 @@ Content-Type: application/json
 </code>
 </pre>
 
-        <h3>Request</h3>
-        <p><code class="prettyprint">POST https://api.col.plus/name</code></p>
+        <h3><code class="prettyprint">POST</code> https://api.col.plus/name</h3>
+    <p><p>Create a new Name</p>
+</p>
 
     <h3 id="op3-request-header">Header</h3>
     <table><thead>
@@ -1411,7 +1954,7 @@ Content-Type: application/json
     </tbody></table>
 <pre><code class="http">
 HTTP/1.1 201 Created
-Date: Monday, May 22, 2017 12:22:03 PM CEST
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
 Content-Type: application/json
 Location: https://api.col.plus/...
 </code>
@@ -1420,15 +1963,11 @@ Location: https://api.col.plus/...
                     <p><code>application/json</code></p>
                     <p>Content: integer</p>
 
-    <h1 id="resource-2">/name/{key}</h1>
 
-    <p><p>get name by its key, the scientificNameID</p>
-</p>
+        <h2 id="resource-2">/name/{key}</h2>
 
-        <h2 id="res-2-get">GET /{key}</h2>
+    
 
-    <p><p>Get a Name by its key</p>
-</p>
 
     <pre><code class="http">
 GET /name/{key} HTTP/1.1
@@ -1436,8 +1975,9 @@ Host: api.col.plus
 </code>
 </pre>
 
-        <h3>Request</h3>
-        <p><code class="prettyprint">GET https://api.col.plus/name/{key}</code></p>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/name/{key}</h3>
+    <p><p>Get a Name by its key</p>
+</p>
 
 
 
@@ -1458,7 +1998,8 @@ Host: api.col.plus
                     <td></td>
                     <td>yes</td>
                     <td></td>
-                    <td></td>
+                    <td><p>name key</p>
+</td>
                 </tr>
             <tr>
                 <td>version</td>
@@ -1469,16 +2010,6 @@ Host: api.col.plus
                 <td><p>The requested specific version of the resource</p>
 </td>
             </tr>
-            <tr>
-                <td>familyMember</td>
-                <td>enum</td>
-                <td>pia, markus, carla, toni
-[a-z+]</td>
-                <td>no</td>
-                <td></td>
-                <td><p>The requested family member</p>
-</td>
-            </tr>
         </tbody></table>
 
 
@@ -1486,23 +2017,20 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, May 22, 2017 12:22:03 PM CEST
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
   "key": 21242,
   "scientificName": "Crepicnema parvula (Jacoby, 1885)",
   "canonicalName": "Crepicnema parvula",
-  "nomenclaturalCode": "Animals",
+  "nomenclaturalCode": "ICZN",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
   "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
   "originalYear": 1885,
-  "publishedInKey": 786,
-  "publishedInPage": "5",
-  "publishedInLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
   "originalNameKey": 8673,
   "isOriginalName": false,
   "isReplacement": false,
@@ -1519,7 +2047,7 @@ Content-Type: application/json
     
 <pre><code class="http">
 HTTP/1.1 404 Not Found
-Date: Monday, May 22, 2017 12:22:03 PM CEST
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -1530,10 +2058,6 @@ Content-Type: application/json
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-Error">Error</a></p>
-        <h2 id="res-2-put">PUT /{key}</h2>
-
-    <p><p>Update a Name</p>
-</p>
 
     <pre><code class="http">
 PUT /name/{key} HTTP/1.1
@@ -1545,16 +2069,13 @@ Content-Type: application/json
   "key": 21242,
   "scientificName": "Crepicnema parvula (Jacoby, 1885)",
   "canonicalName": "Crepicnema parvula",
-  "nomenclaturalCode": "Animals",
+  "nomenclaturalCode": "ICZN",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
   "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
   "originalYear": 1885,
-  "publishedInKey": 786,
-  "publishedInPage": "5",
-  "publishedInLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
   "originalNameKey": 8673,
   "isOriginalName": false,
   "isReplacement": false,
@@ -1566,8 +2087,9 @@ Content-Type: application/json
 </code>
 </pre>
 
-        <h3>Request</h3>
-        <p><code class="prettyprint">PUT https://api.col.plus/name/{key}</code></p>
+        <h3><code class="prettyprint">PUT</code> https://api.col.plus/name/{key}</h3>
+    <p><p>Update a Name</p>
+</p>
 
     <h3 id="op5-request-header">Header</h3>
     <table><thead>
@@ -1608,7 +2130,8 @@ Content-Type: application/json
                     <td></td>
                     <td>yes</td>
                     <td></td>
-                    <td></td>
+                    <td><p>name key</p>
+</td>
                 </tr>
         </tbody></table>
 
@@ -1617,17 +2140,13 @@ Content-Type: application/json
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, May 22, 2017 12:22:03 PM CEST
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">7</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: integer</p>
-        <h2 id="res-2-delete">DELETE /{key}</h2>
-
-    <p><p>Delete a Name</p>
-</p>
 
     <pre><code class="http">
 DELETE /name/{key} HTTP/1.1
@@ -1636,8 +2155,9 @@ access_token: 5757gh76
 </code>
 </pre>
 
-        <h3>Request</h3>
-        <p><code class="prettyprint">DELETE https://api.col.plus/name/{key}</code></p>
+        <h3><code class="prettyprint">DELETE</code> https://api.col.plus/name/{key}</h3>
+    <p><p>Delete a Name</p>
+</p>
 
     <h3 id="op6-request-header">Header</h3>
     <table><thead>
@@ -1675,7 +2195,8 @@ access_token: 5757gh76
                     <td></td>
                     <td>yes</td>
                     <td></td>
-                    <td></td>
+                    <td><p>name key</p>
+</td>
                 </tr>
         </tbody></table>
 
@@ -1683,14 +2204,11 @@ access_token: 5757gh76
             <h3 id="op6-responses" class="clear">Response 204</h3>
     
 
-    <h1 id="resource-3">/name/{key}/activity</h1>
 
-    <p><p>get list of recent changes and comments</p>
-</p>
-
-        <h2 id="res-3-get">GET /activity</h2>
+        <h2 id="resource-3">/name/{key}/activity</h2>
 
     
+
 
     <pre><code class="http">
 GET /name/{key}/activity HTTP/1.1
@@ -1698,8 +2216,9 @@ Host: api.col.plus
 </code>
 </pre>
 
-        <h3>Request</h3>
-        <p><code class="prettyprint">GET https://api.col.plus/name/{key}/activity</code></p>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/name/{key}/activity</h3>
+    <p><p>get list of recent changes and comments in chronological order</p>
+</p>
 
 
 
@@ -1709,21 +2228,18 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, May 22, 2017 12:22:03 PM CEST
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: (Comment | Change)[]</p>
 
-    <h1 id="resource-4">/name/{key}/synonyms</h1>
 
-    <p><p>get list of all homotypic synonyms</p>
-</p>
-
-        <h2 id="res-4-get">GET /synonyms</h2>
+        <h2 id="resource-4">/name/{key}/synonyms</h2>
 
     
+
 
     <pre><code class="http">
 GET /name/{key}/synonyms HTTP/1.1
@@ -1731,8 +2247,9 @@ Host: api.col.plus
 </code>
 </pre>
 
-        <h3>Request</h3>
-        <p><code class="prettyprint">GET https://api.col.plus/name/{key}/synonyms</code></p>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/name/{key}/synonyms</h3>
+    <p><p>get list of all homotypic synonyms</p>
+</p>
 
 
 
@@ -1742,23 +2259,20 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, May 22, 2017 12:22:03 PM CEST
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
   "key": 21242,
   "scientificName": "Crepicnema parvula (Jacoby, 1885)",
   "canonicalName": "Crepicnema parvula",
-  "nomenclaturalCode": "Animals",
+  "nomenclaturalCode": "ICZN",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
   "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
   "originalYear": 1885,
-  "publishedInKey": 786,
-  "publishedInPage": "5",
-  "publishedInLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
   "originalNameKey": 8673,
   "isOriginalName": false,
   "isReplacement": false,
@@ -1771,16 +2285,13 @@ Content-Type: application/json
   "key": 21242,
   "scientificName": "Crepicnema parvula (Jacoby, 1885)",
   "canonicalName": "Crepicnema parvula",
-  "nomenclaturalCode": "Animals",
+  "nomenclaturalCode": "ICZN",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
   "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
   "originalYear": 1885,
-  "publishedInKey": 786,
-  "publishedInPage": "5",
-  "publishedInLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
   "originalNameKey": 8673,
   "isOriginalName": false,
   "isReplacement": false,
@@ -1794,23 +2305,21 @@ Content-Type: application/json
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-Name">Name[]</a></p>
 
-    <h1 id="resource-5">/name/{key}/sources</h1>
 
-    <p><p>get list of all source references for this name</p>
-</p>
-
-        <h2 id="res-5-get">GET /sources</h2>
+        <h2 id="resource-5">/name/{key}/publishedIn</h2>
 
     
 
+
     <pre><code class="http">
-GET /name/{key}/sources HTTP/1.1
+GET /name/{key}/publishedIn HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3>Request</h3>
-        <p><code class="prettyprint">GET https://api.col.plus/name/{key}/sources</code></p>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/name/{key}/publishedIn</h3>
+    <p><p>return the reference where the name was first published, i.e. the original description or recombination</p>
+</p>
 
 
 
@@ -1820,7 +2329,824 @@ Host: api.col.plus
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, May 22, 2017 12:22:03 PM CEST
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "key": 432561,
+  "version": 3,
+  "created": "2016-02-28T16:41:41.090Z",
+  "createdBy": "markus",
+  "serialKey": 17,
+  "csl": {
+    "DOI":"10.1038/nrd842",
+    "type":"article-journal",
+    "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
+    "title":"From the analyst's couch: Selective anticancer drugs",
+    "container-title":"Nature Reviews Drug Discovery",
+    "volume":"1",
+    "issue":"7",
+    "issued":{"date-parts":[[2002,7]]},
+    "page":"491-492"
+  }
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Reference">Reference</a></p>
+
+
+        <h2 id="resource-6">/name/{key}/acts</h2>
+
+    
+
+
+    <pre><code class="http">
+GET /name/{key}/acts HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/name/{key}/acts</h3>
+    <p><p>list all nomenclatural acts for the name in chronological order</p>
+</p>
+
+
+
+        <h3 id="op10-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>homotypic</td>
+                <td>boolean</td>
+                <td></td>
+                <td>yes</td>
+                <td>false</td>
+                <td><p>if true include also all acts about any name from the homotypic group (i.e. protonym)</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op10-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">[{
+  "key": 721141,
+  "type": ["description"],
+  "nameKeys": [78612],
+  "referenceKey": 786,
+  "referencePage": "5",
+  "referenceLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
+  "version": 2,
+  "created": "2017-01-28T16:41:41.090Z",
+  "createdBy": "carlos"
+}
+,{
+  "key": 721141,
+  "type": ["description"],
+  "nameKeys": [78612],
+  "referenceKey": 786,
+  "referencePage": "5",
+  "referenceLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
+  "version": 2,
+  "created": "2017-01-28T16:41:41.090Z",
+  "createdBy": "carlos"
+}
+]</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-NomenclaturalAct">NomenclaturalAct[]</a></p>
+
+
+        <h2 id="resource-7">/name/search</h2>
+
+    
+
+
+    <pre><code class="http">
+GET /name/search HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/name/search</h3>
+    <p><p>search all names</p>
+</p>
+
+
+
+        <h3 id="op11-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>rank</td>
+                <td>string</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>filter by rank</p>
+</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>string</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>filter by name type</p>
+</td>
+            </tr>
+            <tr>
+                <td>q</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>full text search query</p>
+</td>
+            </tr>
+            <tr>
+                <td>offset</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of offset records</p>
+</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested page, defaulting to 1 for the first page</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op11-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-NameResultSet">NameResultSet</a></p>
+
+
+        <h1 id="resource-8">/author</h1>
+
+    
+
+
+    <pre><code class="http">
+GET /author HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/author</h3>
+    <p><p>Page through all authors, optionally filtered</p>
+</p>
+
+
+
+        <h3 id="op12-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>offset</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of offset records</p>
+</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested page, defaulting to 1 for the first page</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op12-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">[{
+  "key": 1563,
+  "firstname": ["Augustin-Pyrame"],
+  "surname": "de Candolle",
+  "aliases": ["Augustin-Pyramus de Candolle", "DC."],
+  "yearOfBirth": 1778,
+  "yearOfDeath": 1841,
+  "areaOfInterest": ["Pteridophytes", "Mycology", "Bryophytes", "Spermatophytes"],
+  "biography": "Augustin Pyramus de Candolle also spelled Augustin Pyrame de Candolle (4 February 1778 – 9 September 1841) was a Swiss botanist. René Louiche Desfontaines launched de Candolle's botanical career by recommending him at an herbarium. Within a couple of years de Candolle had established a new genus, and he went on to document hundreds of plant families and create a new natural plant classification system. Although de Candolle's main focus was botany, he also contributed to related fields such as phytogeography, agronomy, paleontology, medical botany, and economic botany. Candolle originated the idea of Nature's war, which influenced Charles Darwin and the principle of natural selection.[1] de Candolle recognized that multiple species may develop similar characteristics that did not appear in a common evolutionary ancestor; this was later termed analogy. During his work with plants, de Candolle noticed that plant leaf movements follow a near-24-hour cycle in constant light, suggesting that an internal biological clock exists. Though many scientists doubted de Candolle's findings, experiments over a century later demonstrated that ″the internal biological clock″ indeed exists. Candolle's descendants continued his work on plant classification. Alphonse de Candolle and Casimir Pyrame de Candolle contributed to the Prodromus Systematis Naturalis Regni Vegetabilis, a catalog of plants begun by Augustin Pyramus de Candolle.",
+  "collections": [],
+  "version": 1,
+  "created": "2016-02-28T16:41:41.090Z",
+  "createdBy": "deko"
+}
+,{
+  "key": 1563,
+  "firstname": ["Augustin-Pyrame"],
+  "surname": "de Candolle",
+  "aliases": ["Augustin-Pyramus de Candolle", "DC."],
+  "yearOfBirth": 1778,
+  "yearOfDeath": 1841,
+  "areaOfInterest": ["Pteridophytes", "Mycology", "Bryophytes", "Spermatophytes"],
+  "biography": "Augustin Pyramus de Candolle also spelled Augustin Pyrame de Candolle (4 February 1778 – 9 September 1841) was a Swiss botanist. René Louiche Desfontaines launched de Candolle's botanical career by recommending him at an herbarium. Within a couple of years de Candolle had established a new genus, and he went on to document hundreds of plant families and create a new natural plant classification system. Although de Candolle's main focus was botany, he also contributed to related fields such as phytogeography, agronomy, paleontology, medical botany, and economic botany. Candolle originated the idea of Nature's war, which influenced Charles Darwin and the principle of natural selection.[1] de Candolle recognized that multiple species may develop similar characteristics that did not appear in a common evolutionary ancestor; this was later termed analogy. During his work with plants, de Candolle noticed that plant leaf movements follow a near-24-hour cycle in constant light, suggesting that an internal biological clock exists. Though many scientists doubted de Candolle's findings, experiments over a century later demonstrated that ″the internal biological clock″ indeed exists. Candolle's descendants continued his work on plant classification. Alphonse de Candolle and Casimir Pyrame de Candolle contributed to the Prodromus Systematis Naturalis Regni Vegetabilis, a catalog of plants begun by Augustin Pyramus de Candolle.",
+  "collections": [],
+  "version": 1,
+  "created": "2016-02-28T16:41:41.090Z",
+  "createdBy": "deko"
+}
+]</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Author">Author[]</a></p>
+
+    <pre><code class="http">
+POST /author HTTP/1.1
+Host: api.col.plus
+access_token: 5757gh76
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "key": 1563,
+  "firstname": ["Augustin-Pyrame"],
+  "surname": "de Candolle",
+  "aliases": ["Augustin-Pyramus de Candolle", "DC."],
+  "yearOfBirth": 1778,
+  "yearOfDeath": 1841,
+  "areaOfInterest": ["Pteridophytes", "Mycology", "Bryophytes", "Spermatophytes"],
+  "biography": "Augustin Pyramus de Candolle also spelled Augustin Pyrame de Candolle (4 February 1778 – 9 September 1841) was a Swiss botanist. René Louiche Desfontaines launched de Candolle's botanical career by recommending him at an herbarium. Within a couple of years de Candolle had established a new genus, and he went on to document hundreds of plant families and create a new natural plant classification system. Although de Candolle's main focus was botany, he also contributed to related fields such as phytogeography, agronomy, paleontology, medical botany, and economic botany. Candolle originated the idea of Nature's war, which influenced Charles Darwin and the principle of natural selection.[1] de Candolle recognized that multiple species may develop similar characteristics that did not appear in a common evolutionary ancestor; this was later termed analogy. During his work with plants, de Candolle noticed that plant leaf movements follow a near-24-hour cycle in constant light, suggesting that an internal biological clock exists. Though many scientists doubted de Candolle's findings, experiments over a century later demonstrated that ″the internal biological clock″ indeed exists. Candolle's descendants continued his work on plant classification. Alphonse de Candolle and Casimir Pyrame de Candolle contributed to the Prodromus Systematis Naturalis Regni Vegetabilis, a catalog of plants begun by Augustin Pyramus de Candolle.",
+  "collections": [],
+  "version": 1,
+  "created": "2016-02-28T16:41:41.090Z",
+  "createdBy": "deko"
+}
+</code>
+</pre>
+
+        <h3><code class="prettyprint">POST</code> https://api.col.plus/author</h3>
+    <p><p>Create a new Author</p>
+</p>
+
+    <h3 id="op13-request-header">Header</h3>
+    <table><thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Description</th>
+    </tr>
+    </thead><tbody>
+        <tr>
+            <td>access_token</td>
+            <td>string</td>
+            <td>yes</td>
+            <td><p>Access Token</p>
+</td>
+        </tr>
+    </tbody></table>
+
+    <h3 id="op13-request-body">Body</h3>
+            <p><code>application/json</code></p>
+            <p>Content: <a href="#model-Author">Author</a></p>
+
+
+
+            <h3 id="op13-responses" class="clear">Response 201</h3>
+    
+                <h3 id="op13-response-header-201">Header</h3>
+    <table><thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Description</th>
+    </tr>
+    </thead><tbody>
+        <tr>
+            <td>Location</td>
+            <td>string</td>
+            <td>yes</td>
+            <td><p>the absolute resource URL of the newly created object</p>
+</td>
+        </tr>
+    </tbody></table>
+<pre><code class="http">
+HTTP/1.1 201 Created
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+Location: https://api.col.plus/...
+</code>
+    <code class="json">79508</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: integer</p>
+
+
+        <h2 id="resource-9">/author/{key}</h2>
+
+    <p><p>get author by its key</p>
+</p>
+
+
+    <pre><code class="http">
+GET /author/{key} HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/author/{key}</h3>
+    <p><p>Get a Author by its key</p>
+</p>
+
+
+
+        <h3 id="op14-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+                <tr>
+                    <td>{key}</td>
+                    <td>integer</td>
+                    <td></td>
+                    <td>yes</td>
+                    <td></td>
+                    <td><p>author key</p>
+</td>
+                </tr>
+            <tr>
+                <td>version</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested specific version of the resource</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op14-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "key": 1563,
+  "firstname": ["Augustin-Pyrame"],
+  "surname": "de Candolle",
+  "aliases": ["Augustin-Pyramus de Candolle", "DC."],
+  "yearOfBirth": 1778,
+  "yearOfDeath": 1841,
+  "areaOfInterest": ["Pteridophytes", "Mycology", "Bryophytes", "Spermatophytes"],
+  "biography": "Augustin Pyramus de Candolle also spelled Augustin Pyrame de Candolle (4 February 1778 – 9 September 1841) was a Swiss botanist. René Louiche Desfontaines launched de Candolle's botanical career by recommending him at an herbarium. Within a couple of years de Candolle had established a new genus, and he went on to document hundreds of plant families and create a new natural plant classification system. Although de Candolle's main focus was botany, he also contributed to related fields such as phytogeography, agronomy, paleontology, medical botany, and economic botany. Candolle originated the idea of Nature's war, which influenced Charles Darwin and the principle of natural selection.[1] de Candolle recognized that multiple species may develop similar characteristics that did not appear in a common evolutionary ancestor; this was later termed analogy. During his work with plants, de Candolle noticed that plant leaf movements follow a near-24-hour cycle in constant light, suggesting that an internal biological clock exists. Though many scientists doubted de Candolle's findings, experiments over a century later demonstrated that ″the internal biological clock″ indeed exists. Candolle's descendants continued his work on plant classification. Alphonse de Candolle and Casimir Pyrame de Candolle contributed to the Prodromus Systematis Naturalis Regni Vegetabilis, a catalog of plants begun by Augustin Pyramus de Candolle.",
+  "collections": [],
+  "version": 1,
+  "created": "2016-02-28T16:41:41.090Z",
+  "createdBy": "deko"
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Author">Author</a></p>
+            <h3 id="op14-responses" class="clear">Response 404</h3>
+    
+<pre><code class="http">
+HTTP/1.1 404 Not Found
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "status": 404,
+  "message": "Name 467324, version 7 not found"
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Error">Error</a></p>
+
+    <pre><code class="http">
+PUT /author/{key} HTTP/1.1
+Host: api.col.plus
+access_token: 5757gh76
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "key": 1563,
+  "firstname": ["Augustin-Pyrame"],
+  "surname": "de Candolle",
+  "aliases": ["Augustin-Pyramus de Candolle", "DC."],
+  "yearOfBirth": 1778,
+  "yearOfDeath": 1841,
+  "areaOfInterest": ["Pteridophytes", "Mycology", "Bryophytes", "Spermatophytes"],
+  "biography": "Augustin Pyramus de Candolle also spelled Augustin Pyrame de Candolle (4 February 1778 – 9 September 1841) was a Swiss botanist. René Louiche Desfontaines launched de Candolle's botanical career by recommending him at an herbarium. Within a couple of years de Candolle had established a new genus, and he went on to document hundreds of plant families and create a new natural plant classification system. Although de Candolle's main focus was botany, he also contributed to related fields such as phytogeography, agronomy, paleontology, medical botany, and economic botany. Candolle originated the idea of Nature's war, which influenced Charles Darwin and the principle of natural selection.[1] de Candolle recognized that multiple species may develop similar characteristics that did not appear in a common evolutionary ancestor; this was later termed analogy. During his work with plants, de Candolle noticed that plant leaf movements follow a near-24-hour cycle in constant light, suggesting that an internal biological clock exists. Though many scientists doubted de Candolle's findings, experiments over a century later demonstrated that ″the internal biological clock″ indeed exists. Candolle's descendants continued his work on plant classification. Alphonse de Candolle and Casimir Pyrame de Candolle contributed to the Prodromus Systematis Naturalis Regni Vegetabilis, a catalog of plants begun by Augustin Pyramus de Candolle.",
+  "collections": [],
+  "version": 1,
+  "created": "2016-02-28T16:41:41.090Z",
+  "createdBy": "deko"
+}
+</code>
+</pre>
+
+        <h3><code class="prettyprint">PUT</code> https://api.col.plus/author/{key}</h3>
+    <p><p>Update a Author</p>
+</p>
+
+    <h3 id="op15-request-header">Header</h3>
+    <table><thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Description</th>
+    </tr>
+    </thead><tbody>
+        <tr>
+            <td>access_token</td>
+            <td>string</td>
+            <td>yes</td>
+            <td><p>Access Token</p>
+</td>
+        </tr>
+    </tbody></table>
+
+    <h3 id="op15-request-body">Body</h3>
+            <p><code>application/json</code></p>
+            <p>Content: <a href="#model-Author">Author</a></p>
+
+        <h3 id="op15-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+                <tr>
+                    <td>{key}</td>
+                    <td>integer</td>
+                    <td></td>
+                    <td>yes</td>
+                    <td></td>
+                    <td><p>author key</p>
+</td>
+                </tr>
+        </tbody></table>
+
+
+            <h3 id="op15-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">7</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: integer</p>
+
+    <pre><code class="http">
+DELETE /author/{key} HTTP/1.1
+Host: api.col.plus
+access_token: 5757gh76
+</code>
+</pre>
+
+        <h3><code class="prettyprint">DELETE</code> https://api.col.plus/author/{key}</h3>
+    <p><p>Delete a Author</p>
+</p>
+
+    <h3 id="op16-request-header">Header</h3>
+    <table><thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Description</th>
+    </tr>
+    </thead><tbody>
+        <tr>
+            <td>access_token</td>
+            <td>string</td>
+            <td>yes</td>
+            <td><p>Access Token</p>
+</td>
+        </tr>
+    </tbody></table>
+
+
+        <h3 id="op16-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+                <tr>
+                    <td>{key}</td>
+                    <td>integer</td>
+                    <td></td>
+                    <td>yes</td>
+                    <td></td>
+                    <td><p>author key</p>
+</td>
+                </tr>
+        </tbody></table>
+
+
+            <h3 id="op16-responses" class="clear">Response 204</h3>
+    
+
+
+        <h2 id="resource-10">/author/{key}/activity</h2>
+
+    
+
+
+    <pre><code class="http">
+GET /author/{key}/activity HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/author/{key}/activity</h3>
+    <p><p>get list of recent changes and comments in chronological order</p>
+</p>
+
+
+
+
+
+            <h3 id="op17-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: (Comment | Change)[]</p>
+
+
+        <h2 id="resource-11">/author/{key}/names</h2>
+
+    
+
+
+    <pre><code class="http">
+GET /author/{key}/names HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/author/{key}/names</h3>
+    <p><p>get list of all names that have been described by the author</p>
+</p>
+
+
+
+        <h3 id="op18-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>offset</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of offset records</p>
+</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested page, defaulting to 1 for the first page</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op18-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-NameResultSet">NameResultSet</a></p>
+
+
+        <h2 id="resource-12">/author/search</h2>
+
+    
+
+
+    <pre><code class="http">
+GET /author/search HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/author/search</h3>
+    <p><p>Search through all Author</p>
+</p>
+
+
+
+        <h3 id="op19-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>q</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>full text search on the complete author name and its aliases</p>
+</td>
+            </tr>
+            <tr>
+                <td>year</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>filter by year the authors were knwon to be alive</p>
+</td>
+            </tr>
+            <tr>
+                <td>offset</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of offset records</p>
+</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested page, defaulting to 1 for the first page</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op19-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-AuthorResultSet">AuthorResultSet</a></p>
+
+
+        <h1 id="resource-13">/reference</h1>
+
+    
+
+
+    <pre><code class="http">
+GET /reference HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/reference</h3>
+    <p><p>Page through all references, optionally filtered</p>
+</p>
+
+
+
+        <h3 id="op20-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>offset</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of offset records</p>
+</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested page, defaulting to 1 for the first page</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op20-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -1828,8 +3154,8 @@ Content-Type: application/json
   "version": 3,
   "created": "2016-02-28T16:41:41.090Z",
   "createdBy": "markus",
-  "journalKey": 17,
-  "json": {
+  "serialKey": 17,
+  "csl": {
     "DOI":"10.1038/nrd842",
     "type":"article-journal",
     "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
@@ -1846,8 +3172,8 @@ Content-Type: application/json
   "version": 3,
   "created": "2016-02-28T16:41:41.090Z",
   "createdBy": "markus",
-  "journalKey": 17,
-  "json": {
+  "serialKey": 17,
+  "csl": {
     "DOI":"10.1038/nrd842",
     "type":"article-journal",
     "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
@@ -1864,14 +3190,1107 @@ Content-Type: application/json
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-Reference">Reference[]</a></p>
 
-    <h1 id="resource-6">/activity</h1>
+    <pre><code class="http">
+POST /reference HTTP/1.1
+Host: api.col.plus
+access_token: 5757gh76
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "key": 432561,
+  "version": 3,
+  "created": "2016-02-28T16:41:41.090Z",
+  "createdBy": "markus",
+  "serialKey": 17,
+  "csl": {
+    "DOI":"10.1038/nrd842",
+    "type":"article-journal",
+    "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
+    "title":"From the analyst's couch: Selective anticancer drugs",
+    "container-title":"Nature Reviews Drug Discovery",
+    "volume":"1",
+    "issue":"7",
+    "issued":{"date-parts":[[2002,7]]},
+    "page":"491-492"
+  }
+}
+</code>
+</pre>
 
-    <p><p>get list of recent activity in the entire system</p>
+        <h3><code class="prettyprint">POST</code> https://api.col.plus/reference</h3>
+    <p><p>Create a new Reference</p>
 </p>
 
-        <h2 id="res-6-get">GET /activity</h2>
+    <h3 id="op21-request-header">Header</h3>
+    <table><thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Description</th>
+    </tr>
+    </thead><tbody>
+        <tr>
+            <td>access_token</td>
+            <td>string</td>
+            <td>yes</td>
+            <td><p>Access Token</p>
+</td>
+        </tr>
+    </tbody></table>
+
+    <h3 id="op21-request-body">Body</h3>
+            <p><code>application/json</code></p>
+            <p>Content: <a href="#model-Reference">Reference</a></p>
+
+
+
+            <h3 id="op21-responses" class="clear">Response 201</h3>
+    
+                <h3 id="op21-response-header-201">Header</h3>
+    <table><thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Description</th>
+    </tr>
+    </thead><tbody>
+        <tr>
+            <td>Location</td>
+            <td>string</td>
+            <td>yes</td>
+            <td><p>the absolute resource URL of the newly created object</p>
+</td>
+        </tr>
+    </tbody></table>
+<pre><code class="http">
+HTTP/1.1 201 Created
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+Location: https://api.col.plus/...
+</code>
+    <code class="json">79508</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: integer</p>
+
+
+        <h2 id="resource-14">/reference/{key}</h2>
 
     
+
+
+    <pre><code class="http">
+GET /reference/{key} HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/reference/{key}</h3>
+    <p><p>Get a Reference by its key</p>
+</p>
+
+
+
+        <h3 id="op22-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+                <tr>
+                    <td>{key}</td>
+                    <td>integer</td>
+                    <td></td>
+                    <td>yes</td>
+                    <td></td>
+                    <td><p>reference key</p>
+</td>
+                </tr>
+            <tr>
+                <td>version</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested specific version of the resource</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op22-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "key": 432561,
+  "version": 3,
+  "created": "2016-02-28T16:41:41.090Z",
+  "createdBy": "markus",
+  "serialKey": 17,
+  "csl": {
+    "DOI":"10.1038/nrd842",
+    "type":"article-journal",
+    "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
+    "title":"From the analyst's couch: Selective anticancer drugs",
+    "container-title":"Nature Reviews Drug Discovery",
+    "volume":"1",
+    "issue":"7",
+    "issued":{"date-parts":[[2002,7]]},
+    "page":"491-492"
+  }
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Reference">Reference</a></p>
+            <h3 id="op22-responses" class="clear">Response 404</h3>
+    
+<pre><code class="http">
+HTTP/1.1 404 Not Found
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "status": 404,
+  "message": "Name 467324, version 7 not found"
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Error">Error</a></p>
+
+    <pre><code class="http">
+PUT /reference/{key} HTTP/1.1
+Host: api.col.plus
+access_token: 5757gh76
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "key": 432561,
+  "version": 3,
+  "created": "2016-02-28T16:41:41.090Z",
+  "createdBy": "markus",
+  "serialKey": 17,
+  "csl": {
+    "DOI":"10.1038/nrd842",
+    "type":"article-journal",
+    "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
+    "title":"From the analyst's couch: Selective anticancer drugs",
+    "container-title":"Nature Reviews Drug Discovery",
+    "volume":"1",
+    "issue":"7",
+    "issued":{"date-parts":[[2002,7]]},
+    "page":"491-492"
+  }
+}
+</code>
+</pre>
+
+        <h3><code class="prettyprint">PUT</code> https://api.col.plus/reference/{key}</h3>
+    <p><p>Update a Reference</p>
+</p>
+
+    <h3 id="op23-request-header">Header</h3>
+    <table><thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Description</th>
+    </tr>
+    </thead><tbody>
+        <tr>
+            <td>access_token</td>
+            <td>string</td>
+            <td>yes</td>
+            <td><p>Access Token</p>
+</td>
+        </tr>
+    </tbody></table>
+
+    <h3 id="op23-request-body">Body</h3>
+            <p><code>application/json</code></p>
+            <p>Content: <a href="#model-Reference">Reference</a></p>
+
+        <h3 id="op23-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+                <tr>
+                    <td>{key}</td>
+                    <td>integer</td>
+                    <td></td>
+                    <td>yes</td>
+                    <td></td>
+                    <td><p>reference key</p>
+</td>
+                </tr>
+        </tbody></table>
+
+
+            <h3 id="op23-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">7</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: integer</p>
+
+    <pre><code class="http">
+DELETE /reference/{key} HTTP/1.1
+Host: api.col.plus
+access_token: 5757gh76
+</code>
+</pre>
+
+        <h3><code class="prettyprint">DELETE</code> https://api.col.plus/reference/{key}</h3>
+    <p><p>Delete a Reference</p>
+</p>
+
+    <h3 id="op24-request-header">Header</h3>
+    <table><thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Description</th>
+    </tr>
+    </thead><tbody>
+        <tr>
+            <td>access_token</td>
+            <td>string</td>
+            <td>yes</td>
+            <td><p>Access Token</p>
+</td>
+        </tr>
+    </tbody></table>
+
+
+        <h3 id="op24-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+                <tr>
+                    <td>{key}</td>
+                    <td>integer</td>
+                    <td></td>
+                    <td>yes</td>
+                    <td></td>
+                    <td><p>reference key</p>
+</td>
+                </tr>
+        </tbody></table>
+
+
+            <h3 id="op24-responses" class="clear">Response 204</h3>
+    
+
+
+        <h2 id="resource-15">/reference/{key}/activity</h2>
+
+    
+
+
+    <pre><code class="http">
+GET /reference/{key}/activity HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/reference/{key}/activity</h3>
+    <p><p>get list of recent changes and comments in chronological order</p>
+</p>
+
+
+
+
+
+            <h3 id="op25-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: (Comment | Change)[]</p>
+
+
+        <h2 id="resource-16">/reference/{key}/names</h2>
+
+    
+
+
+    <pre><code class="http">
+GET /reference/{key}/names HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/reference/{key}/names</h3>
+    <p><p>get list of all distinct names from nomenclatural acts in this reference</p>
+</p>
+
+
+
+
+
+            <h3 id="op26-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">[{
+  "key": 21242,
+  "scientificName": "Crepicnema parvula (Jacoby, 1885)",
+  "canonicalName": "Crepicnema parvula",
+  "nomenclaturalCode": "ICZN",
+  "genus": "Crepicnema",
+  "specificEpithet": "parvula",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
+  "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
+  "originalYear": 1885,
+  "originalNameKey": 8673,
+  "isOriginalName": false,
+  "isReplacement": false,
+  "isCodeCompliant": true,
+  "version": 11,
+  "created": "2017-01-28T16:41:41.090Z",
+  "createdBy": "charles.d"
+}
+,{
+  "key": 21242,
+  "scientificName": "Crepicnema parvula (Jacoby, 1885)",
+  "canonicalName": "Crepicnema parvula",
+  "nomenclaturalCode": "ICZN",
+  "genus": "Crepicnema",
+  "specificEpithet": "parvula",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
+  "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
+  "originalYear": 1885,
+  "originalNameKey": 8673,
+  "isOriginalName": false,
+  "isReplacement": false,
+  "isCodeCompliant": true,
+  "version": 11,
+  "created": "2017-01-28T16:41:41.090Z",
+  "createdBy": "charles.d"
+}
+]</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Name">Name[]</a></p>
+
+
+        <h2 id="resource-17">/reference/search</h2>
+
+    
+
+
+    <pre><code class="http">
+GET /reference/search HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/reference/search</h3>
+    <p><p>search all references</p>
+</p>
+
+
+
+        <h3 id="op27-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>serialKey</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>filter by serial</p>
+</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>string</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>filter by reference type</p>
+</td>
+            </tr>
+            <tr>
+                <td>year</td>
+                <td>string</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>filter by year of publication</p>
+</td>
+            </tr>
+            <tr>
+                <td>volume</td>
+                <td>string</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>filter by serial volume</p>
+</td>
+            </tr>
+            <tr>
+                <td>doi</td>
+                <td>string</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>filter by DOI</p>
+</td>
+            </tr>
+            <tr>
+                <td>q</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>full text search query</p>
+</td>
+            </tr>
+            <tr>
+                <td>offset</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of offset records</p>
+</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested page, defaulting to 1 for the first page</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op27-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-ReferenceResultSet">ReferenceResultSet</a></p>
+
+
+        <h1 id="resource-18">/serial</h1>
+
+    
+
+
+    <pre><code class="http">
+GET /serial HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/serial</h3>
+    <p><p>Page through all serials, optionally filtered</p>
+</p>
+
+
+
+        <h3 id="op28-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>offset</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of offset records</p>
+</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested page, defaulting to 1 for the first page</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op28-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">[{
+  "key": 432561,
+  "version": 3,
+  "created": "2016-02-28T16:41:41.090Z",
+  "createdBy": "markus",
+  "bph": "460.06",
+  "tl2": "11.084",
+  "call": "QK1.J55",
+  "oclc": 1754397,
+  "bhl": 68922,
+  "firstYear": 1799,
+  "lastYear": 1804,
+  "csl": {
+    "call-number": "QK1.J55",
+    "type":"journal",
+    "title":"Journal für die Botanik",
+    "title-short":"J. Bot. (Schrader)",
+    "editor":[{"family":"Schrader","given":"H. A."}],
+    "publisher-place": "Göttingen"
+  }
+}
+,{
+  "key": 432561,
+  "version": 3,
+  "created": "2016-02-28T16:41:41.090Z",
+  "createdBy": "markus",
+  "bph": "460.06",
+  "tl2": "11.084",
+  "call": "QK1.J55",
+  "oclc": 1754397,
+  "bhl": 68922,
+  "firstYear": 1799,
+  "lastYear": 1804,
+  "csl": {
+    "call-number": "QK1.J55",
+    "type":"journal",
+    "title":"Journal für die Botanik",
+    "title-short":"J. Bot. (Schrader)",
+    "editor":[{"family":"Schrader","given":"H. A."}],
+    "publisher-place": "Göttingen"
+  }
+}
+]</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Serial">Serial[]</a></p>
+
+    <pre><code class="http">
+POST /serial HTTP/1.1
+Host: api.col.plus
+access_token: 5757gh76
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "key": 432561,
+  "version": 3,
+  "created": "2016-02-28T16:41:41.090Z",
+  "createdBy": "markus",
+  "bph": "460.06",
+  "tl2": "11.084",
+  "call": "QK1.J55",
+  "oclc": 1754397,
+  "bhl": 68922,
+  "firstYear": 1799,
+  "lastYear": 1804,
+  "csl": {
+    "call-number": "QK1.J55",
+    "type":"journal",
+    "title":"Journal für die Botanik",
+    "title-short":"J. Bot. (Schrader)",
+    "editor":[{"family":"Schrader","given":"H. A."}],
+    "publisher-place": "Göttingen"
+  }
+}
+</code>
+</pre>
+
+        <h3><code class="prettyprint">POST</code> https://api.col.plus/serial</h3>
+    <p><p>Create a new Serial</p>
+</p>
+
+    <h3 id="op29-request-header">Header</h3>
+    <table><thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Description</th>
+    </tr>
+    </thead><tbody>
+        <tr>
+            <td>access_token</td>
+            <td>string</td>
+            <td>yes</td>
+            <td><p>Access Token</p>
+</td>
+        </tr>
+    </tbody></table>
+
+    <h3 id="op29-request-body">Body</h3>
+            <p><code>application/json</code></p>
+            <p>Content: <a href="#model-Serial">Serial</a></p>
+
+
+
+            <h3 id="op29-responses" class="clear">Response 201</h3>
+    
+                <h3 id="op29-response-header-201">Header</h3>
+    <table><thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Description</th>
+    </tr>
+    </thead><tbody>
+        <tr>
+            <td>Location</td>
+            <td>string</td>
+            <td>yes</td>
+            <td><p>the absolute resource URL of the newly created object</p>
+</td>
+        </tr>
+    </tbody></table>
+<pre><code class="http">
+HTTP/1.1 201 Created
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+Location: https://api.col.plus/...
+</code>
+    <code class="json">79508</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: integer</p>
+
+
+        <h2 id="resource-19">/serial/{key}</h2>
+
+    
+
+
+    <pre><code class="http">
+GET /serial/{key} HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/serial/{key}</h3>
+    <p><p>Get a Serial by its key</p>
+</p>
+
+
+
+        <h3 id="op30-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+                <tr>
+                    <td>{key}</td>
+                    <td>integer</td>
+                    <td></td>
+                    <td>yes</td>
+                    <td></td>
+                    <td><p>serial key</p>
+</td>
+                </tr>
+            <tr>
+                <td>version</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested specific version of the resource</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op30-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "key": 432561,
+  "version": 3,
+  "created": "2016-02-28T16:41:41.090Z",
+  "createdBy": "markus",
+  "bph": "460.06",
+  "tl2": "11.084",
+  "call": "QK1.J55",
+  "oclc": 1754397,
+  "bhl": 68922,
+  "firstYear": 1799,
+  "lastYear": 1804,
+  "csl": {
+    "call-number": "QK1.J55",
+    "type":"journal",
+    "title":"Journal für die Botanik",
+    "title-short":"J. Bot. (Schrader)",
+    "editor":[{"family":"Schrader","given":"H. A."}],
+    "publisher-place": "Göttingen"
+  }
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Serial">Serial</a></p>
+            <h3 id="op30-responses" class="clear">Response 404</h3>
+    
+<pre><code class="http">
+HTTP/1.1 404 Not Found
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "status": 404,
+  "message": "Name 467324, version 7 not found"
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Error">Error</a></p>
+
+    <pre><code class="http">
+PUT /serial/{key} HTTP/1.1
+Host: api.col.plus
+access_token: 5757gh76
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "key": 432561,
+  "version": 3,
+  "created": "2016-02-28T16:41:41.090Z",
+  "createdBy": "markus",
+  "bph": "460.06",
+  "tl2": "11.084",
+  "call": "QK1.J55",
+  "oclc": 1754397,
+  "bhl": 68922,
+  "firstYear": 1799,
+  "lastYear": 1804,
+  "csl": {
+    "call-number": "QK1.J55",
+    "type":"journal",
+    "title":"Journal für die Botanik",
+    "title-short":"J. Bot. (Schrader)",
+    "editor":[{"family":"Schrader","given":"H. A."}],
+    "publisher-place": "Göttingen"
+  }
+}
+</code>
+</pre>
+
+        <h3><code class="prettyprint">PUT</code> https://api.col.plus/serial/{key}</h3>
+    <p><p>Update a Serial</p>
+</p>
+
+    <h3 id="op31-request-header">Header</h3>
+    <table><thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Description</th>
+    </tr>
+    </thead><tbody>
+        <tr>
+            <td>access_token</td>
+            <td>string</td>
+            <td>yes</td>
+            <td><p>Access Token</p>
+</td>
+        </tr>
+    </tbody></table>
+
+    <h3 id="op31-request-body">Body</h3>
+            <p><code>application/json</code></p>
+            <p>Content: <a href="#model-Serial">Serial</a></p>
+
+        <h3 id="op31-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+                <tr>
+                    <td>{key}</td>
+                    <td>integer</td>
+                    <td></td>
+                    <td>yes</td>
+                    <td></td>
+                    <td><p>serial key</p>
+</td>
+                </tr>
+        </tbody></table>
+
+
+            <h3 id="op31-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">7</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: integer</p>
+
+    <pre><code class="http">
+DELETE /serial/{key} HTTP/1.1
+Host: api.col.plus
+access_token: 5757gh76
+</code>
+</pre>
+
+        <h3><code class="prettyprint">DELETE</code> https://api.col.plus/serial/{key}</h3>
+    <p><p>Delete a Serial</p>
+</p>
+
+    <h3 id="op32-request-header">Header</h3>
+    <table><thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Description</th>
+    </tr>
+    </thead><tbody>
+        <tr>
+            <td>access_token</td>
+            <td>string</td>
+            <td>yes</td>
+            <td><p>Access Token</p>
+</td>
+        </tr>
+    </tbody></table>
+
+
+        <h3 id="op32-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+                <tr>
+                    <td>{key}</td>
+                    <td>integer</td>
+                    <td></td>
+                    <td>yes</td>
+                    <td></td>
+                    <td><p>serial key</p>
+</td>
+                </tr>
+        </tbody></table>
+
+
+            <h3 id="op32-responses" class="clear">Response 204</h3>
+    
+
+
+        <h2 id="resource-20">/serial/{key}/activity</h2>
+
+    
+
+
+    <pre><code class="http">
+GET /serial/{key}/activity HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/serial/{key}/activity</h3>
+    <p><p>get list of recent changes and comments in chronological order</p>
+</p>
+
+
+
+
+
+            <h3 id="op33-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: (Comment | Change)[]</p>
+
+
+        <h2 id="resource-21">/serial/search</h2>
+
+    
+
+
+    <pre><code class="http">
+GET /serial/search HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/serial/search</h3>
+    <p><p>Search through all Serial</p>
+</p>
+
+
+
+        <h3 id="op34-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>year</td>
+                <td>string</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>filter by year of publication. The given year must be within the range the serial is known to be active.</p>
+</td>
+            </tr>
+            <tr>
+                <td>issn</td>
+                <td>string</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>filter by ISSN</p>
+</td>
+            </tr>
+            <tr>
+                <td>q</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>full text search query</p>
+</td>
+            </tr>
+            <tr>
+                <td>offset</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of offset records</p>
+</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested page, defaulting to 1 for the first page</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op34-responses" class="clear">Response 200</h3>
+    
+<pre><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-SerialResultSet">SerialResultSet</a></p>
+
+
+        <h1 id="resource-22">/activity</h1>
+
+    
+
 
     <pre><code class="http">
 GET /activity HTTP/1.1
@@ -1879,32 +4298,30 @@ Host: api.col.plus
 </code>
 </pre>
 
-        <h3>Request</h3>
-        <p><code class="prettyprint">GET https://api.col.plus/activity</code></p>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/activity</h3>
+    <p><p>get list of recent activity in the entire system</p>
+</p>
 
 
 
 
 
-            <h3 id="op10-responses" class="clear">Response 200</h3>
+            <h3 id="op35-responses" class="clear">Response 200</h3>
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, May 22, 2017 12:22:03 PM CEST
+Date: Tuesday, May 23, 2017 1:35:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: (Comment | Change)[]</p>
 
-    <h1 id="resource-7">/contributor/{key}</h1>
 
-    <p><p>get contributor</p>
-</p>
-
-        <h2 id="res-7-get">GET /contributor/{key}</h2>
+        <h1 id="resource-23">/contributor/{key}</h1>
 
     
+
 
     <pre><code class="http">
 GET /contributor/{key} HTTP/1.1
@@ -1912,12 +4329,13 @@ Host: api.col.plus
 </code>
 </pre>
 
-        <h3>Request</h3>
-        <p><code class="prettyprint">GET https://api.col.plus/contributor/{key}</code></p>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/contributor/{key}</h3>
+    <p><p>get contributor</p>
+</p>
 
 
 
-        <h3 id="op11-request-params">Parameters</h3>
+        <h3 id="op36-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -1939,25 +4357,22 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op11-responses" class="clear">Response 200</h3>
+            <h3 id="op36-responses" class="clear">Response 200</h3>
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, May 22, 2017 12:22:03 PM CEST
+Date: Tuesday, May 23, 2017 1:35:50 PM CEST
 Content-Type: application/json
 </code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: (Comment | Change)[]</p>
 
-    <h1 id="resource-8">/contributor/{key}/activity</h1>
 
-    <p><p>get list of recent activity from the contributor</p>
-</p>
-
-        <h2 id="res-8-get">GET /activity</h2>
+        <h2 id="resource-24">/contributor/{key}/activity</h2>
 
     
+
 
     <pre><code class="http">
 GET /contributor/{key}/activity HTTP/1.1
@@ -1965,18 +4380,19 @@ Host: api.col.plus
 </code>
 </pre>
 
-        <h3>Request</h3>
-        <p><code class="prettyprint">GET https://api.col.plus/contributor/{key}/activity</code></p>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/contributor/{key}/activity</h3>
+    <p><p>get list of recent activity from the contributor</p>
+</p>
 
 
 
 
 
-            <h3 id="op12-responses" class="clear">Response 200</h3>
+            <h3 id="op37-responses" class="clear">Response 200</h3>
     
 <pre><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, May 22, 2017 12:22:03 PM CEST
+Date: Tuesday, May 23, 2017 1:35:50 PM CEST
 Content-Type: application/json
 </code>
 </pre>
