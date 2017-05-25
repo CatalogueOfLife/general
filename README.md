@@ -130,32 +130,34 @@ a) fuzzy prcatice: scientific names and refrences in the CoL might be linked to 
 
 
 #### Source staging environment
-In order to evaluate source data, provide initial integrity checks and a unified API to work against all sources a staging environment is planned. 
-This is the outer tier where all external sources get imported and interpreted before they can be incorporated into the CoL or the Nomenclator. 
+Tool for data harvest and internal integrity checks of each incoming GSD, and for making/applying editorial decisions by editor in cooperation with GSD authors should be built. 
+This is the outer tier where all external sources get imported and interpreted before they can be incorporated into the CoL. The Nomenclator is a separate issue. 
 The staging environment will be responsible for:
 
- - Keeping track of (GSD) sources and their metadata, providing a UI for managing them
+ - Keeping track of (GSD) sources and their metadata, providing a UI? for managing them
  - A minimal GSD cache API to return exact original content
- - Assign nameID by name matching to nomenclator
- - Interpretation of controlled vocabularies (e.g. countries, language, rank, taxonomic status)
+ - Assign nameID by name matching to nomenclator (if GSD does not already contain NameGUID as required in best practice)
+ - Interpretation of controlled vocabularies (e.g. name status, rank, infraspecific marker, etc.; all controlled values in Stadard Dataset fileds, i.e. country names, languages, ecoenvironments; creation of bibliographic references from nomenclatural citations as a part of botanical names, etc.)
  - Assign existing stable taxon identifiers to accepted taxa by comparing the synonymy with the existing catalogue
- - Integrity checks and verification, flagging issues for editorial review
- - Slice into families/groups for assembly process
+ - Integrity checks for whole CoL and verification, flagging issues for editorial review
+ [- Slice into families/groups for assembly process. This is a nonsens, which we need to discuss. CoL is assembled from "sectors", i.e. taxa of various ranks from genus to kingdom. We are not "slicing" it into families. So called "management classification" is an indiscerptible part of the database].
 
-#### Automated assembly
-After a source has been reviewed and considered suitable it can be incorporated into the latest version of the Catalogue of Life. 
-This process can be influenced by manual editorial decisions, but overall is fully automated. 
-A source can be added as either provisional or authoritative. 
+#### Assembly supported by IT tools and editorian interface and Automated update 
+There are two slightly different processes: assembly of new GSD and update of "old" GSD. Assembly of new GSD involves wider set of checks and more manual work. We need to understand which information and how should be modified into a CoL Stanadard Dataset format; what are peculiarities of the database and which transformation queries we should built.
+After a source has been reviewed and considered suitable it can be incorporated into the latest staging version of the Catalogue of Life via editorial decisions and modifications. 
+Assembly process involves internal and external data integrity checks, editorial decisions and editorial modifications; all should be performed via editorial tool. 
+Further updates should be automated. Update of each GSD includes (1) Harvest (ideally, it should be automated; but majority of GSDs will continue to send data via email, WeTransfer and other services; so harvest should include an option for manual upload to the server); (2) Internal data integrity checks (ask Luisa for a list of standard and special checks for "old" GSDs), (3) editorial decisions agreed between CoL editor and GSD authors, (4) data modification queries, (5) insertion of GSD "cluster" in defined node of the classification (old data from the same or another provider should be deleted in the CoL). 
+A source can be added as either provisional or authoritative. OK, it might be implemented in Bisby's CoL, however, the better way is to implement "gap filling" as a services between Bisby's CoL, Global Nomenclator and GNIndex. 
 Provisional data will only be visible in the extended Catalogue of Life plus. 
 Key features of the assembly process are:
 
  - Persistent editorial decisions
- - Replace entire families from GSD sources
- - Allow overlay of provisional sources for groups not covered by any GSD
- - Integrate nomenclator (homotypic synonyms, literature) as provisional data
+ - Replace entire taxonomic cluster from GSD sources
+ - Allow overlay of provisional sources for groups not covered by any GSD (see above)
+ - Integrate nomenclator (homotypic synonyms, literature) as provisional data (further discussions are needed. No extra data can be added in GSD sector without permission from the author. Homotypic synonyms and literature might be shown as unvetted data in the interface, but it will be better to present them as an external service from Global Nomenclator, BHL, etc. 
  - Create new stable taxon identifiers for missing concepts
- - Final integrity checks and validation
- - Point reviewers to flagged issues.
+ - Final integrity checks and validation ?
+ - Point reviewers to flagged issues. ?
 
 ![](taxon-concept-changes.jpg)
 
