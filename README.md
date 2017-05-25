@@ -2,9 +2,9 @@
 
 The CoL+ project addresses two primary concerns:
 
- 1) The broadening of covered names through deployment of services between GNIndex, Global Nomenclator, Bisby's Catalogue of Life and alternative taxonomic resources can act as a taxonomic backbone for GBIF and similar global activities. (We need to keep in mind that Bisby's CoL has many users otside GBIF and similar global activities). This includes both filling true taxonomic gaps with nomenclatoral  data and alternative resources cross-mapped through GNIndex.
-
- 2)  The migration of all content and social features of the Bisby's CoL to a new infrastructure to address current sustainability and hosting issues. This includes automation of GSD updates and bringing IT tools in editorial process of the Catalogue compilation.
+ 1) The broadening of covered names so the catalogue can act as a taxonomic backbone for GBIF and similar global activities. In addition to the classic, scrutinized catalogue an extended catalogue with additional provisional data will be produced that both fills true taxonomic gaps and adds homotypic synonymies for groups already existing in the classic, core catalogue. Users of the CoL will be able to switch between the classic and extended view.
+ 
+ 2)  The migration of all content and social features of the existing CoL to a new infrastructure to address current sustainability and hosting issues. This includes automation of GSD updates and bringing IT tools in editorial process of the Catalogue compilation.
  
 ## System Overview
 ![](system-overview.png)
