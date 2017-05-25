@@ -147,7 +147,7 @@ There are two slightly different processes: assembly of new GSD and update of "o
 After a source has been reviewed and considered suitable it can be incorporated into the latest staging version of the Catalogue of Life via editorial decisions and modifications. 
 Assembly process involves internal and external data integrity checks, editorial decisions and editorial modifications; all should be performed via editorial tool. 
 Further updates should be automated. Update of each GSD includes (1) Harvest (ideally, it should be automated; but majority of GSDs will continue to send data via email, WeTransfer and other services; so harvest should include an option for manual upload to the server); (2) Internal data integrity checks (ask Luisa for a list of standard and special checks for "old" GSDs), (3) editorial decisions agreed between CoL editor and GSD authors, (4) data modification queries, (5) insertion of GSD "cluster" in defined node of the classification (old data from the same or another provider should be deleted in the CoL). 
-A source can be added as either provisional or authoritative. OK, it might be implemented in Bisby's CoL, however, the better way is to implement "gap filling" as a services between Bisby's CoL, Global Nomenclator and GNIndex. 
+A source can be added as either provisional or authoritative. YR: OK, it might be implemented in Bisby's CoL, however, the better way is to implement "gap filling" as services between Bisby's CoL, Global Nomenclator and GNIndex. 
 Provisional data will only be visible in the extended Catalogue of Life plus. 
 Key features of the assembly process are:
 
@@ -168,12 +168,13 @@ The most pressing issues currently are caused by hosting each annual CoL edition
 and the use of outdated software and operating systems for which no security patches are available anymore.
 
 #### Dynamic system
-With the introduction of stable taxon identifiers that will resolve forever even if logically deleted the CoL will be a dynamic system exposing the current database as it tracks changes. 
-Annual or quarterly snapshots will be preserved as backups and as a source for generating future metrics not yet perceived, 
-but they will not be exposed anymore through the webservices or the portal.
+With the introduction of stable taxon identifiers that will resolve forever even if logically deleted the CoL will be a dynamic (i.e. monthly) system exposing the current database as it tracks changes. 
+Monthly snapshots will be preserved as backups and as a source for generating future metrics not yet perceived, 
+but previous month releases will not be exposed anymore through the webservices or the portal.
+Each Annual Checklist as a reference system for huge number of web resources should be exposed through the webservices and the portal.
 
 #### CoL Portal
-With a changed database model the portal as it is will be dysfunctional. Consider the least intrusive and resource efficient way to revive the essential features within the new infrastructure, for example:
+With a changed database model the portal as it is will be dysfunctional. What?! Consider the least intrusive and resource efficient way to revive the essential features within the new infrastructure, for example:
 
  1. Update the current PHP portal code to 
     - Use the new database model for SQL queries
