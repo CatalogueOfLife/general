@@ -6,10 +6,10 @@ A scientific name is a surprisingly ambigous term.
 CoL deals and categorizes the following types of names:
 
  - Linnaean names, i.e. mono-, bi- or trinomials
- - Named hybrids and nothotaxa
+ - Named hybrids and nothotaxa are not recognised in the CoL as a separate category   
  - Virus names
 
-A name includes it's authorship. Two homonyms with different authors therefore represent two different name entities.
+A name includes it's authorship; as well as nomenclatural comments in Botanical names. Two homonyms with different authors therefore represent two different name entities.
 
 ### Lexical variations
 
@@ -98,7 +98,7 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
 
 
 ### Rank
-There is the need to deal with old ranks not accepted anymore.
+There is the need to deal with old ranks not accepted anymore - in semantic synonyms only; accepted names have only Code regulated ranks
 The list given is intended to be interoperable between name providers for bacteria, viruses, fungi, plants, and animals. 
 It is not assumed that in each taxonomic group all ranks have to be used. 
 The enumeration attempts to strike a balance between listing all possible rank terms, and remaining comprehensible. 
@@ -112,21 +112,21 @@ Sources:
 
 
 ### Name properties
- - scientificName: full string incl authorship and rank marker for infragenerics and infraspecfics
+ - scientificName: full string incl authorship and rank marker for infragenerics and infraspecfics in botany
  - canonicalName: plain name made from 1-3 name epithets only, exluding authors and rank markers
  - nomenclaturalCode: [Algae, Fungi and Plants](http://www.iapt-taxon.org/nomen/), [Animals](http://www.nhm.ac.uk/hosted-sites/iczn/code/), [Bacteria](https://www.ncbi.nlm.nih.gov/books/NBK8817/), [Virus](https://talk.ictvonline.org/information/w/ictv-information/383/ictv-code)
- - uninomial: for names at higher rank than genus, e.g. a family name
- - genus: the genus part of a name
- - infragenericEpithet: the infrageneric epithet. Used only as the terminal epithet for names at infrageneric ranks, not for species
+ - uninomial: for names at higher rank than species, e.g. genus, family name, etc. 
+ - genus: the genus part of species name as well as independent uninomial if used in its own rank
+ - infragenericEpithet: the infrageneric name 
  - specificEpithet
  - infraspecificEpithet
  - rank: rank of the name from enumeration above
  - notho: the part of the name which is considered a hybrid; generic, infrageneric, specific, infraspecific (see [GBIF](https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/NamePart.java#L24)
  - authorship: full string
  - originalAuthors: list of NameAuthor entities
- - originalYear: year of original name publication
+ - originalYear: year of original name publication (in zoology only)
  - combinationAuthors: list of NameAuthor entities excluding ex- authors
- - combinationYear: year of combination publication, usually the same as publishedIn reference
+ - combinationYear: year of combination publication, usually the same as publishedIn reference (in zoology only)
  - publishedIn: Reference the name was published in
  - publishedInPage: exact first page of the treatment within above reference
  - publishedInLink: URL to the first page of the treatment, e.g. in BHL, BioStor or Zenodo
@@ -205,8 +205,7 @@ For taxon concept identity discussion see issue#6
 
  - taxonId
  - name: Name
- - status: accepted, doubtful, synoym, heterotypicSynonym, homotypicSynonym
- - accepted: accepted Taxon in case of synonyms
+ - status: accepted, provisionally accepted
  - parent: Taxon to establish taxonomic hierarchy. Not used for synonyms
  - accordingTo: Reference that describes the taxon concept
  - remarks: taxonomic notes
@@ -215,6 +214,10 @@ TODO: scrutiny, accordingTo vs plain list of references as sources
 
 
 ### Synonymy
+
+- nameID
+- nomenclatural status acording the Code
+- colStatus: synonym, ambiguous synonym, misapplied name
 Assuming that the homonyms Xus cus Smith 1850 and Xus cus Jones 1900 are for completely different species, 
 and that we now regard Xus cus Smith 1850 as a subjective junior heterotypic synonym of Aus bus Linnaeus 1758, 
 which we consider to belong to the genus “Aus”, we can collapse these down to two Accepted names (homotypic and heterotypic synonymy included indented under each):
@@ -239,9 +242,10 @@ TODO:
 Vernacular or common names that are used for a given taxon. Any taxon can have multiple vernacular names, even for the same language.
 Properties of a common name are:
 
- - name: the vernacular name itself
+ - name: the vernacular name itself in original script
+ - transliteration: transliteration in Roman alphabet
  - language: the language of the name
- - country: the country the name is used in
+ - country: the country and area the name is used in 
  - source: a source reference where the name was listed
 
 ## Distribution
@@ -251,6 +255,7 @@ A single distribution record for a species should cover only one known area.
  - area: the named area, preferrably an area code from a given standard
  - standard: the standard the given code is based on. If missing the area is taken as free text. One out of: tdwg, iho, eez, iso
  - status: alien, alien-domesticated, domesticated, native, native-domesticated or uncertain
+ - text (for not normalised data)
  - source: a source reference where the name was listed
 
 ## Environment information:
@@ -264,7 +269,7 @@ For palaeo taxa it is desirable to indicate whether an organism is known from fo
 
 For recent taxa ideally we also want to know whether is is considered currently extinct, but known to have existed during the holocene.
 As species go extinct rather quickly these days and true extinction of species is difficult to assess, we propose to leave this job to other initiatives like the IUCN 
-and only track whether an organism is known from the holocene. The following properties are proposed:
+and only track whether an organism is known from the holocene. The following properties are proposed THIS SHOULD BE REVISED:
 
  - livingPeriodStart: Earliest geological time in millions of years an organism is known to have lived on Earth
  - livingPeriodEnd: Latest geological time in millions of years an organism is known to have lived on Earth
@@ -285,17 +290,16 @@ TODO: review current fields:
 
  - name: Full name of the source database
  - abbreviatedName: Abbreviated name of the source database
- - groupName: Name in English of the group(s) treated in the database
- - authorsAndEditors: Optional author(s) and editor(s) of the source database
- - organisation: Optional organisation which has compiled or is owning the source database
- - contactPerson: Optional contact person of the source database
- - version: Optional version number of the source database ???
- - releaseDate: Optional most recent release date of the source database
- - abstract: Optional free text field describing the source database
- - taxonomicCoverage
- - isNew
- - coverage
- - completeness
- - confidence
+ - englishName: Name in English of the group(s) treated in the database
+ - authorsOrEditors: Optional author(s) and editor(s) of the source database
+ - organisation: Optional organisation which has compiled or is owning the source database 
+ - version: version number or date of the source database 
+ - releaseDate: date when database export has been completed for the CoL
+ - abstract: free text field describing the source database, project and taxonomic group
+ - taxonomicCoverage: a place of the group in CoL classification
+ - isNew: values "new in a year cycle", "updated in a year cycle"
+ - coverage: values "global", "regional"  
+ - completeness: % 
+ - checklistConfidence: values 1-5 
 
 
