@@ -162,13 +162,23 @@ types:
        - [NOMEN](https://raw.githubusercontent.com/SpeciesFileGroup/nomen/master/src/ontology/nomen.owl)
 
        TODO: extract all values from sources
+  NomCodeType:
+    type: string
+    enum: ["Bacteriological", "Botanical", "Viral", "Zoological"]
+    description: >
+      Nomenclatural code enumeration.
+      [Bacteriological](https://www.ncbi.nlm.nih.gov/books/NBK8817/),
+      [Botanical](http://www.iapt-taxon.org/nomen/),
+      [Viral](https://talk.ictvonline.org/information/w/ictv-information/383/ictv-code),
+      [Zoological](http://www.nhm.ac.uk/hosted-sites/iczn/code/)
   NameType:
     type: string
     enum: ["scientific", "virus", "hybrid-formula", "cultivar", "otu", "placeholder", "none"]
     description: Classification of names, mostly based on their syntactic structure.
   NomenclaturalActType:
     type: string
-    enum: ["description", "typification", "ruling", "emendation"]
+    enum: ["description", "typification", "spellingCorrection", "emendation"]
+    #enum: ["description", "typification", "ruling", "emendation"]
     description: >
       Coarse classification of nomenclatural acts.
 
@@ -242,6 +252,7 @@ types:
       CoL deals and categorizes the following types of names:
 
        - Linnaean names, i.e. mono-, bi- or trinomials
+         - available or unavailable
        - Named hybrids and nothotaxa
        - Virus names
 
@@ -316,7 +327,7 @@ types:
        4. Foo bar var. lion Smith 1850
       ```
 
-      #### comb. nov. in ICZN vs ICN
+      ### comb. nov. in ICZN vs ICN
 
       One of the most notable differences between [ICN](http://www.iapt-taxon.org/nomen/)
       and [ICZN](http://www.nhm.ac.uk/hosted-sites/iczn/code/) is the way names are cited when a species is placed in a different genus from the one it was originally published in (a comb. nov.).
@@ -341,13 +352,7 @@ types:
         description: plain name made from 1-3 name epithets only, exluding authors and rank markers
         required: false
       nomenclaturalCode:
-        type: string
-        enum: ["ICN", "ICZN", "ICNB", "ICTV"]
-        description: >
-          [ICN](http://www.iapt-taxon.org/nomen/) Algae, Fungi and Plants,
-          [ICZN](http://www.nhm.ac.uk/hosted-sites/iczn/code/) Animals,
-          [ICNB](https://www.ncbi.nlm.nih.gov/books/NBK8817/) Bacteria,
-          [ICTV](https://talk.ictvonline.org/information/w/ictv-information/383/ictv-code) Virus
+        type: NomCodeType
       uninomial:
         type: string
         description: for names at higher rank than genus, e.g. a family name
@@ -400,12 +405,9 @@ types:
         type: integer
         description: link to the original name. In case of [replacement names](https://en.wikipedia.org/wiki/Nomen_novum) it points back to the replaced synonym.
         required: false
-      isOriginalName:
+      isFossil:
         type: boolean
-        description: true if the name was an original description, i.e. protonym or basionym
-      isReplacement:
-        type: boolean
-        description: flag to indicate that this name is a replacement name
+        description: true if the type specimen of the name is a fossil
       isCodeCompliant:
         type: boolean
         description: flag to indicate that this name is available/validly published
@@ -418,7 +420,7 @@ types:
         "key": 21242,
         "scientificName": "Crepicnema parvula (Jacoby, 1885)",
         "canonicalName": "Crepicnema parvula",
-        "nomenclaturalCode": "ICZN",
+        "nomenclaturalCode": "Zoological",
         "genus": "Crepicnema",
         "specificEpithet": "parvula",
         "rank": "species",
@@ -426,8 +428,7 @@ types:
         "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
         "originalYear": 1885,
         "originalNameKey": 8673,
-        "isOriginalName": false,
-        "isReplacement": false,
+        "isFossil": false,
         "isCodeCompliant": true,
         "version": 11,
         "created": "2017-01-28T16:41:41.090Z",
@@ -441,6 +442,51 @@ types:
       results:
         type: Name[]
         description: the resulting names
+  NameMatch:
+    type: object
+    description: >
+      A name matching result offering a match, notes and potential alternatives
+    properties:
+      match:
+        type: Name
+        description: the matching name or none
+        required: false
+      alternatives:
+        type: Name[]
+        description: alternative name matches that did not match with enough confidence
+        required: false
+      notes:
+        type: Name
+        description: the resulting names
+        required: false
+      matchType:
+        type: string
+        enum: ["exact", "canonical", "fuzzy", "none"]
+        description: the type of match. Exact matches are canonical matches that also match the authorship
+        required: true
+    example: |
+      {
+        "matchType": "exact",
+        "match": {
+          "key": 21242,
+          "scientificName": "Crepicnema parvula (Jacoby, 1885)",
+          "canonicalName": "Crepicnema parvula",
+          "nomenclaturalCode": "Zoological",
+          "genus": "Crepicnema",
+          "specificEpithet": "parvula",
+          "rank": "species",
+          "authorship": "(Jacoby, 1885)",
+          "originalAuthors": [{"key":10789, "surname": "Jacoby", "version": 2}],
+          "originalYear": 1885,
+          "originalNameKey": 8673,
+          "isOriginalName": false,
+          "isReplacement": false,
+          "isCodeCompliant": true,
+          "version": 11,
+          "created": "2017-01-28T16:41:41.090Z",
+          "createdBy": "charles.d"
+        }
+      }
   Author:
     type: Versioned
     description: >
@@ -513,12 +559,16 @@ types:
       key:
         type: integer
         description: the unique key, i.e. scientificNameID
-      nameKeys:
-         type: integer[]
-         description: keys to the names the act is about
+      nameKey:
+        type: integer
+        description: key to the name the act is about
       type:
-         type: NomenclaturalActType[]
-         description: Coarse classification of acts.
+        type: NomenclaturalActType[]
+        description: Coarse classification of acts.
+      relatedNameKey:
+        type: integer
+        description: key to the related name of the act in case the act defines a name relation
+        required: false
       description:
         type: string
         description: A desription of the details of the nomenclatural act
@@ -543,7 +593,7 @@ types:
       {
         "key": 721141,
         "type": ["description"],
-        "nameKeys": [78612],
+        "nameKey": 78612,
         "referenceKey": 786,
         "referencePage": "5",
         "referenceLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725",
@@ -906,6 +956,26 @@ types:
           type: string
           description: filter by name type
           required: false
+  /match:
+    get:
+      description: search all names
+      queryParameters:
+        name:
+          type: string
+          description: full scientific name string incl authorship
+          required: true
+        code:
+          type: string
+          description: full scientific name string incl authorship
+          required: true
+        verbose:
+          type: boolean
+          description: if true show alternative matches
+          default: false
+          required: false
+      responses:
+        200:
+          body: NameMatch
 /author:
   type: collection
   /{key}:
