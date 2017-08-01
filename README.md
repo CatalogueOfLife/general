@@ -22,10 +22,10 @@ is the ultimate goal the project contributes to.
 
 The **goals for the Catalogue of Life Plus (CoL+) project** are: 
 
-	1) creating both an extended and a strictly scrutinized taxonomic catalogue to replace the current GBIF Backbone Taxonomy and Catalogue of Life
-	2) separating nomenclature (facts) and taxonomy (opinion) with different identifiers and authorities for names and taxa for better reuse
-	3) providing (infrastructural) support to the completion and strengthening of taxonomic and nomenclature content authorities
-	4) ensuring a sustainable, robust, and more dynamic IT infrastructure for maintaining the Catalogue of Life. 
+ 1. creating both an extended and a strictly scrutinized taxonomic catalogue to replace the current GBIF Backbone Taxonomy and Catalogue of Life
+ 2. separating nomenclature (facts) and taxonomy (opinion) with different identifiers and authorities for names and taxa for better reuse
+ 3. providing (infrastructural) support to the completion and strengthening of taxonomic and nomenclature content authorities
+ 4. ensuring a sustainable, robust, and more dynamic IT infrastructure for maintaining the Catalogue of Life. 
 
 Specifically [the project](docs/project-proposal.pdf) will establish a clearinghouse for taxonomy and nomenclature 
 and rebuild all existing infrastructure of the Catalogue of Life including 
@@ -33,8 +33,8 @@ webservices, the portal and the software for the assembly of the catalogue and i
 
 ## A clearinghouse for taxonomy and nomenclature
 ![](system-overview.png)
-Figure 1  Green: Clearinghouse;  Blue: Editorial work;  Yellow: Consolidated data publishing
-Solid lines: scrutinized data;  Dashed lines: provisional data;  Red lines: remote data management
+Green: *Clearinghouse*;  Blue: *Editorial work*;  Yellow: *Consolidated data publishing*
+Solid lines: *scrutinized data*;  Dashed lines: *provisional data*;  Red lines: *remote data management*
 
 
 The clearinghouse will cover scientific names across all life and provide a single taxonomic view grounded in the consensus classification of the Catalogue of Life along with provisional taxonomic sources. 
