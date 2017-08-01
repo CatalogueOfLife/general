@@ -20,7 +20,7 @@ and complete the reviewed name coverage without sacrificing quality.
 Creating an open, shared, and sustainable consensus taxonomy to serve the proper linking of data in the global biodiversity information initiatives 
 is the ultimate goal the project contributes to. 
 
-The **goals for the Catalogue of Life Plus (CoL+) project** are: 
+**The goals** for the Catalogue of Life Plus (CoL+) project are: 
 
  1. creating both an extended and a strictly scrutinized taxonomic catalogue to replace the current GBIF Backbone Taxonomy and Catalogue of Life
  2. separating nomenclature (facts) and taxonomy (opinion) with different identifiers and authorities for names and taxa for better reuse
