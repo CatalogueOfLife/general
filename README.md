@@ -56,4 +56,3 @@ Areas in the taxonomic tree not governed by content authorities yet are exposed 
 The portal will expose metrics about contributions and allow users to customize their experience by setting preferences for specific taxonomic groups. 
 Communal management of a freely licensed reference image will be explored. 
 The clearinghouse and its associated components will replace the current Catalogue of Life software.
-

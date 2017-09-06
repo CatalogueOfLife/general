@@ -1,0 +1,880 @@
+#%RAML 1.0
+title: CoL+ Staging API
+version: v1
+baseUri: https://api.col.plus/staging
+protocols:
+  - HTTPS
+mediaType:
+  - application/json
+description:
+    API of the staging environment of the Catalogue of Life.
+    The API gives access to staged source datasets for editorial review.
+resourceTypes:
+  pageable:
+    usage: Use this resourceType to represent a collection of items from a dataset that offer paging through all items.
+    get:
+      description: Page through all <<resourcePathName>>s, optionally filtered
+      is: [paged]
+      queryParameters:
+        datasetKey:
+          type: integer
+          description: filter by dataset
+          required: false
+      responses:
+        200:
+          body: <<resourcePathName | !uppercamelcase>>[]
+  searchable:
+    get:
+      description: Search through all <<class>>
+      is: [paged]
+      queryParameters:
+        q:
+          type: string
+          description: full text search query
+        datasetKey:
+          type: integer
+          description: filter by dataset
+          required: false
+      responses:
+        200:
+          body: <<class>>ResultSet
+  readable:
+    usage: A single, modifiable and versioned resource with read, update & delete methods.
+    get:
+      description: Get a <<class>> by its key
+      responses:
+        200:
+          body: <<class>>
+        404:
+          body: Error
+traits:
+  paged:
+    usage: Apply this to any method that needs paging parameters
+    description: Paging parameters.
+    queryParameters:
+      offset:
+        type: integer
+        required: false
+        description: The requested number of offset records
+      limit:
+        type: integer
+        required: false
+        description: The requested page, defaulting to 1 for the first page
+types:
+  RankType:
+    type: string
+    enum: ["kingdom", "phylum", "class", "order", "superfamily", "family", "genus", "subgenus", "species", "subspecies", "variety", "form"]
+    description: >
+      Enumeration of all possible rank values across all codes.
+      There is the need to deal with old ranks not accepted anymore.
+      The list given is intended to be interoperable between name providers for bacteria, viruses, fungi, plants, and animals.
+      The enumeration attempts to strike a balance between listing all possible rank terms, and remaining comprehensible.
+      Not included in the list are the botanical "notho-" ranks, which are used to designate hybrids (nothospecies, nothogenus) as this information is handled by the Name.notho property already.
+
+      Sources:
+
+       - [GBIF](https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/Rank.java)
+       - [TCS](https://github.com/tdwg/tcs/blob/master/TCS101/v101.xsd#L860)
+       - [TaxCat2](http://mansfeld.ipk-gatersleben.de/apex/f?p=185:78:::NO::P77_TAXCAT,P77_DB_CHECKBOX1,77_TAXCAT2RAD,77_SHOWRAD:%25,,0,s_All)
+       - [NOMEN](https://raw.githubusercontent.com/SpeciesFileGroup/nomen/master/src/ontology/nomen.owl)
+
+       TODO: extract all values from sources
+  NomCodeType:
+    type: string
+    enum: ["Bacterial", "Botanical", "Viral", "Zoological"]
+    description: >
+      Nomenclatural code enumeration regardless of the exact version published.
+      [Bacteriological](https://www.ncbi.nlm.nih.gov/books/NBK8817/),
+      [Botanical](http://www.iapt-taxon.org/nomen/),
+      [CultivatedPlants](http://www.ishs.org/scripta-horticulturae/international-code-nomenclature-cultivated-plants-ninth-edition),
+      [Viral](https://talk.ictvonline.org/information/w/ictv-information/383/ictv-code),
+      [Zoological](http://www.nhm.ac.uk/hosted-sites/iczn/code/)
+  NameType:
+    type: string
+    enum: ["scientific", "virus", "hybrid-formula", "cultivar", "otu", "placeholder", "none"]
+    description: Classification of names, mostly based on their syntactic structure.
+  NomenclaturalActType:
+    type: string
+    enum: ["description", "typification", "spellingCorrection", "emendation"]
+    #enum: ["description", "typification", "ruling", "emendation"]
+    description: >
+      Coarse classification of nomenclatural acts.
+
+       - *description* covers original descriptions, new recombinations and changes in rank.
+       - *typification* is used for subsequent type designations.
+       - *ruling* acts are e.g. suppressed or conserved names.
+       - *emendation* are intentional changes in the original spelling of an available name.
+  LifezoneType:
+    type: string
+    enum: ["brackish", "freshwater", "marine", "terrestrial"]
+    description: >
+      Coarse classification of the environment an organism lives in.
+  SynonymyType:
+    type: string
+    enum: ["synonym", "ambiguous", "misapplied"]
+    description: >
+      Synonym classification.
+       - *synonym* ...
+       - *ambiguous* ...
+       - *misapplied* ...
+  KingdomType:
+    type: string
+    enum: ["Animalia","Archaea","Bacteria","Chromista","Fungi","Plantae","Protozoa","Viruses"]
+    description: >
+      Enumeration of all kingdoms recognized in the Catalogue of Life.
+  Error:
+    type: object
+    description: >
+      An error response.
+    properties:
+      status:
+        type: integer
+        description: http status code
+      message:
+        type: string
+        description: Error message
+    example: |
+      {
+        "status": 404,
+        "message": "Name 467324, version 7 not found"
+      }
+  ResultSet:
+    type: object
+    description: >
+      A paging resultset without the actual type specific result payload.
+    properties:
+      offset:
+        type: integer
+        description: >
+          The offset applied during request.
+          Can be less than requested if the limit is reached.
+      limit:
+        type: integer
+        description: >
+          The maximum number of records returned.
+          Can be less than requested if the limit is reached.
+      total:
+        type: integer
+        description: >
+          The total number of records available.
+  DatasetObject:
+    type: object
+    description: >
+      An object which is part of a specific dataset.
+    properties:
+      key:
+        type: integer
+        description: Primary key for the <<class>>
+        required: true
+      datasetKey:
+        type: integer
+        description: Key to the source dataset this <<class>> belongs to
+        required: true
+  Dataset:
+    type: object
+    description: Metadata about the source dataset, e.g. a GSD
+    properties:
+      key:
+        type: integer
+        description: Primary key for the source dataset
+      title:
+        type: string
+        description: Full name of the source dataset
+      alias:
+        type: string
+        description: Short name of the source dataset
+      abstract:
+        type: string
+        description: Free text describing the source dataset supporting markdown formatting
+        required: false
+      groupName:
+        type: string
+        description: Name in English of the group(s) treated in the database
+      authorsAndEditors:
+        type: string
+        description: Optional author(s) and editor(s) of the source dataset
+        required: false
+      organisation:
+        type: string
+        description: Organisation which has compiled or is owning the source dataset
+        required: false
+      contactPerson:
+        type: string
+        description: Contact person of the source dataset
+        required: false
+      version:
+        type: string
+        description: Latest version number of the source dataset used in the Catalogue of Life
+        required: false
+      releaseDate:
+        type: string
+        description: Latest release date of the source dataset used in the Catalogue of Life
+        required: false
+      taxonomicCoverage:
+        type: string
+        description:
+        required: false
+      coverage:
+        type: string
+        description:
+        required: false
+      completeness:
+        type: string
+        description:
+        required: false
+      confidence:
+        type: string
+        description:
+        required: false
+      homepage:
+        type: string
+        description: Homepage URL of the source
+        required: false
+      dataFormat:
+        type: string
+        enum: ["dwca", "tcs", "xls", "other"]
+        description: data format
+        required: false
+      dataAccess:
+        type: string
+        description: URL to access the source data
+        required: false
+  Author:
+    type: object
+    description: >
+      A person that is an author of scientific names. Not to be used for Reference authors.
+      The actual name string of the author can vary similar to scientific names due to spelling, transliteration, aliases, marriage or other name changes over time.
+      e.g., "Carlolus Linnaus", "Carl Linnaus", "Carl von Linné", etc.
+    properties:
+      key:
+        type: integer
+        description: Primary key for the name author
+        required: true
+      datasetKey:
+        type: integer
+        description: Key to the source dataset this <<class>> belongs to
+        required: false
+      firstname:
+        type: string[]
+        description: the preffered full first name(s) separated by whitespace
+        required: false
+      name:
+        type: string
+        description: >
+          full last name incl prefixes like "van" if existing.
+          If the firstname cannot be seperated allowed to contain the entire name.
+      aliases:
+        type: string[]
+        description: list of alternative representations (surname, firstname)
+        required: false
+      yearOfBirth:
+        type: integer
+        description: year the person was born
+        required: false
+        minimum: 1500
+        maximum: 2020
+      yearOfDeath:
+        type: integer
+        description: year the person died
+        required: false
+        minimum: 1500
+        maximum: 2020
+      areaOfInterest:
+        type: string[]
+        description: systematic groups of interest to the author
+        required: false
+      biography:
+        type: string
+        description: short description of the persons (work) life
+        required: false
+      collections:
+        type: string[]
+        description: collection codes known to host type material for species described by the author
+        required: false
+    example: |
+      {
+        "key": 1563,
+        "datasetKey": 15,
+        "firstname": ["Augustin-Pyrame"],
+        "name": "de Candolle",
+        "aliases": ["Augustin-Pyramus de Candolle", "DC."],
+        "yearOfBirth": 1778,
+        "yearOfDeath": 1841,
+        "areaOfInterest": ["Pteridophytes", "Mycology", "Bryophytes", "Spermatophytes"],
+        "biography": "Augustin Pyramus de Candolle also spelled Augustin Pyrame de Candolle (4 February 1778 – 9 September 1841) was a Swiss botanist. René Louiche Desfontaines launched de Candolle's botanical career by recommending him at an herbarium. Within a couple of years de Candolle had established a new genus, and he went on to document hundreds of plant families and create a new natural plant classification system. Although de Candolle's main focus was botany, he also contributed to related fields such as phytogeography, agronomy, paleontology, medical botany, and economic botany. Candolle originated the idea of Nature's war, which influenced Charles Darwin and the principle of natural selection.[1] de Candolle recognized that multiple species may develop similar characteristics that did not appear in a common evolutionary ancestor; this was later termed analogy. During his work with plants, de Candolle noticed that plant leaf movements follow a near-24-hour cycle in constant light, suggesting that an internal biological clock exists. Though many scientists doubted de Candolle's findings, experiments over a century later demonstrated that ″the internal biological clock″ indeed exists. Candolle's descendants continued his work on plant classification. Alphonse de Candolle and Casimir Pyrame de Candolle contributed to the Prodromus Systematis Naturalis Regni Vegetabilis, a catalog of plants begun by Augustin Pyramus de Candolle.",
+        "collections": []
+      }
+  AuthorResultSet:
+    type: ResultSet
+    description: >
+      A paging resultset for Authors.
+    properties:
+      results:
+        type: Author[]
+        description: the resulting Authors
+  Name:
+    type: DatasetObject
+    description: |
+      A scientific name.
+      CoL deals and categorizes the following types of names:
+
+       - Linnaean names, i.e. mono-, bi- or trinomials
+         - available or unavailable
+       - Named hybrids and nothotaxa
+       - Virus names
+
+      A name includes it's authorship. Two homonyms with different authors therefore represent two different name entities.
+
+      ### Lexical variations
+
+      The same name can usually be represented by many different strings which we refer to as lexical variations.
+      For each name a standard representation, the canonical form, exists.
+
+      Lexical variations exist for various reasons.
+      Author spelling, transliterations, epither gender, additional infrageneric or infraspecific indications, cited species authors in infraspecific names are common reasons.
+      Listed here are 7 distinct names with some of their string representations:
+
+      ```
+       1. Aus bus Linnaeus 1758
+          - Aus bus Linn. 1758
+          - Aus bus Linn 1758
+          - Aus bus L.
+          - Aus ba Linn 1758.
+          - Aus (Hus) bus L.
+
+       2. Xus bus (Linn, 1758)
+          - Xus bus (Linn) Smith
+
+       3. Xus cus Smith, 1850
+          - Xus cus Sm.
+
+       4. Xus cus Jones 1900
+
+       5. Xus bus cus Smith 1850
+          - Xus bus subsp. cus Smith 1850
+
+       6. Xus dus Pyle 2000
+
+       7. Foo bar var. lion Smith 1850
+          - Foo bar L. var. lion Smith
+          - Foo bar subsp. dar var. lion Smith 1850
+          - Foo bar Lin. subsp. dar Mill. var. lion Smith 1850
+      ```
+
+      New names (**sp./gen. nov.**),
+      new recombinations of the same epithet (**comb. nov.**),
+      a name at a new rank (**stat. nov.**)
+      or replacement names (**nom. nov.**) are all treated as distinct names.
+
+      ### Homotypic group & original name
+      Names based on the same type can be clustered together as a homotypic group of names.
+      A homotypic group not only includes all subsequent recombinations, but also any [replacement name](https://en.wikipedia.org/wiki/Nomen_novum) if existing.
+      These names are homotypic synonyms, also called nomenclatural or objective synonyms.
+
+      The first, originally published name is used to represent such a group as it is a clean proxy to the type specimen,
+      therefore every name in a homotypic group points back to the same original name.
+
+      Protonym in zoology and basionym in botany are terms for a very similar concept, but they do not include replacement names and are rather code specific
+      so we will refer to *original name* here instead, inline with Darwin Core terminology.
+      Original names are not necessarily Code-compliant original descriptions, but usually they are.
+
+      The above names can be clustered into four sets of homotypic synonym groups, shown with canonical authorship:
+
+      ```
+       1. Aus bus Linnaeus 1758
+          - Aus ba Linnaeus 1758 [orthographic variant]
+          - Xus bus (Linnaeus 1758) Smith 1850 [alternate combination]
+
+       2. Xus cus Smith 1850
+          - Xus bus subsp. cus Smith 1850 [alternate rank]
+
+       3. Xus cus Jones 1900 (heterotypic homonym of Xus cus Smith 1850)
+          - Xus dus Pyle 2000 [replacement name for Xus cus Jones]
+
+       4. Foo bar var. lion Smith 1850
+      ```
+
+      ### comb. nov. in ICZN vs ICN
+
+      One of the most notable differences between [ICN](http://www.iapt-taxon.org/nomen/)
+      and [ICZN](http://www.nhm.ac.uk/hosted-sites/iczn/code/) is the way names are cited when a species is placed in a different genus from the one it was originally published in (a comb. nov.).
+      Botanists have a convention of always citing the authors of the original combination in brackets followed by the names of the authors of the combination.
+      Zoologists don't follow this convention, they simply place the author of the original combination in brackets for the new combination and don't cite the authors who were first to make the new combination.
+      This difference is cosmetic. Indeed [ICZN Recommendation 51G](http://www.nhm.ac.uk/hosted-sites/iczn/code/index.jsp?article=51) is that new combinations in zoology should be quoted in a similar way to the way they are quoted in botany.
+
+      *Basionym* is a well established term in the ICN where it is defined that
+      a "basionym provides the final epithet, name, or stem of the new combination or name at new rank" (ICN Art. 6.10 & Art. 41).
+      It is the orginal combination of a name as viewed from a new combination. The basionym is therefore always relative to a new combination.
+      A name can't be a basionym in its own right only relative to another name.
+      ICZN does not mention the term basionym but the notion is clearly present in zoological nomenclature as zoologists also have the concept of the new recombination of a name.
+    properties:
+      scientificName:
+         type: string
+         description: full string incl authorship and rank marker for infragenerics and infraspecfics
+      canonicalName:
+        type: string
+        description: plain name made from 1-3 name epithets only, exluding authors and rank markers
+        required: false
+      nomenclaturalCode:
+        type: NomCodeType
+      uninomial:
+        type: string
+        description: for names at higher rank than genus, e.g. a family name
+        required: false
+      genus:
+        type: string
+        description: the genus part of a name
+        required: false
+      infragenericEpithet:
+        type: string
+        description: the infrageneric epithet. Used only as the terminal epithet for names at infrageneric ranks, not for species
+        required: false
+      specificEpithet:
+        type: string
+        description:
+        required: false
+      infraspecificEpithet:
+        type: string
+        description:
+        required: false
+      rank:
+        type: RankType
+        description: rank of the name from enumeration above
+      notho:
+        type: string
+        enum: [ "generic", "infrageneric", "specific", "infraspecific" ]
+        description: the part of the name which is considered a hybrid;  see [GBIF](https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/NamePart.java#L24)
+        required: false
+      authorship:
+        type: string
+        description: full string
+        required: false
+      originalAuthors:
+        type: Author[]
+        description: list of NameAuthor entities
+        required: false
+      originalYear:
+        type: integer
+        description: year of original name publication
+        required: false
+      combinationAuthors:
+        type: Author[]
+        description: list of NameAuthor entities excluding ex- authors
+        required: false
+      combinationYear:
+        type: integer
+        description: year of combination publication, usually the same as publishedIn reference
+        required: false
+      originalNameKey:
+        type: integer
+        description: link to the original name. In case of [replacement names](https://en.wikipedia.org/wiki/Nomen_novum) it points back to the replaced synonym.
+        required: false
+      fossil:
+        type: boolean
+        description: true if the type specimen of the name is a fossil
+      available:
+        type: boolean
+        description: flag to indicate that this name is available/validly published
+      remark:
+        type: string
+        description: notes for general remarks on the name
+        required: false
+    example: |
+      {
+        "key": 21242,
+        "datasetKey": 15,
+        "scientificName": "Crepicnema parvula (Jacoby, 1885)",
+        "canonicalName": "Crepicnema parvula",
+        "nomenclaturalCode": "Zoological",
+        "genus": "Crepicnema",
+        "specificEpithet": "parvula",
+        "rank": "species",
+        "authorship": "(Jacoby, 1885)",
+        "originalAuthors": [{"key":10789, "name": "Jacoby"}],
+        "originalYear": 1885,
+        "originalNameKey": 8673,
+        "fossil": false,
+        "available": true
+      }
+  NameResultSet:
+    type: ResultSet
+    description: >
+      A paging resultset for Names.
+    properties:
+      results:
+        type: Name[]
+        description: the resulting names
+  NomenclaturalAct:
+    type: DatasetObject
+    description: A published act which affects the nomenclatural status of a scientific name or the typification of a nominal taxon.
+    properties:
+      key:
+        type: integer
+        description: the unique key, i.e. scientificNameID
+      nameKey:
+        type: integer
+        description: key to the name the act is about
+      type:
+        type: NomenclaturalActType[]
+        description: Coarse classification of acts.
+      relatedNameKey:
+        type: integer
+        description: key to the related name of the act in case the act defines a name relation
+        required: false
+      description:
+        type: string
+        description: A desription of the details of the nomenclatural act
+        required: false
+      referenceKey:
+        type: integer
+        description: Key to reference in which the act was published
+        required: false
+      referencePage:
+        type: string
+        description: exact first page of the treatment within above reference
+        required: false
+      referenceLink:
+        type: string
+        description: URL to the first page of the treatment, e.g. in BHL, BioStor or Zenodo
+        required: false
+      bhlPageId:
+        type: integer
+        description: BHL PageID for the first page of the treatment
+        required: false
+    example: |
+      {
+        "key": 721141,
+        "datasetKey": 15,
+        "type": ["description"],
+        "nameKey": 78612,
+        "referenceKey": 786,
+        "referencePage": "5",
+        "referenceLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725"
+      }
+  Reference:
+    type: DatasetObject
+    description: |
+      A (literature) reference mostly given in [CSL-JSON](https://github.com/citation-style-language/schema#csl-json-schema).
+      A reference can be linked to a serial, e.g. a journal, that defines the content for the CSL container attributes.
+
+      Treatments are the section of a publication that deals with a single scientific name.
+      They are a unit of citation below articles. [Plazi](http://www.plazi.org) is based on them
+      and Taxon Name Usages (TNU) in [GNUB](http://globalnames.org/docs/gnub/) correspond to treatments.
+
+      The ability to link to the treatment of a name is very useful. It is accomplished in the NomenclaturalAct class,
+      but not dealt with on the shared Reference instances.
+    properties:
+      serialKey:
+        type: integer
+        description: key to container serial
+        required: false
+      csl:
+        type: object
+        description: |
+          the citation metadata as [CSL-JSON](https://github.com/citation-style-language/schema#csl-json-schema),
+          see [CSL JSON schema](https://github.com/citation-style-language/schema/blob/master/csl-data.json).
+    example: |
+      {
+        "key": 432561,
+        "datasetKey": 15,
+        "serialKey": 17,
+        "csl": {
+          "DOI":"10.1038/nrd842",
+          "type":"article-journal",
+          "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
+          "title":"From the analyst's couch: Selective anticancer drugs",
+          "container-title":"Nature Reviews Drug Discovery",
+          "volume":"1",
+          "issue":"7",
+          "issued":{"date-parts":[[2002,7]]},
+          "page":"491-492"
+        }
+      }
+  ReferenceResultSet:
+    type: ResultSet
+    description: >
+      A paging resultset for References.
+    properties:
+      results:
+        type: Reference[]
+        description: the resulting References
+  Serial:
+    type: DatasetObject
+    description: |
+        A journal or other serial used as a container for references.
+
+        A serial is a publication in any medium issued under the same title in a succession of discrete parts,
+        usually numbered (or dated) and appearing at regular or irregular intervals with no predetermined conclusion.
+        Serial publications include print periodicals and newspapers, electronic magazines and journals, annuals (reports, yearbooks, etc.),
+        proceedings and transactions, and numbered monographic series cataloged separately.
+
+        When serials split, merge, or are absorbed, a title change may occur.
+
+        A specific serial title is identified by a unique International Standard Serials Number (ISSN) and key title,
+        assigned and maintained by the International Serials Data System (ISDS), a network of national serials data centers.
+        Serials and annuals are listed in Ulrich's International Periodicals Directory published annually by ProQuest and in The Serials Directory published by EBSCO.
+    properties:
+      aliases:
+        type: string[]
+        description: Alternative titles known for the serial
+        required: false
+      bph:
+        type: string
+        description: >
+          [BPH Online](http://huntbotanical.org/databases/show.php?1) identifier. Botanic periodicals published between 1665 and the present.
+        required: false
+      call:
+        type: string
+        description: library of congress classification number
+        required: false
+      tl2:
+        type: string
+        description: TL2 number
+        required: false
+      oclc:
+        type: integer
+        description: OCLC number
+        required: false
+      bhl:
+        type: integer
+        description: BHL title number
+        required: false
+      jstor:
+        type: string
+        description: link to JSTOR
+        required: false
+      firstYear:
+        type: integer
+        description: First year the serial was published
+        required: false
+      lastYear:
+        type: integer
+        description: Last year the serial was published. Empty for current journals
+        required: false
+      csl:
+        type: object
+        description: >
+          Serial metadata as [CSL-JSON](https://github.com/citation-style-language/schema#csl-json-schema),
+          see [CSL JSON schema](https://github.com/citation-style-language/schema/blob/master/csl-data.json)
+      notes:
+        type: string
+        description: Notes about the serial
+        required: false
+    example: |
+      {
+        "key": 432561,
+        "datasetKey": 15,
+        "bph": "460.06",
+        "tl2": "11.084",
+        "call": "QK1.J55",
+        "oclc": 1754397,
+        "bhl": 68922,
+        "firstYear": 1799,
+        "lastYear": 1804,
+        "csl": {
+          "call-number": "QK1.J55",
+          "type":"journal",
+          "title":"Journal für die Botanik",
+          "title-short":"J. Bot. (Schrader)",
+          "editor":[{"family":"Schrader","given":"H. A."}],
+          "publisher-place": "Göttingen"
+        }
+      }
+  SerialResultSet:
+    type: ResultSet
+    description: >
+      A paging resultset for Serials.
+    properties:
+      results:
+        type: Serial[]
+        description: the resulting Serials
+  Taxon:
+    type: DatasetObject
+    description: >
+      A taxon concept, i.e. an accepted name.
+    properties:
+      sourceTaxonId:
+        type: string
+        description: Identifier used in the source database for this taxon.
+      taxonConceptId:
+        type: string
+        description: identifier for the taxon concept strongly based on the synonymy.
+      name:
+        type: Name
+        description: the accepted taxon name
+      status:
+        type: string
+        description: the taxon name
+      rank:
+        type: RankType
+        description: taxonomic rank
+      kingdom:
+        type: KingdomType
+        description: the kingdom the taxon is classified under.
+      parentKey:
+        type: string
+        description: key to next higher taxon in the classification
+      accordingTo:
+        type: string
+        description: person who scrutinized the taxon. LTSSpecialist in the CoL submission format
+      accordingToDate:
+        type: date-only
+        description: date when the taxon was last scrutinized. LTSDate in the CoL submission format
+      fossil:
+        type: boolean
+        description: true if the taxon is known from fossil records. NULL if unknown.
+      recent:
+        type: boolean
+        description: true if the taxon is known from recent, i.e. holocene records. That includes organisms that died out in the last centuries. NULL if unknown.
+      lifezone:
+        type: LifezoneType[]
+        description: the environment the organism is known to live in.
+      referenceKeys:
+        type: integer[]
+        description: keys to references supporting the taxon concept.
+      sourceLink:
+        type: string
+        description: URL to the taxon webpage in the source.
+  TaxonResultSet:
+    type: ResultSet
+    description: >
+      A paging resultset for Taxa.
+    properties:
+      results:
+        type: Taxon[]
+        description: the resulting Taxa
+  TaxonDetail:
+    type: DatasetObject
+    description: >
+      All supplementarly taxon information for a given taxon.
+    properties:
+      vernacularNames:
+        type: VernacularName[]
+      distributions:
+        type: Distribution[]
+      references:
+        type: Reference[]
+  TaxonVerbatim:
+    type: DatasetObject
+    description: >
+      Verbatim version of the taxon given as DwC terms.
+    properties:
+      extensions:
+        type: object
+        description: Map of extension rowType URLs to array of records with DwC terms value pairs.
+      modified:
+        type: datetime
+  VernacularName:
+    type: object
+    description: TODO A vernacular name
+  Distribution:
+    type: object
+    description: TODO An area distribution record
+  Synonymy:
+    type: HomotypicGroup[]
+    description: >
+      A complete synonymy chronologically arranged by homotypic names.
+  HomotypicGroup:
+    type: Name[]
+    description: >
+      A list of names sharing the same type, i.e. have the same basionym or replaced name.
+
+/dataset:
+  type: pageable
+  /{key}:
+    type:  { readable: {class : "Dataset"} }
+    uriParameters:
+      key:
+        type: integer
+        description: dataset key
+/name:
+  type: pageable
+  /{key}:
+    type:  { readable: {class : "Name"} }
+    uriParameters:
+      key:
+        type: integer
+        description: name key
+    /synonyms:
+      get:
+        description: get list of all homotypic synonyms
+        responses:
+          200:
+            body: HomotypicGroup
+    /publishedIn:
+      get:
+        description: return the reference where the name was first published, i.e. the original description or recombination
+        responses:
+          200:
+            body: Reference
+    /acts:
+      get:
+        description: list all nomenclatural acts for the name in chronological order
+        queryParameters:
+          homotypic:
+            type: boolean
+            description: if true include also all acts about any names from the homotypic group (i.e. protonym)
+            default: false
+        responses:
+          200:
+            body: NomenclaturalAct[]
+/taxon:
+  type: pageable
+  /{key}:
+    uriParameters:
+      key:
+        type: integer
+    get:
+      description: get taxon
+      responses:
+        200:
+          body: Taxon
+    /details:
+      get:
+        description: get full detail of the taxon with all its supplementary information
+        responses:
+          200:
+            body: TaxonDetail
+    /synonyms:
+      get:
+        description: get list of all synonyms
+        responses:
+          200:
+            body: Synonymy
+    /search:
+      type:  { searchable: {class : "Taxon"} }
+      get:
+        description: search all taxa
+        queryParameters:
+          rank:
+            type: string
+            description: filter by rank
+            required: false
+          status:
+            type: string
+            description: filter by taxonomic status
+            required: false
+          issue:
+            type: string
+            description: filter by issue found
+            required: false
+          type:
+            type: string
+            description: filter by name type
+            required: false
+/reference:
+  type: pageable
+  /{key}:
+    type:  { readable: {class : "Reference"} }
+    uriParameters:
+      key:
+        type: integer
+        description: reference key
+/serial:
+  type: pageable
+  /{key}:
+    type:  { readable: {class : "Serial"} }
+    uriParameters:
+      key:
+        type: integer
+        description: serial key
