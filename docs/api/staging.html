@@ -128,7 +128,7 @@
     <div class="content">
 
         <h1 id="introduction">CoL+ Staging API (v1)</h1>
-        <h3><code>https://api.col.plus/staging</code></h3>
+        <h3><code>https://api.col.plus</code></h3>
 
     <p><p>API of the staging environment of the Catalogue of Life. The API gives access to staged source datasets for editorial review.</p>
 </p>
@@ -136,6 +136,12 @@
 
 
             <h1 id="model">Data Model</h1>
+                        <h2 id="model-uuid">uuid</h2>
+
+
+    <p><p>UUID data type represented as 32 hexadecimal (base 16) digits. Example 123e4567-e89b-12d3-a456-426655440000</p>
+</p>
+
                         <h2 id="model-Error">Error</h2>
 
     <pre class="example"><code class="json">{
@@ -173,6 +179,46 @@
 </td>
                                 </tr>
                             </tbody></table>
+                        <h2 id="model-MatchResult">MatchResult</h2>
+
+
+    <p><p>A matching result without the actual type specific result payload.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>alternatives</td>
+                                    <td>object[]</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Alternative, discarded matches for debugging puposes</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>matchType</td>
+                                    <td><a href="#model-MatchType">MatchType</a></td>
+                                    <td>exact, fuzzy, higherrank, none</td>
+                                    <td>yes</td>
+                                    <td><p>the kind of match</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>note</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Matching remarks</p>
+</td>
+                                </tr>
+                            </tbody></table>
                         <h2 id="model-Dataset">Dataset</h2>
 
 
@@ -197,6 +243,14 @@
 </td>
                                 </tr>
                                 <tr>
+                                    <td>alias</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Short name of the source dataset</p>
+</td>
+                                </tr>
+                                <tr>
                                     <td>title</td>
                                     <td>string</td>
                                     <td></td>
@@ -205,11 +259,11 @@
 </td>
                                 </tr>
                                 <tr>
-                                    <td>alias</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Short name of the source dataset</p>
+                                    <td>gbifKey</td>
+                                    <td><a href="#model-uuid">uuid</a></td>
+                                    <td>^[0-9abcdef]{8}-[0-9abcdef]{4}-[0-9abcdef]{4}-[0-9abcdef]{4}-[0-9abcdef]{12}$</td>
+                                    <td>no</td>
+                                    <td><p>GBIF dataset key</p>
 </td>
                                 </tr>
                                 <tr>
@@ -318,6 +372,86 @@
                                     <td></td>
                                     <td>no</td>
                                     <td><p>URL to access the source data</p>
+</td>
+                                </tr>
+                            </tbody></table>
+                        <h2 id="model-DatasetResultSet">DatasetResultSet</h2>
+
+
+    <p><p>A paging resultset for Datasets.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>results</td>
+                                    <td>object[]</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Result page</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>offset</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The offset applied during request. Can be less than requested if the limit is reached.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>limit</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The maximum number of records returned. Can be less than requested if the limit is reached.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>total</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The total number of records available.</p>
+</td>
+                                </tr>
+                            </tbody></table>
+                        <h2 id="model-AuthorName">AuthorName</h2>
+
+
+    <p><p>A minimal version of Author with just the key and name.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>key</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Primary key for the name author</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>name</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Entire  name incl initials and prefixes like &ldquo;van&rdquo; if existing.</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -445,6 +579,14 @@
                             </tr>
                             </thead><tbody>
                                 <tr>
+                                    <td>results</td>
+                                    <td>object[]</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Result page</p>
+</td>
+                                </tr>
+                                <tr>
                                     <td>offset</td>
                                     <td>integer</td>
                                     <td></td>
@@ -468,27 +610,18 @@
                                     <td><p>The total number of records available.</p>
 </td>
                                 </tr>
-                                <tr>
-                                    <td>results</td>
-                                    <td><a href="#model-Author">Author[]</a></td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>the resulting Authors</p>
-</td>
-                                </tr>
                             </tbody></table>
                         <h2 id="model-Name">Name</h2>
 
     <pre class="example"><code class="json">{
   "key": 21242,
   "datasetKey": 15,
-  "scientificName": "Crepicnema parvula (Jacoby, 1885)",
-  "canonicalName": "Crepicnema parvula",
+  "scientificName": "Crepicnema parvula",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
   "nomenclaturalCode": "Zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "rank": "species",
-  "authorship": "(Jacoby, 1885)",
   "originalAuthors": [{"key":10789, "name": "Jacoby"}],
   "originalYear": 1885,
   "originalNameKey": 8673,
@@ -609,15 +742,23 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td>string</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>full string incl authorship and rank marker for infragenerics and infraspecfics</p>
+                                    <td><p>entire canonical name string with a rank marker for infragenerics and infraspecfics, but excluding the authorship. For uninomials, e.g. families or names at higher ranks, this is just the uninomial.</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>canonicalName</td>
+                                    <td>authorship</td>
                                     <td>string</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>plain name made from 1-3 name epithets only, exluding authors and rank markers</p>
+                                    <td><p>full unparsed authorship of the name incl basionym and years</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>rank</td>
+                                    <td><a href="#model-RankType">RankType</a></td>
+                                    <td>kingdom, phylum, class, order, superfamily, family, genus, subgenus, species, subspecies, variety, form</td>
+                                    <td>yes</td>
+                                    <td><p>rank of the name from enumeration above</p>
 </td>
                                 </tr>
                                 <tr>
@@ -628,19 +769,11 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td>uninomial</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>for names at higher rank than genus, e.g. a family name</p>
-</td>
-                                </tr>
-                                <tr>
                                     <td>genus</td>
                                     <td>string</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>the genus part of a name</p>
+                                    <td><p>the genus part of a bi- or trinomial name. Not used for genus names which are represented by the scientificName alone.</p>
 </td>
                                 </tr>
                                 <tr>
@@ -666,14 +799,6 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td>rank</td>
-                                    <td><a href="#model-RankType">RankType</a></td>
-                                    <td>kingdom, phylum, class, order, superfamily, family, genus, subgenus, species, subspecies, variety, form</td>
-                                    <td>yes</td>
-                                    <td><p>rank of the name from enumeration above</p>
-</td>
-                                </tr>
-                                <tr>
                                     <td>notho</td>
                                     <td>enum</td>
                                     <td>generic, infrageneric, specific, infraspecific</td>
@@ -682,16 +807,8 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
 </td>
                                 </tr>
                                 <tr>
-                                    <td>authorship</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>full string</p>
-</td>
-                                </tr>
-                                <tr>
                                     <td>originalAuthors</td>
-                                    <td><a href="#model-Author">Author[]</a></td>
+                                    <td><a href="#model-AuthorName">AuthorName[]</a></td>
                                     <td></td>
                                     <td>no</td>
                                     <td><p>list of NameAuthor entities</p>
@@ -707,7 +824,7 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                 </tr>
                                 <tr>
                                     <td>combinationAuthors</td>
-                                    <td><a href="#model-Author">Author[]</a></td>
+                                    <td><a href="#model-AuthorName">AuthorName[]</a></td>
                                     <td></td>
                                     <td>no</td>
                                     <td><p>list of NameAuthor entities excluding ex- authors</p>
@@ -718,7 +835,7 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td>integer</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>year of combination publication, usually the same as publishedIn reference</p>
+                                    <td><p>the year this combination was first published, usually the same as the publishedIn reference. It is used for sorting names and ought to be populated even for botanical names which do not use it in the complete authorship string.</p>
 </td>
                                 </tr>
                                 <tr>
@@ -733,7 +850,7 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td>fossil</td>
                                     <td>boolean</td>
                                     <td></td>
-                                    <td>yes</td>
+                                    <td>no</td>
                                     <td><p>true if the type specimen of the name is a fossil</p>
 </td>
                                 </tr>
@@ -741,7 +858,7 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td>available</td>
                                     <td>boolean</td>
                                     <td></td>
-                                    <td>yes</td>
+                                    <td>no</td>
                                     <td><p>flag to indicate that this name is available/validly published</p>
 </td>
                                 </tr>
@@ -750,7 +867,55 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td>string</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>notes for general remarks on the name</p>
+                                    <td><p>notes for general remarks on the name, i.e. its nomenclature</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>colNameKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>matching name from the (provisional) Catalogue of Life.</p>
+</td>
+                                </tr>
+                            </tbody></table>
+                        <h2 id="model-NameMatch">NameMatch</h2>
+
+
+    <p><p>A name matching result.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>alternatives</td>
+                                    <td>object[]</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Alternative, discarded matches for debugging puposes</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>matchType</td>
+                                    <td><a href="#model-MatchType">MatchType</a></td>
+                                    <td>exact, fuzzy, higherrank, none</td>
+                                    <td>yes</td>
+                                    <td><p>the kind of match</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>note</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Matching remarks</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -769,6 +934,14 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                 <th>Description</th>
                             </tr>
                             </thead><tbody>
+                                <tr>
+                                    <td>results</td>
+                                    <td>object[]</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Result page</p>
+</td>
+                                </tr>
                                 <tr>
                                     <td>offset</td>
                                     <td>integer</td>
@@ -793,12 +966,112 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td><p>The total number of records available.</p>
 </td>
                                 </tr>
+                            </tbody></table>
+                        <h2 id="model-NameSearchResult">NameSearchResult</h2>
+
+    <pre class="example"><code class="json">{
+  "taxonKey": 892134,
+  "status": "accepted",
+  "name": {
+    "key": 21242,
+    "datasetKey": 15,
+    "scientificName": "Crepicnema parvula",
+    "rank": "species",
+    "authorship": "(Jacoby, 1885)",
+    "nomenclaturalCode": "Zoological",
+    "genus": "Crepicnema",
+    "specificEpithet": "parvula",
+    "originalAuthors": [{"key":10789, "name": "Jacoby"}],
+    "originalYear": 1885,
+    "originalNameKey": 8673,
+    "fossil": false,
+    "available": true
+  }
+}
+</code></pre>
+
+    <p><p>A scientific name as part of a search result.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
                                 <tr>
-                                    <td>results</td>
-                                    <td><a href="#model-Name">Name[]</a></td>
+                                    <td>taxonKey</td>
+                                    <td>integer</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>the resulting names</p>
+                                    <td><p>key of the accepted taxon this name belongs to, either as a synonym or the accepted name itself.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>name</td>
+                                    <td><a href="#model-Name">Name</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the name</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>status</td>
+                                    <td><a href="#model-TaxonomicStatusType">TaxonomicStatusType</a></td>
+                                    <td>accepted, provisional, synonym, orthographic-variant, ambiguous, misapplied</td>
+                                    <td>yes</td>
+                                    <td><p>taxonomic status</p>
+</td>
+                                </tr>
+                            </tbody></table>
+                        <h2 id="model-NameSearchResultSet">NameSearchResultSet</h2>
+
+
+    <p><p>A paging resultset for name search results.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>results</td>
+                                    <td>object[]</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Result page</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>offset</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The offset applied during request. Can be less than requested if the limit is reached.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>limit</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The maximum number of records returned. Can be less than requested if the limit is reached.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>total</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The total number of records available.</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -980,6 +1253,46 @@ see <a href="https://github.com/citation-style-language/schema/blob/master/csl-d
 </td>
                                 </tr>
                             </tbody></table>
+                        <h2 id="model-ReferenceMatch">ReferenceMatch</h2>
+
+
+    <p><p>A reference matching result.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>alternatives</td>
+                                    <td>object[]</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Alternative, discarded matches for debugging puposes</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>matchType</td>
+                                    <td><a href="#model-MatchType">MatchType</a></td>
+                                    <td>exact, fuzzy, higherrank, none</td>
+                                    <td>yes</td>
+                                    <td><p>the kind of match</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>note</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Matching remarks</p>
+</td>
+                                </tr>
+                            </tbody></table>
                         <h2 id="model-ReferenceResultSet">ReferenceResultSet</h2>
 
 
@@ -995,6 +1308,14 @@ see <a href="https://github.com/citation-style-language/schema/blob/master/csl-d
                                 <th>Description</th>
                             </tr>
                             </thead><tbody>
+                                <tr>
+                                    <td>results</td>
+                                    <td>object[]</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Result page</p>
+</td>
+                                </tr>
                                 <tr>
                                     <td>offset</td>
                                     <td>integer</td>
@@ -1017,14 +1338,6 @@ see <a href="https://github.com/citation-style-language/schema/blob/master/csl-d
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>The total number of records available.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>results</td>
-                                    <td><a href="#model-Reference">Reference[]</a></td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>the resulting References</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -1176,6 +1489,46 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
 </td>
                                 </tr>
                             </tbody></table>
+                        <h2 id="model-SerialMatch">SerialMatch</h2>
+
+
+    <p><p>A serial matching result.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>alternatives</td>
+                                    <td>object[]</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Alternative, discarded matches for debugging puposes</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>matchType</td>
+                                    <td><a href="#model-MatchType">MatchType</a></td>
+                                    <td>exact, fuzzy, higherrank, none</td>
+                                    <td>yes</td>
+                                    <td><p>the kind of match</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>note</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Matching remarks</p>
+</td>
+                                </tr>
+                            </tbody></table>
                         <h2 id="model-SerialResultSet">SerialResultSet</h2>
 
 
@@ -1191,6 +1544,14 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                 <th>Description</th>
                             </tr>
                             </thead><tbody>
+                                <tr>
+                                    <td>results</td>
+                                    <td>object[]</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Result page</p>
+</td>
+                                </tr>
                                 <tr>
                                     <td>offset</td>
                                     <td>integer</td>
@@ -1215,15 +1576,236 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td><p>The total number of records available.</p>
 </td>
                                 </tr>
+                            </tbody></table>
+                        <h2 id="model-Synonym">Synonym</h2>
+
+
+    <p><p>A name used as a synonym or for an accepted taxon.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
                                 <tr>
-                                    <td>results</td>
-                                    <td><a href="#model-Serial">Serial[]</a></td>
+                                    <td>name</td>
+                                    <td><a href="#model-Name">Name</a></td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>the resulting Serials</p>
+                                    <td><p>the name for this taxon</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>status</td>
+                                    <td><a href="#model-TaxonomicStatusType">TaxonomicStatusType</a></td>
+                                    <td>accepted, provisional, synonym, orthographic-variant, ambiguous, misapplied</td>
+                                    <td>yes</td>
+                                    <td><p>the kind of synonym</p>
 </td>
                                 </tr>
                             </tbody></table>
+                        <h2 id="model-Synonymy">Synonymy</h2>
+
+    <pre class="example"><code class="json">[
+    [
+        {
+            "name": {
+                "key": 21242,
+                "datasetKey": 15,
+                "scientificName": "Stylopappus grandiflorus",
+                "authorship": "Nutt.",
+                "rank": "species",
+                "nomenclaturalCode": "Botanical",
+                "genus": "Stylopappus",
+                "specificEpithet": "grandiflorus",
+                "combinationAuthors": [
+                    {"key":10789, "name": "Nutt."}
+                ],
+                "combinationYear": 1841,
+                "originalNameKey": 21242
+            },
+            "status": "synonym"
+        },
+        {
+            "name": {
+                "key": 21243,
+                "datasetKey": 15,
+                "scientificName": "Macrorhynchus grandiflorus",
+                "authorship": "(Nutt.) Torr. & A. Gray",
+                "rank": "species",
+                "nomenclaturalCode": "Botanical",
+                "genus": "Stylopappus",
+                "specificEpithet": "grandiflorus",
+                "originalAuthors": [
+                    {"key":10789, "name": "Nutt."}
+                ],
+                "combinationAuthors": [
+                    {"key":10790, "name": "Torr."},
+                    {"key":10791, "name": "A. Gray"}
+                ],
+                "combinationYear": 1843,
+                "originalNameKey": 21242
+            },
+            "status": "synonym"
+        },
+        {
+            "name": {
+                "key": 21244,
+                "datasetKey": 15,
+                "scientificName": "Troximon grandiflorum",
+                "authorship": "(Nutt.) A. Gray",
+                "rank": "species",
+                "nomenclaturalCode": "Botanical",
+                "genus": "Troximon",
+                "specificEpithet": "grandiflorum",
+                "originalAuthors": [
+                    {"key":10789, "name": "Nutt."}
+                ],
+                "combinationAuthors": [
+                    {"key":10791, "name": "A. Gray"}
+                ],
+                "combinationYear": 1874,
+                "originalNameKey": 21242
+            },
+            "status": "synonym"
+        }
+    ],
+    [
+        {
+            "name": {
+                "key": 13078,
+                "datasetKey": 15,
+                "scientificName": "Troximon marshallii",
+                "authorship": "Greene",
+                "rank": "species",
+                "nomenclaturalCode": "Botanical",
+                "genus": "Troximon",
+                "specificEpithet": "marshallii",
+                "combinationAuthors": [
+                    {"key":10001, "name": "Greene"}
+                ],
+                "combinationYear": 1888,
+                "originalNameKey": 13078
+            },
+            "status": "synonym"
+        },
+        {
+            "name": {
+                "key": 13079,
+                "datasetKey": 15,
+                "scientificName": "Agoseris marshallii",
+                "authorship": "(Greene) Greene",
+                "rank": "species",
+                "nomenclaturalCode": "Botanical",
+                "genus": "Agoseris",
+                "specificEpithet": "marshallii",
+                "originalAuthors": [
+                    {"key":10001, "name": "Greene"}
+                ],
+                "combinationAuthors": [
+                    {"key":10001, "name": "Greene"}
+                ],
+                "combinationYear": 1891,
+                "originalNameKey": 13078
+            },
+            "status": "synonym"
+        },
+        {
+            "name": {
+                "key": 13080,
+                "datasetKey": 15,
+                "scientificName": "Agoseris marshalii",
+                "authorship": "(Greene) Greene",
+                "rank": "species",
+                "nomenclaturalCode": "Botanical",
+                "genus": "Agoseris",
+                "specificEpithet": "marshalii",
+                "originalAuthors": [
+                    {"key":10001, "name": "Greene"}
+                ],
+                "combinationAuthors": [
+                    {"key":10001, "name": "Greene"}
+                ],
+                "combinationYear": 1891,
+                "originalNameKey": 13078
+            },
+            "status": "orthographic-variant"
+        }
+    ],
+    [
+        {
+            "name": {
+                "key": 13122,
+                "datasetKey": 15,
+                "scientificName": "Troximon plebeium",
+                "authorship": "Greene",
+                "rank": "species",
+                "nomenclaturalCode": "Botanical",
+                "genus": "Troximon",
+                "specificEpithet": "plebeium",
+                "combinationAuthors": [
+                    {"key":10001, "name": "Greene"}
+                ],
+                "combinationYear": 1890,
+                "originalNameKey": 13122
+            },
+            "status": "synonym"
+        },
+        {
+            "name": {
+                "key": 13123,
+                "datasetKey": 15,
+                "scientificName": "Agoseris plebeia",
+                "authorship": "(Greene) Greene",
+                "rank": "species",
+                "nomenclaturalCode": "Botanical",
+                "genus": "Agoseris",
+                "specificEpithet": "plebeia",
+                "originalAuthors": [
+                    {"key":10001, "name": "Greene"}
+                ],
+                "combinationAuthors": [
+                    {"key":10001, "name": "Greene"}
+                ],
+                "combinationYear": 1891,
+                "originalNameKey": 13122
+            },
+            "status": "synonym"
+        },
+        {
+            "name": {
+                "key": 13124,
+                "datasetKey": 15,
+                "scientificName": "Agoseris grandiflora var. plebeia",
+                "authorship": "(Greene) G. L. Wittr.",
+                "rank": "variety",
+                "nomenclaturalCode": "Botanical",
+                "genus": "Agoseris",
+                "specificEpithet": "grandiflora",
+                "infraSpecificEpithet": "plebeia",
+                "originalAuthors": [
+                    {"key":10001, "name": "Greene"}
+                ],
+                "combinationAuthors": [
+                    {"key":10031, "name": "G. L. Wittr."}
+                ],
+                "combinationYear": 1928,
+                "originalNameKey": 13122
+            },
+            "status": "synonym"
+        }
+    ]
+]
+</code></pre>
+
+    <p><p>A synonymy list, nesting homotypic names based on the same basionym in sublists. Example given for synonymy of Agoseris grandiflora (Nutt.) Greene</p>
+</p>
+
                         <h2 id="model-Taxon">Taxon</h2>
 
 
@@ -1241,10 +1823,10 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                             </thead><tbody>
                                 <tr>
                                     <td>key</td>
-                                    <td>integer</td>
+                                    <td>string</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>Primary key for the record</p>
+                                    <td><p>Primary key for this taxon as used in the source database.</p>
 </td>
                                 </tr>
                                 <tr>
@@ -1256,19 +1838,11 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
 </td>
                                 </tr>
                                 <tr>
-                                    <td>sourceTaxonId</td>
-                                    <td>string</td>
+                                    <td>colTaxonKey</td>
+                                    <td>integer</td>
                                     <td></td>
-                                    <td>yes</td>
-                                    <td><p>Identifier used in the source database for this taxon.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>taxonConceptId</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>identifier for the taxon concept strongly based on the synonymy.</p>
+                                    <td>no</td>
+                                    <td><p>matching taxon concept from the (provisional) Catalogue of Life.</p>
 </td>
                                 </tr>
                                 <tr>
@@ -1276,7 +1850,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td><a href="#model-Name">Name</a></td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>the accepted taxon name</p>
+                                    <td><p>the name for this taxon</p>
 </td>
                                 </tr>
                                 <tr>
@@ -1284,7 +1858,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td>string</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>the taxon name</p>
+                                    <td><p>the taxonomic status of name</p>
 </td>
                                 </tr>
                                 <tr>
@@ -1307,7 +1881,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td>parentKey</td>
                                     <td>string</td>
                                     <td></td>
-                                    <td>yes</td>
+                                    <td>no</td>
                                     <td><p>key to next higher taxon in the classification</p>
 </td>
                                 </tr>
@@ -1315,7 +1889,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td>accordingTo</td>
                                     <td>string</td>
                                     <td></td>
-                                    <td>yes</td>
+                                    <td>no</td>
                                     <td><p>person who scrutinized the taxon. LTSSpecialist in the CoL submission format</p>
 </td>
                                 </tr>
@@ -1323,7 +1897,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td>accordingToDate</td>
                                     <td>date-only</td>
                                     <td></td>
-                                    <td>yes</td>
+                                    <td>no</td>
                                     <td><p>date when the taxon was last scrutinized. LTSDate in the CoL submission format</p>
 </td>
                                 </tr>
@@ -1331,7 +1905,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td>fossil</td>
                                     <td>boolean</td>
                                     <td></td>
-                                    <td>yes</td>
+                                    <td>no</td>
                                     <td><p>true if the taxon is known from fossil records. NULL if unknown.</p>
 </td>
                                 </tr>
@@ -1339,7 +1913,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td>recent</td>
                                     <td>boolean</td>
                                     <td></td>
-                                    <td>yes</td>
+                                    <td>no</td>
                                     <td><p>true if the taxon is known from recent, i.e. holocene records. That includes organisms that died out in the last centuries. NULL if unknown.</p>
 </td>
                                 </tr>
@@ -1347,7 +1921,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td>lifezone</td>
                                     <td><a href="#model-LifezoneType">LifezoneType[]</a></td>
                                     <td></td>
-                                    <td>yes</td>
+                                    <td>no</td>
                                     <td><p>the environment the organism is known to live in.</p>
 </td>
                                 </tr>
@@ -1355,7 +1929,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td>referenceKeys</td>
                                     <td>integer[]</td>
                                     <td></td>
-                                    <td>yes</td>
+                                    <td>no</td>
                                     <td><p>keys to references supporting the taxon concept.</p>
 </td>
                                 </tr>
@@ -1363,8 +1937,64 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td>sourceLink</td>
                                     <td>string</td>
                                     <td></td>
-                                    <td>yes</td>
+                                    <td>no</td>
                                     <td><p>URL to the taxon webpage in the source.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>speciesEstimate</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Estimation of total number of species that have been described for this group.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>speciesEstimateReferenceKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Key to reference supporting the estimated number.</p>
+</td>
+                                </tr>
+                            </tbody></table>
+                        <h2 id="model-TaxonMatch">TaxonMatch</h2>
+
+
+    <p><p>A taxon matching result.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>alternatives</td>
+                                    <td>object[]</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Alternative, discarded matches for debugging puposes</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>matchType</td>
+                                    <td><a href="#model-MatchType">MatchType</a></td>
+                                    <td>exact, fuzzy, higherrank, none</td>
+                                    <td>yes</td>
+                                    <td><p>the kind of match</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>note</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Matching remarks</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -1383,6 +2013,14 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                 <th>Description</th>
                             </tr>
                             </thead><tbody>
+                                <tr>
+                                    <td>results</td>
+                                    <td>object[]</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Result page</p>
+</td>
+                                </tr>
                                 <tr>
                                     <td>offset</td>
                                     <td>integer</td>
@@ -1407,16 +2045,8 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td><p>The total number of records available.</p>
 </td>
                                 </tr>
-                                <tr>
-                                    <td>results</td>
-                                    <td><a href="#model-Taxon">Taxon[]</a></td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>the resulting Taxa</p>
-</td>
-                                </tr>
                             </tbody></table>
-                        <h2 id="model-TaxonDetail">TaxonDetail</h2>
+                        <h2 id="model-TaxonInfo">TaxonInfo</h2>
 
 
     <p><p>All supplementarly taxon information for a given taxon.</p>
@@ -1528,16 +2158,10 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
     <p><p>TODO An area distribution record</p>
 </p>
 
-                        <h2 id="model-Synonymy">Synonymy</h2>
-
-
-    <p><p>A complete synonymy chronologically arranged by homotypic names.</p>
-</p>
-
                         <h2 id="model-HomotypicGroup">HomotypicGroup</h2>
 
 
-    <p><p>A list of names sharing the same type, i.e. have the same basionym or replaced name.</p>
+    <p><p>A list of names sharing the same type, i.e. have the same basionym or replaced name. dsdsa</p>
 </p>
 
 
@@ -1558,6 +2182,15 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
             <p><strong>Enumeration</strong>: <em>brackish</em>, <em>freshwater</em>, <em>marine</em>, <em>terrestrial</em></p>
 
     <p><p>Coarse classification of the environment an organism lives in.</p>
+</p>
+
+
+            <h2 id="model-MatchType">MatchType</h2>
+
+
+            <p><strong>Enumeration</strong>: <em>exact</em>, <em>fuzzy</em>, <em>higherrank</em>, <em>none</em></p>
+
+    <p><p>Enumeration of the kind of matches possible.</p>
 </p>
 
 
@@ -1611,17 +2244,12 @@ Sources:</p>
 </p>
 
 
-            <h2 id="model-SynonymyType">SynonymyType</h2>
+            <h2 id="model-TaxonomicStatusType">TaxonomicStatusType</h2>
 
 
-            <p><strong>Enumeration</strong>: <em>synonym</em>, <em>ambiguous</em>, <em>misapplied</em></p>
+            <p><strong>Enumeration</strong>: <em>accepted</em>, <em>provisional</em>, <em>synonym</em>, <em>orthographic-variant</em>, <em>ambiguous</em>, <em>misapplied</em></p>
 
-    <p><p>Synonym classification.</p>
-<ul>
-<li><em>synonym</em> &hellip;</li>
-<li><em>ambiguous</em> &hellip;</li>
-<li><em>misapplied</em> &hellip;</li>
-</ul>
+    <p><p>Taxonomic status enumeration for both accepted taxa and synonyms.</p>
 </p>
 
 
@@ -1629,19 +2257,25 @@ Sources:</p>
 
 
 
-        <h1 id="resource-1">/dataset</h1>
+        <h1 id="resource-1">/admin</h1>
+
+    
+
+
+
+        <h1 id="resource-2">/dataset</h1>
 
     
 
 
     <pre class="example"><code class="http">
-GET /staging/dataset HTTP/1.1
+GET //dataset HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> https://api.col.plus/staging/dataset</h3>
-    <p><p>Page through all datasets, optionally filtered</p>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/dataset</h3>
+    <p><p>Paging parameters.</p>
 </p>
 
 
@@ -1657,15 +2291,6 @@ Host: api.col.plus
             <th>Description</th>
         </tr>
         </thead><tbody>
-            <tr>
-                <td>datasetKey</td>
-                <td>integer</td>
-                <td></td>
-                <td>no</td>
-                <td></td>
-                <td><p>filter by dataset</p>
-</td>
-            </tr>
             <tr>
                 <td>offset</td>
                 <td>integer</td>
@@ -1691,26 +2316,26 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 7, 2017 2:26:46 PM CEST
+Date: Wednesday, September 20, 2017 2:26:33 PM CEST
 Content-Type: application/json
 </code>
 </pre>
                     <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-Dataset">Dataset[]</a></p>
+                    <p>Content: <a href="#model-DatasetResultSet">DatasetResultSet</a></p>
 
 
-        <h2 id="resource-2">/dataset/{key}</h2>
+        <h1 id="resource-3">/{dataset}</h1>
 
     
 
 
     <pre class="example"><code class="http">
-GET /staging/dataset/{key} HTTP/1.1
+GET //{dataset} HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> https://api.col.plus/staging/dataset/{key}</h3>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/{dataset}</h3>
     <p><p>Get a Dataset by its key</p>
 </p>
 
@@ -1728,7 +2353,7 @@ Host: api.col.plus
         </tr>
         </thead><tbody>
                 <tr>
-                    <td>{key}</td>
+                    <td>{dataset}</td>
                     <td>integer</td>
                     <td></td>
                     <td>yes</td>
@@ -1743,41 +2368,26 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 7, 2017 2:26:46 PM CEST
+Date: Wednesday, September 20, 2017 2:26:33 PM CEST
 Content-Type: application/json
 </code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-Dataset">Dataset</a></p>
-            <h3 id="op2-responses" class="clear">Response 404</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 404 Not Found
-Date: Thursday, September 7, 2017 2:26:46 PM CEST
-Content-Type: application/json
-</code>
-    <code class="json">{
-  "status": 404,
-  "message": "Name 467324, version 7 not found"
-}
-</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-Error">Error</a></p>
 
 
-        <h1 id="resource-3">/name</h1>
+        <h2 id="resource-4">/{dataset}/name</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET /staging/name HTTP/1.1
+GET //{dataset}/name HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> https://api.col.plus/staging/name</h3>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/{dataset}/name</h3>
     <p><p>Page through all names, optionally filtered</p>
 </p>
 
@@ -1794,15 +2404,6 @@ Host: api.col.plus
             <th>Description</th>
         </tr>
         </thead><tbody>
-            <tr>
-                <td>datasetKey</td>
-                <td>integer</td>
-                <td></td>
-                <td>no</td>
-                <td></td>
-                <td><p>filter by dataset</p>
-</td>
-            </tr>
             <tr>
                 <td>offset</td>
                 <td>integer</td>
@@ -1828,60 +2429,27 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 7, 2017 2:26:46 PM CEST
+Date: Wednesday, September 20, 2017 2:26:33 PM CEST
 Content-Type: application/json
 </code>
-    <code class="json">[{
-  "key": 21242,
-  "datasetKey": 15,
-  "scientificName": "Crepicnema parvula (Jacoby, 1885)",
-  "canonicalName": "Crepicnema parvula",
-  "nomenclaturalCode": "Zoological",
-  "genus": "Crepicnema",
-  "specificEpithet": "parvula",
-  "rank": "species",
-  "authorship": "(Jacoby, 1885)",
-  "originalAuthors": [{"key":10789, "name": "Jacoby"}],
-  "originalYear": 1885,
-  "originalNameKey": 8673,
-  "fossil": false,
-  "available": true
-}
-,{
-  "key": 21242,
-  "datasetKey": 15,
-  "scientificName": "Crepicnema parvula (Jacoby, 1885)",
-  "canonicalName": "Crepicnema parvula",
-  "nomenclaturalCode": "Zoological",
-  "genus": "Crepicnema",
-  "specificEpithet": "parvula",
-  "rank": "species",
-  "authorship": "(Jacoby, 1885)",
-  "originalAuthors": [{"key":10789, "name": "Jacoby"}],
-  "originalYear": 1885,
-  "originalNameKey": 8673,
-  "fossil": false,
-  "available": true
-}
-]</code>
 </pre>
                     <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-Name">Name[]</a></p>
+                    <p>Content: <a href="#model-NameResultSet">NameResultSet</a></p>
 
 
-        <h2 id="resource-4">/name/{key}</h2>
+        <h2 id="resource-5">/{dataset}/name/{key}</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET /staging/name/{key} HTTP/1.1
+GET //{dataset}/name/{key} HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> https://api.col.plus/staging/name/{key}</h3>
-    <p><p>Get a Name by its key</p>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/{dataset}/name/{key}</h3>
+    <p><p>Get a name by its key</p>
 </p>
 
 
@@ -1913,19 +2481,18 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 7, 2017 2:26:46 PM CEST
+Date: Wednesday, September 20, 2017 2:26:33 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
   "key": 21242,
   "datasetKey": 15,
-  "scientificName": "Crepicnema parvula (Jacoby, 1885)",
-  "canonicalName": "Crepicnema parvula",
+  "scientificName": "Crepicnema parvula",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
   "nomenclaturalCode": "Zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "rank": "species",
-  "authorship": "(Jacoby, 1885)",
   "originalAuthors": [{"key":10789, "name": "Jacoby"}],
   "originalYear": 1885,
   "originalNameKey": 8673,
@@ -1936,36 +2503,21 @@ Content-Type: application/json
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-Name">Name</a></p>
-            <h3 id="op4-responses" class="clear">Response 404</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 404 Not Found
-Date: Thursday, September 7, 2017 2:26:46 PM CEST
-Content-Type: application/json
-</code>
-    <code class="json">{
-  "status": 404,
-  "message": "Name 467324, version 7 not found"
-}
-</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-Error">Error</a></p>
 
 
-        <h2 id="resource-5">/name/{key}/synonyms</h2>
+        <h2 id="resource-6">/{dataset}/name/{key}/synonyms</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET /staging/name/{key}/synonyms HTTP/1.1
+GET //{dataset}/name/{key}/synonyms HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> https://api.col.plus/staging/name/{key}/synonyms</h3>
-    <p><p>get list of all homotypic synonyms</p>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/{dataset}/name/{key}/synonyms</h3>
+    <p><p>list all homotypic synonyms ordered by year published</p>
 </p>
 
 
@@ -1976,26 +2528,57 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 7, 2017 2:26:46 PM CEST
+Date: Wednesday, September 20, 2017 2:26:33 PM CEST
 Content-Type: application/json
 </code>
+    <code class="json">[{
+  "key": 21242,
+  "datasetKey": 15,
+  "scientificName": "Crepicnema parvula",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
+  "nomenclaturalCode": "Zoological",
+  "genus": "Crepicnema",
+  "specificEpithet": "parvula",
+  "originalAuthors": [{"key":10789, "name": "Jacoby"}],
+  "originalYear": 1885,
+  "originalNameKey": 8673,
+  "fossil": false,
+  "available": true
+}
+,{
+  "key": 21242,
+  "datasetKey": 15,
+  "scientificName": "Crepicnema parvula",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
+  "nomenclaturalCode": "Zoological",
+  "genus": "Crepicnema",
+  "specificEpithet": "parvula",
+  "originalAuthors": [{"key":10789, "name": "Jacoby"}],
+  "originalYear": 1885,
+  "originalNameKey": 8673,
+  "fossil": false,
+  "available": true
+}
+]</code>
 </pre>
                     <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-HomotypicGroup">HomotypicGroup</a></p>
+                    <p>Content: <a href="#model-Name">Name[]</a></p>
 
 
-        <h2 id="resource-6">/name/{key}/publishedIn</h2>
+        <h2 id="resource-7">/{dataset}/name/{key}/publishedIn</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET /staging/name/{key}/publishedIn HTTP/1.1
+GET //{dataset}/name/{key}/publishedIn HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> https://api.col.plus/staging/name/{key}/publishedIn</h3>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/{dataset}/name/{key}/publishedIn</h3>
     <p><p>return the reference where the name was first published, i.e. the original description or recombination</p>
 </p>
 
@@ -2007,7 +2590,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 7, 2017 2:26:46 PM CEST
+Date: Wednesday, September 20, 2017 2:26:33 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -2032,18 +2615,18 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Reference">Reference</a></p>
 
 
-        <h2 id="resource-7">/name/{key}/acts</h2>
+        <h2 id="resource-8">/{dataset}/name/{key}/acts</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET /staging/name/{key}/acts HTTP/1.1
+GET //{dataset}/name/{key}/acts HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> https://api.col.plus/staging/name/{key}/acts</h3>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/{dataset}/name/{key}/acts</h3>
     <p><p>list all nomenclatural acts for the name in chronological order</p>
 </p>
 
@@ -2066,7 +2649,7 @@ Host: api.col.plus
                 <td></td>
                 <td>yes</td>
                 <td>false</td>
-                <td><p>if true include also all acts about any names from the homotypic group (i.e. protonym)</p>
+                <td><p>if true include all acts about any names from the homotypic group (see /synonyms call)</p>
 </td>
             </tr>
         </tbody></table>
@@ -2076,7 +2659,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 7, 2017 2:26:46 PM CEST
+Date: Wednesday, September 20, 2017 2:26:33 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -2103,19 +2686,19 @@ Content-Type: application/json
                     <p>Content: <a href="#model-NomenclaturalAct">NomenclaturalAct[]</a></p>
 
 
-        <h1 id="resource-8">/taxon</h1>
+        <h2 id="resource-9">/{dataset}/name/search</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET /staging/taxon HTTP/1.1
+GET //{dataset}/name/search HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> https://api.col.plus/staging/taxon</h3>
-    <p><p>Page through all taxons, optionally filtered</p>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/{dataset}/name/search</h3>
+    <p><p>search all names for both accepted taxa and synonyms</p>
 </p>
 
 
@@ -2132,192 +2715,9 @@ Host: api.col.plus
         </tr>
         </thead><tbody>
             <tr>
-                <td>datasetKey</td>
-                <td>integer</td>
-                <td></td>
-                <td>no</td>
-                <td></td>
-                <td><p>filter by dataset</p>
-</td>
-            </tr>
-            <tr>
-                <td>offset</td>
-                <td>integer</td>
-                <td></td>
-                <td>no</td>
-                <td></td>
-                <td><p>The requested number of offset records</p>
-</td>
-            </tr>
-            <tr>
-                <td>limit</td>
-                <td>integer</td>
-                <td></td>
-                <td>no</td>
-                <td></td>
-                <td><p>The requested page, defaulting to 1 for the first page</p>
-</td>
-            </tr>
-        </tbody></table>
-
-
-            <h3 id="op8-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Thursday, September 7, 2017 2:26:46 PM CEST
-Content-Type: application/json
-</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-Taxon">Taxon[]</a></p>
-
-
-        <h2 id="resource-9">/taxon/{key}</h2>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET /staging/taxon/{key} HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> https://api.col.plus/staging/taxon/{key}</h3>
-    <p><p>get taxon</p>
-</p>
-
-
-
-        <h3 id="op9-request-params">Parameters</h3>
-        <table><thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Pattern</th>
-            <th>Required</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-        </thead><tbody>
-                <tr>
-                    <td>{key}</td>
-                    <td>integer</td>
-                    <td></td>
-                    <td>yes</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-        </tbody></table>
-
-
-            <h3 id="op9-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Thursday, September 7, 2017 2:26:46 PM CEST
-Content-Type: application/json
-</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-Taxon">Taxon</a></p>
-
-
-        <h2 id="resource-10">/taxon/{key}/details</h2>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET /staging/taxon/{key}/details HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> https://api.col.plus/staging/taxon/{key}/details</h3>
-    <p><p>get full detail of the taxon with all its supplementary information</p>
-</p>
-
-
-
-
-
-            <h3 id="op10-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Thursday, September 7, 2017 2:26:46 PM CEST
-Content-Type: application/json
-</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-TaxonDetail">TaxonDetail</a></p>
-
-
-        <h2 id="resource-11">/taxon/{key}/synonyms</h2>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET /staging/taxon/{key}/synonyms HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> https://api.col.plus/staging/taxon/{key}/synonyms</h3>
-    <p><p>get list of all synonyms</p>
-</p>
-
-
-
-
-
-            <h3 id="op11-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Thursday, September 7, 2017 2:26:46 PM CEST
-Content-Type: application/json
-</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-Synonymy">Synonymy</a></p>
-
-
-        <h2 id="resource-12">/taxon/{key}/search</h2>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET /staging/taxon/{key}/search HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> https://api.col.plus/staging/taxon/{key}/search</h3>
-    <p><p>search all taxa</p>
-</p>
-
-
-
-        <h3 id="op12-request-params">Parameters</h3>
-        <table><thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Pattern</th>
-            <th>Required</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-        </thead><tbody>
-            <tr>
                 <td>rank</td>
-                <td>string</td>
-                <td></td>
+                <td><a href="#model-RankType">RankType</a></td>
+                <td>kingdom, phylum, class, order, superfamily, family, genus, subgenus, species, subspecies, variety, form</td>
                 <td>no</td>
                 <td></td>
                 <td><p>filter by rank</p>
@@ -2325,8 +2725,8 @@ Host: api.col.plus
             </tr>
             <tr>
                 <td>status</td>
-                <td>string</td>
-                <td></td>
+                <td><a href="#model-TaxonomicStatusType">TaxonomicStatusType</a></td>
+                <td>accepted, provisional, synonym, orthographic-variant, ambiguous, misapplied</td>
                 <td>no</td>
                 <td></td>
                 <td><p>filter by taxonomic status</p>
@@ -2343,11 +2743,29 @@ Host: api.col.plus
             </tr>
             <tr>
                 <td>type</td>
-                <td>string</td>
-                <td></td>
+                <td><a href="#model-NameType">NameType</a></td>
+                <td>scientific, virus, hybrid-formula, cultivar, otu, placeholder, none</td>
                 <td>no</td>
                 <td></td>
                 <td><p>filter by name type</p>
+</td>
+            </tr>
+            <tr>
+                <td>offset</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of offset records</p>
+</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested page, defaulting to 1 for the first page</p>
 </td>
             </tr>
             <tr>
@@ -2359,66 +2777,39 @@ Host: api.col.plus
                 <td><p>full text search query</p>
 </td>
             </tr>
-            <tr>
-                <td>datasetKey</td>
-                <td>integer</td>
-                <td></td>
-                <td>no</td>
-                <td></td>
-                <td><p>filter by dataset</p>
-</td>
-            </tr>
-            <tr>
-                <td>offset</td>
-                <td>integer</td>
-                <td></td>
-                <td>no</td>
-                <td></td>
-                <td><p>The requested number of offset records</p>
-</td>
-            </tr>
-            <tr>
-                <td>limit</td>
-                <td>integer</td>
-                <td></td>
-                <td>no</td>
-                <td></td>
-                <td><p>The requested page, defaulting to 1 for the first page</p>
-</td>
-            </tr>
         </tbody></table>
 
 
-            <h3 id="op12-responses" class="clear">Response 200</h3>
+            <h3 id="op8-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 7, 2017 2:26:46 PM CEST
+Date: Wednesday, September 20, 2017 2:26:33 PM CEST
 Content-Type: application/json
 </code>
 </pre>
                     <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-TaxonResultSet">TaxonResultSet</a></p>
+                    <p>Content: <a href="#model-NameSearchResultSet">NameSearchResultSet</a></p>
 
 
-        <h1 id="resource-13">/reference</h1>
+        <h2 id="resource-10">/{dataset}/name/match</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET /staging/reference HTTP/1.1
+GET //{dataset}/name/match HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> https://api.col.plus/staging/reference</h3>
-    <p><p>Page through all references, optionally filtered</p>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/{dataset}/name/match</h3>
+    <p><p>Tries to match a name against all names in this dataset. As much information as possible should be provided to yield the best match.</p>
 </p>
 
 
 
-        <h3 id="op13-request-params">Parameters</h3>
+        <h3 id="op9-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -2430,12 +2821,91 @@ Host: api.col.plus
         </tr>
         </thead><tbody>
             <tr>
-                <td>datasetKey</td>
-                <td>integer</td>
+                <td>name</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>full name to be matched</p>
+</td>
+            </tr>
+            <tr>
+                <td>authorship</td>
+                <td>string</td>
                 <td></td>
                 <td>no</td>
                 <td></td>
-                <td><p>filter by dataset</p>
+                <td><p>entire authorship of the name to be matched</p>
+</td>
+            </tr>
+            <tr>
+                <td>rank</td>
+                <td><a href="#model-RankType">RankType</a></td>
+                <td>kingdom, phylum, class, order, superfamily, family, genus, subgenus, species, subspecies, variety, form</td>
+                <td>no</td>
+                <td></td>
+                <td><p>rank of the name to be matched</p>
+</td>
+            </tr>
+            <tr>
+                <td>kingdom</td>
+                <td><a href="#model-KingdomType">KingdomType</a></td>
+                <td>Animalia, Archaea, Bacteria, Chromista, Fungi, Plantae, Protozoa, Viruses</td>
+                <td>no</td>
+                <td></td>
+                <td><p>kingdom of the name to be matched</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op9-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-NameMatch">NameMatch</a></p>
+
+
+        <h2 id="resource-11">/{dataset}/taxon</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //{dataset}/taxon HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/{dataset}/taxon</h3>
+    <p><p>Page through all taxa, optionally filtered</p>
+</p>
+
+
+
+        <h3 id="op10-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>root</td>
+                <td>boolean</td>
+                <td></td>
+                <td>no</td>
+                <td>false</td>
+                <td><p>only return root taxa of the tree with no parents</p>
 </td>
             </tr>
             <tr>
@@ -2459,69 +2929,409 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op13-responses" class="clear">Response 200</h3>
+            <h3 id="op10-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 7, 2017 2:26:46 PM CEST
+Date: Wednesday, September 20, 2017 2:26:33 PM CEST
 Content-Type: application/json
 </code>
-    <code class="json">[{
-  "key": 432561,
-  "datasetKey": 15,
-  "serialKey": 17,
-  "csl": {
-    "DOI":"10.1038/nrd842",
-    "type":"article-journal",
-    "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
-    "title":"From the analyst's couch: Selective anticancer drugs",
-    "container-title":"Nature Reviews Drug Discovery",
-    "volume":"1",
-    "issue":"7",
-    "issued":{"date-parts":[[2002,7]]},
-    "page":"491-492"
-  }
-}
-,{
-  "key": 432561,
-  "datasetKey": 15,
-  "serialKey": 17,
-  "csl": {
-    "DOI":"10.1038/nrd842",
-    "type":"article-journal",
-    "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
-    "title":"From the analyst's couch: Selective anticancer drugs",
-    "container-title":"Nature Reviews Drug Discovery",
-    "volume":"1",
-    "issue":"7",
-    "issued":{"date-parts":[[2002,7]]},
-    "page":"491-492"
-  }
-}
-]</code>
 </pre>
                     <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-Reference">Reference[]</a></p>
+                    <p>Content: <a href="#model-TaxonResultSet">TaxonResultSet</a></p>
 
 
-        <h2 id="resource-14">/reference/{key}</h2>
+        <h2 id="resource-12">/{dataset}/taxon/{key}</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET /staging/reference/{key} HTTP/1.1
+GET //{dataset}/taxon/{key} HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> https://api.col.plus/staging/reference/{key}</h3>
-    <p><p>Get a Reference by its key</p>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/{dataset}/taxon/{key}</h3>
+    <p><p>get accepted taxon concept</p>
 </p>
 
 
 
-        <h3 id="op14-request-params">Parameters</h3>
+        <h3 id="op11-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+                <tr>
+                    <td>{key}</td>
+                    <td>integer</td>
+                    <td></td>
+                    <td>yes</td>
+                    <td></td>
+                    <td><p>primary key of the accepted taxon concept</p>
+</td>
+                </tr>
+        </tbody></table>
+
+
+            <h3 id="op11-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Taxon">Taxon</a></p>
+
+
+        <h2 id="resource-13">/{dataset}/taxon/{key}/info</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //{dataset}/taxon/{key}/info HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/{dataset}/taxon/{key}/info</h3>
+    <p><p>get full detail of the taxon with all its supplementary information</p>
+</p>
+
+
+
+
+
+            <h3 id="op12-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-TaxonInfo">TaxonInfo</a></p>
+
+
+        <h2 id="resource-14">/{dataset}/taxon/{key}/synonyms</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //{dataset}/taxon/{key}/synonyms HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/{dataset}/taxon/{key}/synonyms</h3>
+    <p><p>get list of all synonyms chronologically arranged by homotypic groups.</p>
+</p>
+
+
+
+
+
+            <h3 id="op13-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">[
+    [
+        {
+            "name": {
+                "key": 21242,
+                "datasetKey": 15,
+                "scientificName": "Stylopappus grandiflorus",
+                "authorship": "Nutt.",
+                "rank": "species",
+                "nomenclaturalCode": "Botanical",
+                "genus": "Stylopappus",
+                "specificEpithet": "grandiflorus",
+                "combinationAuthors": [
+                    {"key":10789, "name": "Nutt."}
+                ],
+                "combinationYear": 1841,
+                "originalNameKey": 21242
+            },
+            "status": "synonym"
+        },
+        {
+            "name": {
+                "key": 21243,
+                "datasetKey": 15,
+                "scientificName": "Macrorhynchus grandiflorus",
+                "authorship": "(Nutt.) Torr. & A. Gray",
+                "rank": "species",
+                "nomenclaturalCode": "Botanical",
+                "genus": "Stylopappus",
+                "specificEpithet": "grandiflorus",
+                "originalAuthors": [
+                    {"key":10789, "name": "Nutt."}
+                ],
+                "combinationAuthors": [
+                    {"key":10790, "name": "Torr."},
+                    {"key":10791, "name": "A. Gray"}
+                ],
+                "combinationYear": 1843,
+                "originalNameKey": 21242
+            },
+            "status": "synonym"
+        },
+        {
+            "name": {
+                "key": 21244,
+                "datasetKey": 15,
+                "scientificName": "Troximon grandiflorum",
+                "authorship": "(Nutt.) A. Gray",
+                "rank": "species",
+                "nomenclaturalCode": "Botanical",
+                "genus": "Troximon",
+                "specificEpithet": "grandiflorum",
+                "originalAuthors": [
+                    {"key":10789, "name": "Nutt."}
+                ],
+                "combinationAuthors": [
+                    {"key":10791, "name": "A. Gray"}
+                ],
+                "combinationYear": 1874,
+                "originalNameKey": 21242
+            },
+            "status": "synonym"
+        }
+    ],
+    [
+        {
+            "name": {
+                "key": 13078,
+                "datasetKey": 15,
+                "scientificName": "Troximon marshallii",
+                "authorship": "Greene",
+                "rank": "species",
+                "nomenclaturalCode": "Botanical",
+                "genus": "Troximon",
+                "specificEpithet": "marshallii",
+                "combinationAuthors": [
+                    {"key":10001, "name": "Greene"}
+                ],
+                "combinationYear": 1888,
+                "originalNameKey": 13078
+            },
+            "status": "synonym"
+        },
+        {
+            "name": {
+                "key": 13079,
+                "datasetKey": 15,
+                "scientificName": "Agoseris marshallii",
+                "authorship": "(Greene) Greene",
+                "rank": "species",
+                "nomenclaturalCode": "Botanical",
+                "genus": "Agoseris",
+                "specificEpithet": "marshallii",
+                "originalAuthors": [
+                    {"key":10001, "name": "Greene"}
+                ],
+                "combinationAuthors": [
+                    {"key":10001, "name": "Greene"}
+                ],
+                "combinationYear": 1891,
+                "originalNameKey": 13078
+            },
+            "status": "synonym"
+        },
+        {
+            "name": {
+                "key": 13080,
+                "datasetKey": 15,
+                "scientificName": "Agoseris marshalii",
+                "authorship": "(Greene) Greene",
+                "rank": "species",
+                "nomenclaturalCode": "Botanical",
+                "genus": "Agoseris",
+                "specificEpithet": "marshalii",
+                "originalAuthors": [
+                    {"key":10001, "name": "Greene"}
+                ],
+                "combinationAuthors": [
+                    {"key":10001, "name": "Greene"}
+                ],
+                "combinationYear": 1891,
+                "originalNameKey": 13078
+            },
+            "status": "orthographic-variant"
+        }
+    ],
+    [
+        {
+            "name": {
+                "key": 13122,
+                "datasetKey": 15,
+                "scientificName": "Troximon plebeium",
+                "authorship": "Greene",
+                "rank": "species",
+                "nomenclaturalCode": "Botanical",
+                "genus": "Troximon",
+                "specificEpithet": "plebeium",
+                "combinationAuthors": [
+                    {"key":10001, "name": "Greene"}
+                ],
+                "combinationYear": 1890,
+                "originalNameKey": 13122
+            },
+            "status": "synonym"
+        },
+        {
+            "name": {
+                "key": 13123,
+                "datasetKey": 15,
+                "scientificName": "Agoseris plebeia",
+                "authorship": "(Greene) Greene",
+                "rank": "species",
+                "nomenclaturalCode": "Botanical",
+                "genus": "Agoseris",
+                "specificEpithet": "plebeia",
+                "originalAuthors": [
+                    {"key":10001, "name": "Greene"}
+                ],
+                "combinationAuthors": [
+                    {"key":10001, "name": "Greene"}
+                ],
+                "combinationYear": 1891,
+                "originalNameKey": 13122
+            },
+            "status": "synonym"
+        },
+        {
+            "name": {
+                "key": 13124,
+                "datasetKey": 15,
+                "scientificName": "Agoseris grandiflora var. plebeia",
+                "authorship": "(Greene) G. L. Wittr.",
+                "rank": "variety",
+                "nomenclaturalCode": "Botanical",
+                "genus": "Agoseris",
+                "specificEpithet": "grandiflora",
+                "infraSpecificEpithet": "plebeia",
+                "originalAuthors": [
+                    {"key":10001, "name": "Greene"}
+                ],
+                "combinationAuthors": [
+                    {"key":10031, "name": "G. L. Wittr."}
+                ],
+                "combinationYear": 1928,
+                "originalNameKey": 13122
+            },
+            "status": "synonym"
+        }
+    ]
+]
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Synonymy">Synonymy</a></p>
+
+
+        <h2 id="resource-15">/{dataset}/taxon/{key}/children</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //{dataset}/taxon/{key}/children HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/{dataset}/taxon/{key}/children</h3>
+    <p><p>page through all direct children of the taxon.</p>
+</p>
+
+
+
+
+
+            <h3 id="op14-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-TaxonResultSet">TaxonResultSet</a></p>
+
+
+        <h2 id="resource-16">/{dataset}/taxon/{key}/classification</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //{dataset}/taxon/{key}/classification HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/{dataset}/taxon/{key}/classification</h3>
+    <p><p>List entire classification with all higher taxa, i.e. taxonomic parents, starting with lowest rank, i.e. the direct parent taxon.</p>
+</p>
+
+
+
+
+
+            <h3 id="op15-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Taxon">Taxon[]</a></p>
+
+
+        <h2 id="resource-17">/{dataset}/reference</h2>
+
+    
+
+
+
+        <h2 id="resource-18">/{dataset}/reference/{key}</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //{dataset}/reference/{key} HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/{dataset}/reference/{key}</h3>
+    <p><p>get reference details by key</p>
+</p>
+
+
+
+        <h3 id="op16-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -2544,11 +3354,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op14-responses" class="clear">Response 200</h3>
+            <h3 id="op16-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 7, 2017 2:26:46 PM CEST
+Date: Wednesday, September 20, 2017 2:26:33 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -2571,41 +3381,26 @@ Content-Type: application/json
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-Reference">Reference</a></p>
-            <h3 id="op14-responses" class="clear">Response 404</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 404 Not Found
-Date: Thursday, September 7, 2017 2:26:46 PM CEST
-Content-Type: application/json
-</code>
-    <code class="json">{
-  "status": 404,
-  "message": "Name 467324, version 7 not found"
-}
-</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-Error">Error</a></p>
 
 
-        <h1 id="resource-15">/serial</h1>
+        <h2 id="resource-19">/{dataset}/reference/search</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET /staging/serial HTTP/1.1
+GET //{dataset}/reference/search HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> https://api.col.plus/staging/serial</h3>
-    <p><p>Page through all serials, optionally filtered</p>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/{dataset}/reference/search</h3>
+    <p><p>search the entire metadata for all references within this dataset</p>
 </p>
 
 
 
-        <h3 id="op15-request-params">Parameters</h3>
+        <h3 id="op17-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -2617,12 +3412,21 @@ Host: api.col.plus
         </tr>
         </thead><tbody>
             <tr>
-                <td>datasetKey</td>
+                <td>year</td>
                 <td>integer</td>
                 <td></td>
                 <td>no</td>
                 <td></td>
-                <td><p>filter by dataset</p>
+                <td><p>limit search to certain year of publication</p>
+</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>string</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>limit reference to certain reference type</p>
 </td>
             </tr>
             <tr>
@@ -2643,78 +3447,54 @@ Host: api.col.plus
                 <td><p>The requested page, defaulting to 1 for the first page</p>
 </td>
             </tr>
+            <tr>
+                <td>q</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>full text search query</p>
+</td>
+            </tr>
         </tbody></table>
 
 
-            <h3 id="op15-responses" class="clear">Response 200</h3>
+            <h3 id="op17-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 7, 2017 2:26:46 PM CEST
+Date: Wednesday, September 20, 2017 2:26:33 PM CEST
 Content-Type: application/json
 </code>
-    <code class="json">[{
-  "key": 432561,
-  "datasetKey": 15,
-  "bph": "460.06",
-  "tl2": "11.084",
-  "call": "QK1.J55",
-  "oclc": 1754397,
-  "bhl": 68922,
-  "firstYear": 1799,
-  "lastYear": 1804,
-  "csl": {
-    "call-number": "QK1.J55",
-    "type":"journal",
-    "title":"Journal für die Botanik",
-    "title-short":"J. Bot. (Schrader)",
-    "editor":[{"family":"Schrader","given":"H. A."}],
-    "publisher-place": "Göttingen"
-  }
-}
-,{
-  "key": 432561,
-  "datasetKey": 15,
-  "bph": "460.06",
-  "tl2": "11.084",
-  "call": "QK1.J55",
-  "oclc": 1754397,
-  "bhl": 68922,
-  "firstYear": 1799,
-  "lastYear": 1804,
-  "csl": {
-    "call-number": "QK1.J55",
-    "type":"journal",
-    "title":"Journal für die Botanik",
-    "title-short":"J. Bot. (Schrader)",
-    "editor":[{"family":"Schrader","given":"H. A."}],
-    "publisher-place": "Göttingen"
-  }
-}
-]</code>
 </pre>
                     <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-Serial">Serial[]</a></p>
+                    <p>Content: <a href="#model-ReferenceResultSet">ReferenceResultSet</a></p>
 
 
-        <h2 id="resource-16">/serial/{key}</h2>
+        <h2 id="resource-20">/{dataset}/serial</h2>
+
+    
+
+
+
+        <h2 id="resource-21">/{dataset}/serial/{key}</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET /staging/serial/{key} HTTP/1.1
+GET //{dataset}/serial/{key} HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> https://api.col.plus/staging/serial/{key}</h3>
-    <p><p>Get a Serial by its key</p>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/{dataset}/serial/{key}</h3>
+    <p><p>get Serial details by key</p>
 </p>
 
 
 
-        <h3 id="op16-request-params">Parameters</h3>
+        <h3 id="op18-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -2737,11 +3517,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op16-responses" class="clear">Response 200</h3>
+            <h3 id="op18-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 7, 2017 2:26:46 PM CEST
+Date: Wednesday, September 20, 2017 2:26:33 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -2767,21 +3547,85 @@ Content-Type: application/json
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-Serial">Serial</a></p>
-            <h3 id="op16-responses" class="clear">Response 404</h3>
+
+
+        <h2 id="resource-22">/{dataset}/serial/search</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //{dataset}/serial/search HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/{dataset}/serial/search</h3>
+    <p><p>Page through all serials within this dataset, optionally filtered</p>
+</p>
+
+
+
+        <h3 id="op19-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>issn</td>
+                <td>string</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>limit search to certain ISSN number</p>
+</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>string</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>limit reference to certain serial type</p>
+</td>
+            </tr>
+            <tr>
+                <td>offset</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of offset records</p>
+</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested page, defaulting to 1 for the first page</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op19-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
-HTTP/1.1 404 Not Found
-Date: Thursday, September 7, 2017 2:26:46 PM CEST
+HTTP/1.1 200 OK
+Date: Wednesday, September 20, 2017 2:26:33 PM CEST
 Content-Type: application/json
-</code>
-    <code class="json">{
-  "status": 404,
-  "message": "Name 467324, version 7 not found"
-}
 </code>
 </pre>
                     <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-Error">Error</a></p>
+                    <p>Content: <a href="#model-SerialResultSet">SerialResultSet</a></p>
 
 
         <aside class="success">
