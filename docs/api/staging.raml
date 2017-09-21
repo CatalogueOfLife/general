@@ -777,8 +777,10 @@ types:
   Synonymy:
     type: Synonym[][]
     description: >
-      A synonymy list, nesting homotypic names based on the same basionym in sublists.
+      A synonymy list, nesting homotypic names based on the same original name in sublists.
       Example given for synonymy of Agoseris grandiflora (Nutt.) Greene
+      TODO: should we also group homotypic names based on different basionyms?
+      Example: Barkhausia lessingii Hook. & Arn. nom. illeg. is a homotypical synonym of Agoseris apargioides (Less.) Greene
     example: |
       [
           [
@@ -1055,11 +1057,6 @@ types:
   Distribution:
     type: object
     description: TODO An area distribution record
-  HomotypicGroup:
-    type: Name[]
-    description: >
-      A list of names sharing the same type, i.e. have the same basionym or replaced name.
-      dsdsa
 /admin:
 /dataset:
   get:
