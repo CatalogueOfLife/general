@@ -1891,7 +1891,8 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td><a href="#model-TaxonReference">TaxonReference[]</a></td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td></td>
+                                    <td><p>List of all distinct references supporting the taxon concept, distribution or vernacular names as referenced by the individual record.</p>
+</td>
                                 </tr>
                             </tbody></table>
                         <h2 id="model-TaxonVerbatim">TaxonVerbatim</h2>
@@ -1988,6 +1989,14 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td><p>the language given as 2 or 3 letter ISO codes</p>
 </td>
                                 </tr>
+                                <tr>
+                                    <td>referenceKeys</td>
+                                    <td>integer[]</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Links to references supporting the vernacular name record</p>
+</td>
+                                </tr>
                             </tbody></table>
                         <h2 id="model-Distribution">Distribution</h2>
 
@@ -2026,6 +2035,14 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td>native, domesticated, alien, uncertain</td>
                                     <td>yes</td>
                                     <td><p>The status of the distribution</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>referenceKeys</td>
+                                    <td>integer[]</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Links to references supporting the distribution record</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -2267,7 +2284,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 1:21:49 PM CEST
+Date: Thursday, September 21, 2017 1:33:26 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2319,7 +2336,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 1:21:49 PM CEST
+Date: Thursday, September 21, 2017 1:33:26 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2380,7 +2397,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 1:21:49 PM CEST
+Date: Thursday, September 21, 2017 1:33:26 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2432,7 +2449,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 1:21:49 PM CEST
+Date: Thursday, September 21, 2017 1:33:26 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -2479,7 +2496,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 1:21:49 PM CEST
+Date: Thursday, September 21, 2017 1:33:26 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -2541,7 +2558,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 1:21:49 PM CEST
+Date: Thursday, September 21, 2017 1:33:26 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -2610,7 +2627,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 1:21:49 PM CEST
+Date: Thursday, September 21, 2017 1:33:26 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -2742,7 +2759,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 1:21:49 PM CEST
+Date: Thursday, September 21, 2017 1:33:26 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2821,7 +2838,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 1:21:49 PM CEST
+Date: Thursday, September 21, 2017 1:33:26 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2891,7 +2908,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 1:21:49 PM CEST
+Date: Thursday, September 21, 2017 1:33:26 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2943,7 +2960,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 1:21:49 PM CEST
+Date: Thursday, September 21, 2017 1:33:26 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2974,7 +2991,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 1:21:49 PM CEST
+Date: Thursday, September 21, 2017 1:33:26 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3005,7 +3022,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 1:21:49 PM CEST
+Date: Thursday, September 21, 2017 1:33:26 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -3197,7 +3214,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 1:21:49 PM CEST
+Date: Thursday, September 21, 2017 1:33:26 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3228,7 +3245,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 1:21:49 PM CEST
+Date: Thursday, September 21, 2017 1:33:26 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3286,7 +3303,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 1:21:49 PM CEST
+Date: Thursday, September 21, 2017 1:33:26 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3391,7 +3408,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 1:21:49 PM CEST
+Date: Thursday, September 21, 2017 1:33:26 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3449,7 +3466,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 1:21:49 PM CEST
+Date: Thursday, September 21, 2017 1:33:26 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3548,7 +3565,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 1:21:49 PM CEST
+Date: Thursday, September 21, 2017 1:33:26 PM CEST
 Content-Type: application/json
 </code>
 </pre>

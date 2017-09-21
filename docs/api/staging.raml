@@ -1091,6 +1091,7 @@ types:
         type: Distribution[]
       references:
         type: TaxonReference[]
+        description: List of all distinct references supporting the taxon concept, distribution or vernacular names as referenced by the individual record.
   TaxonVerbatim:
     type: DatasetObject
     description: >
@@ -1111,7 +1112,9 @@ types:
       language:
         type: isocode
         description: the language given as 2 or 3 letter ISO codes
-
+      referenceKeys:
+        type: integer[]
+        description: Links to references supporting the vernacular name record
   Distribution:
     type: object
     description: TODO An area distribution record
@@ -1125,6 +1128,9 @@ types:
       status:
         type: DistributionStatusType
         description: The status of the distribution
+      referenceKeys:
+        type: integer[]
+        description: Links to references supporting the distribution record
 /admin:
 /dataset:
   get:
