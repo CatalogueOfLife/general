@@ -142,6 +142,12 @@
     <p><p>UUID data type represented as 32 hexadecimal (base 16) digits. Example 123e4567-e89b-12d3-a456-426655440000</p>
 </p>
 
+                        <h2 id="model-isocode">isocode</h2>
+
+
+    <p><p>2 or 3 letter codes as used by ISO country or languages</p>
+</p>
+
                         <h2 id="model-Error">Error</h2>
 
     <pre class="example"><code class="json">{
@@ -338,17 +344,19 @@
                                 </tr>
                                 <tr>
                                     <td>completeness</td>
-                                    <td>string</td>
+                                    <td>integer</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td></td>
+                                    <td><p>completeness of global coverage in percent given as 0-100</p>
+</td>
                                 </tr>
                                 <tr>
                                     <td>confidence</td>
-                                    <td>string</td>
+                                    <td>integer</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td></td>
+                                    <td><p>1-5</p>
+</td>
                                 </tr>
                                 <tr>
                                     <td>homepage</td>
@@ -1803,6 +1811,36 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
 </td>
                                 </tr>
                             </tbody></table>
+                        <h2 id="model-TaxonReference">TaxonReference</h2>
+
+
+    <p><p>A reference referring to a specific taxon and annotated with a certain topic.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>reference</td>
+                                    <td><a href="#model-Reference">Reference</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>topic</td>
+                                    <td><a href="#model-ReferenceTopicType">ReferenceTopicType[]</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td></td>
+                                </tr>
+                            </tbody></table>
                         <h2 id="model-TaxonInfo">TaxonInfo</h2>
 
 
@@ -1850,7 +1888,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                 </tr>
                                 <tr>
                                     <td>references</td>
-                                    <td><a href="#model-Reference">Reference[]</a></td>
+                                    <td><a href="#model-TaxonReference">TaxonReference[]</a></td>
                                     <td></td>
                                     <td>yes</td>
                                     <td></td>
@@ -1935,19 +1973,20 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
 </td>
                                 </tr>
                                 <tr>
-                                    <td>extensions</td>
-                                    <td>object</td>
+                                    <td>name</td>
+                                    <td>string</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>Map of extension rowType URLs to array of records with DwC terms value pairs.</p>
+                                    <td><p>the vernacular name</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>modified</td>
-                                    <td>datetime</td>
-                                    <td></td>
+                                    <td>language</td>
+                                    <td><a href="#model-isocode">isocode</a></td>
+                                    <td>^[a-z]{2,3}$</td>
                                     <td>yes</td>
-                                    <td></td>
+                                    <td><p>the language given as 2 or 3 letter ISO codes</p>
+</td>
                                 </tr>
                             </tbody></table>
                         <h2 id="model-Distribution">Distribution</h2>
@@ -1956,8 +1995,82 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
     <p><p>TODO An area distribution record</p>
 </p>
 
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>area</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the language given as 2 or 3 letter ISO codes</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>areaStandard</td>
+                                    <td><a href="#model-AreaStandardType">AreaStandardType</a></td>
+                                    <td>tdwg, iso, fao, fao-fishing, longhurst, teow, iho, text</td>
+                                    <td>yes</td>
+                                    <td><p>The standard the area value refers to.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>status</td>
+                                    <td><a href="#model-DistributionStatusType">DistributionStatusType</a></td>
+                                    <td>native, domesticated, alien, uncertain</td>
+                                    <td>yes</td>
+                                    <td><p>The status of the distribution</p>
+</td>
+                                </tr>
+                            </tbody></table>
 
         <h1 id="vocabs">Vocabularies</h1>
+
+            <h2 id="model-AreaStandardType">AreaStandardType</h2>
+
+
+            <p><strong>Enumeration</strong>: <em>tdwg</em>, <em>iso</em>, <em>fao</em>, <em>fao-fishing</em>, <em>longhurst</em>, <em>teow</em>, <em>iho</em>, <em>text</em></p>
+
+    <p><p>List of supported distribution area standards.</p>
+<dl>
+<dt>tdwg</dt>
+<dd><a href="http://www.tdwg.org/standards/109">World Geographical Scheme for Recording Plant Distributions</a> published by TDWG at level 3 or 4.</dd>
+<dt>iso</dt>
+<dd><a href="https://www.iso.org/obp/ui/">ISO 3166-1</a> country codes given either as alpha-2, alpha-3 or numeric codes</dd>
+<dt>fao</dt>
+<dd><a href="http://www.fao.org/countryprofiles/iso3list/en/">FAO ISO codes</a></dd>
+<dt>fao-fishing</dt>
+<dd><a href="http://www.fao.org/fishery/cwp/handbook/H/en">FAO Fishing Areas</a></dd>
+<dt>longhurst</dt>
+<dd><a href="http://www.marineregions.org/sources.php#longhurst">Longhurst Biogeographical Provinces</a>, a partition of the world oceans into provinces
+as defined by Longhurst, A.R. (2006). Ecological Geography of the Sea. 2nd Edition.</dd>
+<dt>teow</dt>
+<dd><a href="https://www.worldwildlife.org/publications/terrestrial-ecoregions-of-the-world">Terrestrial Ecoregions of the World</a>
+(TEOW) is a biogeographic regionalization of the Earth&rsquo;s terrestrial biodiversity.
+See Olson et al. 2001. Terrestrial ecoregions of the world: a new map of life on Earth. Bioscience 51(11):933-938.</dd>
+<dt>iho</dt>
+<dd>IAO sea areas as boundaries of the major oceans and seas of the world.
+See Limits of Oceans &amp; Seas, Special Publication No. 23 published by the International Hydrographic Organization in 1953.</dd>
+<dt>text</dt>
+<dd>Free text not following any standard</dd>
+</dl>
+</p>
+
+
+            <h2 id="model-DistributionStatusType">DistributionStatusType</h2>
+
+
+            <p><strong>Enumeration</strong>: <em>native</em>, <em>domesticated</em>, <em>alien</em>, <em>uncertain</em></p>
+
+    <p><p>CoL distribution status enumeration</p>
+</p>
+
 
             <h2 id="model-KingdomType">KingdomType</h2>
 
@@ -2073,6 +2186,15 @@ Sources:</p>
 </p>
 
 
+            <h2 id="model-ReferenceTopicType">ReferenceTopicType</h2>
+
+
+            <p><strong>Enumeration</strong>: <em>nomen</em>, <em>taxon</em>, <em>vernacular</em>, <em>distribution</em></p>
+
+    <p><p>Enumeration of types of CoL relevant information that is treated in a publication</p>
+</p>
+
+
             <h2 id="model-TaxonomicStatusType">TaxonomicStatusType</h2>
 
 
@@ -2145,7 +2267,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 12:34:15 PM CEST
+Date: Thursday, September 21, 2017 1:21:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2197,7 +2319,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 12:34:15 PM CEST
+Date: Thursday, September 21, 2017 1:21:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2258,7 +2380,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 12:34:15 PM CEST
+Date: Thursday, September 21, 2017 1:21:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2310,7 +2432,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 12:34:15 PM CEST
+Date: Thursday, September 21, 2017 1:21:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -2357,7 +2479,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 12:34:15 PM CEST
+Date: Thursday, September 21, 2017 1:21:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -2419,7 +2541,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 12:34:15 PM CEST
+Date: Thursday, September 21, 2017 1:21:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -2488,7 +2610,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 12:34:15 PM CEST
+Date: Thursday, September 21, 2017 1:21:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -2620,7 +2742,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 12:34:15 PM CEST
+Date: Thursday, September 21, 2017 1:21:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2699,7 +2821,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 12:34:15 PM CEST
+Date: Thursday, September 21, 2017 1:21:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2769,7 +2891,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 12:34:15 PM CEST
+Date: Thursday, September 21, 2017 1:21:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2821,7 +2943,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 12:34:15 PM CEST
+Date: Thursday, September 21, 2017 1:21:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2852,7 +2974,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 12:34:15 PM CEST
+Date: Thursday, September 21, 2017 1:21:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2883,7 +3005,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 12:34:15 PM CEST
+Date: Thursday, September 21, 2017 1:21:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -3075,7 +3197,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 12:34:15 PM CEST
+Date: Thursday, September 21, 2017 1:21:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3106,7 +3228,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 12:34:15 PM CEST
+Date: Thursday, September 21, 2017 1:21:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3164,7 +3286,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 12:34:15 PM CEST
+Date: Thursday, September 21, 2017 1:21:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3269,7 +3391,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 12:34:15 PM CEST
+Date: Thursday, September 21, 2017 1:21:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3327,7 +3449,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 12:34:15 PM CEST
+Date: Thursday, September 21, 2017 1:21:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3426,7 +3548,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 21, 2017 12:34:15 PM CEST
+Date: Thursday, September 21, 2017 1:21:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>

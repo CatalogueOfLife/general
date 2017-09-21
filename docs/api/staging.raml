@@ -52,10 +52,16 @@ traits:
 types:
   uuid:
     type: string
-    minLength: 2
-    maxLength: 6
+    minLength: 36
+    maxLength: 36
     pattern: ^[0-9abcdef]{8}-[0-9abcdef]{4}-[0-9abcdef]{4}-[0-9abcdef]{4}-[0-9abcdef]{12}$
     description: UUID data type represented as 32 hexadecimal (base 16) digits. Example 123e4567-e89b-12d3-a456-426655440000
+  isocode:
+    type: string
+    minLength: 2
+    maxLength: 3
+    pattern: ^[a-z]{2,3}$
+    description: 2 or 3 letter codes as used by ISO country or languages
   RankType:
     type: string
     enum: ["kingdom", "phylum", "subphylum", "class", "subclass", "order",
@@ -175,6 +181,47 @@ types:
     enum: ["brackish", "freshwater", "marine", "terrestrial"]
     description: >
       Coarse classification of the environment an organism lives in.
+  AreaStandardType:
+    type: string
+    enum: ["tdwg", "iso", "fao", "fao-fishing", "longhurst", "teow", "iho", "text"]
+    description: |
+      List of supported distribution area standards.
+
+      tdwg
+      : [World Geographical Scheme for Recording Plant Distributions](http://www.tdwg.org/standards/109) published by TDWG at level 3 or 4.
+
+      iso
+      : [ISO 3166-1](https://www.iso.org/obp/ui/) country codes given either as alpha-2, alpha-3 or numeric codes
+
+      fao
+      : [FAO ISO codes](http://www.fao.org/countryprofiles/iso3list/en/)
+
+      fao-fishing
+      : [FAO Fishing Areas](http://www.fao.org/fishery/cwp/handbook/H/en)
+
+      longhurst
+      : [Longhurst Biogeographical Provinces](http://www.marineregions.org/sources.php#longhurst), a partition of the world oceans into provinces
+      as defined by Longhurst, A.R. (2006). Ecological Geography of the Sea. 2nd Edition.
+
+      teow
+      : [Terrestrial Ecoregions of the World](https://www.worldwildlife.org/publications/terrestrial-ecoregions-of-the-world)
+        (TEOW) is a biogeographic regionalization of the Earth's terrestrial biodiversity.
+        See Olson et al. 2001. Terrestrial ecoregions of the world: a new map of life on Earth. Bioscience 51(11):933-938.
+
+      iho
+      : IAO sea areas as boundaries of the major oceans and seas of the world.
+        See Limits of Oceans & Seas, Special Publication No. 23 published by the International Hydrographic Organization in 1953.
+
+      text
+      : Free text not following any standard
+  DistributionStatusType:
+    type: string
+    enum: ["native", "domesticated", "alien", "uncertain"]
+    description: CoL distribution status enumeration
+  ReferenceTopicType:
+    type: string
+    enum: ["nomen", "taxon", "vernacular", "distribution"]
+    description: Enumeration of types of CoL relevant information that is treated in a publication
   TaxonomicStatusType:
     type: string
     enum: ["accepted", "synonym", "doubtful"]
@@ -307,12 +354,12 @@ types:
         description:
         required: false
       completeness:
-        type: string
-        description:
+        type: integer
+        description: completeness of global coverage in percent given as 0-100
         required: false
       confidence:
-        type: string
-        description:
+        type: integer
+        description: 1-5
         required: false
       homepage:
         type: string
@@ -1024,6 +1071,15 @@ types:
       results:
         type: Taxon[]
         description: the resulting Taxa
+  TaxonReference:
+    type: object
+    description: >
+      A reference referring to a specific taxon and annotated with a certain topic.
+    properties:
+      reference:
+        type: Reference
+      topic:
+        type: ReferenceTopicType[]
   TaxonInfo:
     type: DatasetObject
     description: >
@@ -1034,7 +1090,7 @@ types:
       distributions:
         type: Distribution[]
       references:
-        type: Reference[]
+        type: TaxonReference[]
   TaxonVerbatim:
     type: DatasetObject
     description: >
@@ -1049,14 +1105,26 @@ types:
     type: DatasetObject
     description: A vernacular name
     properties:
-      extensions:
-        type: object
-        description: Map of extension rowType URLs to array of records with DwC terms value pairs.
-      modified:
-        type: datetime
+      name:
+        type: string
+        description: the vernacular name
+      language:
+        type: isocode
+        description: the language given as 2 or 3 letter ISO codes
+
   Distribution:
     type: object
     description: TODO An area distribution record
+    properties:
+      area:
+        type: string
+        description: the language given as 2 or 3 letter ISO codes
+      areaStandard:
+        type: AreaStandardType
+        description: The standard the area value refers to.
+      status:
+        type: DistributionStatusType
+        description: The status of the distribution
 /admin:
 /dataset:
   get:
