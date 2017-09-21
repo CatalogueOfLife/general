@@ -76,29 +76,98 @@ types:
        TODO: extract all values from sources
   NomCodeType:
     type: string
-    enum: ["Bacterial", "Botanical", "Viral", "Zoological"]
+    enum: ["bacterial", "botanical", "cultivated", "viral", "zoological", "unknown"]
     description: >
       Nomenclatural code enumeration regardless of the exact version published.
-      [Bacteriological](https://www.ncbi.nlm.nih.gov/books/NBK8817/),
-      [Botanical](http://www.iapt-taxon.org/nomen/),
-      [CultivatedPlants](http://www.ishs.org/scripta-horticulturae/international-code-nomenclature-cultivated-plants-ninth-edition),
-      [Viral](https://talk.ictvonline.org/information/w/ictv-information/383/ictv-code),
-      [Zoological](http://www.nhm.ac.uk/hosted-sites/iczn/code/)
+
+      bacteriological
+      : [Bacteriological code](https://www.ncbi.nlm.nih.gov/books/NBK8817/)
+
+      botanical
+      : [Botanical code](http://www.iapt-taxon.org/nomen/)
+
+      cultivated
+      : [Cultivated Plants](http://www.ishs.org/scripta-horticulturae/international-code-nomenclature-cultivated-plants-ninth-edition)
+
+      viral
+      : [viral](https://talk.ictvonline.org/information/w/ictv-information/383/ictv-code),
+
+      zoological
+      : [zoological code](http://www.nhm.ac.uk/hosted-sites/iczn/code/)
+  NomStatusType:
+    type: string
+    enum: ["ok", "unavailable", "illegitimate", "variant", "conserved", "rejected", "doubtful", "unevaluated"]
+    description: >
+      The status related to the latest nomenclatural act published for the name and its conformance to the rules of nomenclature.
+      Generic nomenclatural status enumeration across all codes.
+      Only the broader status concepts are captured and details of the nomenclatural status of a name should be given as free text.
+      The overloaded term "valid" is avoided as it carries different semantics in the botanical and zoological code.
+      Rendering of the status can be different between codes and some values only apply to certain codes.
+
+      ok
+      : TODO: probably a better term should be coined
+      : Botany - Names that are validly published and legitimate
+      : Zoology - Available name and potentially valid, i.e. not otherwise invalid for any other objective reason, such as being a junior homonym.
+
+      unavailable
+      : Botany - Names that are not validly published (nom. inval.)
+      : Zoology - An unavailable name published not conforming to all the mandatory provisions of the International Code of Zoological Nomenclature.
+
+      illegitimate
+      : Botany - A validly published name which is a later homonym, superfluous, or rejected (nom. illeg.)
+      : Zoology - Available, but objectively invalid names, e.g. junior homonym or objective synonyms
+
+      variant
+      : Orthographic variant. An alternative or corrected spelling for the name (orth. var.)
+
+      replacement
+      : A nomen novum, replacement name or new substitute name indicates a scientific name
+        that is created specifically to replace another preoccupied name,
+        but only when this other name can not be used for technical, nomenclatural reasons.
+        It automatically inherits the same type and type locality and is commonly applied
+        to names proposed to replace junior homonyms
+
+      conserved
+      : Botany - A validly published name which is listed in the ICN appendices of conserved names (nom. cons.)
+      : Zoology -
+
+      rejected
+      : Botany - A validly published name listed as rejected by ICN – includes utique rejiciendum and opera oppressa (nom. rej.)
+      : Zoology -
+
+      doubtful
+      : Unknown or doubtful names (nom. dub.)
+
+      unevaluated
+      : if the name status has not been evaluated yet
+
   NameType:
     type: string
     enum: ["scientific", "virus", "hybrid-formula", "cultivar", "otu", "placeholder", "none"]
     description: Classification of names, mostly based on their syntactic structure.
   NomenclaturalActType:
     type: string
-    enum: ["description", "typification", "spellingCorrection", "emendation"]
-    #enum: ["description", "typification", "ruling", "emendation"]
+    enum: ["description", "ruling", "emendation", "typification"]
     description: >
       Coarse classification of nomenclatural acts.
 
-       - *description* covers original descriptions, new recombinations and changes in rank.
-       - *typification* is used for subsequent type designations.
-       - *ruling* acts are e.g. suppressed or conserved names.
-       - *emendation* are intentional changes in the original spelling of an available name.
+       description
+       : the description of a new original name, a new recombination, a replacement name or a change in rank.
+         The publication linked to the description act is the dwc:namePublishedIn reference.
+
+       ruling
+       : acts taken by the official committee e.g. suppressed, rejected or conserved names.
+
+       emendation
+       : corrected or improved names. Intentional changes in the original spelling of an available name. The binomial authority remains unchanged.
+         Valid emendations include changes made to correct:
+         a) typographical errors in the original work describing the species,
+         b) errors in transliteration from non-Latin languages,
+         c) names that included diacritics, hyphens
+         d) endings of species to match the gender of the generic name, particularly when the combination has been changed
+
+       typification
+       : subsequent type designations.
   LifezoneType:
     type: string
     enum: ["brackish", "freshwater", "marine", "terrestrial"]
@@ -481,16 +550,16 @@ types:
         description: the part of the name which is considered a hybrid;  see [GBIF](https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/NamePart.java#L24)
         required: false
       originalAuthors:
-        type: AuthorName[]
-        description: list of NameAuthor entities
+        type: string[]
+        description: list of basionym authors.
         required: false
       originalYear:
         type: integer
         description: year of original name publication
         required: false
       combinationAuthors:
-        type: AuthorName[]
-        description: list of NameAuthor entities excluding ex- authors
+        type: string[]
+        description: list of authors excluding ex- authors
         required: false
       combinationYear:
         type: integer
@@ -500,14 +569,14 @@ types:
         required: false
       originalNameKey:
         type: integer
-        description: link to the original name. In case of [replacement names](https://en.wikipedia.org/wiki/Nomen_novum) it points back to the replaced synonym.
+        description: link to the original combination. In case of [replacement names](https://en.wikipedia.org/wiki/Nomen_novum) it points back to the replaced synonym.
         required: false
       fossil:
         type: boolean
         description: true if the type specimen of the name is a fossil
         required: false
-      available:
-        type: boolean
+      status:
+        type: NomStatusType
         description: flag to indicate that this name is available/validly published
         required: false
       remark:
@@ -525,10 +594,10 @@ types:
         "scientificName": "Crepicnema parvula",
         "rank": "species",
         "authorship": "(Jacoby, 1885)",
-        "nomenclaturalCode": "Zoological",
+        "nomenclaturalCode": "zoological",
         "genus": "Crepicnema",
         "specificEpithet": "parvula",
-        "originalAuthors": [{"key":10789, "name": "Jacoby"}],
+        "originalAuthors": ["Jacoby"],
         "originalYear": 1885,
         "originalNameKey": 8673,
         "fossil": false,
@@ -574,10 +643,10 @@ types:
           "scientificName": "Crepicnema parvula",
           "rank": "species",
           "authorship": "(Jacoby, 1885)",
-          "nomenclaturalCode": "Zoological",
+          "nomenclaturalCode": "zoological",
           "genus": "Crepicnema",
           "specificEpithet": "parvula",
-          "originalAuthors": [{"key":10789, "name": "Jacoby"}],
+          "originalAuthors": ["Jacoby"],
           "originalYear": 1885,
           "originalNameKey": 8673,
           "fossil": false,
@@ -603,8 +672,8 @@ types:
         type: integer
         description: key to the name the act is about
       type:
-        type: NomenclaturalActType[]
-        description: Coarse classification of acts.
+        type: NomenclaturalActType
+        description: Coarse classification of the nomenclatural act.
       relatedNameKey:
         type: integer
         description: key to the related name of the act in case the act defines a name relation
@@ -621,23 +690,14 @@ types:
         type: string
         description: exact first page of the treatment within above reference
         required: false
-      referenceLink:
-        type: string
-        description: URL to the first page of the treatment, e.g. in BHL, BioStor or Zenodo
-        required: false
-      bhlPageId:
-        type: integer
-        description: BHL PageID for the first page of the treatment
-        required: false
     example: |
       {
         "key": 721141,
         "datasetKey": 15,
-        "type": ["description"],
+        "type": "description",
         "nameKey": 78612,
         "referenceKey": 786,
-        "referencePage": "5",
-        "referenceLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725"
+        "referencePage": "5"
       }
   Reference:
     type: DatasetObject
@@ -734,10 +794,6 @@ types:
         type: integer
         description: BHL title number
         required: false
-      jstor:
-        type: string
-        description: link to JSTOR
-        required: false
       firstYear:
         type: integer
         description: First year the serial was published
@@ -816,12 +872,10 @@ types:
                       "scientificName": "Stylopappus grandiflorus",
                       "authorship": "Nutt.",
                       "rank": "species",
-                      "nomenclaturalCode": "Botanical",
+                      "nomenclaturalCode": "botanical",
                       "genus": "Stylopappus",
                       "specificEpithet": "grandiflorus",
-                      "combinationAuthors": [
-                          {"key":10789, "name": "Nutt."}
-                      ],
+                      "combinationAuthors": ["Nutt."],
                       "combinationYear": 1841,
                       "originalNameKey": 21242
                   },
@@ -834,16 +888,11 @@ types:
                       "scientificName": "Macrorhynchus grandiflorus",
                       "authorship": "(Nutt.) Torr. & A. Gray",
                       "rank": "species",
-                      "nomenclaturalCode": "Botanical",
+                      "nomenclaturalCode": "botanical",
                       "genus": "Stylopappus",
                       "specificEpithet": "grandiflorus",
-                      "originalAuthors": [
-                          {"key":10789, "name": "Nutt."}
-                      ],
-                      "combinationAuthors": [
-                          {"key":10790, "name": "Torr."},
-                          {"key":10791, "name": "A. Gray"}
-                      ],
+                      "originalAuthors": ["Nutt."],
+                      "combinationAuthors": ["Torr.", "A. Gray"],
                       "combinationYear": 1843,
                       "originalNameKey": 21242
                   },
@@ -856,15 +905,11 @@ types:
                       "scientificName": "Troximon grandiflorum",
                       "authorship": "(Nutt.) A. Gray",
                       "rank": "species",
-                      "nomenclaturalCode": "Botanical",
+                      "nomenclaturalCode": "botanical",
                       "genus": "Troximon",
                       "specificEpithet": "grandiflorum",
-                      "originalAuthors": [
-                          {"key":10789, "name": "Nutt."}
-                      ],
-                      "combinationAuthors": [
-                          {"key":10791, "name": "A. Gray"}
-                      ],
+                      "originalAuthors": ["Nutt."],
+                      "combinationAuthors": ["A. Gray"],
                       "combinationYear": 1874,
                       "originalNameKey": 21242
                   },
@@ -879,12 +924,10 @@ types:
                       "scientificName": "Troximon marshallii",
                       "authorship": "Greene",
                       "rank": "species",
-                      "nomenclaturalCode": "Botanical",
+                      "nomenclaturalCode": "botanical",
                       "genus": "Troximon",
                       "specificEpithet": "marshallii",
-                      "combinationAuthors": [
-                          {"key":10001, "name": "Greene"}
-                      ],
+                      "combinationAuthors": ["Greene"],
                       "combinationYear": 1888,
                       "originalNameKey": 13078
                   },
@@ -897,15 +940,11 @@ types:
                       "scientificName": "Agoseris marshallii",
                       "authorship": "(Greene) Greene",
                       "rank": "species",
-                      "nomenclaturalCode": "Botanical",
+                      "nomenclaturalCode": "botanical",
                       "genus": "Agoseris",
                       "specificEpithet": "marshallii",
-                      "originalAuthors": [
-                          {"key":10001, "name": "Greene"}
-                      ],
-                      "combinationAuthors": [
-                          {"key":10001, "name": "Greene"}
-                      ],
+                      "originalAuthors": ["Greene"],
+                      "combinationAuthors": ["Greene"],
                       "combinationYear": 1891,
                       "originalNameKey": 13078
                   },
@@ -918,15 +957,11 @@ types:
                       "scientificName": "Agoseris marshalii",
                       "authorship": "(Greene) Greene",
                       "rank": "species",
-                      "nomenclaturalCode": "Botanical",
+                      "nomenclaturalCode": "botanical",
                       "genus": "Agoseris",
                       "specificEpithet": "marshalii",
-                      "originalAuthors": [
-                          {"key":10001, "name": "Greene"}
-                      ],
-                      "combinationAuthors": [
-                          {"key":10001, "name": "Greene"}
-                      ],
+                      "originalAuthors": ["Greene"],
+                      "combinationAuthors": ["Greene"],
                       "combinationYear": 1891,
                       "originalNameKey": 13078
                   },
@@ -941,12 +976,10 @@ types:
                       "scientificName": "Troximon plebeium",
                       "authorship": "Greene",
                       "rank": "species",
-                      "nomenclaturalCode": "Botanical",
+                      "nomenclaturalCode": "botanical",
                       "genus": "Troximon",
                       "specificEpithet": "plebeium",
-                      "combinationAuthors": [
-                          {"key":10001, "name": "Greene"}
-                      ],
+                      "combinationAuthors": ["Greene"],
                       "combinationYear": 1890,
                       "originalNameKey": 13122
                   },
@@ -959,15 +992,11 @@ types:
                       "scientificName": "Agoseris plebeia",
                       "authorship": "(Greene) Greene",
                       "rank": "species",
-                      "nomenclaturalCode": "Botanical",
+                      "nomenclaturalCode": "botanical",
                       "genus": "Agoseris",
                       "specificEpithet": "plebeia",
-                      "originalAuthors": [
-                          {"key":10001, "name": "Greene"}
-                      ],
-                      "combinationAuthors": [
-                          {"key":10001, "name": "Greene"}
-                      ],
+                      "originalAuthors": ["Greene"],
+                      "combinationAuthors": ["Greene"],
                       "combinationYear": 1891,
                       "originalNameKey": 13122
                   },
@@ -980,16 +1009,12 @@ types:
                       "scientificName": "Agoseris grandiflora var. plebeia",
                       "authorship": "(Greene) G. L. Wittr.",
                       "rank": "variety",
-                      "nomenclaturalCode": "Botanical",
+                      "nomenclaturalCode": "botanical",
                       "genus": "Agoseris",
                       "specificEpithet": "grandiflora",
                       "infraSpecificEpithet": "plebeia",
-                      "originalAuthors": [
-                          {"key":10001, "name": "Greene"}
-                      ],
-                      "combinationAuthors": [
-                          {"key":10031, "name": "G. L. Wittr."}
-                      ],
+                      "originalAuthors": ["Greene"],
+                      "combinationAuthors": ["G. L. Wittr."],
                       "combinationYear": 1928,
                       "originalNameKey": 13122
                   },
@@ -1101,8 +1126,14 @@ types:
       modified:
         type: datetime
   VernacularName:
-    type: object
-    description: TODO A vernacular name
+    type: DatasetObject
+    description: A vernacular name
+    properties:
+      extensions:
+        type: object
+        description: Map of extension rowType URLs to array of records with DwC terms value pairs.
+      modified:
+        type: datetime
   Distribution:
     type: object
     description: TODO An area distribution record
