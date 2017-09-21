@@ -58,7 +58,9 @@ types:
     description: UUID data type represented as 32 hexadecimal (base 16) digits. Example 123e4567-e89b-12d3-a456-426655440000
   RankType:
     type: string
-    enum: ["kingdom", "phylum", "class", "order", "superfamily", "family", "genus", "subgenus", "species", "subspecies", "variety", "form"]
+    enum: ["kingdom", "phylum", "subphylum", "class", "subclass", "order",
+    "superfamily", "family", "subfamily", "tribe", "subtribe", "genus", "subgenus", "section",
+    "species", "subspecies", "variety", "subvariety", "form", "subform"]
     description: >
       Enumeration of all possible rank values across all codes.
       There is the need to deal with old ranks not accepted anymore.
@@ -175,7 +177,7 @@ types:
       Coarse classification of the environment an organism lives in.
   TaxonomicStatusType:
     type: string
-    enum: ["accepted", "provisional", "synonym", "orthographic-variant", "ambiguous", "misapplied"]
+    enum: ["accepted", "synonym", "doubtful"]
     description: >
       Taxonomic status enumeration for both accepted taxa and synonyms.
   KingdomType:
@@ -333,91 +335,6 @@ types:
       results:
         type: Dataset[]
         description: the resulting Datasets
-  AuthorName:
-    type: object
-    description: >
-      A minimal version of Author with just the key and name.
-    properties:
-      key:
-        type: integer
-        description: Primary key for the name author
-        required: true
-      name:
-        type: string
-        description: Entire  name incl initials and prefixes like "van" if existing.
-  Author:
-    type: object
-    description: >
-      A person that is an author of scientific names. Not to be used for Reference authors.
-      The actual name string of the author can vary similar to scientific names due to spelling, transliteration, aliases, marriage or other name changes over time.
-      e.g., "Carlolus Linnaus", "Carl Linnaus", "Carl von Linné", etc.
-    properties:
-      key:
-        type: integer
-        description: Primary key for the name author
-        required: true
-      datasetKey:
-        type: integer
-        description: Key to the source dataset this <<class>> belongs to
-        required: false
-      firstname:
-        type: string[]
-        description: the preffered full first name(s) separated by whitespace
-        required: false
-      name:
-        type: string
-        description: >
-          full last name incl prefixes like "van" if existing.
-          If the firstname cannot be seperated allowed to contain the entire name.
-      aliases:
-        type: string[]
-        description: list of alternative representations (surname, firstname)
-        required: false
-      yearOfBirth:
-        type: integer
-        description: year the person was born
-        required: false
-        minimum: 1500
-        maximum: 2020
-      yearOfDeath:
-        type: integer
-        description: year the person died
-        required: false
-        minimum: 1500
-        maximum: 2020
-      areaOfInterest:
-        type: string[]
-        description: systematic groups of interest to the author
-        required: false
-      biography:
-        type: string
-        description: short description of the persons (work) life
-        required: false
-      collections:
-        type: string[]
-        description: collection codes known to host type material for species described by the author
-        required: false
-    example: |
-      {
-        "key": 1563,
-        "datasetKey": 15,
-        "firstname": ["Augustin-Pyrame"],
-        "name": "de Candolle",
-        "aliases": ["Augustin-Pyramus de Candolle", "DC."],
-        "yearOfBirth": 1778,
-        "yearOfDeath": 1841,
-        "areaOfInterest": ["Pteridophytes", "Mycology", "Bryophytes", "Spermatophytes"],
-        "biography": "Augustin Pyramus de Candolle also spelled Augustin Pyrame de Candolle (4 February 1778 – 9 September 1841) was a Swiss botanist. René Louiche Desfontaines launched de Candolle's botanical career by recommending him at an herbarium. Within a couple of years de Candolle had established a new genus, and he went on to document hundreds of plant families and create a new natural plant classification system. Although de Candolle's main focus was botany, he also contributed to related fields such as phytogeography, agronomy, paleontology, medical botany, and economic botany. Candolle originated the idea of Nature's war, which influenced Charles Darwin and the principle of natural selection.[1] de Candolle recognized that multiple species may develop similar characteristics that did not appear in a common evolutionary ancestor; this was later termed analogy. During his work with plants, de Candolle noticed that plant leaf movements follow a near-24-hour cycle in constant light, suggesting that an internal biological clock exists. Though many scientists doubted de Candolle's findings, experiments over a century later demonstrated that ″the internal biological clock″ indeed exists. Candolle's descendants continued his work on plant classification. Alphonse de Candolle and Casimir Pyrame de Candolle contributed to the Prodromus Systematis Naturalis Regni Vegetabilis, a catalog of plants begun by Augustin Pyramus de Candolle.",
-        "collections": []
-      }
-  AuthorResultSet:
-    type: ResultSet
-    description: >
-      A paging resultset for Authors.
-    properties:
-      results:
-        type: Author[]
-        description: the resulting Authors
   Name:
     type: DatasetObject
     description: |
@@ -958,6 +875,7 @@ types:
                       "authorship": "(Greene) Greene",
                       "rank": "species",
                       "nomenclaturalCode": "botanical",
+                      "status": "variant",
                       "genus": "Agoseris",
                       "specificEpithet": "marshalii",
                       "originalAuthors": ["Greene"],
@@ -965,7 +883,7 @@ types:
                       "combinationYear": 1891,
                       "originalNameKey": 13078
                   },
-                  "status": "orthographic-variant"
+                  "status": "synonym"
               }
           ],
           [
@@ -1184,7 +1102,7 @@ types:
               body: Name[]
       /publishedIn:
         get:
-          description: return the reference where the name was first published, i.e. the original description or recombination
+          description: return the reference where the name was first published, i.e. the reference linked to the description act of that name
           responses:
             200:
               body: Reference
@@ -1208,7 +1126,11 @@ types:
             type: RankType
             description: filter by rank
             required: false
-          status:
+          nomstatus:
+            type: NomStatusType
+            description: filter by nomenclatural status
+            required: false
+          taxstatus:
             type: TaxonomicStatusType
             description: filter by taxonomic status
             required: false

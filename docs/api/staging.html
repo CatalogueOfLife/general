@@ -423,194 +423,6 @@
 </td>
                                 </tr>
                             </tbody></table>
-                        <h2 id="model-AuthorName">AuthorName</h2>
-
-
-    <p><p>A minimal version of Author with just the key and name.</p>
-</p>
-
-                            <table><thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Pattern</th>
-                                <th>Required</th>
-                                <th>Description</th>
-                            </tr>
-                            </thead><tbody>
-                                <tr>
-                                    <td>key</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Primary key for the name author</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>name</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Entire  name incl initials and prefixes like &ldquo;van&rdquo; if existing.</p>
-</td>
-                                </tr>
-                            </tbody></table>
-                        <h2 id="model-Author">Author</h2>
-
-    <pre class="example"><code class="json">{
-  "key": 1563,
-  "datasetKey": 15,
-  "firstname": ["Augustin-Pyrame"],
-  "name": "de Candolle",
-  "aliases": ["Augustin-Pyramus de Candolle", "DC."],
-  "yearOfBirth": 1778,
-  "yearOfDeath": 1841,
-  "areaOfInterest": ["Pteridophytes", "Mycology", "Bryophytes", "Spermatophytes"],
-  "biography": "Augustin Pyramus de Candolle also spelled Augustin Pyrame de Candolle (4 February 1778 – 9 September 1841) was a Swiss botanist. René Louiche Desfontaines launched de Candolle's botanical career by recommending him at an herbarium. Within a couple of years de Candolle had established a new genus, and he went on to document hundreds of plant families and create a new natural plant classification system. Although de Candolle's main focus was botany, he also contributed to related fields such as phytogeography, agronomy, paleontology, medical botany, and economic botany. Candolle originated the idea of Nature's war, which influenced Charles Darwin and the principle of natural selection.[1] de Candolle recognized that multiple species may develop similar characteristics that did not appear in a common evolutionary ancestor; this was later termed analogy. During his work with plants, de Candolle noticed that plant leaf movements follow a near-24-hour cycle in constant light, suggesting that an internal biological clock exists. Though many scientists doubted de Candolle's findings, experiments over a century later demonstrated that ″the internal biological clock″ indeed exists. Candolle's descendants continued his work on plant classification. Alphonse de Candolle and Casimir Pyrame de Candolle contributed to the Prodromus Systematis Naturalis Regni Vegetabilis, a catalog of plants begun by Augustin Pyramus de Candolle.",
-  "collections": []
-}
-</code></pre>
-
-    <p><p>A person that is an author of scientific names. Not to be used for Reference authors. The actual name string of the author can vary similar to scientific names due to spelling, transliteration, aliases, marriage or other name changes over time. e.g., &ldquo;Carlolus Linnaus&rdquo;, &ldquo;Carl Linnaus&rdquo;, &ldquo;Carl von Linné&rdquo;, etc.</p>
-</p>
-
-                            <table><thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Pattern</th>
-                                <th>Required</th>
-                                <th>Description</th>
-                            </tr>
-                            </thead><tbody>
-                                <tr>
-                                    <td>key</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Primary key for the name author</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>datasetKey</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>firstname</td>
-                                    <td>string[]</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>the preffered full first name(s) separated by whitespace</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>name</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>full last name incl prefixes like &ldquo;van&rdquo; if existing. If the firstname cannot be seperated allowed to contain the entire name.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>aliases</td>
-                                    <td>string[]</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>list of alternative representations (surname, firstname)</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>yearOfBirth</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>year the person was born</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>yearOfDeath</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>year the person died</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>areaOfInterest</td>
-                                    <td>string[]</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>systematic groups of interest to the author</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>biography</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>short description of the persons (work) life</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>collections</td>
-                                    <td>string[]</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>collection codes known to host type material for species described by the author</p>
-</td>
-                                </tr>
-                            </tbody></table>
-                        <h2 id="model-AuthorResultSet">AuthorResultSet</h2>
-
-
-    <p><p>A paging resultset for Authors.</p>
-</p>
-
-                            <table><thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Pattern</th>
-                                <th>Required</th>
-                                <th>Description</th>
-                            </tr>
-                            </thead><tbody>
-                                <tr>
-                                    <td>results</td>
-                                    <td>object[]</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Result page</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>offset</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>The offset applied during request. Can be less than requested if the limit is reached.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>limit</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>The maximum number of records returned. Can be less than requested if the limit is reached.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>total</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>The total number of records available.</p>
-</td>
-                                </tr>
-                            </tbody></table>
                         <h2 id="model-Name">Name</h2>
 
     <pre class="example"><code class="json">{
@@ -619,10 +431,10 @@
   "scientificName": "Crepicnema parvula",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
-  "nomenclaturalCode": "Zoological",
+  "nomenclaturalCode": "zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "originalAuthors": [{"key":10789, "name": "Jacoby"}],
+  "originalAuthors": ["Jacoby"],
   "originalYear": 1885,
   "originalNameKey": 8673,
   "fossil": false,
@@ -756,7 +568,7 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                 <tr>
                                     <td>rank</td>
                                     <td><a href="#model-RankType">RankType</a></td>
-                                    <td>kingdom, phylum, class, order, superfamily, family, genus, subgenus, species, subspecies, variety, form</td>
+                                    <td>kingdom, phylum, subphylum, class, subclass, order, superfamily, family, subfamily, tribe, subtribe, genus, subgenus, section, species, subspecies, variety, subvariety, form, subform</td>
                                     <td>yes</td>
                                     <td><p>rank of the name from enumeration above</p>
 </td>
@@ -764,7 +576,7 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                 <tr>
                                     <td>nomenclaturalCode</td>
                                     <td><a href="#model-NomCodeType">NomCodeType</a></td>
-                                    <td>Bacterial, Botanical, Viral, Zoological</td>
+                                    <td>bacterial, botanical, cultivated, viral, zoological, unknown</td>
                                     <td>yes</td>
                                     <td></td>
                                 </tr>
@@ -808,10 +620,10 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                 </tr>
                                 <tr>
                                     <td>originalAuthors</td>
-                                    <td><a href="#model-AuthorName">AuthorName[]</a></td>
+                                    <td>string[]</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>list of NameAuthor entities</p>
+                                    <td><p>list of basionym authors.</p>
 </td>
                                 </tr>
                                 <tr>
@@ -824,10 +636,10 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                 </tr>
                                 <tr>
                                     <td>combinationAuthors</td>
-                                    <td><a href="#model-AuthorName">AuthorName[]</a></td>
+                                    <td>string[]</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>list of NameAuthor entities excluding ex- authors</p>
+                                    <td><p>list of authors excluding ex- authors</p>
 </td>
                                 </tr>
                                 <tr>
@@ -843,7 +655,7 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td>integer</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>link to the original name. In case of <a href="https://en.wikipedia.org/wiki/Nomen_novum">replacement names</a> it points back to the replaced synonym.</p>
+                                    <td><p>link to the original combination. In case of <a href="https://en.wikipedia.org/wiki/Nomen_novum">replacement names</a> it points back to the replaced synonym.</p>
 </td>
                                 </tr>
                                 <tr>
@@ -855,9 +667,9 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
 </td>
                                 </tr>
                                 <tr>
-                                    <td>available</td>
-                                    <td>boolean</td>
-                                    <td></td>
+                                    <td>status</td>
+                                    <td><a href="#model-NomStatusType">NomStatusType</a></td>
+                                    <td>ok, unavailable, illegitimate, variant, conserved, rejected, doubtful, unevaluated</td>
                                     <td>no</td>
                                     <td><p>flag to indicate that this name is available/validly published</p>
 </td>
@@ -978,10 +790,10 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
     "scientificName": "Crepicnema parvula",
     "rank": "species",
     "authorship": "(Jacoby, 1885)",
-    "nomenclaturalCode": "Zoological",
+    "nomenclaturalCode": "zoological",
     "genus": "Crepicnema",
     "specificEpithet": "parvula",
-    "originalAuthors": [{"key":10789, "name": "Jacoby"}],
+    "originalAuthors": ["Jacoby"],
     "originalYear": 1885,
     "originalNameKey": 8673,
     "fossil": false,
@@ -1021,7 +833,7 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                 <tr>
                                     <td>status</td>
                                     <td><a href="#model-TaxonomicStatusType">TaxonomicStatusType</a></td>
-                                    <td>accepted, provisional, synonym, orthographic-variant, ambiguous, misapplied</td>
+                                    <td>accepted, synonym, doubtful</td>
                                     <td>yes</td>
                                     <td><p>taxonomic status</p>
 </td>
@@ -1080,11 +892,10 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
     <pre class="example"><code class="json">{
   "key": 721141,
   "datasetKey": 15,
-  "type": ["description"],
+  "type": "description",
   "nameKey": 78612,
   "referenceKey": 786,
-  "referencePage": "5",
-  "referenceLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725"
+  "referencePage": "5"
 }
 </code></pre>
 
@@ -1126,10 +937,10 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                 </tr>
                                 <tr>
                                     <td>type</td>
-                                    <td><a href="#model-NomenclaturalActType">NomenclaturalActType[]</a></td>
-                                    <td></td>
+                                    <td><a href="#model-NomenclaturalActType">NomenclaturalActType</a></td>
+                                    <td>description, ruling, emendation, typification</td>
                                     <td>yes</td>
-                                    <td><p>Coarse classification of acts.</p>
+                                    <td><p>Coarse classification of the nomenclatural act.</p>
 </td>
                                 </tr>
                                 <tr>
@@ -1162,22 +973,6 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td></td>
                                     <td>no</td>
                                     <td><p>exact first page of the treatment within above reference</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>referenceLink</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>URL to the first page of the treatment, e.g. in BHL, BioStor or Zenodo</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>bhlPageId</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>BHL PageID for the first page of the treatment</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -1449,14 +1244,6 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
 </td>
                                 </tr>
                                 <tr>
-                                    <td>jstor</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>link to JSTOR</p>
-</td>
-                                </tr>
-                                <tr>
                                     <td>firstYear</td>
                                     <td>integer</td>
                                     <td></td>
@@ -1603,7 +1390,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                 <tr>
                                     <td>status</td>
                                     <td><a href="#model-TaxonomicStatusType">TaxonomicStatusType</a></td>
-                                    <td>accepted, provisional, synonym, orthographic-variant, ambiguous, misapplied</td>
+                                    <td>accepted, synonym, doubtful</td>
                                     <td>yes</td>
                                     <td><p>the kind of synonym</p>
 </td>
@@ -1620,12 +1407,10 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                 "scientificName": "Stylopappus grandiflorus",
                 "authorship": "Nutt.",
                 "rank": "species",
-                "nomenclaturalCode": "Botanical",
+                "nomenclaturalCode": "botanical",
                 "genus": "Stylopappus",
                 "specificEpithet": "grandiflorus",
-                "combinationAuthors": [
-                    {"key":10789, "name": "Nutt."}
-                ],
+                "combinationAuthors": ["Nutt."],
                 "combinationYear": 1841,
                 "originalNameKey": 21242
             },
@@ -1638,16 +1423,11 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                 "scientificName": "Macrorhynchus grandiflorus",
                 "authorship": "(Nutt.) Torr. & A. Gray",
                 "rank": "species",
-                "nomenclaturalCode": "Botanical",
+                "nomenclaturalCode": "botanical",
                 "genus": "Stylopappus",
                 "specificEpithet": "grandiflorus",
-                "originalAuthors": [
-                    {"key":10789, "name": "Nutt."}
-                ],
-                "combinationAuthors": [
-                    {"key":10790, "name": "Torr."},
-                    {"key":10791, "name": "A. Gray"}
-                ],
+                "originalAuthors": ["Nutt."],
+                "combinationAuthors": ["Torr.", "A. Gray"],
                 "combinationYear": 1843,
                 "originalNameKey": 21242
             },
@@ -1660,15 +1440,11 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                 "scientificName": "Troximon grandiflorum",
                 "authorship": "(Nutt.) A. Gray",
                 "rank": "species",
-                "nomenclaturalCode": "Botanical",
+                "nomenclaturalCode": "botanical",
                 "genus": "Troximon",
                 "specificEpithet": "grandiflorum",
-                "originalAuthors": [
-                    {"key":10789, "name": "Nutt."}
-                ],
-                "combinationAuthors": [
-                    {"key":10791, "name": "A. Gray"}
-                ],
+                "originalAuthors": ["Nutt."],
+                "combinationAuthors": ["A. Gray"],
                 "combinationYear": 1874,
                 "originalNameKey": 21242
             },
@@ -1683,12 +1459,10 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                 "scientificName": "Troximon marshallii",
                 "authorship": "Greene",
                 "rank": "species",
-                "nomenclaturalCode": "Botanical",
+                "nomenclaturalCode": "botanical",
                 "genus": "Troximon",
                 "specificEpithet": "marshallii",
-                "combinationAuthors": [
-                    {"key":10001, "name": "Greene"}
-                ],
+                "combinationAuthors": ["Greene"],
                 "combinationYear": 1888,
                 "originalNameKey": 13078
             },
@@ -1701,15 +1475,11 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                 "scientificName": "Agoseris marshallii",
                 "authorship": "(Greene) Greene",
                 "rank": "species",
-                "nomenclaturalCode": "Botanical",
+                "nomenclaturalCode": "botanical",
                 "genus": "Agoseris",
                 "specificEpithet": "marshallii",
-                "originalAuthors": [
-                    {"key":10001, "name": "Greene"}
-                ],
-                "combinationAuthors": [
-                    {"key":10001, "name": "Greene"}
-                ],
+                "originalAuthors": ["Greene"],
+                "combinationAuthors": ["Greene"],
                 "combinationYear": 1891,
                 "originalNameKey": 13078
             },
@@ -1722,19 +1492,16 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                 "scientificName": "Agoseris marshalii",
                 "authorship": "(Greene) Greene",
                 "rank": "species",
-                "nomenclaturalCode": "Botanical",
+                "nomenclaturalCode": "botanical",
+                "status": "variant",
                 "genus": "Agoseris",
                 "specificEpithet": "marshalii",
-                "originalAuthors": [
-                    {"key":10001, "name": "Greene"}
-                ],
-                "combinationAuthors": [
-                    {"key":10001, "name": "Greene"}
-                ],
+                "originalAuthors": ["Greene"],
+                "combinationAuthors": ["Greene"],
                 "combinationYear": 1891,
                 "originalNameKey": 13078
             },
-            "status": "orthographic-variant"
+            "status": "synonym"
         }
     ],
     [
@@ -1745,12 +1512,10 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                 "scientificName": "Troximon plebeium",
                 "authorship": "Greene",
                 "rank": "species",
-                "nomenclaturalCode": "Botanical",
+                "nomenclaturalCode": "botanical",
                 "genus": "Troximon",
                 "specificEpithet": "plebeium",
-                "combinationAuthors": [
-                    {"key":10001, "name": "Greene"}
-                ],
+                "combinationAuthors": ["Greene"],
                 "combinationYear": 1890,
                 "originalNameKey": 13122
             },
@@ -1763,15 +1528,11 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                 "scientificName": "Agoseris plebeia",
                 "authorship": "(Greene) Greene",
                 "rank": "species",
-                "nomenclaturalCode": "Botanical",
+                "nomenclaturalCode": "botanical",
                 "genus": "Agoseris",
                 "specificEpithet": "plebeia",
-                "originalAuthors": [
-                    {"key":10001, "name": "Greene"}
-                ],
-                "combinationAuthors": [
-                    {"key":10001, "name": "Greene"}
-                ],
+                "originalAuthors": ["Greene"],
+                "combinationAuthors": ["Greene"],
                 "combinationYear": 1891,
                 "originalNameKey": 13122
             },
@@ -1784,16 +1545,12 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                 "scientificName": "Agoseris grandiflora var. plebeia",
                 "authorship": "(Greene) G. L. Wittr.",
                 "rank": "variety",
-                "nomenclaturalCode": "Botanical",
+                "nomenclaturalCode": "botanical",
                 "genus": "Agoseris",
                 "specificEpithet": "grandiflora",
                 "infraSpecificEpithet": "plebeia",
-                "originalAuthors": [
-                    {"key":10001, "name": "Greene"}
-                ],
-                "combinationAuthors": [
-                    {"key":10031, "name": "G. L. Wittr."}
-                ],
+                "originalAuthors": ["Greene"],
+                "combinationAuthors": ["G. L. Wittr."],
                 "combinationYear": 1928,
                 "originalNameKey": 13122
             },
@@ -1864,7 +1621,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                 <tr>
                                     <td>rank</td>
                                     <td><a href="#model-RankType">RankType</a></td>
-                                    <td>kingdom, phylum, class, order, superfamily, family, genus, subgenus, species, subspecies, variety, form</td>
+                                    <td>kingdom, phylum, subphylum, class, subclass, order, superfamily, family, subfamily, tribe, subtribe, genus, subgenus, section, species, subspecies, variety, subvariety, form, subform</td>
                                     <td>yes</td>
                                     <td><p>taxonomic rank</p>
 </td>
@@ -2149,9 +1906,50 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                         <h2 id="model-VernacularName">VernacularName</h2>
 
 
-    <p><p>TODO A vernacular name</p>
+    <p><p>A vernacular name</p>
 </p>
 
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>key</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Primary key for the record</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>datasetKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Key to the source dataset this record belongs to</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>extensions</td>
+                                    <td>object</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Map of extension rowType URLs to array of records with DwC terms value pairs.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modified</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td></td>
+                                </tr>
+                            </tbody></table>
                         <h2 id="model-Distribution">Distribution</h2>
 
 
@@ -2206,31 +2004,68 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
             <h2 id="model-NomCodeType">NomCodeType</h2>
 
 
-            <p><strong>Enumeration</strong>: <em>Bacterial</em>, <em>Botanical</em>, <em>Viral</em>, <em>Zoological</em></p>
+            <p><strong>Enumeration</strong>: <em>bacterial</em>, <em>botanical</em>, <em>cultivated</em>, <em>viral</em>, <em>zoological</em>, <em>unknown</em></p>
 
-    <p><p>Nomenclatural code enumeration regardless of the exact version published. <a href="https://www.ncbi.nlm.nih.gov/books/NBK8817/">Bacteriological</a>, <a href="http://www.iapt-taxon.org/nomen/">Botanical</a>, <a href="http://www.ishs.org/scripta-horticulturae/international-code-nomenclature-cultivated-plants-ninth-edition">CultivatedPlants</a>, <a href="https://talk.ictvonline.org/information/w/ictv-information/383/ictv-code">Viral</a>, <a href="http://www.nhm.ac.uk/hosted-sites/iczn/code/">Zoological</a></p>
+    <p><p>Nomenclatural code enumeration regardless of the exact version published.
+bacteriological : <a href="https://www.ncbi.nlm.nih.gov/books/NBK8817/">Bacteriological code</a>
+botanical : <a href="http://www.iapt-taxon.org/nomen/">Botanical code</a>
+cultivated : <a href="http://www.ishs.org/scripta-horticulturae/international-code-nomenclature-cultivated-plants-ninth-edition">Cultivated Plants</a>
+viral : <a href="https://talk.ictvonline.org/information/w/ictv-information/383/ictv-code">viral</a>,
+zoological : <a href="http://www.nhm.ac.uk/hosted-sites/iczn/code/">zoological code</a></p>
 </p>
 
 
             <h2 id="model-NomenclaturalActType">NomenclaturalActType</h2>
 
 
-            <p><strong>Enumeration</strong>: <em>description</em>, <em>typification</em>, <em>spellingCorrection</em>, <em>emendation</em></p>
+            <p><strong>Enumeration</strong>: <em>description</em>, <em>ruling</em>, <em>emendation</em>, <em>typification</em></p>
 
     <p><p>Coarse classification of nomenclatural acts.</p>
-<ul>
-<li><em>description</em> covers original descriptions, new recombinations and changes in rank.</li>
-<li><em>typification</em> is used for subsequent type designations.</li>
-<li><em>ruling</em> acts are e.g. suppressed or conserved names.</li>
-<li><em>emendation</em> are intentional changes in the original spelling of an available name.</li>
-</ul>
+<dl>
+<dt>description</dt>
+<dd>the description of a new original name, a new recombination, a replacement name or a change in rank.
+The publication linked to the description act is the dwc:namePublishedIn reference.</dd>
+<dt>ruling</dt>
+<dd>acts taken by the official committee e.g. suppressed, rejected or conserved names.</dd>
+<dt>emendation</dt>
+<dd>corrected or improved names. Intentional changes in the original spelling of an available name. The binomial authority remains unchanged.
+Valid emendations include changes made to correct:
+a) typographical errors in the original work describing the species,
+b) errors in transliteration from non-Latin languages,
+c) names that included diacritics, hyphens
+d) endings of species to match the gender of the generic name, particularly when the combination has been changed</dd>
+<dt>typification</dt>
+<dd>subsequent type designations.</dd>
+</dl>
+</p>
+
+
+            <h2 id="model-NomStatusType">NomStatusType</h2>
+
+
+            <p><strong>Enumeration</strong>: <em>ok</em>, <em>unavailable</em>, <em>illegitimate</em>, <em>variant</em>, <em>conserved</em>, <em>rejected</em>, <em>doubtful</em>, <em>unevaluated</em></p>
+
+    <p><p>The status related to the latest nomenclatural act published for the name and its conformance to the rules of nomenclature. Generic nomenclatural status enumeration across all codes. Only the broader status concepts are captured and details of the nomenclatural status of a name should be given as free text. The overloaded term &ldquo;valid&rdquo; is avoided as it carries different semantics in the botanical and zoological code. Rendering of the status can be different between codes and some values only apply to certain codes.
+ok : TODO: probably a better term should be coined : Botany - Names that are validly published and legitimate : Zoology - Available name and potentially valid, i.e. not otherwise invalid for any other objective reason, such as being a junior homonym.
+unavailable : Botany - Names that are not validly published (nom. inval.) : Zoology - An unavailable name published not conforming to all the mandatory provisions of the International Code of Zoological Nomenclature.
+illegitimate : Botany - A validly published name which is a later homonym, superfluous, or rejected (nom. illeg.) : Zoology - Available, but objectively invalid names, e.g. junior homonym or objective synonyms
+variant : Orthographic variant. An alternative or corrected spelling for the name (orth. var.)
+replacement : A nomen novum, replacement name or new substitute name indicates a scientific name
+that is created specifically to replace another preoccupied name,
+but only when this other name can not be used for technical, nomenclatural reasons.
+It automatically inherits the same type and type locality and is commonly applied
+to names proposed to replace junior homonyms</p>
+<p>conserved : Botany - A validly published name which is listed in the ICN appendices of conserved names (nom. cons.) : Zoology -
+rejected : Botany - A validly published name listed as rejected by ICN – includes utique rejiciendum and opera oppressa (nom. rej.) : Zoology -
+doubtful : Unknown or doubtful names (nom. dub.)
+unevaluated : if the name status has not been evaluated yet</p>
 </p>
 
 
             <h2 id="model-RankType">RankType</h2>
 
 
-            <p><strong>Enumeration</strong>: <em>kingdom</em>, <em>phylum</em>, <em>class</em>, <em>order</em>, <em>superfamily</em>, <em>family</em>, <em>genus</em>, <em>subgenus</em>, <em>species</em>, <em>subspecies</em>, <em>variety</em>, <em>form</em></p>
+            <p><strong>Enumeration</strong>: <em>kingdom</em>, <em>phylum</em>, <em>subphylum</em>, <em>class</em>, <em>subclass</em>, <em>order</em>, <em>superfamily</em>, <em>family</em>, <em>subfamily</em>, <em>tribe</em>, <em>subtribe</em>, <em>genus</em>, <em>subgenus</em>, <em>section</em>, <em>species</em>, <em>subspecies</em>, <em>variety</em>, <em>subvariety</em>, <em>form</em>, <em>subform</em></p>
 
     <p><p>Enumeration of all possible rank values across all codes. There is the need to deal with old ranks not accepted anymore. The list given is intended to be interoperable between name providers for bacteria, viruses, fungi, plants, and animals. The enumeration attempts to strike a balance between listing all possible rank terms, and remaining comprehensible. Not included in the list are the botanical &ldquo;notho-&rdquo; ranks, which are used to designate hybrids (nothospecies, nothogenus) as this information is handled by the Name.notho property already.
 Sources:</p>
@@ -2247,7 +2082,7 @@ Sources:</p>
             <h2 id="model-TaxonomicStatusType">TaxonomicStatusType</h2>
 
 
-            <p><strong>Enumeration</strong>: <em>accepted</em>, <em>provisional</em>, <em>synonym</em>, <em>orthographic-variant</em>, <em>ambiguous</em>, <em>misapplied</em></p>
+            <p><strong>Enumeration</strong>: <em>accepted</em>, <em>synonym</em>, <em>doubtful</em></p>
 
     <p><p>Taxonomic status enumeration for both accepted taxa and synonyms.</p>
 </p>
@@ -2316,7 +2151,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Date: Thursday, September 21, 2017 12:28:53 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2368,7 +2203,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Date: Thursday, September 21, 2017 12:28:53 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2429,7 +2264,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Date: Thursday, September 21, 2017 12:28:53 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2481,7 +2316,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Date: Thursday, September 21, 2017 12:28:53 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -2490,10 +2325,10 @@ Content-Type: application/json
   "scientificName": "Crepicnema parvula",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
-  "nomenclaturalCode": "Zoological",
+  "nomenclaturalCode": "zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "originalAuthors": [{"key":10789, "name": "Jacoby"}],
+  "originalAuthors": ["Jacoby"],
   "originalYear": 1885,
   "originalNameKey": 8673,
   "fossil": false,
@@ -2528,7 +2363,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Date: Thursday, September 21, 2017 12:28:53 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -2537,10 +2372,10 @@ Content-Type: application/json
   "scientificName": "Crepicnema parvula",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
-  "nomenclaturalCode": "Zoological",
+  "nomenclaturalCode": "zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "originalAuthors": [{"key":10789, "name": "Jacoby"}],
+  "originalAuthors": ["Jacoby"],
   "originalYear": 1885,
   "originalNameKey": 8673,
   "fossil": false,
@@ -2552,10 +2387,10 @@ Content-Type: application/json
   "scientificName": "Crepicnema parvula",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
-  "nomenclaturalCode": "Zoological",
+  "nomenclaturalCode": "zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "originalAuthors": [{"key":10789, "name": "Jacoby"}],
+  "originalAuthors": ["Jacoby"],
   "originalYear": 1885,
   "originalNameKey": 8673,
   "fossil": false,
@@ -2579,7 +2414,7 @@ Host: api.col.plus
 </pre>
 
         <h3><code class="prettyprint">GET</code> https://api.col.plus/{dataset}/name/{key}/publishedIn</h3>
-    <p><p>return the reference where the name was first published, i.e. the original description or recombination</p>
+    <p><p>return the reference where the name was first published, i.e. the reference linked to the description act of that name</p>
 </p>
 
 
@@ -2590,7 +2425,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Date: Thursday, September 21, 2017 12:28:53 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -2659,26 +2494,24 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Date: Thursday, September 21, 2017 12:28:53 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
   "key": 721141,
   "datasetKey": 15,
-  "type": ["description"],
+  "type": "description",
   "nameKey": 78612,
   "referenceKey": 786,
-  "referencePage": "5",
-  "referenceLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725"
+  "referencePage": "5"
 }
 ,{
   "key": 721141,
   "datasetKey": 15,
-  "type": ["description"],
+  "type": "description",
   "nameKey": 78612,
   "referenceKey": 786,
-  "referencePage": "5",
-  "referenceLink": "http://www.europeanjournaloftaxonomy.eu/index.php/ejt/article/view/354/725"
+  "referencePage": "5"
 }
 ]</code>
 </pre>
@@ -2717,16 +2550,25 @@ Host: api.col.plus
             <tr>
                 <td>rank</td>
                 <td><a href="#model-RankType">RankType</a></td>
-                <td>kingdom, phylum, class, order, superfamily, family, genus, subgenus, species, subspecies, variety, form</td>
+                <td>kingdom, phylum, subphylum, class, subclass, order, superfamily, family, subfamily, tribe, subtribe, genus, subgenus, section, species, subspecies, variety, subvariety, form, subform</td>
                 <td>no</td>
                 <td></td>
                 <td><p>filter by rank</p>
 </td>
             </tr>
             <tr>
-                <td>status</td>
+                <td>nomstatus</td>
+                <td><a href="#model-NomStatusType">NomStatusType</a></td>
+                <td>ok, unavailable, illegitimate, variant, conserved, rejected, doubtful, unevaluated</td>
+                <td>no</td>
+                <td></td>
+                <td><p>filter by nomenclatural status</p>
+</td>
+            </tr>
+            <tr>
+                <td>taxstatus</td>
                 <td><a href="#model-TaxonomicStatusType">TaxonomicStatusType</a></td>
-                <td>accepted, provisional, synonym, orthographic-variant, ambiguous, misapplied</td>
+                <td>accepted, synonym, doubtful</td>
                 <td>no</td>
                 <td></td>
                 <td><p>filter by taxonomic status</p>
@@ -2784,7 +2626,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Date: Thursday, September 21, 2017 12:28:53 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2841,7 +2683,7 @@ Host: api.col.plus
             <tr>
                 <td>rank</td>
                 <td><a href="#model-RankType">RankType</a></td>
-                <td>kingdom, phylum, class, order, superfamily, family, genus, subgenus, species, subspecies, variety, form</td>
+                <td>kingdom, phylum, subphylum, class, subclass, order, superfamily, family, subfamily, tribe, subtribe, genus, subgenus, section, species, subspecies, variety, subvariety, form, subform</td>
                 <td>no</td>
                 <td></td>
                 <td><p>rank of the name to be matched</p>
@@ -2863,7 +2705,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Date: Thursday, September 21, 2017 12:28:53 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2933,7 +2775,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Date: Thursday, September 21, 2017 12:28:53 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -2985,7 +2827,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Date: Thursday, September 21, 2017 12:28:53 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3016,7 +2858,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Date: Thursday, September 21, 2017 12:28:53 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3047,7 +2889,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Date: Thursday, September 21, 2017 12:28:53 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -3059,12 +2901,10 @@ Content-Type: application/json
                 "scientificName": "Stylopappus grandiflorus",
                 "authorship": "Nutt.",
                 "rank": "species",
-                "nomenclaturalCode": "Botanical",
+                "nomenclaturalCode": "botanical",
                 "genus": "Stylopappus",
                 "specificEpithet": "grandiflorus",
-                "combinationAuthors": [
-                    {"key":10789, "name": "Nutt."}
-                ],
+                "combinationAuthors": ["Nutt."],
                 "combinationYear": 1841,
                 "originalNameKey": 21242
             },
@@ -3077,16 +2917,11 @@ Content-Type: application/json
                 "scientificName": "Macrorhynchus grandiflorus",
                 "authorship": "(Nutt.) Torr. & A. Gray",
                 "rank": "species",
-                "nomenclaturalCode": "Botanical",
+                "nomenclaturalCode": "botanical",
                 "genus": "Stylopappus",
                 "specificEpithet": "grandiflorus",
-                "originalAuthors": [
-                    {"key":10789, "name": "Nutt."}
-                ],
-                "combinationAuthors": [
-                    {"key":10790, "name": "Torr."},
-                    {"key":10791, "name": "A. Gray"}
-                ],
+                "originalAuthors": ["Nutt."],
+                "combinationAuthors": ["Torr.", "A. Gray"],
                 "combinationYear": 1843,
                 "originalNameKey": 21242
             },
@@ -3099,15 +2934,11 @@ Content-Type: application/json
                 "scientificName": "Troximon grandiflorum",
                 "authorship": "(Nutt.) A. Gray",
                 "rank": "species",
-                "nomenclaturalCode": "Botanical",
+                "nomenclaturalCode": "botanical",
                 "genus": "Troximon",
                 "specificEpithet": "grandiflorum",
-                "originalAuthors": [
-                    {"key":10789, "name": "Nutt."}
-                ],
-                "combinationAuthors": [
-                    {"key":10791, "name": "A. Gray"}
-                ],
+                "originalAuthors": ["Nutt."],
+                "combinationAuthors": ["A. Gray"],
                 "combinationYear": 1874,
                 "originalNameKey": 21242
             },
@@ -3122,12 +2953,10 @@ Content-Type: application/json
                 "scientificName": "Troximon marshallii",
                 "authorship": "Greene",
                 "rank": "species",
-                "nomenclaturalCode": "Botanical",
+                "nomenclaturalCode": "botanical",
                 "genus": "Troximon",
                 "specificEpithet": "marshallii",
-                "combinationAuthors": [
-                    {"key":10001, "name": "Greene"}
-                ],
+                "combinationAuthors": ["Greene"],
                 "combinationYear": 1888,
                 "originalNameKey": 13078
             },
@@ -3140,15 +2969,11 @@ Content-Type: application/json
                 "scientificName": "Agoseris marshallii",
                 "authorship": "(Greene) Greene",
                 "rank": "species",
-                "nomenclaturalCode": "Botanical",
+                "nomenclaturalCode": "botanical",
                 "genus": "Agoseris",
                 "specificEpithet": "marshallii",
-                "originalAuthors": [
-                    {"key":10001, "name": "Greene"}
-                ],
-                "combinationAuthors": [
-                    {"key":10001, "name": "Greene"}
-                ],
+                "originalAuthors": ["Greene"],
+                "combinationAuthors": ["Greene"],
                 "combinationYear": 1891,
                 "originalNameKey": 13078
             },
@@ -3161,19 +2986,16 @@ Content-Type: application/json
                 "scientificName": "Agoseris marshalii",
                 "authorship": "(Greene) Greene",
                 "rank": "species",
-                "nomenclaturalCode": "Botanical",
+                "nomenclaturalCode": "botanical",
+                "status": "variant",
                 "genus": "Agoseris",
                 "specificEpithet": "marshalii",
-                "originalAuthors": [
-                    {"key":10001, "name": "Greene"}
-                ],
-                "combinationAuthors": [
-                    {"key":10001, "name": "Greene"}
-                ],
+                "originalAuthors": ["Greene"],
+                "combinationAuthors": ["Greene"],
                 "combinationYear": 1891,
                 "originalNameKey": 13078
             },
-            "status": "orthographic-variant"
+            "status": "synonym"
         }
     ],
     [
@@ -3184,12 +3006,10 @@ Content-Type: application/json
                 "scientificName": "Troximon plebeium",
                 "authorship": "Greene",
                 "rank": "species",
-                "nomenclaturalCode": "Botanical",
+                "nomenclaturalCode": "botanical",
                 "genus": "Troximon",
                 "specificEpithet": "plebeium",
-                "combinationAuthors": [
-                    {"key":10001, "name": "Greene"}
-                ],
+                "combinationAuthors": ["Greene"],
                 "combinationYear": 1890,
                 "originalNameKey": 13122
             },
@@ -3202,15 +3022,11 @@ Content-Type: application/json
                 "scientificName": "Agoseris plebeia",
                 "authorship": "(Greene) Greene",
                 "rank": "species",
-                "nomenclaturalCode": "Botanical",
+                "nomenclaturalCode": "botanical",
                 "genus": "Agoseris",
                 "specificEpithet": "plebeia",
-                "originalAuthors": [
-                    {"key":10001, "name": "Greene"}
-                ],
-                "combinationAuthors": [
-                    {"key":10001, "name": "Greene"}
-                ],
+                "originalAuthors": ["Greene"],
+                "combinationAuthors": ["Greene"],
                 "combinationYear": 1891,
                 "originalNameKey": 13122
             },
@@ -3223,16 +3039,12 @@ Content-Type: application/json
                 "scientificName": "Agoseris grandiflora var. plebeia",
                 "authorship": "(Greene) G. L. Wittr.",
                 "rank": "variety",
-                "nomenclaturalCode": "Botanical",
+                "nomenclaturalCode": "botanical",
                 "genus": "Agoseris",
                 "specificEpithet": "grandiflora",
                 "infraSpecificEpithet": "plebeia",
-                "originalAuthors": [
-                    {"key":10001, "name": "Greene"}
-                ],
-                "combinationAuthors": [
-                    {"key":10031, "name": "G. L. Wittr."}
-                ],
+                "originalAuthors": ["Greene"],
+                "combinationAuthors": ["G. L. Wittr."],
                 "combinationYear": 1928,
                 "originalNameKey": 13122
             },
@@ -3269,7 +3081,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Date: Thursday, September 21, 2017 12:28:53 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3300,7 +3112,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Date: Thursday, September 21, 2017 12:28:53 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3358,7 +3170,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Date: Thursday, September 21, 2017 12:28:53 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3463,7 +3275,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Date: Thursday, September 21, 2017 12:28:53 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3521,7 +3333,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Date: Thursday, September 21, 2017 12:28:53 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3620,7 +3432,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, September 20, 2017 2:26:33 PM CEST
+Date: Thursday, September 21, 2017 12:28:53 PM CEST
 Content-Type: application/json
 </code>
 </pre>
