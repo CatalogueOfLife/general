@@ -1,5 +1,5 @@
-# Nomenclature
-The Nomenclator API is designed in [RAML](https://github.com/Sp2000/colplus/blob/master/docs/api/nomenclator.raml) with the current draft being published at https://sp2000.github.io/colplus/api/nomenclator.html
+# Staging
+The Staging API is designed in [RAML](https://github.com/Sp2000/colplus/blob/master/docs/api/staging.raml) with the current draft being published at https://sp2000.github.io/colplus/api/staging.html
 
 ## ScientificName
 A scientific name is a surprisingly ambigous term. 
