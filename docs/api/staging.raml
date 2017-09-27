@@ -1096,141 +1096,142 @@ types:
               Example: Barkhausia lessingii Hook. & Arn. nom. illeg. is a homotypical synonym of Agoseris apargioides (Less.) Greene
             responses:
               200:
-                body: Name[][]
-                example: |
-                  [
-                      [
-                          {
-                              "key": 21242,
-                              "datasetKey": 15,
-                              "scientificName": "Stylopappus grandiflorus",
-                              "authorship": "Nutt.",
-                              "rank": "species",
-                              "nomenclaturalCode": "botanical",
-                              "genus": "Stylopappus",
-                              "specificEpithet": "grandiflorus",
-                              "combinationAuthors": ["Nutt."],
-                              "combinationYear": 1841,
-                              "originalNameKey": 21242
-                           },
-                          {
-                              "key": 21243,
-                              "datasetKey": 15,
-                              "scientificName": "Macrorhynchus grandiflorus",
-                              "authorship": "(Nutt.) Torr. & A. Gray",
-                              "rank": "species",
-                              "nomenclaturalCode": "botanical",
-                              "genus": "Stylopappus",
-                              "specificEpithet": "grandiflorus",
-                              "originalAuthors": ["Nutt."],
-                              "combinationAuthors": ["Torr.", "A. Gray"],
-                              "combinationYear": 1843,
-                              "originalNameKey": 21242
-                          },
-                          {
-                              "key": 21244,
-                              "datasetKey": 15,
-                              "scientificName": "Troximon grandiflorum",
-                              "authorship": "(Nutt.) A. Gray",
-                              "rank": "species",
-                              "nomenclaturalCode": "botanical",
-                              "genus": "Troximon",
-                              "specificEpithet": "grandiflorum",
-                              "originalAuthors": ["Nutt."],
-                              "combinationAuthors": ["A. Gray"],
-                              "combinationYear": 1874,
-                              "originalNameKey": 21242
-                           }
-                      ],
-                      [
-                          {
-                              "key": 13078,
-                              "datasetKey": 15,
-                              "scientificName": "Troximon marshallii",
-                              "authorship": "Greene",
-                              "rank": "species",
-                              "nomenclaturalCode": "botanical",
-                              "genus": "Troximon",
-                              "specificEpithet": "marshallii",
-                              "combinationAuthors": ["Greene"],
-                              "combinationYear": 1888,
-                              "originalNameKey": 13078
-                          },
-                          {
-                              "key": 13079,
-                              "datasetKey": 15,
-                              "scientificName": "Agoseris marshallii",
-                              "authorship": "(Greene) Greene",
-                              "rank": "species",
-                              "nomenclaturalCode": "botanical",
-                              "genus": "Agoseris",
-                              "specificEpithet": "marshallii",
-                              "originalAuthors": ["Greene"],
-                              "combinationAuthors": ["Greene"],
-                              "combinationYear": 1891,
-                              "originalNameKey": 13078
-                          },
-                          {
-                              "key": 13080,
-                              "datasetKey": 15,
-                              "scientificName": "Agoseris marshalii",
-                              "authorship": "(Greene) Greene",
-                              "rank": "species",
-                              "nomenclaturalCode": "botanical",
-                              "status": "variant",
-                              "genus": "Agoseris",
-                              "specificEpithet": "marshalii",
-                              "originalAuthors": ["Greene"],
-                              "combinationAuthors": ["Greene"],
-                              "combinationYear": 1891,
-                              "originalNameKey": 13078
-                          }
-                      ],
-                      [
-                          {
-                              "key": 13122,
-                              "datasetKey": 15,
-                              "scientificName": "Troximon plebeium",
-                              "authorship": "Greene",
-                              "rank": "species",
-                              "nomenclaturalCode": "botanical",
-                              "genus": "Troximon",
-                              "specificEpithet": "plebeium",
-                              "combinationAuthors": ["Greene"],
-                              "combinationYear": 1890,
-                              "originalNameKey": 13122
-                          },
-                          {
-                              "key": 13123,
-                              "datasetKey": 15,
-                              "scientificName": "Agoseris plebeia",
-                              "authorship": "(Greene) Greene",
-                              "rank": "species",
-                              "nomenclaturalCode": "botanical",
-                              "genus": "Agoseris",
-                              "specificEpithet": "plebeia",
-                              "originalAuthors": ["Greene"],
-                              "combinationAuthors": ["Greene"],
-                              "combinationYear": 1891,
-                              "originalNameKey": 13122
-                          },
-                          {
-                              "key": 13124,
-                              "datasetKey": 15,
-                              "scientificName": "Agoseris grandiflora var. plebeia",
-                              "authorship": "(Greene) G. L. Wittr.",
-                              "rank": "variety",
-                              "nomenclaturalCode": "botanical",
-                              "genus": "Agoseris",
-                              "specificEpithet": "grandiflora",
-                              "infraSpecificEpithet": "plebeia",
-                              "originalAuthors": ["Greene"],
-                              "combinationAuthors": ["G. L. Wittr."],
-                              "combinationYear": 1928,
-                              "originalNameKey": 13122
-                          }
-                      ]
-                  ]
+                body:
+                  type: Name[][]
+                  example: |
+                    [
+                        [
+                            {
+                                "key": 21242,
+                                "datasetKey": 15,
+                                "scientificName": "Stylopappus grandiflorus",
+                                "authorship": "Nutt.",
+                                "rank": "species",
+                                "nomenclaturalCode": "botanical",
+                                "genus": "Stylopappus",
+                                "specificEpithet": "grandiflorus",
+                                "combinationAuthors": ["Nutt."],
+                                "combinationYear": 1841,
+                                "originalNameKey": 21242
+                             },
+                            {
+                                "key": 21243,
+                                "datasetKey": 15,
+                                "scientificName": "Macrorhynchus grandiflorus",
+                                "authorship": "(Nutt.) Torr. & A. Gray",
+                                "rank": "species",
+                                "nomenclaturalCode": "botanical",
+                                "genus": "Stylopappus",
+                                "specificEpithet": "grandiflorus",
+                                "originalAuthors": ["Nutt."],
+                                "combinationAuthors": ["Torr.", "A. Gray"],
+                                "combinationYear": 1843,
+                                "originalNameKey": 21242
+                            },
+                            {
+                                "key": 21244,
+                                "datasetKey": 15,
+                                "scientificName": "Troximon grandiflorum",
+                                "authorship": "(Nutt.) A. Gray",
+                                "rank": "species",
+                                "nomenclaturalCode": "botanical",
+                                "genus": "Troximon",
+                                "specificEpithet": "grandiflorum",
+                                "originalAuthors": ["Nutt."],
+                                "combinationAuthors": ["A. Gray"],
+                                "combinationYear": 1874,
+                                "originalNameKey": 21242
+                             }
+                        ],
+                        [
+                            {
+                                "key": 13078,
+                                "datasetKey": 15,
+                                "scientificName": "Troximon marshallii",
+                                "authorship": "Greene",
+                                "rank": "species",
+                                "nomenclaturalCode": "botanical",
+                                "genus": "Troximon",
+                                "specificEpithet": "marshallii",
+                                "combinationAuthors": ["Greene"],
+                                "combinationYear": 1888,
+                                "originalNameKey": 13078
+                            },
+                            {
+                                "key": 13079,
+                                "datasetKey": 15,
+                                "scientificName": "Agoseris marshallii",
+                                "authorship": "(Greene) Greene",
+                                "rank": "species",
+                                "nomenclaturalCode": "botanical",
+                                "genus": "Agoseris",
+                                "specificEpithet": "marshallii",
+                                "originalAuthors": ["Greene"],
+                                "combinationAuthors": ["Greene"],
+                                "combinationYear": 1891,
+                                "originalNameKey": 13078
+                            },
+                            {
+                                "key": 13080,
+                                "datasetKey": 15,
+                                "scientificName": "Agoseris marshalii",
+                                "authorship": "(Greene) Greene",
+                                "rank": "species",
+                                "nomenclaturalCode": "botanical",
+                                "status": "variant",
+                                "genus": "Agoseris",
+                                "specificEpithet": "marshalii",
+                                "originalAuthors": ["Greene"],
+                                "combinationAuthors": ["Greene"],
+                                "combinationYear": 1891,
+                                "originalNameKey": 13078
+                            }
+                        ],
+                        [
+                            {
+                                "key": 13122,
+                                "datasetKey": 15,
+                                "scientificName": "Troximon plebeium",
+                                "authorship": "Greene",
+                                "rank": "species",
+                                "nomenclaturalCode": "botanical",
+                                "genus": "Troximon",
+                                "specificEpithet": "plebeium",
+                                "combinationAuthors": ["Greene"],
+                                "combinationYear": 1890,
+                                "originalNameKey": 13122
+                            },
+                            {
+                                "key": 13123,
+                                "datasetKey": 15,
+                                "scientificName": "Agoseris plebeia",
+                                "authorship": "(Greene) Greene",
+                                "rank": "species",
+                                "nomenclaturalCode": "botanical",
+                                "genus": "Agoseris",
+                                "specificEpithet": "plebeia",
+                                "originalAuthors": ["Greene"],
+                                "combinationAuthors": ["Greene"],
+                                "combinationYear": 1891,
+                                "originalNameKey": 13122
+                            },
+                            {
+                                "key": 13124,
+                                "datasetKey": 15,
+                                "scientificName": "Agoseris grandiflora var. plebeia",
+                                "authorship": "(Greene) G. L. Wittr.",
+                                "rank": "variety",
+                                "nomenclaturalCode": "botanical",
+                                "genus": "Agoseris",
+                                "specificEpithet": "grandiflora",
+                                "infraSpecificEpithet": "plebeia",
+                                "originalAuthors": ["Greene"],
+                                "combinationAuthors": ["G. L. Wittr."],
+                                "combinationYear": 1928,
+                                "originalNameKey": 13122
+                            }
+                        ]
+                    ]
         /children:
           get:
             description: page through all direct children of the taxon.
