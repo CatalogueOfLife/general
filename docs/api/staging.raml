@@ -996,14 +996,24 @@ types:
         200:
     /import:
       get:
-        displayName: Dataset import metrics
-        description: Returns import metrics for the dataset with the specified key.
+        displayName: All dataset import metrics
+        description: Returns all import metrics for the dataset with the specified key.
         responses:
           200:
             description: A list of datset import metric objects
             body:
               application/json:
                 type: DatasetImport[]
+      /last:
+        get:
+          displayName: Dataset import metrics
+          description: Returns import metrics for the last import of the dataset with the specified key.
+          responses:
+            200:
+              description: An import metric object
+              body:
+                application/json:
+                  type: DatasetImport
   post:
     displayName: Create dataset
     description: Creates a new dataset specified through the JSON request body and returns the database key of the new dataset.
