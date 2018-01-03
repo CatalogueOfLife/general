@@ -2080,7 +2080,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 3, 2018 3:21:48 PM CET
+Date: Wednesday, January 3, 2018 3:56:17 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2095,7 +2095,8 @@ Content-Type: application/json
 </pre>
 
         <h3><code class="prettyprint">POST</code> https://api.col.plus/dataset</h3>
-    
+    <p><p>Creates a new dataset specified through the JSON request body and returns the database key of the new dataset.</p>
+</p>
 
 
     <h3 id="op2-request-body">Body</h3>
@@ -2108,7 +2109,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Wednesday, January 3, 2018 3:21:48 PM CET
+Date: Wednesday, January 3, 2018 3:56:17 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2139,12 +2140,50 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 3, 2018 3:21:48 PM CET
+Date: Wednesday, January 3, 2018 3:56:17 PM CET
 Content-Type: application/json
 </code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-Dataset">Dataset</a></p>
+
+    <pre class="example"><code class="http">
+DELETE //dataset/{key} HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">DELETE</code> https://api.col.plus/dataset/{key}</h3>
+    <p><p>Deletes the dataset with the specified database key.</p>
+</p>
+
+
+
+
+
+            <h3 id="op4-responses" class="clear">Response 200</h3>
+    
+
+    <pre class="example"><code class="http">
+PUT //dataset/{key} HTTP/1.1
+Host: api.col.plus
+Content-Type: application/json
+</code>
+</pre>
+
+        <h3><code class="prettyprint">PUT</code> https://api.col.plus/dataset/{key}</h3>
+    <p><p>Updates the dataset specified through the JSON request body.</p>
+</p>
+
+
+    <h3 id="op5-request-body">Body</h3>
+            <p><code>application/json</code></p>
+            <p>Content: <a href="#model-Dataset">Dataset</a></p>
+
+
+
+            <h3 id="op5-responses" class="clear">Response 200</h3>
+    
 
 
         <h1 id="resource-3">/taxon</h1>
@@ -2164,7 +2203,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op4-request-params">Parameters</h3>
+        <h3 id="op6-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -2193,14 +2232,23 @@ Host: api.col.plus
                 <td><p>The requested page, defaulting to 1 for the first page</p>
 </td>
             </tr>
+            <tr>
+                <td>datasetKey</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>The database key of the dataset</p>
+</td>
+            </tr>
         </tbody></table>
 
 
-            <h3 id="op4-responses" class="clear">Response 200</h3>
+            <h3 id="op6-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 3, 2018 3:21:48 PM CET
+Date: Wednesday, January 3, 2018 3:56:17 PM CET
 Content-Type: application/json
 </code>
 </pre>

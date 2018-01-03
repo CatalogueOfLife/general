@@ -30,6 +30,13 @@ traits:
         type: integer
         required: false
         description: The requested page, defaulting to 1 for the first page
+  datasetContrainable:
+    usage: Apply this to any method that allows results to be constrained to a certain dataset.
+    description: Query parameter.
+    queryParameters:
+        datasetKey:
+          type: string
+          description: The database key of the dataset
   classification:
     usage: Apply this to any method that accepts a classification given as major rank parameters
     description: Linnean classification parameters, given as monomials without authorship.
@@ -961,7 +968,22 @@ types:
       responses:
         200:
           body: Dataset
+    delete:
+      displayName: Delete dataset
+      description: Deletes the dataset with the specified database key.
+      responses:
+        200:
+    put:
+      displayName: Update dataset
+      description: Updates the dataset specified through the JSON request body.
+      body:
+        application/json:
+          type: Dataset
+      responses:
+        200:
   post:
+    displayName: Create dataset
+    description: Creates a new dataset specified through the JSON request body and returns the database key of the new dataset.
     body:
       application/json:
         type: Dataset
@@ -972,7 +994,7 @@ types:
             type: integer
 /taxon:
   get:
-    is: [paged]
+    is: [paged,datasetContrainable]
     responses:
       200:
         body: DatasetResultSet
