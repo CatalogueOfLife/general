@@ -381,6 +381,19 @@ types:
         type: string
         description: URL to access the source data
         required: false
+  DatasetImport:
+    type: object
+    description: Metrics and import details about a single dataset import event.
+    properties:
+      datasetKey:
+        type: integer
+        description: Primary key for the source dataset
+      attempt:
+        type: integer
+        description: State of the import, indicating if still running, success or failure
+      error:
+        type: string
+        description: Error message
   DatasetResultSet:
     type: ResultSet
     description: >
@@ -962,9 +975,9 @@ types:
       200:
         body: DatasetResultSet
   /{key}:
-    displayName: Get
-    description: Retrieves the dataset with the specified key.
     get:
+      displayName: Get dataset
+      description: Retrieves the dataset with the specified key.
       responses:
         200:
           body: Dataset
@@ -981,6 +994,16 @@ types:
           type: Dataset
       responses:
         200:
+    /import:
+      get:
+        displayName: Dataset import metrics
+        description: Returns import metrics for the dataset with the specified key.
+        responses:
+          200:
+            description: A list of datset import metric objects
+            body:
+              application/json:
+                type: DatasetImport[]
   post:
     displayName: Create dataset
     description: Creates a new dataset specified through the JSON request body and returns the database key of the new dataset.

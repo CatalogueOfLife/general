@@ -383,6 +383,46 @@
 </td>
                                 </tr>
                             </tbody></table>
+                        <h2 id="model-DatasetImport">DatasetImport</h2>
+
+
+    <p><p>Metrics and import details about a single dataset import event.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>datasetKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Primary key for the source dataset</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>attempt</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>State of the import, indicating if still running, success or failure</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>error</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Error message</p>
+</td>
+                                </tr>
+                            </tbody></table>
                         <h2 id="model-DatasetResultSet">DatasetResultSet</h2>
 
 
@@ -2080,7 +2120,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 3, 2018 3:56:17 PM CET
+Date: Wednesday, January 3, 2018 4:26:55 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2109,7 +2149,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Wednesday, January 3, 2018 3:56:17 PM CET
+Date: Wednesday, January 3, 2018 4:26:55 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2119,8 +2159,7 @@ Content-Type: application/json
 
         <h2 id="resource-2">/dataset/{key}</h2>
 
-    <p><p>Retrieves the dataset with the specified key.</p>
-</p>
+    
 
 
     <pre class="example"><code class="http">
@@ -2130,7 +2169,8 @@ Host: api.col.plus
 </pre>
 
         <h3><code class="prettyprint">GET</code> https://api.col.plus/dataset/{key}</h3>
-    
+    <p><p>Retrieves the dataset with the specified key.</p>
+</p>
 
 
 
@@ -2140,7 +2180,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 3, 2018 3:56:17 PM CET
+Date: Wednesday, January 3, 2018 4:26:55 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2186,7 +2226,39 @@ Content-Type: application/json
     
 
 
-        <h1 id="resource-3">/taxon</h1>
+        <h2 id="resource-3">/dataset/{key}/import</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //dataset/{key}/import HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/dataset/{key}/import</h3>
+    <p><p>Returns import metrics for the dataset with the specified key.</p>
+</p>
+
+
+
+
+
+            <h3 id="op6-responses" class="clear">Response 200</h3>
+    <p><p>A list of datset import metric objects</p>
+</p>
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, January 3, 2018 4:26:55 PM CET
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-DatasetImport">DatasetImport[]</a></p>
+
+
+        <h1 id="resource-4">/taxon</h1>
 
     
 
@@ -2203,7 +2275,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op6-request-params">Parameters</h3>
+        <h3 id="op7-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -2244,11 +2316,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op6-responses" class="clear">Response 200</h3>
+            <h3 id="op7-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 3, 2018 3:56:17 PM CET
+Date: Wednesday, January 3, 2018 4:26:55 PM CET
 Content-Type: application/json
 </code>
 </pre>
