@@ -2064,6 +2064,15 @@ Host: api.col.plus
                 <td><p>The requested page, defaulting to 1 for the first page</p>
 </td>
             </tr>
+            <tr>
+                <td>q</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>full text search query</p>
+</td>
+            </tr>
         </tbody></table>
 
 
@@ -2071,32 +2080,91 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 3, 2018 1:03:01 PM CET
+Date: Wednesday, January 3, 2018 3:21:48 PM CET
 Content-Type: application/json
 </code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-DatasetResultSet">DatasetResultSet</a></p>
 
+    <pre class="example"><code class="http">
+POST //dataset HTTP/1.1
+Host: api.col.plus
+Content-Type: application/json
+</code>
+</pre>
 
-        <h2 id="resource-2">/dataset/{dataset}</h2>
+        <h3><code class="prettyprint">POST</code> https://api.col.plus/dataset</h3>
+    
+
+
+    <h3 id="op2-request-body">Body</h3>
+            <p><code>application/json</code></p>
+            <p>Content: <a href="#model-Dataset">Dataset</a></p>
+
+
+
+            <h3 id="op2-responses" class="clear">Response 201</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 201 Created
+Date: Wednesday, January 3, 2018 3:21:48 PM CET
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: integer</p>
+
+
+        <h2 id="resource-2">/dataset/{key}</h2>
+
+    <p><p>Retrieves the dataset with the specified key.</p>
+</p>
+
+
+    <pre class="example"><code class="http">
+GET //dataset/{key} HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/dataset/{key}</h3>
+    
+
+
+
+
+
+            <h3 id="op3-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, January 3, 2018 3:21:48 PM CET
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Dataset">Dataset</a></p>
+
+
+        <h1 id="resource-3">/taxon</h1>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dataset} HTTP/1.1
+GET //taxon HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> https://api.col.plus/dataset/{dataset}</h3>
-    <p><p>Get a Dataset by its key</p>
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/taxon</h3>
+    <p><p>Paging parameters.</p>
 </p>
 
 
 
-        <h3 id="op2-request-params">Parameters</h3>
+        <h3 id="op4-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -2107,28 +2175,37 @@ Host: api.col.plus
             <th>Description</th>
         </tr>
         </thead><tbody>
-                <tr>
-                    <td>{dataset}</td>
-                    <td>integer</td>
-                    <td></td>
-                    <td>yes</td>
-                    <td></td>
-                    <td><p>dataset key</p>
+            <tr>
+                <td>offset</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of offset records</p>
 </td>
-                </tr>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested page, defaulting to 1 for the first page</p>
+</td>
+            </tr>
         </tbody></table>
 
 
-            <h3 id="op2-responses" class="clear">Response 200</h3>
+            <h3 id="op4-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 3, 2018 1:03:01 PM CET
+Date: Wednesday, January 3, 2018 3:21:48 PM CET
 Content-Type: application/json
 </code>
 </pre>
                     <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-Dataset">Dataset</a></p>
+                    <p>Content: <a href="#model-DatasetResultSet">DatasetResultSet</a></p>
 
 
         <aside class="success">

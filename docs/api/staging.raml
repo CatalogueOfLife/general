@@ -950,17 +950,29 @@ types:
         description: Links to references supporting the distribution record
 /dataset:
   get:
+    is: [paged,query]
+    responses:
+      200:
+        body: DatasetResultSet
+  /{key}:
+    displayName: Get
+    description: Retrieves the dataset with the specified key.
+    get:
+      responses:
+        200:
+          body: Dataset
+  post:
+    body:
+      application/json:
+        type: Dataset
+    responses:
+      201:
+        body:
+          application/json:
+            type: integer
+/taxon:
+  get:
     is: [paged]
     responses:
       200:
         body: DatasetResultSet
-  /{dataset}:
-    get:
-      description: Get a Dataset by its key
-      responses:
-        200:
-          body: Dataset
-    uriParameters:
-      dataset:
-        type: integer
-        description: dataset key
