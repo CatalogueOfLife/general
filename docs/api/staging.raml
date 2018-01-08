@@ -1030,4 +1030,40 @@ types:
     is: [paged,datasetContrainable]
     responses:
       200:
-        body: DatasetResultSet
+        body: Taxon[]
+  /{id}/{datasetKey}:
+    get:
+      displayName: Lookup taxon key
+      description: Looks up the internal database key using the original, GSD-provided ID of the taxon and the database key of the dataset.
+      responses:
+        200:
+          body: integer
+  /{key}:
+    get:
+      displayName: Get taxon
+      description: Retrieves the taxon with the specified key.
+      responses:
+        200:
+          body: Taxon
+    /children:
+      get:
+        displayName: Get children
+        description: Retrieves all children of the taxon with the specified key, e.g. all family-ranked taxa for an order-ranked taxon.
+        responses:
+          200:
+            body: Taxon[]
+    /classification:
+      get:
+        displayName: Get classification
+        description: Returns the taxonomic ancestry of the taxon with the specified key, i.e. all ancestral taxa up to the taxon's kingdom.
+        responses:
+          200:
+            body: Taxon[]
+    /info:
+      get:
+        displayName: Get taxon info
+        description: Returns a TaxonInfo object containing extra information about the taxon with the specified key.
+        responses:
+          200:
+            body: TaxonInfo
+      

@@ -2120,7 +2120,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 3, 2018 4:32:16 PM CET
+Date: Monday, January 8, 2018 8:54:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2149,7 +2149,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Wednesday, January 3, 2018 4:32:16 PM CET
+Date: Monday, January 8, 2018 8:54:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2180,7 +2180,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 3, 2018 4:32:16 PM CET
+Date: Monday, January 8, 2018 8:54:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2250,7 +2250,7 @@ Host: api.col.plus
 </p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 3, 2018 4:32:16 PM CET
+Date: Monday, January 8, 2018 8:54:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2282,7 +2282,7 @@ Host: api.col.plus
 </p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 3, 2018 4:32:16 PM CET
+Date: Monday, January 8, 2018 8:54:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2352,12 +2352,167 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 3, 2018 4:32:16 PM CET
+Date: Monday, January 8, 2018 8:54:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
                     <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-DatasetResultSet">DatasetResultSet</a></p>
+                    <p>Content: <a href="#model-Taxon">Taxon[]</a></p>
+
+
+        <h2 id="resource-6">/taxon/{id}/{datasetKey}</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //taxon/{id}/{datasetKey} HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/taxon/{id}/{datasetKey}</h3>
+    <p><p>Looks up the internal database key using the original, GSD-provided ID of the taxon and the database key of the dataset.</p>
+</p>
+
+
+
+
+
+            <h3 id="op9-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Monday, January 8, 2018 8:54:49 AM CET
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: integer</p>
+
+
+        <h2 id="resource-7">/taxon/{key}</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //taxon/{key} HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/taxon/{key}</h3>
+    <p><p>Retrieves the taxon with the specified key.</p>
+</p>
+
+
+
+
+
+            <h3 id="op10-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Monday, January 8, 2018 8:54:49 AM CET
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Taxon">Taxon</a></p>
+
+
+        <h2 id="resource-8">/taxon/{key}/children</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //taxon/{key}/children HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/taxon/{key}/children</h3>
+    <p><p>Retrieves all children of the taxon with the specified key, e.g. all family-ranked taxa for an order-ranked taxon.</p>
+</p>
+
+
+
+
+
+            <h3 id="op11-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Monday, January 8, 2018 8:54:49 AM CET
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Taxon">Taxon[]</a></p>
+
+
+        <h2 id="resource-9">/taxon/{key}/classification</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //taxon/{key}/classification HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/taxon/{key}/classification</h3>
+    <p><p>Returns the taxonomic ancestry of the taxon with the specified key, i.e. all ancestral taxa up to the taxon&rsquo;s kingdom.</p>
+</p>
+
+
+
+
+
+            <h3 id="op12-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Monday, January 8, 2018 8:54:49 AM CET
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Taxon">Taxon[]</a></p>
+
+
+        <h2 id="resource-10">/taxon/{key}/info</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //taxon/{key}/info HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/taxon/{key}/info</h3>
+    <p><p>Returns a TaxonInfo object containing extra information about the taxon with the specified key.</p>
+</p>
+
+
+
+
+
+            <h3 id="op13-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Monday, January 8, 2018 8:54:49 AM CET
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-TaxonInfo">TaxonInfo</a></p>
 
 
         <aside class="success">
