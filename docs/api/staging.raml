@@ -587,13 +587,38 @@ types:
         "fossil": false,
         "available": true
       }
-  NameMatch:
-    type: MatchResult
-    description: A name matching result.
+  NameSearchSortBy:
+    type: string
+    enum: ["RELEVANCE", "NAME"]
+    description: Sort options for name searches. 
+  NameSearch:
+    type: object
+    description: A name search criteria object. 
     properties:
-      alternatives:
-        type: Name[]
-        description: Alternative, discarded name matches for debugging puposes
+      q:
+        type: string
+        description: Full-text search query
+      datasetKey:
+        type: integer
+        description: The database key of the dataset containing the names
+      key:
+        type: integer
+        description: The database key of the name
+      rank:
+        type: RankType
+        description: The taxonomic rank of the name
+      nomstatus:
+        type: NomStatusType
+        description: The status of the name
+      taxstatus:
+        type: TaxonomicStatusType
+        description: The taxonomic status of the name
+      type:
+        type: NameType
+        description: The type of the name
+      sortBy:
+        type: NameSearchSortBy
+        description: Specifies how to sort the names satisfying the search criteria.
   NameResultSet:
     type: ResultSet
     description: >
@@ -603,40 +628,25 @@ types:
         type: Name[]
         description: the resulting names
   NameSearchResult:
-    type: object
+    type: Name
     description: |
-      A scientific name as part of a search result.
+      The type of object coming back from a name search query. A NameSearchResult object is a
+      Name object with some extra properties related to synonymy. See below.
     properties:
-      taxonKey:
-        type: integer
-        description: key of the accepted taxon this name belongs to, either as a synonym or the accepted name itself.
+      acceptedName:
+        type: boolean
+        description: >
+          Whether or not this is an accepted name. If true, the taxa field
+          will be a one-element list containing the Taxon associated with the
+          accepted name. If acceptedName is false, then the name either is a
+          synonym or it is a naked name. If the taxa field is empty, it is
+          a naked name. If the taxa field contains one or more Taxon objects,
+          the name is a synonym, and the taxa field will contain the Taxon
+          objects associated with the accepted names of the synonym.
         required: true
-      name:
-         type: Name
-         description: the name
-      status:
-         type: TaxonomicStatusType
-         description: taxonomic status
-    example: |
-      {
-        "taxonKey": 892134,
-        "status": "accepted",
-        "name": {
-          "key": 21242,
-          "datasetKey": 15,
-          "scientificName": "Crepicnema parvula",
-          "rank": "species",
-          "authorship": "(Jacoby, 1885)",
-          "nomenclaturalCode": "zoological",
-          "genus": "Crepicnema",
-          "specificEpithet": "parvula",
-          "originalAuthors": ["Jacoby"],
-          "originalYear": 1885,
-          "originalNameKey": 8673,
-          "fossil": false,
-          "available": true
-        }
-      }
+      taxa:
+        type: Taxon[]
+        description: See above.
   NameSearchResultSet:
     type: ResultSet
     description: >
@@ -1030,40 +1040,98 @@ types:
     is: [paged,datasetContrainable]
     responses:
       200:
-        body: Taxon[]
+        body:
+          application/json:
+            type: ResultSet
   /{id}/{datasetKey}:
     get:
       displayName: Lookup taxon key
       description: Looks up the internal database key using the original, GSD-provided ID of the taxon and the database key of the dataset.
       responses:
         200:
-          body: integer
+          body:
+            application/json:
+              type: integer
   /{key}:
     get:
       displayName: Get taxon
       description: Retrieves the taxon with the specified key.
       responses:
         200:
-          body: Taxon
+          body:
+            application/json:
+              type: Taxon
     /children:
       get:
         displayName: Get children
         description: Retrieves all children of the taxon with the specified key, e.g. all family-ranked taxa for an order-ranked taxon.
         responses:
           200:
-            body: Taxon[]
+            body:
+              application/json:
+                type: Taxon[]
     /classification:
       get:
         displayName: Get classification
         description: Returns the taxonomic ancestry of the taxon with the specified key, i.e. all ancestral taxa up to the taxon's kingdom.
         responses:
           200:
-            body: Taxon[]
+            body:
+              application/json:
+                type: Taxon[]
     /info:
       get:
         displayName: Get taxon info
         description: Returns a TaxonInfo object containing extra information about the taxon with the specified key.
         responses:
           200:
-            body: TaxonInfo
+            body:
+              application/json:
+                type: TaxonInfo
+/name:
+  get:
+    is: [paged,datasetContrainable]
+    responses:
+      200:
+        body:
+          application/json:
+            type: ResultSet
+  /search:
+    get:
+      displayName: Name search
+      description: Executes a name search.
+      is: [paged]
+      queryParameters:
+        q:
+        datasetKey:
+        key:
+        rank:
+        nomstatus:
+        taxstatus:
+        issue:
+        type:
+        sortBy:
+      responses:
+        200:
+          body:
+            application/json:
+              type: ResultSet    
+  /{id}/{datasetKey}:
+    get:
+      displayName: Lookup name key
+      description: Looks up the internal database key using the original, GSD-provided ID of the name and the database key of the dataset.
+      responses:
+        200:
+          body:
+            application/json:
+              type: integer
+  /{key}:
+    get:
+      displayName: Get name
+      description: Retrieves the name with the specified key.
+      responses:
+        200:
+          body:
+            application/json:
+              type: Name
       

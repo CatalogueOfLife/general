@@ -739,10 +739,10 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
 </td>
                                 </tr>
                             </tbody></table>
-                        <h2 id="model-NameMatch">NameMatch</h2>
+                        <h2 id="model-NameSearch">NameSearch</h2>
 
 
-    <p><p>A name matching result.</p>
+    <p><p>A name search criteria object.</p>
 </p>
 
                             <table><thead>
@@ -755,27 +755,67 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>alternatives</td>
-                                    <td>object[]</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Alternative, discarded matches for debugging puposes</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>matchType</td>
-                                    <td><a href="#model-MatchType">MatchType</a></td>
-                                    <td>exact, fuzzy, higherrank, none</td>
-                                    <td>yes</td>
-                                    <td><p>the kind of match</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>note</td>
+                                    <td>q</td>
                                     <td>string</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>Matching remarks</p>
+                                    <td><p>Full-text search query</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>datasetKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The database key of the dataset containing the names</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>key</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The database key of the name</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>rank</td>
+                                    <td><a href="#model-RankType">RankType</a></td>
+                                    <td>kingdom, phylum, subphylum, class, subclass, order, superfamily, family, subfamily, tribe, subtribe, genus, subgenus, section, species, subspecies, variety, subvariety, form, subform</td>
+                                    <td>yes</td>
+                                    <td><p>The taxonomic rank of the name</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>nomstatus</td>
+                                    <td><a href="#model-NomStatusType">NomStatusType</a></td>
+                                    <td>ok, unavailable, illegitimate, variant, conserved, rejected, doubtful, unevaluated</td>
+                                    <td>yes</td>
+                                    <td><p>The status of the name</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>taxstatus</td>
+                                    <td><a href="#model-TaxonomicStatusType">TaxonomicStatusType</a></td>
+                                    <td>accepted, doubtful</td>
+                                    <td>yes</td>
+                                    <td><p>The taxonomic status of the name</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>type</td>
+                                    <td><a href="#model-NameType">NameType</a></td>
+                                    <td>scientific, virus, hybrid-formula, cultivar, otu, placeholder, none</td>
+                                    <td>yes</td>
+                                    <td><p>The type of the name</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>sortBy</td>
+                                    <td><a href="#model-NameSearchSortBy">NameSearchSortBy</a></td>
+                                    <td>RELEVANCE, NAME</td>
+                                    <td>yes</td>
+                                    <td><p>Specifies how to sort the names satisfying the search criteria.</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -829,28 +869,9 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                             </tbody></table>
                         <h2 id="model-NameSearchResult">NameSearchResult</h2>
 
-    <pre class="example"><code class="json">{
-  "taxonKey": 892134,
-  "status": "accepted",
-  "name": {
-    "key": 21242,
-    "datasetKey": 15,
-    "scientificName": "Crepicnema parvula",
-    "rank": "species",
-    "authorship": "(Jacoby, 1885)",
-    "nomenclaturalCode": "zoological",
-    "genus": "Crepicnema",
-    "specificEpithet": "parvula",
-    "originalAuthors": ["Jacoby"],
-    "originalYear": 1885,
-    "originalNameKey": 8673,
-    "fossil": false,
-    "available": true
-  }
-}
-</code></pre>
 
-    <p><p>A scientific name as part of a search result.</p>
+    <p><p>The type of object coming back from a name search query. A NameSearchResult object is a
+Name object with some extra properties related to synonymy. See below.</p>
 </p>
 
                             <table><thead>
@@ -863,27 +884,176 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>taxonKey</td>
+                                    <td>key</td>
                                     <td>integer</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>key of the accepted taxon this name belongs to, either as a synonym or the accepted name itself.</p>
+                                    <td><p>Primary key for the record</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>name</td>
-                                    <td><a href="#model-Name">Name</a></td>
+                                    <td>datasetKey</td>
+                                    <td>integer</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>the name</p>
+                                    <td><p>Key to the source dataset this record belongs to</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>scientificName</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>entire canonical name string with a rank marker for infragenerics and infraspecfics, but excluding the authorship. For uninomials, e.g. families or names at higher ranks, this is just the uninomial.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>authorship</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>full unparsed authorship of the name incl basionym and years</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>rank</td>
+                                    <td><a href="#model-RankType">RankType</a></td>
+                                    <td>kingdom, phylum, subphylum, class, subclass, order, superfamily, family, subfamily, tribe, subtribe, genus, subgenus, section, species, subspecies, variety, subvariety, form, subform</td>
+                                    <td>yes</td>
+                                    <td><p>rank of the name from enumeration above</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>nomenclaturalCode</td>
+                                    <td><a href="#model-NomCodeType">NomCodeType</a></td>
+                                    <td>bacterial, botanical, cultivated, viral, zoological, unknown</td>
+                                    <td>yes</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>genus</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the genus part of a bi- or trinomial name. Not used for genus names which are represented by the scientificName alone.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>infragenericEpithet</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the infrageneric epithet. Used only as the terminal epithet for names at infrageneric ranks, not for species</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>specificEpithet</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>infraspecificEpithet</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>notho</td>
+                                    <td>enum</td>
+                                    <td>generic, infrageneric, specific, infraspecific</td>
+                                    <td>no</td>
+                                    <td><p>the part of the name which is considered a hybrid;  see <a href="https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/NamePart.java#L24">GBIF</a></p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>originalAuthors</td>
+                                    <td>string[]</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>list of basionym authors.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>originalYear</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>year of original name publication</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>combinationAuthors</td>
+                                    <td>string[]</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>list of authors excluding ex- authors</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>combinationYear</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the year this combination was first published, usually the same as the publishedIn reference. It is used for sorting names and ought to be populated even for botanical names which do not use it in the complete authorship string.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>originalNameKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>link to the original combination. In case of <a href="https://en.wikipedia.org/wiki/Nomen_novum">replacement names</a> it points back to the replaced synonym.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>fossil</td>
+                                    <td>boolean</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>true if the type specimen of the name is a fossil</p>
 </td>
                                 </tr>
                                 <tr>
                                     <td>status</td>
-                                    <td><a href="#model-TaxonomicStatusType">TaxonomicStatusType</a></td>
-                                    <td>accepted, doubtful</td>
+                                    <td><a href="#model-NomStatusType">NomStatusType</a></td>
+                                    <td>ok, unavailable, illegitimate, variant, conserved, rejected, doubtful, unevaluated</td>
+                                    <td>no</td>
+                                    <td><p>flag to indicate that this name is available/validly published</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>remark</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>notes for general remarks on the name, i.e. its nomenclature</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>colNameKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>matching name from the (provisional) Catalogue of Life.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>acceptedName</td>
+                                    <td>boolean</td>
+                                    <td></td>
                                     <td>yes</td>
-                                    <td><p>taxonomic status</p>
+                                    <td><p>Whether or not this is an accepted name. If true, the taxa field will be a one-element list containing the Taxon associated with the accepted name. If acceptedName is false, then the name either is a synonym or it is a naked name. If the taxa field is empty, it is a naked name. If the taxa field contains one or more Taxon objects, the name is a synonym, and the taxa field will contain the Taxon objects associated with the accepted names of the synonym.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>taxa</td>
+                                    <td><a href="#model-Taxon">Taxon[]</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>See above.</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -1949,6 +2119,15 @@ See Limits of Oceans &amp; Seas, Special Publication No. 23 published by the Int
 </p>
 
 
+            <h2 id="model-NameSearchSortBy">NameSearchSortBy</h2>
+
+
+            <p><strong>Enumeration</strong>: <em>RELEVANCE</em>, <em>NAME</em></p>
+
+    <p><p>Sort options for name searches.</p>
+</p>
+
+
             <h2 id="model-NameType">NameType</h2>
 
 
@@ -2120,7 +2299,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 8, 2018 8:54:49 AM CET
+Date: Tuesday, January 9, 2018 10:16:21 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2149,7 +2328,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Monday, January 8, 2018 8:54:49 AM CET
+Date: Tuesday, January 9, 2018 10:16:21 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2180,7 +2359,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 8, 2018 8:54:49 AM CET
+Date: Tuesday, January 9, 2018 10:16:21 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2250,7 +2429,7 @@ Host: api.col.plus
 </p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 8, 2018 8:54:49 AM CET
+Date: Tuesday, January 9, 2018 10:16:21 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2282,7 +2461,7 @@ Host: api.col.plus
 </p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 8, 2018 8:54:49 AM CET
+Date: Tuesday, January 9, 2018 10:16:21 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2352,12 +2531,12 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 8, 2018 8:54:49 AM CET
+Date: Tuesday, January 9, 2018 10:16:21 AM CET
 Content-Type: application/json
 </code>
 </pre>
                     <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-Taxon">Taxon[]</a></p>
+                    <p>Content: <a href="#model-ResultSet">ResultSet</a></p>
 
 
         <h2 id="resource-6">/taxon/{id}/{datasetKey}</h2>
@@ -2383,7 +2562,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 8, 2018 8:54:49 AM CET
+Date: Tuesday, January 9, 2018 10:16:21 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2414,7 +2593,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 8, 2018 8:54:49 AM CET
+Date: Tuesday, January 9, 2018 10:16:21 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2445,7 +2624,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 8, 2018 8:54:49 AM CET
+Date: Tuesday, January 9, 2018 10:16:21 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2476,7 +2655,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 8, 2018 8:54:49 AM CET
+Date: Tuesday, January 9, 2018 10:16:21 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2507,12 +2686,293 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 8, 2018 8:54:49 AM CET
+Date: Tuesday, January 9, 2018 10:16:21 AM CET
 Content-Type: application/json
 </code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-TaxonInfo">TaxonInfo</a></p>
+
+
+        <h1 id="resource-11">/name</h1>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //name HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/name</h3>
+    <p><p>Paging parameters.</p>
+</p>
+
+
+
+        <h3 id="op14-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>offset</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of offset records</p>
+</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested page, defaulting to 1 for the first page</p>
+</td>
+            </tr>
+            <tr>
+                <td>datasetKey</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>The database key of the dataset</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op14-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, January 9, 2018 10:16:21 AM CET
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-ResultSet">ResultSet</a></p>
+
+
+        <h2 id="resource-12">/name/search</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //name/search HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/name/search</h3>
+    <p><p>Executes a name search.</p>
+</p>
+
+
+
+        <h3 id="op15-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>q</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>datasetKey</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>key</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>rank</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>nomstatus</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>taxstatus</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>issue</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>sortBy</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>offset</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of offset records</p>
+</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested page, defaulting to 1 for the first page</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op15-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, January 9, 2018 10:16:21 AM CET
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-ResultSet">ResultSet</a></p>
+
+
+        <h2 id="resource-13">/name/{id}/{datasetKey}</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //name/{id}/{datasetKey} HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/name/{id}/{datasetKey}</h3>
+    <p><p>Looks up the internal database key using the original, GSD-provided ID of the name and the database key of the dataset.</p>
+</p>
+
+
+
+
+
+            <h3 id="op16-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, January 9, 2018 10:16:21 AM CET
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: integer</p>
+
+
+        <h2 id="resource-14">/name/{key}</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //name/{key} HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/name/{key}</h3>
+    <p><p>Retrieves the name with the specified key.</p>
+</p>
+
+
+
+
+
+            <h3 id="op17-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, January 9, 2018 10:16:21 AM CET
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "key": 21242,
+  "datasetKey": 15,
+  "scientificName": "Crepicnema parvula",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
+  "nomenclaturalCode": "zoological",
+  "genus": "Crepicnema",
+  "specificEpithet": "parvula",
+  "originalAuthors": ["Jacoby"],
+  "originalYear": 1885,
+  "originalNameKey": 8673,
+  "fossil": false,
+  "available": true
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Name">Name</a></p>
 
 
         <aside class="success">
