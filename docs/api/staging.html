@@ -471,6 +471,11 @@
 </td>
                                 </tr>
                             </tbody></table>
+                        <h2 id="model-ParsedName">ParsedName</h2>
+
+
+    
+
                         <h2 id="model-Name">Name</h2>
 
     <pre class="example"><code class="json">{
@@ -581,22 +586,6 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                 <th>Description</th>
                             </tr>
                             </thead><tbody>
-                                <tr>
-                                    <td>key</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Primary key for the record</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>datasetKey</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Key to the source dataset this record belongs to</p>
-</td>
-                                </tr>
                                 <tr>
                                     <td>scientificName</td>
                                     <td>string</td>
@@ -883,22 +872,6 @@ Name object with some extra properties related to synonymy. See below.</p>
                                 <th>Description</th>
                             </tr>
                             </thead><tbody>
-                                <tr>
-                                    <td>key</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Primary key for the record</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>datasetKey</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Key to the source dataset this record belongs to</p>
-</td>
-                                </tr>
                                 <tr>
                                     <td>scientificName</td>
                                     <td>string</td>
@@ -2299,7 +2272,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, January 9, 2018 10:16:21 AM CET
+Date: Thursday, January 11, 2018 4:48:41 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2328,7 +2301,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Tuesday, January 9, 2018 10:16:21 AM CET
+Date: Thursday, January 11, 2018 4:48:41 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2359,7 +2332,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, January 9, 2018 10:16:21 AM CET
+Date: Thursday, January 11, 2018 4:48:41 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2380,13 +2353,16 @@ Host: api.col.plus
 
 
 
-            <h3 id="op4-responses" class="clear">Response 200</h3>
-    
+            <h3 id="op4-responses" class="clear">Response 204</h3>
+    <p><p>Dataset deleted.</p>
+</p>
+            <h3 id="op4-responses" class="clear">Response 404</h3>
+    <p><p>Specified key does not exist.</p>
+</p>
 
     <pre class="example"><code class="http">
 PUT //dataset/{key} HTTP/1.1
 Host: api.col.plus
-Content-Type: application/json
 </code>
 </pre>
 
@@ -2395,13 +2371,12 @@ Content-Type: application/json
 </p>
 
 
-    <h3 id="op5-request-body">Body</h3>
-            <p><code>application/json</code></p>
-            <p>Content: <a href="#model-Dataset">Dataset</a></p>
 
 
 
-            <h3 id="op5-responses" class="clear">Response 200</h3>
+            <h3 id="op5-responses" class="clear">Response 204</h3>
+    
+            <h3 id="op5-responses" class="clear">Response 404</h3>
     
 
 
@@ -2429,7 +2404,7 @@ Host: api.col.plus
 </p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, January 9, 2018 10:16:21 AM CET
+Date: Thursday, January 11, 2018 4:48:41 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2461,7 +2436,7 @@ Host: api.col.plus
 </p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, January 9, 2018 10:16:21 AM CET
+Date: Thursday, January 11, 2018 4:48:41 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2531,7 +2506,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, January 9, 2018 10:16:21 AM CET
+Date: Thursday, January 11, 2018 4:48:41 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2562,7 +2537,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, January 9, 2018 10:16:21 AM CET
+Date: Thursday, January 11, 2018 4:48:41 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2593,7 +2568,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, January 9, 2018 10:16:21 AM CET
+Date: Thursday, January 11, 2018 4:48:41 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2624,7 +2599,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, January 9, 2018 10:16:21 AM CET
+Date: Thursday, January 11, 2018 4:48:41 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2655,7 +2630,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, January 9, 2018 10:16:21 AM CET
+Date: Thursday, January 11, 2018 4:48:41 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2686,7 +2661,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, January 9, 2018 10:16:21 AM CET
+Date: Thursday, January 11, 2018 4:48:41 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2756,7 +2731,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, January 9, 2018 10:16:21 AM CET
+Date: Thursday, January 11, 2018 4:48:41 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2889,7 +2864,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, January 9, 2018 10:16:21 AM CET
+Date: Thursday, January 11, 2018 4:48:41 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2909,7 +2884,7 @@ Host: api.col.plus
 </pre>
 
         <h3><code class="prettyprint">GET</code> https://api.col.plus/name/{id}/{datasetKey}</h3>
-    <p><p>Looks up the internal database key using the original, GSD-provided ID of the name and the database key of the dataset.</p>
+    <p><p>Looks up the internal database key using the original (GSD-provided) ID of the name and the database key of the dataset containing the name.</p>
 </p>
 
 
@@ -2920,7 +2895,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, January 9, 2018 10:16:21 AM CET
+Date: Thursday, January 11, 2018 4:48:41 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2951,7 +2926,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, January 9, 2018 10:16:21 AM CET
+Date: Thursday, January 11, 2018 4:48:41 PM CET
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -2973,6 +2948,307 @@ Content-Type: application/json
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-Name">Name</a></p>
+
+
+        <h2 id="resource-15">/name/{key}/synonyms</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //name/{key}/synonyms HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/name/{key}/synonyms</h3>
+    <p><p>Retrieves all names in the same basionym group as the name with the specified key.</p>
+</p>
+
+
+
+
+
+            <h3 id="op18-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Thursday, January 11, 2018 4:48:41 PM CET
+Content-Type: application/json
+</code>
+    <code class="json">[{
+  "key": 21242,
+  "datasetKey": 15,
+  "scientificName": "Crepicnema parvula",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
+  "nomenclaturalCode": "zoological",
+  "genus": "Crepicnema",
+  "specificEpithet": "parvula",
+  "originalAuthors": ["Jacoby"],
+  "originalYear": 1885,
+  "originalNameKey": 8673,
+  "fossil": false,
+  "available": true
+}
+,{
+  "key": 21242,
+  "datasetKey": 15,
+  "scientificName": "Crepicnema parvula",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
+  "nomenclaturalCode": "zoological",
+  "genus": "Crepicnema",
+  "specificEpithet": "parvula",
+  "originalAuthors": ["Jacoby"],
+  "originalYear": 1885,
+  "originalNameKey": 8673,
+  "fossil": false,
+  "available": true
+}
+]</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Name">Name[]</a></p>
+
+
+        <h2 id="resource-16">/name/{key}/publishedIn</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //name/{key}/publishedIn HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/name/{key}/publishedIn</h3>
+    <p><p>Retrieves the literature reference for the name with the specified key.</p>
+</p>
+
+
+
+
+
+            <h3 id="op19-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Thursday, January 11, 2018 4:48:41 PM CET
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "key": 432561,
+  "datasetKey": 15,
+  "serialKey": 17,
+  "csl": {
+    "DOI":"10.1038/nrd842",
+    "type":"article-journal",
+    "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
+    "title":"From the analyst's couch: Selective anticancer drugs",
+    "container-title":"Nature Reviews Drug Discovery",
+    "volume":"1",
+    "issue":"7",
+    "issued":{"date-parts":[[2002,7]]},
+    "page":"491-492"
+  }
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Reference">Reference</a></p>
+
+
+        <h2 id="resource-17">/name/{key}/verbatim</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //name/{key}/verbatim HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/name/{key}/verbatim</h3>
+    <p><p>Retrieves the verbatim DarwinCore record of the name with the specified key,</p>
+</p>
+
+
+
+
+
+            <h3 id="op20-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Thursday, January 11, 2018 4:48:41 PM CET
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-TaxonVerbatim">TaxonVerbatim</a></p>
+
+
+        <h2 id="resource-18">/name/{key}/acts</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //name/{key}/acts HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/name/{key}/acts</h3>
+    <p><p>Retrieves nomenclatural acts for the name with the specified key</p>
+</p>
+
+
+
+        <h3 id="op21-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>homotypic</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op21-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Thursday, January 11, 2018 4:48:41 PM CET
+Content-Type: application/json
+</code>
+    <code class="json">[{
+  "key": 721141,
+  "datasetKey": 15,
+  "type": "description",
+  "nameKey": 78612,
+  "referenceKey": 786,
+  "referencePage": "5"
+}
+,{
+  "key": 721141,
+  "datasetKey": 15,
+  "type": "description",
+  "nameKey": 78612,
+  "referenceKey": 786,
+  "referencePage": "5"
+}
+]</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-NomenclaturalAct">NomenclaturalAct[]</a></p>
+
+
+        <h1 id="resource-19">/parser</h1>
+
+    
+
+
+
+        <h2 id="resource-20">/parser/name</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //parser/name HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> https://api.col.plus/parser/name</h3>
+    <p><p>List parsed names.</p>
+</p>
+
+
+
+        <h3 id="op22-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>name</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>The names to parse (may occur multiple times)</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op22-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Thursday, January 11, 2018 4:48:41 PM CET
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-ParsedName">ParsedName[]</a></p>
+
+    <pre class="example"><code class="http">
+POST //parser/name HTTP/1.1
+Host: api.col.plus
+Content-Type: application/json
+</code>
+</pre>
+
+        <h3><code class="prettyprint">POST</code> https://api.col.plus/parser/name</h3>
+    <p><p>List parsed names. The names to be parsed can be specified as a JSON array in the request body; a file upload
+with one name per line, or as plain/text content in the request body.</p>
+</p>
+
+
+    <h3 id="op23-request-body">Body</h3>
+            <p><code>application/json</code></p>
+            <p>Content: any</p>
+            <p><code>multipart/form-data</code></p>
+            <p>Content: any</p>
+            <p><code>text/plain</code></p>
+            <p>Content: any</p>
+
+
+
+            <h3 id="op23-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Thursday, January 11, 2018 4:48:41 PM CET
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-ParsedName">ParsedName[]</a></p>
 
 
         <aside class="success">

@@ -402,8 +402,12 @@ types:
       results:
         type: Dataset[]
         description: the resulting Datasets
+  ParsedName:
+    type: object
+    description:
+    properties:
   Name:
-    type: DatasetObject
+    type: ParsedName
     description: |
       A scientific name.
       CoL deals and categorizes the following types of names:
@@ -995,15 +999,16 @@ types:
       displayName: Delete dataset
       description: Deletes the dataset with the specified database key.
       responses:
-        200:
+        204:
+          description: Dataset deleted.
+        404:
+          description: Specified key does not exist.
     put:
       displayName: Update dataset
       description: Updates the dataset specified through the JSON request body.
-      body:
-        application/json:
-          type: Dataset
       responses:
-        200:
+        204:
+        404:
     /import:
       get:
         displayName: All dataset import metrics
@@ -1115,11 +1120,11 @@ types:
         200:
           body:
             application/json:
-              type: ResultSet    
+              type: ResultSet
   /{id}/{datasetKey}:
     get:
       displayName: Lookup name key
-      description: Looks up the internal database key using the original, GSD-provided ID of the name and the database key of the dataset.
+      description: Looks up the internal database key using the original (GSD-provided) ID of the name and the database key of the dataset containing the name.
       responses:
         200:
           body:
@@ -1134,4 +1139,71 @@ types:
           body:
             application/json:
               type: Name
-      
+  /{key}/synonyms:
+    get:
+      displayName: Get basionym group
+      description: Retrieves all names in the same basionym group as the name with the specified key.
+      responses:
+        200:
+          body:
+            application/json:
+              type: Name[]
+  /{key}/publishedIn:
+    get:
+      displayName: Get literature reference
+      description: Retrieves the literature reference for the name with the specified key.
+      responses:
+        200:
+          body:
+            application/json:
+              type: Reference
+  /{key}/verbatim:
+    get:
+      displayName: Get verbatim record
+      description: Retrieves the verbatim DarwinCore record of the name with the specified key,
+      responses:
+        200:
+          body:
+            application/json:
+              type: TaxonVerbatim              
+  /{key}/acts:
+    get:
+      displayName: Get nomenclatural acts
+      description: Retrieves nomenclatural acts for the name with the specified key
+      queryParameters:
+        homotypic:
+      responses:
+        200:
+          body:
+            application/json:
+              type: NomenclaturalAct[]
+/parser:
+  /name:
+    get:
+      displayName: List parsed names
+      description: List parsed names.
+      queryParameters:
+        name:
+          description: The names to parse (may occur multiple times)
+      responses:
+        200:
+          body:
+            application/json:
+              type: ParsedName[]
+    post:
+      displayName: List parsed names
+      description: |
+        List parsed names. The names to be parsed can be specified as a JSON array in the request body; a file upload 
+        with one name per line, or as plain/text content in the request body.
+      body:
+        application/json:
+          description: A JSON array of names to be parsed
+        multipart/form-data:
+          description: A file upload; one name per line
+        text/plain:
+          description: A plain/text content body; one name per line
+      responses:
+        200:
+          body:
+            application/json:
+              type: ParsedName[]
