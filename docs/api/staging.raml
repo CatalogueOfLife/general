@@ -30,7 +30,7 @@ traits:
         type: integer
         required: false
         description: The requested page, defaulting to 1 for the first page
-  datasetContrainable:
+  datasetConstrainable:
     usage: Apply this to any method that allows results to be constrained to a certain dataset.
     description: Query parameter.
     queryParameters:
@@ -71,7 +71,7 @@ types:
     description: 2 or 3 letter codes as used by ISO country or languages
   RankType:
     type: string
-    enum: ["kingdom", "phylum", "subphylum", "class", "subclass", "order",
+    enum: ["kingdom", "phylum", "subphylum", "class", "subclass", "order", "suborder",
     "superfamily", "family", "subfamily", "tribe", "subtribe", "genus", "subgenus", "section",
     "species", "subspecies", "variety", "subvariety", "form", "subform"]
     description: >
@@ -109,7 +109,7 @@ types:
 
       zoological
       : [zoological code](http://www.nhm.ac.uk/hosted-sites/iczn/code/)
-  NomStatusType:
+  NomenclaturalStatusType:
     type: string
     enum: ["ok", "unavailable", "illegitimate", "variant", "conserved", "rejected", "doubtful", "unevaluated"]
     description: >
@@ -188,7 +188,7 @@ types:
     enum: ["brackish", "freshwater", "marine", "terrestrial"]
     description: >
       Coarse classification of the environment an organism lives in.
-  AreaStandardType:
+  GazetteerType:
     type: string
     enum: ["tdwg", "iso", "fao", "fao-fishing", "longhurst", "teow", "iho", "text"]
     description: |
@@ -243,6 +243,10 @@ types:
     type: string
     enum: ["exact", "fuzzy", "higherrank", "none"]
     description: Enumeration of the kind of matches possible.
+  SortByType:
+    type: string
+    enum: ["relevance", "name"]
+    description: Sort options for searches.
   Error:
     type: object
     description: >
@@ -564,17 +568,20 @@ types:
         description: true if the type specimen of the name is a fossil
         required: false
       status:
-        type: NomStatusType
+        type: NomenclaturalStatusType
         description: flag to indicate that this name is available/validly published
         required: false
-      remark:
+      sourceUrl:
+        type: string
+        description: URL to the taxon webpage in the source.
+        required: false
+      remarks:
         type: string
         description: notes for general remarks on the name, i.e. its nomenclature
         required: false
-      colNameKey:
-        type: integer
-        description: matching name from the (provisional) Catalogue of Life.
-        required: false
+      issues:
+        type: object
+        description: Map of issues spotted during processing.
     example: |
       {
         "key": 21242,
@@ -591,10 +598,6 @@ types:
         "fossil": false,
         "available": true
       }
-  NameSearchSortBy:
-    type: string
-    enum: ["RELEVANCE", "NAME"]
-    description: Sort options for name searches. 
   NameSearch:
     type: object
     description: A name search criteria object. 
@@ -612,7 +615,7 @@ types:
         type: RankType
         description: The taxonomic rank of the name
       nomstatus:
-        type: NomStatusType
+        type: NomenclaturalStatusType
         description: The status of the name
       taxstatus:
         type: TaxonomicStatusType
@@ -621,7 +624,7 @@ types:
         type: NameType
         description: The type of the name
       sortBy:
-        type: NameSearchSortBy
+        type: SortByType
         description: Specifies how to sort the names satisfying the search criteria.
   NameResultSet:
     type: ResultSet
@@ -672,6 +675,10 @@ types:
       type:
         type: NomenclaturalActType
         description: Coarse classification of the nomenclatural act.
+      status:
+        type: NomenclaturalStatusType
+        description: Coarse classification of the nomenclatural act.
+        required: false
       relatedNameKey:
         type: integer
         description: key to the related name of the act in case the act defines a name relation
@@ -895,10 +902,6 @@ types:
         type: integer[]
         description: keys to references supporting the taxon concept.
         required: false
-      sourceLink:
-        type: string
-        description: URL to the taxon webpage in the source.
-        required: false
       speciesEstimate:
         type: integer
         description: Estimation of total number of species that have been described for this group.
@@ -907,6 +910,13 @@ types:
         type: integer
         description: Key to reference supporting the estimated number.
         required: false
+      remarks:
+        type: string
+        description: notes for general remarks on the taxon
+        required: false
+      issues:
+        type: object
+        description: Map of issues spotted during processing.
   TaxonMatch:
     type: MatchResult
     description: A taxon matching result.
@@ -943,18 +953,28 @@ types:
       references:
         type: TaxonReference[]
         description: List of all distinct references supporting the taxon concept, distribution or vernacular names as referenced by the individual record.
-  TaxonVerbatim:
+  VerbatimRecord:
     type: DatasetObject
     description: >
-      Verbatim version of the taxon given as DwC terms.
+      Verbatim version of the entire source record with issues flagged during processing.
     properties:
+      terms:
+        type: VerbatimRecordTerms
+        description: The verbatim source data
+  VerbatimRecordTerms:
+    type: object
+    description: >
+      Verbatim version of the entire Dwc star record given as DwC terms.
+      This includes data about the name, taxon, vernacular, distribution, etc.
+    properties:
+      core:
+        type: object
+        description: Map of core DwC terms to their value.
       extensions:
         type: object
-        description: Map of extension rowType URLs to array of records with DwC terms value pairs.
-      modified:
-        type: datetime
+        description: Map of extension rowType URLs to array of records with DwC terms value pairs similar to core.
   VernacularName:
-    type: DatasetObject
+    type: object
     description: A vernacular name
     properties:
       name:
@@ -962,23 +982,26 @@ types:
         description: the vernacular name
       language:
         type: isocode
-        description: the language given as 2 or 3 letter ISO codes
+        description: the language given as 3 letter ISO codes
+      country:
+        type: isocode
+        description: the country given as 2 letter ISO codes
       referenceKeys:
         type: integer[]
         description: Links to references supporting the vernacular name record
   Distribution:
     type: object
-    description: TODO An area distribution record
+    description: An area distribution record
     properties:
       area:
         type: string
-        description: the language given as 2 or 3 letter ISO codes
-      areaStandard:
-        type: AreaStandardType
-        description: The standard the area value refers to.
+        description: the geographic area the distribution refers to as defined in the corresponding area standard.
+      gazetteer:
+        type: GazetteerType
+        description: The standard of area names the area value refers to.
       status:
         type: DistributionStatusType
-        description: The status of the distribution
+        description: The status of the species distribution
       referenceKeys:
         type: integer[]
         description: Links to references supporting the distribution record
@@ -988,6 +1011,17 @@ types:
     responses:
       200:
         body: DatasetResultSet
+  post:
+    displayName: Create dataset
+    description: Creates a new dataset specified through the JSON request body and returns the database key of the new dataset.
+    body:
+      application/json:
+        type: Dataset
+    responses:
+      201:
+        body:
+          application/json:
+            type: integer
   /{key}:
     get:
       displayName: Get dataset
@@ -1009,40 +1043,34 @@ types:
       responses:
         204:
         404:
+    uriParameters:
+      key:
+        type: integer
+        description: dataset key
     /import:
       get:
-        displayName: All dataset import metrics
-        description: Returns all import metrics for the dataset with the specified key.
+        description: Retrieve import metrics for the dataset with the specified key. By default just returns the last successful import
+        queryParameters:
+          all:
+            type: boolean
+            description: if true returns all import metrics arranged chronologically
         responses:
           200:
-            description: A list of datset import metric objects
-            body:
-              application/json:
-                type: DatasetImport[]
-      /last:
+            body: DatasetImport[]
+    /verbatim:
+      /{id}:
         get:
-          displayName: Dataset import metrics
-          description: Returns import metrics for the last import of the dataset with the specified key.
+          description: Get the verbatim representation of a source record by its dwca core id
           responses:
             200:
-              description: An import metric object
-              body:
-                application/json:
-                  type: DatasetImport
-  post:
-    displayName: Create dataset
-    description: Creates a new dataset specified through the JSON request body and returns the database key of the new dataset.
-    body:
-      application/json:
-        type: Dataset
-    responses:
-      201:
-        body:
-          application/json:
-            type: integer
+              body: VerbatimRecord
+        uriParameters:
+          id:
+            type: string
+            description: dwc archive core id of the record
 /taxon:
   get:
-    is: [paged,datasetContrainable]
+    is: [paged,datasetConstrainable]
     responses:
       200:
         body:
@@ -1051,12 +1079,19 @@ types:
   /{id}/{datasetKey}:
     get:
       displayName: Lookup taxon key
-      description: Looks up the internal database key using the original, GSD-provided ID of the taxon and the database key of the dataset.
+      description: Looks up the internal taxon key using the original taxon ID as provided by the dataset.
       responses:
         200:
           body:
             application/json:
               type: integer
+    uriParameters:
+      id:
+        type: string
+        description: original, dataset provided id for the taxon
+      datasetKey:
+        type: integer
+        description: dataset key
   /{key}:
     get:
       displayName: Get taxon
@@ -1066,41 +1101,192 @@ types:
           body:
             application/json:
               type: Taxon
-    /children:
-      get:
-        displayName: Get children
-        description: Retrieves all children of the taxon with the specified key, e.g. all family-ranked taxa for an order-ranked taxon.
-        responses:
-          200:
-            body:
-              application/json:
-                type: Taxon[]
-    /classification:
-      get:
-        displayName: Get classification
-        description: Returns the taxonomic ancestry of the taxon with the specified key, i.e. all ancestral taxa up to the taxon's kingdom.
-        responses:
-          200:
-            body:
-              application/json:
-                type: Taxon[]
+    uriParameters:
+      key:
+        type: integer
+        description: dataset key
     /info:
       get:
         displayName: Get taxon info
-        description: Returns a TaxonInfo object containing extra information about the taxon with the specified key.
+        description: Returns a TaxonInfo object containing all details about the taxon with the specified key and its supplementary information.
         responses:
           200:
             body:
               application/json:
                 type: TaxonInfo
+    /classification:
+      get:
+        displayName: Get classification
+        description: Returns the taxonomic ancestry of the taxon with the specified key, i.e. all ancestral taxa up to the taxon's kingdom starting with the direct parent taxon.
+        responses:
+          200:
+            body:
+              application/json:
+                type: Taxon[]
+    /children:
+      get:
+        description: Page through all direct children of the taxon regardless of the rank.
+        responses:
+          200:
+            body: TaxonResultSet
+    /synonyms:
+      get:
+        description: >
+          get list of all synonyms chronologically arranged by homotypic groups.
+          Nested homotypic names are based on the same original name in sublists.
+          Example given for synonymy of Agoseris grandiflora (Nutt.) Greene
+          Example: Barkhausia lessingii Hook. & Arn. nom. illeg. is a homotypical synonym of Agoseris apargioides (Less.) Greene
+        responses:
+          200:
+            body:
+              type: Name[][]
+              example: |
+                [
+                    [
+                        {
+                            "key": 21242,
+                            "datasetKey": 15,
+                            "scientificName": "Stylopappus grandiflorus",
+                            "authorship": "Nutt.",
+                            "rank": "species",
+                            "nomenclaturalCode": "botanical",
+                            "genus": "Stylopappus",
+                            "specificEpithet": "grandiflorus",
+                            "combinationAuthors": ["Nutt."],
+                            "combinationYear": 1841,
+                            "originalNameKey": 21242
+                         },
+                        {
+                            "key": 21243,
+                            "datasetKey": 15,
+                            "scientificName": "Macrorhynchus grandiflorus",
+                            "authorship": "(Nutt.) Torr. & A. Gray",
+                            "rank": "species",
+                            "nomenclaturalCode": "botanical",
+                            "genus": "Stylopappus",
+                            "specificEpithet": "grandiflorus",
+                            "originalAuthors": ["Nutt."],
+                            "combinationAuthors": ["Torr.", "A. Gray"],
+                            "combinationYear": 1843,
+                            "originalNameKey": 21242
+                        },
+                        {
+                            "key": 21244,
+                            "datasetKey": 15,
+                            "scientificName": "Troximon grandiflorum",
+                            "authorship": "(Nutt.) A. Gray",
+                            "rank": "species",
+                            "nomenclaturalCode": "botanical",
+                            "genus": "Troximon",
+                            "specificEpithet": "grandiflorum",
+                            "originalAuthors": ["Nutt."],
+                            "combinationAuthors": ["A. Gray"],
+                            "combinationYear": 1874,
+                            "originalNameKey": 21242
+                         }
+                    ],
+                    [
+                        {
+                            "key": 13078,
+                            "datasetKey": 15,
+                            "scientificName": "Troximon marshallii",
+                            "authorship": "Greene",
+                            "rank": "species",
+                            "nomenclaturalCode": "botanical",
+                            "genus": "Troximon",
+                            "specificEpithet": "marshallii",
+                            "combinationAuthors": ["Greene"],
+                            "combinationYear": 1888,
+                            "originalNameKey": 13078
+                        },
+                        {
+                            "key": 13079,
+                            "datasetKey": 15,
+                            "scientificName": "Agoseris marshallii",
+                            "authorship": "(Greene) Greene",
+                            "rank": "species",
+                            "nomenclaturalCode": "botanical",
+                            "genus": "Agoseris",
+                            "specificEpithet": "marshallii",
+                            "originalAuthors": ["Greene"],
+                            "combinationAuthors": ["Greene"],
+                            "combinationYear": 1891,
+                            "originalNameKey": 13078
+                        },
+                        {
+                            "key": 13080,
+                            "datasetKey": 15,
+                            "scientificName": "Agoseris marshalii",
+                            "authorship": "(Greene) Greene",
+                            "rank": "species",
+                            "nomenclaturalCode": "botanical",
+                            "status": "variant",
+                            "genus": "Agoseris",
+                            "specificEpithet": "marshalii",
+                            "originalAuthors": ["Greene"],
+                            "combinationAuthors": ["Greene"],
+                            "combinationYear": 1891,
+                            "originalNameKey": 13078
+                        }
+                    ],
+                    [
+                        {
+                            "key": 13122,
+                            "datasetKey": 15,
+                            "scientificName": "Troximon plebeium",
+                            "authorship": "Greene",
+                            "rank": "species",
+                            "nomenclaturalCode": "botanical",
+                            "genus": "Troximon",
+                            "specificEpithet": "plebeium",
+                            "combinationAuthors": ["Greene"],
+                            "combinationYear": 1890,
+                            "originalNameKey": 13122
+                        },
+                        {
+                            "key": 13123,
+                            "datasetKey": 15,
+                            "scientificName": "Agoseris plebeia",
+                            "authorship": "(Greene) Greene",
+                            "rank": "species",
+                            "nomenclaturalCode": "botanical",
+                            "genus": "Agoseris",
+                            "specificEpithet": "plebeia",
+                            "originalAuthors": ["Greene"],
+                            "combinationAuthors": ["Greene"],
+                            "combinationYear": 1891,
+                            "originalNameKey": 13122
+                        },
+                        {
+                            "key": 13124,
+                            "datasetKey": 15,
+                            "scientificName": "Agoseris grandiflora var. plebeia",
+                            "authorship": "(Greene) G. L. Wittr.",
+                            "rank": "variety",
+                            "nomenclaturalCode": "botanical",
+                            "genus": "Agoseris",
+                            "specificEpithet": "grandiflora",
+                            "infraSpecificEpithet": "plebeia",
+                            "originalAuthors": ["Greene"],
+                            "combinationAuthors": ["G. L. Wittr."],
+                            "combinationYear": 1928,
+                            "originalNameKey": 13122
+                        }
+                    ]
+                ]
+    /verbatim:
+      get:
+        displayName: Get verbatim record for the taxon
+        description: Retrieves the verbatim DarwinCore record of the taxon with the specified key,
+        responses:
+          200:
+            body: VerbatimRecord
 /name:
   get:
-    is: [paged,datasetContrainable]
+    is: [paged,datasetConstrainable]
     responses:
       200:
-        body:
-          application/json:
-            type: ResultSet
+        body: NameResultSet
   /search:
     get:
       displayName: Name search
@@ -1108,75 +1294,137 @@ types:
       is: [paged]
       queryParameters:
         q:
+          type: string
+          description: main query string
+          required: false
         datasetKey:
-        key:
+          type: integer
+          description: dataset key
+          required: false
         rank:
+          type: RankType
+          description: filter by rank
+          required: false
         nomstatus:
+          type: NomenclaturalStatusType
+          description: filter by nomenclatural status
+          required: false
         taxstatus:
+          type: TaxonomicStatusType
+          description: filter by taxonomic status
+          required: false
         issue:
+          type: string
+          description: filter by issue found
+          required: false
         type:
+          type: NameType
+          description: filter by name type
+          required: false
         sortBy:
+          type: SortByType
+          description: dataset key
+          required: false
+          default: 32
       responses:
         200:
           body:
             application/json:
-              type: ResultSet
+              type: NameSe
   /{id}/{datasetKey}:
     get:
       displayName: Lookup name key
-      description: Looks up the internal database key using the original (GSD-provided) ID of the name and the database key of the dataset containing the name.
+      description: Looks up the internal name key using the original name ID as provided by the dataset.
       responses:
         200:
-          body:
-            application/json:
-              type: integer
+          body: integer
+    uriParameters:
+      id:
+        type: string
+        description: original, dataset provided id for the name
+      datasetKey:
+        type: integer
+        description: dataset key
   /{key}:
     get:
       displayName: Get name
       description: Retrieves the name with the specified key.
       responses:
         200:
-          body:
-            application/json:
-              type: Name
-  /{key}/synonyms:
+          body: Name
+    uriParameters:
+      key:
+        type: integer
+        description: name key
+    /synonyms:
+      get:
+        displayName: Get homotypic synonyms
+        description: Retrieves all names in the same homotypic group as the name with the specified key.
+        responses:
+          200:
+            body: Name[]
+    /publishedIn:
+      get:
+        displayName: Get literature reference
+        description: Retrieves the literature reference for the name with the specified key.
+        responses:
+          200:
+            body: Reference
+    /acts:
+      get:
+        displayName: Get nomenclatural acts
+        description: Retrieves nomenclatural acts for the name or its homotypical group
+        queryParameters:
+          homotypic:
+            type: boolean
+            description: if true also includes all acts about related, homotypic names
+        responses:
+          200:
+            body: NomenclaturalAct[]
+    /verbatim:
+      get:
+        displayName: Get verbatim record
+        description: Retrieves the verbatim DarwinCore record of the name with the specified key,
+        responses:
+          200:
+            body: VerbatimRecord
+/reference:
+  get:
+    is: [paged,datasetConstrainable]
+    responses:
+      200:
+        body: ResultSet
+  /{id}/{datasetKey}:
     get:
-      displayName: Get basionym group
-      description: Retrieves all names in the same basionym group as the name with the specified key.
+      displayName: Lookup reference key
+      description: Looks up the internal reference key using the original reference ID as provided by the dataset.
       responses:
         200:
-          body:
-            application/json:
-              type: Name[]
-  /{key}/publishedIn:
+          body: integer
+    uriParameters:
+      id:
+        type: string
+        description: original, dataset provided id for the reference
+      datasetKey:
+        type: integer
+        description: dataset key
+  /{key}:
     get:
-      displayName: Get literature reference
-      description: Retrieves the literature reference for the name with the specified key.
+      description: get reference details by key
       responses:
         200:
-          body:
-            application/json:
-              type: Reference
-  /{key}/verbatim:
-    get:
-      displayName: Get verbatim record
-      description: Retrieves the verbatim DarwinCore record of the name with the specified key,
-      responses:
-        200:
-          body:
-            application/json:
-              type: TaxonVerbatim              
-  /{key}/acts:
-    get:
-      displayName: Get nomenclatural acts
-      description: Retrieves nomenclatural acts for the name with the specified key
-      queryParameters:
-        homotypic:
-      responses:
-        200:
-          body:
-            application/json:
-              type: NomenclaturalAct[]
+          body: Reference
+    uriParameters:
+      key:
+        type: integer
+        description: reference key
+    /acts:
+      get:
+        displayName: Get nomenclatural acts
+        description: Retrieves all nomenclatural acts published in the reference
+        responses:
+          200:
+            body: NomenclaturalAct[]
 /parser:
   /name:
     get:
@@ -1193,7 +1441,7 @@ types:
     post:
       displayName: List parsed names
       description: |
-        List parsed names. The names to be parsed can be specified as a JSON array in the request body; a file upload 
+        List parsed names. The names to be parsed can be specified as a JSON array in the request body; a file upload
         with one name per line, or as plain/text content in the request body.
       body:
         application/json:
