@@ -582,6 +582,7 @@ types:
       issues:
         type: object
         description: Map of issues spotted during processing.
+        required: false
     example: |
       {
         "key": 21242,
@@ -598,34 +599,6 @@ types:
         "fossil": false,
         "available": true
       }
-  NameSearch:
-    type: object
-    description: A name search criteria object. 
-    properties:
-      q:
-        type: string
-        description: Full-text search query
-      datasetKey:
-        type: integer
-        description: The database key of the dataset containing the names
-      key:
-        type: integer
-        description: The database key of the name
-      rank:
-        type: RankType
-        description: The taxonomic rank of the name
-      nomstatus:
-        type: NomenclaturalStatusType
-        description: The status of the name
-      taxstatus:
-        type: TaxonomicStatusType
-        description: The taxonomic status of the name
-      type:
-        type: NameType
-        description: The type of the name
-      sortBy:
-        type: SortByType
-        description: Specifies how to sort the names satisfying the search criteria.
   NameResultSet:
     type: ResultSet
     description: >
@@ -917,6 +890,7 @@ types:
       issues:
         type: object
         description: Map of issues spotted during processing.
+        required: false
   TaxonMatch:
     type: MatchResult
     description: A taxon matching result.
@@ -1330,7 +1304,7 @@ types:
         200:
           body:
             application/json:
-              type: NameSe
+              type: NameSearchResultSet
   /{id}/{datasetKey}:
     get:
       displayName: Lookup name key
