@@ -471,17 +471,13 @@
 </td>
                                 </tr>
                             </tbody></table>
-                        <h2 id="model-ParsedName">ParsedName</h2>
-
-
-    
-
                         <h2 id="model-Name">Name</h2>
 
     <pre class="example"><code class="json">{
   "key": 21242,
   "datasetKey": 15,
   "scientificName": "Crepicnema parvula",
+  "scientificNameID": "http://names.org/12345",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
   "nomenclaturalCode": "zoological",
@@ -595,12 +591,50 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
 </td>
                                 </tr>
                                 <tr>
-                                    <td>authorship</td>
+                                    <td>scientificNameID</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Global name identifier from a nomenclator or the Catalogue of Life</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>origin</td>
+                                    <td><a href="#model-OriginType">OriginType</a></td>
+                                    <td>source, denormed_classification, verbatim_parent, verbatim_accepted, verbatim_basionym, proparte, autonym, implicit_name, missing_accepted, basionym_placeholder, ex_author_synonym, other</td>
+                                    <td>no</td>
+                                    <td><p>Enumeration to classify name usages by how they originated</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>type</td>
+                                    <td><a href="#model-NameType">NameType</a></td>
+                                    <td>scientific, virus, hybrid-formula, cultivar, otu, placeholder, none</td>
+                                    <td>no</td>
+                                    <td><p>Classification of names, mostly based on their syntactic structure</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>combinationAuthorship</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>basionymAuthorship</td>
                                     <td>string</td>
                                     <td></td>
                                     <td>no</td>
                                     <td><p>full unparsed authorship of the name incl basionym and years</p>
 </td>
+                                </tr>
+                                <tr>
+                                    <td>sanctioningAuthor</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>rank</td>
@@ -615,6 +649,20 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td><a href="#model-NomCodeType">NomCodeType</a></td>
                                     <td>bacterial, botanical, cultivated, viral, zoological, unknown</td>
                                     <td>yes</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>nomenclaturalNotes</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>uninomial</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -643,6 +691,27 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                 <tr>
                                     <td>infraspecificEpithet</td>
                                     <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>cultivarEpithet</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>strain</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>candidatus</td>
+                                    <td>boolean</td>
                                     <td></td>
                                     <td>no</td>
                                     <td></td>
@@ -732,8 +801,31 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td>object</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>Map of issues spotted during processing.</p>
+                                    <td><p>Map of issues spotted during processing</p>
 </td>
+                                </tr>
+                                <tr>
+                                    <td>sensu</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Nomenclatural status remarks of the name</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>doubtful</td>
+                                    <td>boolean</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Indicates some doubts that this is a name of the given type</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>state</td>
+                                    <td><a href="#model-NameParsingStateType">NameParsingStateType</a></td>
+                                    <td>complete, name_and_author, name_only, none</td>
+                                    <td>no</td>
+                                    <td></td>
                                 </tr>
                             </tbody></table>
                         <h2 id="model-NameResultSet">NameResultSet</h2>
@@ -809,12 +901,50 @@ Name object with some extra properties related to synonymy. See below.</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>authorship</td>
+                                    <td>scientificNameID</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Global name identifier from a nomenclator or the Catalogue of Life</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>origin</td>
+                                    <td><a href="#model-OriginType">OriginType</a></td>
+                                    <td>source, denormed_classification, verbatim_parent, verbatim_accepted, verbatim_basionym, proparte, autonym, implicit_name, missing_accepted, basionym_placeholder, ex_author_synonym, other</td>
+                                    <td>no</td>
+                                    <td><p>Enumeration to classify name usages by how they originated</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>type</td>
+                                    <td><a href="#model-NameType">NameType</a></td>
+                                    <td>scientific, virus, hybrid-formula, cultivar, otu, placeholder, none</td>
+                                    <td>no</td>
+                                    <td><p>Classification of names, mostly based on their syntactic structure</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>combinationAuthorship</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>basionymAuthorship</td>
                                     <td>string</td>
                                     <td></td>
                                     <td>no</td>
                                     <td><p>full unparsed authorship of the name incl basionym and years</p>
 </td>
+                                </tr>
+                                <tr>
+                                    <td>sanctioningAuthor</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>rank</td>
@@ -829,6 +959,20 @@ Name object with some extra properties related to synonymy. See below.</p>
                                     <td><a href="#model-NomCodeType">NomCodeType</a></td>
                                     <td>bacterial, botanical, cultivated, viral, zoological, unknown</td>
                                     <td>yes</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>nomenclaturalNotes</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>uninomial</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -857,6 +1001,27 @@ Name object with some extra properties related to synonymy. See below.</p>
                                 <tr>
                                     <td>infraspecificEpithet</td>
                                     <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>cultivarEpithet</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>strain</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>candidatus</td>
+                                    <td>boolean</td>
                                     <td></td>
                                     <td>no</td>
                                     <td></td>
@@ -946,8 +1111,31 @@ Name object with some extra properties related to synonymy. See below.</p>
                                     <td>object</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>Map of issues spotted during processing.</p>
+                                    <td><p>Map of issues spotted during processing</p>
 </td>
+                                </tr>
+                                <tr>
+                                    <td>sensu</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Nomenclatural status remarks of the name</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>doubtful</td>
+                                    <td>boolean</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Indicates some doubts that this is a name of the given type</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>state</td>
+                                    <td><a href="#model-NameParsingStateType">NameParsingStateType</a></td>
+                                    <td>complete, name_and_author, name_only, none</td>
+                                    <td>no</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>acceptedName</td>
@@ -2061,6 +2249,15 @@ See Limits of Oceans &amp; Seas, Special Publication No. 23 published by the Int
 </p>
 
 
+            <h2 id="model-NameParsingStateType">NameParsingStateType</h2>
+
+
+            <p><strong>Enumeration</strong>: <em>complete</em>, <em>name_and_author</em>, <em>name_only</em>, <em>none</em></p>
+
+    <p><p>Indicates how successfully a name was parsed into it constituent components</p>
+</p>
+
+
             <h2 id="model-NameType">NameType</h2>
 
 
@@ -2128,6 +2325,15 @@ to names proposed to replace junior homonyms</p>
 rejected : Botany - A validly published name listed as rejected by ICN – includes utique rejiciendum and opera oppressa (nom. rej.) : Zoology -
 doubtful : Unknown or doubtful names (nom. dub.)
 unevaluated : if the name status has not been evaluated yet</p>
+</p>
+
+
+            <h2 id="model-OriginType">OriginType</h2>
+
+
+            <p><strong>Enumeration</strong>: <em>source</em>, <em>denormed_classification</em>, <em>verbatim_parent</em>, <em>verbatim_accepted</em>, <em>verbatim_basionym</em>, <em>proparte</em>, <em>autonym</em>, <em>implicit_name</em>, <em>missing_accepted</em>, <em>basionym_placeholder</em>, <em>ex_author_synonym</em>, <em>other</em></p>
+
+    <p><p>Enumeration of the kind of matches possible.</p>
 </p>
 
 
@@ -2241,7 +2447,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2270,7 +2476,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2322,7 +2528,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2456,7 +2662,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2514,7 +2720,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2551,6 +2757,24 @@ Host: api.col.plus
         </tr>
         </thead><tbody>
             <tr>
+                <td>nameKey</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The database key of the name associated with the requested taxa</p>
+</td>
+            </tr>
+            <tr>
+                <td>root</td>
+                <td>boolean</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>Whether or not to only retrieve root taxa</p>
+</td>
+            </tr>
+            <tr>
                 <td>offset</td>
                 <td>integer</td>
                 <td></td>
@@ -2584,7 +2808,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2645,7 +2869,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2697,7 +2921,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2728,7 +2952,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2759,7 +2983,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2790,7 +3014,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2821,7 +3045,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -2986,7 +3210,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3056,7 +3280,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3189,7 +3413,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3250,7 +3474,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3302,13 +3526,14 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
     <code class="json">{
   "key": 21242,
   "datasetKey": 15,
   "scientificName": "Crepicnema parvula",
+  "scientificNameID": "http://names.org/12345",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
   "nomenclaturalCode": "zoological",
@@ -3349,13 +3574,14 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[{
   "key": 21242,
   "datasetKey": 15,
   "scientificName": "Crepicnema parvula",
+  "scientificNameID": "http://names.org/12345",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
   "nomenclaturalCode": "zoological",
@@ -3371,6 +3597,7 @@ Content-Type: application/json
   "key": 21242,
   "datasetKey": 15,
   "scientificName": "Crepicnema parvula",
+  "scientificNameID": "http://names.org/12345",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
   "nomenclaturalCode": "zoological",
@@ -3411,7 +3638,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3480,7 +3707,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -3528,7 +3755,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:14 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3598,7 +3825,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:15 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3659,7 +3886,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:15 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3711,7 +3938,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:15 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3759,7 +3986,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:15 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -3834,12 +4061,45 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:15 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
+    <code class="json">[{
+  "key": 21242,
+  "datasetKey": 15,
+  "scientificName": "Crepicnema parvula",
+  "scientificNameID": "http://names.org/12345",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
+  "nomenclaturalCode": "zoological",
+  "genus": "Crepicnema",
+  "specificEpithet": "parvula",
+  "originalAuthors": ["Jacoby"],
+  "originalYear": 1885,
+  "originalNameKey": 8673,
+  "fossil": false,
+  "available": true
+}
+,{
+  "key": 21242,
+  "datasetKey": 15,
+  "scientificName": "Crepicnema parvula",
+  "scientificNameID": "http://names.org/12345",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
+  "nomenclaturalCode": "zoological",
+  "genus": "Crepicnema",
+  "specificEpithet": "parvula",
+  "originalAuthors": ["Jacoby"],
+  "originalYear": 1885,
+  "originalNameKey": 8673,
+  "fossil": false,
+  "available": true
+}
+]</code>
 </pre>
                     <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-ParsedName">ParsedName[]</a></p>
+                    <p>Content: <a href="#model-Name">Name[]</a></p>
 
     <pre class="example"><code class="http">
 POST //parser/name HTTP/1.1
@@ -3868,12 +4128,45 @@ with one name per line, or as plain/text content in the request body.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Friday, January 12, 2018 5:53:15 AM CET
+Date: Wednesday, January 17, 2018 3:26:20 PM CET
 Content-Type: application/json
 </code>
+    <code class="json">[{
+  "key": 21242,
+  "datasetKey": 15,
+  "scientificName": "Crepicnema parvula",
+  "scientificNameID": "http://names.org/12345",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
+  "nomenclaturalCode": "zoological",
+  "genus": "Crepicnema",
+  "specificEpithet": "parvula",
+  "originalAuthors": ["Jacoby"],
+  "originalYear": 1885,
+  "originalNameKey": 8673,
+  "fossil": false,
+  "available": true
+}
+,{
+  "key": 21242,
+  "datasetKey": 15,
+  "scientificName": "Crepicnema parvula",
+  "scientificNameID": "http://names.org/12345",
+  "rank": "species",
+  "authorship": "(Jacoby, 1885)",
+  "nomenclaturalCode": "zoological",
+  "genus": "Crepicnema",
+  "specificEpithet": "parvula",
+  "originalAuthors": ["Jacoby"],
+  "originalYear": 1885,
+  "originalNameKey": 8673,
+  "fossil": false,
+  "available": true
+}
+]</code>
 </pre>
                     <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-ParsedName">ParsedName[]</a></p>
+                    <p>Content: <a href="#model-Name">Name[]</a></p>
 
 
         <aside class="success">

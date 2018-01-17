@@ -183,6 +183,10 @@ types:
 
        typification
        : subsequent type designations.
+  NameParsingStateType:
+    type: string
+    enum: ["complete", "name_and_author", "name_only", "none"]
+    description: Indicates how successfully a name was parsed into it constituent components
   LifezoneType:
     type: string
     enum: ["brackish", "freshwater", "marine", "terrestrial"]
@@ -242,6 +246,11 @@ types:
   MatchType:
     type: string
     enum: ["exact", "fuzzy", "higherrank", "none"]
+    description: Enumeration of the kind of matches possible.
+  OriginType:
+    type: string
+    enum: ["source", "denormed_classification", "verbatim_parent", "verbatim_accepted","verbatim_basionym",
+    "proparte","autonym","implicit_name","missing_accepted","basionym_placeholder","ex_author_synonym","other"]
     description: Enumeration of the kind of matches possible.
   SortByType:
     type: string
@@ -406,12 +415,8 @@ types:
       results:
         type: Dataset[]
         description: the resulting Datasets
-  ParsedName:
-    type: object
-    description:
-    properties:
   Name:
-    type: ParsedName
+    type: object
     description: |
       A scientific name.
       CoL deals and categorizes the following types of names:
@@ -511,15 +516,43 @@ types:
          description: >
              entire canonical name string with a rank marker for infragenerics and infraspecfics, but excluding the authorship.
              For uninomials, e.g. families or names at higher ranks, this is just the uninomial.
-      authorship:
+      scientificNameID:
          type: string
-         description: full unparsed authorship of the name incl basionym and years
+         description: Global name identifier from a nomenclator or the Catalogue of Life
          required: false
+      origin:
+         type: OriginType
+         description: Enumeration to classify name usages by how they originated
+         required: false
+      type:
+         type: NameType
+         description: Classification of names, mostly based on their syntactic structure
+         required: false
+      combinationAuthorship:
+        type: string
+        description:
+        required: false
+      basionymAuthorship: 
+        type: string
+        description: full unparsed authorship of the name incl basionym and years
+        required: false
+      sanctioningAuthor:
+        type: string
+        description:
+        required: false
       rank:
          type: RankType
          description: rank of the name from enumeration above
       nomenclaturalCode:
         type: NomCodeType
+      nomenclaturalNotes:
+        type: string
+        description:
+        required: false
+      uninomial:
+        type: string
+        description:
+        required: false
       genus:
         type: string
         description: the genus part of a bi- or trinomial name. Not used for genus names which are represented by the scientificName alone.
@@ -534,6 +567,18 @@ types:
         required: false
       infraspecificEpithet:
         type: string
+        description:
+        required: false
+      cultivarEpithet:
+        type: string
+        description:
+        required: false
+      strain:
+        type: string
+        description:
+        required: false
+      candidatus:
+        type: boolean
         description:
         required: false
       notho:
@@ -581,13 +626,26 @@ types:
         required: false
       issues:
         type: object
-        description: Map of issues spotted during processing.
+        description: Map of issues spotted during processing
+        required: false
+      sensu:
+        type: string
+        description: Nomenclatural status remarks of the name
+        required: false
+      doubtful:
+        type: boolean
+        description: Indicates some doubts that this is a name of the given type
+        required: false
+      state:
+        type: NameParsingStateType
+        description: 
         required: false
     example: |
       {
         "key": 21242,
         "datasetKey": 15,
         "scientificName": "Crepicnema parvula",
+        "scientificNameID": "http://names.org/12345",
         "rank": "species",
         "authorship": "(Jacoby, 1885)",
         "nomenclaturalCode": "zoological",
@@ -1045,6 +1103,15 @@ types:
 /taxon:
   get:
     is: [paged,datasetConstrainable]
+    queryParameters:
+      nameKey:
+        type: integer
+        required: false
+        description: The database key of the name associated with the requested taxa
+      root:
+        type: boolean
+        required: false
+        description: Whether or not to only retrieve root taxa
     responses:
       200:
         body:
@@ -1411,7 +1478,7 @@ types:
         200:
           body:
             application/json:
-              type: ParsedName[]
+              type: Name[]
     post:
       displayName: List parsed names
       description: |
@@ -1428,4 +1495,4 @@ types:
         200:
           body:
             application/json:
-              type: ParsedName[]
+              type: Name[]
