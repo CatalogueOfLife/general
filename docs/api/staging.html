@@ -471,20 +471,64 @@
 </td>
                                 </tr>
                             </tbody></table>
+                        <h2 id="model-Authorship">Authorship</h2>
+
+
+    
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>authors</td>
+                                    <td>string[]</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>list of contributing authors</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>exAuthors</td>
+                                    <td>string[]</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>list of authors excluding ex- authors</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>year</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Year of publication</p>
+</td>
+                                </tr>
+                            </tbody></table>
                         <h2 id="model-Name">Name</h2>
 
     <pre class="example"><code class="json">{
   "key": 21242,
   "datasetKey": 15,
   "scientificName": "Crepicnema parvula",
-  "scientificNameID": "http://names.org/12345",
+  "scientificNameID": "abc12345",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
+  "basionymAuthorship": {
+    "authors": ["Jacoby"]
+  },
+  "combinationAuthorship": {
+    "authors": ["Jacoby"],
+    "year": "1885"
+  },
   "nomenclaturalCode": "zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "originalAuthors": ["Jacoby"],
-  "originalYear": 1885,
   "originalNameKey": 8673,
   "fossil": false,
   "available": true
@@ -615,15 +659,23 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
 </td>
                                 </tr>
                                 <tr>
-                                    <td>combinationAuthorship</td>
+                                    <td>authorship</td>
                                     <td>string</td>
                                     <td></td>
                                     <td>no</td>
+                                    <td><p>full authorship string</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>combinationAuthorship</td>
+                                    <td><a href="#model-Authorship">Authorship</a></td>
+                                    <td></td>
+                                    <td>yes</td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>basionymAuthorship</td>
-                                    <td>string</td>
+                                    <td><a href="#model-Authorship">Authorship</a></td>
                                     <td></td>
                                     <td>no</td>
                                     <td><p>full unparsed authorship of the name incl basionym and years</p>
@@ -722,38 +774,6 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td>generic, infrageneric, specific, infraspecific</td>
                                     <td>no</td>
                                     <td><p>the part of the name which is considered a hybrid;  see <a href="https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/NamePart.java#L24">GBIF</a></p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>originalAuthors</td>
-                                    <td>string[]</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>list of basionym authors.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>originalYear</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>year of original name publication</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>combinationAuthors</td>
-                                    <td>string[]</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>list of authors excluding ex- authors</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>combinationYear</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>the year this combination was first published, usually the same as the publishedIn reference. It is used for sorting names and ought to be populated even for botanical names which do not use it in the complete authorship string.</p>
 </td>
                                 </tr>
                                 <tr>
@@ -925,15 +945,23 @@ Name object with some extra properties related to synonymy. See below.</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>combinationAuthorship</td>
+                                    <td>authorship</td>
                                     <td>string</td>
                                     <td></td>
                                     <td>no</td>
+                                    <td><p>full authorship string</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>combinationAuthorship</td>
+                                    <td><a href="#model-Authorship">Authorship</a></td>
+                                    <td></td>
+                                    <td>yes</td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>basionymAuthorship</td>
-                                    <td>string</td>
+                                    <td><a href="#model-Authorship">Authorship</a></td>
                                     <td></td>
                                     <td>no</td>
                                     <td><p>full unparsed authorship of the name incl basionym and years</p>
@@ -1032,38 +1060,6 @@ Name object with some extra properties related to synonymy. See below.</p>
                                     <td>generic, infrageneric, specific, infraspecific</td>
                                     <td>no</td>
                                     <td><p>the part of the name which is considered a hybrid;  see <a href="https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/NamePart.java#L24">GBIF</a></p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>originalAuthors</td>
-                                    <td>string[]</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>list of basionym authors.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>originalYear</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>year of original name publication</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>combinationAuthors</td>
-                                    <td>string[]</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>list of authors excluding ex- authors</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>combinationYear</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>the year this combination was first published, usually the same as the publishedIn reference. It is used for sorting names and ought to be populated even for botanical names which do not use it in the complete authorship string.</p>
 </td>
                                 </tr>
                                 <tr>
@@ -2447,7 +2443,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2476,7 +2472,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2528,7 +2524,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2662,7 +2658,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2720,7 +2716,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2808,7 +2804,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2869,7 +2865,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2921,7 +2917,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2952,7 +2948,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2983,7 +2979,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3014,7 +3010,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3045,7 +3041,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -3054,41 +3050,54 @@ Content-Type: application/json
             "key": 21242,
             "datasetKey": 15,
             "scientificName": "Stylopappus grandiflorus",
+            "scientificNameID": "abc0001",
             "authorship": "Nutt.",
+            "combinationAuthorship": {
+              "authors": ["Nutt."],
+              "year": "1841"
+            },
             "rank": "species",
             "nomenclaturalCode": "botanical",
             "genus": "Stylopappus",
             "specificEpithet": "grandiflorus",
-            "combinationAuthors": ["Nutt."],
-            "combinationYear": 1841,
             "originalNameKey": 21242
          },
         {
             "key": 21243,
             "datasetKey": 15,
             "scientificName": "Macrorhynchus grandiflorus",
+            "scientificNameID": "abc0002",
             "authorship": "(Nutt.) Torr. & A. Gray",
+            "basionymAuthorship": {
+              "authors": ["Nutt."]
+            },
+            "combinationAuthorship": {
+              "authors": ["Torr.", "A. Gray"],
+              "year": "1843"
+            },
             "rank": "species",
             "nomenclaturalCode": "botanical",
             "genus": "Stylopappus",
             "specificEpithet": "grandiflorus",
-            "originalAuthors": ["Nutt."],
-            "combinationAuthors": ["Torr.", "A. Gray"],
-            "combinationYear": 1843,
             "originalNameKey": 21242
         },
         {
             "key": 21244,
             "datasetKey": 15,
             "scientificName": "Troximon grandiflorum",
+            "scientificNameID": "abc0003",
             "authorship": "(Nutt.) A. Gray",
+            "basionymAuthorship": {
+              "authors": ["Nutt."]
+            },
+            "combinationAuthorship": {
+              "authors": ["A. Gray"],
+              "year": "1874"
+            },
             "rank": "species",
             "nomenclaturalCode": "botanical",
             "genus": "Troximon",
             "specificEpithet": "grandiflorum",
-            "originalAuthors": ["Nutt."],
-            "combinationAuthors": ["A. Gray"],
-            "combinationYear": 1874,
             "originalNameKey": 21242
          }
     ],
@@ -3097,42 +3106,54 @@ Content-Type: application/json
             "key": 13078,
             "datasetKey": 15,
             "scientificName": "Troximon marshallii",
+            "scientificNameID": "abc0004",
             "authorship": "Greene",
+            "combinationAuthorship": {
+              "authors": ["Greene"],
+              "year": "1888"
+            },
             "rank": "species",
             "nomenclaturalCode": "botanical",
             "genus": "Troximon",
-            "specificEpithet": "marshallii",
-            "combinationAuthors": ["Greene"],
-            "combinationYear": 1888,
-            "originalNameKey": 13078
+            "specificEpithet": "marshallii"
         },
         {
             "key": 13079,
             "datasetKey": 15,
             "scientificName": "Agoseris marshallii",
+            "scientificNameID": "abc0005",
             "authorship": "(Greene) Greene",
+            "basionymAuthorship": {
+              "authors": ["Greene"]
+            },
+            "combinationAuthorship": {
+              "authors": ["Greene"],
+              "year": "1891"
+            },
             "rank": "species",
             "nomenclaturalCode": "botanical",
             "genus": "Agoseris",
             "specificEpithet": "marshallii",
-            "originalAuthors": ["Greene"],
-            "combinationAuthors": ["Greene"],
-            "combinationYear": 1891,
             "originalNameKey": 13078
         },
         {
             "key": 13080,
             "datasetKey": 15,
             "scientificName": "Agoseris marshalii",
+            "scientificNameID": "abc0006",
             "authorship": "(Greene) Greene",
+            "basionymAuthorship": {
+              "authors": ["Greene"]
+            },
+            "combinationAuthorship": {
+              "authors": ["Greene"],
+              "year": "1891"
+            },
             "rank": "species",
             "nomenclaturalCode": "botanical",
             "status": "variant",
             "genus": "Agoseris",
             "specificEpithet": "marshalii",
-            "originalAuthors": ["Greene"],
-            "combinationAuthors": ["Greene"],
-            "combinationYear": 1891,
             "originalNameKey": 13078
         }
     ],
@@ -3141,42 +3162,55 @@ Content-Type: application/json
             "key": 13122,
             "datasetKey": 15,
             "scientificName": "Troximon plebeium",
+            "scientificNameID": "abc0007",
             "authorship": "Greene",
+            "combinationAuthorship": {
+              "authors": ["Greene"],
+              "year": "1890"
+            },
             "rank": "species",
             "nomenclaturalCode": "botanical",
             "genus": "Troximon",
             "specificEpithet": "plebeium",
-            "combinationAuthors": ["Greene"],
-            "combinationYear": 1890,
             "originalNameKey": 13122
         },
         {
             "key": 13123,
             "datasetKey": 15,
             "scientificName": "Agoseris plebeia",
+            "scientificNameID": "abc0008",
             "authorship": "(Greene) Greene",
+            "basionymAuthorship": {
+              "authors": ["Greene"]
+            },
+            "combinationAuthorship": {
+              "authors": ["Greene"],
+              "year": "1891"
+            },
             "rank": "species",
             "nomenclaturalCode": "botanical",
             "genus": "Agoseris",
             "specificEpithet": "plebeia",
-            "originalAuthors": ["Greene"],
-            "combinationAuthors": ["Greene"],
-            "combinationYear": 1891,
             "originalNameKey": 13122
         },
         {
             "key": 13124,
             "datasetKey": 15,
             "scientificName": "Agoseris grandiflora var. plebeia",
+            "scientificNameID": "abc0009",
             "authorship": "(Greene) G. L. Wittr.",
+            "basionymAuthorship": {
+              "authors": ["Greene"]
+            },
+            "combinationAuthorship": {
+              "authors": ["G. L. Wittr."],
+              "year": "1928"
+            },
             "rank": "variety",
             "nomenclaturalCode": "botanical",
             "genus": "Agoseris",
             "specificEpithet": "grandiflora",
             "infraSpecificEpithet": "plebeia",
-            "originalAuthors": ["Greene"],
-            "combinationAuthors": ["G. L. Wittr."],
-            "combinationYear": 1928,
             "originalNameKey": 13122
         }
     ]
@@ -3210,7 +3244,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3280,7 +3314,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3413,7 +3447,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3474,7 +3508,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3526,21 +3560,26 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
     <code class="json">{
   "key": 21242,
   "datasetKey": 15,
   "scientificName": "Crepicnema parvula",
-  "scientificNameID": "http://names.org/12345",
+  "scientificNameID": "abc12345",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
+  "basionymAuthorship": {
+    "authors": ["Jacoby"]
+  },
+  "combinationAuthorship": {
+    "authors": ["Jacoby"],
+    "year": "1885"
+  },
   "nomenclaturalCode": "zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "originalAuthors": ["Jacoby"],
-  "originalYear": 1885,
   "originalNameKey": 8673,
   "fossil": false,
   "available": true
@@ -3574,21 +3613,26 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[{
   "key": 21242,
   "datasetKey": 15,
   "scientificName": "Crepicnema parvula",
-  "scientificNameID": "http://names.org/12345",
+  "scientificNameID": "abc12345",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
+  "basionymAuthorship": {
+    "authors": ["Jacoby"]
+  },
+  "combinationAuthorship": {
+    "authors": ["Jacoby"],
+    "year": "1885"
+  },
   "nomenclaturalCode": "zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "originalAuthors": ["Jacoby"],
-  "originalYear": 1885,
   "originalNameKey": 8673,
   "fossil": false,
   "available": true
@@ -3597,14 +3641,19 @@ Content-Type: application/json
   "key": 21242,
   "datasetKey": 15,
   "scientificName": "Crepicnema parvula",
-  "scientificNameID": "http://names.org/12345",
+  "scientificNameID": "abc12345",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
+  "basionymAuthorship": {
+    "authors": ["Jacoby"]
+  },
+  "combinationAuthorship": {
+    "authors": ["Jacoby"],
+    "year": "1885"
+  },
   "nomenclaturalCode": "zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "originalAuthors": ["Jacoby"],
-  "originalYear": 1885,
   "originalNameKey": 8673,
   "fossil": false,
   "available": true
@@ -3638,7 +3687,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3707,7 +3756,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -3755,7 +3804,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3825,7 +3874,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3886,7 +3935,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3938,7 +3987,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3986,7 +4035,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -4061,21 +4110,26 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[{
   "key": 21242,
   "datasetKey": 15,
   "scientificName": "Crepicnema parvula",
-  "scientificNameID": "http://names.org/12345",
+  "scientificNameID": "abc12345",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
+  "basionymAuthorship": {
+    "authors": ["Jacoby"]
+  },
+  "combinationAuthorship": {
+    "authors": ["Jacoby"],
+    "year": "1885"
+  },
   "nomenclaturalCode": "zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "originalAuthors": ["Jacoby"],
-  "originalYear": 1885,
   "originalNameKey": 8673,
   "fossil": false,
   "available": true
@@ -4084,14 +4138,19 @@ Content-Type: application/json
   "key": 21242,
   "datasetKey": 15,
   "scientificName": "Crepicnema parvula",
-  "scientificNameID": "http://names.org/12345",
+  "scientificNameID": "abc12345",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
+  "basionymAuthorship": {
+    "authors": ["Jacoby"]
+  },
+  "combinationAuthorship": {
+    "authors": ["Jacoby"],
+    "year": "1885"
+  },
   "nomenclaturalCode": "zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "originalAuthors": ["Jacoby"],
-  "originalYear": 1885,
   "originalNameKey": 8673,
   "fossil": false,
   "available": true
@@ -4128,21 +4187,26 @@ with one name per line, or as plain/text content in the request body.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, January 17, 2018 3:26:20 PM CET
+Date: Monday, January 22, 2018 4:31:33 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[{
   "key": 21242,
   "datasetKey": 15,
   "scientificName": "Crepicnema parvula",
-  "scientificNameID": "http://names.org/12345",
+  "scientificNameID": "abc12345",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
+  "basionymAuthorship": {
+    "authors": ["Jacoby"]
+  },
+  "combinationAuthorship": {
+    "authors": ["Jacoby"],
+    "year": "1885"
+  },
   "nomenclaturalCode": "zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "originalAuthors": ["Jacoby"],
-  "originalYear": 1885,
   "originalNameKey": 8673,
   "fossil": false,
   "available": true
@@ -4151,14 +4215,19 @@ Content-Type: application/json
   "key": 21242,
   "datasetKey": 15,
   "scientificName": "Crepicnema parvula",
-  "scientificNameID": "http://names.org/12345",
+  "scientificNameID": "abc12345",
   "rank": "species",
   "authorship": "(Jacoby, 1885)",
+  "basionymAuthorship": {
+    "authors": ["Jacoby"]
+  },
+  "combinationAuthorship": {
+    "authors": ["Jacoby"],
+    "year": "1885"
+  },
   "nomenclaturalCode": "zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "originalAuthors": ["Jacoby"],
-  "originalYear": 1885,
   "originalNameKey": 8673,
   "fossil": false,
   "available": true

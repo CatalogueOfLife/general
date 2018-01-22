@@ -415,6 +415,20 @@ types:
       results:
         type: Dataset[]
         description: the resulting Datasets
+  Authorship:
+    type: object
+    properties:
+      authors:
+        type: string[]
+        description: list of contributing authors
+      exAuthors:
+        type: string[]
+        description: list of authors excluding ex- authors
+        required: false
+      year:
+        type: string
+        description: Year of publication
+        required: false
   Name:
     type: object
     description: |
@@ -528,12 +542,15 @@ types:
          type: NameType
          description: Classification of names, mostly based on their syntactic structure
          required: false
-      combinationAuthorship:
+      authorship:
         type: string
-        description:
+        description: full authorship string
         required: false
+      combinationAuthorship:
+        type: Authorship
+        description:
       basionymAuthorship: 
-        type: string
+        type: Authorship
         description: full unparsed authorship of the name incl basionym and years
         required: false
       sanctioningAuthor:
@@ -586,24 +603,6 @@ types:
         enum: [ "generic", "infrageneric", "specific", "infraspecific" ]
         description: the part of the name which is considered a hybrid;  see [GBIF](https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/NamePart.java#L24)
         required: false
-      originalAuthors:
-        type: string[]
-        description: list of basionym authors.
-        required: false
-      originalYear:
-        type: integer
-        description: year of original name publication
-        required: false
-      combinationAuthors:
-        type: string[]
-        description: list of authors excluding ex- authors
-        required: false
-      combinationYear:
-        type: integer
-        description: >
-          the year this combination was first published, usually the same as the publishedIn reference.
-          It is used for sorting names and ought to be populated even for botanical names which do not use it in the complete authorship string.
-        required: false
       originalNameKey:
         type: integer
         description: link to the original combination. In case of [replacement names](https://en.wikipedia.org/wiki/Nomen_novum) it points back to the replaced synonym.
@@ -645,14 +644,19 @@ types:
         "key": 21242,
         "datasetKey": 15,
         "scientificName": "Crepicnema parvula",
-        "scientificNameID": "http://names.org/12345",
+        "scientificNameID": "abc12345",
         "rank": "species",
         "authorship": "(Jacoby, 1885)",
+        "basionymAuthorship": {
+          "authors": ["Jacoby"]
+        },
+        "combinationAuthorship": {
+          "authors": ["Jacoby"],
+          "year": "1885"
+        },
         "nomenclaturalCode": "zoological",
         "genus": "Crepicnema",
         "specificEpithet": "parvula",
-        "originalAuthors": ["Jacoby"],
-        "originalYear": 1885,
         "originalNameKey": 8673,
         "fossil": false,
         "available": true
@@ -1188,41 +1192,54 @@ types:
                             "key": 21242,
                             "datasetKey": 15,
                             "scientificName": "Stylopappus grandiflorus",
+                            "scientificNameID": "abc0001",
                             "authorship": "Nutt.",
+                            "combinationAuthorship": {
+                              "authors": ["Nutt."],
+                              "year": "1841"
+                            },
                             "rank": "species",
                             "nomenclaturalCode": "botanical",
                             "genus": "Stylopappus",
                             "specificEpithet": "grandiflorus",
-                            "combinationAuthors": ["Nutt."],
-                            "combinationYear": 1841,
                             "originalNameKey": 21242
                          },
                         {
                             "key": 21243,
                             "datasetKey": 15,
                             "scientificName": "Macrorhynchus grandiflorus",
+                            "scientificNameID": "abc0002",
                             "authorship": "(Nutt.) Torr. & A. Gray",
+                            "basionymAuthorship": {
+                              "authors": ["Nutt."]
+                            },
+                            "combinationAuthorship": {
+                              "authors": ["Torr.", "A. Gray"],
+                              "year": "1843"
+                            },
                             "rank": "species",
                             "nomenclaturalCode": "botanical",
                             "genus": "Stylopappus",
                             "specificEpithet": "grandiflorus",
-                            "originalAuthors": ["Nutt."],
-                            "combinationAuthors": ["Torr.", "A. Gray"],
-                            "combinationYear": 1843,
                             "originalNameKey": 21242
                         },
                         {
                             "key": 21244,
                             "datasetKey": 15,
                             "scientificName": "Troximon grandiflorum",
+                            "scientificNameID": "abc0003",
                             "authorship": "(Nutt.) A. Gray",
+                            "basionymAuthorship": {
+                              "authors": ["Nutt."]
+                            },
+                            "combinationAuthorship": {
+                              "authors": ["A. Gray"],
+                              "year": "1874"
+                            },
                             "rank": "species",
                             "nomenclaturalCode": "botanical",
                             "genus": "Troximon",
                             "specificEpithet": "grandiflorum",
-                            "originalAuthors": ["Nutt."],
-                            "combinationAuthors": ["A. Gray"],
-                            "combinationYear": 1874,
                             "originalNameKey": 21242
                          }
                     ],
@@ -1231,42 +1248,54 @@ types:
                             "key": 13078,
                             "datasetKey": 15,
                             "scientificName": "Troximon marshallii",
+                            "scientificNameID": "abc0004",
                             "authorship": "Greene",
+                            "combinationAuthorship": {
+                              "authors": ["Greene"],
+                              "year": "1888"
+                            },
                             "rank": "species",
                             "nomenclaturalCode": "botanical",
                             "genus": "Troximon",
-                            "specificEpithet": "marshallii",
-                            "combinationAuthors": ["Greene"],
-                            "combinationYear": 1888,
-                            "originalNameKey": 13078
+                            "specificEpithet": "marshallii"
                         },
                         {
                             "key": 13079,
                             "datasetKey": 15,
                             "scientificName": "Agoseris marshallii",
+                            "scientificNameID": "abc0005",
                             "authorship": "(Greene) Greene",
+                            "basionymAuthorship": {
+                              "authors": ["Greene"]
+                            },
+                            "combinationAuthorship": {
+                              "authors": ["Greene"],
+                              "year": "1891"
+                            },
                             "rank": "species",
                             "nomenclaturalCode": "botanical",
                             "genus": "Agoseris",
                             "specificEpithet": "marshallii",
-                            "originalAuthors": ["Greene"],
-                            "combinationAuthors": ["Greene"],
-                            "combinationYear": 1891,
                             "originalNameKey": 13078
                         },
                         {
                             "key": 13080,
                             "datasetKey": 15,
                             "scientificName": "Agoseris marshalii",
+                            "scientificNameID": "abc0006",
                             "authorship": "(Greene) Greene",
+                            "basionymAuthorship": {
+                              "authors": ["Greene"]
+                            },
+                            "combinationAuthorship": {
+                              "authors": ["Greene"],
+                              "year": "1891"
+                            },
                             "rank": "species",
                             "nomenclaturalCode": "botanical",
                             "status": "variant",
                             "genus": "Agoseris",
                             "specificEpithet": "marshalii",
-                            "originalAuthors": ["Greene"],
-                            "combinationAuthors": ["Greene"],
-                            "combinationYear": 1891,
                             "originalNameKey": 13078
                         }
                     ],
@@ -1275,42 +1304,55 @@ types:
                             "key": 13122,
                             "datasetKey": 15,
                             "scientificName": "Troximon plebeium",
+                            "scientificNameID": "abc0007",
                             "authorship": "Greene",
+                            "combinationAuthorship": {
+                              "authors": ["Greene"],
+                              "year": "1890"
+                            },
                             "rank": "species",
                             "nomenclaturalCode": "botanical",
                             "genus": "Troximon",
                             "specificEpithet": "plebeium",
-                            "combinationAuthors": ["Greene"],
-                            "combinationYear": 1890,
                             "originalNameKey": 13122
                         },
                         {
                             "key": 13123,
                             "datasetKey": 15,
                             "scientificName": "Agoseris plebeia",
+                            "scientificNameID": "abc0008",
                             "authorship": "(Greene) Greene",
+                            "basionymAuthorship": {
+                              "authors": ["Greene"]
+                            },
+                            "combinationAuthorship": {
+                              "authors": ["Greene"],
+                              "year": "1891"
+                            },
                             "rank": "species",
                             "nomenclaturalCode": "botanical",
                             "genus": "Agoseris",
                             "specificEpithet": "plebeia",
-                            "originalAuthors": ["Greene"],
-                            "combinationAuthors": ["Greene"],
-                            "combinationYear": 1891,
                             "originalNameKey": 13122
                         },
                         {
                             "key": 13124,
                             "datasetKey": 15,
                             "scientificName": "Agoseris grandiflora var. plebeia",
+                            "scientificNameID": "abc0009",
                             "authorship": "(Greene) G. L. Wittr.",
+                            "basionymAuthorship": {
+                              "authors": ["Greene"]
+                            },
+                            "combinationAuthorship": {
+                              "authors": ["G. L. Wittr."],
+                              "year": "1928"
+                            },
                             "rank": "variety",
                             "nomenclaturalCode": "botanical",
                             "genus": "Agoseris",
                             "specificEpithet": "grandiflora",
                             "infraSpecificEpithet": "plebeia",
-                            "originalAuthors": ["Greene"],
-                            "combinationAuthors": ["G. L. Wittr."],
-                            "combinationYear": 1928,
                             "originalNameKey": 13122
                         }
                     ]
