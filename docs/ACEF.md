@@ -1,7 +1,7 @@
 # ACEF
 The [CoL Data Submission Format v.4](http://www.catalogueoflife.org/content/contributing-your-data#ACEF) (formerly known as Annual Checklist Exchange Format, ACEF) 
 is supported when provided as a zipped archive of column separated files with a **header row**.
-See our [general file recommendations](DATA-FORMATS.md#General_file_recommendations), 
+See our [general file recommendations](DATA-FORMATS.md#general-file-recommendations), 
 we strongly recommended to use **TAB delimited** files encoded in **UTF-8**.
 
 In addition to ACEF v.4 we recommend to use ´´´IsFossil´´´ and ´´´IsRecent´´´ instead of ´´´IsExtinct´´´, ´´´HasPreHolocene´´´, ´´´HasModern´´´ 
