@@ -4,7 +4,7 @@ is supported when provided as a zipped archive of column separated files with a 
 See our [general file recommendations](DATA-FORMATS.md#general-file-recommendations), 
 we strongly recommended to use **TAB delimited** files encoded in **UTF-8**.
 
-In addition to ACEF v.4 we recommend to use ´´´IsFossil´´´ and ´´´IsRecent´´´ instead of ´´´IsExtinct´´´, ´´´HasPreHolocene´´´, ´´´HasModern´´´ 
+In addition to ACEF v.4 we recommend to use ```IsFossil``` and ```IsRecent``` instead of ```IsExtinct```, ```HasPreHolocene```, ```HasModern``` 
 to indicate a species known from fossil records and of recent times ( ~ Holocene).
 
 Examples of ACEF files can be found in the [CoL data repo](https://github.com/Sp2000/colplus-repo/tree/master/ACEF/assembly).
@@ -33,7 +33,7 @@ A quick summary of all supported files and columns, optional columns or files in
  - ⚡ HasModern (bool)
  - IsFossil (bool)
  - IsRecent (bool)
- - LifeZone (terrestrial, marine, freshwater, brackish)
+ - LifeZone (```terrestrial```, ```marine```, ```freshwater```, ```brackish```)
  - AdditionalData
  - LTSSpecialist
  - LTSDate
@@ -55,7 +55,7 @@ A quick summary of all supported files and columns, optional columns or files in
  - ⚡ HasModern (bool)
  - IsFossil (bool)
  - IsRecent (bool)
- - LifeZone (terrestrial, marine, freshwater, brackish)
+ - LifeZone (```terrestrial```, ```marine```, ```freshwater```, ```brackish```)
  - AdditionalData
  - LTSSpecialist
  - LTSDate
@@ -93,7 +93,7 @@ A quick summary of all supported files and columns, optional columns or files in
  - AcceptedTaxonID
  - DistributionElement (part or all of distribution area) 
  - StandardInUse (which standard schema is used, e.g. TDWG Level 4 codes, TDWG Level 3 names, FAO_ISO codes, or Text when providing free text)
- - DistributionStatus (Native, Domesticated, Alien, Uncertain)
+ - DistributionStatus (```native```, ```domesticated```, ```alien```, ```uncertain```)
 
 ## References.txt
 
@@ -106,7 +106,7 @@ A quick summary of all supported files and columns, optional columns or files in
 ## NameReferecesLinks.txt
 
  - ID
- - ReferenceType (NomRef, TaxAccRef, ComNameRef) 
+ - ReferenceType (```NomRef```, ```TaxAccRef```, ```ComNameRef```) 
  - ReferenceID
 
 ## SourceDatabase.txt
@@ -123,7 +123,7 @@ Please use the suffix yaml or yml to indicate this in your file name as ```Sourc
  - Abstract
  - Organisation
  - HomeURL
- - Coverage (Global/Regional)
+ - Coverage (```global```, ```regional```)
  - Completeness (int, 0-100)
  - Confidence (1 to 5)
  - LogoFileName (either local or remote URL)
