@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>CoL+ Staging API (v1</title>
+    <title>CoL+ Clearinghouse API (v1</title>
     <link href="screen.css" rel="stylesheet" media="screen" />
     <link href="print.css" rel="stylesheet" media="print" />
     <link href="highlight.css" rel="stylesheet" >
@@ -127,10 +127,10 @@
 
     <div class="content">
 
-        <h1 id="introduction">CoL+ Staging API (v1)</h1>
+        <h1 id="introduction">CoL+ Clearinghouse API (v1)</h1>
         <h3><code>https://api.col.plus</code></h3>
 
-    <p><p>API of the staging environment of the Catalogue of Life. The API gives access to staged source datasets for editorial review.</p>
+    <p><p>Public API of the Clearinghouse for taxonomy and nomenclature. The API currently gives access to staged source datasets for editorial review. The full Catalogue of Life and its versions is handled separately. In addition there is a secured, non public admin API, e.g. to request dataset to be (re)imported.</p>
 </p>
 
 
@@ -411,7 +411,47 @@
                                     <td>integer</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>State of the import, indicating if still running, success or failure</p>
+                                    <td><p>Sequential attempt number starting with 1 for each dataset</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>state</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>State of the import, indicating if still running, success or failure.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>downloadUri</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Last modification date of the downloaded file</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>download</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Last modification date of the downloaded file</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>started</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>date time the import started</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>finished</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>date time the import finished</p>
 </td>
                                 </tr>
                                 <tr>
@@ -420,6 +460,94 @@
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>Error message</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>verbatimCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>count of all verbatim records</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>nameCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>count of all name records</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>taxonCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>count of all taxon (accepted name) records</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>vernacularCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>count of all vernacular names</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>distributionCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>count of all distribution records</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>issuesCount</td>
+                                    <td>object</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>count of recorbs by issues</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>namesByRankCount</td>
+                                    <td>object</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>count of names by rank</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>namesByTypeCount</td>
+                                    <td>object</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>count of names by name type</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>vernacularsByLanguageCount</td>
+                                    <td>object</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>count of vernacular names by language</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>distributionsByGazetteerCount</td>
+                                    <td>object</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>count of distributions by gazetteer kind</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>namesByOriginCount</td>
+                                    <td>object</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>count of names by their origin</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -515,6 +643,7 @@
     <pre class="example"><code class="json">{
   "key": 21242,
   "datasetKey": 15,
+  "basionymKey": 8673,
   "scientificName": "Crepicnema parvula",
   "scientificNameID": "abc12345",
   "rank": "species",
@@ -526,12 +655,11 @@
     "authors": ["Jacoby"],
     "year": "1885"
   },
-  "nomenclaturalCode": "zoological",
+  "origin": "source",
+  "code": "zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "originalNameKey": 8673,
-  "fossil": false,
-  "available": true
+  "fossil": false
 }
 </code></pre>
 
@@ -627,6 +755,30 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                             </tr>
                             </thead><tbody>
                                 <tr>
+                                    <td>key</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Internal primary key</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Primary key for the name as used in the source database.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>datasetKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Primary key for the source dataset</p>
+</td>
+                                </tr>
+                                <tr>
                                     <td>scientificName</td>
                                     <td>string</td>
                                     <td></td>
@@ -646,7 +798,7 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td>origin</td>
                                     <td><a href="#model-OriginType">OriginType</a></td>
                                     <td>source, denormed_classification, verbatim_parent, verbatim_accepted, verbatim_basionym, proparte, autonym, implicit_name, missing_accepted, basionym_placeholder, ex_author_synonym, other</td>
-                                    <td>no</td>
+                                    <td>yes</td>
                                     <td><p>Enumeration to classify name usages by how they originated</p>
 </td>
                                 </tr>
@@ -697,18 +849,20 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
 </td>
                                 </tr>
                                 <tr>
-                                    <td>nomenclaturalCode</td>
+                                    <td>code</td>
                                     <td><a href="#model-NomCodeType">NomCodeType</a></td>
                                     <td>bacterial, botanical, cultivated, viral, zoological, unknown</td>
-                                    <td>yes</td>
-                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>code of nomenclature applying to the name</p>
+</td>
                                 </tr>
                                 <tr>
-                                    <td>nomenclaturalNotes</td>
-                                    <td>string</td>
-                                    <td></td>
+                                    <td>status</td>
+                                    <td><a href="#model-NomenclaturalStatusType">NomenclaturalStatusType</a></td>
+                                    <td>ok, unavailable, illegitimate, variant, conserved, rejected, doubtful, unevaluated</td>
                                     <td>no</td>
-                                    <td></td>
+                                    <td><p>flag to indicate that this name is available/validly published. Current nomenclatural status of the name taking into account all known nomenclatural acts.</p>
+</td>
                                 </tr>
                                 <tr>
                                     <td>uninomial</td>
@@ -777,7 +931,7 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
 </td>
                                 </tr>
                                 <tr>
-                                    <td>originalNameKey</td>
+                                    <td>basionymKey</td>
                                     <td>integer</td>
                                     <td></td>
                                     <td>no</td>
@@ -790,14 +944,6 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td></td>
                                     <td>no</td>
                                     <td><p>true if the type specimen of the name is a fossil</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>status</td>
-                                    <td><a href="#model-NomenclaturalStatusType">NomenclaturalStatusType</a></td>
-                                    <td>ok, unavailable, illegitimate, variant, conserved, rejected, doubtful, unevaluated</td>
-                                    <td>no</td>
-                                    <td><p>flag to indicate that this name is available/validly published</p>
 </td>
                                 </tr>
                                 <tr>
@@ -821,31 +967,8 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td>object</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>Map of issues spotted during processing</p>
+                                    <td><p>Set of issues spotted during processing</p>
 </td>
-                                </tr>
-                                <tr>
-                                    <td>sensu</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Nomenclatural status remarks of the name</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>doubtful</td>
-                                    <td>boolean</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Indicates some doubts that this is a name of the given type</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>state</td>
-                                    <td><a href="#model-NameParsingStateType">NameParsingStateType</a></td>
-                                    <td>complete, name_and_author, name_only, none</td>
-                                    <td>no</td>
-                                    <td></td>
                                 </tr>
                             </tbody></table>
                         <h2 id="model-NameResultSet">NameResultSet</h2>
@@ -913,6 +1036,30 @@ Name object with some extra properties related to synonymy. See below.</p>
                             </tr>
                             </thead><tbody>
                                 <tr>
+                                    <td>key</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Internal primary key</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Primary key for the name as used in the source database.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>datasetKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Primary key for the source dataset</p>
+</td>
+                                </tr>
+                                <tr>
                                     <td>scientificName</td>
                                     <td>string</td>
                                     <td></td>
@@ -932,7 +1079,7 @@ Name object with some extra properties related to synonymy. See below.</p>
                                     <td>origin</td>
                                     <td><a href="#model-OriginType">OriginType</a></td>
                                     <td>source, denormed_classification, verbatim_parent, verbatim_accepted, verbatim_basionym, proparte, autonym, implicit_name, missing_accepted, basionym_placeholder, ex_author_synonym, other</td>
-                                    <td>no</td>
+                                    <td>yes</td>
                                     <td><p>Enumeration to classify name usages by how they originated</p>
 </td>
                                 </tr>
@@ -983,18 +1130,20 @@ Name object with some extra properties related to synonymy. See below.</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>nomenclaturalCode</td>
+                                    <td>code</td>
                                     <td><a href="#model-NomCodeType">NomCodeType</a></td>
                                     <td>bacterial, botanical, cultivated, viral, zoological, unknown</td>
-                                    <td>yes</td>
-                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>code of nomenclature applying to the name</p>
+</td>
                                 </tr>
                                 <tr>
-                                    <td>nomenclaturalNotes</td>
-                                    <td>string</td>
-                                    <td></td>
+                                    <td>status</td>
+                                    <td><a href="#model-NomenclaturalStatusType">NomenclaturalStatusType</a></td>
+                                    <td>ok, unavailable, illegitimate, variant, conserved, rejected, doubtful, unevaluated</td>
                                     <td>no</td>
-                                    <td></td>
+                                    <td><p>flag to indicate that this name is available/validly published. Current nomenclatural status of the name taking into account all known nomenclatural acts.</p>
+</td>
                                 </tr>
                                 <tr>
                                     <td>uninomial</td>
@@ -1063,7 +1212,7 @@ Name object with some extra properties related to synonymy. See below.</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>originalNameKey</td>
+                                    <td>basionymKey</td>
                                     <td>integer</td>
                                     <td></td>
                                     <td>no</td>
@@ -1076,14 +1225,6 @@ Name object with some extra properties related to synonymy. See below.</p>
                                     <td></td>
                                     <td>no</td>
                                     <td><p>true if the type specimen of the name is a fossil</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>status</td>
-                                    <td><a href="#model-NomenclaturalStatusType">NomenclaturalStatusType</a></td>
-                                    <td>ok, unavailable, illegitimate, variant, conserved, rejected, doubtful, unevaluated</td>
-                                    <td>no</td>
-                                    <td><p>flag to indicate that this name is available/validly published</p>
 </td>
                                 </tr>
                                 <tr>
@@ -1107,31 +1248,8 @@ Name object with some extra properties related to synonymy. See below.</p>
                                     <td>object</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>Map of issues spotted during processing</p>
+                                    <td><p>Set of issues spotted during processing</p>
 </td>
-                                </tr>
-                                <tr>
-                                    <td>sensu</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Nomenclatural status remarks of the name</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>doubtful</td>
-                                    <td>boolean</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Indicates some doubts that this is a name of the given type</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>state</td>
-                                    <td><a href="#model-NameParsingStateType">NameParsingStateType</a></td>
-                                    <td>complete, name_and_author, name_only, none</td>
-                                    <td>no</td>
-                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>acceptedName</td>
@@ -1700,10 +1818,18 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                             </thead><tbody>
                                 <tr>
                                     <td>key</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Internal primary key</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>id</td>
                                     <td>string</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>Primary key for this taxon as used in the source database.</p>
+                                    <td><p>Primary key for the taxon as used in the source database.</p>
 </td>
                                 </tr>
                                 <tr>
@@ -1831,7 +1957,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td>object</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>Map of issues spotted during processing.</p>
+                                    <td><p>Set of issues spotted during processing.</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -2023,11 +2149,11 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>key</td>
-                                    <td>integer</td>
+                                    <td>id</td>
+                                    <td>string</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>Primary key for the record</p>
+                                    <td><p>Primary key for the record as used in the source database.</p>
 </td>
                                 </tr>
                                 <tr>
@@ -2063,14 +2189,6 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>core</td>
-                                    <td>object</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Map of core DwC terms to their value.</p>
-</td>
-                                </tr>
-                                <tr>
                                     <td>extensions</td>
                                     <td>object</td>
                                     <td></td>
@@ -2095,11 +2213,27 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                             </tr>
                             </thead><tbody>
                                 <tr>
+                                    <td>datasetKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Key to the source dataset this record belongs to</p>
+</td>
+                                </tr>
+                                <tr>
                                     <td>name</td>
                                     <td>string</td>
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>the vernacular name</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>latin</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>transliterated vernacular name into the latin script</p>
 </td>
                                 </tr>
                                 <tr>
@@ -2142,6 +2276,14 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                 <th>Description</th>
                             </tr>
                             </thead><tbody>
+                                <tr>
+                                    <td>datasetKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Key to the source dataset this record belongs to</p>
+</td>
+                                </tr>
                                 <tr>
                                     <td>area</td>
                                     <td>string</td>
@@ -2443,7 +2585,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2472,7 +2614,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2524,7 +2666,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2658,7 +2800,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2716,7 +2858,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2804,7 +2946,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2865,7 +3007,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2917,7 +3059,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2948,7 +3090,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2979,7 +3121,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3010,7 +3152,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3041,7 +3183,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -3056,11 +3198,12 @@ Content-Type: application/json
               "authors": ["Nutt."],
               "year": "1841"
             },
+            "origin": "source",
             "rank": "species",
             "nomenclaturalCode": "botanical",
             "genus": "Stylopappus",
             "specificEpithet": "grandiflorus",
-            "originalNameKey": 21242
+            "basionymKey": 21242
          },
         {
             "key": 21243,
@@ -3075,11 +3218,12 @@ Content-Type: application/json
               "authors": ["Torr.", "A. Gray"],
               "year": "1843"
             },
+            "origin": "source",
             "rank": "species",
             "nomenclaturalCode": "botanical",
             "genus": "Stylopappus",
             "specificEpithet": "grandiflorus",
-            "originalNameKey": 21242
+            "basionymKey": 21242
         },
         {
             "key": 21244,
@@ -3094,11 +3238,12 @@ Content-Type: application/json
               "authors": ["A. Gray"],
               "year": "1874"
             },
+            "origin": "source",
             "rank": "species",
             "nomenclaturalCode": "botanical",
             "genus": "Troximon",
             "specificEpithet": "grandiflorum",
-            "originalNameKey": 21242
+            "basionymKey": 21242
          }
     ],
     [
@@ -3112,6 +3257,7 @@ Content-Type: application/json
               "authors": ["Greene"],
               "year": "1888"
             },
+            "origin": "source",
             "rank": "species",
             "nomenclaturalCode": "botanical",
             "genus": "Troximon",
@@ -3130,11 +3276,12 @@ Content-Type: application/json
               "authors": ["Greene"],
               "year": "1891"
             },
+            "origin": "source",
             "rank": "species",
             "nomenclaturalCode": "botanical",
             "genus": "Agoseris",
             "specificEpithet": "marshallii",
-            "originalNameKey": 13078
+            "basionymKey": 13078
         },
         {
             "key": 13080,
@@ -3149,12 +3296,13 @@ Content-Type: application/json
               "authors": ["Greene"],
               "year": "1891"
             },
+            "origin": "source",
             "rank": "species",
             "nomenclaturalCode": "botanical",
             "status": "variant",
             "genus": "Agoseris",
             "specificEpithet": "marshalii",
-            "originalNameKey": 13078
+            "basionymKey": 13078
         }
     ],
     [
@@ -3168,11 +3316,12 @@ Content-Type: application/json
               "authors": ["Greene"],
               "year": "1890"
             },
+            "origin": "source",
             "rank": "species",
             "nomenclaturalCode": "botanical",
             "genus": "Troximon",
             "specificEpithet": "plebeium",
-            "originalNameKey": 13122
+            "basionymKey": 13122
         },
         {
             "key": 13123,
@@ -3187,11 +3336,12 @@ Content-Type: application/json
               "authors": ["Greene"],
               "year": "1891"
             },
+            "origin": "source",
             "rank": "species",
             "nomenclaturalCode": "botanical",
             "genus": "Agoseris",
             "specificEpithet": "plebeia",
-            "originalNameKey": 13122
+            "basionymKey": 13122
         },
         {
             "key": 13124,
@@ -3206,12 +3356,13 @@ Content-Type: application/json
               "authors": ["G. L. Wittr."],
               "year": "1928"
             },
+            "origin": "source",
             "rank": "variety",
             "nomenclaturalCode": "botanical",
             "genus": "Agoseris",
             "specificEpithet": "grandiflora",
             "infraSpecificEpithet": "plebeia",
-            "originalNameKey": 13122
+            "basionymKey": 13122
         }
     ]
 ]
@@ -3244,7 +3395,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3314,7 +3465,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3447,7 +3598,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3508,7 +3659,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3560,12 +3711,13 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
     <code class="json">{
   "key": 21242,
   "datasetKey": 15,
+  "basionymKey": 8673,
   "scientificName": "Crepicnema parvula",
   "scientificNameID": "abc12345",
   "rank": "species",
@@ -3577,12 +3729,11 @@ Content-Type: application/json
     "authors": ["Jacoby"],
     "year": "1885"
   },
-  "nomenclaturalCode": "zoological",
+  "origin": "source",
+  "code": "zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "originalNameKey": 8673,
-  "fossil": false,
-  "available": true
+  "fossil": false
 }
 </code>
 </pre>
@@ -3613,12 +3764,13 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[{
   "key": 21242,
   "datasetKey": 15,
+  "basionymKey": 8673,
   "scientificName": "Crepicnema parvula",
   "scientificNameID": "abc12345",
   "rank": "species",
@@ -3630,16 +3782,16 @@ Content-Type: application/json
     "authors": ["Jacoby"],
     "year": "1885"
   },
-  "nomenclaturalCode": "zoological",
+  "origin": "source",
+  "code": "zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "originalNameKey": 8673,
-  "fossil": false,
-  "available": true
+  "fossil": false
 }
 ,{
   "key": 21242,
   "datasetKey": 15,
+  "basionymKey": 8673,
   "scientificName": "Crepicnema parvula",
   "scientificNameID": "abc12345",
   "rank": "species",
@@ -3651,12 +3803,11 @@ Content-Type: application/json
     "authors": ["Jacoby"],
     "year": "1885"
   },
-  "nomenclaturalCode": "zoological",
+  "origin": "source",
+  "code": "zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "originalNameKey": 8673,
-  "fossil": false,
-  "available": true
+  "fossil": false
 }
 ]</code>
 </pre>
@@ -3687,7 +3838,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3756,7 +3907,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -3804,7 +3955,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3874,7 +4025,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3935,7 +4086,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3987,7 +4138,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4035,7 +4186,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -4110,12 +4261,13 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:30 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[{
   "key": 21242,
   "datasetKey": 15,
+  "basionymKey": 8673,
   "scientificName": "Crepicnema parvula",
   "scientificNameID": "abc12345",
   "rank": "species",
@@ -4127,16 +4279,16 @@ Content-Type: application/json
     "authors": ["Jacoby"],
     "year": "1885"
   },
-  "nomenclaturalCode": "zoological",
+  "origin": "source",
+  "code": "zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "originalNameKey": 8673,
-  "fossil": false,
-  "available": true
+  "fossil": false
 }
 ,{
   "key": 21242,
   "datasetKey": 15,
+  "basionymKey": 8673,
   "scientificName": "Crepicnema parvula",
   "scientificNameID": "abc12345",
   "rank": "species",
@@ -4148,12 +4300,11 @@ Content-Type: application/json
     "authors": ["Jacoby"],
     "year": "1885"
   },
-  "nomenclaturalCode": "zoological",
+  "origin": "source",
+  "code": "zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "originalNameKey": 8673,
-  "fossil": false,
-  "available": true
+  "fossil": false
 }
 ]</code>
 </pre>
@@ -4187,12 +4338,13 @@ with one name per line, or as plain/text content in the request body.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Monday, January 22, 2018 4:31:33 PM CET
+Date: Tuesday, February 27, 2018 5:51:31 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[{
   "key": 21242,
   "datasetKey": 15,
+  "basionymKey": 8673,
   "scientificName": "Crepicnema parvula",
   "scientificNameID": "abc12345",
   "rank": "species",
@@ -4204,16 +4356,16 @@ Content-Type: application/json
     "authors": ["Jacoby"],
     "year": "1885"
   },
-  "nomenclaturalCode": "zoological",
+  "origin": "source",
+  "code": "zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "originalNameKey": 8673,
-  "fossil": false,
-  "available": true
+  "fossil": false
 }
 ,{
   "key": 21242,
   "datasetKey": 15,
+  "basionymKey": 8673,
   "scientificName": "Crepicnema parvula",
   "scientificNameID": "abc12345",
   "rank": "species",
@@ -4225,12 +4377,11 @@ Content-Type: application/json
     "authors": ["Jacoby"],
     "year": "1885"
   },
-  "nomenclaturalCode": "zoological",
+  "origin": "source",
+  "code": "zoological",
   "genus": "Crepicnema",
   "specificEpithet": "parvula",
-  "originalNameKey": 8673,
-  "fossil": false,
-  "available": true
+  "fossil": false
 }
 ]</code>
 </pre>

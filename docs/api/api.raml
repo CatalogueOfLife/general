@@ -1,5 +1,5 @@
 #%RAML 1.0
-title: CoL+ Staging API
+title: CoL+ Clearinghouse API
 version: v1
 baseUri: https://api.col.plus/
 protocols:
@@ -7,8 +7,10 @@ protocols:
 mediaType:
   - application/json
 description:
-    API of the staging environment of the Catalogue of Life.
-    The API gives access to staged source datasets for editorial review.
+    Public API of the Clearinghouse for taxonomy and nomenclature.
+    The API currently gives access to staged source datasets for editorial review.
+    The full Catalogue of Life and its versions is handled separately.
+    In addition there is a secured, non public admin API, e.g. to request dataset to be (re)imported.
 resourceTypes:
 traits:
   query:
@@ -403,10 +405,58 @@ types:
         description: Primary key for the source dataset
       attempt:
         type: integer
-        description: State of the import, indicating if still running, success or failure
+        description: Sequential attempt number starting with 1 for each dataset
+      state:
+        type: string
+        description: State of the import, indicating if still running, success or failure.
+      downloadUri:
+        type: datetime
+        description: Last modification date of the downloaded file
+      download:
+        type: datetime
+        description: Last modification date of the downloaded file
+      started:
+        type: datetime
+        description: date time the import started
+      finished:
+        type: datetime
+        description: date time the import finished
       error:
         type: string
         description: Error message
+      verbatimCount:
+        type: integer
+        description: count of all verbatim records
+      nameCount:
+        type: integer
+        description: count of all name records
+      taxonCount:
+        type: integer
+        description: count of all taxon (accepted name) records
+      vernacularCount:
+        type: integer
+        description: count of all vernacular names
+      distributionCount:
+        type: integer
+        description: count of all distribution records
+      issuesCount:
+        type: object
+        description: count of recorbs by issues
+      namesByRankCount:
+        type: object
+        description: count of names by rank
+      namesByTypeCount:
+        type: object
+        description: count of names by name type
+      vernacularsByLanguageCount:
+        type: object
+        description: count of vernacular names by language
+      distributionsByGazetteerCount:
+        type: object
+        description: count of distributions by gazetteer kind
+      namesByOriginCount:
+        type: object
+        description: count of names by their origin
   DatasetResultSet:
     type: ResultSet
     description: >
@@ -525,6 +575,16 @@ types:
       A name can't be a basionym in its own right only relative to another name.
       ICZN does not mention the term basionym but the notion is clearly present in zoological nomenclature as zoologists also have the concept of the new recombination of a name.
     properties:
+      key:
+        type: integer
+        description: Internal primary key
+      id:
+        type: string
+        description: Primary key for the name as used in the source database.
+        required: false
+      datasetKey:
+        type: integer
+        description: Primary key for the source dataset
       scientificName:
          type: string
          description: >
@@ -537,7 +597,6 @@ types:
       origin:
          type: OriginType
          description: Enumeration to classify name usages by how they originated
-         required: false
       type:
          type: NameType
          description: Classification of names, mostly based on their syntactic structure
@@ -560,11 +619,13 @@ types:
       rank:
          type: RankType
          description: rank of the name from enumeration above
-      nomenclaturalCode:
+      code:
         type: NomCodeType
-      nomenclaturalNotes:
-        type: string
-        description:
+        description: code of nomenclature applying to the name
+        required: false
+      status:
+        type: NomenclaturalStatusType
+        description: flag to indicate that this name is available/validly published. Current nomenclatural status of the name taking into account all known nomenclatural acts.
         required: false
       uninomial:
         type: string
@@ -603,17 +664,13 @@ types:
         enum: [ "generic", "infrageneric", "specific", "infraspecific" ]
         description: the part of the name which is considered a hybrid;  see [GBIF](https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/NamePart.java#L24)
         required: false
-      originalNameKey:
+      basionymKey:
         type: integer
         description: link to the original combination. In case of [replacement names](https://en.wikipedia.org/wiki/Nomen_novum) it points back to the replaced synonym.
         required: false
       fossil:
         type: boolean
         description: true if the type specimen of the name is a fossil
-        required: false
-      status:
-        type: NomenclaturalStatusType
-        description: flag to indicate that this name is available/validly published
         required: false
       sourceUrl:
         type: string
@@ -625,24 +682,13 @@ types:
         required: false
       issues:
         type: object
-        description: Map of issues spotted during processing
-        required: false
-      sensu:
-        type: string
-        description: Nomenclatural status remarks of the name
-        required: false
-      doubtful:
-        type: boolean
-        description: Indicates some doubts that this is a name of the given type
-        required: false
-      state:
-        type: NameParsingStateType
-        description: 
+        description: Set of issues spotted during processing
         required: false
     example: |
       {
         "key": 21242,
         "datasetKey": 15,
+        "basionymKey": 8673,
         "scientificName": "Crepicnema parvula",
         "scientificNameID": "abc12345",
         "rank": "species",
@@ -654,12 +700,11 @@ types:
           "authors": ["Jacoby"],
           "year": "1885"
         },
-        "nomenclaturalCode": "zoological",
+        "origin": "source",
+        "code": "zoological",
         "genus": "Crepicnema",
         "specificEpithet": "parvula",
-        "originalNameKey": 8673,
-        "fossil": false,
-        "available": true
+        "fossil": false
       }
   NameResultSet:
     type: ResultSet
@@ -892,8 +937,11 @@ types:
       A taxon concept, i.e. an accepted name. Not used for synonyms.
     properties:
       key:
+        type: integer
+        description: Internal primary key
+      id:
         type: string
-        description: Primary key for this taxon as used in the source database.
+        description: Primary key for the taxon as used in the source database.
       datasetKey:
         type: integer
         description: Key to the source dataset this record belongs to
@@ -951,7 +999,7 @@ types:
         required: false
       issues:
         type: object
-        description: Map of issues spotted during processing.
+        description: Set of issues spotted during processing.
         required: false
   TaxonMatch:
     type: MatchResult
@@ -990,10 +1038,16 @@ types:
         type: TaxonReference[]
         description: List of all distinct references supporting the taxon concept, distribution or vernacular names as referenced by the individual record.
   VerbatimRecord:
-    type: DatasetObject
+    type: object
     description: >
       Verbatim version of the entire source record with issues flagged during processing.
     properties:
+      id:
+        type: string
+        description: Primary key for the record as used in the source database.
+      datasetKey:
+        type: integer
+        description: Key to the source dataset this record belongs to
       terms:
         type: VerbatimRecordTerms
         description: The verbatim source data
@@ -1003,9 +1057,6 @@ types:
       Verbatim version of the entire Dwc star record given as DwC terms.
       This includes data about the name, taxon, vernacular, distribution, etc.
     properties:
-      core:
-        type: object
-        description: Map of core DwC terms to their value.
       extensions:
         type: object
         description: Map of extension rowType URLs to array of records with DwC terms value pairs similar to core.
@@ -1013,9 +1064,15 @@ types:
     type: object
     description: A vernacular name
     properties:
+      datasetKey:
+        type: integer
+        description: Key to the source dataset this record belongs to
       name:
         type: string
         description: the vernacular name
+      latin:
+        type: string
+        description: transliterated vernacular name into the latin script
       language:
         type: isocode
         description: the language given as 3 letter ISO codes
@@ -1029,6 +1086,9 @@ types:
     type: object
     description: An area distribution record
     properties:
+      datasetKey:
+        type: integer
+        description: Key to the source dataset this record belongs to
       area:
         type: string
         description: the geographic area the distribution refers to as defined in the corresponding area standard.
@@ -1198,11 +1258,12 @@ types:
                               "authors": ["Nutt."],
                               "year": "1841"
                             },
+                            "origin": "source",
                             "rank": "species",
                             "nomenclaturalCode": "botanical",
                             "genus": "Stylopappus",
                             "specificEpithet": "grandiflorus",
-                            "originalNameKey": 21242
+                            "basionymKey": 21242
                          },
                         {
                             "key": 21243,
@@ -1217,11 +1278,12 @@ types:
                               "authors": ["Torr.", "A. Gray"],
                               "year": "1843"
                             },
+                            "origin": "source",
                             "rank": "species",
                             "nomenclaturalCode": "botanical",
                             "genus": "Stylopappus",
                             "specificEpithet": "grandiflorus",
-                            "originalNameKey": 21242
+                            "basionymKey": 21242
                         },
                         {
                             "key": 21244,
@@ -1236,11 +1298,12 @@ types:
                               "authors": ["A. Gray"],
                               "year": "1874"
                             },
+                            "origin": "source",
                             "rank": "species",
                             "nomenclaturalCode": "botanical",
                             "genus": "Troximon",
                             "specificEpithet": "grandiflorum",
-                            "originalNameKey": 21242
+                            "basionymKey": 21242
                          }
                     ],
                     [
@@ -1254,6 +1317,7 @@ types:
                               "authors": ["Greene"],
                               "year": "1888"
                             },
+                            "origin": "source",
                             "rank": "species",
                             "nomenclaturalCode": "botanical",
                             "genus": "Troximon",
@@ -1272,11 +1336,12 @@ types:
                               "authors": ["Greene"],
                               "year": "1891"
                             },
+                            "origin": "source",
                             "rank": "species",
                             "nomenclaturalCode": "botanical",
                             "genus": "Agoseris",
                             "specificEpithet": "marshallii",
-                            "originalNameKey": 13078
+                            "basionymKey": 13078
                         },
                         {
                             "key": 13080,
@@ -1291,12 +1356,13 @@ types:
                               "authors": ["Greene"],
                               "year": "1891"
                             },
+                            "origin": "source",
                             "rank": "species",
                             "nomenclaturalCode": "botanical",
                             "status": "variant",
                             "genus": "Agoseris",
                             "specificEpithet": "marshalii",
-                            "originalNameKey": 13078
+                            "basionymKey": 13078
                         }
                     ],
                     [
@@ -1310,11 +1376,12 @@ types:
                               "authors": ["Greene"],
                               "year": "1890"
                             },
+                            "origin": "source",
                             "rank": "species",
                             "nomenclaturalCode": "botanical",
                             "genus": "Troximon",
                             "specificEpithet": "plebeium",
-                            "originalNameKey": 13122
+                            "basionymKey": 13122
                         },
                         {
                             "key": 13123,
@@ -1329,11 +1396,12 @@ types:
                               "authors": ["Greene"],
                               "year": "1891"
                             },
+                            "origin": "source",
                             "rank": "species",
                             "nomenclaturalCode": "botanical",
                             "genus": "Agoseris",
                             "specificEpithet": "plebeia",
-                            "originalNameKey": 13122
+                            "basionymKey": 13122
                         },
                         {
                             "key": 13124,
@@ -1348,12 +1416,13 @@ types:
                               "authors": ["G. L. Wittr."],
                               "year": "1928"
                             },
+                            "origin": "source",
                             "rank": "variety",
                             "nomenclaturalCode": "botanical",
                             "genus": "Agoseris",
                             "specificEpithet": "grandiflora",
                             "infraSpecificEpithet": "plebeia",
-                            "originalNameKey": 13122
+                            "basionymKey": 13122
                         }
                     ]
                 ]

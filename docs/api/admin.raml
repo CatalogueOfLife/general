@@ -1,0 +1,46 @@
+#%RAML 1.0
+title: CoL+ admin API
+version: v1
+baseUri: https://api.col.plus
+protocols:
+  - HTTPS
+mediaType:
+  - application/json
+description:
+    Administration API for editorial processes in the Catalogue of Life.
+securitySchemes:
+  basic:
+    type: Basic Authentication
+    description: |
+      Supported for authenticating all API requests.
+  oauth_2_0:
+    description: |
+      Supported for authenticating all API requests.
+    type: OAuth 2.0
+    describedBy:
+      headers:
+        Authorization:
+          description: |
+             Used to send a valid OAuth 2 access token. Do not use
+             with the "access_token" query string parameter.
+          type: string
+      queryParameters:
+        access_token:
+          description: |
+             Used to send a valid OAuth 2 access token. Do not use with
+             the "Authorization" header.
+          type: string
+      responses:
+        401:
+          description: |
+              Bad or expired token. This can happen if the user or system
+              revoked or expired an access token. To fix, re-authenticate
+              the user.
+        403:
+          description: |
+              Bad OAuth request (wrong consumer key, bad nonce, expired
+              timestamp...). Unfortunately, re-authenticating the user won't help here.
+    settings:
+      authorizationUri: https://www.sciname.com/oauth2/authorize
+      accessTokenUri: https://api.sciname.com/oauth2/token
+      authorizationGrants: [ authorization_code, implicit ]
