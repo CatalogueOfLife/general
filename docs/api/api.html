@@ -385,6 +385,25 @@
                             </tbody></table>
                         <h2 id="model-DatasetImport">DatasetImport</h2>
 
+                <pre class="example"><code class="json">{
+                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@3728a578
+                    "attempt":org.raml.v2.internal.impl.commons.model.TypeInstance@3e3cd6fe
+                    "state":org.raml.v2.internal.impl.commons.model.TypeInstance@1de0641b
+                    "downloadUri":org.raml.v2.internal.impl.commons.model.TypeInstance@68b734a8
+                    "download":org.raml.v2.internal.impl.commons.model.TypeInstance@1a464fa3
+                    "started":org.raml.v2.internal.impl.commons.model.TypeInstance@4215e133
+                    "finished":org.raml.v2.internal.impl.commons.model.TypeInstance@5ccb85d6
+                    "verbatimCount":org.raml.v2.internal.impl.commons.model.TypeInstance@d88f893
+                    "nameCount":org.raml.v2.internal.impl.commons.model.TypeInstance@259b85d6
+                    "taxonCount":org.raml.v2.internal.impl.commons.model.TypeInstance@488f3dd1
+                    "vernacularCount":org.raml.v2.internal.impl.commons.model.TypeInstance@2091833
+                    "distributionCount":org.raml.v2.internal.impl.commons.model.TypeInstance@7bc58891
+                    "issuesCount":org.raml.v2.internal.impl.commons.model.TypeInstance@6411504a
+                    "namesByRankCount":org.raml.v2.internal.impl.commons.model.TypeInstance@554188ac
+                    "namesByTypeCount":org.raml.v2.internal.impl.commons.model.TypeInstance@1f43cab7
+                    "distributionsByGazetteerCount":org.raml.v2.internal.impl.commons.model.TypeInstance@467b0f6e
+                    "namesByOriginCount":org.raml.v2.internal.impl.commons.model.TypeInstance@474179fa
+    }</code></pre>
 
     <p><p>Metrics and import details about a single dataset import event.</p>
 </p>
@@ -424,7 +443,7 @@
                                 </tr>
                                 <tr>
                                     <td>downloadUri</td>
-                                    <td>datetime</td>
+                                    <td>string</td>
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>Last modification date of the downloaded file</p>
@@ -450,7 +469,7 @@
                                     <td>finished</td>
                                     <td>datetime</td>
                                     <td></td>
-                                    <td>yes</td>
+                                    <td>no</td>
                                     <td><p>date time the import finished</p>
 </td>
                                 </tr>
@@ -458,7 +477,7 @@
                                     <td>error</td>
                                     <td>string</td>
                                     <td></td>
-                                    <td>yes</td>
+                                    <td>no</td>
                                     <td><p>Error message</p>
 </td>
                                 </tr>
@@ -506,7 +525,7 @@
                                     <td>issuesCount</td>
                                     <td>object</td>
                                     <td></td>
-                                    <td>yes</td>
+                                    <td>no</td>
                                     <td><p>count of recorbs by issues</p>
 </td>
                                 </tr>
@@ -514,7 +533,7 @@
                                     <td>namesByRankCount</td>
                                     <td>object</td>
                                     <td></td>
-                                    <td>yes</td>
+                                    <td>no</td>
                                     <td><p>count of names by rank</p>
 </td>
                                 </tr>
@@ -522,7 +541,7 @@
                                     <td>namesByTypeCount</td>
                                     <td>object</td>
                                     <td></td>
-                                    <td>yes</td>
+                                    <td>no</td>
                                     <td><p>count of names by name type</p>
 </td>
                                 </tr>
@@ -530,7 +549,7 @@
                                     <td>vernacularsByLanguageCount</td>
                                     <td>object</td>
                                     <td></td>
-                                    <td>yes</td>
+                                    <td>no</td>
                                     <td><p>count of vernacular names by language</p>
 </td>
                                 </tr>
@@ -538,7 +557,7 @@
                                     <td>distributionsByGazetteerCount</td>
                                     <td>object</td>
                                     <td></td>
-                                    <td>yes</td>
+                                    <td>no</td>
                                     <td><p>count of distributions by gazetteer kind</p>
 </td>
                                 </tr>
@@ -546,7 +565,7 @@
                                     <td>namesByOriginCount</td>
                                     <td>object</td>
                                     <td></td>
-                                    <td>yes</td>
+                                    <td>no</td>
                                     <td><p>count of names by their origin</p>
 </td>
                                 </tr>
@@ -567,7 +586,7 @@
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>results</td>
+                                    <td>result</td>
                                     <td>object[]</td>
                                     <td></td>
                                     <td>yes</td>
@@ -596,6 +615,14 @@
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>The total number of records available.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>results</td>
+                                    <td><a href="#model-Dataset">Dataset[]</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the resulting Datasets</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -640,28 +667,22 @@
                             </tbody></table>
                         <h2 id="model-Name">Name</h2>
 
-    <pre class="example"><code class="json">{
-  "key": 21242,
-  "datasetKey": 15,
-  "basionymKey": 8673,
-  "scientificName": "Crepicnema parvula",
-  "scientificNameID": "abc12345",
-  "rank": "species",
-  "authorship": "(Jacoby, 1885)",
-  "basionymAuthorship": {
-    "authors": ["Jacoby"]
-  },
-  "combinationAuthorship": {
-    "authors": ["Jacoby"],
-    "year": "1885"
-  },
-  "origin": "source",
-  "code": "zoological",
-  "genus": "Crepicnema",
-  "specificEpithet": "parvula",
-  "fossil": false
-}
-</code></pre>
+                <pre class="example"><code class="json">{
+                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@670342a2
+                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@d5e575c
+                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@7742a45c
+                    "scientificName":org.raml.v2.internal.impl.commons.model.TypeInstance@7ca492d9
+                    "rank":org.raml.v2.internal.impl.commons.model.TypeInstance@14fc9bd
+                    "genus":org.raml.v2.internal.impl.commons.model.TypeInstance@7ed49a7f
+                    "specificEpithet":org.raml.v2.internal.impl.commons.model.TypeInstance@1cd6b1bd
+                    "candidatus":org.raml.v2.internal.impl.commons.model.TypeInstance@443cdaa4
+                    "combinationAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@3b41e1bf
+                    "basionymAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@619c93ca
+                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@486e9d1d
+                    "type":org.raml.v2.internal.impl.commons.model.TypeInstance@6aa5974e
+                    "parsed":org.raml.v2.internal.impl.commons.model.TypeInstance@5e5ddfbc
+                    "authorship":org.raml.v2.internal.impl.commons.model.TypeInstance@5bda157e
+    }</code></pre>
 
     <p><p>A scientific name.
 CoL deals and categorizes the following types of names:</p>
@@ -779,6 +800,14 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
 </td>
                                 </tr>
                                 <tr>
+                                    <td>basionymKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>link to the original combination. In case of <a href="https://en.wikipedia.org/wiki/Nomen_novum">replacement names</a> it points back to the replaced synonym.</p>
+</td>
+                                </tr>
+                                <tr>
                                     <td>scientificName</td>
                                     <td>string</td>
                                     <td></td>
@@ -815,22 +844,23 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td>string</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>full authorship string</p>
+                                    <td><p>full authorship string including basionym and combination authors, ex- sanctioning authors and years</p>
 </td>
                                 </tr>
                                 <tr>
                                     <td>combinationAuthorship</td>
                                     <td><a href="#model-Authorship">Authorship</a></td>
                                     <td></td>
-                                    <td>yes</td>
-                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>parsed authorship object for this combination</p>
+</td>
                                 </tr>
                                 <tr>
                                     <td>basionymAuthorship</td>
                                     <td><a href="#model-Authorship">Authorship</a></td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>full unparsed authorship of the name incl basionym and years</p>
+                                    <td><p>parsed authorship of the basionym</p>
 </td>
                                 </tr>
                                 <tr>
@@ -838,7 +868,8 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td>string</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td></td>
+                                    <td><p>the sanctioning author for Fungus names</p>
+</td>
                                 </tr>
                                 <tr>
                                     <td>rank</td>
@@ -928,14 +959,6 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td>generic, infrageneric, specific, infraspecific</td>
                                     <td>no</td>
                                     <td><p>the part of the name which is considered a hybrid;  see <a href="https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/NamePart.java#L24">GBIF</a></p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>basionymKey</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>link to the original combination. In case of <a href="https://en.wikipedia.org/wiki/Nomen_novum">replacement names</a> it points back to the replaced synonym.</p>
 </td>
                                 </tr>
                                 <tr>
@@ -987,7 +1010,7 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>results</td>
+                                    <td>result</td>
                                     <td>object[]</td>
                                     <td></td>
                                     <td>yes</td>
@@ -1016,6 +1039,14 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>The total number of records available.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>results</td>
+                                    <td><a href="#model-Name">Name[]</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the resulting names</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -1060,6 +1091,14 @@ Name object with some extra properties related to synonymy. See below.</p>
 </td>
                                 </tr>
                                 <tr>
+                                    <td>basionymKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>link to the original combination. In case of <a href="https://en.wikipedia.org/wiki/Nomen_novum">replacement names</a> it points back to the replaced synonym.</p>
+</td>
+                                </tr>
+                                <tr>
                                     <td>scientificName</td>
                                     <td>string</td>
                                     <td></td>
@@ -1096,22 +1135,23 @@ Name object with some extra properties related to synonymy. See below.</p>
                                     <td>string</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>full authorship string</p>
+                                    <td><p>full authorship string including basionym and combination authors, ex- sanctioning authors and years</p>
 </td>
                                 </tr>
                                 <tr>
                                     <td>combinationAuthorship</td>
                                     <td><a href="#model-Authorship">Authorship</a></td>
                                     <td></td>
-                                    <td>yes</td>
-                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>parsed authorship object for this combination</p>
+</td>
                                 </tr>
                                 <tr>
                                     <td>basionymAuthorship</td>
                                     <td><a href="#model-Authorship">Authorship</a></td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>full unparsed authorship of the name incl basionym and years</p>
+                                    <td><p>parsed authorship of the basionym</p>
 </td>
                                 </tr>
                                 <tr>
@@ -1119,7 +1159,8 @@ Name object with some extra properties related to synonymy. See below.</p>
                                     <td>string</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td></td>
+                                    <td><p>the sanctioning author for Fungus names</p>
+</td>
                                 </tr>
                                 <tr>
                                     <td>rank</td>
@@ -1212,14 +1253,6 @@ Name object with some extra properties related to synonymy. See below.</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>basionymKey</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>link to the original combination. In case of <a href="https://en.wikipedia.org/wiki/Nomen_novum">replacement names</a> it points back to the replaced synonym.</p>
-</td>
-                                </tr>
-                                <tr>
                                     <td>fossil</td>
                                     <td>boolean</td>
                                     <td></td>
@@ -1261,7 +1294,7 @@ Name object with some extra properties related to synonymy. See below.</p>
                                 </tr>
                                 <tr>
                                     <td>taxa</td>
-                                    <td><a href="#model-Taxon">Taxon[]</a></td>
+                                    <td>object[]</td>
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>See above.</p>
@@ -1270,6 +1303,13 @@ Name object with some extra properties related to synonymy. See below.</p>
                             </tbody></table>
                         <h2 id="model-NameSearchResultSet">NameSearchResultSet</h2>
 
+                <pre class="example"><code class="json">{
+                    "offset":org.raml.v2.internal.impl.commons.model.TypeInstance@7ed7ae
+                    "limit":org.raml.v2.internal.impl.commons.model.TypeInstance@53ba1175
+                    "total":org.raml.v2.internal.impl.commons.model.TypeInstance@cd5ff55
+                    "result":[org.raml.v2.internal.impl.commons.model.TypeInstance@6003220a, org.raml.v2.internal.impl.commons.model.TypeInstance@16b64a03, org.raml.v2.internal.impl.commons.model.TypeInstance@1584c019, org.raml.v2.internal.impl.commons.model.TypeInstance@3688baab, org.raml.v2.internal.impl.commons.model.TypeInstance@4fe2dd02, org.raml.v2.internal.impl.commons.model.TypeInstance@6ba060af, org.raml.v2.internal.impl.commons.model.TypeInstance@5817f1ca, org.raml.v2.internal.impl.commons.model.TypeInstance@2b395581, org.raml.v2.internal.impl.commons.model.TypeInstance@726a8729, org.raml.v2.internal.impl.commons.model.TypeInstance@1a2724d3]
+                    "last":org.raml.v2.internal.impl.commons.model.TypeInstance@7dd91ffc
+    }</code></pre>
 
     <p><p>A paging resultset for name search results.</p>
 </p>
@@ -1284,7 +1324,7 @@ Name object with some extra properties related to synonymy. See below.</p>
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>results</td>
+                                    <td>result</td>
                                     <td>object[]</td>
                                     <td></td>
                                     <td>yes</td>
@@ -1541,7 +1581,7 @@ see <a href="https://github.com/citation-style-language/schema/blob/master/csl-d
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>results</td>
+                                    <td>result</td>
                                     <td>object[]</td>
                                     <td></td>
                                     <td>yes</td>
@@ -1570,6 +1610,14 @@ see <a href="https://github.com/citation-style-language/schema/blob/master/csl-d
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>The total number of records available.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>results</td>
+                                    <td><a href="#model-Reference">Reference[]</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the resulting References</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -1769,7 +1817,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>results</td>
+                                    <td>result</td>
                                     <td>object[]</td>
                                     <td></td>
                                     <td>yes</td>
@@ -1798,6 +1846,14 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>The total number of records available.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>results</td>
+                                    <td><a href="#model-Serial">Serial[]</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the resulting Serials</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -2017,7 +2073,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>results</td>
+                                    <td>result</td>
                                     <td>object[]</td>
                                     <td></td>
                                     <td>yes</td>
@@ -2046,6 +2102,14 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>The total number of records available.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>results</td>
+                                    <td><a href="#model-Taxon">Taxon[]</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the resulting Taxa</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -2387,15 +2451,6 @@ See Limits of Oceans &amp; Seas, Special Publication No. 23 published by the Int
 </p>
 
 
-            <h2 id="model-NameParsingStateType">NameParsingStateType</h2>
-
-
-            <p><strong>Enumeration</strong>: <em>complete</em>, <em>name_and_author</em>, <em>name_only</em>, <em>none</em></p>
-
-    <p><p>Indicates how successfully a name was parsed into it constituent components</p>
-</p>
-
-
             <h2 id="model-NameType">NameType</h2>
 
 
@@ -2557,7 +2612,7 @@ Host: api.col.plus
                 <td></td>
                 <td>no</td>
                 <td></td>
-                <td><p>The requested number of offset records</p>
+                <td><p>The requested number of offset records. Defaults to zero</p>
 </td>
             </tr>
             <tr>
@@ -2566,7 +2621,7 @@ Host: api.col.plus
                 <td></td>
                 <td>no</td>
                 <td></td>
-                <td><p>The requested page, defaulting to 1 for the first page</p>
+                <td><p>The requested number of maximum records to be returned. Defaults to 10 and can be no more than 1000.</p>
 </td>
             </tr>
             <tr>
@@ -2585,7 +2640,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2614,7 +2669,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2666,7 +2721,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2800,9 +2855,28 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
+                <code class="json">{
+                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@3728a578
+                    "attempt":org.raml.v2.internal.impl.commons.model.TypeInstance@3e3cd6fe
+                    "state":org.raml.v2.internal.impl.commons.model.TypeInstance@1de0641b
+                    "downloadUri":org.raml.v2.internal.impl.commons.model.TypeInstance@68b734a8
+                    "download":org.raml.v2.internal.impl.commons.model.TypeInstance@1a464fa3
+                    "started":org.raml.v2.internal.impl.commons.model.TypeInstance@4215e133
+                    "finished":org.raml.v2.internal.impl.commons.model.TypeInstance@5ccb85d6
+                    "verbatimCount":org.raml.v2.internal.impl.commons.model.TypeInstance@d88f893
+                    "nameCount":org.raml.v2.internal.impl.commons.model.TypeInstance@259b85d6
+                    "taxonCount":org.raml.v2.internal.impl.commons.model.TypeInstance@488f3dd1
+                    "vernacularCount":org.raml.v2.internal.impl.commons.model.TypeInstance@2091833
+                    "distributionCount":org.raml.v2.internal.impl.commons.model.TypeInstance@7bc58891
+                    "issuesCount":org.raml.v2.internal.impl.commons.model.TypeInstance@6411504a
+                    "namesByRankCount":org.raml.v2.internal.impl.commons.model.TypeInstance@554188ac
+                    "namesByTypeCount":org.raml.v2.internal.impl.commons.model.TypeInstance@1f43cab7
+                    "distributionsByGazetteerCount":org.raml.v2.internal.impl.commons.model.TypeInstance@467b0f6e
+                    "namesByOriginCount":org.raml.v2.internal.impl.commons.model.TypeInstance@474179fa
+    }</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-DatasetImport">DatasetImport[]</a></p>
@@ -2858,7 +2932,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2918,7 +2992,7 @@ Host: api.col.plus
                 <td></td>
                 <td>no</td>
                 <td></td>
-                <td><p>The requested number of offset records</p>
+                <td><p>The requested number of offset records. Defaults to zero</p>
 </td>
             </tr>
             <tr>
@@ -2927,7 +3001,7 @@ Host: api.col.plus
                 <td></td>
                 <td>no</td>
                 <td></td>
-                <td><p>The requested page, defaulting to 1 for the first page</p>
+                <td><p>The requested number of maximum records to be returned. Defaults to 10 and can be no more than 1000.</p>
 </td>
             </tr>
             <tr>
@@ -2946,7 +3020,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3007,7 +3081,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3059,7 +3133,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3090,7 +3164,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3121,7 +3195,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3152,7 +3226,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3183,7 +3257,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -3395,7 +3469,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3437,7 +3511,7 @@ Host: api.col.plus
                 <td></td>
                 <td>no</td>
                 <td></td>
-                <td><p>The requested number of offset records</p>
+                <td><p>The requested number of offset records. Defaults to zero</p>
 </td>
             </tr>
             <tr>
@@ -3446,7 +3520,7 @@ Host: api.col.plus
                 <td></td>
                 <td>no</td>
                 <td></td>
-                <td><p>The requested page, defaulting to 1 for the first page</p>
+                <td><p>The requested number of maximum records to be returned. Defaults to 10 and can be no more than 1000.</p>
 </td>
             </tr>
             <tr>
@@ -3465,7 +3539,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3579,7 +3653,7 @@ Host: api.col.plus
                 <td></td>
                 <td>no</td>
                 <td></td>
-                <td><p>The requested number of offset records</p>
+                <td><p>The requested number of offset records. Defaults to zero</p>
 </td>
             </tr>
             <tr>
@@ -3588,7 +3662,7 @@ Host: api.col.plus
                 <td></td>
                 <td>no</td>
                 <td></td>
-                <td><p>The requested page, defaulting to 1 for the first page</p>
+                <td><p>The requested number of maximum records to be returned. Defaults to 10 and can be no more than 1000.</p>
 </td>
             </tr>
         </tbody></table>
@@ -3598,9 +3672,16 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
+                <code class="json">{
+                    "offset":org.raml.v2.internal.impl.commons.model.TypeInstance@7ed7ae
+                    "limit":org.raml.v2.internal.impl.commons.model.TypeInstance@53ba1175
+                    "total":org.raml.v2.internal.impl.commons.model.TypeInstance@cd5ff55
+                    "result":[org.raml.v2.internal.impl.commons.model.TypeInstance@6003220a, org.raml.v2.internal.impl.commons.model.TypeInstance@16b64a03, org.raml.v2.internal.impl.commons.model.TypeInstance@1584c019, org.raml.v2.internal.impl.commons.model.TypeInstance@3688baab, org.raml.v2.internal.impl.commons.model.TypeInstance@4fe2dd02, org.raml.v2.internal.impl.commons.model.TypeInstance@6ba060af, org.raml.v2.internal.impl.commons.model.TypeInstance@5817f1ca, org.raml.v2.internal.impl.commons.model.TypeInstance@2b395581, org.raml.v2.internal.impl.commons.model.TypeInstance@726a8729, org.raml.v2.internal.impl.commons.model.TypeInstance@1a2724d3]
+                    "last":org.raml.v2.internal.impl.commons.model.TypeInstance@7dd91ffc
+    }</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-NameSearchResultSet">NameSearchResultSet</a></p>
@@ -3659,7 +3740,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3711,31 +3792,25 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
-    <code class="json">{
-  "key": 21242,
-  "datasetKey": 15,
-  "basionymKey": 8673,
-  "scientificName": "Crepicnema parvula",
-  "scientificNameID": "abc12345",
-  "rank": "species",
-  "authorship": "(Jacoby, 1885)",
-  "basionymAuthorship": {
-    "authors": ["Jacoby"]
-  },
-  "combinationAuthorship": {
-    "authors": ["Jacoby"],
-    "year": "1885"
-  },
-  "origin": "source",
-  "code": "zoological",
-  "genus": "Crepicnema",
-  "specificEpithet": "parvula",
-  "fossil": false
-}
-</code>
+                <code class="json">{
+                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@670342a2
+                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@d5e575c
+                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@7742a45c
+                    "scientificName":org.raml.v2.internal.impl.commons.model.TypeInstance@7ca492d9
+                    "rank":org.raml.v2.internal.impl.commons.model.TypeInstance@14fc9bd
+                    "genus":org.raml.v2.internal.impl.commons.model.TypeInstance@7ed49a7f
+                    "specificEpithet":org.raml.v2.internal.impl.commons.model.TypeInstance@1cd6b1bd
+                    "candidatus":org.raml.v2.internal.impl.commons.model.TypeInstance@443cdaa4
+                    "combinationAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@3b41e1bf
+                    "basionymAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@619c93ca
+                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@486e9d1d
+                    "type":org.raml.v2.internal.impl.commons.model.TypeInstance@6aa5974e
+                    "parsed":org.raml.v2.internal.impl.commons.model.TypeInstance@5e5ddfbc
+                    "authorship":org.raml.v2.internal.impl.commons.model.TypeInstance@5bda157e
+    }</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-Name">Name</a></p>
@@ -3764,52 +3839,25 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
-    <code class="json">[{
-  "key": 21242,
-  "datasetKey": 15,
-  "basionymKey": 8673,
-  "scientificName": "Crepicnema parvula",
-  "scientificNameID": "abc12345",
-  "rank": "species",
-  "authorship": "(Jacoby, 1885)",
-  "basionymAuthorship": {
-    "authors": ["Jacoby"]
-  },
-  "combinationAuthorship": {
-    "authors": ["Jacoby"],
-    "year": "1885"
-  },
-  "origin": "source",
-  "code": "zoological",
-  "genus": "Crepicnema",
-  "specificEpithet": "parvula",
-  "fossil": false
-}
-,{
-  "key": 21242,
-  "datasetKey": 15,
-  "basionymKey": 8673,
-  "scientificName": "Crepicnema parvula",
-  "scientificNameID": "abc12345",
-  "rank": "species",
-  "authorship": "(Jacoby, 1885)",
-  "basionymAuthorship": {
-    "authors": ["Jacoby"]
-  },
-  "combinationAuthorship": {
-    "authors": ["Jacoby"],
-    "year": "1885"
-  },
-  "origin": "source",
-  "code": "zoological",
-  "genus": "Crepicnema",
-  "specificEpithet": "parvula",
-  "fossil": false
-}
-]</code>
+                <code class="json">{
+                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@670342a2
+                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@d5e575c
+                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@7742a45c
+                    "scientificName":org.raml.v2.internal.impl.commons.model.TypeInstance@7ca492d9
+                    "rank":org.raml.v2.internal.impl.commons.model.TypeInstance@14fc9bd
+                    "genus":org.raml.v2.internal.impl.commons.model.TypeInstance@7ed49a7f
+                    "specificEpithet":org.raml.v2.internal.impl.commons.model.TypeInstance@1cd6b1bd
+                    "candidatus":org.raml.v2.internal.impl.commons.model.TypeInstance@443cdaa4
+                    "combinationAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@3b41e1bf
+                    "basionymAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@619c93ca
+                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@486e9d1d
+                    "type":org.raml.v2.internal.impl.commons.model.TypeInstance@6aa5974e
+                    "parsed":org.raml.v2.internal.impl.commons.model.TypeInstance@5e5ddfbc
+                    "authorship":org.raml.v2.internal.impl.commons.model.TypeInstance@5bda157e
+    }</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-Name">Name[]</a></p>
@@ -3838,7 +3886,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3907,7 +3955,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -3955,7 +4003,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3997,7 +4045,7 @@ Host: api.col.plus
                 <td></td>
                 <td>no</td>
                 <td></td>
-                <td><p>The requested number of offset records</p>
+                <td><p>The requested number of offset records. Defaults to zero</p>
 </td>
             </tr>
             <tr>
@@ -4006,7 +4054,7 @@ Host: api.col.plus
                 <td></td>
                 <td>no</td>
                 <td></td>
-                <td><p>The requested page, defaulting to 1 for the first page</p>
+                <td><p>The requested number of maximum records to be returned. Defaults to 10 and can be no more than 1000.</p>
 </td>
             </tr>
             <tr>
@@ -4025,7 +4073,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -4086,7 +4134,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -4138,7 +4186,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4186,7 +4234,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -4261,52 +4309,25 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:30 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
-    <code class="json">[{
-  "key": 21242,
-  "datasetKey": 15,
-  "basionymKey": 8673,
-  "scientificName": "Crepicnema parvula",
-  "scientificNameID": "abc12345",
-  "rank": "species",
-  "authorship": "(Jacoby, 1885)",
-  "basionymAuthorship": {
-    "authors": ["Jacoby"]
-  },
-  "combinationAuthorship": {
-    "authors": ["Jacoby"],
-    "year": "1885"
-  },
-  "origin": "source",
-  "code": "zoological",
-  "genus": "Crepicnema",
-  "specificEpithet": "parvula",
-  "fossil": false
-}
-,{
-  "key": 21242,
-  "datasetKey": 15,
-  "basionymKey": 8673,
-  "scientificName": "Crepicnema parvula",
-  "scientificNameID": "abc12345",
-  "rank": "species",
-  "authorship": "(Jacoby, 1885)",
-  "basionymAuthorship": {
-    "authors": ["Jacoby"]
-  },
-  "combinationAuthorship": {
-    "authors": ["Jacoby"],
-    "year": "1885"
-  },
-  "origin": "source",
-  "code": "zoological",
-  "genus": "Crepicnema",
-  "specificEpithet": "parvula",
-  "fossil": false
-}
-]</code>
+                <code class="json">{
+                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@670342a2
+                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@d5e575c
+                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@7742a45c
+                    "scientificName":org.raml.v2.internal.impl.commons.model.TypeInstance@7ca492d9
+                    "rank":org.raml.v2.internal.impl.commons.model.TypeInstance@14fc9bd
+                    "genus":org.raml.v2.internal.impl.commons.model.TypeInstance@7ed49a7f
+                    "specificEpithet":org.raml.v2.internal.impl.commons.model.TypeInstance@1cd6b1bd
+                    "candidatus":org.raml.v2.internal.impl.commons.model.TypeInstance@443cdaa4
+                    "combinationAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@3b41e1bf
+                    "basionymAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@619c93ca
+                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@486e9d1d
+                    "type":org.raml.v2.internal.impl.commons.model.TypeInstance@6aa5974e
+                    "parsed":org.raml.v2.internal.impl.commons.model.TypeInstance@5e5ddfbc
+                    "authorship":org.raml.v2.internal.impl.commons.model.TypeInstance@5bda157e
+    }</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-Name">Name[]</a></p>
@@ -4338,52 +4359,25 @@ with one name per line, or as plain/text content in the request body.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, February 27, 2018 5:51:31 PM CET
+Date: Thursday, March 1, 2018 11:57:49 AM CET
 Content-Type: application/json
 </code>
-    <code class="json">[{
-  "key": 21242,
-  "datasetKey": 15,
-  "basionymKey": 8673,
-  "scientificName": "Crepicnema parvula",
-  "scientificNameID": "abc12345",
-  "rank": "species",
-  "authorship": "(Jacoby, 1885)",
-  "basionymAuthorship": {
-    "authors": ["Jacoby"]
-  },
-  "combinationAuthorship": {
-    "authors": ["Jacoby"],
-    "year": "1885"
-  },
-  "origin": "source",
-  "code": "zoological",
-  "genus": "Crepicnema",
-  "specificEpithet": "parvula",
-  "fossil": false
-}
-,{
-  "key": 21242,
-  "datasetKey": 15,
-  "basionymKey": 8673,
-  "scientificName": "Crepicnema parvula",
-  "scientificNameID": "abc12345",
-  "rank": "species",
-  "authorship": "(Jacoby, 1885)",
-  "basionymAuthorship": {
-    "authors": ["Jacoby"]
-  },
-  "combinationAuthorship": {
-    "authors": ["Jacoby"],
-    "year": "1885"
-  },
-  "origin": "source",
-  "code": "zoological",
-  "genus": "Crepicnema",
-  "specificEpithet": "parvula",
-  "fossil": false
-}
-]</code>
+                <code class="json">{
+                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@670342a2
+                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@d5e575c
+                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@7742a45c
+                    "scientificName":org.raml.v2.internal.impl.commons.model.TypeInstance@7ca492d9
+                    "rank":org.raml.v2.internal.impl.commons.model.TypeInstance@14fc9bd
+                    "genus":org.raml.v2.internal.impl.commons.model.TypeInstance@7ed49a7f
+                    "specificEpithet":org.raml.v2.internal.impl.commons.model.TypeInstance@1cd6b1bd
+                    "candidatus":org.raml.v2.internal.impl.commons.model.TypeInstance@443cdaa4
+                    "combinationAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@3b41e1bf
+                    "basionymAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@619c93ca
+                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@486e9d1d
+                    "type":org.raml.v2.internal.impl.commons.model.TypeInstance@6aa5974e
+                    "parsed":org.raml.v2.internal.impl.commons.model.TypeInstance@5e5ddfbc
+                    "authorship":org.raml.v2.internal.impl.commons.model.TypeInstance@5bda157e
+    }</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-Name">Name[]</a></p>

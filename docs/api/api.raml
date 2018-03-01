@@ -27,11 +27,11 @@ traits:
       offset:
         type: integer
         required: false
-        description: The requested number of offset records
+        description: The requested number of offset records. Defaults to zero
       limit:
         type: integer
         required: false
-        description: The requested page, defaulting to 1 for the first page
+        description: The requested number of maximum records to be returned. Defaults to 10 and can be no more than 1000.
   datasetConstrainable:
     usage: Apply this to any method that allows results to be constrained to a certain dataset.
     description: Query parameter.
@@ -185,10 +185,6 @@ types:
 
        typification
        : subsequent type designations.
-  NameParsingStateType:
-    type: string
-    enum: ["complete", "name_and_author", "name_only", "none"]
-    description: Indicates how successfully a name was parsed into it constituent components
   LifezoneType:
     type: string
     enum: ["brackish", "freshwater", "marine", "terrestrial"]
@@ -279,7 +275,7 @@ types:
     description: >
       A paging resultset without the actual type specific result payload.
     properties:
-      results:
+      result:
         type: object[]
         description: Result page
       offset:
@@ -410,7 +406,7 @@ types:
         type: string
         description: State of the import, indicating if still running, success or failure.
       downloadUri:
-        type: datetime
+        type: string
         description: Last modification date of the downloaded file
       download:
         type: datetime
@@ -421,9 +417,11 @@ types:
       finished:
         type: datetime
         description: date time the import finished
+        required: false
       error:
         type: string
         description: Error message
+        required: false
       verbatimCount:
         type: integer
         description: count of all verbatim records
@@ -442,21 +440,28 @@ types:
       issuesCount:
         type: object
         description: count of recorbs by issues
+        required: false
       namesByRankCount:
         type: object
         description: count of names by rank
+        required: false
       namesByTypeCount:
         type: object
         description: count of names by name type
+        required: false
       vernacularsByLanguageCount:
         type: object
         description: count of vernacular names by language
+        required: false
       distributionsByGazetteerCount:
         type: object
         description: count of distributions by gazetteer kind
+        required: false
       namesByOriginCount:
         type: object
         description: count of names by their origin
+        required: false
+    example: {"datasetKey":101,"attempt":1,"state":"FINISHED","downloadUri":"https://raw.githubusercontent.com/Sp2000/colplus-repo/master/ACEF/assembly/101.tar.gz","download":"2018-02-28T03:40:02","started":"2018-02-28T03:40:01.433","finished":"2018-02-28T03:52:27.201","verbatimCount":169988,"nameCount":179025,"taxonCount":147971,"vernacularCount":0,"distributionCount":137999,"issuesCount":{"DISTRIBUTION_GAZETEER_INVALID":3,"DISTRIBUTION_STATUS_INVALID":2,"LIFEZONE_INVALID":1},"namesByRankCount":{"SPECIES":169988,"GENUS":8878,"FAMILY":155,"KINGDOM":1,"PHYLUM":1,"CLASS":1,"ORDER":1},"namesByTypeCount":{"SCIENTIFIC":179025},"distributionsByGazetteerCount":{"TEXT":137999},"namesByOriginCount":{"SOURCE":169988,"DENORMED_CLASSIFICATION":9037}}
   DatasetResultSet:
     type: ResultSet
     description: >
@@ -585,6 +590,10 @@ types:
       datasetKey:
         type: integer
         description: Primary key for the source dataset
+      basionymKey:
+        type: integer
+        description: link to the original combination. In case of [replacement names](https://en.wikipedia.org/wiki/Nomen_novum) it points back to the replaced synonym.
+        required: false
       scientificName:
          type: string
          description: >
@@ -603,18 +612,19 @@ types:
          required: false
       authorship:
         type: string
-        description: full authorship string
+        description: full authorship string including basionym and combination authors, ex- sanctioning authors and years
         required: false
       combinationAuthorship:
         type: Authorship
-        description:
-      basionymAuthorship: 
+        description: parsed authorship object for this combination
+        required: false
+      basionymAuthorship:
         type: Authorship
-        description: full unparsed authorship of the name incl basionym and years
+        description: parsed authorship of the basionym
         required: false
       sanctioningAuthor:
         type: string
-        description:
+        description: the sanctioning author for Fungus names
         required: false
       rank:
          type: RankType
@@ -664,10 +674,6 @@ types:
         enum: [ "generic", "infrageneric", "specific", "infraspecific" ]
         description: the part of the name which is considered a hybrid;  see [GBIF](https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/NamePart.java#L24)
         required: false
-      basionymKey:
-        type: integer
-        description: link to the original combination. In case of [replacement names](https://en.wikipedia.org/wiki/Nomen_novum) it points back to the replaced synonym.
-        required: false
       fossil:
         type: boolean
         description: true if the type specimen of the name is a fossil
@@ -684,28 +690,7 @@ types:
         type: object
         description: Set of issues spotted during processing
         required: false
-    example: |
-      {
-        "key": 21242,
-        "datasetKey": 15,
-        "basionymKey": 8673,
-        "scientificName": "Crepicnema parvula",
-        "scientificNameID": "abc12345",
-        "rank": "species",
-        "authorship": "(Jacoby, 1885)",
-        "basionymAuthorship": {
-          "authors": ["Jacoby"]
-        },
-        "combinationAuthorship": {
-          "authors": ["Jacoby"],
-          "year": "1885"
-        },
-        "origin": "source",
-        "code": "zoological",
-        "genus": "Crepicnema",
-        "specificEpithet": "parvula",
-        "fossil": false
-      }
+    example: {"key":169130,"id":"1000BA50801","datasetKey":1009,"scientificName":"Fomes obliquus","rank":"species","genus":"Fomes","specificEpithet":"obliquus","candidatus":false,"combinationAuthorship":{"authors":["Cooke"],"year":"1885"},"basionymAuthorship":{"authors":["Pers."],"exAuthors":["Ach."]},"origin":"source","type":"scientific","parsed":true,"authorship":"(Ach. ex Pers.) Cooke, 1885"}
   NameResultSet:
     type: ResultSet
     description: >
@@ -732,16 +717,17 @@ types:
           objects associated with the accepted names of the synonym.
         required: true
       taxa:
-        type: Taxon[]
+        type: object[]
         description: See above.
   NameSearchResultSet:
     type: ResultSet
     description: >
       A paging resultset for name search results.
     properties:
-      results:
+      result:
         type: NameSearchResult[]
         description: the names matching the search
+    example: {"offset":0,"limit":10,"total":179025,"result":[{"key":2157461,"datasetKey":101,"scientificName":"Aagaardia","rank":"genus","uninomial":"Aagaardia","candidatus":false,"origin":"denormed_classification","type":"scientific","acceptedName":true,"taxa":[{"key":1123278,"status":"accepted"}],"parsed":true},{"key":2001450,"id":"Sys-172336","datasetKey":101,"scientificName":"Aagaardia longicalcis","rank":"species","genus":"Aagaardia","specificEpithet":"longicalcis","candidatus":false,"combinationAuthorship":{"authors":["Saether"],"year":"2000"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1123282,"id":"Sys-172336","status":"ACCEPTED"}],"parsed":true,"authorship":"Saether, 2000"},{"key":1989627,"id":"Sys-196835","datasetKey":101,"scientificName":"Aagaardia oksanae","rank":"species","genus":"Aagaardia","specificEpithet":"oksanae","candidatus":false,"combinationAuthorship":{"authors":["Makarchenko"],"year":"2005"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1123283,"id":"Sys-196835","status":"ACCEPTED"}],"parsed":true,"authorship":"Makarchenko, 2005"},{"key":2001451,"id":"Sys-172334","datasetKey":101,"scientificName":"Aagaardia protensa","rank":"species","genus":"Aagaardia","specificEpithet":"protensa","candidatus":false,"combinationAuthorship":{"authors":["Saether"],"year":"2000"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1123280,"id":"Sys-172334","status":"ACCEPTED"}],"parsed":true,"authorship":"Saether, 2000"},{"key":2067766,"id":"Sys-87526","datasetKey":101,"scientificName":"Aagaardia sivertseni","rank":"species","genus":"Aagaardia","specificEpithet":"sivertseni","candidatus":false,"basionymAuthorship":{"authors":["Aagaard"],"year":"1979"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1123279,"id":"Sys-87526","status":"accepted"}],"parsed":true,"authorship":"(Aagaard, 1979) "},{"key":2001452,"id":"Sys-172335","datasetKey":101,"scientificName":"Aagaardia triangulata","rank":"species","genus":"Aagaardia","specificEpithet":"triangulata","candidatus":false,"combinationAuthorship":{"authors":["Saether"],"year":"2000"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1123281,"id":"Sys-172335","status":"ACCEPTED"}],"parsed":true,"authorship":"Saether, 2000"},{"key":2165044,"datasetKey":101,"scientificName":"Abago","rank":"genus","uninomial":"Abago","candidatus":false,"origin":"denormed_classification","type":"scientific","acceptedName":true,"taxa":[{"key":1114398,"status":"ACCEPTED"}],"parsed":true},{"key":2112620,"id":"Sys-152428","datasetKey":101,"scientificName":"Abago rohdendorfi","rank":"species","genus":"Abago","specificEpithet":"rohdendorfi","candidatus":false,"combinationAuthorship":{"authors":["Grunin"],"year":"1966"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1114399,"id":"Sys-152428","status":"ACCEPTED"}],"parsed":true,"authorship":"Grunin, 1966"},{"key":2159955,"datasetKey":101,"scientificName":"Abaristophora","rank":"genus","uninomial":"Abaristophora","candidatus":false,"origin":"denormed_classification","type":"scientific","acceptedName":true,"taxa":[{"key":1231163,"status":"ACCEPTED"}],"parsed":true},{"key":2019869,"id":"Sys-16345","datasetKey":101,"scientificName":"Abaristophora arctophila","rank":"species","genus":"Abaristophora","specificEpithet":"arctophila","candidatus":false,"combinationAuthorship":{"authors":["Schmitz"],"year":"1927"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1231173,"id":"Sys-16345","status":"ACCEPTED"}],"parsed":true,"authorship":"Schmitz, 1927"}],"last":false}
   NomenclaturalAct:
     type: DatasetObject
     description: A published act which affects the nomenclatural status of a scientific name or the typification of a nominal taxon.
