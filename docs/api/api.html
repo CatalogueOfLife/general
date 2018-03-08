@@ -345,25 +345,8 @@
                             </tbody></table>
                         <h2 id="model-DatasetImport">DatasetImport</h2>
 
-                <pre class="example"><code class="json">{
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@86d6bf7
-                    "attempt":org.raml.v2.internal.impl.commons.model.TypeInstance@2fbe26da
-                    "state":org.raml.v2.internal.impl.commons.model.TypeInstance@4ed15347
-                    "downloadUri":org.raml.v2.internal.impl.commons.model.TypeInstance@6963b88c
-                    "download":org.raml.v2.internal.impl.commons.model.TypeInstance@ab24484
-                    "started":org.raml.v2.internal.impl.commons.model.TypeInstance@54e43bfe
-                    "finished":org.raml.v2.internal.impl.commons.model.TypeInstance@106b014e
-                    "verbatimCount":org.raml.v2.internal.impl.commons.model.TypeInstance@64387c17
-                    "nameCount":org.raml.v2.internal.impl.commons.model.TypeInstance@7c369270
-                    "taxonCount":org.raml.v2.internal.impl.commons.model.TypeInstance@41d16cc3
-                    "vernacularCount":org.raml.v2.internal.impl.commons.model.TypeInstance@662e682a
-                    "distributionCount":org.raml.v2.internal.impl.commons.model.TypeInstance@2e43c38d
-                    "issuesCount":org.raml.v2.internal.impl.commons.model.TypeInstance@649f25f3
-                    "namesByRankCount":org.raml.v2.internal.impl.commons.model.TypeInstance@2e62ead7
-                    "namesByTypeCount":org.raml.v2.internal.impl.commons.model.TypeInstance@3b98b809
-                    "distributionsByGazetteerCount":org.raml.v2.internal.impl.commons.model.TypeInstance@6fcd31c3
-                    "namesByOriginCount":org.raml.v2.internal.impl.commons.model.TypeInstance@67bf0480
-    }</code></pre>
+    <pre class="example"><code class="json">{"datasetKey":101,"attempt":1,"state":"FINISHED","downloadUri":"https://raw.githubusercontent.com/Sp2000/colplus-repo/master/ACEF/assembly/101.tar.gz","download":"2018-02-28T03:40:02","started":"2018-02-28T03:40:01.433","finished":"2018-02-28T03:52:27.201","verbatimCount":169988,"nameCount":179025,"taxonCount":147971,"vernacularCount":0,"distributionCount":137999,"issuesCount":{"DISTRIBUTION_GAZETEER_INVALID":3,"DISTRIBUTION_STATUS_INVALID":2,"LIFEZONE_INVALID":1},"namesByRankCount":{"SPECIES":169988,"GENUS":8878,"FAMILY":155,"KINGDOM":1,"PHYLUM":1,"CLASS":1,"ORDER":1},"namesByTypeCount":{"SCIENTIFIC":179025},"distributionsByGazetteerCount":{"TEXT":137999},"namesByOriginCount":{"SOURCE":169988,"DENORMED_CLASSIFICATION":9037}}
+</code></pre>
 
     <p><p>Metrics and import details about a single dataset import event.</p>
 </p>
@@ -627,22 +610,8 @@
                             </tbody></table>
                         <h2 id="model-Name">Name</h2>
 
-                <pre class="example"><code class="json">{
-                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@35cec305
-                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@237add
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@491cafec
-                    "scientificName":org.raml.v2.internal.impl.commons.model.TypeInstance@cbd40c1
-                    "rank":org.raml.v2.internal.impl.commons.model.TypeInstance@4fa86cb8
-                    "genus":org.raml.v2.internal.impl.commons.model.TypeInstance@54c60202
-                    "specificEpithet":org.raml.v2.internal.impl.commons.model.TypeInstance@7889b4b9
-                    "candidatus":org.raml.v2.internal.impl.commons.model.TypeInstance@1e545821
-                    "combinationAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@12952aff
-                    "basionymAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@76a7fcbd
-                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@433ea2ac
-                    "type":org.raml.v2.internal.impl.commons.model.TypeInstance@7f977fba
-                    "parsed":org.raml.v2.internal.impl.commons.model.TypeInstance@446e7065
-                    "authorship":org.raml.v2.internal.impl.commons.model.TypeInstance@d653e41
-    }</code></pre>
+    <pre class="example"><code class="json">{"key":169130,"id":"1000BA50801","datasetKey":1009,"scientificName":"Fomes obliquus","rank":"species","genus":"Fomes","specificEpithet":"obliquus","candidatus":false,"combinationAuthorship":{"authors":["Cooke"],"year":"1885"},"basionymAuthorship":{"authors":["Pers."],"exAuthors":["Ach."]},"origin":"source","type":"scientific","parsed":true,"authorship":"(Ach. ex Pers.) Cooke, 1885"}
+</code></pre>
 
     <p><p>A scientific name.
 CoL deals and categorizes the following types of names:</p>
@@ -1285,13 +1254,8 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
                             </tbody></table>
                         <h2 id="model-NameSearchResultSet">NameSearchResultSet</h2>
 
-                <pre class="example"><code class="json">{
-                    "offset":org.raml.v2.internal.impl.commons.model.TypeInstance@395a573c
-                    "limit":org.raml.v2.internal.impl.commons.model.TypeInstance@379f9555
-                    "total":org.raml.v2.internal.impl.commons.model.TypeInstance@7e3ee128
-                    "result":[org.raml.v2.internal.impl.commons.model.TypeInstance@7d64a960, org.raml.v2.internal.impl.commons.model.TypeInstance@166ce247, org.raml.v2.internal.impl.commons.model.TypeInstance@5d92e8e2, org.raml.v2.internal.impl.commons.model.TypeInstance@542c65d9, org.raml.v2.internal.impl.commons.model.TypeInstance@cdbe995, org.raml.v2.internal.impl.commons.model.TypeInstance@7dd45c93, org.raml.v2.internal.impl.commons.model.TypeInstance@374b6e33, org.raml.v2.internal.impl.commons.model.TypeInstance@7ed7ae, org.raml.v2.internal.impl.commons.model.TypeInstance@53ba1175, org.raml.v2.internal.impl.commons.model.TypeInstance@cd5ff55]
-                    "last":org.raml.v2.internal.impl.commons.model.TypeInstance@6003220a
-    }</code></pre>
+    <pre class="example"><code class="json">{"offset":0,"limit":10,"total":179025,"result":[{"key":2157461,"datasetKey":101,"scientificName":"Aagaardia","rank":"genus","uninomial":"Aagaardia","candidatus":false,"origin":"denormed_classification","type":"scientific","acceptedName":true,"taxa":[{"key":1123278,"status":"accepted"}],"parsed":true},{"key":2001450,"id":"Sys-172336","datasetKey":101,"scientificName":"Aagaardia longicalcis","rank":"species","genus":"Aagaardia","specificEpithet":"longicalcis","candidatus":false,"combinationAuthorship":{"authors":["Saether"],"year":"2000"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1123282,"id":"Sys-172336","status":"ACCEPTED"}],"parsed":true,"authorship":"Saether, 2000"},{"key":1989627,"id":"Sys-196835","datasetKey":101,"scientificName":"Aagaardia oksanae","rank":"species","genus":"Aagaardia","specificEpithet":"oksanae","candidatus":false,"combinationAuthorship":{"authors":["Makarchenko"],"year":"2005"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1123283,"id":"Sys-196835","status":"ACCEPTED"}],"parsed":true,"authorship":"Makarchenko, 2005"},{"key":2001451,"id":"Sys-172334","datasetKey":101,"scientificName":"Aagaardia protensa","rank":"species","genus":"Aagaardia","specificEpithet":"protensa","candidatus":false,"combinationAuthorship":{"authors":["Saether"],"year":"2000"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1123280,"id":"Sys-172334","status":"ACCEPTED"}],"parsed":true,"authorship":"Saether, 2000"},{"key":2067766,"id":"Sys-87526","datasetKey":101,"scientificName":"Aagaardia sivertseni","rank":"species","genus":"Aagaardia","specificEpithet":"sivertseni","candidatus":false,"basionymAuthorship":{"authors":["Aagaard"],"year":"1979"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1123279,"id":"Sys-87526","status":"accepted"}],"parsed":true,"authorship":"(Aagaard, 1979) "},{"key":2001452,"id":"Sys-172335","datasetKey":101,"scientificName":"Aagaardia triangulata","rank":"species","genus":"Aagaardia","specificEpithet":"triangulata","candidatus":false,"combinationAuthorship":{"authors":["Saether"],"year":"2000"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1123281,"id":"Sys-172335","status":"ACCEPTED"}],"parsed":true,"authorship":"Saether, 2000"},{"key":2165044,"datasetKey":101,"scientificName":"Abago","rank":"genus","uninomial":"Abago","candidatus":false,"origin":"denormed_classification","type":"scientific","acceptedName":true,"taxa":[{"key":1114398,"status":"ACCEPTED"}],"parsed":true},{"key":2112620,"id":"Sys-152428","datasetKey":101,"scientificName":"Abago rohdendorfi","rank":"species","genus":"Abago","specificEpithet":"rohdendorfi","candidatus":false,"combinationAuthorship":{"authors":["Grunin"],"year":"1966"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1114399,"id":"Sys-152428","status":"ACCEPTED"}],"parsed":true,"authorship":"Grunin, 1966"},{"key":2159955,"datasetKey":101,"scientificName":"Abaristophora","rank":"genus","uninomial":"Abaristophora","candidatus":false,"origin":"denormed_classification","type":"scientific","acceptedName":true,"taxa":[{"key":1231163,"status":"ACCEPTED"}],"parsed":true},{"key":2019869,"id":"Sys-16345","datasetKey":101,"scientificName":"Abaristophora arctophila","rank":"species","genus":"Abaristophora","specificEpithet":"arctophila","candidatus":false,"combinationAuthorship":{"authors":["Schmitz"],"year":"1927"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1231173,"id":"Sys-16345","status":"ACCEPTED"}],"parsed":true,"authorship":"Schmitz, 1927"}],"last":false}
+</code></pre>
 
     <p><p>A paging resultset for name search results.</p>
 </p>
@@ -1769,19 +1733,8 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                             </tbody></table>
                         <h2 id="model-Taxon">Taxon</h2>
 
-                <pre class="example"><code class="json">{
-                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@21c99abf
-                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@6d6f6ca9
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@54496c2d
-                    "name":org.raml.v2.internal.impl.commons.model.TypeInstance@4e1a3d5a
-                    "status":org.raml.v2.internal.impl.commons.model.TypeInstance@236b4a44
-                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@35f760a4
-                    "parentKey":org.raml.v2.internal.impl.commons.model.TypeInstance@2ac05a33
-                    "accordingTo":org.raml.v2.internal.impl.commons.model.TypeInstance@35af52dc
-                    "fossil":org.raml.v2.internal.impl.commons.model.TypeInstance@4cef0747
-                    "recent":org.raml.v2.internal.impl.commons.model.TypeInstance@4213bc3e
-                    "issues":[org.raml.v2.internal.impl.commons.model.TypeInstance@6aaa678d, org.raml.v2.internal.impl.commons.model.TypeInstance@25dcf1b6]
-    }</code></pre>
+    <pre class="example"><code class="json">{"key":209379,"id":"Kew-114621","datasetKey":24,"name":{"key":369744,"id":"Kew-114621","datasetKey":24,"scientificName":"Lithocarpus mariae","rank":"species","genus":"Lithocarpus","specificEpithet":"mariae","candidatus":false,"combinationAuthorship":{"authors":["Soepadmo"]},"origin":"source","type":"scientific","issues":["according to date invalid","distribution area invalid"],"parsed":true,"authorship":"Soepadmo"},"status":"accepted","origin":"source","parentKey":209098,"accordingTo":"Govaerts R.","fossil":false,"recent":true,"issues":["according to date invalid","distribution area invalid"]}
+</code></pre>
 
     <p><p>A taxon concept, i.e. an accepted name. Not used for synonyms.</p>
 </p>
@@ -2012,10 +1965,8 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                             </tbody></table>
                         <h2 id="model-TaxonInfo">TaxonInfo</h2>
 
-                <pre class="example"><code class="json">{
-                    "taxon":org.raml.v2.internal.impl.commons.model.TypeInstance@57b3d869
-                    "distributions":[org.raml.v2.internal.impl.commons.model.TypeInstance@51f4439e]
-    }</code></pre>
+    <pre class="example"><code class="json">{"taxon":{"key":209379,"id":"Kew-114621","datasetKey":24,"name":{"key":369744,"id":"Kew-114621","datasetKey":24,"scientificName":"Lithocarpus mariae","rank":"species","genus":"Lithocarpus","specificEpithet":"mariae","candidatus":false,"combinationAuthorship":{"authors":["Soepadmo"]},"origin":"source","type":"scientific","issues":["according to date invalid","distribution area invalid"],"parsed":true,"authorship":"Soepadmo"},"status":"accepted","origin":"source","parentKey":209098,"accordingTo":"Govaerts R.","fossil":false,"recent":true,"issues":["according to date invalid","distribution area invalid"]},"distributions":[{"area":"Borneo","gazetteer":"tdwg","status":"native"}]}
+</code></pre>
 
     <p><p>All supplementarly taxon information for a given taxon.</p>
 </p>
@@ -2069,11 +2020,8 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                             </tbody></table>
                         <h2 id="model-VerbatimRecord">VerbatimRecord</h2>
 
-                <pre class="example"><code class="json">{
-                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@38ba8b45
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@41f23499
-                    "terms":org.raml.v2.internal.impl.commons.model.TypeInstance@31dbf5bb
-    }</code></pre>
+    <pre class="example"><code class="json">{"id":"Kew-114621","datasetKey":24,"terms":{"_line":0,"acef:AuthorString":"Soepadmo","acef:Family":"Fagaceae","acef:AcceptedTaxonID":"Kew-114621","acef:Phylum":"Tracheophyta","acef:LTSDate":"Aug-2017","acef:Sp2000NameStatus":"accepted name","acef:LTSSpecialist":"Govaerts R.","acef:HasModern":"1","acef:SpeciesEpithet":"mariae","acef:Kingdom":"Plantae","acef:Order":"Fagales","acef:Genus":"Lithocarpus","acef:HasPreHolocene":"0","acef:Class":"Magnoliopsida","acef:IsExtinct":"0","extensions":{"acef:Distribution":[{"_file":"Distribution.txt","_line":282711,"acef:StandardInUse":"TDWG Level 3","acef:DistributionStatus":"null","acef:AcceptedTaxonID":"Kew-114621","acef:DistributionElement":"Borneo"}]}}}
+</code></pre>
 
     <p><p>Verbatim version of the entire source record with issues flagged during processing.</p>
 </p>
@@ -2518,7 +2466,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2547,7 +2495,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2599,7 +2547,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2733,28 +2681,12 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
-                <code class="json">{
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@86d6bf7
-                    "attempt":org.raml.v2.internal.impl.commons.model.TypeInstance@2fbe26da
-                    "state":org.raml.v2.internal.impl.commons.model.TypeInstance@4ed15347
-                    "downloadUri":org.raml.v2.internal.impl.commons.model.TypeInstance@6963b88c
-                    "download":org.raml.v2.internal.impl.commons.model.TypeInstance@ab24484
-                    "started":org.raml.v2.internal.impl.commons.model.TypeInstance@54e43bfe
-                    "finished":org.raml.v2.internal.impl.commons.model.TypeInstance@106b014e
-                    "verbatimCount":org.raml.v2.internal.impl.commons.model.TypeInstance@64387c17
-                    "nameCount":org.raml.v2.internal.impl.commons.model.TypeInstance@7c369270
-                    "taxonCount":org.raml.v2.internal.impl.commons.model.TypeInstance@41d16cc3
-                    "vernacularCount":org.raml.v2.internal.impl.commons.model.TypeInstance@662e682a
-                    "distributionCount":org.raml.v2.internal.impl.commons.model.TypeInstance@2e43c38d
-                    "issuesCount":org.raml.v2.internal.impl.commons.model.TypeInstance@649f25f3
-                    "namesByRankCount":org.raml.v2.internal.impl.commons.model.TypeInstance@2e62ead7
-                    "namesByTypeCount":org.raml.v2.internal.impl.commons.model.TypeInstance@3b98b809
-                    "distributionsByGazetteerCount":org.raml.v2.internal.impl.commons.model.TypeInstance@6fcd31c3
-                    "namesByOriginCount":org.raml.v2.internal.impl.commons.model.TypeInstance@67bf0480
-    }</code>
+    <code class="json">[{"datasetKey":101,"attempt":1,"state":"FINISHED","downloadUri":"https://raw.githubusercontent.com/Sp2000/colplus-repo/master/ACEF/assembly/101.tar.gz","download":"2018-02-28T03:40:02","started":"2018-02-28T03:40:01.433","finished":"2018-02-28T03:52:27.201","verbatimCount":169988,"nameCount":179025,"taxonCount":147971,"vernacularCount":0,"distributionCount":137999,"issuesCount":{"DISTRIBUTION_GAZETEER_INVALID":3,"DISTRIBUTION_STATUS_INVALID":2,"LIFEZONE_INVALID":1},"namesByRankCount":{"SPECIES":169988,"GENUS":8878,"FAMILY":155,"KINGDOM":1,"PHYLUM":1,"CLASS":1,"ORDER":1},"namesByTypeCount":{"SCIENTIFIC":179025},"distributionsByGazetteerCount":{"TEXT":137999},"namesByOriginCount":{"SOURCE":169988,"DENORMED_CLASSIFICATION":9037}}
+,{"datasetKey":101,"attempt":1,"state":"FINISHED","downloadUri":"https://raw.githubusercontent.com/Sp2000/colplus-repo/master/ACEF/assembly/101.tar.gz","download":"2018-02-28T03:40:02","started":"2018-02-28T03:40:01.433","finished":"2018-02-28T03:52:27.201","verbatimCount":169988,"nameCount":179025,"taxonCount":147971,"vernacularCount":0,"distributionCount":137999,"issuesCount":{"DISTRIBUTION_GAZETEER_INVALID":3,"DISTRIBUTION_STATUS_INVALID":2,"LIFEZONE_INVALID":1},"namesByRankCount":{"SPECIES":169988,"GENUS":8878,"FAMILY":155,"KINGDOM":1,"PHYLUM":1,"CLASS":1,"ORDER":1},"namesByTypeCount":{"SCIENTIFIC":179025},"distributionsByGazetteerCount":{"TEXT":137999},"namesByOriginCount":{"SOURCE":169988,"DENORMED_CLASSIFICATION":9037}}
+]</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-DatasetImport">DatasetImport[]</a></p>
@@ -2810,14 +2742,11 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
-                <code class="json">{
-                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@38ba8b45
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@41f23499
-                    "terms":org.raml.v2.internal.impl.commons.model.TypeInstance@31dbf5bb
-    }</code>
+    <code class="json">{"id":"Kew-114621","datasetKey":24,"terms":{"_line":0,"acef:AuthorString":"Soepadmo","acef:Family":"Fagaceae","acef:AcceptedTaxonID":"Kew-114621","acef:Phylum":"Tracheophyta","acef:LTSDate":"Aug-2017","acef:Sp2000NameStatus":"accepted name","acef:LTSSpecialist":"Govaerts R.","acef:HasModern":"1","acef:SpeciesEpithet":"mariae","acef:Kingdom":"Plantae","acef:Order":"Fagales","acef:Genus":"Lithocarpus","acef:HasPreHolocene":"0","acef:Class":"Magnoliopsida","acef:IsExtinct":"0","extensions":{"acef:Distribution":[{"_file":"Distribution.txt","_line":282711,"acef:StandardInUse":"TDWG Level 3","acef:DistributionStatus":"null","acef:AcceptedTaxonID":"Kew-114621","acef:DistributionElement":"Borneo"}]}}}
+</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-VerbatimRecord">VerbatimRecord</a></p>
@@ -2903,7 +2832,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2964,7 +2893,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3016,22 +2945,11 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
-                <code class="json">{
-                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@21c99abf
-                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@6d6f6ca9
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@54496c2d
-                    "name":org.raml.v2.internal.impl.commons.model.TypeInstance@4e1a3d5a
-                    "status":org.raml.v2.internal.impl.commons.model.TypeInstance@236b4a44
-                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@35f760a4
-                    "parentKey":org.raml.v2.internal.impl.commons.model.TypeInstance@2ac05a33
-                    "accordingTo":org.raml.v2.internal.impl.commons.model.TypeInstance@35af52dc
-                    "fossil":org.raml.v2.internal.impl.commons.model.TypeInstance@4cef0747
-                    "recent":org.raml.v2.internal.impl.commons.model.TypeInstance@4213bc3e
-                    "issues":[org.raml.v2.internal.impl.commons.model.TypeInstance@6aaa678d, org.raml.v2.internal.impl.commons.model.TypeInstance@25dcf1b6]
-    }</code>
+    <code class="json">{"key":209379,"id":"Kew-114621","datasetKey":24,"name":{"key":369744,"id":"Kew-114621","datasetKey":24,"scientificName":"Lithocarpus mariae","rank":"species","genus":"Lithocarpus","specificEpithet":"mariae","candidatus":false,"combinationAuthorship":{"authors":["Soepadmo"]},"origin":"source","type":"scientific","issues":["according to date invalid","distribution area invalid"],"parsed":true,"authorship":"Soepadmo"},"status":"accepted","origin":"source","parentKey":209098,"accordingTo":"Govaerts R.","fossil":false,"recent":true,"issues":["according to date invalid","distribution area invalid"]}
+</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-Taxon">Taxon</a></p>
@@ -3060,13 +2978,11 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
-                <code class="json">{
-                    "taxon":org.raml.v2.internal.impl.commons.model.TypeInstance@57b3d869
-                    "distributions":[org.raml.v2.internal.impl.commons.model.TypeInstance@51f4439e]
-    }</code>
+    <code class="json">{"taxon":{"key":209379,"id":"Kew-114621","datasetKey":24,"name":{"key":369744,"id":"Kew-114621","datasetKey":24,"scientificName":"Lithocarpus mariae","rank":"species","genus":"Lithocarpus","specificEpithet":"mariae","candidatus":false,"combinationAuthorship":{"authors":["Soepadmo"]},"origin":"source","type":"scientific","issues":["according to date invalid","distribution area invalid"],"parsed":true,"authorship":"Soepadmo"},"status":"accepted","origin":"source","parentKey":209098,"accordingTo":"Govaerts R.","fossil":false,"recent":true,"issues":["according to date invalid","distribution area invalid"]},"distributions":[{"area":"Borneo","gazetteer":"tdwg","status":"native"}]}
+</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-TaxonInfo">TaxonInfo</a></p>
@@ -3095,22 +3011,12 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
-                <code class="json">{
-                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@21c99abf
-                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@6d6f6ca9
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@54496c2d
-                    "name":org.raml.v2.internal.impl.commons.model.TypeInstance@4e1a3d5a
-                    "status":org.raml.v2.internal.impl.commons.model.TypeInstance@236b4a44
-                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@35f760a4
-                    "parentKey":org.raml.v2.internal.impl.commons.model.TypeInstance@2ac05a33
-                    "accordingTo":org.raml.v2.internal.impl.commons.model.TypeInstance@35af52dc
-                    "fossil":org.raml.v2.internal.impl.commons.model.TypeInstance@4cef0747
-                    "recent":org.raml.v2.internal.impl.commons.model.TypeInstance@4213bc3e
-                    "issues":[org.raml.v2.internal.impl.commons.model.TypeInstance@6aaa678d, org.raml.v2.internal.impl.commons.model.TypeInstance@25dcf1b6]
-    }</code>
+    <code class="json">[{"key":209379,"id":"Kew-114621","datasetKey":24,"name":{"key":369744,"id":"Kew-114621","datasetKey":24,"scientificName":"Lithocarpus mariae","rank":"species","genus":"Lithocarpus","specificEpithet":"mariae","candidatus":false,"combinationAuthorship":{"authors":["Soepadmo"]},"origin":"source","type":"scientific","issues":["according to date invalid","distribution area invalid"],"parsed":true,"authorship":"Soepadmo"},"status":"accepted","origin":"source","parentKey":209098,"accordingTo":"Govaerts R.","fossil":false,"recent":true,"issues":["according to date invalid","distribution area invalid"]}
+,{"key":209379,"id":"Kew-114621","datasetKey":24,"name":{"key":369744,"id":"Kew-114621","datasetKey":24,"scientificName":"Lithocarpus mariae","rank":"species","genus":"Lithocarpus","specificEpithet":"mariae","candidatus":false,"combinationAuthorship":{"authors":["Soepadmo"]},"origin":"source","type":"scientific","issues":["according to date invalid","distribution area invalid"],"parsed":true,"authorship":"Soepadmo"},"status":"accepted","origin":"source","parentKey":209098,"accordingTo":"Govaerts R.","fossil":false,"recent":true,"issues":["according to date invalid","distribution area invalid"]}
+]</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-Taxon">Taxon[]</a></p>
@@ -3139,7 +3045,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3170,7 +3076,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -3382,14 +3288,11 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
-                <code class="json">{
-                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@38ba8b45
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@41f23499
-                    "terms":org.raml.v2.internal.impl.commons.model.TypeInstance@31dbf5bb
-    }</code>
+    <code class="json">{"id":"Kew-114621","datasetKey":24,"terms":{"_line":0,"acef:AuthorString":"Soepadmo","acef:Family":"Fagaceae","acef:AcceptedTaxonID":"Kew-114621","acef:Phylum":"Tracheophyta","acef:LTSDate":"Aug-2017","acef:Sp2000NameStatus":"accepted name","acef:LTSSpecialist":"Govaerts R.","acef:HasModern":"1","acef:SpeciesEpithet":"mariae","acef:Kingdom":"Plantae","acef:Order":"Fagales","acef:Genus":"Lithocarpus","acef:HasPreHolocene":"0","acef:Class":"Magnoliopsida","acef:IsExtinct":"0","extensions":{"acef:Distribution":[{"_file":"Distribution.txt","_line":282711,"acef:StandardInUse":"TDWG Level 3","acef:DistributionStatus":"null","acef:AcceptedTaxonID":"Kew-114621","acef:DistributionElement":"Borneo"}]}}}
+</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-VerbatimRecord">VerbatimRecord</a></p>
@@ -3457,7 +3360,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3590,16 +3493,11 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
-                <code class="json">{
-                    "offset":org.raml.v2.internal.impl.commons.model.TypeInstance@395a573c
-                    "limit":org.raml.v2.internal.impl.commons.model.TypeInstance@379f9555
-                    "total":org.raml.v2.internal.impl.commons.model.TypeInstance@7e3ee128
-                    "result":[org.raml.v2.internal.impl.commons.model.TypeInstance@7d64a960, org.raml.v2.internal.impl.commons.model.TypeInstance@166ce247, org.raml.v2.internal.impl.commons.model.TypeInstance@5d92e8e2, org.raml.v2.internal.impl.commons.model.TypeInstance@542c65d9, org.raml.v2.internal.impl.commons.model.TypeInstance@cdbe995, org.raml.v2.internal.impl.commons.model.TypeInstance@7dd45c93, org.raml.v2.internal.impl.commons.model.TypeInstance@374b6e33, org.raml.v2.internal.impl.commons.model.TypeInstance@7ed7ae, org.raml.v2.internal.impl.commons.model.TypeInstance@53ba1175, org.raml.v2.internal.impl.commons.model.TypeInstance@cd5ff55]
-                    "last":org.raml.v2.internal.impl.commons.model.TypeInstance@6003220a
-    }</code>
+    <code class="json">{"offset":0,"limit":10,"total":179025,"result":[{"key":2157461,"datasetKey":101,"scientificName":"Aagaardia","rank":"genus","uninomial":"Aagaardia","candidatus":false,"origin":"denormed_classification","type":"scientific","acceptedName":true,"taxa":[{"key":1123278,"status":"accepted"}],"parsed":true},{"key":2001450,"id":"Sys-172336","datasetKey":101,"scientificName":"Aagaardia longicalcis","rank":"species","genus":"Aagaardia","specificEpithet":"longicalcis","candidatus":false,"combinationAuthorship":{"authors":["Saether"],"year":"2000"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1123282,"id":"Sys-172336","status":"ACCEPTED"}],"parsed":true,"authorship":"Saether, 2000"},{"key":1989627,"id":"Sys-196835","datasetKey":101,"scientificName":"Aagaardia oksanae","rank":"species","genus":"Aagaardia","specificEpithet":"oksanae","candidatus":false,"combinationAuthorship":{"authors":["Makarchenko"],"year":"2005"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1123283,"id":"Sys-196835","status":"ACCEPTED"}],"parsed":true,"authorship":"Makarchenko, 2005"},{"key":2001451,"id":"Sys-172334","datasetKey":101,"scientificName":"Aagaardia protensa","rank":"species","genus":"Aagaardia","specificEpithet":"protensa","candidatus":false,"combinationAuthorship":{"authors":["Saether"],"year":"2000"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1123280,"id":"Sys-172334","status":"ACCEPTED"}],"parsed":true,"authorship":"Saether, 2000"},{"key":2067766,"id":"Sys-87526","datasetKey":101,"scientificName":"Aagaardia sivertseni","rank":"species","genus":"Aagaardia","specificEpithet":"sivertseni","candidatus":false,"basionymAuthorship":{"authors":["Aagaard"],"year":"1979"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1123279,"id":"Sys-87526","status":"accepted"}],"parsed":true,"authorship":"(Aagaard, 1979) "},{"key":2001452,"id":"Sys-172335","datasetKey":101,"scientificName":"Aagaardia triangulata","rank":"species","genus":"Aagaardia","specificEpithet":"triangulata","candidatus":false,"combinationAuthorship":{"authors":["Saether"],"year":"2000"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1123281,"id":"Sys-172335","status":"ACCEPTED"}],"parsed":true,"authorship":"Saether, 2000"},{"key":2165044,"datasetKey":101,"scientificName":"Abago","rank":"genus","uninomial":"Abago","candidatus":false,"origin":"denormed_classification","type":"scientific","acceptedName":true,"taxa":[{"key":1114398,"status":"ACCEPTED"}],"parsed":true},{"key":2112620,"id":"Sys-152428","datasetKey":101,"scientificName":"Abago rohdendorfi","rank":"species","genus":"Abago","specificEpithet":"rohdendorfi","candidatus":false,"combinationAuthorship":{"authors":["Grunin"],"year":"1966"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1114399,"id":"Sys-152428","status":"ACCEPTED"}],"parsed":true,"authorship":"Grunin, 1966"},{"key":2159955,"datasetKey":101,"scientificName":"Abaristophora","rank":"genus","uninomial":"Abaristophora","candidatus":false,"origin":"denormed_classification","type":"scientific","acceptedName":true,"taxa":[{"key":1231163,"status":"ACCEPTED"}],"parsed":true},{"key":2019869,"id":"Sys-16345","datasetKey":101,"scientificName":"Abaristophora arctophila","rank":"species","genus":"Abaristophora","specificEpithet":"arctophila","candidatus":false,"combinationAuthorship":{"authors":["Schmitz"],"year":"1927"},"origin":"source","type":"scientific","acceptedName":true,"taxa":[{"key":1231173,"id":"Sys-16345","status":"ACCEPTED"}],"parsed":true,"authorship":"Schmitz, 1927"}],"last":false}
+</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-NameSearchResultSet">NameSearchResultSet</a></p>
@@ -3658,7 +3556,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3710,25 +3608,11 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
-                <code class="json">{
-                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@35cec305
-                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@237add
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@491cafec
-                    "scientificName":org.raml.v2.internal.impl.commons.model.TypeInstance@cbd40c1
-                    "rank":org.raml.v2.internal.impl.commons.model.TypeInstance@4fa86cb8
-                    "genus":org.raml.v2.internal.impl.commons.model.TypeInstance@54c60202
-                    "specificEpithet":org.raml.v2.internal.impl.commons.model.TypeInstance@7889b4b9
-                    "candidatus":org.raml.v2.internal.impl.commons.model.TypeInstance@1e545821
-                    "combinationAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@12952aff
-                    "basionymAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@76a7fcbd
-                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@433ea2ac
-                    "type":org.raml.v2.internal.impl.commons.model.TypeInstance@7f977fba
-                    "parsed":org.raml.v2.internal.impl.commons.model.TypeInstance@446e7065
-                    "authorship":org.raml.v2.internal.impl.commons.model.TypeInstance@d653e41
-    }</code>
+    <code class="json">{"key":169130,"id":"1000BA50801","datasetKey":1009,"scientificName":"Fomes obliquus","rank":"species","genus":"Fomes","specificEpithet":"obliquus","candidatus":false,"combinationAuthorship":{"authors":["Cooke"],"year":"1885"},"basionymAuthorship":{"authors":["Pers."],"exAuthors":["Ach."]},"origin":"source","type":"scientific","parsed":true,"authorship":"(Ach. ex Pers.) Cooke, 1885"}
+</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-Name">Name</a></p>
@@ -3757,25 +3641,12 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
-                <code class="json">{
-                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@35cec305
-                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@237add
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@491cafec
-                    "scientificName":org.raml.v2.internal.impl.commons.model.TypeInstance@cbd40c1
-                    "rank":org.raml.v2.internal.impl.commons.model.TypeInstance@4fa86cb8
-                    "genus":org.raml.v2.internal.impl.commons.model.TypeInstance@54c60202
-                    "specificEpithet":org.raml.v2.internal.impl.commons.model.TypeInstance@7889b4b9
-                    "candidatus":org.raml.v2.internal.impl.commons.model.TypeInstance@1e545821
-                    "combinationAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@12952aff
-                    "basionymAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@76a7fcbd
-                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@433ea2ac
-                    "type":org.raml.v2.internal.impl.commons.model.TypeInstance@7f977fba
-                    "parsed":org.raml.v2.internal.impl.commons.model.TypeInstance@446e7065
-                    "authorship":org.raml.v2.internal.impl.commons.model.TypeInstance@d653e41
-    }</code>
+    <code class="json">[{"key":169130,"id":"1000BA50801","datasetKey":1009,"scientificName":"Fomes obliquus","rank":"species","genus":"Fomes","specificEpithet":"obliquus","candidatus":false,"combinationAuthorship":{"authors":["Cooke"],"year":"1885"},"basionymAuthorship":{"authors":["Pers."],"exAuthors":["Ach."]},"origin":"source","type":"scientific","parsed":true,"authorship":"(Ach. ex Pers.) Cooke, 1885"}
+,{"key":169130,"id":"1000BA50801","datasetKey":1009,"scientificName":"Fomes obliquus","rank":"species","genus":"Fomes","specificEpithet":"obliquus","candidatus":false,"combinationAuthorship":{"authors":["Cooke"],"year":"1885"},"basionymAuthorship":{"authors":["Pers."],"exAuthors":["Ach."]},"origin":"source","type":"scientific","parsed":true,"authorship":"(Ach. ex Pers.) Cooke, 1885"}
+]</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-Name">Name[]</a></p>
@@ -3804,7 +3675,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3873,7 +3744,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -3921,14 +3792,11 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
-                <code class="json">{
-                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@38ba8b45
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@41f23499
-                    "terms":org.raml.v2.internal.impl.commons.model.TypeInstance@31dbf5bb
-    }</code>
+    <code class="json">{"id":"Kew-114621","datasetKey":24,"terms":{"_line":0,"acef:AuthorString":"Soepadmo","acef:Family":"Fagaceae","acef:AcceptedTaxonID":"Kew-114621","acef:Phylum":"Tracheophyta","acef:LTSDate":"Aug-2017","acef:Sp2000NameStatus":"accepted name","acef:LTSSpecialist":"Govaerts R.","acef:HasModern":"1","acef:SpeciesEpithet":"mariae","acef:Kingdom":"Plantae","acef:Order":"Fagales","acef:Genus":"Lithocarpus","acef:HasPreHolocene":"0","acef:Class":"Magnoliopsida","acef:IsExtinct":"0","extensions":{"acef:Distribution":[{"_file":"Distribution.txt","_line":282711,"acef:StandardInUse":"TDWG Level 3","acef:DistributionStatus":"null","acef:AcceptedTaxonID":"Kew-114621","acef:DistributionElement":"Borneo"}]}}}
+</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-VerbatimRecord">VerbatimRecord</a></p>
@@ -3996,7 +3864,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -4057,7 +3925,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -4109,7 +3977,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4157,7 +4025,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -4232,25 +4100,12 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
-                <code class="json">{
-                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@35cec305
-                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@237add
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@491cafec
-                    "scientificName":org.raml.v2.internal.impl.commons.model.TypeInstance@cbd40c1
-                    "rank":org.raml.v2.internal.impl.commons.model.TypeInstance@4fa86cb8
-                    "genus":org.raml.v2.internal.impl.commons.model.TypeInstance@54c60202
-                    "specificEpithet":org.raml.v2.internal.impl.commons.model.TypeInstance@7889b4b9
-                    "candidatus":org.raml.v2.internal.impl.commons.model.TypeInstance@1e545821
-                    "combinationAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@12952aff
-                    "basionymAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@76a7fcbd
-                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@433ea2ac
-                    "type":org.raml.v2.internal.impl.commons.model.TypeInstance@7f977fba
-                    "parsed":org.raml.v2.internal.impl.commons.model.TypeInstance@446e7065
-                    "authorship":org.raml.v2.internal.impl.commons.model.TypeInstance@d653e41
-    }</code>
+    <code class="json">[{"key":169130,"id":"1000BA50801","datasetKey":1009,"scientificName":"Fomes obliquus","rank":"species","genus":"Fomes","specificEpithet":"obliquus","candidatus":false,"combinationAuthorship":{"authors":["Cooke"],"year":"1885"},"basionymAuthorship":{"authors":["Pers."],"exAuthors":["Ach."]},"origin":"source","type":"scientific","parsed":true,"authorship":"(Ach. ex Pers.) Cooke, 1885"}
+,{"key":169130,"id":"1000BA50801","datasetKey":1009,"scientificName":"Fomes obliquus","rank":"species","genus":"Fomes","specificEpithet":"obliquus","candidatus":false,"combinationAuthorship":{"authors":["Cooke"],"year":"1885"},"basionymAuthorship":{"authors":["Pers."],"exAuthors":["Ach."]},"origin":"source","type":"scientific","parsed":true,"authorship":"(Ach. ex Pers.) Cooke, 1885"}
+]</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-Name">Name[]</a></p>
@@ -4282,25 +4137,12 @@ with one name per line, or as plain/text content in the request body.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
-                <code class="json">{
-                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@35cec305
-                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@237add
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@491cafec
-                    "scientificName":org.raml.v2.internal.impl.commons.model.TypeInstance@cbd40c1
-                    "rank":org.raml.v2.internal.impl.commons.model.TypeInstance@4fa86cb8
-                    "genus":org.raml.v2.internal.impl.commons.model.TypeInstance@54c60202
-                    "specificEpithet":org.raml.v2.internal.impl.commons.model.TypeInstance@7889b4b9
-                    "candidatus":org.raml.v2.internal.impl.commons.model.TypeInstance@1e545821
-                    "combinationAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@12952aff
-                    "basionymAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@76a7fcbd
-                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@433ea2ac
-                    "type":org.raml.v2.internal.impl.commons.model.TypeInstance@7f977fba
-                    "parsed":org.raml.v2.internal.impl.commons.model.TypeInstance@446e7065
-                    "authorship":org.raml.v2.internal.impl.commons.model.TypeInstance@d653e41
-    }</code>
+    <code class="json">[{"key":169130,"id":"1000BA50801","datasetKey":1009,"scientificName":"Fomes obliquus","rank":"species","genus":"Fomes","specificEpithet":"obliquus","candidatus":false,"combinationAuthorship":{"authors":["Cooke"],"year":"1885"},"basionymAuthorship":{"authors":["Pers."],"exAuthors":["Ach."]},"origin":"source","type":"scientific","parsed":true,"authorship":"(Ach. ex Pers.) Cooke, 1885"}
+,{"key":169130,"id":"1000BA50801","datasetKey":1009,"scientificName":"Fomes obliquus","rank":"species","genus":"Fomes","specificEpithet":"obliquus","candidatus":false,"combinationAuthorship":{"authors":["Cooke"],"year":"1885"},"basionymAuthorship":{"authors":["Pers."],"exAuthors":["Ach."]},"origin":"source","type":"scientific","parsed":true,"authorship":"(Ach. ex Pers.) Cooke, 1885"}
+]</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: <a href="#model-Name">Name[]</a></p>
@@ -4330,12 +4172,11 @@ Any of the names can be used as valid subresources to list the actual enumeratio
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
-                <code class="json">{
-                    "example":[org.raml.v2.internal.impl.commons.model.TypeInstance@530bd77b, org.raml.v2.internal.impl.commons.model.TypeInstance@58a9e64d, org.raml.v2.internal.impl.commons.model.TypeInstance@7657d29f, org.raml.v2.internal.impl.commons.model.TypeInstance@6ace3, org.raml.v2.internal.impl.commons.model.TypeInstance@d3b0397, org.raml.v2.internal.impl.commons.model.TypeInstance@1ab717f3, org.raml.v2.internal.impl.commons.model.TypeInstance@52bcfd10, org.raml.v2.internal.impl.commons.model.TypeInstance@67683210, org.raml.v2.internal.impl.commons.model.TypeInstance@329aa2d1, org.raml.v2.internal.impl.commons.model.TypeInstance@103033fe, org.raml.v2.internal.impl.commons.model.TypeInstance@25511895, org.raml.v2.internal.impl.commons.model.TypeInstance@38f569d, org.raml.v2.internal.impl.commons.model.TypeInstance@6464f017, org.raml.v2.internal.impl.commons.model.TypeInstance@755a90a6, org.raml.v2.internal.impl.commons.model.TypeInstance@5862ab28, org.raml.v2.internal.impl.commons.model.TypeInstance@21202507, org.raml.v2.internal.impl.commons.model.TypeInstance@62878d7c, org.raml.v2.internal.impl.commons.model.TypeInstance@4379fe2a, org.raml.v2.internal.impl.commons.model.TypeInstance@e0f2686, org.raml.v2.internal.impl.commons.model.TypeInstance@2e27325d, org.raml.v2.internal.impl.commons.model.TypeInstance@7095b688, org.raml.v2.internal.impl.commons.model.TypeInstance@7c919e1e, org.raml.v2.internal.impl.commons.model.TypeInstance@bddac1c, org.raml.v2.internal.impl.commons.model.TypeInstance@1c7fd2e0, org.raml.v2.internal.impl.commons.model.TypeInstance@41831611, org.raml.v2.internal.impl.commons.model.TypeInstance@31921151]
-    }</code>
+    <code class="json">["continent","country","areastandard","cslreftype","nametype","origin","language","frequency","rank","nomacttype","coverage","nomstatus","dataformat","importstate","issue","gazetteer","cslvariable","typestatus","lifezone","distributionstatus","taxonomicstatus","kingdom","datasettype","license","nomcode","namepart"]
+</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: string[]</p>
@@ -4364,12 +4205,11 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 8, 2018 3:55:00 PM CET
+Date: Thursday, March 8, 2018 4:01:14 PM CET
 Content-Type: application/json
 </code>
-                <code class="json">{
-                    "example":[org.raml.v2.internal.impl.commons.model.TypeInstance@61c0fb12, org.raml.v2.internal.impl.commons.model.TypeInstance@56f19f36, org.raml.v2.internal.impl.commons.model.TypeInstance@2faae7f6, org.raml.v2.internal.impl.commons.model.TypeInstance@673a5aa7, org.raml.v2.internal.impl.commons.model.TypeInstance@1443539, org.raml.v2.internal.impl.commons.model.TypeInstance@5b160208, org.raml.v2.internal.impl.commons.model.TypeInstance@237bdbcb, org.raml.v2.internal.impl.commons.model.TypeInstance@16a15261, org.raml.v2.internal.impl.commons.model.TypeInstance@36ec4071, org.raml.v2.internal.impl.commons.model.TypeInstance@5d8112e6, org.raml.v2.internal.impl.commons.model.TypeInstance@20d92f1e, org.raml.v2.internal.impl.commons.model.TypeInstance@3cf7433e, org.raml.v2.internal.impl.commons.model.TypeInstance@68cc6319, org.raml.v2.internal.impl.commons.model.TypeInstance@3d0f4ac4, org.raml.v2.internal.impl.commons.model.TypeInstance@544733a4, org.raml.v2.internal.impl.commons.model.TypeInstance@522f74a1, org.raml.v2.internal.impl.commons.model.TypeInstance@59700156, org.raml.v2.internal.impl.commons.model.TypeInstance@1e6e29d6, org.raml.v2.internal.impl.commons.model.TypeInstance@7359f3ac, org.raml.v2.internal.impl.commons.model.TypeInstance@5afa0b1a, org.raml.v2.internal.impl.commons.model.TypeInstance@3d9cba2, org.raml.v2.internal.impl.commons.model.TypeInstance@6c167296, org.raml.v2.internal.impl.commons.model.TypeInstance@506e382b, org.raml.v2.internal.impl.commons.model.TypeInstance@5a464be7, org.raml.v2.internal.impl.commons.model.TypeInstance@170f0fd6, org.raml.v2.internal.impl.commons.model.TypeInstance@48d24d63, org.raml.v2.internal.impl.commons.model.TypeInstance@695c8b32, org.raml.v2.internal.impl.commons.model.TypeInstance@1adec8d, org.raml.v2.internal.impl.commons.model.TypeInstance@6eb332d1, org.raml.v2.internal.impl.commons.model.TypeInstance@34d0c331, org.raml.v2.internal.impl.commons.model.TypeInstance@3958db82, org.raml.v2.internal.impl.commons.model.TypeInstance@577f81a0, org.raml.v2.internal.impl.commons.model.TypeInstance@202d1424, org.raml.v2.internal.impl.commons.model.TypeInstance@1256925b, org.raml.v2.internal.impl.commons.model.TypeInstance@6dadcf58, org.raml.v2.internal.impl.commons.model.TypeInstance@467421cc, org.raml.v2.internal.impl.commons.model.TypeInstance@eb09112, org.raml.v2.internal.impl.commons.model.TypeInstance@28521ed5, org.raml.v2.internal.impl.commons.model.TypeInstance@2b06c388, org.raml.v2.internal.impl.commons.model.TypeInstance@4c9bed65, org.raml.v2.internal.impl.commons.model.TypeInstance@4629dde5, org.raml.v2.internal.impl.commons.model.TypeInstance@7e35d743, org.raml.v2.internal.impl.commons.model.TypeInstance@63b2418e, org.raml.v2.internal.impl.commons.model.TypeInstance@70d16858, org.raml.v2.internal.impl.commons.model.TypeInstance@789f5552, org.raml.v2.internal.impl.commons.model.TypeInstance@28c00acd, org.raml.v2.internal.impl.commons.model.TypeInstance@590f806a, org.raml.v2.internal.impl.commons.model.TypeInstance@2267b0bb, org.raml.v2.internal.impl.commons.model.TypeInstance@20505460, org.raml.v2.internal.impl.commons.model.TypeInstance@8eeb4c5, org.raml.v2.internal.impl.commons.model.TypeInstance@2dc77962, org.raml.v2.internal.impl.commons.model.TypeInstance@32bae609, org.raml.v2.internal.impl.commons.model.TypeInstance@106b476a, org.raml.v2.internal.impl.commons.model.TypeInstance@6dde913e, org.raml.v2.internal.impl.commons.model.TypeInstance@7b44e98e, org.raml.v2.internal.impl.commons.model.TypeInstance@1e2bc241, org.raml.v2.internal.impl.commons.model.TypeInstance@543196f9, org.raml.v2.internal.impl.commons.model.TypeInstance@4d7fba20, org.raml.v2.internal.impl.commons.model.TypeInstance@112b3298, org.raml.v2.internal.impl.commons.model.TypeInstance@51d2d336, org.raml.v2.internal.impl.commons.model.TypeInstance@90c01ab, org.raml.v2.internal.impl.commons.model.TypeInstance@39921410, org.raml.v2.internal.impl.commons.model.TypeInstance@71e55e48, org.raml.v2.internal.impl.commons.model.TypeInstance@36696821, org.raml.v2.internal.impl.commons.model.TypeInstance@5f01361e, org.raml.v2.internal.impl.commons.model.TypeInstance@769a9b7a, org.raml.v2.internal.impl.commons.model.TypeInstance@2d568cff, org.raml.v2.internal.impl.commons.model.TypeInstance@5003c114, org.raml.v2.internal.impl.commons.model.TypeInstance@6e4bccc, org.raml.v2.internal.impl.commons.model.TypeInstance@2487b621, org.raml.v2.internal.impl.commons.model.TypeInstance@3d2ff73a, org.raml.v2.internal.impl.commons.model.TypeInstance@736a8aea, org.raml.v2.internal.impl.commons.model.TypeInstance@504b4a97, org.raml.v2.internal.impl.commons.model.TypeInstance@4964d801, org.raml.v2.internal.impl.commons.model.TypeInstance@b307030, org.raml.v2.internal.impl.commons.model.TypeInstance@2caa9666]
-    }</code>
+    <code class="json">["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]
+</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: string[]</p>
