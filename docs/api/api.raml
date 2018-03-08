@@ -987,6 +987,7 @@ types:
         type: IssueType[]
         description: Set of issues spotted during processing.
         required: false
+    example: {"key":209379,"id":"Kew-114621","datasetKey":24,"name":{"key":369744,"id":"Kew-114621","datasetKey":24,"scientificName":"Lithocarpus mariae","rank":"species","genus":"Lithocarpus","specificEpithet":"mariae","candidatus":false,"combinationAuthorship":{"authors":["Soepadmo"]},"origin":"source","type":"scientific","issues":["according to date invalid","distribution area invalid"],"parsed":true,"authorship":"Soepadmo"},"status":"accepted","origin":"source","parentKey":209098,"accordingTo":"Govaerts R.","fossil":false,"recent":true,"issues":["according to date invalid","distribution area invalid"]}
   TaxonResultSet:
     type: ResultSet
     description: >
@@ -1040,6 +1041,7 @@ types:
       terms:
         type: VerbatimRecordTerms
         description: The verbatim source data
+    example: {"id":"Kew-114621","datasetKey":24,"terms":{"_line":0,"acef:AuthorString":"Soepadmo","acef:Family":"Fagaceae","acef:AcceptedTaxonID":"Kew-114621","acef:Phylum":"Tracheophyta","acef:LTSDate":"Aug-2017","acef:Sp2000NameStatus":"accepted name","acef:LTSSpecialist":"Govaerts R.","acef:HasModern":"1","acef:SpeciesEpithet":"mariae","acef:Kingdom":"Plantae","acef:Order":"Fagales","acef:Genus":"Lithocarpus","acef:HasPreHolocene":"0","acef:Class":"Magnoliopsida","acef:IsExtinct":"0","extensions":{"acef:Distribution":[{"_file":"Distribution.txt","_line":282711,"acef:StandardInUse":"TDWG Level 3","acef:DistributionStatus":"null","acef:AcceptedTaxonID":"Kew-114621","acef:DistributionElement":"Borneo"}]}}}
   VerbatimRecordTerms:
     type: object
     description: >
@@ -1604,11 +1606,17 @@ types:
       Any of the names can be used as valid subresources to list the actual enumeration values.
     responses:
       200:
-        body: string[]
+        body:
+          application/json:
+            type: string[]
+            example: ["continent","country","areastandard","cslreftype","nametype","origin","language","frequency","rank","nomacttype","coverage","nomstatus","dataformat","importstate","issue","gazetteer","cslvariable","typestatus","lifezone","distributionstatus","taxonomicstatus","kingdom","datasettype","license","nomcode","namepart"]
   /{name}:
     get:
       description: |
         List of all enumeration values for the requested vocabulary.
       responses:
         200:
-          body: string[]
+          body:
+            application/json:
+              type: string[]
+              example: ["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]
