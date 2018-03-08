@@ -185,46 +185,6 @@
 </td>
                                 </tr>
                             </tbody></table>
-                        <h2 id="model-MatchResult">MatchResult</h2>
-
-
-    <p><p>A matching result without the actual type specific result payload.</p>
-</p>
-
-                            <table><thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Pattern</th>
-                                <th>Required</th>
-                                <th>Description</th>
-                            </tr>
-                            </thead><tbody>
-                                <tr>
-                                    <td>alternatives</td>
-                                    <td>object[]</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Alternative, discarded matches for debugging puposes</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>matchType</td>
-                                    <td><a href="#model-MatchType">MatchType</a></td>
-                                    <td>exact, fuzzy, higherrank, none</td>
-                                    <td>yes</td>
-                                    <td><p>the kind of match</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>note</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Matching remarks</p>
-</td>
-                                </tr>
-                            </tbody></table>
                         <h2 id="model-Dataset">Dataset</h2>
 
 
@@ -386,23 +346,23 @@
                         <h2 id="model-DatasetImport">DatasetImport</h2>
 
                 <pre class="example"><code class="json">{
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@3728a578
-                    "attempt":org.raml.v2.internal.impl.commons.model.TypeInstance@3e3cd6fe
-                    "state":org.raml.v2.internal.impl.commons.model.TypeInstance@1de0641b
-                    "downloadUri":org.raml.v2.internal.impl.commons.model.TypeInstance@68b734a8
-                    "download":org.raml.v2.internal.impl.commons.model.TypeInstance@1a464fa3
-                    "started":org.raml.v2.internal.impl.commons.model.TypeInstance@4215e133
-                    "finished":org.raml.v2.internal.impl.commons.model.TypeInstance@5ccb85d6
-                    "verbatimCount":org.raml.v2.internal.impl.commons.model.TypeInstance@d88f893
-                    "nameCount":org.raml.v2.internal.impl.commons.model.TypeInstance@259b85d6
-                    "taxonCount":org.raml.v2.internal.impl.commons.model.TypeInstance@488f3dd1
-                    "vernacularCount":org.raml.v2.internal.impl.commons.model.TypeInstance@2091833
-                    "distributionCount":org.raml.v2.internal.impl.commons.model.TypeInstance@7bc58891
-                    "issuesCount":org.raml.v2.internal.impl.commons.model.TypeInstance@6411504a
-                    "namesByRankCount":org.raml.v2.internal.impl.commons.model.TypeInstance@554188ac
-                    "namesByTypeCount":org.raml.v2.internal.impl.commons.model.TypeInstance@1f43cab7
-                    "distributionsByGazetteerCount":org.raml.v2.internal.impl.commons.model.TypeInstance@467b0f6e
-                    "namesByOriginCount":org.raml.v2.internal.impl.commons.model.TypeInstance@474179fa
+                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@5e5beb8a
+                    "attempt":org.raml.v2.internal.impl.commons.model.TypeInstance@1f95881a
+                    "state":org.raml.v2.internal.impl.commons.model.TypeInstance@17b016ac
+                    "downloadUri":org.raml.v2.internal.impl.commons.model.TypeInstance@733ec58b
+                    "download":org.raml.v2.internal.impl.commons.model.TypeInstance@723877dd
+                    "started":org.raml.v2.internal.impl.commons.model.TypeInstance@415ef4d8
+                    "finished":org.raml.v2.internal.impl.commons.model.TypeInstance@56cc9f29
+                    "verbatimCount":org.raml.v2.internal.impl.commons.model.TypeInstance@535b1ae6
+                    "nameCount":org.raml.v2.internal.impl.commons.model.TypeInstance@626c19cf
+                    "taxonCount":org.raml.v2.internal.impl.commons.model.TypeInstance@66a53104
+                    "vernacularCount":org.raml.v2.internal.impl.commons.model.TypeInstance@6d229b1c
+                    "distributionCount":org.raml.v2.internal.impl.commons.model.TypeInstance@6f825516
+                    "issuesCount":org.raml.v2.internal.impl.commons.model.TypeInstance@2da99821
+                    "namesByRankCount":org.raml.v2.internal.impl.commons.model.TypeInstance@62cba181
+                    "namesByTypeCount":org.raml.v2.internal.impl.commons.model.TypeInstance@1b482cbf
+                    "distributionsByGazetteerCount":org.raml.v2.internal.impl.commons.model.TypeInstance@297c9a9b
+                    "namesByOriginCount":org.raml.v2.internal.impl.commons.model.TypeInstance@20999517
     }</code></pre>
 
     <p><p>Metrics and import details about a single dataset import event.</p>
@@ -668,20 +628,20 @@
                         <h2 id="model-Name">Name</h2>
 
                 <pre class="example"><code class="json">{
-                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@670342a2
-                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@d5e575c
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@7742a45c
-                    "scientificName":org.raml.v2.internal.impl.commons.model.TypeInstance@7ca492d9
-                    "rank":org.raml.v2.internal.impl.commons.model.TypeInstance@14fc9bd
-                    "genus":org.raml.v2.internal.impl.commons.model.TypeInstance@7ed49a7f
-                    "specificEpithet":org.raml.v2.internal.impl.commons.model.TypeInstance@1cd6b1bd
-                    "candidatus":org.raml.v2.internal.impl.commons.model.TypeInstance@443cdaa4
-                    "combinationAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@3b41e1bf
-                    "basionymAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@619c93ca
-                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@486e9d1d
-                    "type":org.raml.v2.internal.impl.commons.model.TypeInstance@6aa5974e
-                    "parsed":org.raml.v2.internal.impl.commons.model.TypeInstance@5e5ddfbc
-                    "authorship":org.raml.v2.internal.impl.commons.model.TypeInstance@5bda157e
+                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@40943a6
+                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@798cb6d9
+                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@42679fc2
+                    "scientificName":org.raml.v2.internal.impl.commons.model.TypeInstance@5e50df2e
+                    "rank":org.raml.v2.internal.impl.commons.model.TypeInstance@100aa331
+                    "genus":org.raml.v2.internal.impl.commons.model.TypeInstance@c2cf597
+                    "specificEpithet":org.raml.v2.internal.impl.commons.model.TypeInstance@724bf25f
+                    "candidatus":org.raml.v2.internal.impl.commons.model.TypeInstance@2abafa97
+                    "combinationAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@6f6cc7da
+                    "basionymAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@40717ed
+                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@29f3c438
+                    "type":org.raml.v2.internal.impl.commons.model.TypeInstance@5460edd3
+                    "parsed":org.raml.v2.internal.impl.commons.model.TypeInstance@5dbbb292
+                    "authorship":org.raml.v2.internal.impl.commons.model.TypeInstance@613f7eb7
     }</code></pre>
 
     <p><p>A scientific name.
@@ -869,6 +829,17 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td></td>
                                     <td>no</td>
                                     <td><p>the sanctioning author for Fungus names</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>taxonomicNote</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>informal note often included in authorship that informs about the taxonomic concept.
+See also Taxon.accordingTo for taxon concept references.
+Contrary to accordingTo the note here also applies to synonyms such as misapplied names.
+For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu latu&rdquo;</p>
 </td>
                                 </tr>
                                 <tr>
@@ -1163,6 +1134,17 @@ Name object with some extra properties related to synonymy. See below.</p>
 </td>
                                 </tr>
                                 <tr>
+                                    <td>taxonomicNote</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>informal note often included in authorship that informs about the taxonomic concept.
+See also Taxon.accordingTo for taxon concept references.
+Contrary to accordingTo the note here also applies to synonyms such as misapplied names.
+For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu latu&rdquo;</p>
+</td>
+                                </tr>
+                                <tr>
                                     <td>rank</td>
                                     <td><a href="#model-RankType">RankType</a></td>
                                     <td>kingdom, phylum, subphylum, class, subclass, order, suborder, superfamily, family, subfamily, tribe, subtribe, genus, subgenus, section, species, subspecies, variety, subvariety, form, subform</td>
@@ -1304,11 +1286,11 @@ Name object with some extra properties related to synonymy. See below.</p>
                         <h2 id="model-NameSearchResultSet">NameSearchResultSet</h2>
 
                 <pre class="example"><code class="json">{
-                    "offset":org.raml.v2.internal.impl.commons.model.TypeInstance@7ed7ae
-                    "limit":org.raml.v2.internal.impl.commons.model.TypeInstance@53ba1175
-                    "total":org.raml.v2.internal.impl.commons.model.TypeInstance@cd5ff55
-                    "result":[org.raml.v2.internal.impl.commons.model.TypeInstance@6003220a, org.raml.v2.internal.impl.commons.model.TypeInstance@16b64a03, org.raml.v2.internal.impl.commons.model.TypeInstance@1584c019, org.raml.v2.internal.impl.commons.model.TypeInstance@3688baab, org.raml.v2.internal.impl.commons.model.TypeInstance@4fe2dd02, org.raml.v2.internal.impl.commons.model.TypeInstance@6ba060af, org.raml.v2.internal.impl.commons.model.TypeInstance@5817f1ca, org.raml.v2.internal.impl.commons.model.TypeInstance@2b395581, org.raml.v2.internal.impl.commons.model.TypeInstance@726a8729, org.raml.v2.internal.impl.commons.model.TypeInstance@1a2724d3]
-                    "last":org.raml.v2.internal.impl.commons.model.TypeInstance@7dd91ffc
+                    "offset":org.raml.v2.internal.impl.commons.model.TypeInstance@349312d5
+                    "limit":org.raml.v2.internal.impl.commons.model.TypeInstance@5885e231
+                    "total":org.raml.v2.internal.impl.commons.model.TypeInstance@47eaf55c
+                    "result":[org.raml.v2.internal.impl.commons.model.TypeInstance@2c0798bd, org.raml.v2.internal.impl.commons.model.TypeInstance@2e3252, org.raml.v2.internal.impl.commons.model.TypeInstance@77cddc0c, org.raml.v2.internal.impl.commons.model.TypeInstance@671d97bc, org.raml.v2.internal.impl.commons.model.TypeInstance@774f2992, org.raml.v2.internal.impl.commons.model.TypeInstance@602298b, org.raml.v2.internal.impl.commons.model.TypeInstance@1fb6b8fb, org.raml.v2.internal.impl.commons.model.TypeInstance@149d7cc6, org.raml.v2.internal.impl.commons.model.TypeInstance@1a10c47e, org.raml.v2.internal.impl.commons.model.TypeInstance@d49e8c6]
+                    "last":org.raml.v2.internal.impl.commons.model.TypeInstance@2712e8f4
     }</code></pre>
 
     <p><p>A paging resultset for name search results.</p>
@@ -1525,46 +1507,6 @@ see <a href="https://github.com/citation-style-language/schema/blob/master/csl-d
 </td>
                                 </tr>
                             </tbody></table>
-                        <h2 id="model-ReferenceMatch">ReferenceMatch</h2>
-
-
-    <p><p>A reference matching result.</p>
-</p>
-
-                            <table><thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Pattern</th>
-                                <th>Required</th>
-                                <th>Description</th>
-                            </tr>
-                            </thead><tbody>
-                                <tr>
-                                    <td>alternatives</td>
-                                    <td>object[]</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Alternative, discarded matches for debugging puposes</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>matchType</td>
-                                    <td><a href="#model-MatchType">MatchType</a></td>
-                                    <td>exact, fuzzy, higherrank, none</td>
-                                    <td>yes</td>
-                                    <td><p>the kind of match</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>note</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Matching remarks</p>
-</td>
-                                </tr>
-                            </tbody></table>
                         <h2 id="model-ReferenceResultSet">ReferenceResultSet</h2>
 
 
@@ -1758,46 +1700,6 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td></td>
                                     <td>no</td>
                                     <td><p>Notes about the serial</p>
-</td>
-                                </tr>
-                            </tbody></table>
-                        <h2 id="model-SerialMatch">SerialMatch</h2>
-
-
-    <p><p>A serial matching result.</p>
-</p>
-
-                            <table><thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Pattern</th>
-                                <th>Required</th>
-                                <th>Description</th>
-                            </tr>
-                            </thead><tbody>
-                                <tr>
-                                    <td>alternatives</td>
-                                    <td>object[]</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Alternative, discarded matches for debugging puposes</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>matchType</td>
-                                    <td><a href="#model-MatchType">MatchType</a></td>
-                                    <td>exact, fuzzy, higherrank, none</td>
-                                    <td>yes</td>
-                                    <td><p>the kind of match</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>note</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Matching remarks</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -2014,46 +1916,6 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td></td>
                                     <td>no</td>
                                     <td><p>Set of issues spotted during processing.</p>
-</td>
-                                </tr>
-                            </tbody></table>
-                        <h2 id="model-TaxonMatch">TaxonMatch</h2>
-
-
-    <p><p>A taxon matching result.</p>
-</p>
-
-                            <table><thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Pattern</th>
-                                <th>Required</th>
-                                <th>Description</th>
-                            </tr>
-                            </thead><tbody>
-                                <tr>
-                                    <td>alternatives</td>
-                                    <td>object[]</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Alternative, discarded matches for debugging puposes</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>matchType</td>
-                                    <td><a href="#model-MatchType">MatchType</a></td>
-                                    <td>exact, fuzzy, higherrank, none</td>
-                                    <td>yes</td>
-                                    <td><p>the kind of match</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>note</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Matching remarks</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -2640,7 +2502,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2669,7 +2531,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2721,7 +2583,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -2855,27 +2717,27 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
                 <code class="json">{
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@3728a578
-                    "attempt":org.raml.v2.internal.impl.commons.model.TypeInstance@3e3cd6fe
-                    "state":org.raml.v2.internal.impl.commons.model.TypeInstance@1de0641b
-                    "downloadUri":org.raml.v2.internal.impl.commons.model.TypeInstance@68b734a8
-                    "download":org.raml.v2.internal.impl.commons.model.TypeInstance@1a464fa3
-                    "started":org.raml.v2.internal.impl.commons.model.TypeInstance@4215e133
-                    "finished":org.raml.v2.internal.impl.commons.model.TypeInstance@5ccb85d6
-                    "verbatimCount":org.raml.v2.internal.impl.commons.model.TypeInstance@d88f893
-                    "nameCount":org.raml.v2.internal.impl.commons.model.TypeInstance@259b85d6
-                    "taxonCount":org.raml.v2.internal.impl.commons.model.TypeInstance@488f3dd1
-                    "vernacularCount":org.raml.v2.internal.impl.commons.model.TypeInstance@2091833
-                    "distributionCount":org.raml.v2.internal.impl.commons.model.TypeInstance@7bc58891
-                    "issuesCount":org.raml.v2.internal.impl.commons.model.TypeInstance@6411504a
-                    "namesByRankCount":org.raml.v2.internal.impl.commons.model.TypeInstance@554188ac
-                    "namesByTypeCount":org.raml.v2.internal.impl.commons.model.TypeInstance@1f43cab7
-                    "distributionsByGazetteerCount":org.raml.v2.internal.impl.commons.model.TypeInstance@467b0f6e
-                    "namesByOriginCount":org.raml.v2.internal.impl.commons.model.TypeInstance@474179fa
+                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@5e5beb8a
+                    "attempt":org.raml.v2.internal.impl.commons.model.TypeInstance@1f95881a
+                    "state":org.raml.v2.internal.impl.commons.model.TypeInstance@17b016ac
+                    "downloadUri":org.raml.v2.internal.impl.commons.model.TypeInstance@733ec58b
+                    "download":org.raml.v2.internal.impl.commons.model.TypeInstance@723877dd
+                    "started":org.raml.v2.internal.impl.commons.model.TypeInstance@415ef4d8
+                    "finished":org.raml.v2.internal.impl.commons.model.TypeInstance@56cc9f29
+                    "verbatimCount":org.raml.v2.internal.impl.commons.model.TypeInstance@535b1ae6
+                    "nameCount":org.raml.v2.internal.impl.commons.model.TypeInstance@626c19cf
+                    "taxonCount":org.raml.v2.internal.impl.commons.model.TypeInstance@66a53104
+                    "vernacularCount":org.raml.v2.internal.impl.commons.model.TypeInstance@6d229b1c
+                    "distributionCount":org.raml.v2.internal.impl.commons.model.TypeInstance@6f825516
+                    "issuesCount":org.raml.v2.internal.impl.commons.model.TypeInstance@2da99821
+                    "namesByRankCount":org.raml.v2.internal.impl.commons.model.TypeInstance@62cba181
+                    "namesByTypeCount":org.raml.v2.internal.impl.commons.model.TypeInstance@1b482cbf
+                    "distributionsByGazetteerCount":org.raml.v2.internal.impl.commons.model.TypeInstance@297c9a9b
+                    "namesByOriginCount":org.raml.v2.internal.impl.commons.model.TypeInstance@20999517
     }</code>
 </pre>
                     <p><code>application/json</code></p>
@@ -2932,7 +2794,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3020,7 +2882,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3081,7 +2943,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3133,7 +2995,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3164,7 +3026,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3195,7 +3057,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3226,7 +3088,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3257,7 +3119,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -3469,7 +3331,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3539,7 +3401,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3672,15 +3534,15 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
                 <code class="json">{
-                    "offset":org.raml.v2.internal.impl.commons.model.TypeInstance@7ed7ae
-                    "limit":org.raml.v2.internal.impl.commons.model.TypeInstance@53ba1175
-                    "total":org.raml.v2.internal.impl.commons.model.TypeInstance@cd5ff55
-                    "result":[org.raml.v2.internal.impl.commons.model.TypeInstance@6003220a, org.raml.v2.internal.impl.commons.model.TypeInstance@16b64a03, org.raml.v2.internal.impl.commons.model.TypeInstance@1584c019, org.raml.v2.internal.impl.commons.model.TypeInstance@3688baab, org.raml.v2.internal.impl.commons.model.TypeInstance@4fe2dd02, org.raml.v2.internal.impl.commons.model.TypeInstance@6ba060af, org.raml.v2.internal.impl.commons.model.TypeInstance@5817f1ca, org.raml.v2.internal.impl.commons.model.TypeInstance@2b395581, org.raml.v2.internal.impl.commons.model.TypeInstance@726a8729, org.raml.v2.internal.impl.commons.model.TypeInstance@1a2724d3]
-                    "last":org.raml.v2.internal.impl.commons.model.TypeInstance@7dd91ffc
+                    "offset":org.raml.v2.internal.impl.commons.model.TypeInstance@349312d5
+                    "limit":org.raml.v2.internal.impl.commons.model.TypeInstance@5885e231
+                    "total":org.raml.v2.internal.impl.commons.model.TypeInstance@47eaf55c
+                    "result":[org.raml.v2.internal.impl.commons.model.TypeInstance@2c0798bd, org.raml.v2.internal.impl.commons.model.TypeInstance@2e3252, org.raml.v2.internal.impl.commons.model.TypeInstance@77cddc0c, org.raml.v2.internal.impl.commons.model.TypeInstance@671d97bc, org.raml.v2.internal.impl.commons.model.TypeInstance@774f2992, org.raml.v2.internal.impl.commons.model.TypeInstance@602298b, org.raml.v2.internal.impl.commons.model.TypeInstance@1fb6b8fb, org.raml.v2.internal.impl.commons.model.TypeInstance@149d7cc6, org.raml.v2.internal.impl.commons.model.TypeInstance@1a10c47e, org.raml.v2.internal.impl.commons.model.TypeInstance@d49e8c6]
+                    "last":org.raml.v2.internal.impl.commons.model.TypeInstance@2712e8f4
     }</code>
 </pre>
                     <p><code>application/json</code></p>
@@ -3740,7 +3602,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -3792,24 +3654,24 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
                 <code class="json">{
-                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@670342a2
-                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@d5e575c
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@7742a45c
-                    "scientificName":org.raml.v2.internal.impl.commons.model.TypeInstance@7ca492d9
-                    "rank":org.raml.v2.internal.impl.commons.model.TypeInstance@14fc9bd
-                    "genus":org.raml.v2.internal.impl.commons.model.TypeInstance@7ed49a7f
-                    "specificEpithet":org.raml.v2.internal.impl.commons.model.TypeInstance@1cd6b1bd
-                    "candidatus":org.raml.v2.internal.impl.commons.model.TypeInstance@443cdaa4
-                    "combinationAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@3b41e1bf
-                    "basionymAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@619c93ca
-                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@486e9d1d
-                    "type":org.raml.v2.internal.impl.commons.model.TypeInstance@6aa5974e
-                    "parsed":org.raml.v2.internal.impl.commons.model.TypeInstance@5e5ddfbc
-                    "authorship":org.raml.v2.internal.impl.commons.model.TypeInstance@5bda157e
+                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@40943a6
+                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@798cb6d9
+                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@42679fc2
+                    "scientificName":org.raml.v2.internal.impl.commons.model.TypeInstance@5e50df2e
+                    "rank":org.raml.v2.internal.impl.commons.model.TypeInstance@100aa331
+                    "genus":org.raml.v2.internal.impl.commons.model.TypeInstance@c2cf597
+                    "specificEpithet":org.raml.v2.internal.impl.commons.model.TypeInstance@724bf25f
+                    "candidatus":org.raml.v2.internal.impl.commons.model.TypeInstance@2abafa97
+                    "combinationAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@6f6cc7da
+                    "basionymAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@40717ed
+                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@29f3c438
+                    "type":org.raml.v2.internal.impl.commons.model.TypeInstance@5460edd3
+                    "parsed":org.raml.v2.internal.impl.commons.model.TypeInstance@5dbbb292
+                    "authorship":org.raml.v2.internal.impl.commons.model.TypeInstance@613f7eb7
     }</code>
 </pre>
                     <p><code>application/json</code></p>
@@ -3839,24 +3701,24 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
                 <code class="json">{
-                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@670342a2
-                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@d5e575c
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@7742a45c
-                    "scientificName":org.raml.v2.internal.impl.commons.model.TypeInstance@7ca492d9
-                    "rank":org.raml.v2.internal.impl.commons.model.TypeInstance@14fc9bd
-                    "genus":org.raml.v2.internal.impl.commons.model.TypeInstance@7ed49a7f
-                    "specificEpithet":org.raml.v2.internal.impl.commons.model.TypeInstance@1cd6b1bd
-                    "candidatus":org.raml.v2.internal.impl.commons.model.TypeInstance@443cdaa4
-                    "combinationAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@3b41e1bf
-                    "basionymAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@619c93ca
-                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@486e9d1d
-                    "type":org.raml.v2.internal.impl.commons.model.TypeInstance@6aa5974e
-                    "parsed":org.raml.v2.internal.impl.commons.model.TypeInstance@5e5ddfbc
-                    "authorship":org.raml.v2.internal.impl.commons.model.TypeInstance@5bda157e
+                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@40943a6
+                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@798cb6d9
+                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@42679fc2
+                    "scientificName":org.raml.v2.internal.impl.commons.model.TypeInstance@5e50df2e
+                    "rank":org.raml.v2.internal.impl.commons.model.TypeInstance@100aa331
+                    "genus":org.raml.v2.internal.impl.commons.model.TypeInstance@c2cf597
+                    "specificEpithet":org.raml.v2.internal.impl.commons.model.TypeInstance@724bf25f
+                    "candidatus":org.raml.v2.internal.impl.commons.model.TypeInstance@2abafa97
+                    "combinationAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@6f6cc7da
+                    "basionymAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@40717ed
+                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@29f3c438
+                    "type":org.raml.v2.internal.impl.commons.model.TypeInstance@5460edd3
+                    "parsed":org.raml.v2.internal.impl.commons.model.TypeInstance@5dbbb292
+                    "authorship":org.raml.v2.internal.impl.commons.model.TypeInstance@613f7eb7
     }</code>
 </pre>
                     <p><code>application/json</code></p>
@@ -3886,7 +3748,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3955,7 +3817,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -4003,7 +3865,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -4073,7 +3935,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -4134,7 +3996,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
 </pre>
@@ -4186,7 +4048,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4234,7 +4096,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -4309,24 +4171,24 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
                 <code class="json">{
-                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@670342a2
-                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@d5e575c
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@7742a45c
-                    "scientificName":org.raml.v2.internal.impl.commons.model.TypeInstance@7ca492d9
-                    "rank":org.raml.v2.internal.impl.commons.model.TypeInstance@14fc9bd
-                    "genus":org.raml.v2.internal.impl.commons.model.TypeInstance@7ed49a7f
-                    "specificEpithet":org.raml.v2.internal.impl.commons.model.TypeInstance@1cd6b1bd
-                    "candidatus":org.raml.v2.internal.impl.commons.model.TypeInstance@443cdaa4
-                    "combinationAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@3b41e1bf
-                    "basionymAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@619c93ca
-                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@486e9d1d
-                    "type":org.raml.v2.internal.impl.commons.model.TypeInstance@6aa5974e
-                    "parsed":org.raml.v2.internal.impl.commons.model.TypeInstance@5e5ddfbc
-                    "authorship":org.raml.v2.internal.impl.commons.model.TypeInstance@5bda157e
+                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@40943a6
+                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@798cb6d9
+                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@42679fc2
+                    "scientificName":org.raml.v2.internal.impl.commons.model.TypeInstance@5e50df2e
+                    "rank":org.raml.v2.internal.impl.commons.model.TypeInstance@100aa331
+                    "genus":org.raml.v2.internal.impl.commons.model.TypeInstance@c2cf597
+                    "specificEpithet":org.raml.v2.internal.impl.commons.model.TypeInstance@724bf25f
+                    "candidatus":org.raml.v2.internal.impl.commons.model.TypeInstance@2abafa97
+                    "combinationAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@6f6cc7da
+                    "basionymAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@40717ed
+                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@29f3c438
+                    "type":org.raml.v2.internal.impl.commons.model.TypeInstance@5460edd3
+                    "parsed":org.raml.v2.internal.impl.commons.model.TypeInstance@5dbbb292
+                    "authorship":org.raml.v2.internal.impl.commons.model.TypeInstance@613f7eb7
     }</code>
 </pre>
                     <p><code>application/json</code></p>
@@ -4359,24 +4221,24 @@ with one name per line, or as plain/text content in the request body.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, March 1, 2018 11:57:49 AM CET
+Date: Thursday, March 8, 2018 12:44:25 PM CET
 Content-Type: application/json
 </code>
                 <code class="json">{
-                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@670342a2
-                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@d5e575c
-                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@7742a45c
-                    "scientificName":org.raml.v2.internal.impl.commons.model.TypeInstance@7ca492d9
-                    "rank":org.raml.v2.internal.impl.commons.model.TypeInstance@14fc9bd
-                    "genus":org.raml.v2.internal.impl.commons.model.TypeInstance@7ed49a7f
-                    "specificEpithet":org.raml.v2.internal.impl.commons.model.TypeInstance@1cd6b1bd
-                    "candidatus":org.raml.v2.internal.impl.commons.model.TypeInstance@443cdaa4
-                    "combinationAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@3b41e1bf
-                    "basionymAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@619c93ca
-                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@486e9d1d
-                    "type":org.raml.v2.internal.impl.commons.model.TypeInstance@6aa5974e
-                    "parsed":org.raml.v2.internal.impl.commons.model.TypeInstance@5e5ddfbc
-                    "authorship":org.raml.v2.internal.impl.commons.model.TypeInstance@5bda157e
+                    "key":org.raml.v2.internal.impl.commons.model.TypeInstance@40943a6
+                    "id":org.raml.v2.internal.impl.commons.model.TypeInstance@798cb6d9
+                    "datasetKey":org.raml.v2.internal.impl.commons.model.TypeInstance@42679fc2
+                    "scientificName":org.raml.v2.internal.impl.commons.model.TypeInstance@5e50df2e
+                    "rank":org.raml.v2.internal.impl.commons.model.TypeInstance@100aa331
+                    "genus":org.raml.v2.internal.impl.commons.model.TypeInstance@c2cf597
+                    "specificEpithet":org.raml.v2.internal.impl.commons.model.TypeInstance@724bf25f
+                    "candidatus":org.raml.v2.internal.impl.commons.model.TypeInstance@2abafa97
+                    "combinationAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@6f6cc7da
+                    "basionymAuthorship":org.raml.v2.internal.impl.commons.model.TypeInstance@40717ed
+                    "origin":org.raml.v2.internal.impl.commons.model.TypeInstance@29f3c438
+                    "type":org.raml.v2.internal.impl.commons.model.TypeInstance@5460edd3
+                    "parsed":org.raml.v2.internal.impl.commons.model.TypeInstance@5dbbb292
+                    "authorship":org.raml.v2.internal.impl.commons.model.TypeInstance@613f7eb7
     }</code>
 </pre>
                     <p><code>application/json</code></p>
