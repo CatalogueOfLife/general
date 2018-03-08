@@ -73,11 +73,11 @@ types:
     description: 2 or 3 letter codes as used by ISO country or languages
   RankType:
     type: string
-    enum: ["kingdom", "phylum", "subphylum", "class", "subclass", "order", "suborder",
-    "superfamily", "family", "subfamily", "tribe", "subtribe", "genus", "subgenus", "section",
-    "species", "subspecies", "variety", "subvariety", "form", "subform"]
+    enum: ["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]
     description: >
       Enumeration of all possible rank values across all codes.
+      See http://api.col.plus/vocab/rank for the complete list in use
+
       There is the need to deal with old ranks not accepted anymore.
       The list given is intended to be interoperable between name providers for bacteria, viruses, fungi, plants, and animals.
       The enumeration attempts to strike a balance between listing all possible rank terms, and remaining comprehensible.
@@ -91,11 +91,21 @@ types:
        - [NOMEN](https://raw.githubusercontent.com/SpeciesFileGroup/nomen/master/src/ontology/nomen.owl)
 
        TODO: extract all values from sources
+  IssueType:
+    type: string
+    enum: ["unparsable name","partially parsable name","unparsable authorship","doubtful name","inconsistent authorship","inconsistent name","unusual characters","null epithet","subspecies assigned","lc monomial","indet cultivar","indet species","indet infraspecies","higher rank binomial","question marks removed","repl enclosing quote","missing genus","escaped characters","nomenclatural status invalid","nomenclatural code invalid","basionym author mismatch","basionym not unique","basionym derived","conflicting basionym combination","potential orthographic variant","homonym","published before genus","reference id invalid","id not unique","parent id invalid","accepted id invalid","basionym id invalid","accepted name missing","rank invalid","taxonomic status invalid","lifezone invalid","is fossil invalid","is recent invalid","url invalid","according to date invalid","chained synoym","taxonomic status mismatch","parent cycle","classification rank order invalid","classification not applied","vernacular name invalid","vernacular name transliterated","description invalid","distribution invalid","distribution area invalid","distribution country invalid","distribution status invalid","distribution gazeteer invalid","species profile invalid","multimedia invalid","bib reference invalid","alt identifier invalid","backbone match none","backbone match fuzzy","name not unique","parent name not unique","relationship missing","no species","name parent mismatch","orthographic variant"]
+    description: >
+      Issues that the Clearinghouse software is able to detect and flag a Taxon, Name or Reference with.
+      The enumeration is in very active development and extended as new rules are implemented.
+      Not all flagged issues are highlighting data problems. Some simply flag the fact that data was modified during imports,
+      for example "vernacular name transliterated" is added then a latin transliteration of a vernacular name was automatically generated.
+      See http://api.col.plus/vocab/issue for the latest full list.
   NomCodeType:
     type: string
     enum: ["bacterial", "botanical", "cultivated", "viral", "zoological", "unknown"]
     description: >
       Nomenclatural code enumeration regardless of the exact version published.
+      See http://api.col.plus/vocab/nomcode
 
       bacteriological
       : [Bacteriological code](https://www.ncbi.nlm.nih.gov/books/NBK8817/)
@@ -116,6 +126,8 @@ types:
     enum: ["ok", "unavailable", "illegitimate", "variant", "conserved", "rejected", "doubtful", "unevaluated"]
     description: >
       The status related to the latest nomenclatural act published for the name and its conformance to the rules of nomenclature.
+      See http://api.col.plus/vocab/nomstatus
+
       Generic nomenclatural status enumeration across all codes.
       Only the broader status concepts are captured and details of the nomenclatural status of a name should be given as free text.
       The overloaded term "valid" is avoided as it carries different semantics in the botanical and zoological code.
@@ -161,12 +173,15 @@ types:
   NameType:
     type: string
     enum: ["scientific", "virus", "hybrid-formula", "cultivar", "otu", "placeholder", "none"]
-    description: Classification of names, mostly based on their syntactic structure.
+    description: >
+      Classification of names, mostly based on their syntactic structure.
+      See http://api.col.plus/vocab/nametype
   NomenclaturalActType:
     type: string
     enum: ["description", "ruling", "emendation", "typification"]
     description: >
       Coarse classification of nomenclatural acts.
+      See http://api.col.plus/vocab/nomacttype
 
        description
        : the description of a new original name, a new recombination, a replacement name or a change in rank.
@@ -190,11 +205,13 @@ types:
     enum: ["brackish", "freshwater", "marine", "terrestrial"]
     description: >
       Coarse classification of the environment an organism lives in.
+      See http://api.col.plus/vocab/lifezone
   GazetteerType:
     type: string
     enum: ["tdwg", "iso", "fao", "fao-fishing", "longhurst", "teow", "iho", "text"]
     description: |
       List of supported distribution area standards.
+      See http://api.col.plus/vocab/gazetteer
 
       tdwg
       : [World Geographical Scheme for Recording Plant Distributions](http://www.tdwg.org/standards/109) published by TDWG at level 3 or 4.
@@ -226,21 +243,27 @@ types:
   DistributionStatusType:
     type: string
     enum: ["native", "domesticated", "alien", "uncertain"]
-    description: CoL distribution status enumeration
+    description: >
+      CoL distribution status enumeration
+      See http://api.col.plus/vocab/distributionstatus
   ReferenceTopicType:
     type: string
     enum: ["nomen", "taxon", "vernacular", "distribution"]
-    description: Enumeration of types of CoL relevant information that is treated in a publication
+    description: >
+      Enumeration of types of CoL relevant information that is treated in a publication
+      See http://api.col.plus/vocab/gazetteer
   TaxonomicStatusType:
     type: string
     enum: ["accepted", "doubtful"]
     description: >
       Taxonomic status enumeration for both accepted taxa and synonyms.
+      See http://api.col.plus/vocab/taxonomicstatus
   KingdomType:
     type: string
     enum: ["Animalia","Archaea","Bacteria","Chromista","Fungi","Plantae","Protozoa","Viruses"]
     description: >
       Enumeration of all kingdoms recognized in the Catalogue of Life.
+      See http://api.col.plus/vocab/kingdom
   MatchType:
     type: string
     enum: ["exact", "fuzzy", "higherrank", "none"]
@@ -249,11 +272,10 @@ types:
     type: string
     enum: ["source", "denormed_classification", "verbatim_parent", "verbatim_accepted","verbatim_basionym",
     "proparte","autonym","implicit_name","missing_accepted","basionym_placeholder","ex_author_synonym","other"]
-    description: Enumeration of the kind of matches possible.
-  SortByType:
-    type: string
-    enum: ["relevance", "name"]
-    description: Sort options for searches.
+    description: >
+      Enumeration of the kind of matches possible.
+      See http://api.col.plus/vocab/origin
+
   Error:
     type: object
     description: >
@@ -681,7 +703,7 @@ types:
         description: notes for general remarks on the name, i.e. its nomenclature
         required: false
       issues:
-        type: object
+        type: IssueType[]
         description: Set of issues spotted during processing
         required: false
     example: {"key":169130,"id":"1000BA50801","datasetKey":1009,"scientificName":"Fomes obliquus","rank":"species","genus":"Fomes","specificEpithet":"obliquus","candidatus":false,"combinationAuthorship":{"authors":["Cooke"],"year":"1885"},"basionymAuthorship":{"authors":["Pers."],"exAuthors":["Ach."]},"origin":"source","type":"scientific","parsed":true,"authorship":"(Ach. ex Pers.) Cooke, 1885"}
@@ -786,6 +808,10 @@ types:
         description: |
           the citation metadata as [CSL-JSON](https://github.com/citation-style-language/schema#csl-json-schema),
           see [CSL JSON schema](https://github.com/citation-style-language/schema/blob/master/csl-data.json).
+      issues:
+        type: IssueType[]
+        description: Set of issues spotted during processing
+        required: false
     example: |
       {
         "key": 432561,
@@ -917,14 +943,8 @@ types:
       status:
         type: TaxonomicStatusType
         description: the taxonomic status of the taxon
-      rank:
-        type: RankType
-        description: taxonomic rank
-      kingdom:
-        type: KingdomType
-        description: the kingdom the taxon is classified under.
       parentKey:
-        type: string
+        type: integer
         description: key to next higher taxon in the classification
         required: false
       accordingTo:
@@ -964,7 +984,7 @@ types:
         description: notes for general remarks on the taxon
         required: false
       issues:
-        type: object
+        type: IssueType[]
         description: Set of issues spotted during processing.
         required: false
   TaxonResultSet:
@@ -985,17 +1005,27 @@ types:
       topic:
         type: ReferenceTopicType[]
   TaxonInfo:
-    type: DatasetObject
+    type: object
     description: >
       All supplementarly taxon information for a given taxon.
     properties:
+      taxon:
+        type: Taxon
       vernacularNames:
         type: VernacularName[]
+        required: false
       distributions:
         type: Distribution[]
-      references:
-        type: TaxonReference[]
+        required: false
+      taxonReferences:
+        type: integer[]
         description: List of all distinct references supporting the taxon concept, distribution or vernacular names as referenced by the individual record.
+        required: false
+      references:
+        type: object
+        description: A map of reference keys used by the other objects in this class to the actual full Reference instance.
+        required: false
+    example: {"taxon":{"key":209379,"id":"Kew-114621","datasetKey":24,"name":{"key":369744,"id":"Kew-114621","datasetKey":24,"scientificName":"Lithocarpus mariae","rank":"species","genus":"Lithocarpus","specificEpithet":"mariae","candidatus":false,"combinationAuthorship":{"authors":["Soepadmo"]},"origin":"source","type":"scientific","issues":["according to date invalid","distribution area invalid"],"parsed":true,"authorship":"Soepadmo"},"status":"accepted","origin":"source","parentKey":209098,"accordingTo":"Govaerts R.","fossil":false,"recent":true,"issues":["according to date invalid","distribution area invalid"]},"distributions":[{"area":"Borneo","gazetteer":"tdwg","status":"native"}]}
   VerbatimRecord:
     type: object
     description: >
@@ -1048,6 +1078,7 @@ types:
       datasetKey:
         type: integer
         description: Key to the source dataset this record belongs to
+        required: false
       area:
         type: string
         description: the geographic area the distribution refers to as defined in the corresponding area standard.
@@ -1060,6 +1091,7 @@ types:
       referenceKeys:
         type: integer[]
         description: Links to references supporting the distribution record
+        required: false
 /dataset:
   get:
     is: [paged,query]
@@ -1408,6 +1440,10 @@ types:
           type: string
           description: main query string
           required: false
+        key:
+          type: integer
+          description: the database key of the name
+          required: false
         datasetKey:
           type: integer
           description: dataset key
@@ -1432,11 +1468,6 @@ types:
           type: NameType
           description: filter by name type
           required: false
-        sortBy:
-          type: SortByType
-          description: dataset key
-          required: false
-          default: 32
       responses:
         200:
           body:
@@ -1566,3 +1597,18 @@ types:
           body:
             application/json:
               type: Name[]
+/vocab:
+  get:
+    description: |
+      List of all available vocabularies by their unique lowercase form.
+      Any of the names can be used as valid subresources to list the actual enumeration values.
+    responses:
+      200:
+        body: string[]
+  /{name}:
+    get:
+      description: |
+        List of all enumeration values for the requested vocabulary.
+      responses:
+        200:
+          body: string[]
