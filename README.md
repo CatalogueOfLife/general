@@ -9,12 +9,12 @@ Many large institutional users (i.e. GBIF, EOL, ALA, Lifewatch) extend their cop
 to complete it to serve their own specific purpose. 
 These disconnected efforts result in ‘taxonomic inconsistencies’ and cause confusion amongst users. 
 
-The [CoL+ project](docs/CoL+ slide doc.pdf) seeks to replace these efforts with a shared, extended catalogue 
+The [CoL+ project](docs/CoL+slide-doc.pdf) seeks to replace these efforts with a shared, extended catalogue 
 and complete the reviewed name coverage without sacrificing quality. 
 Creating an open, shared, and sustainable consensus taxonomy to serve the proper linking of data in the global biodiversity information initiatives 
 is the ultimate goal the project contributes to. 
 
-**The goals** for the [Catalogue of Life Plus (CoL+) project](docs/CoL+ slide doc.pdf) are: 
+**The goals** for the [Catalogue of Life Plus (CoL+) project](docs/CoL+slide-doc.pdf) are: 
 
  1. creating both an extended and a strictly scrutinized taxonomic catalogue to replace the current GBIF Backbone Taxonomy and Catalogue of Life
  2. separating nomenclature (facts) and taxonomy (opinion) with different identifiers and authorities for names and taxa for better reuse
