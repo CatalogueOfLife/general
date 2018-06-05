@@ -94,7 +94,7 @@ TODO:
 
 
 
-## CoL Store
+## CoL Archive
 Extends the dataset store with features needed for CoL releases
 to archive versions and track data provenance.
 
@@ -103,7 +103,7 @@ to archive versions and track data provenance.
 Registration, management, password recovery and general authentication to the Clearinghouse portal
 
 
-## comments API
+## Comments API
 Allow unstructured comments for authenticated useds.
 
 - unstructed comments on names, taxa, references, dataset
