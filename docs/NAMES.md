@@ -1,7 +1,7 @@
 # Nomenclature / Names Index
 The Clearinghouse separates taxonomy from names and nomenclature.
 Names are not restricted to available names, but the names index should
-also cover for example naked names that might appear in literature or on specimen labels somewhere. CoL+ has decided to base its model on the work done by TDWG with Darwin Core and the Taxon Concept Schema (TCS) which is in use by many nomenclators already, e.g. IPNI.
+also cover for example naked names that might appear in literature or on specimen labels somewhere. CoL+ has decided to base its model on the work done by TDWG with Darwin Core and the Taxon Concept Schema (TCS) which is in use by many nomenclators already, e.g. IPNI. You can also explore the Postgres [database schema](dbschema.png).
 
 The driving use cases dealing with nomenclature are:
 
@@ -94,14 +94,14 @@ A relation does 'not' come with a reference as the relevant publication is the s
    
    ICZN: Conservation is covered under Article 23.9 (this name is nomen protectum and the target name is nomen oblitum)
 
-- ```LATER_HOMONYM ```: Current name has same spelling as related name but was published later and has priority over it (unless conserved or sanctioned).
- Called a junior homonym in zoology.
+- ```LATER_HOMONYM ```: Current name has same spelling as related name but was published later and has priority over it (unless conserved or sanctioned). Called a junior homonym in zoology.
  
- When acts of conservation or suppression have occurred then the terms “Conserved Later Homonym”   and “Rejected Earlier Homonym” should be used.
+   When acts of conservation or suppression have occurred then the terms “Conserved Later Homonym”   and “Rejected Earlier Homonym” should be used.
    
    ICBN: Article 53
-   
+ 
    ICZN: Chapter 12, Article 52.
+
 
 
 
