@@ -7,7 +7,7 @@ The driving use cases dealing with nomenclature are:
 
  - is a given string a name at all?
  - what is the correct spelling?
- - is a name "available" and can be used for a taxon? 
+ - is a name "available" and can it be used for a taxon? 
  - what are the reasons for being unavailable?
  - where was the name originally published? Ideally with a direct link to the publication
  - what is the homotypic synonymy of a name?
