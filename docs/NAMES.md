@@ -95,7 +95,7 @@ See the homotypic group example below for the JSON representation.
 
 
 ## Rank
-There is the need to deal with ranks in a consistent manner. Old ranks not accepted anymore also need to be covered as they appear in synonyms oat least.
+There is the need to deal with ranks in a consistent manner. Old ranks not accepted anymore also need to be covered as they appear in synonyms at least.
 The [list of known ranks](https://github.com/gbif/name-parser/blob/master/name-parser-api/src/main/java/org/gbif/nameparser/api/Rank.java) is intended to be interoperable between name providers for bacteria, viruses, fungi, plants, and animals. 
 It is not assumed that in each taxonomic group all ranks have to be used. 
 The enumeration attempts to strike a balance between listing all possible rank terms, and remaining comprehensible. 
