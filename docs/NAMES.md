@@ -270,39 +270,6 @@ To avoid all spelling mistakes found on labels and in databases to enter the nam
 
 
 
-## Literature citations
-Modelling and maintaining literature data can become a major burden. 
-Currently the Catalogue of Life is using a simplistic model useful when aggregating but not actively managing literature:
-
-  - authors: Complete author string
-  - year: Year(s) of publication
-  - title: Title of the paper or book
-  - source: Journal Name or Publisher Details for a book incl volume, edition, etc
-
-This model is also followed by the GBIF bibliography extension for checklists which uses the corresponding Dublin Core terms:
-
- - dc:creator
- - dc:date
- - dc:title
- - dc:source
- - dc:identifier
- 
-In order to find DOIs and BHL pages it is useful to know the metadata in a better structured way, especially having a handle on the journals and books. Using a more structured metadata standard one can also format a citation to various styles as needed, including using an abbreviated and full form for the title or journal.
-
-### CSL JSON / Citeproc-js
-There are various standards existing so sharing becomes simpler and with tools ready to be used. Specifically for JSON Rod Page put together a nice [overview](https://github.com/rdmpage/bibliographic-metadata-json).
-
-After [consultations](https://github.com/Sp2000/colplus/issues/23) we have settled on the [CSL JSON](http://citeproc-js.readthedocs.io/en/latest/csl-json/markup.html) standard used by citeproc-js and [CrossRef](https://github.com/CrossRef/rest-api-doc/blob/master/api_format.md) to represent reference metadata. Further CSL resources:
-
- - A mapping from [Zotero to CSL](https://aurimasv.github.io/z2csl/typeMap.xml)
-
-There is the need to parse citations from various source formats into CSL JSON (at least single citation and the ACEF/DC style above). We are exploring the [anystyle parser](https://anystyle.io/) for this which can be taught domain specific styles like abbreviated botanical citations.
-
-
-
-
-
-
 # Examples
 
  - Recombinations are considered different names:
@@ -373,41 +340,10 @@ Name:
   "type": "scientific",
   "parsed": true,
   "published_in_key": 6,
-  "published_in_page": "",
+  "published_in_page": ""
 }
 ```
 
-Reference:
-
-```json
-{
-  "key": 6,
-  "datasetKey": 5,
-  "verbatimKey": 32572,
-  "citation": "Gard. Dict. Abr., ed. 4. (1754)",
-  "doi": "https://doi.org/10.5962/bhl.title.79061",
-  "year": 1754,
-  "csl": {
-    "type": "book",
-    "author": Array[2][
-      {
-        "family": "Miller",
-        "given": "Philip"
-      }
-    ],
-    "issued": {
-      "date-parts": Array[1][
-        Array[1][
-          1754
-        ]
-      ]
-    },
-    "edition": "4",
-    "title": "The gardeners dictionary : containing the methods of cultivating and improving all sorts of trees, plants, and flowers, for the kitchen, fruit, and pleasure gardens, as also those which are used in medicine : with directions for the culture of vineyards, and making of wine in England ..."
-  },
-  "parsed": true
-}
-```
 
 ## Order Orthoptera
 ```json
