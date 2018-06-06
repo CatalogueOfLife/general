@@ -1,7 +1,10 @@
-# Nomenclature / Names Index
+	 
+# Nomenclature & Names Index
 The Clearinghouse separates taxonomy from names and nomenclature.
 Names are not restricted to available names, but the names index should
-also cover for example naked names that might appear in literature or on specimen labels somewhere. CoL+ has decided to base its model on the work done by TDWG with Darwin Core and the Taxon Concept Schema (TCS) which is in use by many nomenclators already, e.g. IPNI. You can also explore the Postgres [database schema](dbschema.png).
+also cover for example naked names that might appear in literature or on specimen labels somewhere. CoL+ has decided to base its model on the work done by TDWG with [Darwin Core](https://github.com/tdwg/dwc) and the Taxon Concept Schema ([TCS](https://github.com/tdwg/tcs)) which is in use by many nomenclators already, e.g. IPNI. You can also explore the Postgres [database schema](dbschema.png).
+
+TDWG's [Taxon Concept Schema guide](http://www.tdwg.org/fileadmin/_migrated/content_uploads/UserGuidev_1.3.pdf) provides great examples which we repeat here as CoL+ JSON to illustrate various use cases. It is well worth reading.
 
 The driving use cases dealing with nomenclature are:
 
@@ -9,10 +12,12 @@ The driving use cases dealing with nomenclature are:
  - what is the correct spelling?
  - is a name "available" and can it be used for a taxon? 
  - what are the reasons for being unavailable?
- - where was the name originally published? Ideally with a direct link to the publication
+ - where was the name originally published? Where do I find the publication on the internet?
  - what is the homotypic synonymy of a name?
  - which nomenclatural code does a name follow?
  
+
+
 ## Name types
 When dealing with real data one has to work with a wide variety of name strings. These *scientific names*, excluding vernacular names, often do not follow simple latin binomials which can be represented in a parsed form. They can also contain nomenclatural (e.g. *nom.illeg.*), taxonomic (e.g. *s.str.*) or informal (e.g. *cf.*) notes. To work with a wide variety of names we coarsely classify them based on their syntactic nature:
 
@@ -63,6 +68,47 @@ The name class holds parsed names and is free of taxonomic judgements. A name co
  - **remarks**: Any informal note about the nomenclature of the name
  
 Please see our [API docs](https://sp2000.github.io/colplus/api/api.html#model-Name) for more details.
+
+
+
+## Homotypic synonymy
+Names based on the same type can be clustered together as a homotypic group of names.
+A homotypic group not only includes all subsequent recombinations, but also any [replacement name](https://en.wikipedia.org/wiki/Nomen_novum) or emendation if existing. These names are homotypic synonyms, also called nomenclatural or objective synonyms.
+
+In theory one can establish such a group by linking all names back to the first published name known as the protonym in zoology and basionym in botany (strictly a basionym only exists once a name was newly combined while the protonym definition covers a lone newly described name already. We prefer to use the older and well known term basionym in CoL). But in reality the basionym is often not known while it is known that a collection of names are homotypic. The Clearinghouse datastore therefore picks a random name from the set of homotypic names and uses its key on all such names in the property `homotypicNameKey`.
+
+The following names can be clustered into three sets of homotypic groups, shown with canonical authorship:
+
+```
+ 1. Aus bus Linnaeus 1758
+    - Aus ba Linnaeus 1758 [orthographic variant]
+    - Xus bus (Linnaeus 1758) Smith 1850 [alternate combination] 
+    
+ 2. Xus cus Smith 1850
+    - Xus bus subsp. cus Smith 1850 [alternate rank]
+    
+ 3. Xus cus Jones 1900 (later, heterotypic homonym of Xus cus Smith 1850)
+    - Xus dus Pyle 2000 [replacement name for Xus cus Jones]
+```
+
+See the homotypic group example below for the JSON representation.
+
+
+## Rank
+There is the need to deal with ranks in a consistent manner. Old ranks not accepted anymore also need to be covered as they appear in synonyms oat least.
+The [list of known ranks](https://github.com/gbif/name-parser/blob/master/name-parser-api/src/main/java/org/gbif/nameparser/api/Rank.java) is intended to be interoperable between name providers for bacteria, viruses, fungi, plants, and animals. 
+It is not assumed that in each taxonomic group all ranks have to be used. 
+The enumeration attempts to strike a balance between listing all possible rank terms, and remaining comprehensible. 
+Not included in the list are the botanical "notho-" ranks, which are used to designate hybrids (nothospecies, nothogenus) as this information is handled by the Name.notho property already. If needed the list can obviously be extended to cover missing ranks.
+
+Sources consulted:
+
+ - [GBIF](https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/Rank.java)
+ - [TCS](https://github.com/tdwg/tcs/blob/master/TCS101/v101.xsd#L860) 
+ - [TaxCat2](http://mansfeld.ipk-gatersleben.de/apex/f?p=185:78:::NO::P77_TAXCAT,P77_DB_CHECKBOX1,77_TAXCAT2RAD,77_SHOWRAD:%25,,0,s_All) 
+ - [EDIT CDM](https://dev.e-taxonomy.eu/gitweb/cdmlib.git/blob/HEAD:/cdmlib-model/src/main/java/eu/etaxonomy/cdm/model/name/Rank.java)
+
+
 
 ## Name relations
 CoL follows the TCS name relations and distinguishes between the following. 
@@ -184,16 +230,80 @@ A scientific name should have been published in literature according to the code
 
 The names index is meant to keep track of all distinct names that syntactically appear to be published scientific names. It offers a matching API that can be used to lookup up names and an editorial API to manage its content.
 
-Every dataset (e.g. GSD) imported into the Clearinghouse is isolated from others and does not share any name instances with other datasets. Thus the *same* name may exist various times in the Clearinghouse, but they should all be linked to the same name in the Names Index.
+Every dataset (e.g. GSD) imported into the Clearinghouse is isolated from others and does not share any name instances with other datasets. Thus the *same* name, potentially in a different exact string, may exist various times in the Clearinghouse, but they should all be linked to the same name in the Names Index.
 
 A name is considered the same when it's canonical form (rank, genus, specific & infraspecific epithet), the authorship and the place of original publication are the *same*. Authorship and publication equality are rather difficult to determine, as the exact spelling for the same authorteam or publication often varies considerably. 
+
+Lexical variations exist for various reasons. Author spelling, transliterations, epithet gender, additional infrageneric or infraspecific indications, cited species authors in infraspecific names are common reasons. Listed here are 7 distinct names with some of their string representations:
+
+```
+ 1. Aus bus Linnaeus 1758
+    - Aus bus Linn. 1758
+    - Aus bus Linn 1758
+    - Aus bus L.
+    - Aus ba Linn 1758.
+    - Aus (Hus) bus L.
+    
+ 2. Xus bus (Linn, 1758) 
+    - Xus bus (Linn) Smith 
+    
+ 3. Xus cus Smith, 1850
+    - Xus cus Sm.
+    
+ 4. Xus cus Jones 1900
+ 
+ 5. Xus bus cus Smith 1850
+    - Xus bus subsp. cus Smith 1850
+    
+ 6. Xus dus Pyle 2000
+ 
+ 7. Foo bar var. lion Smith 1850
+    - Foo bar L. var. lion Smith
+    - Foo bar subsp. dar var. lion Smith 1850
+    - Foo bar Lin. subsp. dar Mill. var. lion Smith 1850
+```
+
+New names (**sp./gen. nov.**), new recombinations of the same epithet (**comb. nov.**), a name at a new rank (**stat. nov.**) 
+or replacement names (**nom. nov.**) are all treated as distinct names. 
 
 To avoid all spelling mistakes found on labels and in databases to enter the names index a very limited *fuzzy* matching is also allowed on the canonical name itself. This is largely restricted to gender stemming of the terminal epithet and very frequently swapped characters such as `i/y` or the addition/removal of an `h` after `t` or `g`.
 
 
 
+## Literature citations
+Modelling and maintaining literature data can become a major burden. 
+Currently the Catalogue of Life is using a simplistic model useful when aggregating but not actively managing literature:
+
+  - authors: Complete author string
+  - year: Year(s) of publication
+  - title: Title of the paper or book
+  - source: Journal Name or Publisher Details for a book incl volume, edition, etc
+
+This model is also followed by the GBIF bibliography extension for checklists which uses the corresponding Dublin Core terms:
+
+ - dc:creator
+ - dc:date
+ - dc:title
+ - dc:source
+ - dc:identifier
+ 
+In order to find DOIs and BHL pages it is useful to know the metadata in a better structured way, especially having a handle on the journals and books. Using a more structured metadata standard one can also format a citation to various styles as needed, including using an abbreviated and full form for the title or journal.
+
+### CSL JSON / Citeproc-js
+There are various standards existing so sharing becomes simpler and with tools ready to be used. Specifically for JSON Rod Page put together a nice [overview](https://github.com/rdmpage/bibliographic-metadata-json).
+
+After [consultations](https://github.com/Sp2000/colplus/issues/23) we have settled on the [CSL JSON](http://citeproc-js.readthedocs.io/en/latest/csl-json/markup.html) standard used by citeproc-js and [CrossRef](https://github.com/CrossRef/rest-api-doc/blob/master/api_format.md) to represent reference metadata. Further CSL resources:
+
+ - A mapping from [Zotero to CSL](https://aurimasv.github.io/z2csl/typeMap.xml)
+
+There is the need to parse citations from various source formats into CSL JSON (at least single citation and the ACEF/DC style above). We are exploring the [anystyle parser](https://anystyle.io/) for this which can be taught domain specific styles like abbreviated botanical citations.
+
+
+
+
+
+
 # Examples
-TDWG's [Taxon Concept Schema guide](http://www.tdwg.org/fileadmin/_migrated/content_uploads/UserGuidev_1.3.pdf) provides great examples illustrating the different relations above. Many examples covered here are taken from the TCS guide and show how they would look in the CoL+ API.
 
  - Recombinations are considered different names:
 	 - 	```Arethusa divaricata L.```
@@ -216,19 +326,109 @@ TDWG's [Taxon Concept Schema guide](http://www.tdwg.org/fileadmin/_migrated/cont
 
 
 
+## Virus xyz
+## Hybrid Forumula xyz
+## Placeholder Asteraceae Incertae sedis
+## Species Abies alba Mill.
+```json
+{
+  "key": 1234,
+  "id": "urn:lsid:Orthoptera.speciesfile.org:TaxonName:1",
+  "datasetKey": 1045,
+  "verbatimKey": 2190,
+  "homotypicNameKey": 1234,
+  "scientificName": "Orthoptera",
+  "rank": "order",
+  "uninomial": "Orthoptera",
+  "candidatus": false,
+  "code": "zoological",
+  "origin": "source",
+  "type": "scientific",
+  "parsed": true
+}
+```
+
 ## genus Abies
 
-__single taxon core__:
-By using dwc:namePublishedInID and related terms in the taxon core one can express information about where the name was published.
-namePublishedInID can refer to a structured reference in the reference file or the full citation can be given as namePublishedIn.
+Name:
 
-```
-taxon.csv
-taxonID;scientificName;scientificNameAuthorship;taxonRank;namePublishedInID;namePublishedIn
-325655-2;Abies;Mill.;genus;8134-2;Gard. Dict. Abr., ed. 4. (1754).
+```json
+{
+  "key": 1234,
+  "datasetKey": 5,
+  "verbatimKey": 2190,
+  "homotypicNameKey": 1234,
+  "scientificName": "Abies",
+  "authorship": "Mill."
+  "rank": "genus",
+  "uninomial": "Abies",
+  "candidatus": false,
+  "combinationAuthorship": {
+    "authors": Array[1][
+      "Mill."
+    ]
+  },
+  "code": "botanical",
+  "origin": "source",
+  "type": "scientific",
+  "parsed": true,
+  "published_in_key": 6,
+  "published_in_page": "",
+}
 ```
 
-## New combination
+Reference:
+
+```json
+{
+  "key": 6,
+  "datasetKey": 5,
+  "verbatimKey": 32572,
+  "citation": "Gard. Dict. Abr., ed. 4. (1754)",
+  "doi": "https://doi.org/10.5962/bhl.title.79061",
+  "year": 1754,
+  "csl": {
+    "type": "book",
+    "author": Array[2][
+      {
+        "family": "Miller",
+        "given": "Philip"
+      }
+    ],
+    "issued": {
+      "date-parts": Array[1][
+        Array[1][
+          1754
+        ]
+      ]
+    },
+    "edition": "4",
+    "title": "The gardeners dictionary : containing the methods of cultivating and improving all sorts of trees, plants, and flowers, for the kitchen, fruit, and pleasure gardens, as also those which are used in medicine : with directions for the culture of vineyards, and making of wine in England ..."
+  },
+  "parsed": true
+}
+```
+
+## Order Orthoptera
+```json
+{
+  "key": 1234,
+  "id": "urn:lsid:Orthoptera.speciesfile.org:TaxonName:1",
+  "datasetKey": 1045,
+  "verbatimKey": 2190,
+  "homotypicNameKey": 1234,
+  "scientificName": "Orthoptera",
+  "rank": "order",
+  "uninomial": "Orthoptera",
+  "candidatus": false,
+  "code": "zoological",
+  "origin": "source",
+  "type": "scientific",
+  "parsed": true
+}
+```
+
+## New combination Cleistes divaricata
 
 	 - 	```Arethusa divaricata L.```
 	 - 	```Cleistes divaricata (L.) Ames```
@@ -247,35 +447,13 @@ taxonID;scientificName;scientificNameAuthorship;taxonRank;namePublishedInID;name
 </TaxonNames>
 ```
 
-__single taxon core__:
-By using dwc:originalNameUsageID in the taxon core one can express the basionym relation of a name.
-```
-taxon.csv
-taxonID;scientificName;scientificNameAuthorship;originalNameUsageID
-325;Fallopia dumetorum;(L.) J. Holub;326
-326;Polygonum dumetorum;L.;
-```
 
-__taxon core & acts__:
-_taxon.csv_
-```
-taxonID;scientificName;scientificNameAuthorship
-325;Fallopia dumetorum;(L.) J. Holub
-326;Polygonum dumetorum;L.
-```
-
-_acts.csv_
-```
-taxonID;actType;relatedTaxonID
-325;publication;326
-```
-
-
-
-## Correction
+## Correction Gossypium tomentosum
 Correction of an invalid/unavailable name in a subsequent publication.
+In its simplest form this can be expressed by citing an ex author in the scientific name authorship.
 
 ```
+nom.inval.
 <TaxonNames>
   <TaxonName id="123" nomenclaturalCode="Botanical">
     <Simple>Gossypium tomentosum Nutt. ex Seem.</Simple>
@@ -299,36 +477,28 @@ Correction of an invalid/unavailable name in a subsequent publication.
 </TaxonNames>
 ```
 
-In its simplest form this can be expressed by citing an ex author in the scientific name authorship.
-
-__single taxon core__:
-```
-taxon.csv
-taxonID;scientificName;scientificNameAuthorship
-123;Gossypium tomentosum;Nutt. ex Seem.
-```
-
-__taxon core & acts__:
-Explicitly listing the names and relation is preferred as it allows to cite all publications:
-
-_taxon.csv_
-```
-taxonID;scientificName;scientificNameAuthorship;nomenclaturalStatus
-123;Gossypium tomentosum;Nutt. ex Seem.;
-124;Gossypium tomentosum;Nutt. mss.;nom.inval.
-```
-
-_acts.csv_
-```
-taxonID;actType;relatedTaxonID;publishedInID
-123;correction;124;ref1
-```
-_references.csv_
-```
-referenceID;standardForm;author;date;title;volume;collation
+valid publication:
 ref1;Fl. Vit. 22.;Seemann, Berthold Carl;1865;Flora Vitiensis;1;22
-```
 
+
+## emendation
+
+
+```
+<TaxonNames>
+  <TaxonName id="225" nomenclaturalCode="Botanical">
+    <Simple>Persicaria segetum (Kunth) Small (1903)</Simple>
+    <SpellingCorrectionOf>
+      <RuleConsidered>23.5</RuleConsidered>
+      <Note>Correction of epithet gender</Note>
+      <RelatedName ref="226">Persicaria segeta (Kunth) Small (1903)</RelatedName>
+    </SpellingCorrectionOf>
+  </TaxonName>
+  <TaxonName id="226" nomenclaturalCode="Botanical">
+    <Simple>Persicaria segeta (Kunth) Small (1903)</Simple>
+  </TaxonName>
+</TaxonNames>
+```
 
 
 ## homonym
@@ -394,8 +564,6 @@ ref1;Fl. Vit. 22.;Seemann, Berthold Carl;1865;Flora Vitiensis;1;22
 
 
 
-## rejection
-
 
 ## replacement
 
@@ -435,30 +603,8 @@ ref1;Fl. Vit. 22.;Seemann, Berthold Carl;1865;Flora Vitiensis;1;22
 ```
 
 
-# emendation
 
-
-```
-<TaxonNames>
-  <TaxonName id="225" nomenclaturalCode="Botanical">
-    <Simple>Persicaria segetum (Kunth) Small (1903)</Simple>
-    <SpellingCorrectionOf>
-      <RuleConsidered>23.5</RuleConsidered>
-      <Note>Correction of epithet gender</Note>
-      <RelatedName ref="226">Persicaria segeta (Kunth) Small (1903)</RelatedName>
-    </SpellingCorrectionOf>
-  </TaxonName>
-  <TaxonName id="226" nomenclaturalCode="Botanical">
-    <Simple>Persicaria segeta (Kunth) Small (1903)</Simple>
-  </TaxonName>
-</TaxonNames>
-```
-
-
-
-
-# Other examples
-## sanctioned names
+## Sanctioned name
 
 ```
 <TaxonNames>
@@ -488,4 +634,54 @@ ref1;Fl. Vit. 22.;Seemann, Berthold Carl;1865;Flora Vitiensis;1;22
     <Simple>Agaricus peronatus With.</Simple>
   </TaxonName>
 </TaxonNames>
+```
+
+
+## Homotypic group Aus bus
+
+```json
+[{
+  "key": 1000,
+  "homotypicNameKey": 1000,
+  "scientificName": "Aus bus",
+  "authorship": "Linnaeus 1758",
+  "rank": "species"
+},{
+  "key": 1001,
+  "homotypicNameKey": 1000,
+  "scientificName": "Aus ba",
+  "authorship": "Linnaeus 1758",
+  "status": "variant"  
+  "rank": "species"
+},{
+  "key": 1002,
+  "homotypicNameKey": 1000,
+  "scientificName": "Xus bus",
+  "authorship": "(Linnaeus 1758) Smith 1850",
+  "rank": "species"
+},{
+  "key": 1003,
+  "homotypicNameKey": 1003,
+  "scientificName": "Xus cus",
+  "authorship": "Smith 1850",
+  "rank": "species"
+},{
+  "key": 1004,
+  "homotypicNameKey": 1003,
+  "scientificName": "Xus bus subsp. cus",
+  "authorship": "Smith 1850",
+  "rank": "subspecies"
+},{
+  "key": 1005,
+  "homotypicNameKey": 1005,
+  "scientificName": "Xus bus",
+  "authorship": "Jones 1900",
+  "rank": "species"
+},{
+  "key": 1006,
+  "homotypicNameKey": 1005,
+  "scientificName": "Xus dus",
+  "authorship": "Pyle 1900",
+  "rank": "species"
+}]
 ```
