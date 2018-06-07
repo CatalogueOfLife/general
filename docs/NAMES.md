@@ -281,6 +281,8 @@ To avoid all spelling mistakes found on labels and in databases to enter the nam
 # Examples
 TDWG's [Taxon Concept Schema guide](http://www.tdwg.org/fileadmin/_migrated/content_uploads/UserGuidev_1.3.pdf) provides great examples which we exploited here as CoL+ JSON to illustrate various use cases. The guide is well worth reading on its own.
 
+After the first few examples we will start omitting parsed fields of the name instance to concentrate on the important parts. If it says parsed=true at the bottom of an object please imagine the missing fields would be present.
+
 
 ## Species Pinus abies var. leioclada Steven ex Endl.
 ```json
@@ -296,10 +298,10 @@ TDWG's [Taxon Concept Schema guide](http://www.tdwg.org/fileadmin/_migrated/cont
   "specificEpithet": "abies",
   "infraspecificEpithet": "leioclada",
   "combinationAuthorship": {
-    "authors": Array[1][
+    "authors": [
       "Endl."
     ],
-    "exAuthors": Array[1][
+    "exAuthors": [
       "Steven"
     ]
   },
@@ -321,7 +323,7 @@ TDWG's [Taxon Concept Schema guide](http://www.tdwg.org/fileadmin/_migrated/cont
   "uninomial": "Abies",
   "candidatus": false,
   "combinationAuthorship": {
-    "authors": Array[1][
+    "authors": [
       "Mill."
     ]
   },
@@ -360,12 +362,12 @@ TDWG's [Taxon Concept Schema guide](http://www.tdwg.org/fileadmin/_migrated/cont
   "genus": "Carex",
   "specificEpithet": "subviridula",
   "basionymAuthorship": {
-    "authors": Array[1][
+    "authors": [
       "Kükenthal"
     ]
   },
   "combinationAuthorship": {
-    "authors": Array[1][
+    "authors": [
       "Fernald"
     ]
   },
@@ -429,7 +431,7 @@ The JSON shows both names and their relation object.
   "genus": "Polygonum",
   "specificEpithet": "dumetorum",
   "combinationAuthorship": {
-    "authors": Array[1][
+    "authors": [
       "L."
     ]
   },
@@ -446,12 +448,12 @@ The JSON shows both names and their relation object.
   "genus": "Fallopia",
   "specificEpithet": "dumetorum",
   "basionymAuthorship": {
-    "authors": Array[1][
+    "authors": [
       "L."
     ]
   },
   "combinationAuthorship": {
-    "authors": Array[1][
+    "authors": [
       "J.Holub"
     ]
   },
@@ -479,12 +481,12 @@ Correction homonyms are represented as two separate names. The validating name s
   "key": 124,
   "homotypicNameKey": 124,
   "scientificName": "Gossypium tomentosum",
-  "authorship": "Nutt."
+  "authorship": "Nutt.",
   "rank": "species",
   "genus": "Gossypium",
   "specificEpithet": "tomentosum",
   "combinationAuthorship": {
-    "authors": Array[1][
+    "authors": [
       "Nutt."
     ]
   },
@@ -497,15 +499,15 @@ Correction homonyms are represented as two separate names. The validating name s
   "key": 123,
   "homotypicNameKey": 124,
   "scientificName": "Gossypium tomentosum",
-  "authorship": "Nutt. ex Seem."
+  "authorship": "Nutt. ex Seem.",
   "rank": "species",
   "genus": "Gossypium",
   "specificEpithet": "tomentosum",
   "combinationAuthorship": {
-    "authors": Array[1][
+    "authors": [
       "Seem."
     ],
-    "exAuthors": Array[1][
+    "exAuthors": [
       "Nutt."
     ]
   },
@@ -530,15 +532,13 @@ Sometimes names are misspelled. By misspelling here we mean orthographic and typ
 {
   "key": 225,
   "scientificName": "Persicaria segetum",
-  "authorship": "(Kunth) Small (1903)"
-   ...
+  "authorship": "(Kunth) Small (1903)",
   "parsed": true
 },
 {
   "key": 226,
   "scientificName": "Persicaria segeta",
-  "authorship": "(Kunth) Small (1903)"
-   ...
+  "authorship": "(Kunth) Small (1903)",
   "parsed": true
 },
 {
@@ -564,28 +564,25 @@ Names 1 and 3 relate to the same taxon from Bhutan and represent double publicat
   "key": 123,
   "homotypicNameKey": 123,
   "scientificName": "Pedicularis inconspicua",
-  "authorship": "P.C. Tsoong"
+  "authorship": "P.C. Tsoong",
   "publishedInKey": 26,
-   ...
   "parsed": true
 },
 {
   "key": 124,
   "homotypicNameKey": 124,
   "scientificName": "Pedicularis inconspicua",
-  "authorship": "Vved."
+  "authorship": "Vved.",
   "publishedInKey": 27,
-   ...
   "parsed": true
 },
 {
   "key": 125,
   "homotypicNameKey": 123,
   "scientificName": "Pedicularis inconspicua",
-  "authorship": "P.C. Tsoong"
+  "authorship": "P.C. Tsoong",
   "status": "illegitimate",
   "publishedInKey": 28,
-   ...
   "parsed": true
 },
 
@@ -593,12 +590,12 @@ Names 1 and 3 relate to the same taxon from Bhutan and represent double publicat
 {
   "type": "later homonym",
   "nameKey": 124,
-  "relatedNameKey": 123,
+  "relatedNameKey": 123
 },
 {
   "type": "later homonym",
   "nameKey": 125,
-  "relatedNameKey": 123,
+  "relatedNameKey": 123
 }
 ```
 
@@ -616,28 +613,25 @@ The combination made by C.F. Reed is a later homonym and so invalid.
   "key": 123,
   "homotypicNameKey": 123,
   "scientificName": "Trillium texanum",
-  "authorship": "Buckley"
+  "authorship": "Buckley",
   "publishedInKey": 100,
-   ...
   "parsed": true
 },
 {
   "key": 124,
   "homotypicNameKey": 123,
   "scientificName": "Trillium pusillum var. texanum",
-  "authorship": "(Buckley) J.L.Reveal & C.R.Broome"
+  "authorship": "(Buckley) J.L.Reveal & C.R.Broome",
   "publishedInKey": 101,
-   ...
   "parsed": true
 },
 {
   "key": 125,
   "homotypicNameKey": 123,
   "scientificName": "Trillium pusillum var. texanum",
-  "authorship": "(Buckley) C.F.Reed"
+  "authorship": "(Buckley) C.F.Reed",
   "status": "illegitimate",
   "publishedInKey": 102,
-   ...
   "parsed": true
 },
 
@@ -645,17 +639,17 @@ The combination made by C.F. Reed is a later homonym and so invalid.
 {
   "type": "later homonym",
   "nameKey": 125,
-  "relatedNameKey": 124,
+  "relatedNameKey": 124
 },
 {
   "type": "basionym",
   "nameKey": 125,
-  "relatedNameKey": 123,
+  "relatedNameKey": 123
 },
 {
   "type": "basionym",
   "nameKey": 124,
-  "relatedNameKey": 123,
+  "relatedNameKey": 123
 }
 ```
 
@@ -672,29 +666,26 @@ A nomen novum should have a `ReplacementName` relation to the illegitimate homon
   "key": 123,
   "homotypicNameKey": 123,
   "scientificName": "Myrcia lucida",
-  "authorship": "McVaugh"
+  "authorship": "McVaugh",
   "publishedInKey": 1969,
-   ...
   "parsed": true
 },
 {
   "key": 124,
   "homotypicNameKey": 123,
   "scientificName": "Myrcia laevis",
-  "authorship": "O.Berg"
+  "authorship": "O.Berg",
   "publishedInKey": 1862,
   "status": "illegitimate",
-   ...
   "parsed": true
 },
 {
   "key": 125,
   "homotypicNameKey": 125,
   "scientificName": "Myrcia laevis",
-  "authorship": "G.Don"
+  "authorship": "G.Don",
   "status": "illegitimate",
   "publishedInKey": 1832,
-   ...
   "parsed": true
 },
 
@@ -702,12 +693,12 @@ A nomen novum should have a `ReplacementName` relation to the illegitimate homon
 {
   "type": "later homonym",
   "nameKey": 124,
-  "relatedNameKey": 125,
+  "relatedNameKey": 125
 },
 {
   "type": "replacement",
   "nameKey": 123,
-  "relatedNameKey": 124,
+  "relatedNameKey": 124
 }
 ```
  
@@ -724,49 +715,45 @@ A sanctioned name may be conserved against more than one other names and so may 
   "key": 123,
   "homotypicNameKey": 123,
   "scientificName": "Agaricus personatus",
-  "authorship": "Bolton : Fr"
-   ...
+  "authorship": "Bolton : Fr",
   "parsed": true
 },
 {
   "key": 124,
   "homotypicNameKey": 124,
   "scientificName": "Agaricus personatus",
-  "authorship": "Valenti"
-   ...
+  "authorship": "Valenti",
   "parsed": true
 },
 {
   "key": 125,
   "homotypicNameKey": 125,
   "scientificName": "Agaricus personatus",
-  "authorship": "Lasch"
-   ...
+  "authorship": "Lasch",
   "parsed": true
 },
 {
   "key": 126,
   "homotypicNameKey": 126,
   "scientificName": "Agaricus personatus",
-  "authorship": "With."
-   ...
+  "authorship": "With.",
   "parsed": true
 },
 
 {
   "type": "conserved",
   "nameKey": 123,
-  "relatedNameKey": 124,
+  "relatedNameKey": 124
 },
 {
   "type": "conserved",
   "nameKey": 123,
-  "relatedNameKey": 125,
+  "relatedNameKey": 125
 },
 {
   "type": "conserved",
   "nameKey": 123,
-  "relatedNameKey": 126,
+  "relatedNameKey": 126
 }
 ```
 
