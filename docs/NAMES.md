@@ -4,8 +4,6 @@ The Clearinghouse separates taxonomy from names and nomenclature.
 Names are not restricted to available names, but the names index should
 also cover for example naked names that might appear in literature or on specimen labels somewhere. CoL+ has decided to base its model on the work done by TDWG with [Darwin Core](https://github.com/tdwg/dwc) and the Taxon Concept Schema ([TCS](https://github.com/tdwg/tcs)) which is in use by many nomenclators already, e.g. IPNI. You can also explore the Postgres [database schema](dbschema.png).
 
-TDWG's [Taxon Concept Schema guide](http://www.tdwg.org/fileadmin/_migrated/content_uploads/UserGuidev_1.3.pdf) provides great examples which we repeat here as CoL+ JSON to illustrate various use cases. It is well worth reading.
-
 The driving use cases dealing with nomenclature are:
 
  - is a given string a name at all?
@@ -34,39 +32,47 @@ Only scientific and informal names are represented as parsed name instances. All
 ## Name class
 The name class holds parsed names and is free of taxonomic judgements. A name comes with the following attributes (```+``` required for all names, ```#``` only on parsed names):
 
- - **key** ```+```: Primary, internal surrogate key of the name as provided by the dataset store.       
- - **id**: identifier for the name as given by the dataset  Only guaranteed to be unique within a dataset and can follow any kind of schema.
- - **datasetKey** ```+```: Key to dataset instance. Defines context of the name id.
- - **verbatimKey**: key to the verbatim record as it came from the source
- - **homotypicNameKey** ```+```: Groups all homotypic names by referring to a single representative name of that group.
+ - ```key```**+** Primary, internal surrogate key of the name as provided by the dataset store.       
+ - ```id``` identifier for the name as given by the dataset  Only guaranteed to be unique within a dataset and can follow any kind of schema.
+ - ```datasetKey```**+**  Key to dataset instance. Defines context of the name id.
+ - ```verbatimKey``` key to the verbatim record as it came from the source
+ - ```homotypicNameKey``` **+** Groups all homotypic names by referring to a single representative name of that group.
     This representative name is not guaranteed to be semantically meaningful, but if known it will often be the basionym.
- - **scientificName** ```+```: Entire canonical name string with a rank marker for infragenerics and infraspecfics, but
+ - ```scientificName``` **+** Entire canonical name string with a rank marker for infragenerics and infraspecfics, but
     excluding the authorship. For uninomials, e.g. families or names at higher ranks, this is just
     the uninomial.
- - **rank** ```+```: Rank of the name from an extensive, ordered enumeration
- - **type** ```+```: The kind of name classified in broad catagories based on their syntactical structure
- - **code**: the nomenclatural code that governs the name
- - **uninomial** ```#```: Represents the monomial for genus, families or names at higher ranks which do not have further epithets.
+ - ```rank``` **+** Rank of the name from an extensive, ordered enumeration
+ - ```type``` **+** The kind of name classified in broad catagories based on their syntactical structure
+ - ```code``` the nomenclatural code that governs the name
+ - ```uninomial```**#** Represents the monomial for genus, families or names at higher ranks which do not have further epithets.
    Not used for binonimals.
- - **genus** ```#```: The genus part of a bi- or trinomial name. Not used for genus names which are represented by the uninomial alone.
- - **infragenericEpithet** ```#```: The infrageneric epithet. Used as the terminal epithet for names at infrageneric ranks and
+ - ```genus```**#** The genus part of a bi- or trinomial name. Not used for genus names which are represented by the uninomial alone.
+ - ```infragenericEpithet```**#** The infrageneric epithet. Used as the terminal epithet for names at infrageneric ranks and
    optionally also for binomials
- - **specificEpithet** ```#```: the specific part of a binomial
- - **infraspecificEpithet** ```#```: the lowest, infraspecific part of a trinomial. 
- - **cultivarEpithet** ```#```: cultivar name
- - **candidatus** ```#```: A boolean flag to indicate a bacterial candidate name. Candidatus is a provisional status for incompletely described procaryotes and such names are usually prefixed with the italic term *Candidatus*.
- - **notho** ```#```: The part of the named hybrid which is considered a hybrid for notho taxa.
- - **combinationAuthorship** ```#```: Authorship instance (see below for class definition) with years of the name, but excluding any basionym authorship. 
+ - ```specificEpithet```**#** the specific part of a binomial
+ - ```infraspecificEpithet```**#** the lowest, infraspecific part of a trinomial. 
+ - ```cultivarEpithet```**#** cultivar name
+ - ```candidatus```**#** A boolean flag to indicate a bacterial candidate name. Candidatus is a provisional status for incompletely described procaryotes and such names are usually prefixed with the italic term *Candidatus*.
+ - ```notho```**#** The part of the named hybrid which is considered a hybrid for notho taxa.
+ - ```combinationAuthorship```**#** Authorship instance (see below for class definition) with years of the name, but excluding any basionym authorship. 
    For binomials the combination authors.
- - **basionymAuthorship** ```#```: Basionym authorship of the name
- - **sanctioningAuthor** ```#```: The sanctioning author for sanctioned fungal names. Fr. or Pers.
- - **status**: nomenclatural status of the name
- - **publishedInKey**: key to the reference the name was originally published in.
- - **publishedInPage**: The page(s) or other detailed location within the publishedIn reference the name was described.
- - **sourceUrl**: link to a webpage showing the name in the original source if available
- - **fossil**: true if the type specimen of the name is a fossil
- - **remarks**: Any informal note about the nomenclature of the name
+ - ```basionymAuthorship```**#** Basionym authorship of the name
+ - ```sanctioningAuthor```**#** The sanctioning author for sanctioned fungal names. Fr. or Pers.
+ - ```status``` nomenclatural status of the name
+ - ```publishedInKey``` key to the reference the name was originally published in.
+ - ```publishedInPage``` The page(s) or other detailed location within the publishedIn reference the name was described.
+ - ```sourceUrl``` link to a webpage showing the name in the original source if available
+ - ```fossil``` true if the type specimen of the name is a fossil
+ - ```remarks``` Any informal note about the nomenclature of the name
  
+### Authorship class
+This class is only used as part of a Name instance and not on its own. It therefore has no keys and is not shared between names.
+
+ - ```year```**#**: The year the combination or basionym was first published, usually the same as the publishedIn reference.
+ - ```authors```**#**: List of authors as strings, excluding ex- authors.
+ - ```exAuthors``` List of ex- authors.
+
+
 Please see our [API docs](https://sp2000.github.io/colplus/api/api.html#model-Name) for more details.
 
 
@@ -111,8 +117,10 @@ Sources consulted:
 
 
 ## Name relations
-CoL follows the TCS name relations and distinguishes between the following. 
-A relation does 'not' come with a reference as the relevant publication is the same as  the publishedIn reference for the name with the exception of the conservation relations. Conserving a botanical or zoological name can only be done by using the official lists of the code, so it is straight forward to look them up.
+CoL follows the TCS name relations and distinguishes between the following type of directed relations. 
+A relation does *not* come with a reference as the relevant publication is the same as  the publishedIn reference for the name with the exception of the conservation relations. Conserving a botanical or zoological name can only be done by using the official lists of the code, so it is straight forward to look them up.
+
+We provide a [Darwin Core Archive extension definition](https://github.com/Sp2000/colplus/blob/master/dwca/name_relation.xml) supporting publishing name relations as part of a DwC Checklist Archive with tools like the [GBIF IPT](https://www.gbif.org/ipt).
 
 
  - ```SPELLING_CORRECTION```: The current name is a spelling correction, called emendation in zoology, of the related name. Intentional changes in the original spelling of an available name, whether justified or unjustified. The binomial authority remains unchanged. Valid emendations include changes made to correct:
@@ -271,59 +279,41 @@ To avoid all spelling mistakes found on labels and in databases to enter the nam
 
 
 # Examples
-
- - Recombinations are considered different names:
-	 - 	```Arethusa divaricata L.```
-	 - 	```Cleistes divaricata (L.) Ames```
- - True Homonyms:
-	 - 	``` ```
-	 - 	``` ```
- - Same genus name published under different codes:
-	 - 	``` ```
-	 - 	``` ```
- - Correction of an invalid/unavailable name in a subsequent publication. 'Correction' homonyms in TCS:
-	 - 	``` ```
-	 - 	``` ```
- - Correction of an invalid/unavailable name in a subsequent publication by the same author in the same year:
-	 - 	``` ```
-	 - 	``` ```
- - Published spelling corrections:
-	 - 	``` ```
-	 - 	``` ```
+TDWG's [Taxon Concept Schema guide](http://www.tdwg.org/fileadmin/_migrated/content_uploads/UserGuidev_1.3.pdf) provides great examples which we exploited here as CoL+ JSON to illustrate various use cases. The guide is well worth reading on its own.
 
 
-
-## Virus xyz
-## Hybrid Forumula xyz
-## Placeholder Asteraceae Incertae sedis
-## Species Abies alba Mill.
+## Species Pinus abies var. leioclada Steven ex Endl.
 ```json
 {
   "key": 1234,
-  "id": "urn:lsid:Orthoptera.speciesfile.org:TaxonName:1",
   "datasetKey": 1045,
   "verbatimKey": 2190,
   "homotypicNameKey": 1234,
-  "scientificName": "Orthoptera",
-  "rank": "order",
-  "uninomial": "Orthoptera",
-  "candidatus": false,
-  "code": "zoological",
+  "scientificName": "Pinus abies var. leioclada",
+  "authorship": "Steven ex Endl."
+  "rank": "variety",
+  "genus": "Pinus",
+  "specificEpithet": "abies",
+  "infraspecificEpithet": "leioclada",
+  "combinationAuthorship": {
+    "authors": Array[1][
+      "Endl."
+    ],
+    "exAuthors": Array[1][
+      "Steven"
+    ]
+  },
+  "code": "botanical",
   "origin": "source",
   "type": "scientific",
   "parsed": true
 }
 ```
 
-## genus Abies
-
-Name:
-
+## Genus Abies
 ```json
 {
   "key": 1234,
-  "datasetKey": 5,
-  "verbatimKey": 2190,
   "homotypicNameKey": 1234,
   "scientificName": "Abies",
   "authorship": "Mill."
@@ -338,245 +328,453 @@ Name:
   "code": "botanical",
   "origin": "source",
   "type": "scientific",
-  "parsed": true,
-  "published_in_key": 6,
-  "published_in_page": ""
+  "publishedInKey": 6,
+  "publishedInPage": "347",
+  "parsed": true
 }
 ```
 
-
-## Order Orthoptera
+## Virus species Garlic virus B
 ```json
 {
   "key": 1234,
-  "id": "urn:lsid:Orthoptera.speciesfile.org:TaxonName:1",
-  "datasetKey": 1045,
-  "verbatimKey": 2190,
   "homotypicNameKey": 1234,
-  "scientificName": "Orthoptera",
-  "rank": "order",
-  "uninomial": "Orthoptera",
+  "scientificName": "Garlic virus B",
+  "rank": "species",
   "candidatus": false,
-  "code": "zoological",
-  "origin": "source",
+  "code": "virus",
+  "type": "virus",
+  "parsed": false
+}
+```
+
+## Named hybrid 
+```json
+{
+  "key": 1234,
+  "homotypicNameKey": 1234,
+  "scientificName": "Carex ×subviridula",
+  "authorship": "(Kükenthal) Fernald"
+  "rank": "species",
+  "notho": "specific",
+  "genus": "Carex",
+  "specificEpithet": "subviridula",
+  "basionymAuthorship": {
+    "authors": Array[1][
+      "Kükenthal"
+    ]
+  },
+  "combinationAuthorship": {
+    "authors": Array[1][
+      "Fernald"
+    ]
+  },
+  "code": "botanical",
   "type": "scientific",
   "parsed": true
 }
 ```
 
-## New combination Cleistes divaricata
 
-	 - 	```Arethusa divaricata L.```
-	 - 	```Cleistes divaricata (L.) Ames```
-
+## Hybrid Forumula
+```json
+{
+  "key": 1234,
+  "homotypicNameKey": 1234,
+  "scientificName": "Asplenium germanicum x trichomanes C.Chr.",
+  "rank": "species",
+  "code": "botanical",
+  "type": "hybrid formula",
+  "parsed": false
+}
 ```
-<TaxonNames>
-  <TaxonName id="325" nomenclaturalCode="Botanical">
-    <Simple>Fallopia dumetorum (L.) J. Holub</Simple>
-    <Basionym>
-      <RelatedName ref="326"/>
-    </Basionym>
-  </TaxonName>
-  <TaxonName id="326" nomenclaturalCode="Botanical">
-    <Simple>Polygonum dumetorum L.</Simple>
-  </TaxonName>
-</TaxonNames>
+
+## Cultivar Rhododendron x obtusum 'Amoenum'
+```json
+{
+  "key": 1234,
+  "scientificName": "Rhododendron x obtusum 'Amoenum'",
+  "rank": "species",
+  "notho": "specific",
+  "genus": "Rhododendron",
+  "specificEpithet": "obtusum",
+  "cultivarEpithet": "Amoenum",
+  "code": "cultivars",
+  "type": "scientific",
+  "parsed": true
+}
+```
+## Placeholder Asteraceae Incertae sedis
+```json
+{
+  "key": 1234,
+  "scientificName": "Asteraceae Incertae sedis",
+  "rank": "unranked",
+  "type": "placeholder",
+  "parsed": false
+}
+```
+
+## New combination Fallopia dumetorum
+Arethusa divaricata gets placed into a new genus. 
+The JSON shows both names and their relation object.
+
+```json
+{
+  "key": 325,
+  "homotypicNameKey": 325,
+  "scientificName": "Polygonum dumetorum",
+  "authorship": "L."
+  "rank": "species",
+  "genus": "Polygonum",
+  "specificEpithet": "dumetorum",
+  "combinationAuthorship": {
+    "authors": Array[1][
+      "L."
+    ]
+  },
+  "code": "botanical",
+  "type": "scientific",
+  "parsed": true
+},
+{
+  "key": 326,
+  "homotypicNameKey": 325,
+  "scientificName": "Fallopia dumetorum",
+  "authorship": "(L.) J.Holub"
+  "rank": "species",
+  "genus": "Fallopia",
+  "specificEpithet": "dumetorum",
+  "basionymAuthorship": {
+    "authors": Array[1][
+      "L."
+    ]
+  },
+  "combinationAuthorship": {
+    "authors": Array[1][
+      "J.Holub"
+    ]
+  },
+  "code": "botanical",
+  "type": "scientific",
+  "parsed": true
+},
+{
+  "type": "basionym",
+  "nameKey": 326,
+  "relatedNameKey": 325
+}
 ```
 
 
 ## Correction Gossypium tomentosum
 Correction of an invalid/unavailable name in a subsequent publication.
-In its simplest form this can be expressed by citing an ex author in the scientific name authorship.
 
-```
-nom.inval.
-<TaxonNames>
-  <TaxonName id="123" nomenclaturalCode="Botanical">
-    <Simple>Gossypium tomentosum Nutt. ex Seem.</Simple>
-    <CanonicalAuthorship>
-      <Simple>Nutt. ex Seem.</Simple>
-      <Authorship>
-        <Simple>Nutt. ex Seem.</Simple>
-        <Authors>
-          <AgentName role="ex">Nuttall</AgentName>
-          <AgentName>Seem</AgentName>
-        </Authors>
-      </Authorship>
-    </CanonicalAuthorship>
-    <BasedOn>
-      <RelatedName ref="124"/>
-    </BasedOn>
-  </TaxonName>
-  <TaxonName id="124" nomenclaturalCode="Botanical">
-    <Simple>Gossypium tomentosum Nutt.</Simple>
-  </TaxonName>
-</TaxonNames>
-```
+An example from the ICBN Art. 15 - Seemann (1865) published Gossypium tomentosum "Nutt. mss.", followed by a validating description not ascribed to Nuttall; the name may be cited as G. tomentosum Nutt. ex Seem. or G. tomentosum Seem.
 
-valid publication:
-ref1;Fl. Vit. 22.;Seemann, Berthold Carl;1865;Flora Vitiensis;1;22
+Correction homonyms are represented as two separate names. The validating name should have a `basedOn` relation to the incorrectly published name. The validating name should not have a `laterHomonym` relation to the incorrectly published name.
 
+```json
+{
+  "key": 124,
+  "homotypicNameKey": 124,
+  "scientificName": "Gossypium tomentosum",
+  "authorship": "Nutt."
+  "rank": "species",
+  "genus": "Gossypium",
+  "specificEpithet": "tomentosum",
+  "combinationAuthorship": {
+    "authors": Array[1][
+      "Nutt."
+    ]
+  },
+  "code": "botanical",
+  "type": "scientific",
+  "status": "manuscript",
+  "parsed": true
+},
+{
+  "key": 123,
+  "homotypicNameKey": 124,
+  "scientificName": "Gossypium tomentosum",
+  "authorship": "Nutt. ex Seem."
+  "rank": "species",
+  "genus": "Gossypium",
+  "specificEpithet": "tomentosum",
+  "combinationAuthorship": {
+    "authors": Array[1][
+      "Seem."
+    ],
+    "exAuthors": Array[1][
+      "Nutt."
+    ]
+  },
+  "code": "botanical",
+  "type": "scientific",
+  "publishedInKey": 166,
+  "parsed": true
+},
 
-## emendation
-
-
-```
-<TaxonNames>
-  <TaxonName id="225" nomenclaturalCode="Botanical">
-    <Simple>Persicaria segetum (Kunth) Small (1903)</Simple>
-    <SpellingCorrectionOf>
-      <RuleConsidered>23.5</RuleConsidered>
-      <Note>Correction of epithet gender</Note>
-      <RelatedName ref="226">Persicaria segeta (Kunth) Small (1903)</RelatedName>
-    </SpellingCorrectionOf>
-  </TaxonName>
-  <TaxonName id="226" nomenclaturalCode="Botanical">
-    <Simple>Persicaria segeta (Kunth) Small (1903)</Simple>
-  </TaxonName>
-</TaxonNames>
-```
-
-
-## homonym
-### Pedicularis inconspicua
-
-```
-<TaxonNames>
-  <TaxonName id="123" nomenclaturalCode="Botanical">
-    <Simple>Pedicularis inconspicua P.C. Tsoong</Simple>
-    <PublishedIn>Acta Phytotax. Sin. 3: 292 &amp; 323, Jan. 1955</PublishedIn>
-  </TaxonName>
-  <TaxonName id="124" nomenclaturalCode="Botanical">
-    <Simple>Pedicularis inconspicua Vved.</Simple>
-    <PublishedIn>Fl. URSS 22: 811, 18 Jun. 1955.</PublishedIn>
-    <LaterHomonymOf>
-      <RelatedName ref="123"/>
-    </LaterHomonymOf>
-  </TaxonName>
-  <TaxonName id="125" nomenclaturalCode="Botanical">
-    <Simple>Pedicularis inconspicua P.C. Tsoong</Simple>
-    <PublishedIn>Bull. Brit. Mus. (Nat. Hist.) 2:17, Nov. 1955</PublishedIn>
-    <LaterHomonymOf>
-      <RelatedName ref="123"/>
-    </LaterHomonymOf>
-  </TaxonName>
-</TaxonNames>
+{
+  "type": "basedOn",
+  "nameKey": 123,
+  "relatedNameKey": 124
+}
 ```
 
 
+## Emendation Persicaria segeta
+Sometimes names are misspelled. By misspelling here we mean orthographic and typographic variants of all forms including having the wrong gender for an epithet. This can happen for a number of reasons. The original author of a name can spell it incorrectly and the name can then be corrected under the code (e.g. see ICN Article 60 for examples.), authors of revision concepts can make mistakes in interpreting the code or typographical errors can be made. A correctly spelled Name can be related to multiple incorrectly spelled Names.
 
-### Trillium texanum
-
-```
-<TaxonNames>
-  <TaxonName id="123" nomenclaturalCode="Botanical">
-    <Simple>Trillium texanum Buckley</Simple>
-    <PublishedIn>Proc. Acad. Nat. Sci. Philadelphia 1860: 443. 1861</PublishedIn>
-  </TaxonName>
-  <TaxonName id="124" nomenclaturalCode="Botanical">
-    <Simple>Trillium pusillum Michx. var. texanum J.L.Reveal &amp; C.R.Broome</Simple>
-    <PublishedIn>Castanea, 46(1): 56 (1981)</PublishedIn>
-    <Basionym>
-      <RelatedName ref="123"/>
-    </Basionym>
-  </TaxonName>
-  <TaxonName id="125" nomenclaturalCode="Botanical">
-    <Simple>Trillium pusillum Michx. var. texanum (Buckley) C.F.Reed</Simple>
-    <PublishedIn>Phytologia, 50(4): 279, 283 (1982)</PublishedIn>
-    <Basionym>
-      <RelatedName ref="123"/>
-    </Basionym>
-    <LaterHomonymOf>
-      <RelatedName ref="124"/>
-    </LaterHomonymOf>
-  </TaxonName>
-</TaxonNames>
+```json
+{
+  "key": 225,
+  "scientificName": "Persicaria segetum",
+  "authorship": "(Kunth) Small (1903)"
+   ...
+  "parsed": true
+},
+{
+  "key": 226,
+  "scientificName": "Persicaria segeta",
+  "authorship": "(Kunth) Small (1903)"
+   ...
+  "parsed": true
+},
+{
+  "type": "correction",
+  "nameKey": 226,
+  "relatedNameKey": 225,
+  "note": "Correction of epithet gender, rule 23.5"
+}
 ```
 
 
+## Homonym Pedicularis inconspicua
+An example of a publication homonym and a real homonym from botany is
+
+ - Pedicularis inconspicua P.C.Tsoong, ActaPhytotax. Sin. 3: 292 & 323, Jan. 1955
+ - Pedicularis inconspicua Vved., Fl. URSS 22: 811, 18 Jun. 1955.
+ - Pedicularis inconspicua P.C. Tsoong, Bull. Brit. Mus. (Nat. Hist.) 2:17, Nov. 1955.
+
+Names 1 and 3 relate to the same taxon from Bhutan and represent double publication of the same name in Chinese and Western journals. This is one of many such names published in the same two papers by Tsoong; all the names in Acta Phytotax. Sin. have priority over their publication in the British Museum Bulletin. Between the two papers published by Tsoong, the Russian botanist Vvedensky published a real homonym P. inconspicua Vved. for a totally different species from Uzbekistan.
+
+```json
+{
+  "key": 123,
+  "homotypicNameKey": 123,
+  "scientificName": "Pedicularis inconspicua",
+  "authorship": "P.C. Tsoong"
+  "publishedInKey": 26,
+   ...
+  "parsed": true
+},
+{
+  "key": 124,
+  "homotypicNameKey": 124,
+  "scientificName": "Pedicularis inconspicua",
+  "authorship": "Vved."
+  "publishedInKey": 27,
+   ...
+  "parsed": true
+},
+{
+  "key": 125,
+  "homotypicNameKey": 123,
+  "scientificName": "Pedicularis inconspicua",
+  "authorship": "P.C. Tsoong"
+  "status": "illegitimate",
+  "publishedInKey": 28,
+   ...
+  "parsed": true
+},
 
 
-## conservation
-
-
-
-
-## replacement
-
+{
+  "type": "later homonym",
+  "nameKey": 124,
+  "relatedNameKey": 123,
+},
+{
+  "type": "later homonym",
+  "nameKey": 125,
+  "relatedNameKey": 123,
+}
 ```
-<TaxonNames>
-  <TaxonName id="123" nomenclaturalCode="Botanical">
-    <Simple>Myrcia lucida McVaugh (1969)</Simple>
-    <Typification>
-      <TypeVoucher typeOfType="holo">
-        <VoucherReference>Spruce 3502</VoucherReference>
-      </TypeVoucher>
-    </Typification>
-    <ReplacementNameFor>
-      <RelatedName ref="124"/>
-    </ReplacementNameFor>
-  </TaxonName>
-  <TaxonName id="124" nomenclaturalCode="Botanical">
-    <Simple>Myrcia laevis O. Berg (1862)</Simple>
-    <Typification>
-      <TypeVoucher typeOfType="holo">
-        <VoucherReference>Spruce 3502</VoucherReference>
-      </TypeVoucher>
-    </Typification>
-    <LaterHomonymOf>
-      <RelatedName ref="125"/>
-    </LaterHomonymOf>
-  </TaxonName>
-  <TaxonName id="125" nomenclaturalCode="Botanical">
-    <Simple>Myrcia laevis G. Don (1832)</Simple>
-    <Typification>
-      <TypeVoucher typeOfType="holo">
-        <VoucherReference>Some other type</VoucherReference>
-      </TypeVoucher>
-    </Typification>
-  </TaxonName>
-</TaxonNames>
+
+
+## Homonym Trillium texanum
+Sometimes a new combination is made more than once thus creating a homonym. An example is Trillium texanum Buckley which was recombined as a variety of Trillium pusillum twice:
+
+ - Trillium pusillum var. texanum (Buckley) J.L. Reveal & C.R. Broome in Castanea,46(1): 56 (1981)
+ - Trillium pusillum var. texanum (Buckley) C.F.Reed in Phytologia, 50(4): 279, 283 (1982)
+
+The combination made by C.F. Reed is a later homonym and so invalid.
+
+```json
+{
+  "key": 123,
+  "homotypicNameKey": 123,
+  "scientificName": "Trillium texanum",
+  "authorship": "Buckley"
+  "publishedInKey": 100,
+   ...
+  "parsed": true
+},
+{
+  "key": 124,
+  "homotypicNameKey": 123,
+  "scientificName": "Trillium pusillum var. texanum",
+  "authorship": "(Buckley) J.L.Reveal & C.R.Broome"
+  "publishedInKey": 101,
+   ...
+  "parsed": true
+},
+{
+  "key": 125,
+  "homotypicNameKey": 123,
+  "scientificName": "Trillium pusillum var. texanum",
+  "authorship": "(Buckley) C.F.Reed"
+  "status": "illegitimate",
+  "publishedInKey": 102,
+   ...
+  "parsed": true
+},
+
+
+{
+  "type": "later homonym",
+  "nameKey": 125,
+  "relatedNameKey": 124,
+},
+{
+  "type": "basionym",
+  "nameKey": 125,
+  "relatedNameKey": 123,
+},
+{
+  "type": "basionym",
+  "nameKey": 124,
+  "relatedNameKey": 123,
+}
 ```
 
 
 
-## Sanctioned name
+## Nomen Novum Myrcia lucida
+Sometimes authors wish to recognise taxa whose names are homonyms. In such cases both the ICN (Art. 7.3) and the ICZN allow for *nomen novum* or replacement name to be created. The ICZN glossary defines nomen novum as:
 
+> A name established expressly to replace an already established name. A nominal taxon denoted by a new replacement name (nomen novum) has the same name-bearing type as the nominal taxon denoted by the replaced name [Arts. 67.8, 72.7].
+
+A nomen novum should have a `ReplacementName` relation to the illegitimate homonym name it replaces. The illegitimate homonym should have a `LaterHomonym` relation to the legitimate homonym of the name.
+```json
+{
+  "key": 123,
+  "homotypicNameKey": 123,
+  "scientificName": "Myrcia lucida",
+  "authorship": "McVaugh"
+  "publishedInKey": 1969,
+   ...
+  "parsed": true
+},
+{
+  "key": 124,
+  "homotypicNameKey": 123,
+  "scientificName": "Myrcia laevis",
+  "authorship": "O.Berg"
+  "publishedInKey": 1862,
+  "status": "illegitimate",
+   ...
+  "parsed": true
+},
+{
+  "key": 125,
+  "homotypicNameKey": 125,
+  "scientificName": "Myrcia laevis",
+  "authorship": "G.Don"
+  "status": "illegitimate",
+  "publishedInKey": 1832,
+   ...
+  "parsed": true
+},
+
+
+{
+  "type": "later homonym",
+  "nameKey": 124,
+  "relatedNameKey": 125,
+},
+{
+  "type": "replacement",
+  "nameKey": 123,
+  "relatedNameKey": 124,
+}
 ```
-<TaxonNames>
-  <TaxonName id="123" nomenclaturalCode="Botanical">
-    <Simple>Agaricus personatus Bolton : Fr</Simple>
-    <PublishedIn>Hist. fung. Halifax 2: 58 (1788)</PublishedIn>
-    <ConservedAgainst>
-      <RelatedName ref="124"/>
-    </ConservedAgainst>
-    <ConservedAgainst>
-      <RelatedName ref="125"/>
-    </ConservedAgainst>
-    <ConservedAgainst>
-      <RelatedName ref="126"/>
-    </ConservedAgainst>
-    <Sanctioned>
-      <PublishedIn>Syst. mycol. 1: 126 (1821)</PublishedIn>
-    </Sanctioned>
-  </TaxonName>
-  <TaxonName id="124" nomenclaturalCode="Botanical">
-    <Simple>Agaricus peronatus Valenti</Simple>
-  </TaxonName>
-  <TaxonName id="125" nomenclaturalCode="Botanical">
-    <Simple>Agaricus peronatus Lasch</Simple>
-  </TaxonName>
-  <TaxonName id="126" nomenclaturalCode="Botanical">
-    <Simple>Agaricus peronatus With.</Simple>
-  </TaxonName>
-</TaxonNames>
+ 
+
+
+## Sanctioned Agaricus personatus
+The names of fungi presented in certain publications have been sanctioned by ICN (Art. 15). This means that these names are treated as if conserved against earlier homonyms and competing synonyms. The earlier names are not invalid as would be the case if these works had been set as the starting date for fungal nomenclature but are available for use in different combinations. They are also not illegitimate and can be the basionym for a combination
+
+A sanctioned name may be conserved against more than one other names and so may contain more than one `conservered` relation to the other names.
+
+
+```json
+{
+  "key": 123,
+  "homotypicNameKey": 123,
+  "scientificName": "Agaricus personatus",
+  "authorship": "Bolton : Fr"
+   ...
+  "parsed": true
+},
+{
+  "key": 124,
+  "homotypicNameKey": 124,
+  "scientificName": "Agaricus personatus",
+  "authorship": "Valenti"
+   ...
+  "parsed": true
+},
+{
+  "key": 125,
+  "homotypicNameKey": 125,
+  "scientificName": "Agaricus personatus",
+  "authorship": "Lasch"
+   ...
+  "parsed": true
+},
+{
+  "key": 126,
+  "homotypicNameKey": 126,
+  "scientificName": "Agaricus personatus",
+  "authorship": "With."
+   ...
+  "parsed": true
+},
+
+{
+  "type": "conserved",
+  "nameKey": 123,
+  "relatedNameKey": 124,
+},
+{
+  "type": "conserved",
+  "nameKey": 123,
+  "relatedNameKey": 125,
+},
+{
+  "type": "conserved",
+  "nameKey": 123,
+  "relatedNameKey": 126,
+}
 ```
 
 
 ## Homotypic group Aus bus
 
 ```json
-[{
+{
   "key": 1000,
   "homotypicNameKey": 1000,
   "scientificName": "Aus bus",
@@ -619,5 +817,5 @@ ref1;Fl. Vit. 22.;Seemann, Berthold Carl;1865;Flora Vitiensis;1;22
   "scientificName": "Xus dus",
   "authorship": "Pyle 1900",
   "rank": "species"
-}]
+}
 ```
