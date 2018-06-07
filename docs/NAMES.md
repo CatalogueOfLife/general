@@ -285,14 +285,14 @@ After the first few examples we will start omitting parsed fields of the name in
 
 
 ## Species Pinus abies var. leioclada Steven ex Endl.
-```json
+```javascript
 {
   "key": 1234,
   "datasetKey": 1045,
   "verbatimKey": 2190,
   "homotypicNameKey": 1234,
   "scientificName": "Pinus abies var. leioclada",
-  "authorship": "Steven ex Endl."
+  "authorship": "Steven ex Endl.",
   "rank": "variety",
   "genus": "Pinus",
   "specificEpithet": "abies",
@@ -313,12 +313,12 @@ After the first few examples we will start omitting parsed fields of the name in
 ```
 
 ## Genus Abies
-```json
+```javascript
 {
   "key": 1234,
   "homotypicNameKey": 1234,
   "scientificName": "Abies",
-  "authorship": "Mill."
+  "authorship": "Mill.",
   "rank": "genus",
   "uninomial": "Abies",
   "candidatus": false,
@@ -337,7 +337,7 @@ After the first few examples we will start omitting parsed fields of the name in
 ```
 
 ## Virus species Garlic virus B
-```json
+```javascript
 {
   "key": 1234,
   "homotypicNameKey": 1234,
@@ -351,12 +351,12 @@ After the first few examples we will start omitting parsed fields of the name in
 ```
 
 ## Named hybrid 
-```json
+```javascript
 {
   "key": 1234,
   "homotypicNameKey": 1234,
   "scientificName": "Carex ×subviridula",
-  "authorship": "(Kükenthal) Fernald"
+  "authorship": "(Kükenthal) Fernald",
   "rank": "species",
   "notho": "specific",
   "genus": "Carex",
@@ -379,7 +379,7 @@ After the first few examples we will start omitting parsed fields of the name in
 
 
 ## Hybrid Forumula
-```json
+```javascript
 {
   "key": 1234,
   "homotypicNameKey": 1234,
@@ -392,7 +392,7 @@ After the first few examples we will start omitting parsed fields of the name in
 ```
 
 ## Cultivar Rhododendron x obtusum 'Amoenum'
-```json
+```javascript
 {
   "key": 1234,
   "scientificName": "Rhododendron x obtusum 'Amoenum'",
@@ -407,7 +407,7 @@ After the first few examples we will start omitting parsed fields of the name in
 }
 ```
 ## Placeholder Asteraceae Incertae sedis
-```json
+```javascript
 {
   "key": 1234,
   "scientificName": "Asteraceae Incertae sedis",
@@ -421,12 +421,12 @@ After the first few examples we will start omitting parsed fields of the name in
 Arethusa divaricata gets placed into a new genus. 
 The JSON shows both names and their relation object.
 
-```json
+```javascript
 {
   "key": 325,
   "homotypicNameKey": 325,
   "scientificName": "Polygonum dumetorum",
-  "authorship": "L."
+  "authorship": "L.",
   "rank": "species",
   "genus": "Polygonum",
   "specificEpithet": "dumetorum",
@@ -443,7 +443,7 @@ The JSON shows both names and their relation object.
   "key": 326,
   "homotypicNameKey": 325,
   "scientificName": "Fallopia dumetorum",
-  "authorship": "(L.) J.Holub"
+  "authorship": "(L.) J.Holub",
   "rank": "species",
   "genus": "Fallopia",
   "specificEpithet": "dumetorum",
@@ -476,7 +476,7 @@ An example from the ICBN Art. 15 - Seemann (1865) published Gossypium tomentosum
 
 Correction homonyms are represented as two separate names. The validating name should have a `basedOn` relation to the incorrectly published name. The validating name should not have a `laterHomonym` relation to the incorrectly published name.
 
-```json
+```javascript
 {
   "key": 124,
   "homotypicNameKey": 124,
@@ -528,7 +528,7 @@ Correction homonyms are represented as two separate names. The validating name s
 ## Emendation Persicaria segeta
 Sometimes names are misspelled. By misspelling here we mean orthographic and typographic variants of all forms including having the wrong gender for an epithet. This can happen for a number of reasons. The original author of a name can spell it incorrectly and the name can then be corrected under the code (e.g. see ICN Article 60 for examples.), authors of revision concepts can make mistakes in interpreting the code or typographical errors can be made. A correctly spelled Name can be related to multiple incorrectly spelled Names.
 
-```json
+```javascript
 {
   "key": 225,
   "scientificName": "Persicaria segetum",
@@ -559,7 +559,7 @@ An example of a publication homonym and a real homonym from botany is
 
 Names 1 and 3 relate to the same taxon from Bhutan and represent double publication of the same name in Chinese and Western journals. This is one of many such names published in the same two papers by Tsoong; all the names in Acta Phytotax. Sin. have priority over their publication in the British Museum Bulletin. Between the two papers published by Tsoong, the Russian botanist Vvedensky published a real homonym P. inconspicua Vved. for a totally different species from Uzbekistan.
 
-```json
+```javascript
 {
   "key": 123,
   "homotypicNameKey": 123,
@@ -608,7 +608,7 @@ Sometimes a new combination is made more than once thus creating a homonym. An e
 
 The combination made by C.F. Reed is a later homonym and so invalid.
 
-```json
+```javascript
 {
   "key": 123,
   "homotypicNameKey": 123,
@@ -661,7 +661,7 @@ Sometimes authors wish to recognise taxa whose names are homonyms. In such cases
 > A name established expressly to replace an already established name. A nominal taxon denoted by a new replacement name (nomen novum) has the same name-bearing type as the nominal taxon denoted by the replaced name [Arts. 67.8, 72.7].
 
 A nomen novum should have a `ReplacementName` relation to the illegitimate homonym name it replaces. The illegitimate homonym should have a `LaterHomonym` relation to the legitimate homonym of the name.
-```json
+```javascript
 {
   "key": 123,
   "homotypicNameKey": 123,
@@ -710,7 +710,7 @@ The names of fungi presented in certain publications have been sanctioned by ICN
 A sanctioned name may be conserved against more than one other names and so may contain more than one `conservered` relation to the other names.
 
 
-```json
+```javascript
 {
   "key": 123,
   "homotypicNameKey": 123,
@@ -760,7 +760,7 @@ A sanctioned name may be conserved against more than one other names and so may 
 
 ## Homotypic group Aus bus
 
-```json
+```javascript
 {
   "key": 1000,
   "homotypicNameKey": 1000,
@@ -772,7 +772,7 @@ A sanctioned name may be conserved against more than one other names and so may 
   "homotypicNameKey": 1000,
   "scientificName": "Aus ba",
   "authorship": "Linnaeus 1758",
-  "status": "variant"  
+  "status": "variant",
   "rank": "species"
 },{
   "key": 1002,
