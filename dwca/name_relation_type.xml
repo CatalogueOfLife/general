@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/style/human.xsl"?>
+<thesaurus 
+	dc:URI="http://rs.col.plus/vocab/reltype/" 
+	dc:description="" 
+	dc:title="CoL Name Relation Type Vocabulary"
+  dc:issued="2018-06-09"
+  dc:relation="https://github.com/Sp2000/colplus/blob/master/docs/NAMES.md"
+
+	xmlns="http://rs.gbif.org/thesaurus/" xmlns:dc="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://rs.gbif.org/thesaurus/  http://rs.gbif.org/schema/thesaurus.xsd">
+	
+ <concept dc:identifier="SpellingCorrection" 
+	   dc:URI="http://rs.col.plus/vocab/reltype/SpellingCorrection"
+     dc:description="The current name is a spelling correction, called emendation in zoology, of the related name. Intentional changes in the original spelling of an available name, whether justified or unjustified. The binomial authority remains unchanged. Valid emendations include changes made to correct:
+      a) typographical errors in the original work describing the species,
+      b) errors in transliteration from non-Latin languages,
+      c) names that included diacritics, hyphens
+      d) endings of species to match the gender of the generic name, particularly when the combination has been changed.">
+  <preferred>
+     <term dc:source="CoL" dc:title="spelling correction" xml:lang="en"/>
+  </preferred>
+  <alternative>
+     <term dc:source="ICN" dc:title="correction" xml:lang="en"/>
+     <term dc:source="ICZN" dc:title="emendation" xml:lang="en"/>
+  </alternative>
+ </concept>
+
+ <concept dc:identifier="Basionym" 
+     dc:URI="http://rs.col.plus/vocab/reltype/Basionym"
+     dc:description="Has basionym relation pointing back to the basionym. ">
+  <preferred>
+     <term dc:source="CoL" dc:title="basionym" xml:lang="en"/>
+  </preferred>
+  <alternative>
+     <term dc:source="DwC" dc:title="original name" xml:lang="en"/>
+     <term dc:source="ICZN" dc:title="protonym" xml:lang="en"/>
+  </alternative>
+ </concept>
+
+  <concept dc:identifier="BasedOn" 
+     dc:URI="http://rs.col.plus/vocab/reltype/BasedOn"
+     dc:description="The current name is the validation of a name that was not fully published before.
+        Covers the use of ex in botanical author strings (ICN Art. 46.4).
+        E.g. if this name object represents G. tomentosum Nutt. ex Seem. then the related name should be G. tomentosum Nutt.">
+  <preferred>
+     <term dc:source="CoL" dc:title="based on" xml:lang="en"/>
+  </preferred>
+  <alternative>
+  </alternative>
+ </concept>
+
+  <concept dc:identifier="ReplacementName" 
+     dc:URI="http://rs.col.plus/vocab/reltype/ReplacementName"
+     dc:description="Current name is a replacement for the related name.
+      Also called 'Nomen Novum' or 'avowed substitute'
+      ICN: Article 7.3
+      ICZN: Article 60.3.">
+  <preferred>
+     <term dc:source="CoL" dc:title="replacement name" xml:lang="en"/>
+  </preferred>
+  <alternative>
+     <term dc:source="" dc:title="Nomen Novum" xml:lang="en"/>
+     <term dc:source="" dc:title="avowed substitute" xml:lang="en"/>
+     <term dc:source="" dc:title="substitute name" xml:lang="en"/>
+  </alternative>
+ </concept>
+
+  <concept dc:identifier="Conserved" 
+     dc:URI="http://rs.col.plus/vocab/reltype/Conserved"
+     dc:relation=""
+     dc:description="The current name is conserved against the related name or the related name is suppressed in favor of the current name.
+        Acts taken by the official committee.        
+        ICN: Conservation is covered under Article 14 and Appendix II and Appendix III (this name is nomina conservanda).
+        ICZN: Conservation is covered under Article 23.9 (this name is nomen protectum and the target name is nomen oblitum)">
+  <preferred>
+     <term dc:source="CoL" dc:title="conserved" xml:lang="en"/>
+  </preferred>
+  <alternative>
+     <term dc:source="ICN" dc:title="sanctioned" xml:lang="en"/>
+     <term dc:source="ICZN" dc:title="protected" xml:lang="en"/>
+  </alternative>
+ </concept>
+
+  <concept dc:identifier="LaterHomonym" 
+     dc:URI="http://rs.col.plus/vocab/reltype/LaterHomonym"
+     dc:description="Current name has same spelling as related name but was published later and has priority over it (unless conserved or sanctioned).
+        Called a junior homonym in zoology.        
+        ICN: Article 53, ICZN: Chapter 12, Article 52.">
+  <preferred>
+     <term dc:source="CoL" dc:title="later homonym" xml:lang="en"/>
+  </preferred>
+  <alternative>
+     <term dc:source="ICZN" dc:title="junior homonym" xml:lang="en"/>
+  </alternative>
+ </concept>
+
+</thesaurus>
