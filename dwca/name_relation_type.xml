@@ -95,4 +95,15 @@
   </alternative>
  </concept>
 
+  <concept dc:identifier="Superfluous" 
+     dc:URI="http://rs.col.plus/vocab/reltype/Superfluous"
+     dc:description="Current name was superfluous at its time of publication, 
+      i. e. it was based on the same type as the related, previously published name (ICN article 52).
+      The current, superfluous name is available but illegitimate.">
+  <preferred>
+     <term dc:source="CoL" dc:title="superfluous" xml:lang="en"/>
+  </preferred>
+  <alternative>    
+  </alternative>
+ </concept>
 </thesaurus>
