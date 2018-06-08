@@ -13,6 +13,8 @@
 
     <property name='relatedNameUsageID' namespace='http://rs.col.plus/terms/' qualName='http://rs.col.plus/terms/relatedNameUsageID' dc:relation='' dc:description='An identifier for the related name this relation points to.' examples='' required='true'/>
     <property name='relationType' thesaurus="https://raw.githubusercontent.com/Sp2000/colplus/master/dwca/name_relation_type.xml" namespace='http://rs.col.plus/terms/' qualName='http://rs.col.plus/terms/relationType' dc:relation='' dc:description='The kind of directed name relation, usually pointing back in time.' examples='basionym, later_homonym, conserved' required='true'/>
+    <property name='publishedIn' namespace='http://rs.col.plus/terms/' qualName='http://rs.col.plus/terms/publishedIn' dc:relation='' dc:description='The citation of the publication that established the relationship, e.g. emended a name' required='false'/>
+    <property name='publishedInID' namespace='http://rs.col.plus/terms/' qualName='http://rs.col.plus/terms/publishedInID' dc:relation='' dc:description='An identifier for the publication that established the relationship, e.g. emended a name' required='false'/>
     <property name='relationRemarks' namespace='http://rs.col.plus/terms/' qualName='http://rs.col.plus/terms/relationRemarks' dc:relation='' dc:description='Further notes about the relation' examples='' required='false'/>
     
 </extension>

@@ -118,7 +118,7 @@ Sources consulted:
 
 ## Name relations
 CoL follows the TCS name relations and distinguishes between the following type of directed relations. 
-A relation does *not* come with a reference as the relevant publication is the same as  the publishedIn reference for the name with the exception of the conservation relations. Conserving a botanical or zoological name can only be done by using the official lists of the code, so it is straight forward to look them up.
+A relation optionally comes with a reference if the underlying nomenclatural act is different from the publishedIn reference for the name.
 
 We provide a [Darwin Core Archive extension definition](https://github.com/Sp2000/colplus/blob/master/dwca/name_relation.xml) supporting publishing name relations as part of a DwC Checklist Archive with tools like the [GBIF IPT](https://www.gbif.org/ipt).
 
