@@ -168,12 +168,12 @@ The related name is sometimes not known and a name that has not been properly pu
 
 The vocablary is kept minimal to basically answer two fundamental questions:
 
-1) Has the name nomenclatural standing?
+1) Has the name nomenclatural standing and should be considered in nomenclatural questions?
 2) Can the name be used for a taxon?
 
-The name class offers an unrestricted remarks field which should be used to keep further nomenclatural notes to inform about the exact status of a name and which rules have been considered. It is not meant to be understood by humans.
+The name class also offers an unrestricted remarks field which should be used to keep further nomenclatural notes to inform about the exact status of a name and which rules have been considered. It is meant to be understood by humans.
 
-The terms valid/invalid are very overloaded and used for different things in the codes so we avoid them entirely.
+The terms valid/invalid are highly overloaded and used for different things in the codes so we avoid them entirely.
 
  - ```UNAVAILABLE```: *nomen invalidum*. A name that was not validly published according to the rules of the code, or a name that was not accepted by the author in the original publication, for example,
    if the name was suggested as a synonym of an accepted name.
