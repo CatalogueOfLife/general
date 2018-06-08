@@ -301,7 +301,6 @@ After the first few examples we will start omitting parsed fields of the name in
   "authorship": "Mill.",
   "rank": "genus",
   "uninomial": "Abies",
-  "candidatus": false,
   "combinationAuthorship": {
     "authors": [
       "Mill."
@@ -323,7 +322,6 @@ After the first few examples we will start omitting parsed fields of the name in
   "homotypicNameKey": 1234,
   "scientificName": "Garlic virus B",
   "rank": "species",
-  "candidatus": false,
   "code": "virus",
   "type": "virus",
   "parsed": false
@@ -752,7 +750,6 @@ A sanctioned name may be conserved against more than one other names and so may 
   "homotypicNameKey": 1000,
   "scientificName": "Aus ba",
   "authorship": "Linnaeus 1758",
-  "status": "variant",
   "rank": "species"
 },{
   "key": 1002,
