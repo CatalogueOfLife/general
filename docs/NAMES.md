@@ -141,14 +141,15 @@ We provide a [Darwin Core Archive extension definition](https://github.com/Sp200
    ICBN: Article 7.3
    ICZN: Article 60.3.
 
-- ```CONSERVED ```: The current name is conserved against the related name or the related name is suppressed in favor of the current name.
-   Acts taken by the official committee.
+- ```CONSERVED ```: The current name or spelling is conserved / protected against the related name or the related name is suppressed / rejected in favor of the current name. A spelling which has been conserved relates two homotypic names, otherwise
+   the related names should be based on different types. Based on an individual publication but more often due to actions of the ICZN or ICBN exercising its Plenary Powers.
    
-   ICBN: Conservation is covered under Article 14 and Appendix II and Appendix III (this name is nomina conservanda).
+   ICN: Conservation is covered under Article 14 and Appendix II and Appendix III (this name is nomina conservanda).
    
-   ICZN: Conservation is covered under Article 23.9 (this name is nomen protectum and the target name is nomen oblitum)
+   ICZN: Reversal of precedence under Article 23.9 (this name is nomen protectum and the target name is nomen oblitum) or suppression via plenary power Article 81.
 
-- ```LATER_HOMONYM ```: Current name has same spelling as related name but was published later and has priority over it (unless conserved or sanctioned). Called a junior homonym in zoology.
+
+- ```LATER_HOMONYM ```: Current name has same spelling as related name but was published later and has priority over it (unless conserved or sanctioned). Called a junior homonym in zoology. This includes botanical parahomonyms which differ slightly in spelling but are similar enough that they are likely to be confused (Art 53.3). The zoological code has a set of spelling variations (article 58) that are considered to be identical.
  
    When acts of conservation or suppression have occurred then the terms “Conserved Later Homonym”   and “Rejected Earlier Homonym” should be used.
    
@@ -156,70 +157,50 @@ We provide a [Darwin Core Archive extension definition](https://github.com/Sp200
  
    ICZN: Chapter 12, Article 52.
 
+- ```SUPERFLUOUS```: Current name was superfluous at its time of publication,
+   i. e. it was based on the same type as the related, previously published name (ICN article 52). The current, superfluous name is available but illegitimate.
 
 
 
 ## Name status
 The name status can in many cases be derived from a names relation if existing.
-The related name is sometimes not known and a name that has not been properly published (e.g. a naked name) need to be flagged directly as such. We also use the status to indicate known chresonyms. Status values which correspond to relation types are indicated with ```*```:
+The related name is sometimes not known and a name that has not been properly published (e.g. a naked name) need to be flagged directly as such. We also use the status to indicate known chresonyms or provisional manuscript names. 
+
+The vocablary is kept minimal to basically answer two fundamental questions:
+
+1) Has the name nomenclatural standing?
+2) Can the name be used for a taxon?
+
+The name class offers an unrestricted remarks field which should be used to keep further nomenclatural notes to inform about the exact status of a name and which rules have been considered. It is not meant to be understood by humans.
+
+The terms valid/invalid are very overloaded and used for different things in the codes so we avoid them entirely.
+
+ - ```UNAVAILABLE```: *nomen invalidum*. A name that was not validly published according to the rules of the code, or a name that was not accepted by the author in the original publication, for example,
+   if the name was suggested as a synonym of an accepted name.
+   In zoology referred to as an unavailable name.
+   There are many reasons for a name to be unavailable.
+   The exact reason should be indicated in the Names remarks field, e.g.:
+   
+    - published as synonym (pro syn.) ICN Art 36
+    - nomen nudum (nom. nud.) published without an adequate description
+    - not latin (ICN Art 32)
+    - provisional/manuscript names
+    - suppressed publication
+    - tautonym (ICN)
+   
 
  - ```LEGITIMATE```: *nomen legitimum*. Botany: Names that are validly published and legitimate
    Zoology: Available name and *potentially* valid, i.e. not otherwise invalid
    for any other objective reason, such as being a junior homonym.
 
- - ```REPLACEMENT*```: *nomen novum*. A replacement name or new substitute name indicates a scientific name
-   that is created specifically to replace another preoccupied name,
-   but only when this other name can not be used for technical, nomenclatural reasons.
-   It automatically inherits the same type and type locality and is commonly applied
-   to names proposed to replace junior homonyms.
-
- - ```VARIANT*```: *nomen orthographia*. An alternative or corrected spelling for the name.
-   In botanical nomenclature (Art 61 ICN), an orthographical variant (abbreviated orth. var.) is a spelling variant
-   of the same name. For example, Hieronima and Hyeronima are orthographical variants of Hieronyma.
-   One of the spellings must be treated as the correct one. In this case, the spelling Hieronyma has been conserved
-   and is to be used as the correct spelling.
-   An inadvertent use of one of the other spellings has no consequences:
-   the name is to be treated as if it were correctly spelled.
-   Any subsequent use is to be corrected.
-   In zoology, orthographical variants in the formal sense do not exist;
-   a misspelling or orthographic error is treated as a lapsus, a form of inadvertent error.
-   The first reviser is allowed to choose one variant for mandatory further use, but in other ways,
-   these errors generally have no further formal standing.
-   Inadvertent misspellings are treated in Art. 32-33 of the ICZN.
-
- - ```CONSERVED*```: *nomen conservandum* or *nomen protectum*. A scientific name that enjoys special nomenclatural protection, i.e. a name conserved in respective code.
-   Names classed as available and valid by action of the ICZN or ICBN exercising its Plenary Powers.
-   Includes rulings to conserve junior/later synonyms (nomen protectum) in place of rejected forgotten names (nomen oblitum).
-   Such names are entered on the respective Official Lists.
-
- - ```REJECTED*```: *nomen rejiciendum*. Rejected / suppressed name. Inverse of conserved. Outright rejection is possible for a name at any rank.
-
- - ```UNAVAILABLE```: *nomen invalidum*. A name that was not validly published according to the rules of the code, or a name that was not accepted by the author in the original publication, for example,
-   if the name was suggested as a synonym of an accepted name.
-   In zoology referred to as an unavailable name.
-
- - ```NAKED```: *nomen nudum*. The term is used to indicate a designation which looks exactly like a scientific name of an organism,
-   and may have originally been intended to be a scientific name, but fails to be one
-   because it has not (or has not yet) been published with an adequate description (or a reference to such a description),
-   and thus is a "bare" or "naked" name, one which cannot be accepted as it currently stands.
-   Because a nomen nudum fails to qualify as a formal scientific name,
-   a later author can publish a real scientific name that is identical in spelling.
-   If one and the same author puts a name in print, first as a nomen nudum and later publishes the name
-   accompanied by a description that meets the formal requirements,
-   then the date of publication of the latter, formally correct, publication becomes the name's date of establishment.
-
- - ```FORGOTTEN```: *nomen oblitum*. A name which has been overlooked (literally, forgotten), has not been in use after 1899 and is no longer valid.
-   The name is turned invalid in favor of the nomen protectum which should be marked as conserved.
-   ICZN Article 23.9.1
-
- - ```ILLEGITIMATE```: *nomen illegitimum*. A nomen illegitimum is a validly published name, but one that contravenes some of the articles laid down by
-   the International Botanical Congress. The name could be illegitimate because:
-   - article 52: it was superfluous at its time of publication, i.e., the taxon (as represented by the type) already has a name
-   - articles 53 and 54: the name has already been applied to another plant (a homonym)
+ - ```ILLEGITIMATE```: *nomen illegitimum*. An available name with nomenclatural standing, but one that objectively contravenes some of the rules laid down by nomenclatural codes and thus cannot be used as a name for an accepted taxon. 
    
-   Zoology: Available, but objectively invalid names, e.g. a junior homonym
-
- - ```SUPERFLUOUS```: *nomen superfluum*. A name that was superfluous at its time of publication, i. e. it was based on the same type as another, previously published name (ICN article 52).
+   There can be varioous reasons why a name is illegitimate, e.g.:
+     - Botany: superfluous at its time of publication (article 52), i.e., the taxon (as represented by the type) already has a name
+     - Botany: the name has already been applied to another plant (a homonym) articles 53 and 54
+     - Zoology: junior homonym or objective synonyms
+     - Zoology: nomen oblitum
+     - Zoology: suppressed name
 
  - ```DOUBTFUL```: *nomen dubium* or *nomen ambiguum*. Doubtful or dubious names, names which are not certainly applicable to any known taxon or for which the evidence is insufficient to permit recognition of the taxon to which they belong. The confusion being derived from an incomplete or confusing description.
 
@@ -229,7 +210,6 @@ The related name is sometimes not known and a name that has not been properly pu
 
  - ```UNEVALUATED```: *nomen inquirendum*. A species of doubtful identity requiring further investigation
 
-The unrestricted remarks field is used to keep further nomenclatural notes to inform about the status of a name but which are only understood by humans.
 
 
 
@@ -600,8 +580,8 @@ Names 1 and 3 relate to the same taxon from Bhutan and represent double publicat
 ```
 
 
-## Homonym Trillium texanum
-Sometimes a new combination is made more than once thus creating a homonym. An example is Trillium texanum Buckley which was recombined as a variety of Trillium pusillum twice:
+## Isonym Trillium pusillum var. texanum
+Sometimes a new combination is made more than once thus creating a homotypic isonym. An example is Trillium texanum Buckley which was recombined as a variety of Trillium pusillum twice:
 
  - Trillium pusillum var. texanum (Buckley) J.L. Reveal & C.R. Broome in Castanea,46(1): 56 (1981)
  - Trillium pusillum var. texanum (Buckley) C.F.Reed in Phytologia, 50(4): 279, 283 (1982)
