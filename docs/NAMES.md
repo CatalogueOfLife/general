@@ -149,7 +149,7 @@ We provide a [Darwin Core Archive extension definition](https://github.com/Sp200
    ICZN: Reversal of precedence under Article 23.9 (this name is nomen protectum and the target name is nomen oblitum) or suppression via plenary power Article 81.
 
 
-- ```LATER_HOMONYM ```: Current name has same spelling as related name but was published later and has priority over it (unless conserved or sanctioned). Called a junior homonym in zoology. This includes botanical parahomonyms which differ slightly in spelling but are similar enough that they are likely to be confused (Art 53.3). The zoological code has a set of spelling variations (article 58) that are considered to be identical.
+- ```LATER_HOMONYM ```: Current name has same spelling as related name but was published later and has priority over it (unless conserved or sanctioned) and is based on a different type. Called a junior homonym in zoology. This includes botanical parahomonyms which differ slightly in spelling but are similar enough that they are likely to be confused (Art 53.3). The zoological code has a set of spelling variations (article 58) that are considered to be identical.
  
    When acts of conservation or suppression have occurred then the terms “Conserved Later Homonym”   and “Rejected Earlier Homonym” should be used.
    
@@ -158,7 +158,7 @@ We provide a [Darwin Core Archive extension definition](https://github.com/Sp200
    ICZN: Chapter 12, Article 52.
 
 - ```SUPERFLUOUS```: Current name was superfluous at its time of publication,
-   i. e. it was based on the same type as the related, previously published name (ICN article 52). The current, superfluous name is available but illegitimate.
+   i. e. it was based on the same type as the related, previously published name (ICN article 52). The current, superfluous name is available but illegitimate. Includes the special case of isonyms which are identical, homotypic names.
 
 
 
@@ -529,13 +529,13 @@ Sometimes names are misspelled. By misspelling here we mean orthographic and typ
 
 
 ## Homonym Pedicularis inconspicua
-An example of a publication homonym and a real homonym from botany is
+An example of a superfluous *publication homonym* and a real homonym from botany is
 
  - Pedicularis inconspicua P.C.Tsoong, ActaPhytotax. Sin. 3: 292 & 323, Jan. 1955
  - Pedicularis inconspicua Vved., Fl. URSS 22: 811, 18 Jun. 1955.
  - Pedicularis inconspicua P.C. Tsoong, Bull. Brit. Mus. (Nat. Hist.) 2:17, Nov. 1955.
 
-Names 1 and 3 relate to the same taxon from Bhutan and represent double publication of the same name in Chinese and Western journals. This is one of many such names published in the same two papers by Tsoong; all the names in Acta Phytotax. Sin. have priority over their publication in the British Museum Bulletin. Between the two papers published by Tsoong, the Russian botanist Vvedensky published a real homonym P. inconspicua Vved. for a totally different species from Uzbekistan.
+Names 1 and 3 relate to the same taxon from Bhutan and represent double publication of the same name in Chinese and Western journals. This is one of many such isonyms published in the same two papers by Tsoong; all the names in Acta Phytotax. Sin. have priority over their publication in the British Museum Bulletin. Between the two papers published by Tsoong, the Russian botanist Vvedensky published a real homonym P. inconspicua Vved. for a totally different species from Uzbekistan.
 
 ```json5
 {
@@ -571,7 +571,7 @@ Names 1 and 3 relate to the same taxon from Bhutan and represent double publicat
   "relatedNameKey": 123
 },
 {
-  "type": "later homonym",
+  "type": "superfluous",
   "nameKey": 125,
   "relatedNameKey": 123
 }
@@ -579,33 +579,33 @@ Names 1 and 3 relate to the same taxon from Bhutan and represent double publicat
 
 
 ## Isonym Trillium pusillum var. texanum
-Sometimes a new combination is made more than once thus creating a homotypic isonym. An example is Trillium texanum Buckley which was recombined as a variety of Trillium pusillum twice:
+Sometimes a new combination is made more than once thus creating an isonym, i.e. the same name published several times based on the same type (as opposed to a homonym which is based on different types). An example is Trillium texanum Buckley which was recombined as a variety of Trillium pusillum twice:
 
  - Trillium pusillum var. texanum (Buckley) J.L. Reveal & C.R. Broome in Castanea,46(1): 56 (1981)
  - Trillium pusillum var. texanum (Buckley) C.F.Reed in Phytologia, 50(4): 279, 283 (1982)
 
-The combination made by C.F. Reed is a later homonym and so invalid.
+The combination made by C.F. Reed is a later isonym and so invalid.
 
 ```json5
 {
-  "key": 123,
-  "homotypicNameKey": 123,
+  "key": 223,
+  "homotypicNameKey": 223,
   "scientificName": "Trillium texanum",
   "authorship": "Buckley",
   "publishedInKey": 100,
   "parsed": true
 },
 {
-  "key": 124,
-  "homotypicNameKey": 123,
+  "key": 224,
+  "homotypicNameKey": 223,
   "scientificName": "Trillium pusillum var. texanum",
   "authorship": "(Buckley) J.L.Reveal & C.R.Broome",
   "publishedInKey": 101,
   "parsed": true
 },
 {
-  "key": 125,
-  "homotypicNameKey": 123,
+  "key": 225,
+  "homotypicNameKey": 223,
   "scientificName": "Trillium pusillum var. texanum",
   "authorship": "(Buckley) C.F.Reed",
   "status": "illegitimate",
@@ -615,19 +615,19 @@ The combination made by C.F. Reed is a later homonym and so invalid.
 
 
 {
-  "type": "later homonym",
-  "nameKey": 125,
-  "relatedNameKey": 124
+  "type": "superfluous",
+  "nameKey": 225,
+  "relatedNameKey": 224
 },
 {
   "type": "basionym",
-  "nameKey": 125,
-  "relatedNameKey": 123
+  "nameKey": 225,
+  "relatedNameKey": 223
 },
 {
   "type": "basionym",
-  "nameKey": 124,
-  "relatedNameKey": 123
+  "nameKey": 224,
+  "relatedNameKey": 223
 }
 ```
 
@@ -638,7 +638,8 @@ Sometimes authors wish to recognise taxa whose names are homonyms. In such cases
 
 > A name established expressly to replace an already established name. A nominal taxon denoted by a new replacement name (nomen novum) has the same name-bearing type as the nominal taxon denoted by the replaced name [Arts. 67.8, 72.7].
 
-A nomen novum should have a `ReplacementName` relation to the illegitimate homonym name it replaces. The illegitimate homonym should have a `LaterHomonym` relation to the legitimate homonym of the name.
+A nomen novum should have a `ReplacementName` relation to the illegitimate homonym name it replaces. The illegitimate homonym should have a `LaterHomonym` relation to the legitimate homonym of the name.
+
 ```json5
 {
   "key": 123,
