@@ -529,11 +529,11 @@ Sometimes names are misspelled. By misspelling here we mean orthographic and typ
 
 
 ## Homonym Pedicularis inconspicua
-An example of a superfluous *publication homonym* and a real homonym from botany is
+An example of 3 identical names from botany, one superfluous *publication homonym* as TCS calls it and a real homonym in chronological order and all published in the same year:
 
- - Pedicularis inconspicua P.C.Tsoong, ActaPhytotax. Sin. 3: 292 & 323, Jan. 1955
- - Pedicularis inconspicua Vved., Fl. URSS 22: 811, 18 Jun. 1955.
- - Pedicularis inconspicua P.C. Tsoong, Bull. Brit. Mus. (Nat. Hist.) 2:17, Nov. 1955.
+ - Pedicularis inconspicua P.C.Tsoong, ActaPhytotax. Sin. 3: 292 & 323, Jan. 1955 [IPNI](http://beta.ipni.org/n/807180-1)
+ - Pedicularis inconspicua Vved., Fl. URSS 22: 811, 18 Jun. 1955. [IPNI](http://beta.ipni.org/n/807178-1)
+ - Pedicularis inconspicua P.C. Tsoong, Bull. Brit. Mus. (Nat. Hist.) 2:17, Nov. 1955. [IPNI](http://beta.ipni.org/n/807179-1)
 
 Names 1 and 3 relate to the same taxon from Bhutan and represent double publication of the same name in Chinese and Western journals. This is one of many such isonyms published in the same two papers by Tsoong; all the names in Acta Phytotax. Sin. have priority over their publication in the British Museum Bulletin. Between the two papers published by Tsoong, the Russian botanist Vvedensky published a real homonym P. inconspicua Vved. for a totally different species from Uzbekistan.
 
