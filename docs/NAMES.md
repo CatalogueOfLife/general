@@ -202,6 +202,19 @@ The terms valid/invalid are highly overloaded and used for different things in t
      - Zoology: nomen oblitum
      - Zoology: suppressed name
 
+ - ```CONSERVED```: *nomen conservandum*. A scientific name that enjoys special nomenclatural protection, i.e. a name conserved, protected or sanctioned in respective code.
+   Names classified as available and valid by action of the ICZN or ICBN exercising its Plenary Powers .
+   Includes rulings to conserve junior/later synonyms in place of rejected forgotten names (nomen oblitum)
+   via "Reversal of Precedence" in accordance with ICZN Article 23.9.1.
+   Such names are entered on the Official Lists.
+
+   Conservation of botanical names is only possible at the rank of family, genus or species.
+   
+   Conserved names are a more generalized definition than the one for nomen protectum, which is specifically a conserved name that is either a junior synonym or homonym that is in use
+   because the senior synonym or homonym has been made an available, but invalid nomen oblitum ("forgotten name").
+
+ - ```REJECTED```: *nomen rejiciendum* Rejected / suppressed name. Inverse of conserved. Outright rejection is possible for a name at any rank.
+
  - ```DOUBTFUL```: *nomen dubium* or *nomen ambiguum*. Doubtful or dubious names, names which are not certainly applicable to any known taxon or for which the evidence is insufficient to permit recognition of the taxon to which they belong. The confusion being derived from an incomplete or confusing description.
 
  - ```MANUSCRIPT```: An unpublished name that was given a temporary placeholder name to work with. Sometimes these names do not get properly published for decades and can be cited in other works. Often abbreviated as ined. (ineditus) or ms. (manuscript) and sometimes called chironym/cheironym
@@ -209,8 +222,6 @@ The terms valid/invalid are highly overloaded and used for different things in t
  - ```CHRESONYM```: A name usage erroneously cited without a sec/sensu indication so it appears to be a published homonym with a different authority.
 
  - ```UNEVALUATED```: *nomen inquirendum*. A species of doubtful identity requiring further investigation
-
-
 
 
 ## Names Index and Name equality
@@ -695,6 +706,7 @@ A sanctioned name may be conserved against more than one other names and so may 
   "homotypicNameKey": 123,
   "scientificName": "Agaricus personatus",
   "authorship": "Bolton : Fr",
+  "status": "conserved",
   "parsed": true
 },
 {
@@ -702,6 +714,7 @@ A sanctioned name may be conserved against more than one other names and so may 
   "homotypicNameKey": 124,
   "scientificName": "Agaricus personatus",
   "authorship": "Valenti",
+  "status": "rejected",
   "parsed": true
 },
 {
@@ -709,6 +722,7 @@ A sanctioned name may be conserved against more than one other names and so may 
   "homotypicNameKey": 125,
   "scientificName": "Agaricus personatus",
   "authorship": "Lasch",
+  "status": "rejected",
   "parsed": true
 },
 {
@@ -716,6 +730,7 @@ A sanctioned name may be conserved against more than one other names and so may 
   "homotypicNameKey": 126,
   "scientificName": "Agaricus personatus",
   "authorship": "With.",
+  "status": "rejected",
   "parsed": true
 },
 
