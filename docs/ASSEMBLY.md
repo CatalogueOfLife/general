@@ -75,6 +75,6 @@ When a sector is copied to the preliminary Catalogue missing transliterations fo
 The preliminary CoL can be browsed and searched just as any other dataset in the Clearinghouse for review before it gets released. When released it will be copied into the immutable CoL archive that drives the public portal.
 
 # CoL Management Hierarchy
-The management classification of the CoL is a special dataset in the Clearinghouse. It contains a taxonomic tree down to order or family level, may include synonyms and offers species estimates for higher groups that can be used for gap analysis and which also show up in the public portal.
+The [management classification of the CoL](http://www.catalogueoflife.org/col/info/hierarchy) is a special dataset in the Clearinghouse. It contains a taxonomic tree down to order or family level, may include synonyms and offers species estimates for higher groups that can be used for gap analysis and which also show up in the public portal.
 
 To guarantee consistency a basic tree editor with species estimates forms will be provided that allow the CoL editors to manage a single tree.
