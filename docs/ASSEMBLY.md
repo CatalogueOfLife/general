@@ -1,4 +1,4 @@
-ASSEMBLY.md
+# Catalogue of Life Assembly
 
 The Catalogue of Life is build by assembling non overlapping taxonomic groups taken from source datasets. We call these groups taxonomic *sectors* and a single source dataset may contain multiple sectors, e.g. ITIS or WoRMS. Selecting appropriate sectors for the CoL is an important editorial decision, as well as reviewing the quality and overlap of the original sources as well as the final resulting Catalogue before it can be released.
 
@@ -53,7 +53,7 @@ It is planned that the names index will be identical to the names stored in the 
 
 The status of a name can be used to indicate chresonyms or manuscript names. An editorial interface for basic name properties, initially at least the status, is provided which allows the CoL editor to exclude names from entering the final Catalogue.
 
-# Mapping Sectors
+# Taxonomic Sectors
 Taxonomic groups that should end up in the CoL need to be mapped at least once from the source datasets to the CoL management hierarchy (see below). In the simplest case a single higher taxon from a source dataset can be placed diretly onto the MC. More control is provided to define sectors by allowing multiple root groups and also exclusion of included groups, for example a specific genus or family because they are treated in a different source already. Nested sectors that attach and thereby replace a group in another sector is another option. Once defined, sectors will remain when the underlying dataset is updated.
 
 Sectors in the CoL correspond to the source databases currently listed in the annual checklist. They have distinct metadata (title, contacts, logo, etc) that can be managed by the CoL editor, but defaults to its parent dataset metadata.
