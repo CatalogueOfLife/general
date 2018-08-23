@@ -19,7 +19,7 @@ All existing GSDs inside the CoL have been exported into ACEF compliant files so
 # Dataset registry
 Within the Clearinghouse all datasets must be available on an external URL. These dataset URLs need to be registered manually by editorial or publisher intervention. The Clearinghouse has an internal registry of datasets, but is also able to sync dataset metadata from the GBIF registry. The ACEF data format is currently not supported in GBIF though.
 
-Dataset registration will also include a few more settings that determine how a dataset is processed in the Clearinghouse and which are to be maintained by the CoL editor. Currently this includes:
+Dataset registration will also include a few more settings that determine how a dataset is processed in the Clearinghouse and which are to be maintained through editorial decision. Currently this includes:
 
  - trustedNames: a flag that indicates trusted datasets which will be allowed to insert new names into the names index
  - nomenclator: a flag to indicate a dataset is a trusted nomenclatural source
