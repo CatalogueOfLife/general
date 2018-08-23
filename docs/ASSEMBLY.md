@@ -1,6 +1,6 @@
 # Catalogue of Life Assembly
 
-The Catalogue of Life is build by assembling non overlapping taxonomic groups taken from source datasets. We call these groups taxonomic *sectors* and a single source dataset may contain multiple sectors, e.g. ITIS or WoRMS. Selecting appropriate sectors for the CoL is an important editorial decision. The editorial board also reviews the quality and overlap of the original sources as well as the final resulting Catalogue before it can be released.
+The Catalogue of Life is built by assembling non overlapping taxonomic groups taken from source datasets. We call these groups taxonomic *sectors* and a single source dataset may contain multiple sectors, e.g. ITIS or WoRMS. Selecting appropriate sectors for the CoL is an important editorial decision. The editorial board also reviews the quality and overlap of the original sources as well as the final resulting Catalogue before it can be released.
 
 All data passes a number of steps before it ends up in the public CoL:
 
