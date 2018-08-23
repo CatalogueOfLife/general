@@ -63,7 +63,7 @@ Entire datasets or specific sector subsets can be reviewed to find problems and 
 
 A dataset and sector subset summary will help identifying problems. For certain issues like duplicates or potential chresonyms a comparison view of several records is needed that allows the editor to block names from entering the Catalogue or modify their status.
 
-Trusted sources that already have a review process implemented themselves can be marked to be included in the CoL automatically with every new dataset version imported. Otherwise manually acceptance of a new or updated sector for inclusion into the CoL needs to take place everytime through editorial decision. 
+Trusted sources that already have a review process implemented themselves can be marked to be included in the CoL automatically with every new dataset version imported. Otherwise manual acceptance of a new or updated sector for inclusion into the CoL needs to take place everytime through editorial decision. 
 
 # Assembling a preliminary CoL
 Automatically or manually accepted sectors are copied to a preliminary CoL so they are immutable and available for subsequent Catalogues. The preliminary CoL can only by modified by replacing entire sectors or changing the management classification (MC) itself. When a sector is attached to a higher part of the management classification it becomes the authority for that part of the tree and defines the included classification which can be different from the hidden MC. 
