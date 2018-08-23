@@ -17,7 +17,7 @@ Datasets that should be added to the CoL need to be accessible in a standard for
 All existing GSDs inside the CoL have been exported into ACEF compliant files so that the current version of the data is immediately available even if the original sources are not yet published in a standard format.
 
 # Dataset registry
-Within the Clearinghouse all datasets have a URL. These dataset URLs need to be registered manually by editorial or publisher intervention. The Clearinghouse has an internal registry of datasets, but is also able to sync datasets from the GBIF registry. The ACEF data format is currently not supported in GBIF though.
+Within the Clearinghouse all datasets must be available on an external URL. These dataset URLs need to be registered manually by editorial or publisher intervention. The Clearinghouse has an internal registry of datasets, but is also able to sync dataset metadata from the GBIF registry. The ACEF data format is currently not supported in GBIF though.
 
 Dataset registration will also include a few more settings that determine how a dataset is processed in the Clearinghouse and which are to be maintained by the CoL editor. Currently this includes:
 
