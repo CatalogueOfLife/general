@@ -72,9 +72,29 @@ In order to avoid tedious marking of duplicate names we propose to automatically
 
 When a sector is copied to the preliminary Catalogue missing transliterations for vernacular names are generated automatically.
 
+Optionally a dataset can be configured to prefer the exact name spelling from a nomenclator and to apply the objective synonyms from the nomenlcator.
+    
 The preliminary CoL can be browsed and searched just as any other dataset in the Clearinghouse for review before it gets released. When released it will be copied into the immutable CoL archive that drives the public portal.
 
 # CoL Management Hierarchy
 The [management classification of the CoL](http://www.catalogueoflife.org/col/info/hierarchy) is a special dataset in the Clearinghouse. It contains a taxonomic tree down to order or family level, may include synonyms and offers species estimates for higher groups that can be used for gap analysis and which also show up in the public portal.
 
 To guarantee consistency a basic tree editor with species estimates forms will be provided that allow managing a single tree through editorial decisions.
+
+
+
+
+
+# Assembling a provisional Catalogue
+Assembling a provisional Catalogue of Life with a much broader names base is done by merging many overlapping datasets onto the scrutinized catalogue. 
+
+**Work in progress !!!**
+Draft ideas to cover here:
+- copy scrutinized cat? What about the scrut cat lagging behind because of manual review required?
+- names are added dynamically as trusted datasets are imported (see names index)
+- merge data about the same name based on names index match
+- logically delete all names that no source contains anymore (should be done post dataset import already)
+- process relevant dataset by priority, then by reverse date published (eg Plazi)
+    - insert only ranks configured, default to family and below
+- detect basionyms by the same epithet and authorship within families
+- resolve taxonomic status, allow just one accepted name within a homotypic group
