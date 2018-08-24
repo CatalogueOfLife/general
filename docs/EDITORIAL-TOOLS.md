@@ -1,11 +1,11 @@
 # Editorial Tooling
-An overview of the main tools needed to assembly a scrutinized Catalogue of Life. Most tools should correspond to some interactive UI pages and the ideas here can be used to define UI & backend requirements.
+An overview of the main tools needed to assembly a scrutinized and provisional Catalogue of Life. Most tools should correspond to some interactive UI pages and the ideas here can be used to define UI & backend requirements.
 
 ## Terminology
-MC: CoL management classification
-Dataset: An entire dataset as provided by some source archive
-Datasubset: A subset of a dataset with its own metadata
-Sector: A single higher taxon from a data(sub)set that acts as the root for a taxonomic sector in the CoL
+**MC**: CoL management classification
+**Dataset**: An entire dataset as provided by some source archive
+**Datasubset**: A subset of a dataset with its own metadata
+**Sector**: A single higher taxon from a data(sub)set that acts as the root for a taxonomic sector in the CoL
 
 
 # Editorial Dashboard
