@@ -29,7 +29,7 @@ A quick overview about all relevant states, highlighting work to be done by the 
 - system health overview ?
 
 
-# Data(sub)set Editor Page
+# Data(sub)set Editorial Page
 Shows a single dataset or datasubset with editorial focus.
 
 - modify metadata (title, abstract, contacts, homepage, etc)
@@ -51,7 +51,7 @@ Shows a single dataset or datasubset with editorial focus.
 - full issue overview
     - highlight unhandled ones
 
-# Sector Editor Page
+# Sector Editorial Page
 - list assembly configs
     - useNomenclatorSpelling
     - useNomenclatorSynonyms
@@ -94,4 +94,4 @@ Shows several names/taxa next to each other to resolve issues, e.g. duplicates
 # Review Queue
 The review queue page is targeting the dataset publisher to improve the data.
 - list issues like in dataset review
-- show records highlighted by editor
+- show records highlighted by editorial decision
