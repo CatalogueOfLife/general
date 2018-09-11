@@ -45,16 +45,18 @@ Shows a single dataset or datasubset with editorial focus.
     - ignoreVernaculars
 - list mapped sectors
     - size, last accepted, names changed since last accepted
-- metrics
-    - issue overview
 - unread discussions
 - import default values (nomCode, vernacular lang, isNomenclator)
-- tab with table of editorial decisions (sourceId, name, authorship, action, issue reason)
+
+## tab with table of editorial decisions (sourceId, name, authorship, action, issue reason)
     - blocked names
     - status changes
+
+## metrics Tab
+    - issue overview
     
 
-# Editorial Review Portal
+## Data Review Tab
 Editorial portal for detailed data review and decisions on record level.
 - restrict to dataset or sector
 - faceted search by rank, issue, taxon & name status (incl bare names), name type, nomCode, higher taxon?
@@ -65,7 +67,7 @@ Editorial portal for detailed data review and decisions on record level.
 - remember records with comment for review queue
 
 
-### Record Comparison
+## Record Comparison
 Shows several names/taxa next to each other to resolve issues, e.g. duplicates
 - tabular view
 - block name from CoL sector
