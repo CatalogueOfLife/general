@@ -38,27 +38,21 @@ Shows a single dataset or datasubset with editorial focus.
 - datasubset specific
     - show parent dataset
 - metadata lock toggle (dont overwrite by parent or imported metadata)
-- import configs (nomCode, rootTaxon, trustedNames, vernacular lang, isNomenclator)
-- provCat prio number, num of new names
-    - if not yet used, allow to be appended to provcat sources
-    - maxRank assembly setting
-    - how can we prioritize subsets differently?
+- provCat contributor?, num of new names
 - assembly configs
-    - useNomenclator
+    - useNomenclatorSpelling
+    - useNomenclatorSynonyms
     - ignoreVernaculars
 - list mapped sectors
     - size, last accepted, names changed since last accepted
-- full issue overview
-    - highlight unhandled ones
-
-# Sector Editorial Page
-- list assembly configs
-    - useNomenclatorSpelling
-    - useNomenclatorSynonyms
-- list editorial decisions
+- metrics
+    - issue overview
+- unread discussions
+- import default values (nomCode, vernacular lang, isNomenclator)
+- tab with table of editorial decisions (sourceId, name, authorship, action, issue reason)
     - blocked names
     - status changes
-
+    
 
 # Editorial Review Portal
 Editorial portal for detailed data review and decisions on record level.
@@ -71,7 +65,7 @@ Editorial portal for detailed data review and decisions on record level.
 - remember records with comment for review queue
 
 
-# Record Comparison
+### Record Comparison
 Shows several names/taxa next to each other to resolve issues, e.g. duplicates
 - tabular view
 - block name from CoL sector
@@ -90,6 +84,11 @@ Shows several names/taxa next to each other to resolve issues, e.g. duplicates
     - list all sectors, last accepted, newer dataset available
     - browse management tree with sector roots
 
+# Classification editor
+Manage the CoL tree with monomials, rank, species estimate & estimate reference
+
+# Patch Editor
+Create new patches for name & taxa, deactivate existing one
 
 # Review Queue
 The review queue page is targeting the dataset publisher to improve the data.
