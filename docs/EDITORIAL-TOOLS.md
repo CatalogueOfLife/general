@@ -55,12 +55,13 @@ Shows a single dataset or datasubset with editorial focus.
 ## metrics Tab
     - issue overview
     
-
-## Data Review Tab
+## Tree browse Tab
 Editorial portal for detailed data review and decisions on record level.
-- restrict to dataset or sector
-- faceted search by rank, issue, taxon & name status (incl bare names), name type, nomCode, higher taxon?
 - tree browser
+- link to taxon page
+
+## Data search Tab
+- faceted search by rank, issue, taxon & name status (incl bare names), name type, nomCode, higher taxon?
 - map taxon onto MC by selecting its MC parent
     - optionally allow suppression of other MC taxa
 - remember records for comparison or later review (multiple lists needed?)
@@ -74,6 +75,14 @@ Shows several names/taxa next to each other to resolve issues, e.g. duplicates
 - change taxon status?
 - change name status? Link to dedicated names index editor?
 
+# Single Name page
+- show nomenclatural info
+- objective synonymy
+- name relations
+- link to currently accepted (=taxon) name
+
+# Single Taxon page
+- ...
 
 # Assembly Console
 - show running builds
