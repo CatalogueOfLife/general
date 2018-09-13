@@ -1,0 +1,47 @@
+# to be included for traits like this:
+# traits: !include inc/traits.raml
+query:
+  usage: Apply this to any method that needs a query parameter
+  description: Query parameter.
+  queryParameters:
+      q:
+        type: string
+        description: full text search query
+paged:
+  usage: Apply this to any method that needs paging parameters
+  description: Paging parameters.
+  queryParameters:
+    offset:
+      type: integer
+      required: false
+      description: The requested number of offset records. Defaults to zero
+    limit:
+      type: integer
+      required: false
+      description: The requested number of maximum records to be returned. Defaults to 10 and can be no more than 1000.
+datasetConstrainable:
+  usage: Apply this to any method that allows results to be constrained to a certain dataset.
+  description: Query parameter.
+  queryParameters:
+      datasetKey:
+        type: string
+        description: The database key of the dataset
+classification:
+  usage: Apply this to any method that accepts a classification given as major rank parameters
+  description: Linnean classification parameters, given as monomials without authorship.
+  queryParameters:
+    kingdom:
+      type: string
+      required: false
+    phylum:
+      type: string
+      required: false
+    class:
+      type: string
+      required: false
+    order:
+      type: string
+      required: false
+    family:
+      type: string
+      required: false

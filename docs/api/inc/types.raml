@@ -1,0 +1,1499 @@
+# to be included for traits like this:
+# types: !include inc/types.raml
+uuid:
+  type: string
+  minLength: 36
+  maxLength: 36
+  pattern: ^[0-9abcdef]{8}-[0-9abcdef]{4}-[0-9abcdef]{4}-[0-9abcdef]{4}-[0-9abcdef]{12}$
+  description: UUID data type represented as 32 hexadecimal (base 16) digits. Example 123e4567-e89b-12d3-a456-426655440000
+isocode:
+  type: string
+  minLength: 2
+  maxLength: 3
+  pattern: ^[a-z]{2,3}$
+  description: 2 or 3 letter codes as used by ISO country or languages
+RankType:
+  type: string
+  enum: ["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]
+  description: >
+    Enumeration of all possible rank values across all codes.
+    See http://api.col.plus/vocab/rank for the complete list in use
+
+    There is the need to deal with old ranks not accepted anymore.
+    The list given is intended to be interoperable between name providers for bacteria, viruses, fungi, plants, and animals.
+    The enumeration attempts to strike a balance between listing all possible rank terms, and remaining comprehensible.
+    Not included in the list are the botanical "notho-" ranks, which are used to designate hybrids (nothospecies, nothogenus) as this information is handled by the Name.notho property already.
+
+    Sources:
+
+     - [GBIF](https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/Rank.java)
+     - [TCS](https://github.com/tdwg/tcs/blob/master/TCS101/v101.xsd#L860)
+     - [TaxCat2](http://mansfeld.ipk-gatersleben.de/apex/f?p=185:78:::NO::P77_TAXCAT,P77_DB_CHECKBOX1,77_TAXCAT2RAD,77_SHOWRAD:%25,,0,s_All)
+     - [NOMEN](https://raw.githubusercontent.com/SpeciesFileGroup/nomen/master/src/ontology/nomen.owl)
+
+     TODO: extract all values from sources
+ImportState:
+  type: string
+  enum: ["downloading","processing","inserting","unchanged","finished","canceled","failed"]
+  description: >
+    Ennumeration of states of running or finished dataset imports.
+    See http://api.col.plus/vocab/importstate for the latest full list.
+IssueType:
+  type: string
+  enum: ["unparsable name","partially parsable name","unparsable authorship","doubtful name","inconsistent authorship","inconsistent name","unusual characters","null epithet","subspecies assigned","lc monomial","indet cultivar","indet species","indet infraspecies","higher rank binomial","question marks removed","repl enclosing quote","missing genus","escaped characters","nomenclatural status invalid","nomenclatural code invalid","basionym author mismatch","basionym not unique","basionym derived","conflicting basionym combination","potential orthographic variant","homonym","published before genus","reference id invalid","id not unique","parent id invalid","accepted id invalid","basionym id invalid","accepted name missing","rank invalid","taxonomic status invalid","lifezone invalid","is fossil invalid","is recent invalid","url invalid","according to date invalid","chained synoym","taxonomic status mismatch","parent cycle","classification rank order invalid","classification not applied","vernacular name invalid","vernacular name transliterated","description invalid","distribution invalid","distribution area invalid","distribution country invalid","distribution status invalid","distribution gazeteer invalid","species profile invalid","multimedia invalid","bib reference invalid","alt identifier invalid","backbone match none","backbone match fuzzy","name not unique","parent name not unique","relationship missing","no species","name parent mismatch","orthographic variant"]
+  description: >
+    Issues that the Clearinghouse software is able to detect and flag a Taxon, Name or Reference with.
+    The enumeration is in very active development and extended as new rules are implemented.
+    Not all flagged issues are highlighting data problems. Some simply flag the fact that data was modified during imports,
+    for example "vernacular name transliterated" is added then a latin transliteration of a vernacular name was automatically generated.
+    See http://api.col.plus/vocab/issue for the latest full list.
+NomCodeType:
+  type: string
+  enum: ["bacterial", "botanical", "cultivated", "viral", "zoological", "unknown"]
+  description: >
+    Nomenclatural code enumeration regardless of the exact version published.
+    See http://api.col.plus/vocab/nomcode
+
+    bacteriological
+    : [Bacteriological code](https://www.ncbi.nlm.nih.gov/books/NBK8817/)
+
+    botanical
+    : [Botanical code](http://www.iapt-taxon.org/nomen/)
+
+    cultivated
+    : [Cultivated Plants](http://www.ishs.org/scripta-horticulturae/international-code-nomenclature-cultivated-plants-ninth-edition)
+
+    viral
+    : [viral](https://talk.ictvonline.org/information/w/ictv-information/383/ictv-code),
+
+    zoological
+    : [zoological code](http://www.nhm.ac.uk/hosted-sites/iczn/code/)
+NomenclaturalStatusType:
+  type: string
+  enum: ["ok", "unavailable", "illegitimate", "variant", "conserved", "rejected", "doubtful", "unevaluated"]
+  description: >
+    The status related to the latest nomenclatural act published for the name and its conformance to the rules of nomenclature.
+    See http://api.col.plus/vocab/nomstatus
+
+    Generic nomenclatural status enumeration across all codes.
+    Only the broader status concepts are captured and details of the nomenclatural status of a name should be given as free text.
+    The overloaded term "valid" is avoided as it carries different semantics in the botanical and zoological code.
+    Rendering of the status can be different between codes and some values only apply to certain codes.
+
+    ok
+    : TODO: probably a better term should be coined
+    : Botany - Names that are validly published and legitimate
+    : Zoology - Available name and potentially valid, i.e. not otherwise invalid for any other objective reason, such as being a junior homonym.
+
+    unavailable
+    : Botany - Names that are not validly published (nom. inval.)
+    : Zoology - An unavailable name published not conforming to all the mandatory provisions of the International Code of Zoological Nomenclature.
+
+    illegitimate
+    : Botany - A validly published name which is a later homonym, superfluous, or rejected (nom. illeg.)
+    : Zoology - Available, but objectively invalid names, e.g. junior homonym or objective synonyms
+
+    variant
+    : Orthographic variant. An alternative or corrected spelling for the name (orth. var.)
+
+    replacement
+    : A nomen novum, replacement name or new substitute name indicates a scientific name
+      that is created specifically to replace another preoccupied name,
+      but only when this other name can not be used for technical, nomenclatural reasons.
+      It automatically inherits the same type and type locality and is commonly applied
+      to names proposed to replace junior homonyms
+
+    conserved
+    : Botany - A validly published name which is listed in the ICN appendices of conserved names (nom. cons.)
+    : Zoology -
+
+    rejected
+    : Botany - A validly published name listed as rejected by ICN – includes utique rejiciendum and opera oppressa (nom. rej.)
+    : Zoology -
+
+    doubtful
+    : Unknown or doubtful names (nom. dub.)
+
+    unevaluated
+    : if the name status has not been evaluated yet
+
+NameType:
+  type: string
+  enum: ["scientific", "virus", "hybrid-formula", "cultivar", "otu", "placeholder", "none"]
+  description: >
+    Classification of names, mostly based on their syntactic structure.
+    See http://api.col.plus/vocab/nametype
+NomenclaturalActType:
+  type: string
+  enum: ["description", "ruling", "emendation", "typification"]
+  description: >
+    Coarse classification of nomenclatural acts.
+    See http://api.col.plus/vocab/nomacttype
+
+     description
+     : the description of a new original name, a new recombination, a replacement name or a change in rank.
+       The publication linked to the description act is the dwc:namePublishedIn reference.
+
+     ruling
+     : acts taken by the official committee e.g. suppressed, rejected or conserved names.
+
+     emendation
+     : corrected or improved names. Intentional changes in the original spelling of an available name. The binomial authority remains unchanged.
+       Valid emendations include changes made to correct:
+       a) typographical errors in the original work describing the species,
+       b) errors in transliteration from non-Latin languages,
+       c) names that included diacritics, hyphens
+       d) endings of species to match the gender of the generic name, particularly when the combination has been changed
+
+     typification
+     : subsequent type designations.
+LifezoneType:
+  type: string
+  enum: ["brackish", "freshwater", "marine", "terrestrial"]
+  description: >
+    Coarse classification of the environment an organism lives in.
+    See http://api.col.plus/vocab/lifezone
+GazetteerType:
+  type: string
+  enum: ["tdwg", "iso", "fao", "fao-fishing", "longhurst", "teow", "iho", "text"]
+  description: |
+    List of supported distribution area standards.
+    See http://api.col.plus/vocab/gazetteer
+
+    tdwg
+    : [World Geographical Scheme for Recording Plant Distributions](http://www.tdwg.org/standards/109) published by TDWG at level 3 or 4.
+
+    iso
+    : [ISO 3166-1](https://www.iso.org/obp/ui/) country codes given either as alpha-2, alpha-3 or numeric codes
+
+    fao
+    : [FAO ISO codes](http://www.fao.org/countryprofiles/iso3list/en/)
+
+    fao-fishing
+    : [FAO Fishing Areas](http://www.fao.org/fishery/cwp/handbook/H/en)
+
+    longhurst
+    : [Longhurst Biogeographical Provinces](http://www.marineregions.org/sources.php#longhurst), a partition of the world oceans into provinces
+    as defined by Longhurst, A.R. (2006). Ecological Geography of the Sea. 2nd Edition.
+
+    teow
+    : [Terrestrial Ecoregions of the World](https://www.worldwildlife.org/publications/terrestrial-ecoregions-of-the-world)
+      (TEOW) is a biogeographic regionalization of the Earth's terrestrial biodiversity.
+      See Olson et al. 2001. Terrestrial ecoregions of the world: a new map of life on Earth. Bioscience 51(11):933-938.
+
+    iho
+    : IAO sea areas as boundaries of the major oceans and seas of the world.
+      See Limits of Oceans & Seas, Special Publication No. 23 published by the International Hydrographic Organization in 1953.
+
+    text
+    : Free text not following any standard
+DistributionStatusType:
+  type: string
+  enum: ["native", "domesticated", "alien", "uncertain"]
+  description: >
+    CoL distribution status enumeration
+    See http://api.col.plus/vocab/distributionstatus
+ReferenceTopicType:
+  type: string
+  enum: ["nomen", "taxon", "vernacular", "distribution"]
+  description: >
+    Enumeration of types of CoL relevant information that is treated in a publication
+    See http://api.col.plus/vocab/gazetteer
+TaxonomicStatusType:
+  type: string
+  enum: ["accepted", "doubtful"]
+  description: >
+    Taxonomic status enumeration for both accepted taxa and synonyms.
+    See http://api.col.plus/vocab/taxonomicstatus
+KingdomType:
+  type: string
+  enum: ["Animalia","Archaea","Bacteria","Chromista","Fungi","Plantae","Protozoa","Viruses"]
+  description: >
+    Enumeration of all kingdoms recognized in the Catalogue of Life.
+    See http://api.col.plus/vocab/kingdom
+MatchType:
+  type: string
+  enum: ["exact", "variant", "inserted", "ambiguous", "none"]
+  description: Enumeration of the kind of matches possible.
+OriginType:
+  type: string
+  enum: ["source", "denormed_classification", "verbatim_parent", "verbatim_accepted","verbatim_basionym",
+  "proparte","autonym","implicit_name","missing_accepted","basionym_placeholder","ex_author_synonym","other"]
+  description: >
+    Enumeration of the kind of matches possible.
+    See http://api.col.plus/vocab/origin
+Error:
+  type: object
+  description: >
+    An error response.
+  properties:
+    status:
+      type: integer
+      description: http status code
+    message:
+      type: string
+      description: Error message
+  example: |
+    {
+      "status": 404,
+      "message": "Name 467324, version 7 not found"
+    }
+ResultSet:
+  type: object
+  description: >
+    A paging resultset without the actual type specific result payload.
+  properties:
+    result:
+      type: object[]
+      description: Result page
+    offset:
+      type: integer
+      description: >
+        The offset applied during request.
+        Can be less than requested if the limit is reached.
+    limit:
+      type: integer
+      description: >
+        The maximum number of records returned.
+        Can be less than requested if the limit is reached.
+    total:
+      type: integer
+      description: >
+        The total number of records available.
+DatasetObject:
+  type: object
+  description: >
+    An object which is part of a specific dataset.
+  properties:
+    key:
+      type: integer
+      description: Primary key for the record
+      required: true
+    datasetKey:
+      type: integer
+      description: Key to the source dataset this record belongs to
+      required: true
+Dataset:
+  type: object
+  description: Metadata about the source dataset, e.g. a GSD
+  properties:
+    key:
+      type: integer
+      description: Primary key for the source dataset
+    alias:
+      type: string
+      description: Short name of the source dataset
+    title:
+      type: string
+      description: Full name of the source dataset
+    gbifKey:
+      type: uuid
+      description: GBIF dataset key
+      required: false
+    abstract:
+      type: string
+      description: Free text describing the source dataset supporting markdown formatting
+      required: false
+    groupName:
+      type: string
+      description: Name in English of the group(s) treated in the database
+    authorsAndEditors:
+      type: string
+      description: Optional author(s) and editor(s) of the source dataset
+      required: false
+    organisation:
+      type: string
+      description: Organisation which has compiled or is owning the source dataset
+      required: false
+    contactPerson:
+      type: string
+      description: Contact person of the source dataset
+      required: false
+    version:
+      type: string
+      description: Latest version number of the source dataset used in the Catalogue of Life
+      required: false
+    releaseDate:
+      type: string
+      description: Latest release date of the source dataset used in the Catalogue of Life
+      required: false
+    taxonomicCoverage:
+      type: string
+      description:
+      required: false
+    coverage:
+      type: string
+      description:
+      required: false
+    completeness:
+      type: integer
+      description: completeness of global coverage in percent given as 0-100
+      required: false
+    confidence:
+      type: integer
+      description: 1-5
+      required: false
+    homepage:
+      type: string
+      description: Homepage URL of the source
+      required: false
+    dataFormat:
+      type: string
+      enum: ["dwca", "tcs", "xls", "other"]
+      description: data format
+      required: false
+    dataAccess:
+      type: string
+      description: URL to access the source data
+      required: false
+DatasetImport:
+  type: object
+  description: Metrics and import details about a single dataset import event.
+  properties:
+    datasetKey:
+      type: integer
+      description: Primary key for the source dataset
+    attempt:
+      type: integer
+      description: Sequential attempt number starting with 1 for each dataset
+    state:
+      type: ImportState
+      description: State of the import, e.g.indicating if still running, success or failure.
+    downloadUri:
+      type: string
+      description: Last modification date of the downloaded file
+    download:
+      type: datetime
+      description: Last modification date of the downloaded file
+    started:
+      type: datetime
+      description: date time the import started
+    finished:
+      type: datetime
+      description: date time the import finished
+      required: false
+    error:
+      type: string
+      description: Error message
+      required: false
+    verbatimCount:
+      type: integer
+      description: count of all verbatim records
+    nameCount:
+      type: integer
+      description: count of all name records
+    taxonCount:
+      type: integer
+      description: count of all taxon (accepted name) records
+    referenceCount:
+      type: integer
+      description: count of all reference records
+    vernacularCount:
+      type: integer
+      description: count of all vernacular names
+    distributionCount:
+      type: integer
+      description: count of all distribution records
+    issuesCount:
+      type: object
+      description: count of verbatim recorbs by issues
+      required: false
+    namesByRankCount:
+      type: object
+      description: count of names by rank
+      required: false
+    namesByTypeCount:
+      type: object
+      description: count of names by name type
+      required: false
+    vernacularsByLanguageCount:
+      type: object
+      description: count of vernacular names by language
+      required: false
+    distributionsByGazetteerCount:
+      type: object
+      description: count of distributions by gazetteer kind
+      required: false
+    namesByOriginCount:
+      type: object
+      description: count of names by their origin
+      required: false
+    usagesByStatusCount:
+      type: object
+      description: count of name usages by their taxonomic status
+      required: false
+    namesByStatusCount:
+      type: object
+      description: count of names by their name status
+      required: false
+    nameRelationsByTypeCount:
+      type: object
+      description: count of name relations by their type
+      required: false
+    verbatimByTypeCount:
+      type: object
+      description: count of verbatim records by their rowType
+      required: false
+  example: | 
+    {
+        "datasetKey": 101,
+        "attempt": 1,
+        "state": "finished",
+        "downloadUri": "https://raw.githubusercontent.com/Sp2000/colplus-repo/master/ACEF/assembly/101.tar.gz",
+        "download": "2018-02-28T03:40:02",
+        "started": "2018-02-28T03:40:01.433",
+        "finished": "2018-02-28T03:52:27.201",
+        "verbatimCount": 169988,
+        "nameCount": 179025,
+        "taxonCount": 147971,
+        "referenceCount": 1711,
+        "vernacularCount": 0,
+        "distributionCount": 137999,
+        "issuesCount": {
+            "DISTRIBUTION_GAZETEER_INVALID": 3,
+            "DISTRIBUTION_STATUS_INVALID": 2,
+            "LIFEZONE_INVALID": 1
+        },
+        "namesByRankCount": {
+            "SPECIES": 169988,
+            "GENUS": 8878,
+            "FAMILY": 155,
+            "KINGDOM": 1,
+            "PHYLUM": 1,
+            "CLASS": 1,
+            "ORDER": 1
+        },
+        "namesByTypeCount": {
+            "SCIENTIFIC": 179025
+        },
+        "distributionsByGazetteerCount": {
+            "TEXT": 137999
+        },
+        "namesByOriginCount": {
+            "SOURCE": 169988,
+            "DENORMED_CLASSIFICATION": 9037
+        }
+    }
+DatasetResultSet:
+  type: ResultSet
+  description: >
+    A paging resultset for Datasets.
+  properties:
+    results:
+      type: Dataset[]
+      description: the resulting Datasets
+Authorship:
+  type: object
+  properties:
+    authors:
+      type: string[]
+      description: list of contributing authors
+    exAuthors:
+      type: string[]
+      description: list of authors excluding ex- authors
+      required: false
+    year:
+      type: string
+      description: Year of publication
+      required: false
+Name:
+  type: object
+  description: |
+    A scientific name.
+    CoL deals and categorizes the following types of names:
+
+     - Linnaean names, i.e. mono-, bi- or trinomials
+       - available or unavailable
+     - Named hybrids and nothotaxa
+     - Virus names
+
+    A name includes it's authorship. Two homonyms with different authors therefore represent two different name entities.
+
+    ### Lexical variations
+
+    The same name can usually be represented by many different strings which we refer to as lexical variations.
+    For each name a standard representation, the canonical form, exists.
+
+    Lexical variations exist for various reasons.
+    Author spelling, transliterations, epither gender, additional infrageneric or infraspecific indications, cited species authors in infraspecific names are common reasons.
+    Listed here are 7 distinct names with some of their string representations:
+
+    ```
+     1. Aus bus Linnaeus 1758
+        - Aus bus Linn. 1758
+        - Aus bus Linn 1758
+        - Aus bus L.
+        - Aus ba Linn 1758.
+        - Aus (Hus) bus L.
+
+     2. Xus bus (Linn, 1758)
+        - Xus bus (Linn) Smith
+
+     3. Xus cus Smith, 1850
+        - Xus cus Sm.
+
+     4. Xus cus Jones 1900
+
+     5. Xus bus cus Smith 1850
+        - Xus bus subsp. cus Smith 1850
+
+     6. Xus dus Pyle 2000
+
+     7. Foo bar var. lion Smith 1850
+        - Foo bar L. var. lion Smith
+        - Foo bar subsp. dar var. lion Smith 1850
+        - Foo bar Lin. subsp. dar Mill. var. lion Smith 1850
+    ```
+
+    New names (**sp./gen. nov.**),
+    new recombinations of the same epithet (**comb. nov.**),
+    a name at a new rank (**stat. nov.**)
+    or replacement names (**nom. nov.**) are all treated as distinct names.
+
+    ### Homotypic group & original name
+    Names based on the same type can be clustered together as a homotypic group of names.
+    A homotypic group not only includes all subsequent recombinations, but also any [replacement name](https://en.wikipedia.org/wiki/Nomen_novum) if existing.
+    These names are homotypic synonyms, also called nomenclatural or objective synonyms.
+
+    The first, originally published name is used to represent such a group as it is a clean proxy to the type specimen,
+    therefore every name in a homotypic group points back to the same original name.
+
+    Protonym in zoology and basionym in botany are terms for a very similar concept, but they do not include replacement names and are rather code specific
+    so we will refer to *original name* here instead, inline with Darwin Core terminology.
+    Original names are not necessarily Code-compliant original descriptions, but usually they are.
+
+    The above names can be clustered into four sets of homotypic synonym groups, shown with canonical authorship:
+
+    ```
+     1. Aus bus Linnaeus 1758
+        - Aus ba Linnaeus 1758 [orthographic variant]
+        - Xus bus (Linnaeus 1758) Smith 1850 [alternate combination]
+
+     2. Xus cus Smith 1850
+        - Xus bus subsp. cus Smith 1850 [alternate rank]
+
+     3. Xus cus Jones 1900 (heterotypic homonym of Xus cus Smith 1850)
+        - Xus dus Pyle 2000 [replacement name for Xus cus Jones]
+
+     4. Foo bar var. lion Smith 1850
+    ```
+
+    ### comb. nov. in ICZN vs ICN
+
+    One of the most notable differences between [ICN](http://www.iapt-taxon.org/nomen/)
+    and [ICZN](http://www.nhm.ac.uk/hosted-sites/iczn/code/) is the way names are cited when a species is placed in a different genus from the one it was originally published in (a comb. nov.).
+    Botanists have a convention of always citing the authors of the original combination in brackets followed by the names of the authors of the combination.
+    Zoologists don't follow this convention, they simply place the author of the original combination in brackets for the new combination and don't cite the authors who were first to make the new combination.
+    This difference is cosmetic. Indeed [ICZN Recommendation 51G](http://www.nhm.ac.uk/hosted-sites/iczn/code/index.jsp?article=51) is that new combinations in zoology should be quoted in a similar way to the way they are quoted in botany.
+
+    *Basionym* is a well established term in the ICN where it is defined that
+    a "basionym provides the final epithet, name, or stem of the new combination or name at new rank" (ICN Art. 6.10 & Art. 41).
+    It is the orginal combination of a name as viewed from a new combination. The basionym is therefore always relative to a new combination.
+    A name can't be a basionym in its own right only relative to another name.
+    ICZN does not mention the term basionym but the notion is clearly present in zoological nomenclature as zoologists also have the concept of the new recombination of a name.
+  properties:
+    key:
+      type: integer
+      description: Internal primary key
+    id:
+      type: string
+      description: Primary key for the name as used in the source database.
+      required: false
+    datasetKey:
+      type: integer
+      description: Primary key for the source dataset
+    basionymKey:
+      type: integer
+      description: link to the original combination. In case of [replacement names](https://en.wikipedia.org/wiki/Nomen_novum) it points back to the replaced synonym.
+      required: false
+    scientificName:
+       type: string
+       description: >
+           entire canonical name string with a rank marker for infragenerics and infraspecfics, but excluding the authorship.
+           For uninomials, e.g. families or names at higher ranks, this is just the uninomial.
+    scientificNameID:
+       type: string
+       description: Global name identifier from a nomenclator or the Catalogue of Life
+       required: false
+    origin:
+       type: OriginType
+       description: Enumeration to classify name usages by how they originated
+    type:
+       type: NameType
+       description: Classification of names, mostly based on their syntactic structure
+       required: false
+    authorship:
+      type: string
+      description: full authorship string including basionym and combination authors, ex- sanctioning authors and years
+      required: false
+    combinationAuthorship:
+      type: Authorship
+      description: parsed authorship object for this combination
+      required: false
+    basionymAuthorship:
+      type: Authorship
+      description: parsed authorship of the basionym
+      required: false
+    sanctioningAuthor:
+      type: string
+      description: the sanctioning author for Fungus names
+      required: false
+    taxonomicNote:
+      type: string
+      description: |
+          informal note often included in authorship that informs about the taxonomic concept.
+          See also Taxon.accordingTo for taxon concept references.
+          Contrary to accordingTo the note here also applies to synonyms such as misapplied names.
+          For example "non Mill.", "auct. amer." or "sensu latu"
+      required: false
+    rank:
+       type: RankType
+       description: rank of the name from enumeration above
+    code:
+      type: NomCodeType
+      description: code of nomenclature applying to the name
+      required: false
+    status:
+      type: NomenclaturalStatusType
+      description: flag to indicate that this name is available/validly published. Current nomenclatural status of the name taking into account all known nomenclatural acts.
+      required: false
+    uninomial:
+      type: string
+      description:
+      required: false
+    genus:
+      type: string
+      description: the genus part of a bi- or trinomial name. Not used for genus names which are represented by the scientificName alone.
+      required: false
+    infragenericEpithet:
+      type: string
+      description: the infrageneric epithet. Used only as the terminal epithet for names at infrageneric ranks, not for species
+      required: false
+    specificEpithet:
+      type: string
+      description:
+      required: false
+    infraspecificEpithet:
+      type: string
+      description:
+      required: false
+    cultivarEpithet:
+      type: string
+      description:
+      required: false
+    strain:
+      type: string
+      description:
+      required: false
+    candidatus:
+      type: boolean
+      description:
+      required: false
+    notho:
+      type: string
+      enum: [ "generic", "infrageneric", "specific", "infraspecific" ]
+      description: the part of the name which is considered a hybrid;  see [GBIF](https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/NamePart.java#L24)
+      required: false
+    fossil:
+      type: boolean
+      description: true if the type specimen of the name is a fossil
+      required: false
+    sourceUrl:
+      type: string
+      description: URL to the taxon webpage in the source.
+      required: false
+    remarks:
+      type: string
+      description: notes for general remarks on the name, i.e. its nomenclature
+      required: false
+  example: |
+    {
+        "key": 169130,
+        "id": "1000BA50801",
+        "datasetKey": 1009,
+        "scientificName": "Fomes obliquus",
+        "rank": "species",
+        "genus": "Fomes",
+        "specificEpithet": "obliquus",
+        "candidatus": false,
+        "combinationAuthorship": {
+            "authors": [
+                "Cooke"
+            ],
+            "year": "1885"
+        },
+        "basionymAuthorship": {
+            "authors": [
+                "Pers."
+            ],
+            "exAuthors": [
+                "Ach."
+            ]
+        },
+        "origin": "source",
+        "type": "scientific",
+        "parsed": true,
+        "authorship": "(Ach. ex Pers.) Cooke, 1885"
+    }
+NameResultSet:
+  type: ResultSet
+  description: >
+    A paging resultset for Names.
+  properties:
+    results:
+      type: Name[]
+      description: the resulting names
+NameSearchResult:
+  type: Name
+  description: |
+    The type of object coming back from a name search query. A NameSearchResult object is a
+    Name object with some extra properties related to synonymy. See below.
+  properties:
+    acceptedName:
+      type: boolean
+      description: >
+        Whether or not this is an accepted name. If true, the taxa field
+        will be a one-element list containing the Taxon associated with the
+        accepted name. If acceptedName is false, then the name either is a
+        synonym or it is a naked name. If the taxa field is empty, it is
+        a naked name. If the taxa field contains one or more Taxon objects,
+        the name is a synonym, and the taxa field will contain the Taxon
+        objects associated with the accepted names of the synonym.
+      required: true
+    taxa:
+      type: object[]
+      description: See above.
+NameSearchResultSet:
+  type: ResultSet
+  description: >
+    A paging resultset for name search results.
+  properties:
+    result:
+      type: NameSearchResult[]
+      description: the names matching the search
+  example: |
+    {
+        "offset": 0,
+        "limit": 10,
+        "total": 179025,
+        "result": [
+            {
+                "key": 2157461,
+                "datasetKey": 101,
+                "scientificName": "Aagaardia",
+                "rank": "genus",
+                "uninomial": "Aagaardia",
+                "candidatus": false,
+                "origin": "denormed_classification",
+                "type": "scientific",
+                "acceptedName": true,
+                "taxa": [
+                    {
+                        "key": 1123278,
+                        "status": "accepted"
+                    }
+                ],
+                "parsed": true
+            },
+            {
+                "key": 2001450,
+                "id": "Sys-172336",
+                "datasetKey": 101,
+                "scientificName": "Aagaardia longicalcis",
+                "rank": "species",
+                "genus": "Aagaardia",
+                "specificEpithet": "longicalcis",
+                "candidatus": false,
+                "combinationAuthorship": {
+                    "authors": [
+                        "Saether"
+                    ],
+                    "year": "2000"
+                },
+                "origin": "source",
+                "type": "scientific",
+                "acceptedName": true,
+                "taxa": [
+                    {
+                        "key": 1123282,
+                        "id": "Sys-172336",
+                        "status": "ACCEPTED"
+                    }
+                ],
+                "parsed": true,
+                "authorship": "Saether, 2000"
+            },
+            {
+                "key": 1989627,
+                "id": "Sys-196835",
+                "datasetKey": 101,
+                "scientificName": "Aagaardia oksanae",
+                "rank": "species",
+                "genus": "Aagaardia",
+                "specificEpithet": "oksanae",
+                "candidatus": false,
+                "combinationAuthorship": {
+                    "authors": [
+                        "Makarchenko"
+                    ],
+                    "year": "2005"
+                },
+                "origin": "source",
+                "type": "scientific",
+                "acceptedName": true,
+                "taxa": [
+                    {
+                        "key": 1123283,
+                        "id": "Sys-196835",
+                        "status": "ACCEPTED"
+                    }
+                ],
+                "parsed": true,
+                "authorship": "Makarchenko, 2005"
+            },
+            {
+                "key": 2001451,
+                "id": "Sys-172334",
+                "datasetKey": 101,
+                "scientificName": "Aagaardia protensa",
+                "rank": "species",
+                "genus": "Aagaardia",
+                "specificEpithet": "protensa",
+                "candidatus": false,
+                "combinationAuthorship": {
+                    "authors": [
+                        "Saether"
+                    ],
+                    "year": "2000"
+                },
+                "origin": "source",
+                "type": "scientific",
+                "acceptedName": true,
+                "taxa": [
+                    {
+                        "key": 1123280,
+                        "id": "Sys-172334",
+                        "status": "ACCEPTED"
+                    }
+                ],
+                "parsed": true,
+                "authorship": "Saether, 2000"
+            },
+            {
+                "key": 2067766,
+                "id": "Sys-87526",
+                "datasetKey": 101,
+                "scientificName": "Aagaardia sivertseni",
+                "rank": "species",
+                "genus": "Aagaardia",
+                "specificEpithet": "sivertseni",
+                "candidatus": false,
+                "basionymAuthorship": {
+                    "authors": [
+                        "Aagaard"
+                    ],
+                    "year": "1979"
+                },
+                "origin": "source",
+                "type": "scientific",
+                "acceptedName": true,
+                "taxa": [
+                    {
+                        "key": 1123279,
+                        "id": "Sys-87526",
+                        "status": "accepted"
+                    }
+                ],
+                "parsed": true,
+                "authorship": "(Aagaard, 1979) "
+            },
+            {
+                "key": 2001452,
+                "id": "Sys-172335",
+                "datasetKey": 101,
+                "scientificName": "Aagaardia triangulata",
+                "rank": "species",
+                "genus": "Aagaardia",
+                "specificEpithet": "triangulata",
+                "candidatus": false,
+                "combinationAuthorship": {
+                    "authors": [
+                        "Saether"
+                    ],
+                    "year": "2000"
+                },
+                "origin": "source",
+                "type": "scientific",
+                "acceptedName": true,
+                "taxa": [
+                    {
+                        "key": 1123281,
+                        "id": "Sys-172335",
+                        "status": "ACCEPTED"
+                    }
+                ],
+                "parsed": true,
+                "authorship": "Saether, 2000"
+            },
+            {
+                "key": 2165044,
+                "datasetKey": 101,
+                "scientificName": "Abago",
+                "rank": "genus",
+                "uninomial": "Abago",
+                "candidatus": false,
+                "origin": "denormed_classification",
+                "type": "scientific",
+                "acceptedName": true,
+                "taxa": [
+                    {
+                        "key": 1114398,
+                        "status": "ACCEPTED"
+                    }
+                ],
+                "parsed": true
+            },
+            {
+                "key": 2112620,
+                "id": "Sys-152428",
+                "datasetKey": 101,
+                "scientificName": "Abago rohdendorfi",
+                "rank": "species",
+                "genus": "Abago",
+                "specificEpithet": "rohdendorfi",
+                "candidatus": false,
+                "combinationAuthorship": {
+                    "authors": [
+                        "Grunin"
+                    ],
+                    "year": "1966"
+                },
+                "origin": "source",
+                "type": "scientific",
+                "acceptedName": true,
+                "taxa": [
+                    {
+                        "key": 1114399,
+                        "id": "Sys-152428",
+                        "status": "ACCEPTED"
+                    }
+                ],
+                "parsed": true,
+                "authorship": "Grunin, 1966"
+            },
+            {
+                "key": 2159955,
+                "datasetKey": 101,
+                "scientificName": "Abaristophora",
+                "rank": "genus",
+                "uninomial": "Abaristophora",
+                "candidatus": false,
+                "origin": "denormed_classification",
+                "type": "scientific",
+                "acceptedName": true,
+                "taxa": [
+                    {
+                        "key": 1231163,
+                        "status": "ACCEPTED"
+                    }
+                ],
+                "parsed": true
+            },
+            {
+                "key": 2019869,
+                "id": "Sys-16345",
+                "datasetKey": 101,
+                "scientificName": "Abaristophora arctophila",
+                "rank": "species",
+                "genus": "Abaristophora",
+                "specificEpithet": "arctophila",
+                "candidatus": false,
+                "combinationAuthorship": {
+                    "authors": [
+                        "Schmitz"
+                    ],
+                    "year": "1927"
+                },
+                "origin": "source",
+                "type": "scientific",
+                "acceptedName": true,
+                "taxa": [
+                    {
+                        "key": 1231173,
+                        "id": "Sys-16345",
+                        "status": "ACCEPTED"
+                    }
+                ],
+                "parsed": true,
+                "authorship": "Schmitz, 1927"
+            }
+        ],
+        "last": false
+    }
+NameMatch:
+  type: object
+  description: >
+    A name matching result
+  properties:
+    name:
+      type: Name
+      description: the matching name
+      required: false
+    type:
+      type: MatchType
+      description: the type of matching
+    alternatives:
+      type: Name[]
+      description: alternatively matching names
+      required: false
+NomenclaturalAct:
+  type: DatasetObject
+  description: A published act which affects the nomenclatural status of a scientific name or the typification of a nominal taxon.
+  properties:
+    key:
+      type: integer
+      description: the unique key, i.e. scientificNameID
+    nameKey:
+      type: integer
+      description: key to the name the act is about
+    type:
+      type: NomenclaturalActType
+      description: Coarse classification of the nomenclatural act.
+    status:
+      type: NomenclaturalStatusType
+      description: Coarse classification of the nomenclatural act.
+      required: false
+    relatedNameKey:
+      type: integer
+      description: key to the related name of the act in case the act defines a name relation
+      required: false
+    description:
+      type: string
+      description: A desription of the details of the nomenclatural act
+      required: false
+    referenceKey:
+      type: integer
+      description: Key to reference in which the act was published
+      required: false
+    referencePage:
+      type: string
+      description: exact first page of the treatment within above reference
+      required: false
+  example: |
+    {
+      "key": 721141,
+      "datasetKey": 15,
+      "type": "description",
+      "nameKey": 78612,
+      "referenceKey": 786,
+      "referencePage": "5"
+    }
+Reference:
+  type: DatasetObject
+  description: |
+    A (literature) reference mostly given in [CSL-JSON](https://github.com/citation-style-language/schema#csl-json-schema).
+    A reference can be linked to a serial, e.g. a journal, that defines the content for the CSL container attributes.
+
+    Treatments are the section of a publication that deals with a single scientific name.
+    They are a unit of citation below articles. [Plazi](http://www.plazi.org) is based on them
+    and Taxon Name Usages (TNU) in [GNUB](http://globalnames.org/docs/gnub/) correspond to treatments.
+
+    The ability to link to the treatment of a name is very useful. It is accomplished in the NomenclaturalAct class,
+    but not dealt with on the shared Reference instances.
+  properties:
+    serialKey:
+      type: integer
+      description: key to container serial
+      required: false
+    csl:
+      type: object
+      description: |
+        the citation metadata as [CSL-JSON](https://github.com/citation-style-language/schema#csl-json-schema),
+        see [CSL JSON schema](https://github.com/citation-style-language/schema/blob/master/csl-data.json).
+  example: |
+    {
+      "key": 432561,
+      "datasetKey": 15,
+      "serialKey": 17,
+      "csl": {
+        "DOI":"10.1038/nrd842",
+        "type":"article-journal",
+        "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
+        "title":"From the analyst's couch: Selective anticancer drugs",
+        "container-title":"Nature Reviews Drug Discovery",
+        "volume":"1",
+        "issue":"7",
+        "issued":{"date-parts":[[2002,7]]},
+        "page":"491-492"
+      }
+    }
+ReferenceResultSet:
+  type: ResultSet
+  description: >
+    A paging resultset for References.
+  properties:
+    results:
+      type: Reference[]
+      description: the resulting References
+Serial:
+  type: DatasetObject
+  description: |
+      A journal or other serial used as a container for references.
+
+      A serial is a publication in any medium issued under the same title in a succession of discrete parts,
+      usually numbered (or dated) and appearing at regular or irregular intervals with no predetermined conclusion.
+      Serial publications include print periodicals and newspapers, electronic magazines and journals, annuals (reports, yearbooks, etc.),
+      proceedings and transactions, and numbered monographic series cataloged separately.
+
+      When serials split, merge, or are absorbed, a title change may occur.
+
+      A specific serial title is identified by a unique International Standard Serials Number (ISSN) and key title,
+      assigned and maintained by the International Serials Data System (ISDS), a network of national serials data centers.
+      Serials and annuals are listed in Ulrich's International Periodicals Directory published annually by ProQuest and in The Serials Directory published by EBSCO.
+  properties:
+    aliases:
+      type: string[]
+      description: Alternative titles known for the serial
+      required: false
+    bph:
+      type: string
+      description: >
+        [BPH Online](http://huntbotanical.org/databases/show.php?1) identifier. Botanic periodicals published between 1665 and the present.
+      required: false
+    call:
+      type: string
+      description: library of congress classification number
+      required: false
+    tl2:
+      type: string
+      description: TL2 number
+      required: false
+    oclc:
+      type: integer
+      description: OCLC number
+      required: false
+    bhl:
+      type: integer
+      description: BHL title number
+      required: false
+    firstYear:
+      type: integer
+      description: First year the serial was published
+      required: false
+    lastYear:
+      type: integer
+      description: Last year the serial was published. Empty for current journals
+      required: false
+    csl:
+      type: object
+      description: >
+        Serial metadata as [CSL-JSON](https://github.com/citation-style-language/schema#csl-json-schema),
+        see [CSL JSON schema](https://github.com/citation-style-language/schema/blob/master/csl-data.json)
+    notes:
+      type: string
+      description: Notes about the serial
+      required: false
+  example: |
+    {
+      "key": 432561,
+      "datasetKey": 15,
+      "bph": "460.06",
+      "tl2": "11.084",
+      "call": "QK1.J55",
+      "oclc": 1754397,
+      "bhl": 68922,
+      "firstYear": 1799,
+      "lastYear": 1804,
+      "csl": {
+        "call-number": "QK1.J55",
+        "type":"journal",
+        "title":"Journal für die Botanik",
+        "title-short":"J. Bot. (Schrader)",
+        "editor":[{"family":"Schrader","given":"H. A."}],
+        "publisher-place": "Göttingen"
+      }
+    }
+SerialResultSet:
+  type: ResultSet
+  description: >
+    A paging resultset for Serials.
+  properties:
+    results:
+      type: Serial[]
+      description: the resulting Serials
+Taxon:
+  type: object
+  description: >
+    A taxon concept, i.e. an accepted name. Not used for synonyms.
+  properties:
+    key:
+      type: integer
+      description: Internal primary key
+    id:
+      type: string
+      description: Primary key for the taxon as used in the source database.
+    datasetKey:
+      type: integer
+      description: Key to the source dataset this record belongs to
+    name:
+      type: Name
+      description: the name for this taxon
+    status:
+      type: TaxonomicStatusType
+      description: the taxonomic status of the taxon
+    parentKey:
+      type: integer
+      description: key to next higher taxon in the classification
+      required: false
+    accordingTo:
+      type: string
+      description: person who scrutinized the taxon. LTSSpecialist in the CoL submission format
+      required: false
+    accordingToDate:
+      type: date-only
+      description: date when the taxon was last scrutinized. LTSDate in the CoL submission format
+      required: false
+    fossil:
+      type: boolean
+      description: true if the taxon is known from fossil records. NULL if unknown.
+      required: false
+    recent:
+      type: boolean
+      description: true if the taxon is known from recent, i.e. holocene records. That includes organisms that died out in the last centuries. NULL if unknown.
+      required: false
+    lifezone:
+      type: LifezoneType[]
+      description: the environment the organism is known to live in.
+      required: false
+    referenceKeys:
+      type: integer[]
+      description: keys to references supporting the taxon concept.
+      required: false
+    speciesEstimate:
+      type: integer
+      description: Estimation of total number of species that have been described for this group.
+      required: false
+    speciesEstimateReferenceKey:
+      type: integer
+      description: Key to reference supporting the estimated number.
+      required: false
+    remarks:
+      type: string
+      description: notes for general remarks on the taxon
+      required: false
+  example: |
+    {
+        "key": 209379,
+        "id": "Kew-114621",
+        "datasetKey": 24,
+        "name": {
+            "key": 369744,
+            "id": "Kew-114621",
+            "datasetKey": 24,
+            "scientificName": "Lithocarpus mariae",
+            "rank": "species",
+            "genus": "Lithocarpus",
+            "specificEpithet": "mariae",
+            "candidatus": false,
+            "combinationAuthorship": {
+                "authors": [
+                    "Soepadmo"
+                ]
+            },
+            "origin": "source",
+            "type": "scientific",
+            "parsed": true,
+            "authorship": "Soepadmo"
+        },
+        "status": "accepted",
+        "origin": "source",
+        "parentKey": 209098,
+        "accordingTo": "Govaerts R.",
+        "fossil": false,
+        "recent": true
+    }
+TaxonResultSet:
+  type: ResultSet
+  description: >
+    A paging resultset for Taxa.
+  properties:
+    results:
+      type: Taxon[]
+      description: the resulting Taxa
+TaxonReference:
+  type: object
+  description: >
+    A reference referring to a specific taxon and annotated with a certain topic.
+  properties:
+    reference:
+      type: Reference
+    topic:
+      type: ReferenceTopicType[]
+TaxonInfo:
+  type: object
+  description: >
+    All supplementarly taxon information for a given taxon.
+  properties:
+    taxon:
+      type: Taxon
+    vernacularNames:
+      type: VernacularName[]
+      required: false
+    distributions:
+      type: Distribution[]
+      required: false
+    taxonReferences:
+      type: integer[]
+      description: List of all distinct references supporting the taxon concept, distribution or vernacular names as referenced by the individual record.
+      required: false
+    references:
+      type: object
+      description: A map of reference keys used by the other objects in this class to the actual full Reference instance.
+      required: false
+  example: |
+    {
+        "taxon": {
+            "key": 209379,
+            "id": "Kew-114621",
+            "datasetKey": 24,
+            "name": {
+                "key": 369744,
+                "id": "Kew-114621",
+                "datasetKey": 24,
+                "scientificName": "Lithocarpus mariae",
+                "rank": "species",
+                "genus": "Lithocarpus",
+                "specificEpithet": "mariae",
+                "candidatus": false,
+                "combinationAuthorship": {
+                    "authors": [
+                        "Soepadmo"
+                    ]
+                },
+                "origin": "source",
+                "type": "scientific",
+                "parsed": true,
+                "authorship": "Soepadmo"
+            },
+            "status": "accepted",
+            "origin": "source",
+            "parentKey": 209098,
+            "accordingTo": "Govaerts R.",
+            "fossil": false,
+            "recent": true
+        },
+        "distributions": [
+            {
+                "area": "Borneo",
+                "gazetteer": "tdwg",
+                "status": "native"
+            }
+        ]
+    }
+VerbatimRecord:
+  type: object
+  description: >
+    Verbatim version of the entire source record with issues flagged during processing.
+  properties:
+    key:
+      type: integer
+      description: Internal primary key
+    datasetKey:
+      type: integer
+      description: Key to the source dataset this record belongs to
+    line:
+      type: integer
+      description: The line number of the file this record originated from
+    file:
+      type: string
+      description: The name of the file this record originated from
+    type:
+      type: string
+      description: The rowType (class) term of the file this record originated from
+    terms:
+      type: object
+      description: Map of DwC or ACEF terms to their string value
+    issues:
+      type: IssueType[]
+      description: Set of issues spotted during processing
+      required: false
+  example: |
+    {
+        "key": 114621,
+        "datasetKey": 24,
+        "line": 4,
+        "file": "AcceptedSpecies.txt",
+        "type": "acef:AcceptedSpecies",
+        "terms": {
+            "acef:AuthorString": "Soepadmo",
+            "acef:Family": "Fagaceae",
+            "acef:AcceptedTaxonID": "Kew-114621",
+            "acef:Phylum": "Tracheophyta",
+            "acef:LTSDate": "Aug-2017",
+            "acef:Sp2000NameStatus": "accepted name",
+            "acef:LTSSpecialist": "Govaerts R.",
+            "acef:HasModern": "1",
+            "acef:SpeciesEpithet": "mariae",
+            "acef:Kingdom": "Plantae",
+            "acef:Order": "Fagales",
+            "acef:Genus": "Lithocarpus",
+            "acef:HasPreHolocene": "0",
+            "acef:Class": "Magnoliopsida",
+            "acef:IsExtinct": "0"
+        },
+        "issues": [
+            "according to date invalid",
+            "escaped characters"
+        ]
+    }
+VerbatimRecordResultSet:
+  type: ResultSet
+  description: >
+    A paging resultset for VerbatimRecords.
+  properties:
+    results:
+      type: VerbatimRecord[]
+      description: the resulting VerbatimRecords
+VernacularName:
+  type: object
+  description: A vernacular name
+  properties:
+    datasetKey:
+      type: integer
+      description: Key to the source dataset this record belongs to
+    name:
+      type: string
+      description: the vernacular name
+    latin:
+      type: string
+      description: transliterated vernacular name into the latin script
+    language:
+      type: isocode
+      description: the language given as 3 letter ISO codes
+    country:
+      type: isocode
+      description: the country given as 2 letter ISO codes
+    referenceKeys:
+      type: integer[]
+      description: Links to references supporting the vernacular name record
+Distribution:
+  type: object
+  description: An area distribution record
+  properties:
+    datasetKey:
+      type: integer
+      description: Key to the source dataset this record belongs to
+      required: false
+    area:
+      type: string
+      description: the geographic area the distribution refers to as defined in the corresponding area standard.
+    gazetteer:
+      type: GazetteerType
+      description: The standard of area names the area value refers to.
+    status:
+      type: DistributionStatusType
+      description: The status of the species distribution
+    referenceKeys:
+      type: integer[]
+      description: Links to references supporting the distribution record
+      required: false
