@@ -13,20 +13,6 @@ description:
     In addition there is a secured, non public admin API, e.g. to request dataset to be (re)imported.
 traits: !include inc/traits.raml
 types: !include inc/types.raml
-resourceTypes:
-  idLookup:
-    get:
-      displayName: Lookup internal key
-      description: Looks up the internal surrrogate key using the original ID as provided by the dataset.
-      responses:
-        200:
-          body:
-            application/json:
-              type: integer
-    uriParameters:
-      id:
-        type: string
-        description: original, dataset provided id
 /dataset:
   get:
     is: [paged,query]
@@ -120,21 +106,19 @@ resourceTypes:
             body:
               application/json:
                 type: ResultSet
-      /id/{id}:
-        type: idLookup
-      /{key}:
+      /{id}:
         get:
           displayName: Get taxon
-          description: Retrieves the taxon with the specified key.
+          description: Retrieves the taxon with the specified id.
           responses:
             200:
               body:
                 application/json:
                   type: Taxon
         uriParameters:
-          key:
-            type: integer
-            description: dataset key
+          id:
+            type: string
+            description: taxon identifier as coming from the source
         /info:
           get:
             displayName: Get taxon info
@@ -174,7 +158,7 @@ resourceTypes:
                     [
                         [
                             {
-                                "key": 21242,
+                                "id": "21242",
                                 "datasetKey": 15,
                                 "scientificName": "Stylopappus grandiflorus",
                                 "scientificNameID": "abc0001",
@@ -191,7 +175,7 @@ resourceTypes:
                                 "basionymKey": 21242
                              },
                             {
-                                "key": 21243,
+                                "id": "21243",
                                 "datasetKey": 15,
                                 "scientificName": "Macrorhynchus grandiflorus",
                                 "scientificNameID": "abc0002",
@@ -211,7 +195,7 @@ resourceTypes:
                                 "basionymKey": 21242
                             },
                             {
-                                "key": 21244,
+                                "id": "21244",
                                 "datasetKey": 15,
                                 "scientificName": "Troximon grandiflorum",
                                 "scientificNameID": "abc0003",
@@ -233,7 +217,7 @@ resourceTypes:
                         ],
                         [
                             {
-                                "key": 13078,
+                                "id": "13078",
                                 "datasetKey": 15,
                                 "scientificName": "Troximon marshallii",
                                 "scientificNameID": "abc0004",
@@ -249,7 +233,7 @@ resourceTypes:
                                 "specificEpithet": "marshallii"
                             },
                             {
-                                "key": 13079,
+                                "id": "13079",
                                 "datasetKey": 15,
                                 "scientificName": "Agoseris marshallii",
                                 "scientificNameID": "abc0005",
@@ -269,7 +253,7 @@ resourceTypes:
                                 "basionymKey": 13078
                             },
                             {
-                                "key": 13080,
+                                "id": "13080",
                                 "datasetKey": 15,
                                 "scientificName": "Agoseris marshalii",
                                 "scientificNameID": "abc0006",
@@ -292,7 +276,7 @@ resourceTypes:
                         ],
                         [
                             {
-                                "key": 13122,
+                                "id": "13122",
                                 "datasetKey": 15,
                                 "scientificName": "Troximon plebeium",
                                 "scientificNameID": "abc0007",
@@ -309,7 +293,7 @@ resourceTypes:
                                 "basionymKey": 13122
                             },
                             {
-                                "key": 13123,
+                                "id": "13123",
                                 "datasetKey": 15,
                                 "scientificName": "Agoseris plebeia",
                                 "scientificNameID": "abc0008",
@@ -329,7 +313,7 @@ resourceTypes:
                                 "basionymKey": 13122
                             },
                             {
-                                "key": 13124,
+                                "id": "13124",
                                 "datasetKey": 15,
                                 "scientificName": "Agoseris grandiflora var. plebeia",
                                 "scientificNameID": "abc0009",
@@ -402,24 +386,26 @@ resourceTypes:
               type: NameType
               description: filter by name type
               required: false
+            publishedIn:
+              type: string
+              description: publishedIn reference id to filter names by
+              required: false
           responses:
             200:
               body:
                 application/json:
                   type: NameSearchResultSet
-      /id/{id}:
-        type: idLookup
-      /{key}:
+      /{id}:
         get:
           displayName: Get name
-          description: Retrieves the name with the specified key.
+          description: Retrieves the name with the specified id.
           responses:
             200:
               body: Name
         uriParameters:
-          key:
-            type: integer
-            description: name key
+          id:
+            type: string
+            description: name identifier as given by the source
         /synonyms:
           get:
             displayName: Get homotypic synonyms
@@ -434,17 +420,17 @@ resourceTypes:
             responses:
               200:
                 body: Reference
-        /acts:
+        /relations:
           get:
-            displayName: Get nomenclatural acts
-            description: Retrieves nomenclatural acts for the name or its homotypical group
+            displayName: Get nomenclatural name relations
+            description: Retrieves nomenclatural relations for the name or its homotypical group
             queryParameters:
               homotypic:
                 type: boolean
                 description: if true also includes all acts about related, homotypic names
             responses:
               200:
-                body: NomenclaturalAct[]
+                body: NameRelation[]
         /verbatim:
           get:
             displayName: Get verbatim record
@@ -458,25 +444,16 @@ resourceTypes:
         responses:
           200:
             body: ResultSet
-      /id/{id}:
-        type: idLookup
-      /{key}:
+      /{id}:
         get:
-          description: get reference details by key
+          description: get reference details by id
           responses:
             200:
               body: Reference
         uriParameters:
-          key:
-            type: integer
-            description: reference key
-        /acts:
-          get:
-            displayName: Get nomenclatural acts
-            description: Retrieves all nomenclatural acts published in the reference
-            responses:
-              200:
-                body: NomenclaturalAct[]
+          id:
+            type: string
+            description: reference id
 /parser:
   /name:
     get:

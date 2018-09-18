@@ -141,30 +141,88 @@ NameType:
   description: >
     Classification of names, mostly based on their syntactic structure.
     See http://api.col.plus/vocab/nametype
-NomenclaturalActType:
+NameRelationType:
   type: string
-  enum: ["description", "ruling", "emendation", "typification"]
+  enum: ["spelling correction","basionym","based on","replacement name","conserved","later homonym","superfluous","homotypic"]
   description: >
-    Coarse classification of nomenclatural acts.
-    See http://api.col.plus/vocab/nomacttype
+    Coarse classification of nomenclatural name relations.
+    See http://api.col.plus/vocab/nomreltype
 
-     description
-     : the description of a new original name, a new recombination, a replacement name or a change in rank.
-       The publication linked to the description act is the dwc:namePublishedIn reference.
-
-     ruling
-     : acts taken by the official committee e.g. suppressed, rejected or conserved names.
-
-     emendation
-     : corrected or improved names. Intentional changes in the original spelling of an available name. The binomial authority remains unchanged.
+     spelling correction
+     : The current name is a spelling correction, called emendation in zoology, of the related name having the same type.
+       Intentional changes in the original spelling of an available name, whether justified or unjustified.
+       The binomial authority remains unchanged.
        Valid emendations include changes made to correct:
-       a) typographical errors in the original work describing the species,
-       b) errors in transliteration from non-Latin languages,
-       c) names that included diacritics, hyphens
-       d) endings of species to match the gender of the generic name, particularly when the combination has been changed
+          a) typographical errors in the original work describing the species,
+          b) errors in transliteration from non-Latin languages,
+          c) names that included diacritics, hyphens
+          d) endings of species to match the gender of the generic name, particularly when the combination has been changed
+       
+       For example, Hieronima and Hyeronima are orthographical variants of Hieronyma.
+       One of the spellings must be treated as the correct one. In this case, the spelling Hieronyma has been conserved
+       and is to be used as the correct spelling.
+       
+       Botany (Article 61).: An inadvertent use of one of the other spellings has no consequences:
+       the name is to be treated as if it were correctly spelled.
+       
+       Zoology (Art. 32-33 ): Orthographical variants in the formal sense do not exist;
+       a misspelling or orthographic error is treated as a lapsus, a form of inadvertent error.
+       The first reviser is allowed to choose one variant for mandatory further use, but in other ways,
+       these errors generally have no further formal standing.
 
-     typification
-     : subsequent type designations.
+     basionym
+     : The current name has a basionym and therefore is either
+       a recombination (combinatio nova, comb. nov.) of the name pointed to
+        (and the name pointed to is not, itself, a recombination),
+       or a change in rank (status novus, stat. nov.).
+
+     based on
+     : The current name is the validation of a name that was not fully published before.
+       Covers the use of ex in botanical author strings.
+       
+       ICN Art. 46.4: e.g. if this name object represents G. tomentosum Nutt. ex Seem.
+       then the related name should be G. tomentosum Nutt.
+
+     replacement name
+     : Current name is replacement for the related name.
+       Also called 'Nomen Novum' or 'avowed substitute'
+       ICN: Article 7.3
+       ICZN: Article 60.3.
+
+     conserved
+     : The current name or spelling is conserved / protected against the related name
+       or the related name is suppressed / rejected in favor of the current name.
+      
+       A spelling which has been conserved relates two homotypic names, otherwise
+       the related names should be based on different types.
+      
+       Based on an individual publication but more often
+       due to actions of the ICZN or ICBN exercising its Plenary Powers.
+      
+       ICN: Conservation is covered under Article 14 and Appendix II and Appendix III (this name is nomina conservanda).
+       ICZN: Reversal of precedence under Article 23.9 (this name is nomen protectum and the target name is nomen oblitum)
+             or suppression via plenary power Article 81.
+
+     later homonym
+     : Current name has same spelling as related name
+       but was published later and has priority over it (unless conserved or sanctioned)
+       and is based on a different type. Called a junior homonym in zoology.
+       This includes botanical parahomonyms which differ slightly in spelling
+       but are similar enough that they are likely to be confused (Art 53.3).
+       The zoological code has a set of spelling variations (article 58) that are considered to be identical.
+       When acts of conservation or suppression have occurred then the terms 'Conserved Later Homonym'and 'Rejected Earlier Homonym' should be used.
+       Two identical and homotypic names (isonyms) should be indicated with the superfluous relation type.
+       ICN: Article 53
+       ICZN: Chapter 12, Article 52.
+
+     superfluous
+     : Current name was superfluous at its time of publication,
+       i. e. it was based on the same type as the related, previously published name (ICN article 52).
+       The current, superfluous name is available but illegitimate. 
+       Includes the special case of isonyms which are identical names.
+
+     homotypic
+     : A relation indicating two homotypic names, i.e. objective or nomenclatural synonymy, but not further specifying why.
 LicenseType:
   type: string
   enum: ["cc0","cc by","cc by nc","unspecified"]
@@ -289,14 +347,29 @@ DatasetObject:
   description: >
     An object which is part of a specific dataset.
   properties:
-    key:
-      type: integer
-      description: Primary key for the record
-      required: true
     datasetKey:
       type: integer
       description: Key to the source dataset this record belongs to
       required: true
+VerbatimObject:
+  type: DatasetObject
+  properties:
+    verbatimKey:
+      type: integer
+      description: Key to the verbatim record this object was derived from
+      required: false
+VerbatimIdObject:
+  type: VerbatimObject
+  properties:
+    id:
+      type: string
+      description: Primary id for the record
+VerbatimKeyObject:
+  type: VerbatimObject
+  properties:
+    key:
+      type: integer
+      description: Primary key for the record
 Dataset:
   type: object
   description: Metadata about the source dataset, e.g. a GSD
@@ -537,7 +610,7 @@ Authorship:
       description: Year of publication
       required: false
 Name:
-  type: object
+  type: VerbatimIdObject
   description: |
     A scientific name.
     CoL deals and categorizes the following types of names:
@@ -632,18 +705,8 @@ Name:
     A name can't be a basionym in its own right only relative to another name.
     ICZN does not mention the term basionym but the notion is clearly present in zoological nomenclature as zoologists also have the concept of the new recombination of a name.
   properties:
-    key:
-      type: integer
-      description: Internal primary key
-    id:
+    basionymId:
       type: string
-      description: Primary key for the name as used in the source database.
-      required: false
-    datasetKey:
-      type: integer
-      description: Primary key for the source dataset
-    basionymKey:
-      type: integer
       description: link to the original combination. In case of [replacement names](https://en.wikipedia.org/wiki/Nomen_novum) it points back to the replaced synonym.
       required: false
     scientificName:
@@ -651,10 +714,6 @@ Name:
        description: >
            entire canonical name string with a rank marker for infragenerics and infraspecfics, but excluding the authorship.
            For uninomials, e.g. families or names at higher ranks, this is just the uninomial.
-    scientificNameID:
-       type: string
-       description: Global name identifier from a nomenclator or the Catalogue of Life
-       required: false
     origin:
        type: OriginType
        description: Enumeration to classify name usages by how they originated
@@ -748,7 +807,6 @@ Name:
       required: false
   example: |
     {
-        "key": 169130,
         "id": "1000BA50801",
         "datasetKey": 1009,
         "scientificName": "Fomes obliquus",
@@ -818,7 +876,7 @@ NameSearchResultSet:
         "total": 179025,
         "result": [
             {
-                "key": 2157461,
+                "id": "2157461",
                 "datasetKey": 101,
                 "scientificName": "Aagaardia",
                 "rank": "genus",
@@ -829,14 +887,13 @@ NameSearchResultSet:
                 "acceptedName": true,
                 "taxa": [
                     {
-                        "key": 1123278,
+                        "id": "1123278",
                         "status": "accepted"
                     }
                 ],
                 "parsed": true
             },
             {
-                "key": 2001450,
                 "id": "Sys-172336",
                 "datasetKey": 101,
                 "scientificName": "Aagaardia longicalcis",
@@ -855,7 +912,6 @@ NameSearchResultSet:
                 "acceptedName": true,
                 "taxa": [
                     {
-                        "key": 1123282,
                         "id": "Sys-172336",
                         "status": "ACCEPTED"
                     }
@@ -864,7 +920,6 @@ NameSearchResultSet:
                 "authorship": "Saether, 2000"
             },
             {
-                "key": 1989627,
                 "id": "Sys-196835",
                 "datasetKey": 101,
                 "scientificName": "Aagaardia oksanae",
@@ -883,7 +938,6 @@ NameSearchResultSet:
                 "acceptedName": true,
                 "taxa": [
                     {
-                        "key": 1123283,
                         "id": "Sys-196835",
                         "status": "ACCEPTED"
                     }
@@ -892,7 +946,6 @@ NameSearchResultSet:
                 "authorship": "Makarchenko, 2005"
             },
             {
-                "key": 2001451,
                 "id": "Sys-172334",
                 "datasetKey": 101,
                 "scientificName": "Aagaardia protensa",
@@ -911,7 +964,6 @@ NameSearchResultSet:
                 "acceptedName": true,
                 "taxa": [
                     {
-                        "key": 1123280,
                         "id": "Sys-172334",
                         "status": "ACCEPTED"
                     }
@@ -920,7 +972,6 @@ NameSearchResultSet:
                 "authorship": "Saether, 2000"
             },
             {
-                "key": 2067766,
                 "id": "Sys-87526",
                 "datasetKey": 101,
                 "scientificName": "Aagaardia sivertseni",
@@ -939,7 +990,6 @@ NameSearchResultSet:
                 "acceptedName": true,
                 "taxa": [
                     {
-                        "key": 1123279,
                         "id": "Sys-87526",
                         "status": "accepted"
                     }
@@ -948,7 +998,6 @@ NameSearchResultSet:
                 "authorship": "(Aagaard, 1979) "
             },
             {
-                "key": 2001452,
                 "id": "Sys-172335",
                 "datasetKey": 101,
                 "scientificName": "Aagaardia triangulata",
@@ -967,7 +1016,6 @@ NameSearchResultSet:
                 "acceptedName": true,
                 "taxa": [
                     {
-                        "key": 1123281,
                         "id": "Sys-172335",
                         "status": "ACCEPTED"
                     }
@@ -976,7 +1024,7 @@ NameSearchResultSet:
                 "authorship": "Saether, 2000"
             },
             {
-                "key": 2165044,
+                "id": "2165044",
                 "datasetKey": 101,
                 "scientificName": "Abago",
                 "rank": "genus",
@@ -987,14 +1035,13 @@ NameSearchResultSet:
                 "acceptedName": true,
                 "taxa": [
                     {
-                        "key": 1114398,
+                        "id": "1114398",
                         "status": "ACCEPTED"
                     }
                 ],
                 "parsed": true
             },
             {
-                "key": 2112620,
                 "id": "Sys-152428",
                 "datasetKey": 101,
                 "scientificName": "Abago rohdendorfi",
@@ -1013,7 +1060,6 @@ NameSearchResultSet:
                 "acceptedName": true,
                 "taxa": [
                     {
-                        "key": 1114399,
                         "id": "Sys-152428",
                         "status": "ACCEPTED"
                     }
@@ -1022,7 +1068,7 @@ NameSearchResultSet:
                 "authorship": "Grunin, 1966"
             },
             {
-                "key": 2159955,
+                "id": "2159955",
                 "datasetKey": 101,
                 "scientificName": "Abaristophora",
                 "rank": "genus",
@@ -1033,14 +1079,13 @@ NameSearchResultSet:
                 "acceptedName": true,
                 "taxa": [
                     {
-                        "key": 1231163,
+                        "id": "1231163",
                         "status": "ACCEPTED"
                     }
                 ],
                 "parsed": true
             },
             {
-                "key": 2019869,
                 "id": "Sys-16345",
                 "datasetKey": 101,
                 "scientificName": "Abaristophora arctophila",
@@ -1059,7 +1104,6 @@ NameSearchResultSet:
                 "acceptedName": true,
                 "taxa": [
                     {
-                        "key": 1231173,
                         "id": "Sys-16345",
                         "status": "ACCEPTED"
                     }
@@ -1086,50 +1130,39 @@ NameMatch:
       type: Name[]
       description: alternatively matching names
       required: false
-NomenclaturalAct:
-  type: DatasetObject
+NameRelation:
+  type: VerbatimKeyObject
   description: A published act which affects the nomenclatural status of a scientific name or the typification of a nominal taxon.
   properties:
-    key:
-      type: integer
-      description: the unique key, i.e. scientificNameID
-    nameKey:
-      type: integer
-      description: key to the name the act is about
     type:
-      type: NomenclaturalActType
+      type: NameRelationType
       description: Coarse classification of the nomenclatural act.
-    status:
-      type: NomenclaturalStatusType
-      description: Coarse classification of the nomenclatural act.
+    nameId:
+      type: string
+      description: key to the name the act is about
+    relatedNameId:
+      type: string
+      description: id to the other, related name
       required: false
-    relatedNameKey:
-      type: integer
-      description: key to the related name of the act in case the act defines a name relation
+    publishedInId:
+      type: string
+      description: Key to reference in which the relation was published
       required: false
-    description:
+    note:
       type: string
       description: A desription of the details of the nomenclatural act
-      required: false
-    referenceKey:
-      type: integer
-      description: Key to reference in which the act was published
-      required: false
-    referencePage:
-      type: string
-      description: exact first page of the treatment within above reference
       required: false
   example: |
     {
       "key": 721141,
       "datasetKey": 15,
-      "type": "description",
-      "nameKey": 78612,
-      "referenceKey": 786,
-      "referencePage": "5"
+      "type": "basionym",
+      "nameId": "78612",
+      "relatedNameId": "1655",
+      "publishedInId": "786"
     }
 Reference:
-  type: DatasetObject
+  type: VerbatimIdObject
   description: |
     A (literature) reference mostly given in [CSL-JSON](https://github.com/citation-style-language/schema#csl-json-schema).
     A reference can be linked to a serial, e.g. a journal, that defines the content for the CSL container attributes.
@@ -1138,7 +1171,7 @@ Reference:
     They are a unit of citation below articles. [Plazi](http://www.plazi.org) is based on them
     and Taxon Name Usages (TNU) in [GNUB](http://globalnames.org/docs/gnub/) correspond to treatments.
 
-    The ability to link to the treatment of a name is very useful. It is accomplished in the NomenclaturalAct class,
+    The ability to link to the treatment of a name is very useful. It is accomplished in the NameRelation class,
     but not dealt with on the shared Reference instances.
   properties:
     serialKey:
@@ -1152,9 +1185,8 @@ Reference:
         see [CSL JSON schema](https://github.com/citation-style-language/schema/blob/master/csl-data.json).
   example: |
     {
-      "key": 432561,
+      "id": "432561",
       "datasetKey": 15,
-      "serialKey": 17,
       "csl": {
         "DOI":"10.1038/nrd842",
         "type":"article-journal",
@@ -1262,19 +1294,10 @@ SerialResultSet:
       type: Serial[]
       description: the resulting Serials
 Taxon:
-  type: object
+  type: VerbatimIdObject
   description: >
     A taxon concept, i.e. an accepted name. Not used for synonyms.
   properties:
-    key:
-      type: integer
-      description: Internal primary key
-    id:
-      type: string
-      description: Primary key for the taxon as used in the source database.
-    datasetKey:
-      type: integer
-      description: Key to the source dataset this record belongs to
     name:
       type: Name
       description: the name for this taxon
@@ -1383,7 +1406,7 @@ TaxonInfo:
       type: Distribution[]
       required: false
     taxonReferences:
-      type: integer[]
+      type: string[]
       description: List of all distinct references supporting the taxon concept, distribution or vernacular names as referenced by the individual record.
       required: false
     references:
@@ -1393,11 +1416,9 @@ TaxonInfo:
   example: |
     {
         "taxon": {
-            "key": 209379,
             "id": "Kew-114621",
             "datasetKey": 24,
             "name": {
-                "key": 369744,
                 "id": "Kew-114621",
                 "datasetKey": 24,
                 "scientificName": "Lithocarpus mariae",
@@ -1417,13 +1438,14 @@ TaxonInfo:
             },
             "status": "accepted",
             "origin": "source",
-            "parentKey": 209098,
+            "parentId": "209098",
             "accordingTo": "Govaerts R.",
             "fossil": false,
             "recent": true
         },
         "distributions": [
             {
+                "datasetKey": 24,
                 "area": "Borneo",
                 "gazetteer": "tdwg",
                 "status": "native"
@@ -1431,16 +1453,13 @@ TaxonInfo:
         ]
     }
 VerbatimRecord:
-  type: object
+  type: DatasetObject
   description: >
     Verbatim version of the entire source record with issues flagged during processing.
   properties:
     key:
       type: integer
       description: Internal primary key
-    datasetKey:
-      type: integer
-      description: Key to the source dataset this record belongs to
     line:
       type: integer
       description: The line number of the file this record originated from
@@ -1495,12 +1514,9 @@ VerbatimRecordResultSet:
       type: VerbatimRecord[]
       description: the resulting VerbatimRecords
 VernacularName:
-  type: object
+  type: DatasetObject
   description: A vernacular name
   properties:
-    datasetKey:
-      type: integer
-      description: Key to the source dataset this record belongs to
     name:
       type: string
       description: the vernacular name
@@ -1513,17 +1529,13 @@ VernacularName:
     country:
       type: isocode
       description: the country given as 2 letter ISO codes
-    referenceKeys:
-      type: integer[]
+    referenceIds:
+      type: string[]
       description: Links to references supporting the vernacular name record
 Distribution:
-  type: object
+  type: DatasetObject
   description: An area distribution record
   properties:
-    datasetKey:
-      type: integer
-      description: Key to the source dataset this record belongs to
-      required: false
     area:
       type: string
       description: the geographic area the distribution refers to as defined in the corresponding area standard.
@@ -1533,7 +1545,7 @@ Distribution:
     status:
       type: DistributionStatusType
       description: The status of the species distribution
-    referenceKeys:
-      type: integer[]
+    referenceIds:
+      type: string[]
       description: Links to references supporting the distribution record
       required: false

@@ -725,7 +725,6 @@ Dataset used to build the provisional catalogue will be trusted and insert their
                         <h2 id="model-Name">Name</h2>
 
     <pre class="example"><code class="json">{
-    "key": 169130,
     "id": "1000BA50801",
     "datasetKey": 1009,
     "scientificName": "Fomes obliquus",
@@ -846,32 +845,32 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>key</td>
+                                    <td>datasetKey</td>
                                     <td>integer</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>Internal primary key</p>
+                                    <td><p>Key to the source dataset this record belongs to</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>verbatimKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Key to the verbatim record this object was derived from</p>
 </td>
                                 </tr>
                                 <tr>
                                     <td>id</td>
                                     <td>string</td>
                                     <td></td>
-                                    <td>no</td>
-                                    <td><p>Primary key for the name as used in the source database.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>datasetKey</td>
-                                    <td>integer</td>
-                                    <td></td>
                                     <td>yes</td>
-                                    <td><p>Primary key for the source dataset</p>
+                                    <td><p>Primary id for the record</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>basionymKey</td>
-                                    <td>integer</td>
+                                    <td>basionymId</td>
+                                    <td>string</td>
                                     <td></td>
                                     <td>no</td>
                                     <td><p>link to the original combination. In case of <a href="https://en.wikipedia.org/wiki/Nomen_novum">replacement names</a> it points back to the replaced synonym.</p>
@@ -883,14 +882,6 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>entire canonical name string with a rank marker for infragenerics and infraspecfics, but excluding the authorship. For uninomials, e.g. families or names at higher ranks, this is just the uninomial.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>scientificNameID</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Global name identifier from a nomenclator or the Catalogue of Life</p>
 </td>
                                 </tr>
                                 <tr>
@@ -1140,32 +1131,32 @@ Name object with some extra properties related to synonymy. See below.</p>
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>key</td>
+                                    <td>datasetKey</td>
                                     <td>integer</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>Internal primary key</p>
+                                    <td><p>Key to the source dataset this record belongs to</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>verbatimKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Key to the verbatim record this object was derived from</p>
 </td>
                                 </tr>
                                 <tr>
                                     <td>id</td>
                                     <td>string</td>
                                     <td></td>
-                                    <td>no</td>
-                                    <td><p>Primary key for the name as used in the source database.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>datasetKey</td>
-                                    <td>integer</td>
-                                    <td></td>
                                     <td>yes</td>
-                                    <td><p>Primary key for the source dataset</p>
+                                    <td><p>Primary id for the record</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>basionymKey</td>
-                                    <td>integer</td>
+                                    <td>basionymId</td>
+                                    <td>string</td>
                                     <td></td>
                                     <td>no</td>
                                     <td><p>link to the original combination. In case of <a href="https://en.wikipedia.org/wiki/Nomen_novum">replacement names</a> it points back to the replaced synonym.</p>
@@ -1177,14 +1168,6 @@ Name object with some extra properties related to synonymy. See below.</p>
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>entire canonical name string with a rank marker for infragenerics and infraspecfics, but excluding the authorship. For uninomials, e.g. families or names at higher ranks, this is just the uninomial.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>scientificNameID</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Global name identifier from a nomenclator or the Catalogue of Life</p>
 </td>
                                 </tr>
                                 <tr>
@@ -1385,7 +1368,7 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
     "total": 179025,
     "result": [
         {
-            "key": 2157461,
+            "id": "2157461",
             "datasetKey": 101,
             "scientificName": "Aagaardia",
             "rank": "genus",
@@ -1396,14 +1379,13 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1123278,
+                    "id": "1123278",
                     "status": "accepted"
                 }
             ],
             "parsed": true
         },
         {
-            "key": 2001450,
             "id": "Sys-172336",
             "datasetKey": 101,
             "scientificName": "Aagaardia longicalcis",
@@ -1422,7 +1404,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1123282,
                     "id": "Sys-172336",
                     "status": "ACCEPTED"
                 }
@@ -1431,7 +1412,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "authorship": "Saether, 2000"
         },
         {
-            "key": 1989627,
             "id": "Sys-196835",
             "datasetKey": 101,
             "scientificName": "Aagaardia oksanae",
@@ -1450,7 +1430,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1123283,
                     "id": "Sys-196835",
                     "status": "ACCEPTED"
                 }
@@ -1459,7 +1438,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "authorship": "Makarchenko, 2005"
         },
         {
-            "key": 2001451,
             "id": "Sys-172334",
             "datasetKey": 101,
             "scientificName": "Aagaardia protensa",
@@ -1478,7 +1456,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1123280,
                     "id": "Sys-172334",
                     "status": "ACCEPTED"
                 }
@@ -1487,7 +1464,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "authorship": "Saether, 2000"
         },
         {
-            "key": 2067766,
             "id": "Sys-87526",
             "datasetKey": 101,
             "scientificName": "Aagaardia sivertseni",
@@ -1506,7 +1482,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1123279,
                     "id": "Sys-87526",
                     "status": "accepted"
                 }
@@ -1515,7 +1490,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "authorship": "(Aagaard, 1979) "
         },
         {
-            "key": 2001452,
             "id": "Sys-172335",
             "datasetKey": 101,
             "scientificName": "Aagaardia triangulata",
@@ -1534,7 +1508,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1123281,
                     "id": "Sys-172335",
                     "status": "ACCEPTED"
                 }
@@ -1543,7 +1516,7 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "authorship": "Saether, 2000"
         },
         {
-            "key": 2165044,
+            "id": "2165044",
             "datasetKey": 101,
             "scientificName": "Abago",
             "rank": "genus",
@@ -1554,14 +1527,13 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1114398,
+                    "id": "1114398",
                     "status": "ACCEPTED"
                 }
             ],
             "parsed": true
         },
         {
-            "key": 2112620,
             "id": "Sys-152428",
             "datasetKey": 101,
             "scientificName": "Abago rohdendorfi",
@@ -1580,7 +1552,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1114399,
                     "id": "Sys-152428",
                     "status": "ACCEPTED"
                 }
@@ -1589,7 +1560,7 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "authorship": "Grunin, 1966"
         },
         {
-            "key": 2159955,
+            "id": "2159955",
             "datasetKey": 101,
             "scientificName": "Abaristophora",
             "rank": "genus",
@@ -1600,14 +1571,13 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1231163,
+                    "id": "1231163",
                     "status": "ACCEPTED"
                 }
             ],
             "parsed": true
         },
         {
-            "key": 2019869,
             "id": "Sys-16345",
             "datasetKey": 101,
             "scientificName": "Abaristophora arctophila",
@@ -1626,7 +1596,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1231173,
                     "id": "Sys-16345",
                     "status": "ACCEPTED"
                 }
@@ -1724,15 +1693,15 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
 </td>
                                 </tr>
                             </tbody></table>
-                        <h2 id="model-NomenclaturalAct">NomenclaturalAct</h2>
+                        <h2 id="model-NameRelation">NameRelation</h2>
 
     <pre class="example"><code class="json">{
   "key": 721141,
   "datasetKey": 15,
-  "type": "description",
-  "nameKey": 78612,
-  "referenceKey": 786,
-  "referencePage": "5"
+  "type": "basionym",
+  "nameId": "78612",
+  "relatedNameId": "1655",
+  "publishedInId": "786"
 }
 </code></pre>
 
@@ -1749,14 +1718,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>key</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Primary key for the record</p>
-</td>
-                                </tr>
-                                <tr>
                                     <td>datasetKey</td>
                                     <td>integer</td>
                                     <td></td>
@@ -1765,68 +1726,67 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
 </td>
                                 </tr>
                                 <tr>
-                                    <td>nameKey</td>
+                                    <td>verbatimKey</td>
                                     <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Key to the verbatim record this object was derived from</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>key</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Primary key for the record</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>type</td>
+                                    <td><a href="#model-NameRelationType">NameRelationType</a></td>
+                                    <td>spelling correction, basionym, based on, replacement name, conserved, later homonym, superfluous, homotypic</td>
+                                    <td>yes</td>
+                                    <td><p>Coarse classification of the nomenclatural act.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>nameId</td>
+                                    <td>string</td>
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>key to the name the act is about</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>type</td>
-                                    <td><a href="#model-NomenclaturalActType">NomenclaturalActType</a></td>
-                                    <td>description, ruling, emendation, typification</td>
-                                    <td>yes</td>
-                                    <td><p>Coarse classification of the nomenclatural act.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>status</td>
-                                    <td><a href="#model-NomenclaturalStatusType">NomenclaturalStatusType</a></td>
-                                    <td>ok, unavailable, illegitimate, variant, conserved, rejected, doubtful, unevaluated</td>
-                                    <td>no</td>
-                                    <td><p>Coarse classification of the nomenclatural act.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>relatedNameKey</td>
-                                    <td>integer</td>
+                                    <td>relatedNameId</td>
+                                    <td>string</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>key to the related name of the act in case the act defines a name relation</p>
+                                    <td><p>id to the other, related name</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>description</td>
+                                    <td>publishedInId</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Key to reference in which the relation was published</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>note</td>
                                     <td>string</td>
                                     <td></td>
                                     <td>no</td>
                                     <td><p>A desription of the details of the nomenclatural act</p>
 </td>
                                 </tr>
-                                <tr>
-                                    <td>referenceKey</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Key to reference in which the act was published</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>referencePage</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>exact first page of the treatment within above reference</p>
-</td>
-                                </tr>
                             </tbody></table>
                         <h2 id="model-Reference">Reference</h2>
 
     <pre class="example"><code class="json">{
-  "key": 432561,
+  "id": "432561",
   "datasetKey": 15,
-  "serialKey": 17,
   "csl": {
     "DOI":"10.1038/nrd842",
     "type":"article-journal",
@@ -1846,7 +1806,7 @@ A reference can be linked to a serial, e.g. a journal, that defines the content 
 <p>Treatments are the section of a publication that deals with a single scientific name.
 They are a unit of citation below articles. <a href="http://www.plazi.org">Plazi</a> is based on them
 and Taxon Name Usages (TNU) in <a href="http://globalnames.org/docs/gnub/">GNUB</a> correspond to treatments.</p>
-<p>The ability to link to the treatment of a name is very useful. It is accomplished in the NomenclaturalAct class,
+<p>The ability to link to the treatment of a name is very useful. It is accomplished in the NameRelation class,
 but not dealt with on the shared Reference instances.</p>
 </p>
 
@@ -1860,19 +1820,27 @@ but not dealt with on the shared Reference instances.</p>
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>key</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Primary key for the record</p>
-</td>
-                                </tr>
-                                <tr>
                                     <td>datasetKey</td>
                                     <td>integer</td>
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>Key to the source dataset this record belongs to</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>verbatimKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Key to the verbatim record this object was derived from</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Primary id for the record</p>
 </td>
                                 </tr>
                                 <tr>
@@ -1992,14 +1960,6 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                 <th>Description</th>
                             </tr>
                             </thead><tbody>
-                                <tr>
-                                    <td>key</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Primary key for the record</p>
-</td>
-                                </tr>
                                 <tr>
                                     <td>datasetKey</td>
                                     <td>integer</td>
@@ -2192,11 +2152,19 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>key</td>
+                                    <td>datasetKey</td>
                                     <td>integer</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>Internal primary key</p>
+                                    <td><p>Key to the source dataset this record belongs to</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>verbatimKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Key to the verbatim record this object was derived from</p>
 </td>
                                 </tr>
                                 <tr>
@@ -2204,15 +2172,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td>string</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>Primary key for the taxon as used in the source database.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>datasetKey</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Key to the source dataset this record belongs to</p>
+                                    <td><p>Primary id for the record</p>
 </td>
                                 </tr>
                                 <tr>
@@ -2402,11 +2362,9 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
 
     <pre class="example"><code class="json">{
     "taxon": {
-        "key": 209379,
         "id": "Kew-114621",
         "datasetKey": 24,
         "name": {
-            "key": 369744,
             "id": "Kew-114621",
             "datasetKey": 24,
             "scientificName": "Lithocarpus mariae",
@@ -2426,13 +2384,14 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
         },
         "status": "accepted",
         "origin": "source",
-        "parentKey": 209098,
+        "parentId": "209098",
         "accordingTo": "Govaerts R.",
         "fossil": false,
         "recent": true
     },
     "distributions": [
         {
+            "datasetKey": 24,
             "area": "Borneo",
             "gazetteer": "tdwg",
             "status": "native"
@@ -2476,7 +2435,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                 </tr>
                                 <tr>
                                     <td>taxonReferences</td>
-                                    <td>integer[]</td>
+                                    <td>string[]</td>
                                     <td></td>
                                     <td>no</td>
                                     <td><p>List of all distinct references supporting the taxon concept, distribution or vernacular names as referenced by the individual record.</p>
@@ -2536,19 +2495,19 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>key</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Internal primary key</p>
-</td>
-                                </tr>
-                                <tr>
                                     <td>datasetKey</td>
                                     <td>integer</td>
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>Key to the source dataset this record belongs to</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>key</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Internal primary key</p>
 </td>
                                 </tr>
                                 <tr>
@@ -2704,8 +2663,8 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
 </td>
                                 </tr>
                                 <tr>
-                                    <td>referenceKeys</td>
-                                    <td>integer[]</td>
+                                    <td>referenceIds</td>
+                                    <td>string[]</td>
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>Links to references supporting the vernacular name record</p>
@@ -2731,7 +2690,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td>datasetKey</td>
                                     <td>integer</td>
                                     <td></td>
-                                    <td>no</td>
+                                    <td>yes</td>
                                     <td><p>Key to the source dataset this record belongs to</p>
 </td>
                                 </tr>
@@ -2760,8 +2719,8 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
 </td>
                                 </tr>
                                 <tr>
-                                    <td>referenceKeys</td>
-                                    <td>integer[]</td>
+                                    <td>referenceIds</td>
+                                    <td>string[]</td>
                                     <td></td>
                                     <td>no</td>
                                     <td><p>Links to references supporting the distribution record</p>
@@ -2893,6 +2852,81 @@ See Limits of Oceans &amp; Seas, Special Publication No. 23 published by the Int
 </p>
 
 
+            <h2 id="model-NameRelationType">NameRelationType</h2>
+
+
+            <p><strong>Enumeration</strong>: <em>spelling correction</em>, <em>basionym</em>, <em>based on</em>, <em>replacement name</em>, <em>conserved</em>, <em>later homonym</em>, <em>superfluous</em>, <em>homotypic</em></p>
+
+    <p><p>Coarse classification of nomenclatural name relations. See <a href="http://api.col.plus/vocab/nomreltype">http://api.col.plus/vocab/nomreltype</a></p>
+<dl>
+<dt>spelling correction</dt>
+<dd>The current name is a spelling correction, called emendation in zoology, of the related name having the same type.
+Intentional changes in the original spelling of an available name, whether justified or unjustified.
+The binomial authority remains unchanged.
+Valid emendations include changes made to correct:
+a) typographical errors in the original work describing the species,
+b) errors in transliteration from non-Latin languages,
+c) names that included diacritics, hyphens
+d) endings of species to match the gender of the generic name, particularly when the combination has been changed
+<p>For example, Hieronima and Hyeronima are orthographical variants of Hieronyma.
+One of the spellings must be treated as the correct one. In this case, the spelling Hieronyma has been conserved
+and is to be used as the correct spelling.</p>
+<p>Botany (Article 61).: An inadvertent use of one of the other spellings has no consequences:
+the name is to be treated as if it were correctly spelled.</p>
+<p>Zoology (Art. 32-33 ): Orthographical variants in the formal sense do not exist;
+a misspelling or orthographic error is treated as a lapsus, a form of inadvertent error.
+The first reviser is allowed to choose one variant for mandatory further use, but in other ways,
+these errors generally have no further formal standing.</p>
+</dd>
+<dt>basionym</dt>
+<dd>The current name has a basionym and therefore is either
+a recombination (combinatio nova, comb. nov.) of the name pointed to
+(and the name pointed to is not, itself, a recombination),
+or a change in rank (status novus, stat. nov.).</dd>
+<dt>based on</dt>
+<dd>The current name is the validation of a name that was not fully published before.
+Covers the use of ex in botanical author strings.
+<p>ICN Art. 46.4: e.g. if this name object represents G. tomentosum Nutt. ex Seem.
+then the related name should be G. tomentosum Nutt.</p>
+</dd>
+<dt>replacement name</dt>
+<dd>Current name is replacement for the related name.
+Also called &lsquo;Nomen Novum&rsquo; or &lsquo;avowed substitute&rsquo;
+ICN: Article 7.3
+ICZN: Article 60.3.</dd>
+<dt>conserved</dt>
+<dd>The current name or spelling is conserved / protected against the related name
+or the related name is suppressed / rejected in favor of the current name.
+<p>A spelling which has been conserved relates two homotypic names, otherwise
+the related names should be based on different types.</p>
+<p>Based on an individual publication but more often
+due to actions of the ICZN or ICBN exercising its Plenary Powers.</p>
+<p>ICN: Conservation is covered under Article 14 and Appendix II and Appendix III (this name is nomina conservanda).
+ICZN: Reversal of precedence under Article 23.9 (this name is nomen protectum and the target name is nomen oblitum)
+or suppression via plenary power Article 81.</p>
+</dd>
+<dt>later homonym</dt>
+<dd>Current name has same spelling as related name
+but was published later and has priority over it (unless conserved or sanctioned)
+and is based on a different type. Called a junior homonym in zoology.
+This includes botanical parahomonyms which differ slightly in spelling
+but are similar enough that they are likely to be confused (Art 53.3).
+The zoological code has a set of spelling variations (article 58) that are considered to be identical.
+When acts of conservation or suppression have occurred then the terms &rsquo;Conserved Later Homonym&rsquo;and &lsquo;Rejected Earlier Homonym&rsquo; should be used.
+Two identical and homotypic names (isonyms) should be indicated with the superfluous relation type.
+ICN: Article 53
+ICZN: Chapter 12, Article 52.</dd>
+<dt>superfluous</dt>
+<dd>Current name was superfluous at its time of publication,
+i. e. it was based on the same type as the related, previously published name (ICN article 52).
+The current, superfluous name is available but illegitimate.
+Includes the special case of isonyms which are identical names.</dd>
+<dt>homotypic</dt>
+<dd>A relation indicating two homotypic names, i.e. objective or nomenclatural synonymy, but not further specifying why.</dd>
+</dl>
+</p>
+
+
             <h2 id="model-NameType">NameType</h2>
 
 
@@ -2913,31 +2947,6 @@ botanical : <a href="http://www.iapt-taxon.org/nomen/">Botanical code</a>
 cultivated : <a href="http://www.ishs.org/scripta-horticulturae/international-code-nomenclature-cultivated-plants-ninth-edition">Cultivated Plants</a>
 viral : <a href="https://talk.ictvonline.org/information/w/ictv-information/383/ictv-code">viral</a>,
 zoological : <a href="http://www.nhm.ac.uk/hosted-sites/iczn/code/">zoological code</a></p>
-</p>
-
-
-            <h2 id="model-NomenclaturalActType">NomenclaturalActType</h2>
-
-
-            <p><strong>Enumeration</strong>: <em>description</em>, <em>ruling</em>, <em>emendation</em>, <em>typification</em></p>
-
-    <p><p>Coarse classification of nomenclatural acts. See <a href="http://api.col.plus/vocab/nomacttype">http://api.col.plus/vocab/nomacttype</a></p>
-<dl>
-<dt>description</dt>
-<dd>the description of a new original name, a new recombination, a replacement name or a change in rank.
-The publication linked to the description act is the dwc:namePublishedIn reference.</dd>
-<dt>ruling</dt>
-<dd>acts taken by the official committee e.g. suppressed, rejected or conserved names.</dd>
-<dt>emendation</dt>
-<dd>corrected or improved names. Intentional changes in the original spelling of an available name. The binomial authority remains unchanged.
-Valid emendations include changes made to correct:
-a) typographical errors in the original work describing the species,
-b) errors in transliteration from non-Latin languages,
-c) names that included diacritics, hyphens
-d) endings of species to match the gender of the generic name, particularly when the combination has been changed</dd>
-<dt>typification</dt>
-<dd>subsequent type designations.</dd>
-</dl>
 </p>
 
 
@@ -3100,7 +3109,7 @@ Eventually should be exposed in public API.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:25 PM CEST
+Date: Tuesday, September 18, 2018 2:32:23 PM CEST
 Content-Type: application/json
 </code>
 </pre>

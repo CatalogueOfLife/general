@@ -725,7 +725,6 @@ Dataset used to build the provisional catalogue will be trusted and insert their
                         <h2 id="model-Name">Name</h2>
 
     <pre class="example"><code class="json">{
-    "key": 169130,
     "id": "1000BA50801",
     "datasetKey": 1009,
     "scientificName": "Fomes obliquus",
@@ -846,32 +845,32 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>key</td>
+                                    <td>datasetKey</td>
                                     <td>integer</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>Internal primary key</p>
+                                    <td><p>Key to the source dataset this record belongs to</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>verbatimKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Key to the verbatim record this object was derived from</p>
 </td>
                                 </tr>
                                 <tr>
                                     <td>id</td>
                                     <td>string</td>
                                     <td></td>
-                                    <td>no</td>
-                                    <td><p>Primary key for the name as used in the source database.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>datasetKey</td>
-                                    <td>integer</td>
-                                    <td></td>
                                     <td>yes</td>
-                                    <td><p>Primary key for the source dataset</p>
+                                    <td><p>Primary id for the record</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>basionymKey</td>
-                                    <td>integer</td>
+                                    <td>basionymId</td>
+                                    <td>string</td>
                                     <td></td>
                                     <td>no</td>
                                     <td><p>link to the original combination. In case of <a href="https://en.wikipedia.org/wiki/Nomen_novum">replacement names</a> it points back to the replaced synonym.</p>
@@ -883,14 +882,6 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>entire canonical name string with a rank marker for infragenerics and infraspecfics, but excluding the authorship. For uninomials, e.g. families or names at higher ranks, this is just the uninomial.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>scientificNameID</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Global name identifier from a nomenclator or the Catalogue of Life</p>
 </td>
                                 </tr>
                                 <tr>
@@ -1140,32 +1131,32 @@ Name object with some extra properties related to synonymy. See below.</p>
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>key</td>
+                                    <td>datasetKey</td>
                                     <td>integer</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>Internal primary key</p>
+                                    <td><p>Key to the source dataset this record belongs to</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>verbatimKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Key to the verbatim record this object was derived from</p>
 </td>
                                 </tr>
                                 <tr>
                                     <td>id</td>
                                     <td>string</td>
                                     <td></td>
-                                    <td>no</td>
-                                    <td><p>Primary key for the name as used in the source database.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>datasetKey</td>
-                                    <td>integer</td>
-                                    <td></td>
                                     <td>yes</td>
-                                    <td><p>Primary key for the source dataset</p>
+                                    <td><p>Primary id for the record</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>basionymKey</td>
-                                    <td>integer</td>
+                                    <td>basionymId</td>
+                                    <td>string</td>
                                     <td></td>
                                     <td>no</td>
                                     <td><p>link to the original combination. In case of <a href="https://en.wikipedia.org/wiki/Nomen_novum">replacement names</a> it points back to the replaced synonym.</p>
@@ -1177,14 +1168,6 @@ Name object with some extra properties related to synonymy. See below.</p>
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>entire canonical name string with a rank marker for infragenerics and infraspecfics, but excluding the authorship. For uninomials, e.g. families or names at higher ranks, this is just the uninomial.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>scientificNameID</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Global name identifier from a nomenclator or the Catalogue of Life</p>
 </td>
                                 </tr>
                                 <tr>
@@ -1385,7 +1368,7 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
     "total": 179025,
     "result": [
         {
-            "key": 2157461,
+            "id": "2157461",
             "datasetKey": 101,
             "scientificName": "Aagaardia",
             "rank": "genus",
@@ -1396,14 +1379,13 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1123278,
+                    "id": "1123278",
                     "status": "accepted"
                 }
             ],
             "parsed": true
         },
         {
-            "key": 2001450,
             "id": "Sys-172336",
             "datasetKey": 101,
             "scientificName": "Aagaardia longicalcis",
@@ -1422,7 +1404,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1123282,
                     "id": "Sys-172336",
                     "status": "ACCEPTED"
                 }
@@ -1431,7 +1412,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "authorship": "Saether, 2000"
         },
         {
-            "key": 1989627,
             "id": "Sys-196835",
             "datasetKey": 101,
             "scientificName": "Aagaardia oksanae",
@@ -1450,7 +1430,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1123283,
                     "id": "Sys-196835",
                     "status": "ACCEPTED"
                 }
@@ -1459,7 +1438,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "authorship": "Makarchenko, 2005"
         },
         {
-            "key": 2001451,
             "id": "Sys-172334",
             "datasetKey": 101,
             "scientificName": "Aagaardia protensa",
@@ -1478,7 +1456,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1123280,
                     "id": "Sys-172334",
                     "status": "ACCEPTED"
                 }
@@ -1487,7 +1464,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "authorship": "Saether, 2000"
         },
         {
-            "key": 2067766,
             "id": "Sys-87526",
             "datasetKey": 101,
             "scientificName": "Aagaardia sivertseni",
@@ -1506,7 +1482,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1123279,
                     "id": "Sys-87526",
                     "status": "accepted"
                 }
@@ -1515,7 +1490,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "authorship": "(Aagaard, 1979) "
         },
         {
-            "key": 2001452,
             "id": "Sys-172335",
             "datasetKey": 101,
             "scientificName": "Aagaardia triangulata",
@@ -1534,7 +1508,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1123281,
                     "id": "Sys-172335",
                     "status": "ACCEPTED"
                 }
@@ -1543,7 +1516,7 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "authorship": "Saether, 2000"
         },
         {
-            "key": 2165044,
+            "id": "2165044",
             "datasetKey": 101,
             "scientificName": "Abago",
             "rank": "genus",
@@ -1554,14 +1527,13 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1114398,
+                    "id": "1114398",
                     "status": "ACCEPTED"
                 }
             ],
             "parsed": true
         },
         {
-            "key": 2112620,
             "id": "Sys-152428",
             "datasetKey": 101,
             "scientificName": "Abago rohdendorfi",
@@ -1580,7 +1552,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1114399,
                     "id": "Sys-152428",
                     "status": "ACCEPTED"
                 }
@@ -1589,7 +1560,7 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "authorship": "Grunin, 1966"
         },
         {
-            "key": 2159955,
+            "id": "2159955",
             "datasetKey": 101,
             "scientificName": "Abaristophora",
             "rank": "genus",
@@ -1600,14 +1571,13 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1231163,
+                    "id": "1231163",
                     "status": "ACCEPTED"
                 }
             ],
             "parsed": true
         },
         {
-            "key": 2019869,
             "id": "Sys-16345",
             "datasetKey": 101,
             "scientificName": "Abaristophora arctophila",
@@ -1626,7 +1596,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1231173,
                     "id": "Sys-16345",
                     "status": "ACCEPTED"
                 }
@@ -1724,15 +1693,15 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
 </td>
                                 </tr>
                             </tbody></table>
-                        <h2 id="model-NomenclaturalAct">NomenclaturalAct</h2>
+                        <h2 id="model-NameRelation">NameRelation</h2>
 
     <pre class="example"><code class="json">{
   "key": 721141,
   "datasetKey": 15,
-  "type": "description",
-  "nameKey": 78612,
-  "referenceKey": 786,
-  "referencePage": "5"
+  "type": "basionym",
+  "nameId": "78612",
+  "relatedNameId": "1655",
+  "publishedInId": "786"
 }
 </code></pre>
 
@@ -1749,14 +1718,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>key</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Primary key for the record</p>
-</td>
-                                </tr>
-                                <tr>
                                     <td>datasetKey</td>
                                     <td>integer</td>
                                     <td></td>
@@ -1765,68 +1726,67 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
 </td>
                                 </tr>
                                 <tr>
-                                    <td>nameKey</td>
+                                    <td>verbatimKey</td>
                                     <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Key to the verbatim record this object was derived from</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>key</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Primary key for the record</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>type</td>
+                                    <td><a href="#model-NameRelationType">NameRelationType</a></td>
+                                    <td>spelling correction, basionym, based on, replacement name, conserved, later homonym, superfluous, homotypic</td>
+                                    <td>yes</td>
+                                    <td><p>Coarse classification of the nomenclatural act.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>nameId</td>
+                                    <td>string</td>
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>key to the name the act is about</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>type</td>
-                                    <td><a href="#model-NomenclaturalActType">NomenclaturalActType</a></td>
-                                    <td>description, ruling, emendation, typification</td>
-                                    <td>yes</td>
-                                    <td><p>Coarse classification of the nomenclatural act.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>status</td>
-                                    <td><a href="#model-NomenclaturalStatusType">NomenclaturalStatusType</a></td>
-                                    <td>ok, unavailable, illegitimate, variant, conserved, rejected, doubtful, unevaluated</td>
-                                    <td>no</td>
-                                    <td><p>Coarse classification of the nomenclatural act.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>relatedNameKey</td>
-                                    <td>integer</td>
+                                    <td>relatedNameId</td>
+                                    <td>string</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>key to the related name of the act in case the act defines a name relation</p>
+                                    <td><p>id to the other, related name</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>description</td>
+                                    <td>publishedInId</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Key to reference in which the relation was published</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>note</td>
                                     <td>string</td>
                                     <td></td>
                                     <td>no</td>
                                     <td><p>A desription of the details of the nomenclatural act</p>
 </td>
                                 </tr>
-                                <tr>
-                                    <td>referenceKey</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Key to reference in which the act was published</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>referencePage</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>exact first page of the treatment within above reference</p>
-</td>
-                                </tr>
                             </tbody></table>
                         <h2 id="model-Reference">Reference</h2>
 
     <pre class="example"><code class="json">{
-  "key": 432561,
+  "id": "432561",
   "datasetKey": 15,
-  "serialKey": 17,
   "csl": {
     "DOI":"10.1038/nrd842",
     "type":"article-journal",
@@ -1846,7 +1806,7 @@ A reference can be linked to a serial, e.g. a journal, that defines the content 
 <p>Treatments are the section of a publication that deals with a single scientific name.
 They are a unit of citation below articles. <a href="http://www.plazi.org">Plazi</a> is based on them
 and Taxon Name Usages (TNU) in <a href="http://globalnames.org/docs/gnub/">GNUB</a> correspond to treatments.</p>
-<p>The ability to link to the treatment of a name is very useful. It is accomplished in the NomenclaturalAct class,
+<p>The ability to link to the treatment of a name is very useful. It is accomplished in the NameRelation class,
 but not dealt with on the shared Reference instances.</p>
 </p>
 
@@ -1860,19 +1820,27 @@ but not dealt with on the shared Reference instances.</p>
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>key</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Primary key for the record</p>
-</td>
-                                </tr>
-                                <tr>
                                     <td>datasetKey</td>
                                     <td>integer</td>
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>Key to the source dataset this record belongs to</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>verbatimKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Key to the verbatim record this object was derived from</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Primary id for the record</p>
 </td>
                                 </tr>
                                 <tr>
@@ -1992,14 +1960,6 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                 <th>Description</th>
                             </tr>
                             </thead><tbody>
-                                <tr>
-                                    <td>key</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Primary key for the record</p>
-</td>
-                                </tr>
                                 <tr>
                                     <td>datasetKey</td>
                                     <td>integer</td>
@@ -2192,11 +2152,19 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>key</td>
+                                    <td>datasetKey</td>
                                     <td>integer</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>Internal primary key</p>
+                                    <td><p>Key to the source dataset this record belongs to</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>verbatimKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Key to the verbatim record this object was derived from</p>
 </td>
                                 </tr>
                                 <tr>
@@ -2204,15 +2172,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td>string</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>Primary key for the taxon as used in the source database.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>datasetKey</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Key to the source dataset this record belongs to</p>
+                                    <td><p>Primary id for the record</p>
 </td>
                                 </tr>
                                 <tr>
@@ -2402,11 +2362,9 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
 
     <pre class="example"><code class="json">{
     "taxon": {
-        "key": 209379,
         "id": "Kew-114621",
         "datasetKey": 24,
         "name": {
-            "key": 369744,
             "id": "Kew-114621",
             "datasetKey": 24,
             "scientificName": "Lithocarpus mariae",
@@ -2426,13 +2384,14 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
         },
         "status": "accepted",
         "origin": "source",
-        "parentKey": 209098,
+        "parentId": "209098",
         "accordingTo": "Govaerts R.",
         "fossil": false,
         "recent": true
     },
     "distributions": [
         {
+            "datasetKey": 24,
             "area": "Borneo",
             "gazetteer": "tdwg",
             "status": "native"
@@ -2476,7 +2435,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                 </tr>
                                 <tr>
                                     <td>taxonReferences</td>
-                                    <td>integer[]</td>
+                                    <td>string[]</td>
                                     <td></td>
                                     <td>no</td>
                                     <td><p>List of all distinct references supporting the taxon concept, distribution or vernacular names as referenced by the individual record.</p>
@@ -2536,19 +2495,19 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>key</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Internal primary key</p>
-</td>
-                                </tr>
-                                <tr>
                                     <td>datasetKey</td>
                                     <td>integer</td>
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>Key to the source dataset this record belongs to</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>key</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Internal primary key</p>
 </td>
                                 </tr>
                                 <tr>
@@ -2704,8 +2663,8 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
 </td>
                                 </tr>
                                 <tr>
-                                    <td>referenceKeys</td>
-                                    <td>integer[]</td>
+                                    <td>referenceIds</td>
+                                    <td>string[]</td>
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>Links to references supporting the vernacular name record</p>
@@ -2731,7 +2690,7 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td>datasetKey</td>
                                     <td>integer</td>
                                     <td></td>
-                                    <td>no</td>
+                                    <td>yes</td>
                                     <td><p>Key to the source dataset this record belongs to</p>
 </td>
                                 </tr>
@@ -2760,8 +2719,8 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
 </td>
                                 </tr>
                                 <tr>
-                                    <td>referenceKeys</td>
-                                    <td>integer[]</td>
+                                    <td>referenceIds</td>
+                                    <td>string[]</td>
                                     <td></td>
                                     <td>no</td>
                                     <td><p>Links to references supporting the distribution record</p>
@@ -2893,6 +2852,81 @@ See Limits of Oceans &amp; Seas, Special Publication No. 23 published by the Int
 </p>
 
 
+            <h2 id="model-NameRelationType">NameRelationType</h2>
+
+
+            <p><strong>Enumeration</strong>: <em>spelling correction</em>, <em>basionym</em>, <em>based on</em>, <em>replacement name</em>, <em>conserved</em>, <em>later homonym</em>, <em>superfluous</em>, <em>homotypic</em></p>
+
+    <p><p>Coarse classification of nomenclatural name relations. See <a href="http://api.col.plus/vocab/nomreltype">http://api.col.plus/vocab/nomreltype</a></p>
+<dl>
+<dt>spelling correction</dt>
+<dd>The current name is a spelling correction, called emendation in zoology, of the related name having the same type.
+Intentional changes in the original spelling of an available name, whether justified or unjustified.
+The binomial authority remains unchanged.
+Valid emendations include changes made to correct:
+a) typographical errors in the original work describing the species,
+b) errors in transliteration from non-Latin languages,
+c) names that included diacritics, hyphens
+d) endings of species to match the gender of the generic name, particularly when the combination has been changed
+<p>For example, Hieronima and Hyeronima are orthographical variants of Hieronyma.
+One of the spellings must be treated as the correct one. In this case, the spelling Hieronyma has been conserved
+and is to be used as the correct spelling.</p>
+<p>Botany (Article 61).: An inadvertent use of one of the other spellings has no consequences:
+the name is to be treated as if it were correctly spelled.</p>
+<p>Zoology (Art. 32-33 ): Orthographical variants in the formal sense do not exist;
+a misspelling or orthographic error is treated as a lapsus, a form of inadvertent error.
+The first reviser is allowed to choose one variant for mandatory further use, but in other ways,
+these errors generally have no further formal standing.</p>
+</dd>
+<dt>basionym</dt>
+<dd>The current name has a basionym and therefore is either
+a recombination (combinatio nova, comb. nov.) of the name pointed to
+(and the name pointed to is not, itself, a recombination),
+or a change in rank (status novus, stat. nov.).</dd>
+<dt>based on</dt>
+<dd>The current name is the validation of a name that was not fully published before.
+Covers the use of ex in botanical author strings.
+<p>ICN Art. 46.4: e.g. if this name object represents G. tomentosum Nutt. ex Seem.
+then the related name should be G. tomentosum Nutt.</p>
+</dd>
+<dt>replacement name</dt>
+<dd>Current name is replacement for the related name.
+Also called &lsquo;Nomen Novum&rsquo; or &lsquo;avowed substitute&rsquo;
+ICN: Article 7.3
+ICZN: Article 60.3.</dd>
+<dt>conserved</dt>
+<dd>The current name or spelling is conserved / protected against the related name
+or the related name is suppressed / rejected in favor of the current name.
+<p>A spelling which has been conserved relates two homotypic names, otherwise
+the related names should be based on different types.</p>
+<p>Based on an individual publication but more often
+due to actions of the ICZN or ICBN exercising its Plenary Powers.</p>
+<p>ICN: Conservation is covered under Article 14 and Appendix II and Appendix III (this name is nomina conservanda).
+ICZN: Reversal of precedence under Article 23.9 (this name is nomen protectum and the target name is nomen oblitum)
+or suppression via plenary power Article 81.</p>
+</dd>
+<dt>later homonym</dt>
+<dd>Current name has same spelling as related name
+but was published later and has priority over it (unless conserved or sanctioned)
+and is based on a different type. Called a junior homonym in zoology.
+This includes botanical parahomonyms which differ slightly in spelling
+but are similar enough that they are likely to be confused (Art 53.3).
+The zoological code has a set of spelling variations (article 58) that are considered to be identical.
+When acts of conservation or suppression have occurred then the terms &rsquo;Conserved Later Homonym&rsquo;and &lsquo;Rejected Earlier Homonym&rsquo; should be used.
+Two identical and homotypic names (isonyms) should be indicated with the superfluous relation type.
+ICN: Article 53
+ICZN: Chapter 12, Article 52.</dd>
+<dt>superfluous</dt>
+<dd>Current name was superfluous at its time of publication,
+i. e. it was based on the same type as the related, previously published name (ICN article 52).
+The current, superfluous name is available but illegitimate.
+Includes the special case of isonyms which are identical names.</dd>
+<dt>homotypic</dt>
+<dd>A relation indicating two homotypic names, i.e. objective or nomenclatural synonymy, but not further specifying why.</dd>
+</dl>
+</p>
+
+
             <h2 id="model-NameType">NameType</h2>
 
 
@@ -2913,31 +2947,6 @@ botanical : <a href="http://www.iapt-taxon.org/nomen/">Botanical code</a>
 cultivated : <a href="http://www.ishs.org/scripta-horticulturae/international-code-nomenclature-cultivated-plants-ninth-edition">Cultivated Plants</a>
 viral : <a href="https://talk.ictvonline.org/information/w/ictv-information/383/ictv-code">viral</a>,
 zoological : <a href="http://www.nhm.ac.uk/hosted-sites/iczn/code/">zoological code</a></p>
-</p>
-
-
-            <h2 id="model-NomenclaturalActType">NomenclaturalActType</h2>
-
-
-            <p><strong>Enumeration</strong>: <em>description</em>, <em>ruling</em>, <em>emendation</em>, <em>typification</em></p>
-
-    <p><p>Coarse classification of nomenclatural acts. See <a href="http://api.col.plus/vocab/nomacttype">http://api.col.plus/vocab/nomacttype</a></p>
-<dl>
-<dt>description</dt>
-<dd>the description of a new original name, a new recombination, a replacement name or a change in rank.
-The publication linked to the description act is the dwc:namePublishedIn reference.</dd>
-<dt>ruling</dt>
-<dd>acts taken by the official committee e.g. suppressed, rejected or conserved names.</dd>
-<dt>emendation</dt>
-<dd>corrected or improved names. Intentional changes in the original spelling of an available name. The binomial authority remains unchanged.
-Valid emendations include changes made to correct:
-a) typographical errors in the original work describing the species,
-b) errors in transliteration from non-Latin languages,
-c) names that included diacritics, hyphens
-d) endings of species to match the gender of the generic name, particularly when the combination has been changed</dd>
-<dt>typification</dt>
-<dd>subsequent type designations.</dd>
-</dl>
 </p>
 
 
@@ -3075,7 +3084,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3104,7 +3113,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3156,7 +3165,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3299,7 +3308,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -3448,7 +3457,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3500,7 +3509,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3617,7 +3626,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3625,19 +3634,19 @@ Content-Type: application/json
                     <p>Content: <a href="#model-ResultSet">ResultSet</a></p>
 
 
-        <h2 id="resource-7">/dataset/{dkey}/taxon/id/{id}</h2>
+        <h2 id="resource-7">/dataset/{dkey}/taxon/{id}</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/taxon/id/{id} HTTP/1.1
+GET //dataset/{dkey}/taxon/{id} HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/taxon/id/{id}</h3>
-    <p><p>Looks up the internal surrrogate key using the original ID as provided by the dataset.</p>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/taxon/{id}</h3>
+    <p><p>Retrieves the taxon with the specified id.</p>
 </p>
 
 
@@ -3659,7 +3668,7 @@ Host: api.col.plus
                     <td></td>
                     <td>yes</td>
                     <td></td>
-                    <td><p>original, dataset provided id</p>
+                    <td><p>taxon identifier as coming from the source</p>
 </td>
                 </tr>
         </tbody></table>
@@ -3669,59 +3678,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
-Content-Type: application/json
-</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: integer</p>
-
-
-        <h2 id="resource-8">/dataset/{dkey}/taxon/{key}</h2>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET //dataset/{dkey}/taxon/{key} HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/taxon/{key}</h3>
-    <p><p>Retrieves the taxon with the specified key.</p>
-</p>
-
-
-
-        <h3 id="op11-request-params">Parameters</h3>
-        <table><thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Pattern</th>
-            <th>Required</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-        </thead><tbody>
-                <tr>
-                    <td>{key}</td>
-                    <td>integer</td>
-                    <td></td>
-                    <td>yes</td>
-                    <td></td>
-                    <td><p>dataset key</p>
-</td>
-                </tr>
-        </tbody></table>
-
-
-            <h3 id="op11-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3760,18 +3717,18 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Taxon">Taxon</a></p>
 
 
-        <h2 id="resource-9">/dataset/{dkey}/taxon/{key}/info</h2>
+        <h2 id="resource-8">/dataset/{dkey}/taxon/{id}/info</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/taxon/{key}/info HTTP/1.1
+GET //dataset/{dkey}/taxon/{id}/info HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/taxon/{key}/info</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/taxon/{id}/info</h3>
     <p><p>Returns a TaxonInfo object containing all details about the taxon with the specified key and its supplementary information.</p>
 </p>
 
@@ -3779,20 +3736,18 @@ Host: api.col.plus
 
 
 
-            <h3 id="op12-responses" class="clear">Response 200</h3>
+            <h3 id="op11-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
     "taxon": {
-        "key": 209379,
         "id": "Kew-114621",
         "datasetKey": 24,
         "name": {
-            "key": 369744,
             "id": "Kew-114621",
             "datasetKey": 24,
             "scientificName": "Lithocarpus mariae",
@@ -3812,13 +3767,14 @@ Content-Type: application/json
         },
         "status": "accepted",
         "origin": "source",
-        "parentKey": 209098,
+        "parentId": "209098",
         "accordingTo": "Govaerts R.",
         "fossil": false,
         "recent": true
     },
     "distributions": [
         {
+            "datasetKey": 24,
             "area": "Borneo",
             "gazetteer": "tdwg",
             "status": "native"
@@ -3831,18 +3787,18 @@ Content-Type: application/json
                     <p>Content: <a href="#model-TaxonInfo">TaxonInfo</a></p>
 
 
-        <h2 id="resource-10">/dataset/{dkey}/taxon/{key}/classification</h2>
+        <h2 id="resource-9">/dataset/{dkey}/taxon/{id}/classification</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/taxon/{key}/classification HTTP/1.1
+GET //dataset/{dkey}/taxon/{id}/classification HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/taxon/{key}/classification</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/taxon/{id}/classification</h3>
     <p><p>Returns the taxonomic ancestry of the taxon with the specified key, i.e. all ancestral taxa up to the taxon&rsquo;s kingdom starting with the direct parent taxon.</p>
 </p>
 
@@ -3850,11 +3806,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op13-responses" class="clear">Response 200</h3>
+            <h3 id="op12-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -3923,19 +3879,50 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Taxon">Taxon[]</a></p>
 
 
-        <h2 id="resource-11">/dataset/{dkey}/taxon/{key}/children</h2>
+        <h2 id="resource-10">/dataset/{dkey}/taxon/{id}/children</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/taxon/{key}/children HTTP/1.1
+GET //dataset/{dkey}/taxon/{id}/children HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/taxon/{key}/children</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/taxon/{id}/children</h3>
     <p><p>Page through all direct children of the taxon regardless of the rank.</p>
+</p>
+
+
+
+
+
+            <h3 id="op13-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-TaxonResultSet">TaxonResultSet</a></p>
+
+
+        <h2 id="resource-11">/dataset/{dkey}/taxon/{id}/synonyms</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //dataset/{dkey}/taxon/{id}/synonyms HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/taxon/{id}/synonyms</h3>
+    <p><p>get list of all synonyms chronologically arranged by homotypic groups. Nested homotypic names are based on the same original name in sublists. Example given for synonymy of Agoseris grandiflora (Nutt.) Greene Example: Barkhausia lessingii Hook. &amp; Arn. nom. illeg. is a homotypical synonym of Agoseris apargioides (Less.) Greene</p>
 </p>
 
 
@@ -3946,44 +3933,13 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
-Content-Type: application/json
-</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-TaxonResultSet">TaxonResultSet</a></p>
-
-
-        <h2 id="resource-12">/dataset/{dkey}/taxon/{key}/synonyms</h2>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET //dataset/{dkey}/taxon/{key}/synonyms HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/taxon/{key}/synonyms</h3>
-    <p><p>get list of all synonyms chronologically arranged by homotypic groups. Nested homotypic names are based on the same original name in sublists. Example given for synonymy of Agoseris grandiflora (Nutt.) Greene Example: Barkhausia lessingii Hook. &amp; Arn. nom. illeg. is a homotypical synonym of Agoseris apargioides (Less.) Greene</p>
-</p>
-
-
-
-
-
-            <h3 id="op15-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[
     [
         {
-            "key": 21242,
+            "id": "21242",
             "datasetKey": 15,
             "scientificName": "Stylopappus grandiflorus",
             "scientificNameID": "abc0001",
@@ -4000,7 +3956,7 @@ Content-Type: application/json
             "basionymKey": 21242
          },
         {
-            "key": 21243,
+            "id": "21243",
             "datasetKey": 15,
             "scientificName": "Macrorhynchus grandiflorus",
             "scientificNameID": "abc0002",
@@ -4020,7 +3976,7 @@ Content-Type: application/json
             "basionymKey": 21242
         },
         {
-            "key": 21244,
+            "id": "21244",
             "datasetKey": 15,
             "scientificName": "Troximon grandiflorum",
             "scientificNameID": "abc0003",
@@ -4042,7 +3998,7 @@ Content-Type: application/json
     ],
     [
         {
-            "key": 13078,
+            "id": "13078",
             "datasetKey": 15,
             "scientificName": "Troximon marshallii",
             "scientificNameID": "abc0004",
@@ -4058,7 +4014,7 @@ Content-Type: application/json
             "specificEpithet": "marshallii"
         },
         {
-            "key": 13079,
+            "id": "13079",
             "datasetKey": 15,
             "scientificName": "Agoseris marshallii",
             "scientificNameID": "abc0005",
@@ -4078,7 +4034,7 @@ Content-Type: application/json
             "basionymKey": 13078
         },
         {
-            "key": 13080,
+            "id": "13080",
             "datasetKey": 15,
             "scientificName": "Agoseris marshalii",
             "scientificNameID": "abc0006",
@@ -4101,7 +4057,7 @@ Content-Type: application/json
     ],
     [
         {
-            "key": 13122,
+            "id": "13122",
             "datasetKey": 15,
             "scientificName": "Troximon plebeium",
             "scientificNameID": "abc0007",
@@ -4118,7 +4074,7 @@ Content-Type: application/json
             "basionymKey": 13122
         },
         {
-            "key": 13123,
+            "id": "13123",
             "datasetKey": 15,
             "scientificName": "Agoseris plebeia",
             "scientificNameID": "abc0008",
@@ -4138,7 +4094,7 @@ Content-Type: application/json
             "basionymKey": 13122
         },
         {
-            "key": 13124,
+            "id": "13124",
             "datasetKey": 15,
             "scientificName": "Agoseris grandiflora var. plebeia",
             "scientificNameID": "abc0009",
@@ -4166,18 +4122,18 @@ Content-Type: application/json
                     <p>Content: Name[][]</p>
 
 
-        <h2 id="resource-13">/dataset/{dkey}/taxon/{key}/verbatim</h2>
+        <h2 id="resource-12">/dataset/{dkey}/taxon/{id}/verbatim</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/taxon/{key}/verbatim HTTP/1.1
+GET //dataset/{dkey}/taxon/{id}/verbatim HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/taxon/{key}/verbatim</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/taxon/{id}/verbatim</h3>
     <p><p>Retrieves the verbatim DarwinCore record of the taxon with the specified key,</p>
 </p>
 
@@ -4185,11 +4141,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op16-responses" class="clear">Response 200</h3>
+            <h3 id="op15-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4226,7 +4182,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-VerbatimRecord">VerbatimRecord</a></p>
 
 
-        <h2 id="resource-14">/dataset/{dkey}/name</h2>
+        <h2 id="resource-13">/dataset/{dkey}/name</h2>
 
     
 
@@ -4243,7 +4199,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op17-request-params">Parameters</h3>
+        <h3 id="op16-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4284,11 +4240,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op17-responses" class="clear">Response 200</h3>
+            <h3 id="op16-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -4296,7 +4252,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-NameResultSet">NameResultSet</a></p>
 
 
-        <h2 id="resource-15">/dataset/{dkey}/name/search</h2>
+        <h2 id="resource-14">/dataset/{dkey}/name/search</h2>
 
     
 
@@ -4313,7 +4269,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op18-request-params">Parameters</h3>
+        <h3 id="op17-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4397,6 +4353,15 @@ Host: api.col.plus
 </td>
             </tr>
             <tr>
+                <td>publishedIn</td>
+                <td>string</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>publishedIn reference id to filter names by</p>
+</td>
+            </tr>
+            <tr>
                 <td>offset</td>
                 <td>integer</td>
                 <td></td>
@@ -4417,11 +4382,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op18-responses" class="clear">Response 200</h3>
+            <h3 id="op17-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4430,7 +4395,7 @@ Content-Type: application/json
     "total": 179025,
     "result": [
         {
-            "key": 2157461,
+            "id": "2157461",
             "datasetKey": 101,
             "scientificName": "Aagaardia",
             "rank": "genus",
@@ -4441,14 +4406,13 @@ Content-Type: application/json
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1123278,
+                    "id": "1123278",
                     "status": "accepted"
                 }
             ],
             "parsed": true
         },
         {
-            "key": 2001450,
             "id": "Sys-172336",
             "datasetKey": 101,
             "scientificName": "Aagaardia longicalcis",
@@ -4467,7 +4431,6 @@ Content-Type: application/json
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1123282,
                     "id": "Sys-172336",
                     "status": "ACCEPTED"
                 }
@@ -4476,7 +4439,6 @@ Content-Type: application/json
             "authorship": "Saether, 2000"
         },
         {
-            "key": 1989627,
             "id": "Sys-196835",
             "datasetKey": 101,
             "scientificName": "Aagaardia oksanae",
@@ -4495,7 +4457,6 @@ Content-Type: application/json
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1123283,
                     "id": "Sys-196835",
                     "status": "ACCEPTED"
                 }
@@ -4504,7 +4465,6 @@ Content-Type: application/json
             "authorship": "Makarchenko, 2005"
         },
         {
-            "key": 2001451,
             "id": "Sys-172334",
             "datasetKey": 101,
             "scientificName": "Aagaardia protensa",
@@ -4523,7 +4483,6 @@ Content-Type: application/json
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1123280,
                     "id": "Sys-172334",
                     "status": "ACCEPTED"
                 }
@@ -4532,7 +4491,6 @@ Content-Type: application/json
             "authorship": "Saether, 2000"
         },
         {
-            "key": 2067766,
             "id": "Sys-87526",
             "datasetKey": 101,
             "scientificName": "Aagaardia sivertseni",
@@ -4551,7 +4509,6 @@ Content-Type: application/json
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1123279,
                     "id": "Sys-87526",
                     "status": "accepted"
                 }
@@ -4560,7 +4517,6 @@ Content-Type: application/json
             "authorship": "(Aagaard, 1979) "
         },
         {
-            "key": 2001452,
             "id": "Sys-172335",
             "datasetKey": 101,
             "scientificName": "Aagaardia triangulata",
@@ -4579,7 +4535,6 @@ Content-Type: application/json
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1123281,
                     "id": "Sys-172335",
                     "status": "ACCEPTED"
                 }
@@ -4588,7 +4543,7 @@ Content-Type: application/json
             "authorship": "Saether, 2000"
         },
         {
-            "key": 2165044,
+            "id": "2165044",
             "datasetKey": 101,
             "scientificName": "Abago",
             "rank": "genus",
@@ -4599,14 +4554,13 @@ Content-Type: application/json
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1114398,
+                    "id": "1114398",
                     "status": "ACCEPTED"
                 }
             ],
             "parsed": true
         },
         {
-            "key": 2112620,
             "id": "Sys-152428",
             "datasetKey": 101,
             "scientificName": "Abago rohdendorfi",
@@ -4625,7 +4579,6 @@ Content-Type: application/json
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1114399,
                     "id": "Sys-152428",
                     "status": "ACCEPTED"
                 }
@@ -4634,7 +4587,7 @@ Content-Type: application/json
             "authorship": "Grunin, 1966"
         },
         {
-            "key": 2159955,
+            "id": "2159955",
             "datasetKey": 101,
             "scientificName": "Abaristophora",
             "rank": "genus",
@@ -4645,14 +4598,13 @@ Content-Type: application/json
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1231163,
+                    "id": "1231163",
                     "status": "ACCEPTED"
                 }
             ],
             "parsed": true
         },
         {
-            "key": 2019869,
             "id": "Sys-16345",
             "datasetKey": 101,
             "scientificName": "Abaristophora arctophila",
@@ -4671,7 +4623,6 @@ Content-Type: application/json
             "acceptedName": true,
             "taxa": [
                 {
-                    "key": 1231173,
                     "id": "Sys-16345",
                     "status": "ACCEPTED"
                 }
@@ -4688,24 +4639,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-NameSearchResultSet">NameSearchResultSet</a></p>
 
 
-        <h2 id="resource-16">/dataset/{dkey}/name/id/{id}</h2>
+        <h2 id="resource-15">/dataset/{dkey}/name/{id}</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/name/id/{id} HTTP/1.1
+GET //dataset/{dkey}/name/{id} HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/id/{id}</h3>
-    <p><p>Looks up the internal surrrogate key using the original ID as provided by the dataset.</p>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{id}</h3>
+    <p><p>Retrieves the name with the specified id.</p>
 </p>
 
 
 
-        <h3 id="op19-request-params">Parameters</h3>
+        <h3 id="op18-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4722,73 +4673,20 @@ Host: api.col.plus
                     <td></td>
                     <td>yes</td>
                     <td></td>
-                    <td><p>original, dataset provided id</p>
+                    <td><p>name identifier as given by the source</p>
 </td>
                 </tr>
         </tbody></table>
 
 
-            <h3 id="op19-responses" class="clear">Response 200</h3>
+            <h3 id="op18-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
-Content-Type: application/json
-</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: integer</p>
-
-
-        <h2 id="resource-17">/dataset/{dkey}/name/{key}</h2>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET //dataset/{dkey}/name/{key} HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{key}</h3>
-    <p><p>Retrieves the name with the specified key.</p>
-</p>
-
-
-
-        <h3 id="op20-request-params">Parameters</h3>
-        <table><thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Pattern</th>
-            <th>Required</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-        </thead><tbody>
-                <tr>
-                    <td>{key}</td>
-                    <td>integer</td>
-                    <td></td>
-                    <td>yes</td>
-                    <td></td>
-                    <td><p>name key</p>
-</td>
-                </tr>
-        </tbody></table>
-
-
-            <h3 id="op20-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
-    "key": 169130,
     "id": "1000BA50801",
     "datasetKey": 1009,
     "scientificName": "Fomes obliquus",
@@ -4821,18 +4719,18 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Name">Name</a></p>
 
 
-        <h2 id="resource-18">/dataset/{dkey}/name/{key}/synonyms</h2>
+        <h2 id="resource-16">/dataset/{dkey}/name/{id}/synonyms</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/name/{key}/synonyms HTTP/1.1
+GET //dataset/{dkey}/name/{id}/synonyms HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{key}/synonyms</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{id}/synonyms</h3>
     <p><p>Retrieves all names in the same homotypic group as the name with the specified key.</p>
 </p>
 
@@ -4840,15 +4738,14 @@ Host: api.col.plus
 
 
 
-            <h3 id="op21-responses" class="clear">Response 200</h3>
+            <h3 id="op19-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
-    "key": 169130,
     "id": "1000BA50801",
     "datasetKey": 1009,
     "scientificName": "Fomes obliquus",
@@ -4876,7 +4773,6 @@ Content-Type: application/json
     "authorship": "(Ach. ex Pers.) Cooke, 1885"
 }
 ,{
-    "key": 169130,
     "id": "1000BA50801",
     "datasetKey": 1009,
     "scientificName": "Fomes obliquus",
@@ -4909,18 +4805,18 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Name">Name[]</a></p>
 
 
-        <h2 id="resource-19">/dataset/{dkey}/name/{key}/publishedIn</h2>
+        <h2 id="resource-17">/dataset/{dkey}/name/{id}/publishedIn</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/name/{key}/publishedIn HTTP/1.1
+GET //dataset/{dkey}/name/{id}/publishedIn HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{key}/publishedIn</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{id}/publishedIn</h3>
     <p><p>Retrieves the literature reference for the name with the specified key.</p>
 </p>
 
@@ -4928,17 +4824,16 @@ Host: api.col.plus
 
 
 
-            <h3 id="op22-responses" class="clear">Response 200</h3>
+            <h3 id="op20-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
-  "key": 432561,
+  "id": "432561",
   "datasetKey": 15,
-  "serialKey": 17,
   "csl": {
     "DOI":"10.1038/nrd842",
     "type":"article-journal",
@@ -4957,24 +4852,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Reference">Reference</a></p>
 
 
-        <h2 id="resource-20">/dataset/{dkey}/name/{key}/acts</h2>
+        <h2 id="resource-18">/dataset/{dkey}/name/{id}/relations</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/name/{key}/acts HTTP/1.1
+GET //dataset/{dkey}/name/{id}/relations HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{key}/acts</h3>
-    <p><p>Retrieves nomenclatural acts for the name or its homotypical group</p>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{id}/relations</h3>
+    <p><p>Retrieves nomenclatural relations for the name or its homotypical group</p>
 </p>
 
 
 
-        <h3 id="op23-request-params">Parameters</h3>
+        <h3 id="op21-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4997,47 +4892,47 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op23-responses" class="clear">Response 200</h3>
+            <h3 id="op21-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
   "key": 721141,
   "datasetKey": 15,
-  "type": "description",
-  "nameKey": 78612,
-  "referenceKey": 786,
-  "referencePage": "5"
+  "type": "basionym",
+  "nameId": "78612",
+  "relatedNameId": "1655",
+  "publishedInId": "786"
 }
 ,{
   "key": 721141,
   "datasetKey": 15,
-  "type": "description",
-  "nameKey": 78612,
-  "referenceKey": 786,
-  "referencePage": "5"
+  "type": "basionym",
+  "nameId": "78612",
+  "relatedNameId": "1655",
+  "publishedInId": "786"
 }
 ]</code>
 </pre>
                     <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-NomenclaturalAct">NomenclaturalAct[]</a></p>
+                    <p>Content: <a href="#model-NameRelation">NameRelation[]</a></p>
 
 
-        <h2 id="resource-21">/dataset/{dkey}/name/{key}/verbatim</h2>
+        <h2 id="resource-19">/dataset/{dkey}/name/{id}/verbatim</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/name/{key}/verbatim HTTP/1.1
+GET //dataset/{dkey}/name/{id}/verbatim HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{key}/verbatim</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{id}/verbatim</h3>
     <p><p>Retrieves the verbatim DarwinCore record of the name with the specified key,</p>
 </p>
 
@@ -5045,11 +4940,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op24-responses" class="clear">Response 200</h3>
+            <h3 id="op22-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5086,7 +4981,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-VerbatimRecord">VerbatimRecord</a></p>
 
 
-        <h2 id="resource-22">/dataset/{dkey}/reference</h2>
+        <h2 id="resource-20">/dataset/{dkey}/reference</h2>
 
     
 
@@ -5103,7 +4998,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op25-request-params">Parameters</h3>
+        <h3 id="op23-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -5144,11 +5039,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op25-responses" class="clear">Response 200</h3>
+            <h3 id="op23-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -5156,24 +5051,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-ResultSet">ResultSet</a></p>
 
 
-        <h2 id="resource-23">/dataset/{dkey}/reference/id/{id}</h2>
+        <h2 id="resource-21">/dataset/{dkey}/reference/{id}</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/reference/id/{id} HTTP/1.1
+GET //dataset/{dkey}/reference/{id} HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/reference/id/{id}</h3>
-    <p><p>Looks up the internal surrrogate key using the original ID as provided by the dataset.</p>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/reference/{id}</h3>
+    <p><p>get reference details by id</p>
 </p>
 
 
 
-        <h3 id="op26-request-params">Parameters</h3>
+        <h3 id="op24-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -5190,75 +5085,22 @@ Host: api.col.plus
                     <td></td>
                     <td>yes</td>
                     <td></td>
-                    <td><p>original, dataset provided id</p>
+                    <td><p>reference id</p>
 </td>
                 </tr>
         </tbody></table>
 
 
-            <h3 id="op26-responses" class="clear">Response 200</h3>
+            <h3 id="op24-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
-Content-Type: application/json
-</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: integer</p>
-
-
-        <h2 id="resource-24">/dataset/{dkey}/reference/{key}</h2>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET //dataset/{dkey}/reference/{key} HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/reference/{key}</h3>
-    <p><p>get reference details by key</p>
-</p>
-
-
-
-        <h3 id="op27-request-params">Parameters</h3>
-        <table><thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Pattern</th>
-            <th>Required</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-        </thead><tbody>
-                <tr>
-                    <td>{key}</td>
-                    <td>integer</td>
-                    <td></td>
-                    <td>yes</td>
-                    <td></td>
-                    <td><p>reference key</p>
-</td>
-                </tr>
-        </tbody></table>
-
-
-            <h3 id="op27-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
-  "key": 432561,
+  "id": "432561",
   "datasetKey": 15,
-  "serialKey": 17,
   "csl": {
     "DOI":"10.1038/nrd842",
     "type":"article-journal",
@@ -5277,61 +5119,13 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Reference">Reference</a></p>
 
 
-        <h2 id="resource-25">/dataset/{dkey}/reference/{key}/acts</h2>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET //dataset/{dkey}/reference/{key}/acts HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/reference/{key}/acts</h3>
-    <p><p>Retrieves all nomenclatural acts published in the reference</p>
-</p>
-
-
-
-
-
-            <h3 id="op28-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
-Content-Type: application/json
-</code>
-    <code class="json">[{
-  "key": 721141,
-  "datasetKey": 15,
-  "type": "description",
-  "nameKey": 78612,
-  "referenceKey": 786,
-  "referencePage": "5"
-}
-,{
-  "key": 721141,
-  "datasetKey": 15,
-  "type": "description",
-  "nameKey": 78612,
-  "referenceKey": 786,
-  "referencePage": "5"
-}
-]</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-NomenclaturalAct">NomenclaturalAct[]</a></p>
-
-
-        <h1 id="resource-26">/parser</h1>
+        <h1 id="resource-22">/parser</h1>
 
     
 
 
 
-        <h2 id="resource-27">/parser/name</h2>
+        <h2 id="resource-23">/parser/name</h2>
 
     
 
@@ -5348,7 +5142,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op29-request-params">Parameters</h3>
+        <h3 id="op25-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -5371,15 +5165,14 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op29-responses" class="clear">Response 200</h3>
+            <h3 id="op25-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
-    "key": 169130,
     "id": "1000BA50801",
     "datasetKey": 1009,
     "scientificName": "Fomes obliquus",
@@ -5407,7 +5200,6 @@ Content-Type: application/json
     "authorship": "(Ach. ex Pers.) Cooke, 1885"
 }
 ,{
-    "key": 169130,
     "id": "1000BA50801",
     "datasetKey": 1009,
     "scientificName": "Fomes obliquus",
@@ -5452,7 +5244,7 @@ with one name per line, or as plain/text content in the request body.</p>
 </p>
 
 
-    <h3 id="op30-request-body">Body</h3>
+    <h3 id="op26-request-body">Body</h3>
             <p><code>application/json</code></p>
             <p>Content: any</p>
             <p><code>multipart/form-data</code></p>
@@ -5462,15 +5254,14 @@ with one name per line, or as plain/text content in the request body.</p>
 
 
 
-            <h3 id="op30-responses" class="clear">Response 200</h3>
+            <h3 id="op26-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
-    "key": 169130,
     "id": "1000BA50801",
     "datasetKey": 1009,
     "scientificName": "Fomes obliquus",
@@ -5498,7 +5289,6 @@ Content-Type: application/json
     "authorship": "(Ach. ex Pers.) Cooke, 1885"
 }
 ,{
-    "key": 169130,
     "id": "1000BA50801",
     "datasetKey": 1009,
     "scientificName": "Fomes obliquus",
@@ -5531,7 +5321,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Name">Name[]</a></p>
 
 
-        <h1 id="resource-28">/vocab</h1>
+        <h1 id="resource-24">/vocab</h1>
 
     
 
@@ -5551,11 +5341,11 @@ Any of the names can be used as valid subresources to list the actual enumeratio
 
 
 
-            <h3 id="op31-responses" class="clear">Response 200</h3>
+            <h3 id="op27-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">["continent","country","areastandard","cslreftype","nametype","origin","language","frequency","rank","nomacttype","coverage","nomstatus","dataformat","importstate","issue","gazetteer","cslvariable","typestatus","lifezone","distributionstatus","taxonomicstatus","kingdom","datasettype","license","nomcode","namepart"]
@@ -5565,7 +5355,7 @@ Content-Type: application/json
                     <p>Content: string[]</p>
 
 
-        <h2 id="resource-29">/vocab/{name}</h2>
+        <h2 id="resource-25">/vocab/{name}</h2>
 
     
 
@@ -5584,11 +5374,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op32-responses" class="clear">Response 200</h3>
+            <h3 id="op28-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 1:55:23 PM CEST
+Date: Tuesday, September 18, 2018 2:32:21 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]
