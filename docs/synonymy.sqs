@@ -9,7 +9,7 @@
         </location>
         <size>
             <width>231.00</width>
-            <height>100.00</height>
+            <height>120.00</height>
         </size>
         <zorder>1</zorder>
         <SQLField>
@@ -21,7 +21,7 @@
         </SQLField>
         <SQLField>
             <name><![CDATA[scientific_name]]></name>
-            <type><![CDATA[CHAR]]></type>
+            <type><![CDATA[TEXT]]></type>
             <uid><![CDATA[CAD3F9BB-7D79-4111-BA57-6DCFBAA8D541]]></uid>
         </SQLField>
         <SQLField>
@@ -53,7 +53,12 @@
             <referencesTableUID><![CDATA[0DF0863C-01B3-4A4F-8BC6-95B7C605D60E]]></referencesTableUID>
             <uid><![CDATA[75962B56-64B5-4ADC-A21D-C92EEED108CB]]></uid>
         </SQLField>
-        <labelWindowIndex><![CDATA[3]]></labelWindowIndex>
+        <SQLField>
+            <name><![CDATA[status]]></name>
+            <type><![CDATA[ENUM]]></type>
+            <uid><![CDATA[D785DDC7-6461-4202-9BA4-AC37C377A4E6]]></uid>
+        </SQLField>
+        <labelWindowIndex><![CDATA[8]]></labelWindowIndex>
         <ui.treeExpanded><![CDATA[1]]></ui.treeExpanded>
         <uid><![CDATA[01CEBACA-434B-455A-AF88-C697BBA39642]]></uid>
     </SQLTable>
@@ -61,8 +66,8 @@
         <name><![CDATA[Reference]]></name>
         <schema><![CDATA[]]></schema>
         <location>
-            <x>533.00</x>
-            <y>501.00</y>
+            <x>519.00</x>
+            <y>665.00</y>
         </location>
         <size>
             <width>134.00</width>
@@ -81,7 +86,7 @@
             <type><![CDATA[JSON]]></type>
             <uid><![CDATA[4876F6AE-2F0F-4235-B119-65EEF2350EB5]]></uid>
         </SQLField>
-        <labelWindowIndex><![CDATA[0]]></labelWindowIndex>
+        <labelWindowIndex><![CDATA[5]]></labelWindowIndex>
         <ui.treeExpanded><![CDATA[1]]></ui.treeExpanded>
         <uid><![CDATA[0DF0863C-01B3-4A4F-8BC6-95B7C605D60E]]></uid>
     </SQLTable>
@@ -133,7 +138,7 @@
         </SQLField>
         <SQLField>
             <name><![CDATA[according_to]]></name>
-            <type><![CDATA[CHAR]]></type>
+            <type><![CDATA[TEXT]]></type>
             <uid><![CDATA[5163B4FD-87AA-4F4E-A0C1-7C940C13F3EA]]></uid>
         </SQLField>
         <SQLField>
@@ -142,7 +147,7 @@
             <defaultValue><![CDATA[false]]></defaultValue>
             <uid><![CDATA[4AC46CE5-D7B2-4886-95C0-C70458F69B9F]]></uid>
         </SQLField>
-        <labelWindowIndex><![CDATA[2]]></labelWindowIndex>
+        <labelWindowIndex><![CDATA[7]]></labelWindowIndex>
         <ui.treeExpanded><![CDATA[1]]></ui.treeExpanded>
         <uid><![CDATA[6D7A32C0-1A04-4172-931B-DBB5FAD55452]]></uid>
     </SQLTable>
@@ -159,6 +164,7 @@
         </size>
         <zorder>6</zorder>
         <commentTitle><![CDATA[homotypic_name_key]]></commentTitle>
+        <labelWindowIndex><![CDATA[4]]></labelWindowIndex>
         <uid><![CDATA[74177EF7-2B3C-4A82-85FD-6A559657FDF7]]></uid>
     </SQLComment>
     <SQLTable>
@@ -202,20 +208,44 @@
         </SQLField>
         <SQLField>
             <name><![CDATA[according_to]]></name>
-            <type><![CDATA[CHAR]]></type>
+            <type><![CDATA[TEXT]]></type>
             <uid><![CDATA[A72E4A20-57B4-4ED0-8F74-013D504E0E74]]></uid>
         </SQLField>
         <SQLField>
             <name><![CDATA[status]]></name>
-            <type><![CDATA[INTEGER]]></type>
+            <type><![CDATA[ENUM]]></type>
             <uid><![CDATA[0BB84D90-CF9C-4F85-8AB9-DBF68FAA2871]]></uid>
         </SQLField>
-        <labelWindowIndex><![CDATA[1]]></labelWindowIndex>
+        <labelWindowIndex><![CDATA[6]]></labelWindowIndex>
         <ui.treeExpanded><![CDATA[1]]></ui.treeExpanded>
         <uid><![CDATA[9F86E967-0E8F-47EE-ADED-7526BCA13304]]></uid>
     </SQLTable>
+    <SQLComment>
+        <name><![CDATA[Comment1]]></name>
+        <comment><![CDATA[unavailable
+legitimate
+illegitimate
+conserved
+rejected
+doubtful
+manuscript
+chresonym
+unevaluated]]></comment>
+        <location>
+            <x>542.00</x>
+            <y>449.00</y>
+        </location>
+        <size>
+            <width>108.00</width>
+            <height>177.00</height>
+        </size>
+        <zorder>8</zorder>
+        <commentTitle><![CDATA[name status]]></commentTitle>
+        <labelWindowIndex><![CDATA[0]]></labelWindowIndex>
+        <uid><![CDATA[A9FDEC47-7132-4E62-9401-598E03907406]]></uid>
+    </SQLComment>
     <SQLTable>
-        <name><![CDATA[NameAct]]></name>
+        <name><![CDATA[NameRelation]]></name>
         <schema><![CDATA[]]></schema>
         <location>
             <x>208.00</x>
@@ -223,7 +253,7 @@
         </location>
         <size>
             <width>213.00</width>
-            <height>120.00</height>
+            <height>140.00</height>
         </size>
         <zorder>3</zorder>
         <SQLField>
@@ -261,54 +291,54 @@
         </SQLField>
         <SQLField>
             <name><![CDATA[type]]></name>
-            <type><![CDATA[INTEGER]]></type>
+            <type><![CDATA[ENUM]]></type>
             <uid><![CDATA[6B48652E-E56E-4B26-87F4-C100B32C5976]]></uid>
         </SQLField>
         <SQLField>
+            <name><![CDATA[published_in_key]]></name>
+            <type><![CDATA[INTEGER]]></type>
+            <referencesField>key</referencesField>
+            <referencesTable>Reference</referencesTable>
+            <referencesField><![CDATA[key]]></referencesField>
+            <referencesTable><![CDATA[Reference]]></referencesTable>
+            <sourceCardinality>0</sourceCardinality>
+            <destinationCardinality>0</destinationCardinality>
+            <referencesFieldUID><![CDATA[8D3B4A57-CAA9-4634-84A3-09B74C3061CE]]></referencesFieldUID>
+            <referencesTableUID><![CDATA[0DF0863C-01B3-4A4F-8BC6-95B7C605D60E]]></referencesTableUID>
+            <uid><![CDATA[3DDA5F24-0861-4A68-9363-20EB19B7E71D]]></uid>
+        </SQLField>
+        <SQLField>
             <name><![CDATA[note]]></name>
-            <type><![CDATA[CHAR]]></type>
+            <type><![CDATA[TEXT]]></type>
             <uid><![CDATA[329E7E2D-A586-4034-8E17-D2C3EF178D8B]]></uid>
         </SQLField>
-        <labelWindowIndex><![CDATA[0]]></labelWindowIndex>
+        <labelWindowIndex><![CDATA[3]]></labelWindowIndex>
         <ui.treeExpanded><![CDATA[1]]></ui.treeExpanded>
         <uid><![CDATA[D81CA2A7-EC81-4F30-AD3A-6395A21BEA9D]]></uid>
     </SQLTable>
     <SQLComment>
-        <name><![CDATA[Comment2_2]]></name>
-        <comment><![CDATA[if status=synonym:
-only links to name keys allowed which are a homotypic_name_key, thus constraint Name.key=Name. homotypic_name_key]]></comment>
+        <name><![CDATA[Comment1_1]]></name>
+        <comment><![CDATA[From TCS:
+- spelling correction of
+- has basionym
+- based on
+- replacement name for
+- conserved against
+- later homonym of
+Additional:
+- superflous because of
+- homotypic]]></comment>
         <location>
-            <x>942.00</x>
-            <y>439.00</y>
+            <x>230.00</x>
+            <y>444.00</y>
         </location>
         <size>
-            <width>178.00</width>
-            <height>140.00</height>
-        </size>
-        <zorder>7</zorder>
-        <commentTitle><![CDATA[name_key]]></commentTitle>
-        <labelWindowIndex><![CDATA[0]]></labelWindowIndex>
-        <uid><![CDATA[DB20A35A-7A4F-41E6-96B3-C6B93A3CC90D]]></uid>
-    </SQLComment>
-    <SQLComment>
-        <name><![CDATA[Comment1]]></name>
-        <comment><![CDATA[spelling correction of
-has basionym
-based on
-replacement name for
-
-conserved against
-later homonym of]]></comment>
-        <location>
-            <x>229.00</x>
-            <y>429.00</y>
-        </location>
-        <size>
-            <width>167.00</width>
-            <height>145.00</height>
+            <width>166.00</width>
+            <height>188.00</height>
         </size>
         <zorder>5</zorder>
-        <commentTitle><![CDATA[act types (TCS)]]></commentTitle>
+        <commentTitle><![CDATA[relation types]]></commentTitle>
+        <labelWindowIndex><![CDATA[1]]></labelWindowIndex>
         <uid><![CDATA[E7F38558-1C70-4CDE-950C-040702EF7910]]></uid>
     </SQLComment>
     <SQLComment>
@@ -316,14 +346,14 @@ later homonym of]]></comment>
         <comment><![CDATA[synonym
 misapplied]]></comment>
         <location>
-            <x>828.00</x>
-            <y>437.00</y>
+            <x>867.00</x>
+            <y>434.00</y>
         </location>
         <size>
             <width>100.00</width>
             <height>67.00</height>
         </size>
-        <zorder>8</zorder>
+        <zorder>7</zorder>
         <commentTitle><![CDATA[status]]></commentTitle>
         <labelWindowIndex><![CDATA[0]]></labelWindowIndex>
         <uid><![CDATA[ECFEC9A4-F4E0-4F1E-A8C5-576A13E59F5E]]></uid>
@@ -347,11 +377,11 @@ misapplied]]></comment>
         <SourceSidebarWidth><![CDATA[0.000000]]></SourceSidebarWidth>
         <SQLEditorFileFormatVersion><![CDATA[3.1]]></SQLEditorFileFormatVersion>
         <uid><![CDATA[F8C1D3A6-2196-453A-9B20-4771AD22FDE6]]></uid>
-        <windowHeight><![CDATA[777.000000]]></windowHeight>
-        <windowLocationX><![CDATA[366.000000]]></windowLocationX>
-        <windowLocationY><![CDATA[250.000000]]></windowLocationY>
-        <windowScrollOrigin><![CDATA[{62, 67}]]></windowScrollOrigin>
-        <windowWidth><![CDATA[1102.000000]]></windowWidth>
+        <windowHeight><![CDATA[849.000000]]></windowHeight>
+        <windowLocationX><![CDATA[466.000000]]></windowLocationX>
+        <windowLocationY><![CDATA[64.000000]]></windowLocationY>
+        <windowScrollOrigin><![CDATA[{89, 114}]]></windowScrollOrigin>
+        <windowWidth><![CDATA[1464.000000]]></windowWidth>
     </SQLDocumentInfo>
     <AllowsIndexRenamingOnInsert><![CDATA[1]]></AllowsIndexRenamingOnInsert>
     <containerName><![CDATA[model controller orginal container]]></containerName>
