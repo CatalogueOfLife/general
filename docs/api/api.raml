@@ -73,9 +73,9 @@ resourceTypes:
       get:
         description: Retrieve import metrics for the dataset with the specified key. By default just returns the last import
         queryParameters:
-          all:
-            type: boolean
-            description: if true returns all import metrics arranged chronologically
+          limit:
+            type: integer
+            description: number of imports to limit to. Defaults to 1.
           state:
             type: ImportState
             description: filters listed import metrics by their state, e.g. the last failed import

@@ -209,11 +209,11 @@
 </td>
                                 </tr>
                                 <tr>
-                                    <td>alias</td>
-                                    <td>string</td>
-                                    <td></td>
+                                    <td>type</td>
+                                    <td><a href="#model-DatasetType">DatasetType</a></td>
+                                    <td>nomenclator, taxonomic, national, personal, other</td>
                                     <td>yes</td>
-                                    <td><p>Short name of the source dataset</p>
+                                    <td><p>coarse classification of datasets</p>
 </td>
                                 </tr>
                                 <tr>
@@ -233,27 +233,19 @@
 </td>
                                 </tr>
                                 <tr>
-                                    <td>abstract</td>
+                                    <td>gbifPublisherKey</td>
+                                    <td><a href="#model-uuid">uuid</a></td>
+                                    <td>^[0-9abcdef]{8}-[0-9abcdef]{4}-[0-9abcdef]{4}-[0-9abcdef]{4}-[0-9abcdef]{12}$</td>
+                                    <td>no</td>
+                                    <td><p>GBIF publisher key in case of GBIF datasets</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>description</td>
                                     <td>string</td>
                                     <td></td>
                                     <td>no</td>
                                     <td><p>Free text describing the source dataset supporting markdown formatting</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>groupName</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Name in English of the group(s) treated in the database</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>authorsAndEditors</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Optional author(s) and editor(s) of the source dataset</p>
 </td>
                                 </tr>
                                 <tr>
@@ -273,6 +265,22 @@
 </td>
                                 </tr>
                                 <tr>
+                                    <td>authorsAndEditors</td>
+                                    <td>string[]</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Optional author(s) and editor(s) of the source dataset</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>license</td>
+                                    <td><a href="#model-LicenseType">LicenseType</a></td>
+                                    <td>cc0, cc by, cc by nc, unspecified</td>
+                                    <td>yes</td>
+                                    <td><p>License this dataset falls under</p>
+</td>
+                                </tr>
+                                <tr>
                                     <td>version</td>
                                     <td>string</td>
                                     <td></td>
@@ -281,41 +289,11 @@
 </td>
                                 </tr>
                                 <tr>
-                                    <td>releaseDate</td>
-                                    <td>string</td>
+                                    <td>released</td>
+                                    <td>date-only</td>
                                     <td></td>
                                     <td>no</td>
                                     <td><p>Latest release date of the source dataset used in the Catalogue of Life</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>taxonomicCoverage</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>coverage</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>completeness</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>completeness of global coverage in percent given as 0-100</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>confidence</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>1-5</p>
 </td>
                                 </tr>
                                 <tr>
@@ -340,6 +318,64 @@
                                     <td></td>
                                     <td>no</td>
                                     <td><p>URL to access the source data</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>importFrequency</td>
+                                    <td><a href="#model-FrequencyType">FrequencyType</a></td>
+                                    <td>never, once, daily, weekly, monthly, yearly</td>
+                                    <td>yes</td>
+                                    <td><p>the configured frequency the source is visited for new imports</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>code</td>
+                                    <td><a href="#model-NomCodeType">NomCodeType</a></td>
+                                    <td>bacterial, botanical, cultivated, viral, zoological, unknown</td>
+                                    <td>no</td>
+                                    <td><p>a default nomenclatural code to be used when importing</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>catalogue</td>
+                                    <td><a href="#model-CatalogueType">CatalogueType</a></td>
+                                    <td>scrutinized, provisional</td>
+                                    <td>yes</td>
+                                    <td><p>If the dataset participates in any of the 2 catalouge assemblies this is indicated here.
+All scrutinized sources will also be included as provisional ones.
+Dataset used to build the provisional catalogue will be trusted and insert their names into the names index.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>notes</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>any notes</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>created</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>datetime the dataset was registered in the Clearinghouse</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modified</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the data from this dataset was last changed in the Clearinghouse</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>deleted</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the dataset was deleted from the Clearinghouse</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -2735,12 +2771,39 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
 
         <h1 id="vocabs">Vocabularies</h1>
 
+            <h2 id="model-CatalogueType">CatalogueType</h2>
+
+
+            <p><strong>Enumeration</strong>: <em>scrutinized</em>, <em>provisional</em></p>
+
+    <p><p>Assembled catalogues in the CoL See <a href="http://api.col.plus/vocab/catalogue">http://api.col.plus/vocab/catalogue</a> for the latest full list.</p>
+</p>
+
+
+            <h2 id="model-DatasetType">DatasetType</h2>
+
+
+            <p><strong>Enumeration</strong>: <em>nomenclator</em>, <em>taxonomic</em>, <em>national</em>, <em>personal</em>, <em>other</em></p>
+
+    <p><p>Enumeration of kind of datasets See <a href="http://api.col.plus/vocab/datasettype">http://api.col.plus/vocab/datasettype</a> for the latest full list.</p>
+</p>
+
+
             <h2 id="model-DistributionStatusType">DistributionStatusType</h2>
 
 
             <p><strong>Enumeration</strong>: <em>native</em>, <em>domesticated</em>, <em>alien</em>, <em>uncertain</em></p>
 
     <p><p>CoL distribution status enumeration See <a href="http://api.col.plus/vocab/distributionstatus">http://api.col.plus/vocab/distributionstatus</a></p>
+</p>
+
+
+            <h2 id="model-FrequencyType">FrequencyType</h2>
+
+
+            <p><strong>Enumeration</strong>: <em>never</em>, <em>once</em>, <em>daily</em>, <em>weekly</em>, <em>monthly</em>, <em>yearly</em></p>
+
+    <p><p>Enumeration of frequencies for scheduling dataset imports. See <a href="http://api.col.plus/vocab/frequency">http://api.col.plus/vocab/frequency</a> for the latest full list.</p>
 </p>
 
 
@@ -2781,7 +2844,7 @@ See Limits of Oceans &amp; Seas, Special Publication No. 23 published by the Int
 
             <p><strong>Enumeration</strong>: <em>downloading</em>, <em>processing</em>, <em>inserting</em>, <em>unchanged</em>, <em>finished</em>, <em>canceled</em>, <em>failed</em></p>
 
-    <p><p>Ennumeration of states of running or finished dataset imports. See <a href="http://api.col.plus/vocab/importstate">http://api.col.plus/vocab/importstate</a> for the latest full list.</p>
+    <p><p>Enumeration of states of running or finished dataset imports. See <a href="http://api.col.plus/vocab/importstate">http://api.col.plus/vocab/importstate</a> for the latest full list.</p>
 </p>
 
 
@@ -2800,6 +2863,15 @@ See Limits of Oceans &amp; Seas, Special Publication No. 23 published by the Int
             <p><strong>Enumeration</strong>: <em>Animalia</em>, <em>Archaea</em>, <em>Bacteria</em>, <em>Chromista</em>, <em>Fungi</em>, <em>Plantae</em>, <em>Protozoa</em>, <em>Viruses</em></p>
 
     <p><p>Enumeration of all kingdoms recognized in the Catalogue of Life. See <a href="http://api.col.plus/vocab/kingdom">http://api.col.plus/vocab/kingdom</a></p>
+</p>
+
+
+            <h2 id="model-LicenseType">LicenseType</h2>
+
+
+            <p><strong>Enumeration</strong>: <em>cc0</em>, <em>cc by</em>, <em>cc by nc</em>, <em>unspecified</em></p>
+
+    <p><p>Enumeration of Creative Commons license types supported by the Clearinghouse. See <a href="http://api.col.plus/vocab/license">http://api.col.plus/vocab/license</a></p>
 </p>
 
 
@@ -3003,7 +3075,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3032,7 +3104,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3084,7 +3156,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3203,12 +3275,12 @@ Host: api.col.plus
         </tr>
         </thead><tbody>
             <tr>
-                <td>all</td>
-                <td>boolean</td>
+                <td>limit</td>
+                <td>integer</td>
                 <td></td>
                 <td>yes</td>
                 <td></td>
-                <td><p>if true returns all import metrics arranged chronologically</p>
+                <td><p>number of imports to limit to. Defaults to 1.</p>
 </td>
             </tr>
             <tr>
@@ -3227,7 +3299,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -3376,7 +3448,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3428,7 +3500,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3545,7 +3617,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3597,7 +3669,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3649,7 +3721,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3711,7 +3783,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3782,7 +3854,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -3874,7 +3946,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3905,7 +3977,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -4117,7 +4189,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4216,7 +4288,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -4349,7 +4421,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4660,7 +4732,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -4712,7 +4784,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4772,7 +4844,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -4860,7 +4932,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4929,7 +5001,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -4977,7 +5049,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5076,7 +5148,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -5128,7 +5200,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -5180,7 +5252,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5228,7 +5300,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -5303,7 +5375,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -5394,7 +5466,7 @@ with one name per line, or as plain/text content in the request body.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -5483,7 +5555,7 @@ Any of the names can be used as valid subresources to list the actual enumeratio
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">["continent","country","areastandard","cslreftype","nametype","origin","language","frequency","rank","nomacttype","coverage","nomstatus","dataformat","importstate","issue","gazetteer","cslvariable","typestatus","lifezone","distributionstatus","taxonomicstatus","kingdom","datasettype","license","nomcode","namepart"]
@@ -5516,7 +5588,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, September 13, 2018 1:06:30 PM CEST
+Date: Tuesday, September 18, 2018 1:55:23 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]

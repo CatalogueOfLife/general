@@ -32,11 +32,29 @@ RankType:
      - [NOMEN](https://raw.githubusercontent.com/SpeciesFileGroup/nomen/master/src/ontology/nomen.owl)
 
      TODO: extract all values from sources
+CatalogueType:
+  type: string
+  enum: ["scrutinized", "provisional"]
+  description: >
+    Assembled catalogues in the CoL
+    See http://api.col.plus/vocab/catalogue for the latest full list.
+DatasetType:
+  type: string
+  enum: ["nomenclator","taxonomic","national","personal","other"]
+  description: >
+    Enumeration of kind of datasets
+    See http://api.col.plus/vocab/datasettype for the latest full list.
+FrequencyType:
+  type: string
+  enum: ["never", "once", "daily", "weekly", "monthly", "yearly"]
+  description: >
+    Enumeration of frequencies for scheduling dataset imports.
+    See http://api.col.plus/vocab/frequency for the latest full list.    
 ImportState:
   type: string
   enum: ["downloading","processing","inserting","unchanged","finished","canceled","failed"]
   description: >
-    Ennumeration of states of running or finished dataset imports.
+    Enumeration of states of running or finished dataset imports.
     See http://api.col.plus/vocab/importstate for the latest full list.
 IssueType:
   type: string
@@ -147,6 +165,12 @@ NomenclaturalActType:
 
      typification
      : subsequent type designations.
+LicenseType:
+  type: string
+  enum: ["cc0","cc by","cc by nc","unspecified"]
+  description: >
+    Enumeration of Creative Commons license types supported by the Clearinghouse.
+    See http://api.col.plus/vocab/license
 LifezoneType:
   type: string
   enum: ["brackish", "freshwater", "marine", "terrestrial"]
@@ -280,9 +304,9 @@ Dataset:
     key:
       type: integer
       description: Primary key for the source dataset
-    alias:
-      type: string
-      description: Short name of the source dataset
+    type:
+      type: DatasetType
+      description: coarse classification of datasets
     title:
       type: string
       description: Full name of the source dataset
@@ -290,16 +314,13 @@ Dataset:
       type: uuid
       description: GBIF dataset key
       required: false
-    abstract:
+    gbifPublisherKey:
+      type: uuid
+      description: GBIF publisher key in case of GBIF datasets
+      required: false
+    description:
       type: string
       description: Free text describing the source dataset supporting markdown formatting
-      required: false
-    groupName:
-      type: string
-      description: Name in English of the group(s) treated in the database
-    authorsAndEditors:
-      type: string
-      description: Optional author(s) and editor(s) of the source dataset
       required: false
     organisation:
       type: string
@@ -309,29 +330,20 @@ Dataset:
       type: string
       description: Contact person of the source dataset
       required: false
+    authorsAndEditors:
+      type: string[]
+      description: Optional author(s) and editor(s) of the source dataset
+      required: false
+    license:
+      type: LicenseType
+      description: License this dataset falls under
     version:
       type: string
       description: Latest version number of the source dataset used in the Catalogue of Life
       required: false
-    releaseDate:
-      type: string
+    released:
+      type: date-only
       description: Latest release date of the source dataset used in the Catalogue of Life
-      required: false
-    taxonomicCoverage:
-      type: string
-      description:
-      required: false
-    coverage:
-      type: string
-      description:
-      required: false
-    completeness:
-      type: integer
-      description: completeness of global coverage in percent given as 0-100
-      required: false
-    confidence:
-      type: integer
-      description: 1-5
       required: false
     homepage:
       type: string
@@ -345,6 +357,34 @@ Dataset:
     dataAccess:
       type: string
       description: URL to access the source data
+      required: false
+    importFrequency:
+      type: FrequencyType
+      description: the configured frequency the source is visited for new imports
+    code:
+      type: NomCodeType
+      description: a default nomenclatural code to be used when importing
+      required: false
+    catalogue:
+      type: CatalogueType
+      description: | 
+        If the dataset participates in any of the 2 catalouge assemblies this is indicated here. 
+        All scrutinized sources will also be included as provisional ones. 
+        Dataset used to build the provisional catalogue will be trusted and insert their names into the names index.
+    notes:
+      type: string
+      description: any notes
+      required: false
+    created:
+      type: datetime
+      description: datetime the dataset was registered in the Clearinghouse
+    modified:
+      type: datetime
+      description: datetime the data from this dataset was last changed in the Clearinghouse
+      required: false
+    deleted:
+      type: datetime
+      description: datetime the dataset was deleted from the Clearinghouse
       required: false
 DatasetImport:
   type: object
