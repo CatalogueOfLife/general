@@ -108,8 +108,9 @@ It is currently planned that the names index will be identical to the names stor
 The status of a name can be used to indicate chresonyms or manuscript names. An editorial interface for basic name properties, initially at least the status, is provided which allows the exclusion of names from entering the final Catalogue through editorial decisions.
 
 
-**Work in progress !!!**
-Draft ideas to cover here:
+**TODO: Work in progress !!!**
+Draft ideas to cover here: 
+- micrrotaxonomy patches stored in db for overrides
 - copy scrutinized cat? What about the scrut cat lagging behind because of manual review required?
 - names are added dynamically as trusted datasets are imported (see names index)
 - merge data about the same name based on names index match
