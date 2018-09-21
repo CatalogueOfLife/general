@@ -91,6 +91,9 @@ Optionally a dataset can be configured to prefer the exact name spelling from a 
 The preliminary CoL can be browsed and searched just as any other dataset in the Clearinghouse for review before it gets released. When released it will be copied into the immutable CoL archive that drives the public portal.
 
 
+## TO BE ADDED
+- [discussion threads](https://github.com/Sp2000/colplus/blob/master/docs/EDITORIAL-TOOLS.md#discussion-page) for blocking issues
+- block updated datasets if unhandled issues arise
 
 
 # Assembling the Provisional Catalogue
@@ -115,5 +118,4 @@ Draft ideas to cover here:
     - insert only ranks configured, default to family and below
 - detect basionyms by the same epithet and authorship within families
 - resolve taxonomic status, allow just one accepted name within a homotypic group
-
 
