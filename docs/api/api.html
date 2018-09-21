@@ -3084,7 +3084,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3113,7 +3113,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3165,7 +3165,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3308,7 +3308,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -3457,7 +3457,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3509,7 +3509,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3626,7 +3626,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3678,7 +3678,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3740,7 +3740,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3810,7 +3810,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -3902,7 +3902,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3933,7 +3933,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -4145,7 +4145,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4244,7 +4244,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -4252,24 +4252,504 @@ Content-Type: application/json
                     <p>Content: <a href="#model-NameResultSet">NameResultSet</a></p>
 
 
-        <h2 id="resource-14">/dataset/{dkey}/name/search</h2>
+        <h2 id="resource-14">/dataset/{dkey}/name/{id}</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/name/search HTTP/1.1
+GET //dataset/{dkey}/name/{id} HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/search</h3>
-    <p><p>Executes a name search.</p>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{id}</h3>
+    <p><p>Retrieves the name with the specified id.</p>
 </p>
 
 
 
         <h3 id="op17-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+                <tr>
+                    <td>{id}</td>
+                    <td>string</td>
+                    <td></td>
+                    <td>yes</td>
+                    <td></td>
+                    <td><p>name identifier as given by the source</p>
+</td>
+                </tr>
+        </tbody></table>
+
+
+            <h3 id="op17-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">{
+    "id": "1000BA50801",
+    "datasetKey": 1009,
+    "scientificName": "Fomes obliquus",
+    "rank": "species",
+    "genus": "Fomes",
+    "specificEpithet": "obliquus",
+    "candidatus": false,
+    "combinationAuthorship": {
+        "authors": [
+            "Cooke"
+        ],
+        "year": "1885"
+    },
+    "basionymAuthorship": {
+        "authors": [
+            "Pers."
+        ],
+        "exAuthors": [
+            "Ach."
+        ]
+    },
+    "origin": "source",
+    "type": "scientific",
+    "parsed": true,
+    "authorship": "(Ach. ex Pers.) Cooke, 1885"
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Name">Name</a></p>
+
+
+        <h2 id="resource-15">/dataset/{dkey}/name/{id}/synonyms</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //dataset/{dkey}/name/{id}/synonyms HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{id}/synonyms</h3>
+    <p><p>Retrieves all names in the same homotypic group as the name with the specified key.</p>
+</p>
+
+
+
+
+
+            <h3 id="op18-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">[{
+    "id": "1000BA50801",
+    "datasetKey": 1009,
+    "scientificName": "Fomes obliquus",
+    "rank": "species",
+    "genus": "Fomes",
+    "specificEpithet": "obliquus",
+    "candidatus": false,
+    "combinationAuthorship": {
+        "authors": [
+            "Cooke"
+        ],
+        "year": "1885"
+    },
+    "basionymAuthorship": {
+        "authors": [
+            "Pers."
+        ],
+        "exAuthors": [
+            "Ach."
+        ]
+    },
+    "origin": "source",
+    "type": "scientific",
+    "parsed": true,
+    "authorship": "(Ach. ex Pers.) Cooke, 1885"
+}
+,{
+    "id": "1000BA50801",
+    "datasetKey": 1009,
+    "scientificName": "Fomes obliquus",
+    "rank": "species",
+    "genus": "Fomes",
+    "specificEpithet": "obliquus",
+    "candidatus": false,
+    "combinationAuthorship": {
+        "authors": [
+            "Cooke"
+        ],
+        "year": "1885"
+    },
+    "basionymAuthorship": {
+        "authors": [
+            "Pers."
+        ],
+        "exAuthors": [
+            "Ach."
+        ]
+    },
+    "origin": "source",
+    "type": "scientific",
+    "parsed": true,
+    "authorship": "(Ach. ex Pers.) Cooke, 1885"
+}
+]</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Name">Name[]</a></p>
+
+
+        <h2 id="resource-16">/dataset/{dkey}/name/{id}/publishedIn</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //dataset/{dkey}/name/{id}/publishedIn HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{id}/publishedIn</h3>
+    <p><p>Retrieves the literature reference for the name with the specified key.</p>
+</p>
+
+
+
+
+
+            <h3 id="op19-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "id": "432561",
+  "datasetKey": 15,
+  "csl": {
+    "DOI":"10.1038/nrd842",
+    "type":"article-journal",
+    "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
+    "title":"From the analyst's couch: Selective anticancer drugs",
+    "container-title":"Nature Reviews Drug Discovery",
+    "volume":"1",
+    "issue":"7",
+    "issued":{"date-parts":[[2002,7]]},
+    "page":"491-492"
+  }
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Reference">Reference</a></p>
+
+
+        <h2 id="resource-17">/dataset/{dkey}/name/{id}/relations</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //dataset/{dkey}/name/{id}/relations HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{id}/relations</h3>
+    <p><p>Retrieves nomenclatural relations for the name or its homotypical group</p>
+</p>
+
+
+
+        <h3 id="op20-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>homotypic</td>
+                <td>boolean</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>if true also includes all acts about related, homotypic names</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op20-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">[{
+  "key": 721141,
+  "datasetKey": 15,
+  "type": "basionym",
+  "nameId": "78612",
+  "relatedNameId": "1655",
+  "publishedInId": "786"
+}
+,{
+  "key": 721141,
+  "datasetKey": 15,
+  "type": "basionym",
+  "nameId": "78612",
+  "relatedNameId": "1655",
+  "publishedInId": "786"
+}
+]</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-NameRelation">NameRelation[]</a></p>
+
+
+        <h2 id="resource-18">/dataset/{dkey}/name/{id}/verbatim</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //dataset/{dkey}/name/{id}/verbatim HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{id}/verbatim</h3>
+    <p><p>Retrieves the verbatim DarwinCore record of the name with the specified key,</p>
+</p>
+
+
+
+
+
+            <h3 id="op21-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">{
+    "key": 114621,
+    "datasetKey": 24,
+    "line": 4,
+    "file": "AcceptedSpecies.txt",
+    "type": "acef:AcceptedSpecies",
+    "terms": {
+        "acef:AuthorString": "Soepadmo",
+        "acef:Family": "Fagaceae",
+        "acef:AcceptedTaxonID": "Kew-114621",
+        "acef:Phylum": "Tracheophyta",
+        "acef:LTSDate": "Aug-2017",
+        "acef:Sp2000NameStatus": "accepted name",
+        "acef:LTSSpecialist": "Govaerts R.",
+        "acef:HasModern": "1",
+        "acef:SpeciesEpithet": "mariae",
+        "acef:Kingdom": "Plantae",
+        "acef:Order": "Fagales",
+        "acef:Genus": "Lithocarpus",
+        "acef:HasPreHolocene": "0",
+        "acef:Class": "Magnoliopsida",
+        "acef:IsExtinct": "0"
+    },
+    "issues": [
+        "according to date invalid",
+        "escaped characters"
+    ]
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-VerbatimRecord">VerbatimRecord</a></p>
+
+
+        <h2 id="resource-19">/dataset/{dkey}/reference</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //dataset/{dkey}/reference HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/reference</h3>
+    <p><p>Paging parameters.</p>
+</p>
+
+
+
+        <h3 id="op22-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>offset</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of offset records. Defaults to zero</p>
+</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of maximum records to be returned. Defaults to 10 and can be no more than 1000.</p>
+</td>
+            </tr>
+            <tr>
+                <td>datasetKey</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>The database key of the dataset</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op22-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-ResultSet">ResultSet</a></p>
+
+
+        <h2 id="resource-20">/dataset/{dkey}/reference/{id}</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //dataset/{dkey}/reference/{id} HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/reference/{id}</h3>
+    <p><p>get reference details by id</p>
+</p>
+
+
+
+        <h3 id="op23-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+                <tr>
+                    <td>{id}</td>
+                    <td>string</td>
+                    <td></td>
+                    <td>yes</td>
+                    <td></td>
+                    <td><p>reference id</p>
+</td>
+                </tr>
+        </tbody></table>
+
+
+            <h3 id="op23-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "id": "432561",
+  "datasetKey": 15,
+  "csl": {
+    "DOI":"10.1038/nrd842",
+    "type":"article-journal",
+    "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
+    "title":"From the analyst's couch: Selective anticancer drugs",
+    "container-title":"Nature Reviews Drug Discovery",
+    "volume":"1",
+    "issue":"7",
+    "issued":{"date-parts":[[2002,7]]},
+    "page":"491-492"
+  }
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-Reference">Reference</a></p>
+
+
+        <h1 id="resource-21">/name/search</h1>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //name/search HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/name/search</h3>
+    <p><p>Executes a name search.</p>
+</p>
+
+
+
+        <h3 id="op24-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4290,21 +4770,21 @@ Host: api.col.plus
 </td>
             </tr>
             <tr>
-                <td>key</td>
-                <td>integer</td>
-                <td></td>
-                <td>no</td>
-                <td></td>
-                <td><p>the database key of the name</p>
-</td>
-            </tr>
-            <tr>
                 <td>datasetKey</td>
                 <td>integer</td>
                 <td></td>
                 <td>no</td>
                 <td></td>
                 <td><p>dataset key</p>
+</td>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>string</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>the name identifier</p>
 </td>
             </tr>
             <tr>
@@ -4326,7 +4806,7 @@ Host: api.col.plus
 </td>
             </tr>
             <tr>
-                <td>taxstatus</td>
+                <td>status</td>
                 <td><a href="#model-TaxonomicStatusType">TaxonomicStatusType</a></td>
                 <td>accepted, doubtful</td>
                 <td>no</td>
@@ -4362,6 +4842,33 @@ Host: api.col.plus
 </td>
             </tr>
             <tr>
+                <td>hasField</td>
+                <td>string</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>filter that only includes name where the requested name property is not null</p>
+</td>
+            </tr>
+            <tr>
+                <td>facet</td>
+                <td>enum</td>
+                <td>dataset_key, rank, nom_status, status, issue, type, field</td>
+                <td>no</td>
+                <td></td>
+                <td><p>request a facet to be returned. The facet limit defaults to 50</p>
+</td>
+            </tr>
+            <tr>
+                <td>sortBy</td>
+                <td>enum</td>
+                <td>relevance, name, key</td>
+                <td>no</td>
+                <td></td>
+                <td><p>sort order</p>
+</td>
+            </tr>
+            <tr>
                 <td>offset</td>
                 <td>integer</td>
                 <td></td>
@@ -4382,11 +4889,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op17-responses" class="clear">Response 200</h3>
+            <h3 id="op24-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4639,486 +5146,6 @@ Content-Type: application/json
                     <p>Content: <a href="#model-NameSearchResultSet">NameSearchResultSet</a></p>
 
 
-        <h2 id="resource-15">/dataset/{dkey}/name/{id}</h2>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET //dataset/{dkey}/name/{id} HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{id}</h3>
-    <p><p>Retrieves the name with the specified id.</p>
-</p>
-
-
-
-        <h3 id="op18-request-params">Parameters</h3>
-        <table><thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Pattern</th>
-            <th>Required</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-        </thead><tbody>
-                <tr>
-                    <td>{id}</td>
-                    <td>string</td>
-                    <td></td>
-                    <td>yes</td>
-                    <td></td>
-                    <td><p>name identifier as given by the source</p>
-</td>
-                </tr>
-        </tbody></table>
-
-
-            <h3 id="op18-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
-Content-Type: application/json
-</code>
-    <code class="json">{
-    "id": "1000BA50801",
-    "datasetKey": 1009,
-    "scientificName": "Fomes obliquus",
-    "rank": "species",
-    "genus": "Fomes",
-    "specificEpithet": "obliquus",
-    "candidatus": false,
-    "combinationAuthorship": {
-        "authors": [
-            "Cooke"
-        ],
-        "year": "1885"
-    },
-    "basionymAuthorship": {
-        "authors": [
-            "Pers."
-        ],
-        "exAuthors": [
-            "Ach."
-        ]
-    },
-    "origin": "source",
-    "type": "scientific",
-    "parsed": true,
-    "authorship": "(Ach. ex Pers.) Cooke, 1885"
-}
-</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-Name">Name</a></p>
-
-
-        <h2 id="resource-16">/dataset/{dkey}/name/{id}/synonyms</h2>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET //dataset/{dkey}/name/{id}/synonyms HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{id}/synonyms</h3>
-    <p><p>Retrieves all names in the same homotypic group as the name with the specified key.</p>
-</p>
-
-
-
-
-
-            <h3 id="op19-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
-Content-Type: application/json
-</code>
-    <code class="json">[{
-    "id": "1000BA50801",
-    "datasetKey": 1009,
-    "scientificName": "Fomes obliquus",
-    "rank": "species",
-    "genus": "Fomes",
-    "specificEpithet": "obliquus",
-    "candidatus": false,
-    "combinationAuthorship": {
-        "authors": [
-            "Cooke"
-        ],
-        "year": "1885"
-    },
-    "basionymAuthorship": {
-        "authors": [
-            "Pers."
-        ],
-        "exAuthors": [
-            "Ach."
-        ]
-    },
-    "origin": "source",
-    "type": "scientific",
-    "parsed": true,
-    "authorship": "(Ach. ex Pers.) Cooke, 1885"
-}
-,{
-    "id": "1000BA50801",
-    "datasetKey": 1009,
-    "scientificName": "Fomes obliquus",
-    "rank": "species",
-    "genus": "Fomes",
-    "specificEpithet": "obliquus",
-    "candidatus": false,
-    "combinationAuthorship": {
-        "authors": [
-            "Cooke"
-        ],
-        "year": "1885"
-    },
-    "basionymAuthorship": {
-        "authors": [
-            "Pers."
-        ],
-        "exAuthors": [
-            "Ach."
-        ]
-    },
-    "origin": "source",
-    "type": "scientific",
-    "parsed": true,
-    "authorship": "(Ach. ex Pers.) Cooke, 1885"
-}
-]</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-Name">Name[]</a></p>
-
-
-        <h2 id="resource-17">/dataset/{dkey}/name/{id}/publishedIn</h2>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET //dataset/{dkey}/name/{id}/publishedIn HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{id}/publishedIn</h3>
-    <p><p>Retrieves the literature reference for the name with the specified key.</p>
-</p>
-
-
-
-
-
-            <h3 id="op20-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
-Content-Type: application/json
-</code>
-    <code class="json">{
-  "id": "432561",
-  "datasetKey": 15,
-  "csl": {
-    "DOI":"10.1038/nrd842",
-    "type":"article-journal",
-    "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
-    "title":"From the analyst's couch: Selective anticancer drugs",
-    "container-title":"Nature Reviews Drug Discovery",
-    "volume":"1",
-    "issue":"7",
-    "issued":{"date-parts":[[2002,7]]},
-    "page":"491-492"
-  }
-}
-</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-Reference">Reference</a></p>
-
-
-        <h2 id="resource-18">/dataset/{dkey}/name/{id}/relations</h2>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET //dataset/{dkey}/name/{id}/relations HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{id}/relations</h3>
-    <p><p>Retrieves nomenclatural relations for the name or its homotypical group</p>
-</p>
-
-
-
-        <h3 id="op21-request-params">Parameters</h3>
-        <table><thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Pattern</th>
-            <th>Required</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-        </thead><tbody>
-            <tr>
-                <td>homotypic</td>
-                <td>boolean</td>
-                <td></td>
-                <td>yes</td>
-                <td></td>
-                <td><p>if true also includes all acts about related, homotypic names</p>
-</td>
-            </tr>
-        </tbody></table>
-
-
-            <h3 id="op21-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
-Content-Type: application/json
-</code>
-    <code class="json">[{
-  "key": 721141,
-  "datasetKey": 15,
-  "type": "basionym",
-  "nameId": "78612",
-  "relatedNameId": "1655",
-  "publishedInId": "786"
-}
-,{
-  "key": 721141,
-  "datasetKey": 15,
-  "type": "basionym",
-  "nameId": "78612",
-  "relatedNameId": "1655",
-  "publishedInId": "786"
-}
-]</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-NameRelation">NameRelation[]</a></p>
-
-
-        <h2 id="resource-19">/dataset/{dkey}/name/{id}/verbatim</h2>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET //dataset/{dkey}/name/{id}/verbatim HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{id}/verbatim</h3>
-    <p><p>Retrieves the verbatim DarwinCore record of the name with the specified key,</p>
-</p>
-
-
-
-
-
-            <h3 id="op22-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
-Content-Type: application/json
-</code>
-    <code class="json">{
-    "key": 114621,
-    "datasetKey": 24,
-    "line": 4,
-    "file": "AcceptedSpecies.txt",
-    "type": "acef:AcceptedSpecies",
-    "terms": {
-        "acef:AuthorString": "Soepadmo",
-        "acef:Family": "Fagaceae",
-        "acef:AcceptedTaxonID": "Kew-114621",
-        "acef:Phylum": "Tracheophyta",
-        "acef:LTSDate": "Aug-2017",
-        "acef:Sp2000NameStatus": "accepted name",
-        "acef:LTSSpecialist": "Govaerts R.",
-        "acef:HasModern": "1",
-        "acef:SpeciesEpithet": "mariae",
-        "acef:Kingdom": "Plantae",
-        "acef:Order": "Fagales",
-        "acef:Genus": "Lithocarpus",
-        "acef:HasPreHolocene": "0",
-        "acef:Class": "Magnoliopsida",
-        "acef:IsExtinct": "0"
-    },
-    "issues": [
-        "according to date invalid",
-        "escaped characters"
-    ]
-}
-</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-VerbatimRecord">VerbatimRecord</a></p>
-
-
-        <h2 id="resource-20">/dataset/{dkey}/reference</h2>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET //dataset/{dkey}/reference HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/reference</h3>
-    <p><p>Paging parameters.</p>
-</p>
-
-
-
-        <h3 id="op23-request-params">Parameters</h3>
-        <table><thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Pattern</th>
-            <th>Required</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-        </thead><tbody>
-            <tr>
-                <td>offset</td>
-                <td>integer</td>
-                <td></td>
-                <td>no</td>
-                <td></td>
-                <td><p>The requested number of offset records. Defaults to zero</p>
-</td>
-            </tr>
-            <tr>
-                <td>limit</td>
-                <td>integer</td>
-                <td></td>
-                <td>no</td>
-                <td></td>
-                <td><p>The requested number of maximum records to be returned. Defaults to 10 and can be no more than 1000.</p>
-</td>
-            </tr>
-            <tr>
-                <td>datasetKey</td>
-                <td>string</td>
-                <td></td>
-                <td>yes</td>
-                <td></td>
-                <td><p>The database key of the dataset</p>
-</td>
-            </tr>
-        </tbody></table>
-
-
-            <h3 id="op23-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
-Content-Type: application/json
-</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-ResultSet">ResultSet</a></p>
-
-
-        <h2 id="resource-21">/dataset/{dkey}/reference/{id}</h2>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET //dataset/{dkey}/reference/{id} HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/reference/{id}</h3>
-    <p><p>get reference details by id</p>
-</p>
-
-
-
-        <h3 id="op24-request-params">Parameters</h3>
-        <table><thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Pattern</th>
-            <th>Required</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-        </thead><tbody>
-                <tr>
-                    <td>{id}</td>
-                    <td>string</td>
-                    <td></td>
-                    <td>yes</td>
-                    <td></td>
-                    <td><p>reference id</p>
-</td>
-                </tr>
-        </tbody></table>
-
-
-            <h3 id="op24-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
-Content-Type: application/json
-</code>
-    <code class="json">{
-  "id": "432561",
-  "datasetKey": 15,
-  "csl": {
-    "DOI":"10.1038/nrd842",
-    "type":"article-journal",
-    "author":[{"family":"Atkins","given":"Joshua H."},{"family":"Gershell","given":"Leland J."}],
-    "title":"From the analyst's couch: Selective anticancer drugs",
-    "container-title":"Nature Reviews Drug Discovery",
-    "volume":"1",
-    "issue":"7",
-    "issued":{"date-parts":[[2002,7]]},
-    "page":"491-492"
-  }
-}
-</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-Reference">Reference</a></p>
-
-
         <h1 id="resource-22">/parser</h1>
 
     
@@ -5169,7 +5196,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -5258,7 +5285,7 @@ with one name per line, or as plain/text content in the request body.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -5345,7 +5372,7 @@ Any of the names can be used as valid subresources to list the actual enumeratio
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">["continent","country","areastandard","cslreftype","nametype","origin","language","frequency","rank","nomacttype","coverage","nomstatus","dataformat","importstate","issue","gazetteer","cslvariable","typestatus","lifezone","distributionstatus","taxonomicstatus","kingdom","datasettype","license","nomcode","namepart"]
@@ -5378,7 +5405,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 2:32:21 PM CEST
+Date: Tuesday, September 18, 2018 3:11:57 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]

@@ -348,53 +348,6 @@ types: !include inc/types.raml
         responses:
           200:
             body: NameResultSet
-      /search:
-        get:
-          displayName: Name search
-          description: Executes a name search.
-          is: [paged]
-          queryParameters:
-            q:
-              type: string
-              description: main query string
-              required: false
-            key:
-              type: integer
-              description: the database key of the name
-              required: false
-            datasetKey:
-              type: integer
-              description: dataset key
-              required: false
-            rank:
-              type: RankType
-              description: filter by rank
-              required: false
-            nomstatus:
-              type: NomenclaturalStatusType
-              description: filter by nomenclatural status
-              required: false
-            taxstatus:
-              type: TaxonomicStatusType
-              description: filter by taxonomic status
-              required: false
-            issue:
-              type: string
-              description: filter by issue found
-              required: false
-            type:
-              type: NameType
-              description: filter by name type
-              required: false
-            publishedIn:
-              type: string
-              description: publishedIn reference id to filter names by
-              required: false
-          responses:
-            200:
-              body:
-                application/json:
-                  type: NameSearchResultSet
       /{id}:
         get:
           displayName: Get name
@@ -454,6 +407,68 @@ types: !include inc/types.raml
           id:
             type: string
             description: reference id
+/name/search:
+  get:
+    displayName: Name search
+    description: Executes a name search.
+    is: [paged]
+    queryParameters:
+      q:
+        type: string
+        description: main query string
+        required: false
+      datasetKey:
+        type: integer
+        description: dataset key
+        required: false
+      id:
+        type: string
+        description: the name identifier
+        required: false
+      rank:
+        type: RankType
+        description: filter by rank
+        required: false
+      nomstatus:
+        type: NomenclaturalStatusType
+        description: filter by nomenclatural status
+        required: false
+      status:
+        type: TaxonomicStatusType
+        description: filter by taxonomic status
+        required: false
+      issue:
+        type: string
+        description: filter by issue found
+        required: false
+      type:
+        type: NameType
+        description: filter by name type
+        required: false
+      publishedIn:
+        type: string
+        description: publishedIn reference id to filter names by
+        required: false
+      hasField:
+        type: string
+        enum: []
+        description: filter that only includes name where the requested name property is not null
+        required: false        
+      facet:
+        type: string
+        enum: [ "dataset_key","rank","nom_status","status","issue","type","field"]
+        description: request a facet to be returned. The facet limit defaults to 50
+        required: false
+      sortBy:
+        type: string
+        enum: ["relevance", "name", "key"]
+        description: sort order
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            type: NameSearchResultSet
 /parser:
   /name:
     get:
