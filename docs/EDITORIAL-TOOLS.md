@@ -5,7 +5,7 @@ An overview of the main tools needed to assembly a scrutinized and provisional C
 - **MC**: CoL management classification
 - **Dataset**: An entire dataset as provided by some source archive
 - **Datasubset**: A subset of a dataset with its own metadata, often to represent a GSD within a *cluster* such as WoRMS
-- **Sector**: A single higher taxon from a data(sub)set that acts as the root for a taxonomic sector in the CoL
+- **Sector**: A single higher taxon from a data(sub)set that acts as the root for a taxonomic sector in the CoL, with rules for name exclusion, rank exclusion etc
 
 
 # Main Editorial Dashboard
