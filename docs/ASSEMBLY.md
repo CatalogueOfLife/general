@@ -87,6 +87,8 @@ Automatically or manually accepted sectors are copied to a preliminary sCat so t
 
 In order to avoid tedious marking of duplicate names we propose to automatically exclude exact duplicates, i.e. the name, status & classification is identical. When the same accepted name appears with different information multiple times within the same sector or across sectors we can either block such names manually (and persist these edits for subsequent updates) or default to a priority list of sectors to be managed through editorial decision.
 
+Similarily chresonyms, manuscript and placeholder names known by the [Names Index](#names-index) are ignored and not copied to the sCat.
+
 When a sector is copied to the preliminary Catalogue missing transliterations for vernacular names are generated automatically.
 
 Optionally a dataset can be configured to prefer the exact name spelling from a nomenclator and to apply the objective synonyms from the nomenlcator.
@@ -108,7 +110,7 @@ The status of a name can be used to indicate chresonyms or manuscript names. An 
 
 **TODO: Work in progress !!!**
 Draft ideas to cover here: 
-- micrrotaxonomy patches stored in db for overrides
+- microtaxonomy patches stored in db for sCat and source overrides
 - copy scrutinized cat? What about the scrut cat lagging behind because of manual review required?
 - names are added dynamically as trusted datasets are imported (see names index)
 - merge data about the same name based on names index match
