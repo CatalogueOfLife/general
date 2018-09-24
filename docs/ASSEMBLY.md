@@ -50,18 +50,19 @@ A dataset import does many things. Most notably:
 # Assembly of the Scrutinized Catalogue
 All data passes a number of steps before it ends up in the public sCat:
 
- 1) Structural conversion to standard formats
- 2) Data import into the Clearinghouse
- 3) Define relevant sectors from dataset and attach them to the CoL management classification (MC)
- 4) Review of sector, online report back to source, reimport revised version until accepted
- 5) Assemble a preliminary sCat from accepted sectors for review
- 6) Review and rebuild or release sCat
-
+ 1. Structural conversion of sources to standard formats
+ 2. Data import into the Clearinghouse
+ 3. Define relevant sectors from dataset and attach them to the CoL management cssification (MC)
+ 4. Review of sector, online report back to source, reimport revised version until aepted
+ 5. Assemble a preliminary sCat from accepted sectors for review
+ 6. Review and rebuild or release sCat
 
 ## Managing the CoL Management Classification
 At the heart of the sCat lies the [management classification of the CoL](http://www.catalogueoflife.org/col/info/hierarchy). It is a special dataset in the Clearinghouse that contains a taxonomic tree down to order or even family level, may include synonyms and offers species estimates for higher groups that can be used for gap analysis and which also show up in the public portal. The MC is maintained by the CoL editorial board using a basic tree editor with species estimates forms provided by the Clearinghouse.
 
 The MC can be seen as the backbone of the sCat where all other sources are attached to.
+
+![mc](management-classification.pdf)
 
 ## Taxonomic Sectors & Col Sources
 A single taxonomic group attached to the MC is called a taxonomic *sector*. A single source dataset may provide multiple sectors, e.g. Fishbase, WoRMS or ITIS. In the case of [Fishbase](http://www.catalogueoflife.org/annual-checklist/2017/details/database/id/10) the sCat groups all 6 sectors under the same umbrella, listing them all as Fishbase with the same contact and credits. This is different for larger "cluster" source like WoRMS or ITIS that provide many sectors, but like to be cited differently for most sectors, e.g. [WoRMS Bryozoa](http://www.catalogueoflife.org/annual-checklist/2017/details/database/id/81) and [WoRMS Hydrrozoa](http://www.catalogueoflife.org/annual-checklist/2017/details/database/id/112).
@@ -71,13 +72,15 @@ Sectors can therefore be grouped into CoL sources that provide common citation m
 Selecting appropriate taxonomic sectors and mapping them to the CoL Management Classification is an important editorial decision. Taxonomic groups that should end up in the CoL need to be mapped at least once from the source datasets to the CoL management hierarchy. In the simplest case a single higher taxon from a source dataset can be placed directly onto the management classification. More control is provided to filter names & taxa in sectors by rank and allow exclusion of included groups, for example a specific genus or family because they are treated in a different source already. Nested sectors that attach and thereby replace a group in another sector is another option. Once defined, sectors will remain when the underlying dataset is updated.
 
 
-## Sector Review
+## Data Review
 Entire datasets or specific sectors can be reviewed to find problems and report them back to the sources. Once revised an updated dataset can simply be reimported into the Clearinghouse.
 
 A dataset and sector summary will help identifying problems. For certain issues like duplicates or potential chresonyms a comparison view of several records is needed that allows the editor to block names from entering the Catalogue or modify their status.
 
 Trusted sources that already have a review process implemented themselves can be marked to be included in the CoL automatically with every new dataset version imported. Otherwise manual acceptance of a new or updated sector for inclusion into the CoL needs to take place everytime through editorial decision. 
 
+## Discussion Threads
+The Clearinghouse provides generic [discussion threads](https://github.com/Sp2000/colplus/blob/master/docs/EDITORIAL-TOOLS.md#discussion-page) that consist of a description which can link out to any number of name, taxon or reference entities, status and a flat comments timeline. A discussion can be used for numerous things, e.g. to capture feedback and to communicate data issues betweem data reviewers and  data publishers. A number of names from a dataset sharing the same problem can thus be grouped as a discussion which keeps track of its state (e.g. under review, accepted, done). By using a discussion linked to records with issues we can track matching editorial decisions and recognise issues that still need editorial attention from those which have been addressed already.
 
 ## Assembling a preliminary sCat
 Automatically or manually accepted sectors are copied to a preliminary sCat so they are immutable and available for subsequent Catalogues. The preliminary sCat can only by modified by replacing entire sectors or changing the management classification (MC) itself. When a sector is attached to a higher part of the management classification it becomes the authority for that part of the tree and defines the included classification which can be different from the hidden MC. 
@@ -89,11 +92,6 @@ When a sector is copied to the preliminary Catalogue missing transliterations fo
 Optionally a dataset can be configured to prefer the exact name spelling from a nomenclator and to apply the objective synonyms from the nomenlcator.
     
 The preliminary CoL can be browsed and searched just as any other dataset in the Clearinghouse for review before it gets released. When released it will be copied into the immutable CoL archive that drives the public portal.
-
-
-## TO BE ADDED
-- [discussion threads](https://github.com/Sp2000/colplus/blob/master/docs/EDITORIAL-TOOLS.md#discussion-page) for blocking issues
-- block updated datasets if unhandled issues arise
 
 
 # Assembling the Provisional Catalogue
