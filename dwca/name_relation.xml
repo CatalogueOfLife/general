@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/style/human.xsl"?>
+<extension xmlns="http://rs.gbif.org/extension/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:dc="http://purl.org/dc/terms/"    
+    xsi:schemaLocation="http://rs.gbif.org/extension/ http://rs.gbif.org/schema/extension.xsd"
+    dc:title="CoL Name Relations" 
+    name="NameRelations" namespace="http://rs.col.plus/terms/" rowType="http://rs.col.plus/terms/NameRelations"
+    dc:issued="2018-06-09"
+    dc:subject="Taxon"
+    dc:relation="https://github.com/Sp2000/colplus/blob/master/docs/NAMES.md"
+    dc:description="Support for nomenclatural name relations to be used in a Taxon core DwC archive, specifying a directed relation from the core name to a related name.">
+
+    <property name='relatedNameUsageID' namespace='http://rs.col.plus/terms/' qualName='http://rs.col.plus/terms/relatedNameUsageID' dc:relation='' dc:description='An identifier for the related name this relation points to.' examples='' required='true'/>
+    <property name='relationType' thesaurus="https://raw.githubusercontent.com/Sp2000/colplus/master/dwca/name_relation_type.xml" namespace='http://rs.col.plus/terms/' qualName='http://rs.col.plus/terms/relationType' dc:relation='' dc:description='The kind of directed name relation, usually pointing back in time.' examples='basionym, later_homonym, conserved' required='true'/>
+    <property name='publishedIn' namespace='http://rs.col.plus/terms/' qualName='http://rs.col.plus/terms/publishedIn' dc:relation='' dc:description='The citation of the publication that established the relationship, e.g. emended a name' required='false'/>
+    <property name='publishedInID' namespace='http://rs.col.plus/terms/' qualName='http://rs.col.plus/terms/publishedInID' dc:relation='' dc:description='An identifier for the publication that established the relationship, e.g. emended a name' required='false'/>
+    <property name='relationRemarks' namespace='http://rs.col.plus/terms/' qualName='http://rs.col.plus/terms/relationRemarks' dc:relation='' dc:description='Further notes about the relation' examples='' required='false'/>
+    
+</extension>

@@ -1,0 +1,43 @@
+#%RAML 1.0
+title: CoL Clearinghouse Admin API
+version: v1
+baseUri: http://admin.col.plus
+protocols:
+  - HTTP
+mediaType:
+  - application/json
+description:
+    Administration API for editorial processes in the Catalogue of Life.
+traits: !include inc/traits.raml
+types: !include inc/types.raml
+/importer:
+/name/matching:
+  get:
+    description: |
+      Match name against the name index.
+      Eventually should be exposed in public API.
+    queryParameters:
+      q:
+        type: string
+        description: scientific name to match
+      rank:
+        type: RankType
+        description: rank to restrict matches to
+        required: false
+      code:
+        type: NomCodeType
+        description: nomenclatural code to restrict matches to
+        required: false
+      trusted:
+        type: boolean
+        description: if true unmatched name will be inserted into the names index
+        default: false
+      verbose:
+        type: boolean
+        description: if verbose list alternatively considered name matches
+        default: false
+    responses:
+      200:
+        body:
+          application/json:
+            type: NameMatch 
