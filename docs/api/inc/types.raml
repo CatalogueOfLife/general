@@ -370,6 +370,86 @@ VerbatimKeyObject:
     key:
       type: integer
       description: Primary key for the record
+ColSource:
+  type: object
+  description: |
+      A citable source for a CoL data provider
+  properties:
+    key:
+      type: integer
+      description: primary key
+    datasetKey:
+      type: integer
+      description: key to the dataset this source belongs to
+    title:
+      type: string
+      description: Full name of the source. Defaults to dataset title.
+    alias:
+      type: string
+      description: Short alias for the source to show in trees etc.
+    description:
+      type: string
+      description: Free text describing the source supporting markdown formatting
+      required: false
+    organisation:
+      type: string
+      description: Organisation which has compiled or is owning the source
+      required: false
+    contactPerson:
+      type: string
+      description: Contact person of the source
+      required: false
+    authorsAndEditors:
+      type: string[]
+      description: Optional author(s) and editor(s) of the source
+      required: false
+    version:
+      type: string
+      description: Latest version number of the source used in the Catalogue of Life
+      required: false
+    released:
+      type: date-only
+      description: Latest release date of the source used in the Catalogue of Life
+      required: false
+    homepage:
+      type: string
+      description: Homepage URL of the source
+      required: false
+    group:
+      type: string
+      description: taxonomic group in english language
+      required: false
+    coverage:
+      type: DatasetType
+      description: global vs regional sources
+    citation:
+      type: string
+      description: full bibliographic citation to be used
+      required: false
+    livingSpeciesCount:
+      type: integer
+      required: false
+    livingInfraspecificCount:
+      type: integer
+      required: false
+    extinctSpeciesCount:
+      type: integer
+      required: false
+    extinctInfraspecificCount:
+      type: integer
+      required: false
+    synonymsCount:
+      type: integer
+      required: false
+    vernacularsCount:
+      type: integer
+      required: false
+    namesCount:
+      type: integer
+      required: false
+    created:
+      type: datetime
+      description: datetime the source was registered in the Clearinghouse
 Dataset:
   type: object
   description: Metadata about the source dataset, e.g. a GSD
@@ -421,6 +501,10 @@ Dataset:
     homepage:
       type: string
       description: Homepage URL of the source
+      required: false
+    logo:
+      type: string
+      description: URL to a logo image of the dataset
       required: false
     dataFormat:
       type: string
@@ -595,6 +679,37 @@ DatasetResultSet:
     results:
       type: Dataset[]
       description: the resulting Datasets
+Decision:
+  type: object
+  properties:
+    key:
+      type: integer
+      description: primary key
+    sectorKey:
+      type: integer
+      description: primary key
+    subject:
+      type: NameRef
+      description: the name usage this decision is about
+    status:
+      type: TaxonomicStatusType
+      description: the new status
+      required: false
+    name:
+      type: string
+      description: the new scientific name
+      required: false
+    authorship:
+      type: string
+      description: the new authorship
+      required: false
+    created:
+      type: datetime
+      description: datetime the decision was created
+    deleted:
+      type: datetime
+      description: datetime the decision was deleted
+      required: false
 Authorship:
   type: object
   properties:
@@ -1130,6 +1245,29 @@ NameMatch:
       type: Name[]
       description: alternatively matching names
       required: false
+NameRef:
+  type: object
+  description: >
+    A reference to a name based on ids and the name itself
+  properties:
+    id:
+      type: string
+      description: the names id within its dataset
+    indexNameId:
+      type: string
+      description: the name id from the matching name index record
+      required: false
+    name:
+      type: string
+      description: the literal name
+    authorship:
+      type: string
+      description: the literal, full authorship
+      required: false
+    rank:
+      type: RankType
+      description: the rank
+      required: false
 NameRelation:
   type: VerbatimKeyObject
   description: A published act which affects the nomenclatural status of a scientific name or the typification of a nominal taxon.
@@ -1207,6 +1345,39 @@ ReferenceResultSet:
     results:
       type: Reference[]
       description: the resulting References
+Sector:
+  type: object
+  description: |
+      A taxonomic sector in the Catalogue of Life      
+  properties:
+    key:
+      type: integer
+      description: primary key
+    colSourceKey:
+      type: integer
+      description: key to the ColSource this sector originates from
+    root:
+      type: NameRef
+      description: A reference to the single root taxon from the col source for this sector. Can even be a species, but usually some higher taxon.
+    exclude:
+      type: NameRef[]
+      description: Optional list of taxa within the descendants of root to exclude from this sector definition
+    attachment:
+      type: NameRef
+      description: The attachment point in the CoL tree, i.e. the CoL parent taxon for the sector root
+    suppress:
+      type: NameRef[]
+      description: |
+          Optional list of CoL tree taxa that should be suppressed when this sector is attached.
+          E.g. the CoL management classification might define an alternative taxonomy that uses
+          different taxa which are covered by this sector already.
+    created:
+      type: datetime
+      description: datetime the sector was created
+    deleted:
+      type: datetime
+      description: datetime the sector was deleted
+      required: false
 Serial:
   type: DatasetObject
   description: |

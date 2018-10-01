@@ -185,6 +185,191 @@
 </td>
                                 </tr>
                             </tbody></table>
+                        <h2 id="model-ColSource">ColSource</h2>
+
+
+    <p><p>A citable source for a CoL data provider</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>key</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>primary key</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>datasetKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>key to the dataset this source belongs to</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>title</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Full name of the source. Defaults to dataset title.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>alias</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Short alias for the source to show in trees etc.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>description</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Free text describing the source supporting markdown formatting</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>organisation</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Organisation which has compiled or is owning the source</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>contactPerson</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Contact person of the source</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>authorsAndEditors</td>
+                                    <td>string[]</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Optional author(s) and editor(s) of the source</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>version</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Latest version number of the source used in the Catalogue of Life</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>released</td>
+                                    <td>date-only</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Latest release date of the source used in the Catalogue of Life</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>homepage</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Homepage URL of the source</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>group</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>taxonomic group in english language</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>coverage</td>
+                                    <td><a href="#model-DatasetType">DatasetType</a></td>
+                                    <td>nomenclator, taxonomic, national, personal, other</td>
+                                    <td>yes</td>
+                                    <td><p>global vs regional sources</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>citation</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>full bibliographic citation to be used</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>livingSpeciesCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>livingInfraspecificCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>extinctSpeciesCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>extinctInfraspecificCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>synonymsCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>vernacularsCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>namesCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>created</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>datetime the source was registered in the Clearinghouse</p>
+</td>
+                                </tr>
+                            </tbody></table>
                         <h2 id="model-Dataset">Dataset</h2>
 
 
@@ -302,6 +487,14 @@
                                     <td></td>
                                     <td>no</td>
                                     <td><p>Homepage URL of the source</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>logo</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>URL to a logo image of the dataset</p>
 </td>
                                 </tr>
                                 <tr>
@@ -680,6 +873,85 @@ Dataset used to build the provisional catalogue will be trusted and insert their
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>the resulting Datasets</p>
+</td>
+                                </tr>
+                            </tbody></table>
+                        <h2 id="model-Decision">Decision</h2>
+
+
+    
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>key</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>primary key</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>sectorKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>primary key</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>subject</td>
+                                    <td><a href="#model-NameRef">NameRef</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the name usage this decision is about</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>status</td>
+                                    <td><a href="#model-TaxonomicStatusType">TaxonomicStatusType</a></td>
+                                    <td>accepted, doubtful</td>
+                                    <td>no</td>
+                                    <td><p>the new status</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>name</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the new scientific name</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>authorship</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the new authorship</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>created</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>datetime the decision was created</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>deleted</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the decision was deleted</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -1693,6 +1965,62 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
 </td>
                                 </tr>
                             </tbody></table>
+                        <h2 id="model-NameRef">NameRef</h2>
+
+
+    <p><p>A reference to a name based on ids and the name itself</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the names id within its dataset</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>indexNameId</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the name id from the matching name index record</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>name</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the literal name</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>authorship</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the literal, full authorship</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>rank</td>
+                                    <td><a href="#model-RankType">RankType</a></td>
+                                    <td>domain, superkingdom, kingdom, subkingdom, infrakingdom, superphylum, phylum, subphylum, infraphylum, superclass, class, subclass, infraclass, parvclass, superlegion, legion, sublegion, infralegion, supercohort, cohort, subcohort, infracohort, magnorder, superorder, grandorder, order, suborder, infraorder, parvorder, superfamily, family, subfamily, infrafamily, supertribe, tribe, subtribe, infratribe, suprageneric name, genus, subgenus, infragenus, supersection, section, subsection, superseries, series, subseries, infrageneric name, species aggregate, species, infraspecific name, grex, subspecies, cultivar group, convariety, infrasubspecific name, proles, natio, aberration, morph, variety, subvariety, form, subform, pathovar, biovar, chemovar, morphovar, phagovar, serovar, chemoform, forma specialis, cultivar, strain, other, unranked</td>
+                                    <td>no</td>
+                                    <td><p>the rank</p>
+</td>
+                                </tr>
+                            </tbody></table>
                         <h2 id="model-NameRelation">NameRelation</h2>
 
     <pre class="example"><code class="json">{
@@ -1914,6 +2242,88 @@ see <a href="https://github.com/citation-style-language/schema/blob/master/csl-d
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>the resulting References</p>
+</td>
+                                </tr>
+                            </tbody></table>
+                        <h2 id="model-Sector">Sector</h2>
+
+
+    <p><p>A taxonomic sector in the Catalogue of Life</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>key</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>primary key</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>colSourceKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>key to the ColSource this sector originates from</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>root</td>
+                                    <td><a href="#model-NameRef">NameRef</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>A reference to the single root taxon from the col source for this sector. Can even be a species, but usually some higher taxon.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>exclude</td>
+                                    <td><a href="#model-NameRef">NameRef[]</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Optional list of taxa within the descendants of root to exclude from this sector definition</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>attachment</td>
+                                    <td><a href="#model-NameRef">NameRef</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The attachment point in the CoL tree, i.e. the CoL parent taxon for the sector root</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>suppress</td>
+                                    <td><a href="#model-NameRef">NameRef[]</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Optional list of CoL tree taxa that should be suppressed when this sector is attached.
+E.g. the CoL management classification might define an alternative taxonomy that uses
+different taxa which are covered by this sector already.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>created</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>datetime the sector was created</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>deleted</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the sector was deleted</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -3109,7 +3519,7 @@ Eventually should be exposed in public API.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, September 18, 2018 3:11:59 PM CEST
+Date: Monday, October 1, 2018 6:10:42 PM CEST
 Content-Type: application/json
 </code>
 </pre>

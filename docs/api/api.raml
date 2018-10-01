@@ -407,6 +407,44 @@ types: !include inc/types.raml
           id:
             type: string
             description: reference id
+/colsource:
+  get:
+    description: |
+      List of CoL sources.
+      queryParameters:
+        datasetKey:
+          description: Filter by dataset
+      responses:
+        200:
+          body:
+            application/json:
+              type: ColSource[]
+/decision:
+  get:
+    description: |
+      List of editorial decisions.
+      queryParameters:
+        datasetKey:
+          description: Filter by dataset
+        sectorKey:
+          description: Filter by sector
+      responses:
+        200:
+          body:
+            application/json:
+              type: Decision[]
+/sector:
+  get:
+    description: |
+      List of taxonomic sectors in the CoL.
+      queryParameters:
+        sourceKey:
+          description: Filter by CoL source.
+      responses:
+        200:
+          body:
+            application/json:
+              type: Sector[]
 /name/search:
   get:
     displayName: Name search
