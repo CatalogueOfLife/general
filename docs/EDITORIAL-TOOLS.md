@@ -42,7 +42,7 @@ Shows a single dataset or datasubset with editorial focus.
     - useNomenclatorSynonyms
     - ignoreVernaculars
     - ignore / skip Ranks [mockup](https://github.com/Sp2000/colplus/blob/master/mockups/Editorial_Classifiocation_Drag&Drop_in_GSD.png)
-- list mapped sectors
+- list mapped sectors [mockup](https://github.com/Sp2000/colplus/blob/master/mockups/ColSources.png)
     - size, last accepted, names changed since last accepted
 - unread discussions
 - import default values (nomCode, vernacular lang, isNomenclator)
