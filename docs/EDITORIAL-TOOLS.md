@@ -30,7 +30,7 @@ The main dashboard to give a quick overview about all relevant states, running a
 # Data(sub)set Editorial Page
 Shows a single dataset or datasubset with editorial focus.
 
-- modify metadata (title, abstract, contacts, homepage, etc)[mockup](https://github.com/Sp2000/colplus/blob/master/mockups/Datasetmeta.png) [beta](http://test.col.plus/dataset/1007/meta)
+- modify metadata (title, abstract, contacts, homepage, etc) [mockup](https://github.com/Sp2000/colplus/blob/master/mockups/Datasetmeta.png) [beta](http://test.col.plus/dataset/1007/meta)
 - dataset specific
     - list datasubsets
 - datasubset specific
