@@ -55,7 +55,7 @@ sourceId, name, authorship, action, issue reason
     - status changes
 
 ## Metrics Tab 
-- [mockup](https://github.com/Sp2000/colplus/blob/master/mockups/metrics.png)
+- [mockup](https://github.com/Sp2000/colplus/blob/master/mockups/Metrics.png)
 - issue overview 
     
 ## Tree Browser Tab
