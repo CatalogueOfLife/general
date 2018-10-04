@@ -11,7 +11,7 @@ An overview of the main tools needed to assembly a scrutinized and provisional C
 # Main Editorial Dashboard
 The main dashboard to give a quick overview about all relevant states, running and failed imports and highlighting work to be done by the editors.
 
-- dataset table (show all/provcat/scrutcat only)
+- dataset table (show all/provcat/scrutcat only) [mockup](https://github.com/Sp2000/colplus/blob/master/mockups/Datasetlist.png) [beta](http://test.col.plus/dataset) 
     - sorted by name, size, last success import, date registered
     - columns: last import state with error message "popup", last successful import & counts, number verbatim, nomCode, issues, relative to last import (num up/down)
     - search & filter by import status?
