@@ -41,6 +41,7 @@ Shows a single dataset or datasubset with editorial focus.
     - useNomenclatorSpelling
     - useNomenclatorSynonyms
     - ignoreVernaculars
+    - ignore / skip Ranks [mockup](https://github.com/Sp2000/colplus/blob/master/mockups/Editorial_Classifiocation_Drag&Drop_in_GSD.png)
 - list mapped sectors
     - size, last accepted, names changed since last accepted
 - unread discussions
