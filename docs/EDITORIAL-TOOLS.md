@@ -5,7 +5,7 @@ An overview of the main tools needed to assembly a scrutinized and provisional C
 - **MC**: CoL management classification
 - **Dataset**: An entire dataset as provided by some source archive
 - **ColSource**: A subset of a dataset with its own metadata, often to represent a GSD within a *cluster* such as WoRMS
-- **Sector**: A single higher taxon from a data(sub)set that acts as the root for a taxonomic sector in the CoL, with rules for name exclusion, rank exclusion etc
+- **Sector**: A single higher taxon from a dataset or ColSource that acts as the root for a taxonomic sector in the CoL, with rules for name exclusion, rank exclusion etc
 
 
 # Main Editorial Dashboard
@@ -30,7 +30,7 @@ The main dashboard to give a quick overview about all relevant states, running a
 # Data(sub)set Editorial Page
 Shows a single dataset or datasubset with editorial focus.
 
-- modify metadata (title, abstract, contacts, homepage, etc)
+- modify metadata (title, abstract, contacts, homepage, etc)[mockup](https://github.com/Sp2000/colplus/blob/master/mockups/Datasetmeta.png) [beta](http://test.col.plus/dataset/1007/meta)
 - dataset specific
     - list datasubsets
 - datasubset specific
@@ -60,7 +60,7 @@ sourceId, name, authorship, action, issue reason
     
 ## Tree Browser Tab
 Editorial portal for detailed data review and decisions on record level.
-- tree browser
+- tree browser [mockup](https://github.com/Sp2000/colplus/blob/master/mockups/Exploretax.png) [beta](http://test.col.plus/dataset/1028/classification)
 - link to taxon page
 
 ## Data Search Tab
@@ -95,6 +95,7 @@ Single name shown with all its information and relations.
 
 
 # Single Taxon page
+- [mockup](https://github.com/Sp2000/colplus/blob/master/mockups/Taxonpage.png) [beta](http://test.col.plus/dataset/1010/taxon/Fis-22711)
 - classification
 - children
 - full synonymy
