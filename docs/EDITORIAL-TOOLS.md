@@ -65,7 +65,7 @@ Editorial portal for detailed data review and decisions on record level.
 
 ## Data Search Tab
 - faceted search by rank, issue, taxon & name status (incl bare names), name type, nomCode, higher taxon?
-- map taxon onto MC by selecting its MC parent
+- map taxon onto MC by selecting its MC parent [mockup](https://github.com/Sp2000/colplus/blob/master/mockups/Editorial_Classifiocation_Attach_GSD.png)
     - optionally allow suppression of other MC taxa
     - optional excludes of subtrees
 - remember records for comparison or later review (multiple lists needed?)
