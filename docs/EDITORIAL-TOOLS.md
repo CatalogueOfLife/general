@@ -15,7 +15,7 @@ The main dashboard to give a quick overview about all relevant states, running a
     - sorted by name, size, last success import, date registered
     - columns: last import state with error message "popup", last successful import & counts, number verbatim, nomCode, issues, relative to last import (num up/down)
     - search & filter by import status?
-- register new dataset URL, format & type
+- register new dataset URL, format & type [mockup](https://github.com/Sp2000/colplus/blob/master/mockups/Newdataset.png)
 - import overview
     - toggle continuous importing 
     - running imports, highlight long running or stuck imports
