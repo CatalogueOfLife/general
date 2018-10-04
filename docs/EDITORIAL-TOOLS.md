@@ -54,8 +54,9 @@ sourceId, name, authorship, action, issue reason
     - blocked names
     - status changes
 
-## Metrics Tab
-- issue overview
+## Metrics Tab 
+- [mockup](https://github.com/Sp2000/colplus/blob/master/mockups/metrics.png)
+- issue overview 
     
 ## Tree Browser Tab
 Editorial portal for detailed data review and decisions on record level.
