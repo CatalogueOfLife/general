@@ -3,14 +3,24 @@ The Catalogue of Life intends to produce two aggregated catalogues that are asse
 
 Both of these assembly processes are semi-automated and need editorial work and reviewing in order to build a high quality catalogue. This is especially true for the scrutinized catalogue.
 
+
 # Source Datasets
-The first step towards the assembly of both catalogues is to get the source datasets into a common structure and to make sure there are no obvious syntactical or semantic errors. The CoL Clearinghouse is used to register URL accessible datasets in various standard formats and import them into a common database model. The Clearinghouse importer interprets literal string data into well known enumerations, objects and relations, thereby flagging rectified or detected potential problems in the entire range of basic string reading to very specific taxonomic integrity checks.
+The first step towards the assembly of both catalogues is to get the source datasets into a common structure and to make sure there are no obvious syntactical or semantic errors. At the heart of the Clearinghouse is a dataset store that efficiently stores entire, self contained datasets and exposes them in a rich API. Datasets in the store can be of 3 kinds:
+
+ - externally managed and published on a public URL
+ - externally managed and manually uploaded
+ - managed within the Clearinghouse using the taxonomic editor
+
+For external datasets the CoL Clearinghouse is used to register URL accessible datasets in various standard formats and import them into a common database model. The Clearinghouse importer interprets literal string data into well known enumerations, objects and relations, thereby flagging rectified or detected potential problems in the entire range of basic string reading to very specific taxonomic integrity checks.
 
 The content of each dataset in the [Clearinghouse can be browsed and searched](https://sp2000.github.io/colplus/api/api.html) on its own with the primary purpose to allow a quality assesment and detailed data review. For that reason every record also keeps track of the exact verbatim data as it came in and all fallged importing issues can be used for filters to navigate data.
 
+![clearinghouse](overview.png)
+
 
 ## Dataset publication
-Datasets that should be added to the CoL need to be accessible in a standard format from a public URL. The URL should remain the same if new versions of the dataset are published. DwC Archives and the CoL ACEF format are handled currently. It is expected to also cover TCS or newly defined formats in the future. Converting data from highly custom formats into DwC-A or ACEF is expected to be done either by the publishing source directly or with the help of the CoL data manager & the GBIF helpdesk. For sources in relational databases, Excel spreadsheets or CSVs the GBIF IPT can be used to assist in this task. 
+Datasets that should be added to the CoL need to be present in the dataset store.
+If managed externally the data needs to be accessible in a standard format, ideally from a public URL. The URL should remain the same if new versions of the dataset are published. This allows a continuous importer to keep the version in the dataset store up to date. DwC Archives and the CoL ACEF format are handled currently. It is expected to also cover TCS or newly defined formats in the future. Converting data from highly custom formats into DwC-A or ACEF is expected to be done either by the publishing source directly or with the help of the CoL data manager & the GBIF helpdesk. For sources in relational databases, Excel spreadsheets or CSVs the GBIF IPT can be used to assist in this task. 
 
 All existing GSDs inside the CoL have been exported from the CoL global assembly database into [ACEF compliant files](https://github.com/Sp2000/colplus-repo) so that the current version of the data is immediately available even if the original sources are not yet published in a standard format. This can be repeated at any time and should at least be done once more when leaving behind the old workbench.
 
@@ -48,6 +58,14 @@ A dataset import does many things. Most notably:
  - generate dataset import statistics: number of names by status, rank, issues etc. enabling time series for historic imports. Track [diffs of all names](https://github.com/Sp2000/colplus-backend/issues/138)  between versions
 
 
+## Taxonomic Editor
+It is proposed to implement a basic taxonomic editor that allows a community of users to manage a dataset in the Clearinghouse. This editor can therefore also be used to manage the names index and apply final changes to the CoL before it is released.
+
+The editor is meant to be basic and should leave all decisions, restrictions and checks to the users at this stage. Manipulation of names, their relations, taxa & synonyms, vernacular names and distributions will be possible. To get started data archives can be uploaded. For subsequent bulk uploads datasets can be merged. This allows a user to upload data into a new dataset, review it, apply small fixes or remove unused parts and finally merge it into his main dataset.
+
+Initially data is not expected to be versioned.
+
+
 # Assembly of the Scrutinized Catalogue
 All data passes a number of steps before it ends up in the public Catalogue of Life (sCat):
 
@@ -55,18 +73,18 @@ All data passes a number of steps before it ends up in the public Catalogue of L
  2. Data import into the Clearinghouse with data interpretations & issue flagging
  3. Define relevant sectors from dataset and attach them to the CoL management cssification (MC)
  4. Review of sector including duplicate detection across all sectors, online report back to editors and data providers, fixes in the source dataset and reimport revised version until accepted or with a scheduled new update
- 5. Assemble a preliminary sCat from accepted sectors for review by editorial board and data providers
- 6. Release sCat
+ 5. Review of draft sCat by editorial board and data providers. Final adhoc fixes via taxonomic editor.
+ 6. Release sCat, archiving previous release
 
 ## Managing the CoL Management Classification
-At the heart of the sCat lies the [management classification of the CoL](http://www.catalogueoflife.org/col/info/hierarchy). It is a special dataset in the Clearinghouse that contains a taxonomic tree down to genus level as a snapshot of latest version of integrated CoL; it may include synonyms and should offers species estimates for higher groups together with account of acctual species ans children taxa in the sector which show up in the public portal and can be used for gap analysis. The MC is maintained by the CoL editorial board using a basic tree editor with species estimates forms provided by the Clearinghouse.
+At the heart of the sCat lies the [management classification of the CoL](http://www.catalogueoflife.org/col/info/hierarchy). It is a special dataset in the Clearinghouse that contains a taxonomic tree down to order or family level which acts as the default classification for the CoL. It may include synonyms and offers species estimates for higher groups which show up in the public portal and can be used for gap analysis by comparing them with actual species contained in the CoL. 
 
-The MC can be seen as the backbone of the sCat where all other sources are attached to.
+The MC is maintained by the CoL editorial board using the taxonomic editor provided by the Clearinghouse. It can be seen as the backbone of the sCat where all other sources are attached to.
 
 ![mc](management-classification.png)
 
 ## Taxonomic Sectors & Col Sources
-A single taxonomic group attached to the MC is called a taxonomic *sector*. A single source dataset may provide multiple sectors, e.g. Fishbase, WoRMS or ITIS. In the case of [Fishbase](http://www.catalogueoflife.org/annual-checklist/2017/details/database/id/10) the sCat groups all 6 sectors under the same umbrella, listing them all as Fishbase with the same contact and credits. This is different for larger "cluster" source like WoRMS or ITIS that provide many sectors, but like to be cited differently for most sectors, e.g. [WoRMS Bryozoa](http://www.catalogueoflife.org/annual-checklist/2017/details/database/id/81) and [WoRMS Hydrrozoa](http://www.catalogueoflife.org/annual-checklist/2017/details/database/id/112).
+A single taxonomic group attached to the MC is called a taxonomic *sector*. A single source dataset may provide multiple sectors, e.g. Fishbase, WoRMS or ITIS. In the case of [Fishbase](http://www.catalogueoflife.org/annual-checklist/2017/details/database/id/10) the sCat groups all 6 sectors under the same umbrella, listing them all as Fishbase with the same contact and credits. This is different for larger "cluster" source like WoRMS or ITIS that provide many sectors, but like to be cited differently for most sectors, e.g. [WoRMS Bryozoa](http://www.catalogueoflife.org/annual-checklist/2017/details/database/id/81) and [WoRMS Hydrozoa](http://www.catalogueoflife.org/annual-checklist/2017/details/database/id/112).
 
 Sectors can therefore be grouped into CoL sources that provide common citation metadata which can be maintained by the editorial board and in absence of inputs defaults to the metadata of their parent dataset.
 
@@ -89,16 +107,22 @@ The Clearinghouse provides generic [discussion threads](https://github.com/Sp200
 
 A number of names from a dataset sharing the same problem can thus be grouped as a discussion which keeps track of its state (e.g. under review, accepted, done). By using a discussion linked to records with issues we can track matching editorial decisions and recognise issues that still need editorial attention from those which have been addressed already. 
 
-## Assembling a preliminary sCat
-Automatically or manually accepted sectors are copied to a preliminary sCat so they are immutable and available for subsequent Catalogues. The preliminary sCat can only by modified by replacing entire sectors or changing the management classification (MC) itself. When a sector is attached to a higher part of the management classification it becomes the authority for that part of the tree and defines the included classification which can be different from the hidden MC. 
+## The sCat draft
+A draft sCat is always kept up to date with all configured sectors and editorial decisions. This provides the editorial board with a full dataset representing the latest version of the assembly. Whenever a new sector is mapped, its definitions changed or editorial decisions are added or removed the draft will be updated asyncroneously, always reporting whether its in sync with all decisions.
 
-Similarily chresonyms, manuscript and placeholder names known by the [Names Index](#names-index) are ignored and not copied to the sCat.
+When a sector is attached to a higher part of the management classification it becomes the authority for that part of the tree and defines the included classification which can be different from the then hidden MC. 
 
-When a sector is copied to the preliminary Catalogue missing transliterations for vernacular names are generated automatically.
+When updated data in the underlying datasets of sectors is available the editor will be notified and asked to also update the respective sectors in the sCat draft. This leaves all control with the editor who can decide to include updates immediately or at a later stage.
 
-Optionally a CoL source can be configured to prefer the exact name spelling from a nomenclator and to apply the objective synonyms from the nomenlcator.
+When a sector is copied to the draft Catalogue missing transliterations for vernacular names are generated automatically. Chresonyms, manuscript and placeholder names known by the [Names Index](#names-index) are ignored and not copied to the sCat.
+
+Optionally a CoL source can be configured to prefer the exact name spelling from a nomenclator and to apply its objective synonymy.
     
-The preliminary CoL can be browsed and searched for review just as any other dataset in the Clearinghouse, but also in a preview portal similar to the main public one before it gets released. When released it will be copied into the immutable CoL archive that drives the public portal.
+The draft CoL can be browsed and searched for review just as any other dataset in the Clearinghouse, but also in a preview portal similar to the main public one before it gets released. 
+
+Before releasing the draft final edits can be applied using the taxonomic editor. This enables the editor to apply small fixes without waiting for an updated source dataset which can delay publication considerably. Usually such changes are in agreement with the data provider. As these final edits can be anywhere in the data they will not be recorded like sector definitions or main editorial decisions. This means they will be lost and get overwritten when a sector is updated from its underlying source.
+
+When released a new immutable dataset is created which will feed the public portal and the last release will be archived as a regular dataset which can be accessed.
 
 
 # Assembling the Provisional Catalogue
