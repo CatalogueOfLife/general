@@ -38,7 +38,7 @@ and the Netherlands Ministry of Education, Science, and Culture.
 Green: *Public Clearinghouse*;  Orange: *Restricted editorial access*;  Red: *External tools*
 
 
-The clearinghouse will cover scientific names across all life and provide a single taxonomic view grounded in the consensus classification of the Catalogue of Life along with provisional taxonomic sources. 
+The clearinghouse will cover [scientific names](docs/NAMES.md) across all life and provide a single taxonomic view grounded in the consensus classification of the Catalogue of Life along with provisional taxonomic sources. 
 It will be based around a strict separation of nomenclature and taxonomy and allow the merging, addition and conflict resolution of data, 
 completing information missing in other sources. 
 
@@ -55,15 +55,8 @@ Vernacular names, species range distributions, lifezone and fossil information w
 Community participation is desired and any record will be open for public comments. 
 Areas in the taxonomic tree not governed by content authorities yet are exposed for communal editing. 
 The portal will expose metrics about contributions and allow users to customize their experience by setting preferences for specific taxonomic groups. 
-Communal management of a freely licensed reference image will be explored. 
-The clearinghouse and its associated components will replace the current Catalogue of Life software.
+The clearinghouse and its [associated components](docs/ASSEMBLY.md) will replace the current [Catalogue of Life](http://www.catalogueoflife.org) software.
 
-
-## Development plan
-
-The development plan for the [system design](docs/DESIGN.md) is broken down into 
-a few [major milestones](https://github.com/Sp2000/colplus/milestones?direction=asc&sort=due_date)
-that bring together developments on different parts of the system.
 
 
 ##  Github repositories
@@ -72,11 +65,10 @@ CoL+ manages several github repositories within the [Species 2000 organisation](
 Please check the individual repositories and their issue management for more details:
 
  - [colplus](https://github.com/Sp2000/colplus): the overarching project repository that contains:
-    - issues reaching out to the CoL Global Team
-    - API documentation using RAML
-    - Data format documentation and examples for DwC-A and ACEF
+    - issues reaching out to the [CoL Global Team](https://github.com/Sp2000/colplus/issues?q=is%3Aissue+is%3Aopen+label%3A%22Global+Team%22)
+    - [API documentation](https://sp2000.github.io/colplus/api/api.html) using RAML
+ - [datapackage-specs](https://github.com/CatalogueOfLife/datapackage-specs): Draft specification of a richer & recommended exchange format for the Clearinghouse and Catalogue of Life, replacing DwC-A and the CoL submission format (ACEF).
  - [colplus-backend](https://github.com/Sp2000/colplus-backend): the Java backend with various Maven modules that primarily provide standalone JSON webservices as shaded jars using the Dropwizard framework
- - [colplus-frontend](https://github.com/Sp2000/colplus-frontend): void repository to contain all frontend code (Angular, React or Vue) built on top of the API services.
- - [colplus-debugger](https://github.com/Sp2000/colplus-debugger): a simple frontend using the public API to browse & search data for data and API debugging purposes
+ - [colplus-frontend](https://github.com/Sp2000/colplus-frontend): void repository to contain all frontend code written in [React](https://reactjs.org/) on top of the API services.
  - [colplus-deploy](https://github.com/Sp2000/colplus-deploy): private repository with credentials and deploy scripts for GBIF
  - [colplus-repo](https://github.com/Sp2000/colplus-repo): a data repository that hosts DwC or ACEF archives primarily as per GSD dumps from the current CoL Assembly DB
