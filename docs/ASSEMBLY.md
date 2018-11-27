@@ -90,6 +90,28 @@ Sectors can therefore be grouped into CoL sources that provide common citation m
 
 Selecting appropriate taxonomic sectors and mapping them to the CoL Management Classification is an important editorial decision. Taxonomic groups that should end up in the CoL need to be mapped at least once from the source datasets to the CoL management classification. In the simplest case a single higher taxon from a source dataset can be placed directly onto the management classification. More control is provided to filter names & taxa in sectors by rank and allow exclusion of included groups, for example a specific genus or family because they are treated in a different source already. Nested sectors that attach and thereby replace a group in another sector is another option, even down to the level of species when assembling a genus from various sources thus effectively creating a new *ProtoGSD*. Once defined, sectors will remain when the underlying dataset is updated.
 
+### Example: Plant Sectors
+
+Plants in the CoL come mostly from a single GSD, World Plants.
+A few other sources are used for a few sectors, e.g. the Geranium genus or the Fabaceae. To accomodate this the [latest workbench scripts](https://github.com/Sp2000/workbench_scripts/blob/master/home/GSDS/World_Plants/settings/d_local_editorial_transformations.sql) delete some data from World Plants:
+```
+#delete Lacistemataceae from WP (keeping the IOPI version in the CoL). Deletion will be cascaded by triggers
+DELETE FROM families WHERE family = "Lacistemataceae";
+#now delete Geranium in Geraniaceae. Deletion will be cascaded by triggers
+DELETE FROM scientific_names WHERE genus = "Geranium";
+```
+
+In the Clearinghouse a sector for *Magnoliopsida* would be created rooted in the Magnoliopsida from World Plants. The optional exclusion filter would be used to exclude the *Geranium* genus and the entire family *Lacistemataceae* (this appears to be an outdated version as the Lacistemataceae is coming from World Plants in the recent CoL. Fabaceae would probably be a realistic example).
+
+The transformation scripts also contain a large number of classification changes adjusting World Plants to the APG IV scheme. In most cases this is done by moving entire families, e.g. *Morinaceae* to *Caprifoliaceae*:
+
+```
+#01Jan2014 Morinaceae -> Caprifoliaceae
+UPDATE scientific_names SET family_code = (SELECT family_code FROM families WHERE family = "Caprifoliaceae") WHERE family_code IN(SELECT family_code FROM families WHERE family LIKE "Morinaceae%");
+DELETE FROM families WHERE family LIKE "Morinaceae%";
+```
+
+Preferrably this would be done in the Clearinghouse by having a dedicated APG IV source which the World Plants orders or families are then attached against. In this case a sector with root *Morinaceae* in WP would be attached to the *Caprifoliaceae*. Multiple sectors can be attached to a single target node in the CoL that alltogether make up the target taxon, e.g. the *Caprifoliaceae*.
 
 ## Data Review
 Entire datasets or specific sectors can be reviewed to find problems and report them back to the data provider. Once revised at the source the updated dataset can be reimported into the Clearinghouse. 
