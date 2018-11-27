@@ -67,7 +67,7 @@ Please check the individual repositories and their issue management for more det
  - [colplus](https://github.com/Sp2000/colplus): the overarching project repository that contains:
     - issues reaching out to the [CoL Global Team](https://github.com/Sp2000/colplus/issues?q=is%3Aissue+is%3Aopen+label%3A%22Global+Team%22)
     - [API documentation](https://sp2000.github.io/colplus/api/api.html) using RAML
- - [datapackage-specs](https://github.com/CatalogueOfLife/datapackage-specs): Draft specification of a richer & recommended exchange format for the Clearinghouse and Catalogue of Life, replacing DwC-A and the CoL submission format (ACEF).
+ - [coldp](https://github.com/Sp2000/coldp): Catalogue of Life Data Package specification of a richer & recommended exchange format for the Clearinghouse and Catalogue of Life, replacing DwC-A and the CoL submission format (ACEF).
  - [colplus-backend](https://github.com/Sp2000/colplus-backend): the Java backend with various Maven modules that primarily provide standalone JSON webservices as shaded jars using the Dropwizard framework
  - [colplus-frontend](https://github.com/Sp2000/colplus-frontend): void repository to contain all frontend code written in [React](https://reactjs.org/) on top of the API services.
  - [colplus-deploy](https://github.com/Sp2000/colplus-deploy): private repository with credentials and deploy scripts for GBIF
