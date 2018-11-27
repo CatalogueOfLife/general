@@ -19,12 +19,12 @@ paged:
       type: integer
       required: false
       description: The requested number of maximum records to be returned. Defaults to 10 and can be no more than 1000.
-datasetConstrainable:
+filteredByDataset:
   usage: Apply this to any method that allows results to be constrained to a certain dataset.
   description: Query parameter.
   queryParameters:
       datasetKey:
-        type: string
+        type: integer
         description: The database key of the dataset
 classification:
   usage: Apply this to any method that accepts a classification given as major rank parameters

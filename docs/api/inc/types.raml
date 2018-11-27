@@ -543,6 +543,19 @@ Dataset:
       type: datetime
       description: datetime the dataset was deleted from the Clearinghouse
       required: false
+ImportRequest:
+  type: object
+  description: Request to import a dataset.
+  properties:
+    datasetKey:
+      type: integer
+      description: Primary key for the source dataset
+    force:
+      type: boolean
+      description: If true forces a new import even if the data archive has not changed.
+    created:
+      type: datetime
+      description: datetime the request was created/scheduled
 DatasetImport:
   type: object
   description: Metrics and import details about a single dataset import event.
@@ -598,6 +611,10 @@ DatasetImport:
     namesByRankCount:
       type: object
       description: count of names by rank
+      required: false
+    taxaByRankCount:
+      type: object
+      description: count of taxa by rank
       required: false
     namesByTypeCount:
       type: object
@@ -671,6 +688,14 @@ DatasetImport:
             "DENORMED_CLASSIFICATION": 9037
         }
     }
+DatasetImportResultSet:
+  type: ResultSet
+  description: >
+    A paging resultset for DatasetImport.
+  properties:
+    results:
+      type: DatasetImport[]
+      description: the resulting import metrics
 DatasetResultSet:
   type: ResultSet
   description: >
