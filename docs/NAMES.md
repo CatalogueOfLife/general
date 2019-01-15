@@ -14,6 +14,16 @@ The driving use cases dealing with nomenclature are:
  - what is the homotypic synonymy of a name?
  - which nomenclatural code does a name follow?
  
+## Contents
+ - [Name types](#name-types)
+ - [Name class](#name-class)
+   - [Authorship class](#authorship-class)
+ - [Homotypic synonymy](#homotypic-synonymy)
+ - [Rank](#rank)
+ - [Name relations](#name-relations)
+ - [Name status](#name-status)
+ - [Names Index and Name equality](#names-index-and-name-equality)
+ - [Examples](#examples)
 
 
 ## Name types
