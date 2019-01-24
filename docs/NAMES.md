@@ -42,18 +42,18 @@ Only scientific and informal names are represented as parsed name instances. All
 ## Name class
 The name class holds parsed names and is free of taxonomic judgements. A name comes with the following attributes (```+``` required for all names, ```#``` only on parsed names):
 
- - ```key```**+** Primary, internal surrogate key of the name as provided by the dataset store.       
- - ```id``` identifier for the name as given by the dataset  Only guaranteed to be unique within a dataset and can follow any kind of schema.
+ - ```id```**+** Primary identifier for the name as given by the dataset. Only guaranteed to be unique within a dataset and can follow any kind of schema.
  - ```datasetKey```**+**  Key to dataset instance. Defines context of the name id.
  - ```verbatimKey``` key to the verbatim record as it came from the source
- - ```homotypicNameKey``` **+** Groups all homotypic names by referring to a single representative name of that group.
+ - ```homotypicNameId``` **+** Groups all homotypic names by referring to a single representative name of that group.
     This representative name is not guaranteed to be semantically meaningful, but if known it will often be the basionym.
+ - ```indexNameId    ``` Id from the names index grouping all distinct scientific names
  - ```scientificName``` **+** Entire canonical name string with a rank marker for infragenerics and infraspecfics, but
     excluding the authorship. For uninomials, e.g. families or names at higher ranks, this is just
-    the uninomial.
+    the uninomial. See ScientificName section below for more details.
  - ```rank``` **+** Rank of the name from an extensive, ordered enumeration
- - ```type``` **+** The kind of name classified in broad catagories based on their syntactical structure
- - ```code``` the nomenclatural code that governs the name
+ - ```type``` **+** The kind of name classified in broad catagories based on their syntactical structure. Enumeration.
+ - ```code``` the nomenclatural code that governs the name. Enumeration.
  - ```uninomial```**#** Represents the monomial for genus, families or names at higher ranks which do not have further epithets.
    Not used for binonimals.
  - ```genus```**#** The genus part of a bi- or trinomial name. Not used for genus names which are represented by the uninomial alone.
@@ -62,19 +62,24 @@ The name class holds parsed names and is free of taxonomic judgements. A name co
  - ```specificEpithet```**#** the specific part of a binomial
  - ```infraspecificEpithet```**#** the lowest, infraspecific part of a trinomial. 
  - ```cultivarEpithet```**#** cultivar name
+ - ```strain```**#** bacterial strain name
  - ```candidatus```**#** A boolean flag to indicate a bacterial candidate name. Candidatus is a provisional status for incompletely described procaryotes and such names are usually prefixed with the italic term *Candidatus*.
  - ```notho```**#** The part of the named hybrid which is considered a hybrid for notho taxa.
+ - ```authorship``` **+** Full authorship string including basionym and combination authors, ex- sanctioning authors and years.
  - ```combinationAuthorship```**#** Authorship instance (see below for class definition) with years of the name, but excluding any basionym authorship. 
    For binomials the combination authors.
  - ```basionymAuthorship```**#** Basionym authorship of the name
  - ```sanctioningAuthor```**#** The sanctioning author for sanctioned fungal names. Fr. or Pers.
- - ```status``` nomenclatural status of the name
- - ```publishedInKey``` key to the reference the name was originally published in.
+ - ```nomStatus``` nomenclatural status of the name, enumeration.
+ - ```publishedInId``` Id to the reference the name was originally published in.
  - ```publishedInPage``` The page(s) or other detailed location within the publishedIn reference the name was described.
+ - ```origin``` the origin indicates how the name entered the system. Either SOURCE for a record explicitly existing in the sources or other values for names created during import processing for implicitly indicated records, e.g. a flat classification.
  - ```sourceUrl``` link to a webpage showing the name in the original source if available
  - ```fossil``` true if the type specimen of the name is a fossil
- - ```remarks``` Any informal note about the nomenclature of the name
+ - ```remarks``` Any informal note about the nomenclature of the name, e.g. nom. illeg.
  
+Please see our [API docs](https://sp2000.github.io/colplus/api/api.html#model-Name) for more details.
+
 ### Authorship class
 This class is only used as part of a Name instance and not on its own. It therefore has no keys and is not shared between names.
 
@@ -83,15 +88,23 @@ This class is only used as part of a Name instance and not on its own. It theref
  - ```exAuthors``` List of ex- authors.
 
 
-Please see our [API docs](https://sp2000.github.io/colplus/api/api.html#model-Name) for more details.
+### Reconstructing the scientificName & authorship strings
+The scientificName and authorship properties are the main representation of a name instance and are reconstructed based on the other parsed fields.
+For unparsable names such as virus names or hybrid formulas the entire verbatim name string is used. In all other cases the scientificName is assembled and includes just the genus, specific- and infraspecificEpithet, it's standardized rank marker, cultivar and strain names. Authorship, infragenerics, taxon concept references and nomenclatural notes are excluded. Ligatures such as œ are decomposed into their standard multi letter equivalent, in this case oe.
 
+The full authorship string is reconstructed from the parsed authors. 
+Author teams are included in their full length with the last author always concatenated by an ampersand.
+Years are added at the end of each authorship preceeded by a comma.
+Basionym authors are kept in brackets and preceed the combination authorship.
+
+For more details see the [NameFormatter class](https://github.com/gbif/name-parser/blob/master/name-parser-api/src/main/java/org/gbif/nameparser/util/NameFormatter.java#L13) of the GBIF Name Parser.
 
 
 ## Homotypic synonymy
 Names based on the same type can be clustered together as a homotypic group of names.
 A homotypic group not only includes all subsequent recombinations, but also any [replacement name](https://en.wikipedia.org/wiki/Nomen_novum) or emendation if existing. These names are homotypic synonyms, also called nomenclatural or objective synonyms.
 
-In theory one can establish such a group by linking all names back to the first published name known as the protonym in zoology and basionym in botany (strictly a basionym only exists once a name was newly combined while the protonym definition covers a lone newly described name already. We prefer to use the older and well known term basionym in CoL). But in reality the basionym is often not known while it is known that a collection of names are homotypic. The Clearinghouse datastore therefore picks a random name from the set of homotypic names and uses its key on all such names in the property `homotypicNameKey`.
+In theory one can establish such a group by linking all names back to the first published name known as the protonym in zoology and basionym in botany (strictly a basionym only exists once a name was newly combined while the protonym definition covers a lone newly described name already. We prefer to use the older and well known term basionym in CoL). But in reality the basionym is often not known while it is known that a collection of names are homotypic. The Clearinghouse datastore therefore picks a random name from the set of homotypic names and uses its key on all such names in the property `homotypicNameId`.
 
 The following names can be clustered into three sets of homotypic groups, shown with canonical authorship:
 
@@ -288,10 +301,10 @@ After the first few examples we will start omitting parsed fields of the name in
 ## Species Pinus abies var. leioclada Steven ex Endl.
 ```json5
 {
-  "key": 1234,
+  "id": 1234,
   "datasetKey": 1045,
   "verbatimKey": 2190,
-  "homotypicNameKey": 1234,
+  "homotypicNameId": 1234,
   "scientificName": "Pinus abies var. leioclada",
   "authorship": "Steven ex Endl.",
   "rank": "variety",
@@ -316,8 +329,8 @@ After the first few examples we will start omitting parsed fields of the name in
 ## Genus Abies
 ```json5
 {
-  "key": 1234,
-  "homotypicNameKey": 1234,
+  "id": 1234,
+  "homotypicNameId": 1234,
   "scientificName": "Abies",
   "authorship": "Mill.",
   "rank": "genus",
@@ -330,7 +343,7 @@ After the first few examples we will start omitting parsed fields of the name in
   "code": "botanical",
   "origin": "source",
   "type": "scientific",
-  "publishedInKey": 6,
+  "publishedInId": 6,
   "publishedInPage": "347",
   "parsed": true
 }
@@ -339,8 +352,8 @@ After the first few examples we will start omitting parsed fields of the name in
 ## Virus species Garlic virus B
 ```json5
 {
-  "key": 1234,
-  "homotypicNameKey": 1234,
+  "id": 1234,
+  "homotypicNameId": 1234,
   "scientificName": "Garlic virus B",
   "rank": "species",
   "code": "virus",
@@ -352,8 +365,8 @@ After the first few examples we will start omitting parsed fields of the name in
 ## Named hybrid 
 ```json5
 {
-  "key": 1234,
-  "homotypicNameKey": 1234,
+  "id": 1234,
+  "homotypicNameId": 1234,
   "scientificName": "Carex ×subviridula",
   "authorship": "(Kükenthal) Fernald",
   "rank": "species",
@@ -380,8 +393,8 @@ After the first few examples we will start omitting parsed fields of the name in
 ## Hybrid Forumula
 ```json5
 {
-  "key": 1234,
-  "homotypicNameKey": 1234,
+  "id": 1234,
+  "homotypicNameId": 1234,
   "scientificName": "Asplenium germanicum x trichomanes C.Chr.",
   "rank": "species",
   "code": "botanical",
@@ -393,7 +406,7 @@ After the first few examples we will start omitting parsed fields of the name in
 ## Cultivar Rhododendron x obtusum 'Amoenum'
 ```json5
 {
-  "key": 1234,
+  "id": 1234,
   "scientificName": "Rhododendron x obtusum 'Amoenum'",
   "rank": "species",
   "notho": "specific",
@@ -408,7 +421,7 @@ After the first few examples we will start omitting parsed fields of the name in
 ## Placeholder Asteraceae Incertae sedis
 ```json5
 {
-  "key": 1234,
+  "id": 1234,
   "scientificName": "Asteraceae Incertae sedis",
   "rank": "unranked",
   "type": "placeholder",
@@ -422,8 +435,8 @@ The JSON shows both names and their relation object.
 
 ```json5
 {
-  "key": 325,
-  "homotypicNameKey": 325,
+  "id": 325,
+  "homotypicNameId": 325,
   "scientificName": "Polygonum dumetorum",
   "authorship": "L.",
   "rank": "species",
@@ -439,8 +452,8 @@ The JSON shows both names and their relation object.
   "parsed": true
 },
 {
-  "key": 326,
-  "homotypicNameKey": 325,
+  "id": 326,
+  "homotypicNameId": 325,
   "scientificName": "Fallopia dumetorum",
   "authorship": "(L.) J.Holub",
   "rank": "species",
@@ -477,8 +490,8 @@ Correction homonyms are represented as two separate names. The validating name s
 
 ```json5
 {
-  "key": 124,
-  "homotypicNameKey": 124,
+  "id": 124,
+  "homotypicNameId": 124,
   "scientificName": "Gossypium tomentosum",
   "authorship": "Nutt.",
   "rank": "species",
@@ -495,8 +508,8 @@ Correction homonyms are represented as two separate names. The validating name s
   "parsed": true
 },
 {
-  "key": 123,
-  "homotypicNameKey": 124,
+  "id": 123,
+  "homotypicNameId": 124,
   "scientificName": "Gossypium tomentosum",
   "authorship": "Nutt. ex Seem.",
   "rank": "species",
@@ -512,7 +525,7 @@ Correction homonyms are represented as two separate names. The validating name s
   },
   "code": "botanical",
   "type": "scientific",
-  "publishedInKey": 166,
+  "publishedInId": 166,
   "parsed": true
 },
 
@@ -529,13 +542,13 @@ Sometimes names are misspelled. By misspelling here we mean orthographic and typ
 
 ```json5
 {
-  "key": 225,
+  "id": 225,
   "scientificName": "Persicaria segetum",
   "authorship": "(Kunth) Small (1903)",
   "parsed": true
 },
 {
-  "key": 226,
+  "id": 226,
   "scientificName": "Persicaria segeta",
   "authorship": "(Kunth) Small (1903)",
   "parsed": true
@@ -560,28 +573,28 @@ Names 1 and 3 relate to the same taxon from Bhutan and represent double publicat
 
 ```json5
 {
-  "key": 123,
-  "homotypicNameKey": 123,
+  "id": 123,
+  "homotypicNameId": 123,
   "scientificName": "Pedicularis inconspicua",
   "authorship": "P.C. Tsoong",
-  "publishedInKey": 26,
+  "publishedInId": 26,
   "parsed": true
 },
 {
-  "key": 124,
-  "homotypicNameKey": 124,
+  "id": 124,
+  "homotypicNameId": 124,
   "scientificName": "Pedicularis inconspicua",
   "authorship": "Vved.",
-  "publishedInKey": 27,
+  "publishedInId": 27,
   "parsed": true
 },
 {
-  "key": 125,
-  "homotypicNameKey": 123,
+  "id": 125,
+  "homotypicNameId": 123,
   "scientificName": "Pedicularis inconspicua",
   "authorship": "P.C. Tsoong",
   "status": "illegitimate",
-  "publishedInKey": 28,
+  "publishedInId": 28,
   "parsed": true
 },
 
@@ -609,28 +622,28 @@ The combination made by C.F. Reed is a later isonym and so invalid.
 
 ```json5
 {
-  "key": 223,
-  "homotypicNameKey": 223,
+  "id": 223,
+  "homotypicNameId": 223,
   "scientificName": "Trillium texanum",
   "authorship": "Buckley",
-  "publishedInKey": 100,
+  "publishedInId": 100,
   "parsed": true
 },
 {
-  "key": 224,
-  "homotypicNameKey": 223,
+  "id": 224,
+  "homotypicNameId": 223,
   "scientificName": "Trillium pusillum var. texanum",
   "authorship": "(Buckley) J.L.Reveal & C.R.Broome",
-  "publishedInKey": 101,
+  "publishedInId": 101,
   "parsed": true
 },
 {
-  "key": 225,
-  "homotypicNameKey": 223,
+  "id": 225,
+  "homotypicNameId": 223,
   "scientificName": "Trillium pusillum var. texanum",
   "authorship": "(Buckley) C.F.Reed",
   "status": "illegitimate",
-  "publishedInKey": 102,
+  "publishedInId": 102,
   "parsed": true
 },
 
@@ -663,29 +676,29 @@ A nomen novum should have a `ReplacementName` relation to the illegitimate homon
 
 ```json5
 {
-  "key": 123,
-  "homotypicNameKey": 123,
+  "id": 123,
+  "homotypicNameId": 123,
   "scientificName": "Myrcia lucida",
   "authorship": "McVaugh",
-  "publishedInKey": 1969,
+  "publishedInId": 1969,
   "parsed": true
 },
 {
-  "key": 124,
-  "homotypicNameKey": 123,
+  "id": 124,
+  "homotypicNameId": 123,
   "scientificName": "Myrcia laevis",
   "authorship": "O.Berg",
-  "publishedInKey": 1862,
+  "publishedInId": 1862,
   "status": "illegitimate",
   "parsed": true
 },
 {
-  "key": 125,
-  "homotypicNameKey": 125,
+  "id": 125,
+  "homotypicNameId": 125,
   "scientificName": "Myrcia laevis",
   "authorship": "G.Don",
   "status": "illegitimate",
-  "publishedInKey": 1832,
+  "publishedInId": 1832,
   "parsed": true
 },
 
@@ -712,32 +725,32 @@ A sanctioned name may be conserved against more than one other names and so may 
 
 ```json5
 {
-  "key": 123,
-  "homotypicNameKey": 123,
+  "id": 123,
+  "homotypicNameId": 123,
   "scientificName": "Agaricus personatus",
   "authorship": "Bolton : Fr",
   "status": "conserved",
   "parsed": true
 },
 {
-  "key": 124,
-  "homotypicNameKey": 124,
+  "id": 124,
+  "homotypicNameId": 124,
   "scientificName": "Agaricus personatus",
   "authorship": "Valenti",
   "status": "rejected",
   "parsed": true
 },
 {
-  "key": 125,
-  "homotypicNameKey": 125,
+  "id": 125,
+  "homotypicNameId": 125,
   "scientificName": "Agaricus personatus",
   "authorship": "Lasch",
   "status": "rejected",
   "parsed": true
 },
 {
-  "key": 126,
-  "homotypicNameKey": 126,
+  "id": 126,
+  "homotypicNameId": 126,
   "scientificName": "Agaricus personatus",
   "authorship": "With.",
   "status": "rejected",
@@ -766,44 +779,44 @@ A sanctioned name may be conserved against more than one other names and so may 
 
 ```json5
 {
-  "key": 1000,
-  "homotypicNameKey": 1000,
+  "id": 1000,
+  "homotypicNameId": 1000,
   "scientificName": "Aus bus",
   "authorship": "Linnaeus 1758",
   "rank": "species"
 },{
-  "key": 1001,
-  "homotypicNameKey": 1000,
+  "id": 1001,
+  "homotypicNameId": 1000,
   "scientificName": "Aus ba",
   "authorship": "Linnaeus 1758",
   "rank": "species"
 },{
-  "key": 1002,
-  "homotypicNameKey": 1000,
+  "id": 1002,
+  "homotypicNameId": 1000,
   "scientificName": "Xus bus",
   "authorship": "(Linnaeus 1758) Smith 1850",
   "rank": "species"
 },{
-  "key": 1003,
-  "homotypicNameKey": 1003,
+  "id": 1003,
+  "homotypicNameId": 1003,
   "scientificName": "Xus cus",
   "authorship": "Smith 1850",
   "rank": "species"
 },{
-  "key": 1004,
-  "homotypicNameKey": 1003,
+  "id": 1004,
+  "homotypicNameId": 1003,
   "scientificName": "Xus bus subsp. cus",
   "authorship": "Smith 1850",
   "rank": "subspecies"
 },{
-  "key": 1005,
-  "homotypicNameKey": 1005,
+  "id": 1005,
+  "homotypicNameId": 1005,
   "scientificName": "Xus bus",
   "authorship": "Jones 1900",
   "rank": "species"
 },{
-  "key": 1006,
-  "homotypicNameKey": 1005,
+  "id": 1006,
+  "homotypicNameId": 1005,
   "scientificName": "Xus dus",
   "authorship": "Pyle 1900",
   "rank": "species"
