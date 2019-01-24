@@ -18,6 +18,7 @@ The driving use cases dealing with nomenclature are:
  - [Name types](#name-types)
  - [Name class](#name-class)
    - [Authorship class](#authorship-class)
+   - [Reconstructing scientificName & authorship](#reconstructing-scientificname--authorship)
  - [Homotypic synonymy](#homotypic-synonymy)
  - [Rank](#rank)
  - [Name relations](#name-relations)
@@ -88,7 +89,7 @@ This class is only used as part of a Name instance and not on its own. It theref
  - ```exAuthors``` List of ex- authors.
 
 
-### Reconstructing the scientificName & authorship strings
+### Reconstructing scientificName & authorship
 The scientificName and authorship properties are the main representation of a name instance and are reconstructed based on the other parsed fields.
 For unparsable names such as virus names or hybrid formulas the entire verbatim name string is used. In all other cases the scientificName is assembled and includes just the genus, specific- and infraspecificEpithet, it's standardized rank marker, cultivar and strain names. Authorship, infragenerics, taxon concept references and nomenclatural notes are excluded. Ligatures such as œ are decomposed into their standard multi letter equivalent, in this case oe.
 
