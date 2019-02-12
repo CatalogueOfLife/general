@@ -239,13 +239,11 @@ The terms valid/invalid are highly overloaded and used for different things in t
 
  - ```REJECTED```: *nomen rejiciendum* Rejected / suppressed name. Inverse of conserved. Outright rejection is possible for a name at any rank.
 
- - ```DOUBTFUL```: *nomen dubium* or *nomen ambiguum*. Doubtful or dubious names, names which are not certainly applicable to any known taxon or for which the evidence is insufficient to permit recognition of the taxon to which they belong. The confusion being derived from an incomplete or confusing description.
+ - ```DOUBTFUL```: *nomen dubium* or *nomen ambiguum*. Doubtful or dubious names, names which are not certainly applicable to any known taxon or for which the evidence is insufficient to permit recognition of the taxon to which they belong. The confusion being derived from an incomplete or confusing description. Includes nomen ambiguum and nomen inquirendum, a species of doubtful identity requiring further investigation.
 
  - ```MANUSCRIPT```: An unpublished name that was given a temporary placeholder name to work with. Sometimes these names do not get properly published for decades and can be cited in other works. Often abbreviated as ined. (ineditus) or ms. (manuscript) and sometimes called chironym/cheironym
 
  - ```CHRESONYM```: A name usage erroneously cited without a sec/sensu indication so it appears to be a published homonym with a different authority.
-
- - ```UNEVALUATED```: *nomen inquirendum*. A species of doubtful identity requiring further investigation
 
 
 ## Names Index and Name equality
