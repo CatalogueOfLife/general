@@ -197,9 +197,11 @@ The vocablary is kept minimal to basically answer two fundamental questions:
 
 The name class also offers an unrestricted remarks field which should be used to keep further nomenclatural notes to inform about the exact status of a name and which rules have been considered. It is meant to be understood by humans.
 
-The terms valid/invalid are highly overloaded and used for different things in the codes so we avoid them entirely.
+We use [BioCode terminology](https://archive.bgbm.org/IAPT/biocode/biocode.html#Table) as much as possible
+and avoid the term valid entirely as it is very overloaded and used for different things in both codes.
 
- - ```UNAVAILABLE```: *nomen invalidum*. A name that was not validly published according to the rules of the code, or a name that was not accepted by the author in the original publication, for example,
+
+ - ```NOT_ESTABLISHED```: *nomen invalidum*. A name that was not validly published according to the rules of the code, or a name that was not accepted by the author in the original publication, for example,
    if the name was suggested as a synonym of an accepted name.
    In zoology referred to as an unavailable name.
    There are many reasons for a name to be unavailable.
@@ -210,14 +212,14 @@ The terms valid/invalid are highly overloaded and used for different things in t
     - not latin (ICN Art 32)
     - provisional/manuscript names
     - suppressed publication
-    - tautonym (ICN)
+    - tautonym (ICN) e.g. Opuntia opuntia H.Karst.
    
 
- - ```LEGITIMATE```: *nomen legitimum*. Botany: Names that are validly published and legitimate
+ - ```ACCEPTABLE```: *nomen legitimum*. Botany: Names that are validly published and legitimate
    Zoology: Available name and *potentially* valid, i.e. not otherwise invalid
    for any other objective reason, such as being a junior homonym.
 
- - ```ILLEGITIMATE```: *nomen illegitimum*. An available name with nomenclatural standing, but one that objectively contravenes some of the rules laid down by nomenclatural codes and thus cannot be used as a name for an accepted taxon. 
+ - ```UNACCEPTABLE```: *nomen illegitimum*. An available name with nomenclatural standing, but one that objectively contravenes some of the rules laid down by nomenclatural codes and thus cannot be used as a name for an accepted taxon. 
    
    There can be varioous reasons why a name is illegitimate, e.g.:
      - Botany: superfluous at its time of publication (article 52), i.e., the taxon (as represented by the type) already has a name
@@ -592,7 +594,7 @@ Names 1 and 3 relate to the same taxon from Bhutan and represent double publicat
   "homotypicNameId": 123,
   "scientificName": "Pedicularis inconspicua",
   "authorship": "P.C. Tsoong",
-  "status": "illegitimate",
+  "status": "unacceptable",
   "publishedInId": 28,
   "parsed": true
 },
@@ -641,7 +643,7 @@ The combination made by C.F. Reed is a later isonym and so invalid.
   "homotypicNameId": 223,
   "scientificName": "Trillium pusillum var. texanum",
   "authorship": "(Buckley) C.F.Reed",
-  "status": "illegitimate",
+  "status": "unacceptable",
   "publishedInId": 102,
   "parsed": true
 },
@@ -688,7 +690,7 @@ A nomen novum should have a `ReplacementName` relation to the illegitimate homon
   "scientificName": "Myrcia laevis",
   "authorship": "O.Berg",
   "publishedInId": 1862,
-  "status": "illegitimate",
+  "status": "unacceptable",
   "parsed": true
 },
 {
@@ -696,7 +698,7 @@ A nomen novum should have a `ReplacementName` relation to the illegitimate homon
   "homotypicNameId": 125,
   "scientificName": "Myrcia laevis",
   "authorship": "G.Don",
-  "status": "illegitimate",
+  "status": "unacceptable",
   "publishedInId": 1832,
   "parsed": true
 },
@@ -717,7 +719,7 @@ A nomen novum should have a `ReplacementName` relation to the illegitimate homon
 
 
 ## Sanctioned Agaricus personatus
-The names of fungi presented in certain publications have been sanctioned by ICN (Art. 15). This means that these names are treated as if conserved against earlier homonyms and competing synonyms. The earlier names are not invalid as would be the case if these works had been set as the starting date for fungal nomenclature but are available for use in different combinations. They are also not illegitimate and can be the basionym for a combination
+The names of fungi presented in certain publications have been sanctioned by ICN (Art. 15). This means that these names are treated as if conserved against earlier homonyms and competing synonyms. The earlier names are not invalid as would be the case if these works had been set as the starting date for fungal nomenclature but are available for use in different combinations. They are also not unacceptable and can be the basionym for a combination
 
 A sanctioned name may be conserved against more than one other names and so may contain more than one `conservered` relation to the other names.
 
