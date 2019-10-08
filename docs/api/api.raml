@@ -141,6 +141,32 @@ types: !include inc/types.raml
         body:
           application/json:
             type: NameSearchResultSet
+/name/suggest:
+  get:
+    displayName: Name suggest
+    description: Name suggestion service (a.k.a. auto-complete)
+    queryParameters:
+      q:
+        type: string
+        description: main query string
+        required: true
+      datasetKey:
+        type: integer
+        description: dataset key
+        required: true
+      vernaculars:
+        type: boolean
+        description: Whether or not to include vernacular names in the suggestions (default false)
+        required: false
+      limit:
+        type: integer
+        description: The desired number of suggestions (default 10)
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            type: string
 /name/matching:
   get:
     description: |
