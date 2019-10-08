@@ -572,6 +572,46 @@ Dataset used to build the provisional catalogue will be trusted and insert their
 </td>
                                 </tr>
                             </tbody></table>
+                        <h2 id="model-ImportRequest">ImportRequest</h2>
+
+
+    <p><p>Request to import a dataset.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>datasetKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Primary key for the source dataset</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>force</td>
+                                    <td>boolean</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>If true forces a new import even if the data archive has not changed.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>created</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>datetime the request was created/scheduled</p>
+</td>
+                                </tr>
+                            </tbody></table>
                         <h2 id="model-DatasetImport">DatasetImport</h2>
 
     <pre class="example"><code class="json">{
@@ -756,6 +796,14 @@ Dataset used to build the provisional catalogue will be trusted and insert their
 </td>
                                 </tr>
                                 <tr>
+                                    <td>taxaByRankCount</td>
+                                    <td>object</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>count of taxa by rank</p>
+</td>
+                                </tr>
+                                <tr>
                                     <td>namesByTypeCount</td>
                                     <td>object</td>
                                     <td></td>
@@ -817,6 +865,62 @@ Dataset used to build the provisional catalogue will be trusted and insert their
                                     <td></td>
                                     <td>no</td>
                                     <td><p>count of verbatim records by their rowType</p>
+</td>
+                                </tr>
+                            </tbody></table>
+                        <h2 id="model-DatasetImportResultSet">DatasetImportResultSet</h2>
+
+
+    <p><p>A paging resultset for DatasetImport.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>result</td>
+                                    <td>object[]</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Result page</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>offset</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The offset applied during request. Can be less than requested if the limit is reached.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>limit</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The maximum number of records returned. Can be less than requested if the limit is reached.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>total</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The total number of records available.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>results</td>
+                                    <td><a href="#model-DatasetImport">DatasetImport[]</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the resulting import metrics</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -3494,7 +3598,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:34 AM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3523,7 +3627,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:34 AM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3575,7 +3679,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:34 AM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3665,147 +3769,7 @@ Host: api.col.plus
     
 
 
-        <h2 id="resource-3">/dataset/{dkey}/import</h2>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET //dataset/{dkey}/import HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/import</h3>
-    <p><p>Retrieve import metrics for the dataset with the specified key. By default just returns the last import</p>
-</p>
-
-
-
-        <h3 id="op6-request-params">Parameters</h3>
-        <table><thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Pattern</th>
-            <th>Required</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-        </thead><tbody>
-            <tr>
-                <td>limit</td>
-                <td>integer</td>
-                <td></td>
-                <td>yes</td>
-                <td></td>
-                <td><p>number of imports to limit to. Defaults to 1.</p>
-</td>
-            </tr>
-            <tr>
-                <td>state</td>
-                <td><a href="#model-ImportState">ImportState</a></td>
-                <td>downloading, processing, inserting, unchanged, finished, canceled, failed</td>
-                <td>yes</td>
-                <td></td>
-                <td><p>filters listed import metrics by their state, e.g. the last failed import</p>
-</td>
-            </tr>
-        </tbody></table>
-
-
-            <h3 id="op6-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
-Content-Type: application/json
-</code>
-    <code class="json">[{
-    "datasetKey": 101,
-    "attempt": 1,
-    "state": "finished",
-    "downloadUri": "https://raw.githubusercontent.com/Sp2000/colplus-repo/master/ACEF/assembly/101.tar.gz",
-    "download": "2018-02-28T03:40:02",
-    "started": "2018-02-28T03:40:01.433",
-    "finished": "2018-02-28T03:52:27.201",
-    "verbatimCount": 169988,
-    "nameCount": 179025,
-    "taxonCount": 147971,
-    "referenceCount": 1711,
-    "vernacularCount": 0,
-    "distributionCount": 137999,
-    "issuesCount": {
-        "DISTRIBUTION_GAZETEER_INVALID": 3,
-        "DISTRIBUTION_STATUS_INVALID": 2,
-        "LIFEZONE_INVALID": 1
-    },
-    "namesByRankCount": {
-        "SPECIES": 169988,
-        "GENUS": 8878,
-        "FAMILY": 155,
-        "KINGDOM": 1,
-        "PHYLUM": 1,
-        "CLASS": 1,
-        "ORDER": 1
-    },
-    "namesByTypeCount": {
-        "SCIENTIFIC": 179025
-    },
-    "distributionsByGazetteerCount": {
-        "TEXT": 137999
-    },
-    "namesByOriginCount": {
-        "SOURCE": 169988,
-        "DENORMED_CLASSIFICATION": 9037
-    }
-}
-,{
-    "datasetKey": 101,
-    "attempt": 1,
-    "state": "finished",
-    "downloadUri": "https://raw.githubusercontent.com/Sp2000/colplus-repo/master/ACEF/assembly/101.tar.gz",
-    "download": "2018-02-28T03:40:02",
-    "started": "2018-02-28T03:40:01.433",
-    "finished": "2018-02-28T03:52:27.201",
-    "verbatimCount": 169988,
-    "nameCount": 179025,
-    "taxonCount": 147971,
-    "referenceCount": 1711,
-    "vernacularCount": 0,
-    "distributionCount": 137999,
-    "issuesCount": {
-        "DISTRIBUTION_GAZETEER_INVALID": 3,
-        "DISTRIBUTION_STATUS_INVALID": 2,
-        "LIFEZONE_INVALID": 1
-    },
-    "namesByRankCount": {
-        "SPECIES": 169988,
-        "GENUS": 8878,
-        "FAMILY": 155,
-        "KINGDOM": 1,
-        "PHYLUM": 1,
-        "CLASS": 1,
-        "ORDER": 1
-    },
-    "namesByTypeCount": {
-        "SCIENTIFIC": 179025
-    },
-    "distributionsByGazetteerCount": {
-        "TEXT": 137999
-    },
-    "namesByOriginCount": {
-        "SOURCE": 169988,
-        "DENORMED_CLASSIFICATION": 9037
-    }
-}
-]</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-DatasetImport">DatasetImport[]</a></p>
-
-
-        <h2 id="resource-4">/dataset/{dkey}/verbatim</h2>
+        <h2 id="resource-3">/dataset/{dkey}/verbatim</h2>
 
     
 
@@ -3822,7 +3786,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op7-request-params">Parameters</h3>
+        <h3 id="op6-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -3863,11 +3827,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op7-responses" class="clear">Response 200</h3>
+            <h3 id="op6-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:34 AM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3875,7 +3839,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-VerbatimRecordResultSet">VerbatimRecordResultSet</a></p>
 
 
-        <h2 id="resource-5">/dataset/{dkey}/verbatim/{key}</h2>
+        <h2 id="resource-4">/dataset/{dkey}/verbatim/{key}</h2>
 
     
 
@@ -3892,7 +3856,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op8-request-params">Parameters</h3>
+        <h3 id="op7-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -3915,11 +3879,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op8-responses" class="clear">Response 200</h3>
+            <h3 id="op7-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:34 AM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3956,7 +3920,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-VerbatimRecord">VerbatimRecord</a></p>
 
 
-        <h2 id="resource-6">/dataset/{dkey}/taxon</h2>
+        <h2 id="resource-5">/dataset/{dkey}/taxon</h2>
 
     
 
@@ -3973,7 +3937,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op9-request-params">Parameters</h3>
+        <h3 id="op8-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4022,7 +3986,7 @@ Host: api.col.plus
             </tr>
             <tr>
                 <td>datasetKey</td>
-                <td>string</td>
+                <td>integer</td>
                 <td></td>
                 <td>yes</td>
                 <td></td>
@@ -4032,11 +3996,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op9-responses" class="clear">Response 200</h3>
+            <h3 id="op8-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:34 AM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -4044,7 +4008,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-ResultSet">ResultSet</a></p>
 
 
-        <h2 id="resource-7">/dataset/{dkey}/taxon/{id}</h2>
+        <h2 id="resource-6">/dataset/{dkey}/taxon/{id}</h2>
 
     
 
@@ -4061,7 +4025,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op10-request-params">Parameters</h3>
+        <h3 id="op9-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4084,11 +4048,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op10-responses" class="clear">Response 200</h3>
+            <h3 id="op9-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:34 AM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4127,7 +4091,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Taxon">Taxon</a></p>
 
 
-        <h2 id="resource-8">/dataset/{dkey}/taxon/{id}/info</h2>
+        <h2 id="resource-7">/dataset/{dkey}/taxon/{id}/info</h2>
 
     
 
@@ -4146,11 +4110,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op11-responses" class="clear">Response 200</h3>
+            <h3 id="op10-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:34 AM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4197,7 +4161,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-TaxonInfo">TaxonInfo</a></p>
 
 
-        <h2 id="resource-9">/dataset/{dkey}/taxon/{id}/classification</h2>
+        <h2 id="resource-8">/dataset/{dkey}/taxon/{id}/classification</h2>
 
     
 
@@ -4216,11 +4180,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op12-responses" class="clear">Response 200</h3>
+            <h3 id="op11-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:34 AM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -4289,7 +4253,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Taxon">Taxon[]</a></p>
 
 
-        <h2 id="resource-10">/dataset/{dkey}/taxon/{id}/children</h2>
+        <h2 id="resource-9">/dataset/{dkey}/taxon/{id}/children</h2>
 
     
 
@@ -4308,11 +4272,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op13-responses" class="clear">Response 200</h3>
+            <h3 id="op12-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:34 AM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -4320,7 +4284,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-TaxonResultSet">TaxonResultSet</a></p>
 
 
-        <h2 id="resource-11">/dataset/{dkey}/taxon/{id}/synonyms</h2>
+        <h2 id="resource-10">/dataset/{dkey}/taxon/{id}/synonyms</h2>
 
     
 
@@ -4339,11 +4303,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op14-responses" class="clear">Response 200</h3>
+            <h3 id="op13-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:34 AM CEST
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -4532,7 +4496,7 @@ Content-Type: application/json
                     <p>Content: Name[][]</p>
 
 
-        <h2 id="resource-12">/dataset/{dkey}/taxon/{id}/verbatim</h2>
+        <h2 id="resource-11">/dataset/{dkey}/taxon/{id}/verbatim</h2>
 
     
 
@@ -4551,11 +4515,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op15-responses" class="clear">Response 200</h3>
+            <h3 id="op14-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:34 AM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4592,7 +4556,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-VerbatimRecord">VerbatimRecord</a></p>
 
 
-        <h2 id="resource-13">/dataset/{dkey}/name</h2>
+        <h2 id="resource-12">/dataset/{dkey}/name</h2>
 
     
 
@@ -4609,7 +4573,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op16-request-params">Parameters</h3>
+        <h3 id="op15-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4640,7 +4604,7 @@ Host: api.col.plus
             </tr>
             <tr>
                 <td>datasetKey</td>
-                <td>string</td>
+                <td>integer</td>
                 <td></td>
                 <td>yes</td>
                 <td></td>
@@ -4650,11 +4614,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op16-responses" class="clear">Response 200</h3>
+            <h3 id="op15-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:34 AM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -4662,7 +4626,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-NameResultSet">NameResultSet</a></p>
 
 
-        <h2 id="resource-14">/dataset/{dkey}/name/{id}</h2>
+        <h2 id="resource-13">/dataset/{dkey}/name/{id}</h2>
 
     
 
@@ -4679,7 +4643,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op17-request-params">Parameters</h3>
+        <h3 id="op16-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4702,11 +4666,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op17-responses" class="clear">Response 200</h3>
+            <h3 id="op16-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:34 AM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4742,7 +4706,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Name">Name</a></p>
 
 
-        <h2 id="resource-15">/dataset/{dkey}/name/{id}/synonyms</h2>
+        <h2 id="resource-14">/dataset/{dkey}/name/{id}/synonyms</h2>
 
     
 
@@ -4761,11 +4725,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op18-responses" class="clear">Response 200</h3>
+            <h3 id="op17-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:34 AM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -4828,7 +4792,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Name">Name[]</a></p>
 
 
-        <h2 id="resource-16">/dataset/{dkey}/name/{id}/publishedIn</h2>
+        <h2 id="resource-15">/dataset/{dkey}/name/{id}/publishedIn</h2>
 
     
 
@@ -4847,11 +4811,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op19-responses" class="clear">Response 200</h3>
+            <h3 id="op18-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:34 AM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4875,7 +4839,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Reference">Reference</a></p>
 
 
-        <h2 id="resource-17">/dataset/{dkey}/name/{id}/relations</h2>
+        <h2 id="resource-16">/dataset/{dkey}/name/{id}/relations</h2>
 
     
 
@@ -4892,7 +4856,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op20-request-params">Parameters</h3>
+        <h3 id="op19-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4915,11 +4879,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op20-responses" class="clear">Response 200</h3>
+            <h3 id="op19-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:34 AM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -4944,7 +4908,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-NameRelation">NameRelation[]</a></p>
 
 
-        <h2 id="resource-18">/dataset/{dkey}/name/{id}/verbatim</h2>
+        <h2 id="resource-17">/dataset/{dkey}/name/{id}/verbatim</h2>
 
     
 
@@ -4963,11 +4927,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op21-responses" class="clear">Response 200</h3>
+            <h3 id="op20-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:34 AM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5004,7 +4968,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-VerbatimRecord">VerbatimRecord</a></p>
 
 
-        <h2 id="resource-19">/dataset/{dkey}/reference</h2>
+        <h2 id="resource-18">/dataset/{dkey}/reference</h2>
 
     
 
@@ -5021,7 +4985,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op22-request-params">Parameters</h3>
+        <h3 id="op21-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -5052,7 +5016,7 @@ Host: api.col.plus
             </tr>
             <tr>
                 <td>datasetKey</td>
-                <td>string</td>
+                <td>integer</td>
                 <td></td>
                 <td>yes</td>
                 <td></td>
@@ -5062,11 +5026,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op22-responses" class="clear">Response 200</h3>
+            <h3 id="op21-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:35 AM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -5074,7 +5038,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-ResultSet">ResultSet</a></p>
 
 
-        <h2 id="resource-20">/dataset/{dkey}/reference/{id}</h2>
+        <h2 id="resource-19">/dataset/{dkey}/reference/{id}</h2>
 
     
 
@@ -5091,7 +5055,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op23-request-params">Parameters</h3>
+        <h3 id="op22-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -5114,11 +5078,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op23-responses" class="clear">Response 200</h3>
+            <h3 id="op22-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:35 AM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5142,7 +5106,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Reference">Reference</a></p>
 
 
-        <h1 id="resource-21">/colsource</h1>
+        <h1 id="resource-20">/colsource</h1>
 
     
 
@@ -5171,7 +5135,7 @@ type: ColSource[]</p>
 
 
 
-        <h1 id="resource-22">/decision</h1>
+        <h1 id="resource-21">/decision</h1>
 
     
 
@@ -5186,8 +5150,10 @@ Host: api.col.plus
     <p><p>List of editorial decisions.
 queryParameters:
 datasetKey:
+type: integer
 description: Filter by dataset
 sectorKey:
+type: integer
 description: Filter by sector
 responses:
 200:
@@ -5202,7 +5168,7 @@ type: Decision[]</p>
 
 
 
-        <h1 id="resource-23">/sector</h1>
+        <h1 id="resource-22">/sector</h1>
 
     
 
@@ -5231,10 +5197,162 @@ type: Sector[]</p>
 
 
 
-        <h1 id="resource-24">/importer</h1>
+        <h1 id="resource-23">/importer</h1>
 
     
 
+
+    <pre class="example"><code class="http">
+GET //importer HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/importer</h3>
+    <p><p>Retrieve import metrics sorted chronologically descending.</p>
+</p>
+
+
+
+        <h3 id="op26-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>datasetKey</td>
+                <td>integer</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>Filter by dataset</p>
+</td>
+            </tr>
+            <tr>
+                <td>state</td>
+                <td><a href="#model-ImportState">ImportState</a></td>
+                <td>downloading, processing, inserting, unchanged, finished, canceled, failed</td>
+                <td>yes</td>
+                <td></td>
+                <td><p>filters listed import metrics by their state, e.g. the last failed import</p>
+</td>
+            </tr>
+            <tr>
+                <td>offset</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of offset records. Defaults to zero</p>
+</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of maximum records to be returned. Defaults to 10 and can be no more than 1000.</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op26-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, October 8, 2019 11:19:35 AM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-DatasetImportResultSet">DatasetImportResultSet</a></p>
+
+
+        <h2 id="resource-24">/importer/queue</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //importer/queue HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/importer/queue</h3>
+    <p><p>Retrieve import metrics sorted chronologically descending.</p>
+</p>
+
+
+
+        <h3 id="op27-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>state</td>
+                <td><a href="#model-ImportState">ImportState</a></td>
+                <td>downloading, processing, inserting, unchanged, finished, canceled, failed</td>
+                <td>yes</td>
+                <td></td>
+                <td><p>filters listed import metrics by their state, e.g. the last failed import</p>
+</td>
+            </tr>
+            <tr>
+                <td>offset</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of offset records. Defaults to zero</p>
+</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of maximum records to be returned. Defaults to 10 and can be no more than 1000.</p>
+</td>
+            </tr>
+            <tr>
+                <td>datasetKey</td>
+                <td>integer</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>The database key of the dataset</p>
+</td>
+            </tr>
+        </tbody></table>
+
+
+            <h3 id="op27-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, October 8, 2019 11:19:35 AM CEST
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-ImportRequest">ImportRequest[]</a></p>
 
 
         <h1 id="resource-25">/name/search</h1>
@@ -5254,7 +5372,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op27-request-params">Parameters</h3>
+        <h3 id="op28-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -5394,11 +5512,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op27-responses" class="clear">Response 200</h3>
+            <h3 id="op28-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:35 AM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5669,7 +5787,7 @@ Eventually should be exposed in public API.</p>
 
 
 
-        <h3 id="op28-request-params">Parameters</h3>
+        <h3 id="op29-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -5728,11 +5846,11 @@ Eventually should be exposed in public API.</p>
         </tbody></table>
 
 
-            <h3 id="op28-responses" class="clear">Response 200</h3>
+            <h3 id="op29-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:35 AM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -5763,7 +5881,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op29-request-params">Parameters</h3>
+        <h3 id="op30-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -5786,11 +5904,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op29-responses" class="clear">Response 200</h3>
+            <h3 id="op30-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:35 AM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -5865,7 +5983,7 @@ with one name per line, or as plain/text content in the request body.</p>
 </p>
 
 
-    <h3 id="op30-request-body">Body</h3>
+    <h3 id="op31-request-body">Body</h3>
             <p><code>application/json</code></p>
             <p>Content: any</p>
             <p><code>multipart/form-data</code></p>
@@ -5875,11 +5993,11 @@ with one name per line, or as plain/text content in the request body.</p>
 
 
 
-            <h3 id="op30-responses" class="clear">Response 200</h3>
+            <h3 id="op31-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:35 AM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -5962,11 +6080,11 @@ Any of the names can be used as valid subresources to list the actual enumeratio
 
 
 
-            <h3 id="op31-responses" class="clear">Response 200</h3>
+            <h3 id="op32-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:35 AM CEST
 Content-Type: application/json
 </code>
     <code class="json">["continent","country","areastandard","cslreftype","nametype","origin","language","frequency","rank","nomacttype","coverage","nomstatus","dataformat","importstate","issue","gazetteer","cslvariable","typestatus","lifezone","distributionstatus","taxonomicstatus","kingdom","datasettype","license","nomcode","namepart"]
@@ -5995,11 +6113,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op32-responses" class="clear">Response 200</h3>
+            <h3 id="op33-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Wednesday, November 7, 2018 4:02:17 PM CET
+Date: Tuesday, October 8, 2019 11:19:35 AM CEST
 Content-Type: application/json
 </code>
     <code class="json">["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]

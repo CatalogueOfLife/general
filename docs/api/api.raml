@@ -59,16 +59,6 @@ types: !include inc/types.raml
     description: Retrieve import metrics sorted chronologically descending.
     is: [paged,filteredByDataset]
     queryParameters:
-      state:
-        type: ImportState
-        description: filters listed import metrics by their state, e.g. the last failed import
-    responses:
-      200:
-        body: DatasetImportResultSet
-  get:
-    description: Retrieve import metrics sorted chronologically descending.
-    is: [paged]
-    queryParameters:
       datasetKey:
         type: integer
         description: Filter by dataset
