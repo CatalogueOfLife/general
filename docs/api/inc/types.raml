@@ -1773,4 +1773,11 @@ NameSuggestion:
         score:
             type: number
             description: The relevance score assigned to the suggestion by the search engine
+NameSuggestResponse:
+    type: object
+    description: Contains all suggestions matching the search phrase (q)
+    properties:
+        suggestions:
+          type: NameSuggestion[]
+          description: A list of suggestions matching the search phrase
         
