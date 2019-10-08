@@ -1,0 +1,380 @@
+  get:
+    is: [paged,query]
+    responses:
+      200:
+        body: DatasetResultSet
+  post:
+    displayName: Create dataset
+    description: Creates a new dataset specified through the JSON request body and returns the database key of the new dataset.
+    body:
+      application/json:
+        type: Dataset
+    responses:
+      201:
+        body:
+          application/json:
+            type: integer
+  /{dkey}:
+    get:
+      displayName: Get dataset
+      description: Retrieves the dataset with the specified key.
+      responses:
+        200:
+          body: Dataset
+    delete:
+      displayName: Delete dataset
+      description: Deletes the dataset with the specified database key.
+      responses:
+        204:
+          description: Dataset deleted.
+        404:
+          description: Specified key does not exist.
+    put:
+      displayName: Update dataset
+      description: Updates the dataset specified through the JSON request body.
+      responses:
+        204:
+        404:
+    uriParameters:
+      dkey:
+        type: integer
+        description: dataset key
+    /verbatim:
+      get:
+        description: Page through all verbatim records of the dataset
+        is: [paged]
+        queryParameters:
+          type:
+            type: string
+            description: Optional filter by rowType of verbatim record, i.e. which file
+        responses:
+          200:
+            body: VerbatimRecordResultSet
+      /{key}:
+        get:
+          description: Get the verbatim representation of a source record by its dwca core id
+          responses:
+            200:
+              body: VerbatimRecord
+        uriParameters:
+          key:
+            type: string
+            description: internal key of the record
+    /taxon:
+      get:
+        is: [paged,filteredByDataset]
+        queryParameters:
+          nameKey:
+            type: integer
+            required: false
+            description: The database key of the name associated with the requested taxa
+          root:
+            type: boolean
+            required: false
+            description: Whether or not to only retrieve root taxa
+        responses:
+          200:
+            body:
+              application/json:
+                type: ResultSet
+      /{id}:
+        get:
+          displayName: Get taxon
+          description: Retrieves the taxon with the specified id.
+          responses:
+            200:
+              body:
+                application/json:
+                  type: Taxon
+        uriParameters:
+          id:
+            type: string
+            description: taxon identifier as coming from the source
+        /info:
+          get:
+            displayName: Get taxon info
+            description: Returns a TaxonInfo object containing all details about the taxon with the specified key and its supplementary information.
+            responses:
+              200:
+                body:
+                  application/json:
+                    type: TaxonInfo
+        /classification:
+          get:
+            displayName: Get classification
+            description: Returns the taxonomic ancestry of the taxon with the specified key, i.e. all ancestral taxa up to the taxon's kingdom starting with the direct parent taxon.
+            responses:
+              200:
+                body:
+                  application/json:
+                    type: Taxon[]
+        /children:
+          get:
+            description: Page through all direct children of the taxon regardless of the rank.
+            responses:
+              200:
+                body: TaxonResultSet
+        /synonyms:
+          get:
+            description: >
+              get list of all synonyms chronologically arranged by homotypic groups.
+              Nested homotypic names are based on the same original name in sublists.
+              Example given for synonymy of Agoseris grandiflora (Nutt.) Greene
+              Example: Barkhausia lessingii Hook. & Arn. nom. illeg. is a homotypical synonym of Agoseris apargioides (Less.) Greene
+            responses:
+              200:
+                body:
+                  type: Name[][]
+                  example: |
+                    [
+                        [
+                            {
+                                "id": "21242",
+                                "datasetKey": 15,
+                                "scientificName": "Stylopappus grandiflorus",
+                                "scientificNameID": "abc0001",
+                                "authorship": "Nutt.",
+                                "combinationAuthorship": {
+                                  "authors": ["Nutt."],
+                                  "year": "1841"
+                                },
+                                "origin": "source",
+                                "rank": "species",
+                                "nomenclaturalCode": "botanical",
+                                "genus": "Stylopappus",
+                                "specificEpithet": "grandiflorus",
+                                "basionymKey": 21242
+                             },
+                            {
+                                "id": "21243",
+                                "datasetKey": 15,
+                                "scientificName": "Macrorhynchus grandiflorus",
+                                "scientificNameID": "abc0002",
+                                "authorship": "(Nutt.) Torr. & A. Gray",
+                                "basionymAuthorship": {
+                                  "authors": ["Nutt."]
+                                },
+                                "combinationAuthorship": {
+                                  "authors": ["Torr.", "A. Gray"],
+                                  "year": "1843"
+                                },
+                                "origin": "source",
+                                "rank": "species",
+                                "nomenclaturalCode": "botanical",
+                                "genus": "Stylopappus",
+                                "specificEpithet": "grandiflorus",
+                                "basionymKey": 21242
+                            },
+                            {
+                                "id": "21244",
+                                "datasetKey": 15,
+                                "scientificName": "Troximon grandiflorum",
+                                "scientificNameID": "abc0003",
+                                "authorship": "(Nutt.) A. Gray",
+                                "basionymAuthorship": {
+                                  "authors": ["Nutt."]
+                                },
+                                "combinationAuthorship": {
+                                  "authors": ["A. Gray"],
+                                  "year": "1874"
+                                },
+                                "origin": "source",
+                                "rank": "species",
+                                "nomenclaturalCode": "botanical",
+                                "genus": "Troximon",
+                                "specificEpithet": "grandiflorum",
+                                "basionymKey": 21242
+                             }
+                        ],
+                        [
+                            {
+                                "id": "13078",
+                                "datasetKey": 15,
+                                "scientificName": "Troximon marshallii",
+                                "scientificNameID": "abc0004",
+                                "authorship": "Greene",
+                                "combinationAuthorship": {
+                                  "authors": ["Greene"],
+                                  "year": "1888"
+                                },
+                                "origin": "source",
+                                "rank": "species",
+                                "nomenclaturalCode": "botanical",
+                                "genus": "Troximon",
+                                "specificEpithet": "marshallii"
+                            },
+                            {
+                                "id": "13079",
+                                "datasetKey": 15,
+                                "scientificName": "Agoseris marshallii",
+                                "scientificNameID": "abc0005",
+                                "authorship": "(Greene) Greene",
+                                "basionymAuthorship": {
+                                  "authors": ["Greene"]
+                                },
+                                "combinationAuthorship": {
+                                  "authors": ["Greene"],
+                                  "year": "1891"
+                                },
+                                "origin": "source",
+                                "rank": "species",
+                                "nomenclaturalCode": "botanical",
+                                "genus": "Agoseris",
+                                "specificEpithet": "marshallii",
+                                "basionymKey": 13078
+                            },
+                            {
+                                "id": "13080",
+                                "datasetKey": 15,
+                                "scientificName": "Agoseris marshalii",
+                                "scientificNameID": "abc0006",
+                                "authorship": "(Greene) Greene",
+                                "basionymAuthorship": {
+                                  "authors": ["Greene"]
+                                },
+                                "combinationAuthorship": {
+                                  "authors": ["Greene"],
+                                  "year": "1891"
+                                },
+                                "origin": "source",
+                                "rank": "species",
+                                "nomenclaturalCode": "botanical",
+                                "status": "variant",
+                                "genus": "Agoseris",
+                                "specificEpithet": "marshalii",
+                                "basionymKey": 13078
+                            }
+                        ],
+                        [
+                            {
+                                "id": "13122",
+                                "datasetKey": 15,
+                                "scientificName": "Troximon plebeium",
+                                "scientificNameID": "abc0007",
+                                "authorship": "Greene",
+                                "combinationAuthorship": {
+                                  "authors": ["Greene"],
+                                  "year": "1890"
+                                },
+                                "origin": "source",
+                                "rank": "species",
+                                "nomenclaturalCode": "botanical",
+                                "genus": "Troximon",
+                                "specificEpithet": "plebeium",
+                                "basionymKey": 13122
+                            },
+                            {
+                                "id": "13123",
+                                "datasetKey": 15,
+                                "scientificName": "Agoseris plebeia",
+                                "scientificNameID": "abc0008",
+                                "authorship": "(Greene) Greene",
+                                "basionymAuthorship": {
+                                  "authors": ["Greene"]
+                                },
+                                "combinationAuthorship": {
+                                  "authors": ["Greene"],
+                                  "year": "1891"
+                                },
+                                "origin": "source",
+                                "rank": "species",
+                                "nomenclaturalCode": "botanical",
+                                "genus": "Agoseris",
+                                "specificEpithet": "plebeia",
+                                "basionymKey": 13122
+                            },
+                            {
+                                "id": "13124",
+                                "datasetKey": 15,
+                                "scientificName": "Agoseris grandiflora var. plebeia",
+                                "scientificNameID": "abc0009",
+                                "authorship": "(Greene) G. L. Wittr.",
+                                "basionymAuthorship": {
+                                  "authors": ["Greene"]
+                                },
+                                "combinationAuthorship": {
+                                  "authors": ["G. L. Wittr."],
+                                  "year": "1928"
+                                },
+                                "origin": "source",
+                                "rank": "variety",
+                                "nomenclaturalCode": "botanical",
+                                "genus": "Agoseris",
+                                "specificEpithet": "grandiflora",
+                                "infraSpecificEpithet": "plebeia",
+                                "basionymKey": 13122
+                            }
+                        ]
+                    ]
+        /verbatim:
+          get:
+            displayName: Get verbatim record for the taxon
+            description: Retrieves the verbatim DarwinCore record of the taxon with the specified key,
+            responses:
+              200:
+                body: VerbatimRecord
+    /name:
+      get:
+        is: [paged,filteredByDataset]
+        responses:
+          200:
+            body: NameResultSet
+      /{id}:
+        get:
+          displayName: Get name
+          description: Retrieves the name with the specified id.
+          responses:
+            200:
+              body: Name
+        uriParameters:
+          id:
+            type: string
+            description: name identifier as given by the source
+        /synonyms:
+          get:
+            displayName: Get homotypic synonyms
+            description: Retrieves all names in the same homotypic group as the name with the specified key.
+            responses:
+              200:
+                body: Name[]
+        /publishedIn:
+          get:
+            displayName: Get literature reference
+            description: Retrieves the literature reference for the name with the specified key.
+            responses:
+              200:
+                body: Reference
+        /relations:
+          get:
+            displayName: Get nomenclatural name relations
+            description: Retrieves nomenclatural relations for the name or its homotypical group
+            queryParameters:
+              homotypic:
+                type: boolean
+                description: if true also includes all acts about related, homotypic names
+            responses:
+              200:
+                body: NameRelation[]
+        /verbatim:
+          get:
+            displayName: Get verbatim record
+            description: Retrieves the verbatim DarwinCore record of the name with the specified key,
+            responses:
+              200:
+                body: VerbatimRecord
+    /reference:
+      get:
+        is: [paged,filteredByDataset]
+        responses:
+          200:
+            body: ResultSet
+      /{id}:
+        get:
+          description: get reference details by id
+          responses:
+            200:
+              body: Reference
+        uriParameters:
+          id:
+            type: string
+            description: reference id
