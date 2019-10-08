@@ -3241,6 +3241,86 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
 </td>
                                 </tr>
                             </tbody></table>
+                        <h2 id="model-NameSuggestion">NameSuggestion</h2>
+
+
+    <p><p>Captures the information for a single auto-complete suggestion</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>match</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The suggestion</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>vernacularName</td>
+                                    <td>boolean</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Whether or not the suggestion is a vernacular name</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>acceptedName</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The accepted name if the suggestion is anything but an accepted name, null/absent otherwise</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>usageId</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The usage ID (the taxon ID in case of a vernacular name)</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>rank</td>
+                                    <td><a href="#model-RankType">RankType</a></td>
+                                    <td>domain, superkingdom, kingdom, subkingdom, infrakingdom, superphylum, phylum, subphylum, infraphylum, superclass, class, subclass, infraclass, parvclass, superlegion, legion, sublegion, infralegion, supercohort, cohort, subcohort, infracohort, magnorder, superorder, grandorder, order, suborder, infraorder, parvorder, superfamily, family, subfamily, infrafamily, supertribe, tribe, subtribe, infratribe, suprageneric name, genus, subgenus, infragenus, supersection, section, subsection, superseries, series, subseries, infrageneric name, species aggregate, species, infraspecific name, grex, subspecies, cultivar group, convariety, infrasubspecific name, proles, natio, aberration, morph, variety, subvariety, form, subform, pathovar, biovar, chemovar, morphovar, phagovar, serovar, chemoform, forma specialis, cultivar, strain, other, unranked</td>
+                                    <td>yes</td>
+                                    <td><p>The rank of the suggested name (or the rank of the accepted name in case of a vernacular name)</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>status</td>
+                                    <td><a href="#model-TaxonomicStatusType">TaxonomicStatusType</a></td>
+                                    <td>accepted, doubtful</td>
+                                    <td>yes</td>
+                                    <td><p>The taxonomic status of the suggested</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>nomCode</td>
+                                    <td><a href="#model-NomCodeType">NomCodeType</a></td>
+                                    <td>bacterial, botanical, cultivated, viral, zoological, unknown</td>
+                                    <td>yes</td>
+                                    <td><p>The nomenclatural code of the suggested name</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>score</td>
+                                    <td>number</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The relevance score assigned to the suggestion by the search engine</p>
+</td>
+                                </tr>
+                            </tbody></table>
 
         <h1 id="vocabs">Vocabularies</h1>
 
@@ -3598,7 +3678,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3627,7 +3707,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3679,7 +3759,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3831,7 +3911,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -3883,7 +3963,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4000,7 +4080,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -4052,7 +4132,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4114,7 +4194,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4184,7 +4264,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -4276,7 +4356,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -4307,7 +4387,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -4519,7 +4599,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4618,7 +4698,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -4670,7 +4750,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4729,7 +4809,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -4815,7 +4895,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4883,7 +4963,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -4931,7 +5011,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5030,7 +5110,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -5082,7 +5162,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5268,7 +5348,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -5347,7 +5427,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -5516,7 +5596,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5840,7 +5920,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -5929,7 +6009,7 @@ Eventually should be exposed in public API.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
 </pre>
@@ -5987,7 +6067,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -6076,7 +6156,7 @@ with one name per line, or as plain/text content in the request body.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -6163,7 +6243,7 @@ Any of the names can be used as valid subresources to list the actual enumeratio
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">["continent","country","areastandard","cslreftype","nametype","origin","language","frequency","rank","nomacttype","coverage","nomstatus","dataformat","importstate","issue","gazetteer","cslvariable","typestatus","lifezone","distributionstatus","taxonomicstatus","kingdom","datasettype","license","nomcode","namepart"]
@@ -6196,7 +6276,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 11:43:05 AM CEST
+Date: Tuesday, October 8, 2019 12:14:49 PM CEST
 Content-Type: application/json
 </code>
     <code class="json">["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]

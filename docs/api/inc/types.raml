@@ -1745,3 +1745,32 @@ Distribution:
       type: string[]
       description: Links to references supporting the distribution record
       required: false
+NameSuggestion:
+    type: object
+    description: Captures the information for a single auto-complete suggestion
+    properties:
+        match:
+            type: string
+            description: The suggestion
+        vernacularName:
+            type: boolean
+            description: Whether or not the suggestion is a vernacular name
+        acceptedName:
+            type: string
+            description: The accepted name if the suggestion is anything but an accepted name, null/absent otherwise
+        usageId:
+            type: string
+            description: The usage ID (the taxon ID in case of a vernacular name)
+        rank:
+            type: RankType
+            description: The rank of the suggested name (or the rank of the accepted name in case of a vernacular name)
+        status:
+            type: TaxonomicStatusType
+            description: The taxonomic status of the suggested
+        nomCode:
+            type: NomCodeType
+            description: The nomenclatural code of the suggested name
+        score:
+            type: number
+            description: The relevance score assigned to the suggestion by the search engine
+        
