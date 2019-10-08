@@ -1,0 +1,45 @@
+  /admin/background:
+    get:
+      description: |
+        Background resource processes.
+      responses:
+        200:
+          body:
+            application/json: |
+              {"gbifSync":true,"importer":false}
+    put:
+      description: |
+        Update background resource processes.
+      body:
+        application/json: |
+          {"gbifSync":true,"importer":false}
+      responses:
+        204:
+        404:
+  /admin/logo-update:
+    post:
+      description: |
+        Update the GSD logos.
+      responses:
+        200:
+          body:
+            text/plain:
+              type: string
+  /admin/sector-count-update:
+    post:
+      description: |
+        Update the sector counts.
+      responses:
+        200:
+          body:
+            text/plain:
+              type: string
+  /admin/reindex:
+    post:
+      description: |
+        Reindex elastic search.
+      responses:
+        200:
+          body:
+            text/plain:
+              type: string

@@ -3640,7 +3640,160 @@ Sources:</p>
 
 
 
-        <h1 id="resource-1">/dataset</h1>
+        <h1 id="resource-1">/admin</h1>
+
+    
+
+
+
+        <h2 id="resource-2">/admin/admin/background</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //admin/admin/background HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/admin/admin/background</h3>
+    <p><p>Background resource processes.</p>
+</p>
+
+
+
+
+
+            <h3 id="op1-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: {"gbifSync":true,"importer":false}</p>
+
+    <pre class="example"><code class="http">
+PUT //admin/admin/background HTTP/1.1
+Host: api.col.plus
+Content-Type: application/json
+</code>
+</pre>
+
+        <h3><code class="prettyprint">PUT</code> http://api.col.plus/admin/admin/background</h3>
+    <p><p>Update background resource processes.</p>
+</p>
+
+
+    <h3 id="op2-request-body">Body</h3>
+            <p><code>application/json</code></p>
+            <p>Content: {"gbifSync":true,"importer":false}</p>
+
+
+
+            <h3 id="op2-responses" class="clear">Response 204</h3>
+    
+            <h3 id="op2-responses" class="clear">Response 404</h3>
+    
+
+
+        <h2 id="resource-3">/admin/admin/logo-update</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+POST //admin/admin/logo-update HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">POST</code> http://api.col.plus/admin/admin/logo-update</h3>
+    <p><p>Update the GSD logos.</p>
+</p>
+
+
+
+
+
+            <h3 id="op3-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Content-Type: text/plain
+</code>
+</pre>
+                    <p><code>text/plain</code></p>
+                    <p>Content: string</p>
+
+
+        <h2 id="resource-4">/admin/admin/sector-count-update</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+POST //admin/admin/sector-count-update HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">POST</code> http://api.col.plus/admin/admin/sector-count-update</h3>
+    <p><p>Update the sector counts.</p>
+</p>
+
+
+
+
+
+            <h3 id="op4-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Content-Type: text/plain
+</code>
+</pre>
+                    <p><code>text/plain</code></p>
+                    <p>Content: string</p>
+
+
+        <h2 id="resource-5">/admin/admin/reindex</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+POST //admin/admin/reindex HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">POST</code> http://api.col.plus/admin/admin/reindex</h3>
+    <p><p>Reindex elastic search.</p>
+</p>
+
+
+
+
+
+            <h3 id="op5-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Content-Type: text/plain
+</code>
+</pre>
+                    <p><code>text/plain</code></p>
+                    <p>Content: string</p>
+
+
+        <h1 id="resource-6">/dataset</h1>
 
     
 
@@ -3657,7 +3810,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op1-request-params">Parameters</h3>
+        <h3 id="op6-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -3698,11 +3851,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op1-responses" class="clear">Response 200</h3>
+            <h3 id="op6-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -3721,17 +3874,17 @@ Content-Type: application/json
 </p>
 
 
-    <h3 id="op2-request-body">Body</h3>
+    <h3 id="op7-request-body">Body</h3>
             <p><code>application/json</code></p>
             <p>Content: <a href="#model-Dataset">Dataset</a></p>
 
 
 
-            <h3 id="op2-responses" class="clear">Response 201</h3>
+            <h3 id="op7-responses" class="clear">Response 201</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -3739,7 +3892,7 @@ Content-Type: application/json
                     <p>Content: integer</p>
 
 
-        <h2 id="resource-2">/dataset/{dkey}</h2>
+        <h2 id="resource-7">/dataset/{dkey}</h2>
 
     
 
@@ -3756,7 +3909,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op3-request-params">Parameters</h3>
+        <h3 id="op8-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -3779,11 +3932,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op3-responses" class="clear">Response 200</h3>
+            <h3 id="op8-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -3802,7 +3955,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op4-request-params">Parameters</h3>
+        <h3 id="op9-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -3825,10 +3978,10 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op4-responses" class="clear">Response 204</h3>
+            <h3 id="op9-responses" class="clear">Response 204</h3>
     <p><p>Dataset deleted.</p>
 </p>
-            <h3 id="op4-responses" class="clear">Response 404</h3>
+            <h3 id="op9-responses" class="clear">Response 404</h3>
     <p><p>Specified key does not exist.</p>
 </p>
 
@@ -3844,7 +3997,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op5-request-params">Parameters</h3>
+        <h3 id="op10-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -3867,13 +4020,13 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op5-responses" class="clear">Response 204</h3>
+            <h3 id="op10-responses" class="clear">Response 204</h3>
     
-            <h3 id="op5-responses" class="clear">Response 404</h3>
+            <h3 id="op10-responses" class="clear">Response 404</h3>
     
 
 
-        <h2 id="resource-3">/dataset/{dkey}/verbatim</h2>
+        <h2 id="resource-8">/dataset/{dkey}/verbatim</h2>
 
     
 
@@ -3890,7 +4043,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op6-request-params">Parameters</h3>
+        <h3 id="op11-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -3931,11 +4084,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op6-responses" class="clear">Response 200</h3>
+            <h3 id="op11-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -3943,7 +4096,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-VerbatimRecordResultSet">VerbatimRecordResultSet</a></p>
 
 
-        <h2 id="resource-4">/dataset/{dkey}/verbatim/{key}</h2>
+        <h2 id="resource-9">/dataset/{dkey}/verbatim/{key}</h2>
 
     
 
@@ -3960,7 +4113,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op7-request-params">Parameters</h3>
+        <h3 id="op12-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -3983,11 +4136,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op7-responses" class="clear">Response 200</h3>
+            <h3 id="op12-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4024,7 +4177,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-VerbatimRecord">VerbatimRecord</a></p>
 
 
-        <h2 id="resource-5">/dataset/{dkey}/taxon</h2>
+        <h2 id="resource-10">/dataset/{dkey}/taxon</h2>
 
     
 
@@ -4041,7 +4194,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op8-request-params">Parameters</h3>
+        <h3 id="op13-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4100,11 +4253,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op8-responses" class="clear">Response 200</h3>
+            <h3 id="op13-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -4112,7 +4265,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-ResultSet">ResultSet</a></p>
 
 
-        <h2 id="resource-6">/dataset/{dkey}/taxon/{id}</h2>
+        <h2 id="resource-11">/dataset/{dkey}/taxon/{id}</h2>
 
     
 
@@ -4129,7 +4282,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op9-request-params">Parameters</h3>
+        <h3 id="op14-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4152,11 +4305,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op9-responses" class="clear">Response 200</h3>
+            <h3 id="op14-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4195,7 +4348,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Taxon">Taxon</a></p>
 
 
-        <h2 id="resource-7">/dataset/{dkey}/taxon/{id}/info</h2>
+        <h2 id="resource-12">/dataset/{dkey}/taxon/{id}/info</h2>
 
     
 
@@ -4214,11 +4367,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op10-responses" class="clear">Response 200</h3>
+            <h3 id="op15-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4265,7 +4418,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-TaxonInfo">TaxonInfo</a></p>
 
 
-        <h2 id="resource-8">/dataset/{dkey}/taxon/{id}/classification</h2>
+        <h2 id="resource-13">/dataset/{dkey}/taxon/{id}/classification</h2>
 
     
 
@@ -4284,11 +4437,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op11-responses" class="clear">Response 200</h3>
+            <h3 id="op16-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -4357,7 +4510,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Taxon">Taxon[]</a></p>
 
 
-        <h2 id="resource-9">/dataset/{dkey}/taxon/{id}/children</h2>
+        <h2 id="resource-14">/dataset/{dkey}/taxon/{id}/children</h2>
 
     
 
@@ -4376,11 +4529,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op12-responses" class="clear">Response 200</h3>
+            <h3 id="op17-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -4388,7 +4541,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-TaxonResultSet">TaxonResultSet</a></p>
 
 
-        <h2 id="resource-10">/dataset/{dkey}/taxon/{id}/synonyms</h2>
+        <h2 id="resource-15">/dataset/{dkey}/taxon/{id}/synonyms</h2>
 
     
 
@@ -4407,11 +4560,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op13-responses" class="clear">Response 200</h3>
+            <h3 id="op18-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -4600,7 +4753,7 @@ Content-Type: application/json
                     <p>Content: Name[][]</p>
 
 
-        <h2 id="resource-11">/dataset/{dkey}/taxon/{id}/verbatim</h2>
+        <h2 id="resource-16">/dataset/{dkey}/taxon/{id}/verbatim</h2>
 
     
 
@@ -4619,11 +4772,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op14-responses" class="clear">Response 200</h3>
+            <h3 id="op19-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4660,7 +4813,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-VerbatimRecord">VerbatimRecord</a></p>
 
 
-        <h2 id="resource-12">/dataset/{dkey}/name</h2>
+        <h2 id="resource-17">/dataset/{dkey}/name</h2>
 
     
 
@@ -4677,7 +4830,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op15-request-params">Parameters</h3>
+        <h3 id="op20-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4718,11 +4871,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op15-responses" class="clear">Response 200</h3>
+            <h3 id="op20-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -4730,7 +4883,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-NameResultSet">NameResultSet</a></p>
 
 
-        <h2 id="resource-13">/dataset/{dkey}/name/{id}</h2>
+        <h2 id="resource-18">/dataset/{dkey}/name/{id}</h2>
 
     
 
@@ -4747,7 +4900,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op16-request-params">Parameters</h3>
+        <h3 id="op21-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4770,11 +4923,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op16-responses" class="clear">Response 200</h3>
+            <h3 id="op21-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4810,7 +4963,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Name">Name</a></p>
 
 
-        <h2 id="resource-14">/dataset/{dkey}/name/{id}/synonyms</h2>
+        <h2 id="resource-19">/dataset/{dkey}/name/{id}/synonyms</h2>
 
     
 
@@ -4829,11 +4982,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op17-responses" class="clear">Response 200</h3>
+            <h3 id="op22-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -4896,7 +5049,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Name">Name[]</a></p>
 
 
-        <h2 id="resource-15">/dataset/{dkey}/name/{id}/publishedIn</h2>
+        <h2 id="resource-20">/dataset/{dkey}/name/{id}/publishedIn</h2>
 
     
 
@@ -4915,11 +5068,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op18-responses" class="clear">Response 200</h3>
+            <h3 id="op23-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4943,7 +5096,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Reference">Reference</a></p>
 
 
-        <h2 id="resource-16">/dataset/{dkey}/name/{id}/relations</h2>
+        <h2 id="resource-21">/dataset/{dkey}/name/{id}/relations</h2>
 
     
 
@@ -4960,7 +5113,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op19-request-params">Parameters</h3>
+        <h3 id="op24-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4983,11 +5136,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op19-responses" class="clear">Response 200</h3>
+            <h3 id="op24-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -5012,7 +5165,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-NameRelation">NameRelation[]</a></p>
 
 
-        <h2 id="resource-17">/dataset/{dkey}/name/{id}/verbatim</h2>
+        <h2 id="resource-22">/dataset/{dkey}/name/{id}/verbatim</h2>
 
     
 
@@ -5031,11 +5184,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op20-responses" class="clear">Response 200</h3>
+            <h3 id="op25-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5072,7 +5225,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-VerbatimRecord">VerbatimRecord</a></p>
 
 
-        <h2 id="resource-18">/dataset/{dkey}/reference</h2>
+        <h2 id="resource-23">/dataset/{dkey}/reference</h2>
 
     
 
@@ -5089,7 +5242,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op21-request-params">Parameters</h3>
+        <h3 id="op26-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -5130,11 +5283,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op21-responses" class="clear">Response 200</h3>
+            <h3 id="op26-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -5142,7 +5295,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-ResultSet">ResultSet</a></p>
 
 
-        <h2 id="resource-19">/dataset/{dkey}/reference/{id}</h2>
+        <h2 id="resource-24">/dataset/{dkey}/reference/{id}</h2>
 
     
 
@@ -5159,7 +5312,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op22-request-params">Parameters</h3>
+        <h3 id="op27-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -5182,11 +5335,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op22-responses" class="clear">Response 200</h3>
+            <h3 id="op27-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5210,7 +5363,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Reference">Reference</a></p>
 
 
-        <h1 id="resource-20">/colsource</h1>
+        <h1 id="resource-25">/colsource</h1>
 
     
 
@@ -5239,7 +5392,7 @@ type: ColSource[]</p>
 
 
 
-        <h1 id="resource-21">/decision</h1>
+        <h1 id="resource-26">/decision</h1>
 
     
 
@@ -5272,7 +5425,7 @@ type: Decision[]</p>
 
 
 
-        <h1 id="resource-22">/sector</h1>
+        <h1 id="resource-27">/sector</h1>
 
     
 
@@ -5301,7 +5454,7 @@ type: Sector[]</p>
 
 
 
-        <h1 id="resource-23">/importer</h1>
+        <h1 id="resource-28">/importer</h1>
 
     
 
@@ -5318,7 +5471,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op26-request-params">Parameters</h3>
+        <h3 id="op31-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -5368,11 +5521,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op26-responses" class="clear">Response 200</h3>
+            <h3 id="op31-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -5380,7 +5533,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-DatasetImportResultSet">DatasetImportResultSet</a></p>
 
 
-        <h2 id="resource-24">/importer/queue</h2>
+        <h2 id="resource-29">/importer/queue</h2>
 
     
 
@@ -5397,7 +5550,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op27-request-params">Parameters</h3>
+        <h3 id="op32-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -5447,11 +5600,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op27-responses" class="clear">Response 200</h3>
+            <h3 id="op32-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -5459,7 +5612,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-ImportRequest">ImportRequest[]</a></p>
 
 
-        <h1 id="resource-25">/name/search</h1>
+        <h1 id="resource-30">/name/search</h1>
 
     
 
@@ -5476,7 +5629,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op28-request-params">Parameters</h3>
+        <h3 id="op33-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -5616,11 +5769,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op28-responses" class="clear">Response 200</h3>
+            <h3 id="op33-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5873,7 +6026,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-NameSearchResultSet">NameSearchResultSet</a></p>
 
 
-        <h1 id="resource-26">/name/suggest</h1>
+        <h1 id="resource-31">/name/suggest</h1>
 
     
 
@@ -5890,7 +6043,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op29-request-params">Parameters</h3>
+        <h3 id="op34-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -5940,11 +6093,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op29-responses" class="clear">Response 200</h3>
+            <h3 id="op34-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -5952,7 +6105,7 @@ Content-Type: application/json
                     <p>Content: string</p>
 
 
-        <h1 id="resource-27">/name/matching</h1>
+        <h1 id="resource-32">/name/matching</h1>
 
     
 
@@ -5970,7 +6123,7 @@ Eventually should be exposed in public API.</p>
 
 
 
-        <h3 id="op30-request-params">Parameters</h3>
+        <h3 id="op35-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -6029,11 +6182,11 @@ Eventually should be exposed in public API.</p>
         </tbody></table>
 
 
-            <h3 id="op30-responses" class="clear">Response 200</h3>
+            <h3 id="op35-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -6041,13 +6194,13 @@ Content-Type: application/json
                     <p>Content: <a href="#model-NameMatch">NameMatch</a></p>
 
 
-        <h1 id="resource-28">/parser</h1>
+        <h1 id="resource-33">/parser</h1>
 
     
 
 
 
-        <h2 id="resource-29">/parser/name</h2>
+        <h2 id="resource-34">/parser/name</h2>
 
     
 
@@ -6064,7 +6217,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op31-request-params">Parameters</h3>
+        <h3 id="op36-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -6087,11 +6240,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op31-responses" class="clear">Response 200</h3>
+            <h3 id="op36-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -6166,7 +6319,7 @@ with one name per line, or as plain/text content in the request body.</p>
 </p>
 
 
-    <h3 id="op32-request-body">Body</h3>
+    <h3 id="op37-request-body">Body</h3>
             <p><code>application/json</code></p>
             <p>Content: any</p>
             <p><code>multipart/form-data</code></p>
@@ -6176,11 +6329,11 @@ with one name per line, or as plain/text content in the request body.</p>
 
 
 
-            <h3 id="op32-responses" class="clear">Response 200</h3>
+            <h3 id="op37-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -6243,7 +6396,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Name">Name[]</a></p>
 
 
-        <h1 id="resource-30">/vocab</h1>
+        <h1 id="resource-35">/vocab</h1>
 
     
 
@@ -6263,11 +6416,11 @@ Any of the names can be used as valid subresources to list the actual enumeratio
 
 
 
-            <h3 id="op33-responses" class="clear">Response 200</h3>
+            <h3 id="op38-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">["continent","country","areastandard","cslreftype","nametype","origin","language","frequency","rank","nomacttype","coverage","nomstatus","dataformat","importstate","issue","gazetteer","cslvariable","typestatus","lifezone","distributionstatus","taxonomicstatus","kingdom","datasettype","license","nomcode","namepart"]
@@ -6277,7 +6430,7 @@ Content-Type: application/json
                     <p>Content: string[]</p>
 
 
-        <h2 id="resource-31">/vocab/{name}</h2>
+        <h2 id="resource-36">/vocab/{name}</h2>
 
     
 
@@ -6296,11 +6449,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op34-responses" class="clear">Response 200</h3>
+            <h3 id="op39-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 1:17:35 PM CEST
+Date: Tuesday, October 8, 2019 4:05:05 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]
