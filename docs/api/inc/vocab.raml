@@ -1,0 +1,23 @@
+/vocab:
+  get:
+    description: |
+      List of all available vocabularies by their unique lowercase form.
+      Any of the names can be used as valid subresources to list the actual enumeration values.
+    responses:
+      200:
+        body:
+          application/json:
+            type: string[]
+            example: |
+              ["continent","country","areastandard","cslreftype","nametype","origin","language","frequency","rank","nomacttype","coverage","nomstatus","dataformat","importstate","issue","gazetteer","cslvariable","typestatus","lifezone","distributionstatus","taxonomicstatus","kingdom","datasettype","license","nomcode","namepart"]
+  /{name}:
+    get:
+      description: |
+        List of all enumeration values for the requested vocabulary.
+      responses:
+        200:
+          body:
+            application/json:
+              type: string[]
+              example: |
+                ["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]

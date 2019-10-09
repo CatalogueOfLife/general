@@ -3646,18 +3646,18 @@ Sources:</p>
 
 
 
-        <h2 id="resource-2">/admin/admin/background</h2>
+        <h2 id="resource-2">/admin/background</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //admin/admin/background HTTP/1.1
+GET //admin/background HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/admin/admin/background</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/admin/background</h3>
     <p><p>Background resource processes.</p>
 </p>
 
@@ -3669,28 +3669,30 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
+    <code class="json">{"gbifSync":true,"importer":false}</code>
 </pre>
                     <p><code>application/json</code></p>
-                    <p>Content: {"gbifSync":true,"importer":false}</p>
+                    <p>Content: any</p>
 
     <pre class="example"><code class="http">
-PUT //admin/admin/background HTTP/1.1
+PUT //admin/background HTTP/1.1
 Host: api.col.plus
 Content-Type: application/json
 </code>
+    <code class="json">{"gbifSync":false,"importer":true}</code>
 </pre>
 
-        <h3><code class="prettyprint">PUT</code> http://api.col.plus/admin/admin/background</h3>
+        <h3><code class="prettyprint">PUT</code> http://api.col.plus/admin/background</h3>
     <p><p>Update background resource processes.</p>
 </p>
 
 
     <h3 id="op2-request-body">Body</h3>
             <p><code>application/json</code></p>
-            <p>Content: {"gbifSync":true,"importer":false}</p>
+            <p>Content: string</p>
 
 
 
@@ -3700,18 +3702,18 @@ Content-Type: application/json
     
 
 
-        <h2 id="resource-3">/admin/admin/logo-update</h2>
+        <h2 id="resource-3">/admin/logo-update</h2>
 
     
 
 
     <pre class="example"><code class="http">
-POST //admin/admin/logo-update HTTP/1.1
+POST //admin/logo-update HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">POST</code> http://api.col.plus/admin/admin/logo-update</h3>
+        <h3><code class="prettyprint">POST</code> http://api.col.plus/admin/logo-update</h3>
     <p><p>Update the GSD logos.</p>
 </p>
 
@@ -3723,7 +3725,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: text/plain
 </code>
 </pre>
@@ -3731,18 +3733,18 @@ Content-Type: text/plain
                     <p>Content: string</p>
 
 
-        <h2 id="resource-4">/admin/admin/sector-count-update</h2>
+        <h2 id="resource-4">/admin/sector-count-update</h2>
 
     
 
 
     <pre class="example"><code class="http">
-POST //admin/admin/sector-count-update HTTP/1.1
+POST //admin/sector-count-update HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">POST</code> http://api.col.plus/admin/admin/sector-count-update</h3>
+        <h3><code class="prettyprint">POST</code> http://api.col.plus/admin/sector-count-update</h3>
     <p><p>Update the sector counts.</p>
 </p>
 
@@ -3754,7 +3756,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: text/plain
 </code>
 </pre>
@@ -3762,18 +3764,18 @@ Content-Type: text/plain
                     <p>Content: string</p>
 
 
-        <h2 id="resource-5">/admin/admin/reindex</h2>
+        <h2 id="resource-5">/admin/reindex</h2>
 
     
 
 
     <pre class="example"><code class="http">
-POST //admin/admin/reindex HTTP/1.1
+POST //admin/reindex HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">POST</code> http://api.col.plus/admin/admin/reindex</h3>
+        <h3><code class="prettyprint">POST</code> http://api.col.plus/admin/reindex</h3>
     <p><p>Reindex elastic search.</p>
 </p>
 
@@ -3785,7 +3787,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: text/plain
 </code>
 </pre>
@@ -3793,7 +3795,1643 @@ Content-Type: text/plain
                     <p>Content: string</p>
 
 
-        <h1 id="resource-6">/dataset</h1>
+        <h1 id="resource-6">/assembly</h1>
+
+    
+
+
+
+        <h2 id="resource-7">/assembly/{catKey}</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //assembly/{catKey} HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/assembly/{catKey}</h3>
+    <p><p>Get the assembly status for catalogue {catKey}</p>
+</p>
+
+
+
+
+
+            <h3 id="op6-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
+Content-Type: application/json-assembly-idle
+</code>
+    <code class="json">{
+  "failed": 0,
+  "completed": 0,
+  "idle": true
+}
+</code>
+</pre>
+                    <p><code>application/json-assembly-idle</code></p>
+                    <p>Content: any</p>
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
+Content-Type: application/json-assembly-running
+</code>
+    <code class="json">{
+  "running": {
+    "datasetKey": 1140,
+    "attempt": 1,
+    "state": "copying",
+    "started": "2019-10-09T15:33:05.347",
+    "taxonCount": 1110,
+    "type": "SectorSync",
+    "sectorKey": 2729,
+    "ignoredUsageCount": 6,
+    "usagesCount": 0
+  },
+  "failed": 0,
+  "completed": 1,
+  "idle": false
+}
+</code>
+</pre>
+                    <p><code>application/json-assembly-running</code></p>
+                    <p>Content: any</p>
+
+
+        <h2 id="resource-8">/assembly/{catKey}/sync</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //assembly/{catKey}/sync HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/assembly/{catKey}/sync</h3>
+    <p><p>Get the assembly sync status for catalogue {catKey}</p>
+</p>
+
+
+
+
+
+            <h3 id="op7-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "offset": 0,
+  "limit": 25,
+  "total": 2,
+  "result": [
+    {
+      "attempt": 1,
+      "state": "finished",
+      "started": "2019-10-09T16:15:28.471",
+      "finished": "2019-10-09T16:16:09.994",
+      "nameCount": 5979,
+      "taxonCount": 1483,
+      "synonymCount": 4496,
+      "referenceCount": 3905,
+      "distributionCount": 5421,
+      "vernacularCount": 138,
+      "type": "SectorSync",
+      "sectorKey": 2728,
+      "usagesCount": 0
+    },
+    {
+      "attempt": 1,
+      "state": "finished",
+      "started": "2019-10-09T15:33:05.347",
+      "finished": "2019-10-09T15:42:21.107",
+      "nameCount": 57046,
+      "taxonCount": 12959,
+      "synonymCount": 44087,
+      "referenceCount": 36370,
+      "distributionCount": 50063,
+      "vernacularCount": 803,
+      "type": "SectorSync",
+      "sectorKey": 2729,
+      "usagesCount": 0
+    }
+  ],
+  "last": true,
+  "empty": false
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: any</p>
+
+    <pre class="example"><code class="http">
+POST //assembly/{catKey}/sync HTTP/1.1
+Host: api.col.plus
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "sectorKey": 2728,
+  "datasetKey": 3
+}
+</code>
+</pre>
+
+        <h3><code class="prettyprint">POST</code> http://api.col.plus/assembly/{catKey}/sync</h3>
+    <p><p>Sync a sector to catalogue {catKey}</p>
+</p>
+
+
+    <h3 id="op8-request-body">Body</h3>
+            <p><code>application/json</code></p>
+            <p>Content: any</p>
+
+
+
+            <h3 id="op8-responses" class="clear">Response 201</h3>
+    
+            <h3 id="op8-responses" class="clear">Response 400</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 400 Bad Request
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
+Content-Type: application/json-dataset-not-imported-yet
+</code>
+    <code class="json">{
+  "code": 400,
+  "message": "Dataset empty. Cannot sync Sector{2728, datasetKey=3, mode=ATTACH, code=null, subjectDatasetKey=1140, subject=CLASS Lycopodiopsida}"
+}
+</code>
+</pre>
+                    <p><code>application/json-dataset-not-imported-yet</code></p>
+                    <p>Content: any</p>
+<pre class="example"><code class="http">
+HTTP/1.1 400 Bad Request
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
+Content-Type: application/json-dataset-still-importing
+</code>
+    <code class="json">{
+  "code": 400,
+  "message": "Dataset 1140 currently being imported. Cannot sync Sector{2728, datasetKey=3, mode=ATTACH, code=null, subjectDatasetKey=1140, subject=CLASS Lycopodiopsida}"
+}
+</code>
+</pre>
+                    <p><code>application/json-dataset-still-importing</code></p>
+                    <p>Content: any</p>
+<pre class="example"><code class="http">
+HTTP/1.1 400 Bad Request
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
+Content-Type: application/json-sector-does-not-exist
+</code>
+    <code class="json">{
+  "code": 400,
+  "message": "Sector 3453453 does not exist"
+}
+</code>
+</pre>
+                    <p><code>application/json-sector-does-not-exist</code></p>
+                    <p>Content: any</p>
+<pre class="example"><code class="http">
+HTTP/1.1 400 Bad Request
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
+Content-Type: application/json-only-draft-catalogue
+</code>
+    <code class="json">{
+  "code": 400,
+  "message": "Only the draft CoL can be assembled at this stage"
+}
+</code>
+</pre>
+                    <p><code>application/json-only-draft-catalogue</code></p>
+                    <p>Content: any</p>
+            <h3 id="op8-responses" class="clear">Response 404</h3>
+    
+
+
+        <h2 id="resource-9">/assembly/{catKey}/sync/{sectorKey}</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+DELETE //assembly/{catKey}/sync/{sectorKey} HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">DELETE</code> http://api.col.plus/assembly/{catKey}/sync/{sectorKey}</h3>
+    <p><p>Delete sector {sectorKey} from catalogue {catKey}.</p>
+</p>
+
+
+
+
+
+            <h3 id="op9-responses" class="clear">Response 204</h3>
+    
+
+
+        <h2 id="resource-10">/assembly/{catKey}/sync/{sectorKey}/{attempt}</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //assembly/{catKey}/sync/{sectorKey}/{attempt} HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/assembly/{catKey}/sync/{sectorKey}/{attempt}</h3>
+    <p><p>Get info on sector {sectorKey} sync {attempt} number from catalogue {catKey}.</p>
+</p>
+
+
+
+
+
+            <h3 id="op10-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "attempt": 1,
+  "state": "finished",
+  "started": "2019-10-09T16:58:30.936",
+  "finished": "2019-10-09T16:59:08.412",
+  "nameCount": 5979,
+  "taxonCount": 1483,
+  "synonymCount": 4496,
+  "referenceCount": 3905,
+  "distributionCount": 5421,
+  "vernacularCount": 138,
+  "type": "SectorSync",
+  "sectorKey": 2728,
+  "usagesCount": 0
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: any</p>
+            <h3 id="op10-responses" class="clear">Response 404</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 404 Not Found
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "code": 404,
+  "message": "HTTP 404 Not Found"
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: any</p>
+
+
+        <h2 id="resource-11">/assembly/{catKey}/exportAC</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+POST //assembly/{catKey}/exportAC HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">POST</code> http://api.col.plus/assembly/{catKey}/exportAC</h3>
+    <p><p>Export the annual checklist to Assembly_Global format for the legacy Catalogue of Life web portal.</p>
+</p>
+
+
+
+
+
+            <h3 id="op11-responses" class="clear">Response 201</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 201 Created
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
+Content-Type: text/plain
+</code>
+    <code class="json">Execute DROP SQL
+Exporting databases.csv
+Create reference int keys
+Exporting references.csv
+Exporting estimates.csv
+Create usage int keys using a reusable sequence
+Exporting specialists.csv
+Lifezones
+Exporting lifezone.csv
+Create a flattened classification table for all usages incl taxa AND synonyms
+Exporting families.csv
+Scientific_names
+Exporting scientific_names.csv
+Exporting common_names.csv
+Exporting distribution.csv
+Exporting scientific_name_references.csv
+Cleanup
+Zip up archive and move to download
+Clean up temp files
+Export completed
+</code>
+</pre>
+                    <p><code>text/plain</code></p>
+                    <p>Content: any</p>
+            <h3 id="op11-responses" class="clear">Response 400</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 400 Bad Request
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "code": 400,
+  "message": "Only the draft CoL can be assembled at this stage"
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: any</p>
+
+
+        <h2 id="resource-12">/assembly/{catKey}/rematch</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+POST //assembly/{catKey}/rematch HTTP/1.1
+Host: api.col.plus
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "all":true
+}
+</code>
+</pre>
+
+        <h3><code class="prettyprint">POST</code> http://api.col.plus/assembly/{catKey}/rematch</h3>
+    <p><p>Rematches all of the broken sectors and decisions in the {catKey} catalogue assembly.</p>
+</p>
+
+
+    <h3 id="op12-request-body">Body</h3>
+            <p><code>application/json</code></p>
+            <p>Content: any</p>
+
+
+
+            <h3 id="op12-responses" class="clear">Response 400</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 400 Bad Request
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "code": 400,
+  "message": "Only the draft CoL can be assembled at this stage"
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: any</p>
+            <h3 id="op12-responses" class="clear">Response 404</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 404 Not Found
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "code": 404,
+  "message": "Dataset 1115 does not exist"
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: any</p>
+
+
+        <h1 id="resource-13">/datapackage</h1>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //datapackage HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/datapackage</h3>
+    <p><p>Returns the frictionless data package specificiations
+for the <a href="https://github.com/Sp2000/coldp">Catalogue of Life Data Package (CoLDP)</a>.</p>
+</p>
+
+
+
+
+
+            <h3 id="op13-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "profile": "tabular-data-package",
+  "resources": [
+    {
+      "encoding": "UTF-8",
+      "format": "csv",
+      "name": "reference",
+      "path": "reference.tsv",
+      "dialect": {
+        "delimiter": "\t",
+        "doubleQuote": false,
+        "header": true
+      },
+      "schema": {
+        "fields": [
+          {
+            "name": "ID",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "citation",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "author",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "year",
+            "type": "year",
+            "format": "default"
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "doi",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "link",
+            "type": "string",
+            "format": "uri"
+          }
+        ],
+        "primaryKey": "ID"
+      },
+      "profile": "tabular-data-resource"
+    },
+    {
+      "encoding": "UTF-8",
+      "format": "csv",
+      "name": "name",
+      "path": "name.tsv",
+      "dialect": {
+        "delimiter": "\t",
+        "doubleQuote": false,
+        "header": true
+      },
+      "schema": {
+        "fields": [
+          {
+            "name": "ID",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "scientificName",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "authorship",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "rank",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "enum": [
+                "domain",
+                "realm",
+                "subrealm",
+                "superkingdom",
+                "kingdom",
+                "subkingdom",
+                "infrakingdom",
+                "superphylum",
+                "phylum",
+                "subphylum",
+                "infraphylum",
+                "superclass",
+                "class",
+                "subclass",
+                "infraclass",
+                "parvclass",
+                "superlegion",
+                "legion",
+                "sublegion",
+                "infralegion",
+                "supercohort",
+                "cohort",
+                "subcohort",
+                "infracohort",
+                "magnorder",
+                "grandorder",
+                "superorder",
+                "order",
+                "suborder",
+                "infraorder",
+                "parvorder",
+                "megafamily",
+                "grandfamily",
+                "superfamily",
+                "epifamily",
+                "family",
+                "subfamily",
+                "infrafamily",
+                "supertribe",
+                "tribe",
+                "subtribe",
+                "infratribe",
+                "suprageneric name",
+                "genus",
+                "subgenus",
+                "infragenus",
+                "supersection",
+                "section",
+                "subsection",
+                "superseries",
+                "series",
+                "subseries",
+                "infrageneric name",
+                "species aggregate",
+                "species",
+                "infraspecific name",
+                "grex",
+                "subspecies",
+                "cultivar group",
+                "convariety",
+                "infrasubspecific name",
+                "proles",
+                "natio",
+                "aberration",
+                "morph",
+                "variety",
+                "subvariety",
+                "form",
+                "subform",
+                "pathovar",
+                "biovar",
+                "chemovar",
+                "morphovar",
+                "phagovar",
+                "serovar",
+                "chemoform",
+                "forma specialis",
+                "cultivar",
+                "strain",
+                "other",
+                "unranked"
+              ]
+            }
+          },
+          {
+            "name": "genus",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "specificEpithet",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "infraspecificEpithet",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "cultivarEpithet",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "appendedPhrase",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "publishedInID",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "publishedInPage",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "publishedInYear",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "original",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "code",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "enum": [
+                "bacterial",
+                "botanical",
+                "cultivars",
+                "virus",
+                "zoological"
+              ]
+            }
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "enum": [
+                "established",
+                "not established",
+                "acceptable",
+                "unacceptable",
+                "conserved",
+                "rejected",
+                "doubtful",
+                "manuscript",
+                "chresonym"
+              ]
+            }
+          },
+          {
+            "name": "link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "remarks",
+            "type": "string",
+            "format": "default"
+          }
+        ],
+        "primaryKey": "ID"
+      },
+      "profile": "tabular-data-resource"
+    },
+    {
+      "encoding": "UTF-8",
+      "format": "csv",
+      "name": "namerel",
+      "path": "namerel.tsv",
+      "dialect": {
+        "delimiter": "\t",
+        "doubleQuote": false,
+        "header": true
+      },
+      "schema": {
+        "fields": [
+          {
+            "name": "nameID",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "relatedNameID",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "type",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "enum": [
+                "spelling correction",
+                "basionym",
+                "based on",
+                "replacement name",
+                "conserved",
+                "later homonym",
+                "superfluous",
+                "homotypic",
+                "type"
+              ]
+            }
+          },
+          {
+            "name": "publishedInID",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "remarks",
+            "type": "string",
+            "format": "default"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "fields": "nameID",
+            "reference": {
+              "resource": "name",
+              "fields": "ID"
+            }
+          },
+          {
+            "fields": "relatedNameID",
+            "reference": {
+              "resource": "name",
+              "fields": "ID"
+            }
+          }
+        ]
+      },
+      "profile": "tabular-data-resource"
+    },
+    {
+      "encoding": "UTF-8",
+      "format": "csv",
+      "name": "taxon",
+      "path": "taxon.tsv",
+      "dialect": {
+        "delimiter": "\t",
+        "doubleQuote": false,
+        "header": true
+      },
+      "schema": {
+        "fields": [
+          {
+            "name": "ID",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "parentID",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "nameID",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "referenceID",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "enum": [
+                "accepted",
+                "provisionally accepted",
+                "synonym",
+                "ambiguous synonym",
+                "misapplied"
+              ]
+            }
+          },
+          {
+            "name": "accordingTo",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "accordingToID",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "accordingToDate",
+            "type": "date",
+            "format": "default"
+          },
+          {
+            "name": "extinct",
+            "type": "boolean",
+            "format": "default"
+          },
+          {
+            "name": "lifezone",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "enum": [
+                "brackish",
+                "freshwater",
+                "marine",
+                "terrestrial"
+              ]
+            }
+          },
+          {
+            "name": "link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "species",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "section",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "subgenus",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "genus",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "subfamily",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "pattern": "[A-ZÏËÖÜÄÉÈČÁÀÆŒ](?:\\.|[a-zïëöüäåéèčáàæœ]+)(?:-[A-ZÏËÖÜÄÉÈČÁÀÆŒ]?[a-zïëöüäåéèčáàæœ]+)?"
+            }
+          },
+          {
+            "name": "family",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "pattern": "[A-ZÏËÖÜÄÉÈČÁÀÆŒ](?:\\.|[a-zïëöüäåéèčáàæœ]+)(?:-[A-ZÏËÖÜÄÉÈČÁÀÆŒ]?[a-zïëöüäåéèčáàæœ]+)?"
+            }
+          },
+          {
+            "name": "superfamily",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "pattern": "[A-ZÏËÖÜÄÉÈČÁÀÆŒ](?:\\.|[a-zïëöüäåéèčáàæœ]+)(?:-[A-ZÏËÖÜÄÉÈČÁÀÆŒ]?[a-zïëöüäåéèčáàæœ]+)?"
+            }
+          },
+          {
+            "name": "suborder",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "pattern": "[A-ZÏËÖÜÄÉÈČÁÀÆŒ](?:\\.|[a-zïëöüäåéèčáàæœ]+)(?:-[A-ZÏËÖÜÄÉÈČÁÀÆŒ]?[a-zïëöüäåéèčáàæœ]+)?"
+            }
+          },
+          {
+            "name": "order",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "pattern": "[A-ZÏËÖÜÄÉÈČÁÀÆŒ](?:\\.|[a-zïëöüäåéèčáàæœ]+)(?:-[A-ZÏËÖÜÄÉÈČÁÀÆŒ]?[a-zïëöüäåéèčáàæœ]+)?"
+            }
+          },
+          {
+            "name": "subclass",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "pattern": "[A-ZÏËÖÜÄÉÈČÁÀÆŒ](?:\\.|[a-zïëöüäåéèčáàæœ]+)(?:-[A-ZÏËÖÜÄÉÈČÁÀÆŒ]?[a-zïëöüäåéèčáàæœ]+)?"
+            }
+          },
+          {
+            "name": "class",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "pattern": "[A-ZÏËÖÜÄÉÈČÁÀÆŒ](?:\\.|[a-zïëöüäåéèčáàæœ]+)(?:-[A-ZÏËÖÜÄÉÈČÁÀÆŒ]?[a-zïëöüäåéèčáàæœ]+)?"
+            }
+          },
+          {
+            "name": "subphylum",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "pattern": "[A-ZÏËÖÜÄÉÈČÁÀÆŒ](?:\\.|[a-zïëöüäåéèčáàæœ]+)(?:-[A-ZÏËÖÜÄÉÈČÁÀÆŒ]?[a-zïëöüäåéèčáàæœ]+)?"
+            }
+          },
+          {
+            "name": "phylum",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "pattern": "[A-ZÏËÖÜÄÉÈČÁÀÆŒ](?:\\.|[a-zïëöüäåéèčáàæœ]+)(?:-[A-ZÏËÖÜÄÉÈČÁÀÆŒ]?[a-zïëöüäåéèčáàæœ]+)?"
+            }
+          },
+          {
+            "name": "kingdom",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "pattern": "[A-ZÏËÖÜÄÉÈČÁÀÆŒ](?:\\.|[a-zïëöüäåéèčáàæœ]+)(?:-[A-ZÏËÖÜÄÉÈČÁÀÆŒ]?[a-zïëöüäåéèčáàæœ]+)?"
+            }
+          }
+        ],
+        "primaryKey": "ID",
+        "foreignKeys": [
+          {
+            "fields": "parentID",
+            "reference": {
+              "resource": "taxon",
+              "fields": "ID"
+            }
+          },
+          {
+            "fields": "nameID",
+            "reference": {
+              "resource": "name",
+              "fields": "ID"
+            }
+          },
+          {
+            "fields": "referenceID",
+            "reference": {
+              "resource": "reference",
+              "fields": "ID"
+            }
+          }
+        ]
+      },
+      "profile": "tabular-data-resource"
+    },
+    {
+      "encoding": "UTF-8",
+      "format": "csv",
+      "name": "synonym",
+      "path": "synonym.tsv",
+      "dialect": {
+        "delimiter": "\t",
+        "doubleQuote": false,
+        "header": true
+      },
+      "schema": {
+        "fields": [
+          {
+            "name": "taxonID",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "nameID",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "enum": [
+                "accepted",
+                "provisionally accepted",
+                "synonym",
+                "ambiguous synonym",
+                "misapplied"
+              ]
+            }
+          },
+          {
+            "name": "remarks",
+            "type": "string",
+            "format": "default"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "fields": "taxonID",
+            "reference": {
+              "resource": "taxon",
+              "fields": "ID"
+            }
+          },
+          {
+            "fields": "nameID",
+            "reference": {
+              "resource": "name",
+              "fields": "ID"
+            }
+          }
+        ]
+      },
+      "profile": "tabular-data-resource"
+    },
+    {
+      "encoding": "UTF-8",
+      "format": "csv",
+      "name": "description",
+      "path": "description.tsv",
+      "dialect": {
+        "delimiter": "\t",
+        "doubleQuote": false,
+        "header": true
+      },
+      "schema": {
+        "fields": [
+          {
+            "name": "taxonID",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "language",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "referenceID",
+            "type": "string",
+            "format": "default"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "fields": "taxonID",
+            "reference": {
+              "resource": "taxon",
+              "fields": "ID"
+            }
+          },
+          {
+            "fields": "referenceID",
+            "reference": {
+              "resource": "reference",
+              "fields": "ID"
+            }
+          }
+        ]
+      },
+      "profile": "tabular-data-resource"
+    },
+    {
+      "encoding": "UTF-8",
+      "format": "csv",
+      "name": "distribution",
+      "path": "distribution.tsv",
+      "dialect": {
+        "delimiter": "\t",
+        "doubleQuote": false,
+        "header": true
+      },
+      "schema": {
+        "fields": [
+          {
+            "name": "taxonID",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "area",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "gazetteer",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "enum": [
+                "tdwg",
+                "iso",
+                "fao",
+                "longhurst",
+                "teow",
+                "iho",
+                "text"
+              ]
+            }
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "enum": [
+                "accepted",
+                "provisionally accepted",
+                "synonym",
+                "ambiguous synonym",
+                "misapplied"
+              ]
+            }
+          },
+          {
+            "name": "referenceID",
+            "type": "string",
+            "format": "default"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "fields": "taxonID",
+            "reference": {
+              "resource": "taxon",
+              "fields": "ID"
+            }
+          },
+          {
+            "fields": "referenceID",
+            "reference": {
+              "resource": "reference",
+              "fields": "ID"
+            }
+          }
+        ]
+      },
+      "profile": "tabular-data-resource"
+    },
+    {
+      "encoding": "UTF-8",
+      "format": "csv",
+      "name": "media",
+      "path": "media.tsv",
+      "dialect": {
+        "delimiter": "\t",
+        "doubleQuote": false,
+        "header": true
+      },
+      "schema": {
+        "fields": [
+          {
+            "name": "taxonID",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "url",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "type",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "enum": [
+                "image",
+                "video",
+                "audio"
+              ]
+            }
+          },
+          {
+            "name": "format",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "enum": [
+                "dwca",
+                "acef",
+                "tcs",
+                "coldp"
+              ]
+            }
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "created",
+            "type": "datetime",
+            "format": "default"
+          },
+          {
+            "name": "creator",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "license",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "link",
+            "type": "string",
+            "format": "uri"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "fields": "taxonID",
+            "reference": {
+              "resource": "taxon",
+              "fields": "ID"
+            }
+          }
+        ]
+      },
+      "profile": "tabular-data-resource"
+    },
+    {
+      "encoding": "UTF-8",
+      "format": "csv",
+      "name": "vernacularname",
+      "path": "vernacularname.tsv",
+      "dialect": {
+        "delimiter": "\t",
+        "doubleQuote": false,
+        "header": true
+      },
+      "schema": {
+        "fields": [
+          {
+            "name": "taxonID",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "transliteration",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "language",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "country",
+            "type": "string",
+            "format": "default",
+            "constraints": {
+              "enum": [
+                "AF",
+                "AX",
+                "AL",
+                "DZ",
+                "AS",
+                "AD",
+                "AO",
+                "AI",
+                "AQ",
+                "AG",
+                "AR",
+                "AM",
+                "AW",
+                "AU",
+                "AT",
+                "AZ",
+                "BS",
+                "BH",
+                "BD",
+                "BB",
+                "BY",
+                "BE",
+                "BZ",
+                "BJ",
+                "BM",
+                "BT",
+                "BO",
+                "BQ",
+                "BA",
+                "BW",
+                "BV",
+                "BR",
+                "IO",
+                "BN",
+                "BG",
+                "BF",
+                "BI",
+                "KH",
+                "CM",
+                "CA",
+                "CV",
+                "KY",
+                "CF",
+                "TD",
+                "CL",
+                "CN",
+                "CX",
+                "CC",
+                "CO",
+                "KM",
+                "CD",
+                "CG",
+                "CK",
+                "CR",
+                "CI",
+                "HR",
+                "CU",
+                "CW",
+                "CY",
+                "CZ",
+                "DK",
+                "DJ",
+                "DM",
+                "DO",
+                "EC",
+                "EG",
+                "SV",
+                "GQ",
+                "ER",
+                "EE",
+                "ET",
+                "FK",
+                "FO",
+                "FJ",
+                "FI",
+                "FR",
+                "GF",
+                "PF",
+                "TF",
+                "GA",
+                "GM",
+                "GE",
+                "DE",
+                "GH",
+                "GI",
+                "GR",
+                "GL",
+                "GD",
+                "GP",
+                "GU",
+                "GT",
+                "GG",
+                "GN",
+                "GW",
+                "GY",
+                "HT",
+                "HM",
+                "VA",
+                "HN",
+                "HK",
+                "HU",
+                "IS",
+                "IN",
+                "ID",
+                "IR",
+                "IQ",
+                "IE",
+                "IM",
+                "IL",
+                "IT",
+                "JM",
+                "JP",
+                "JE",
+                "JO",
+                "KZ",
+                "KE",
+                "KI",
+                "KP",
+                "KR",
+                "XK",
+                "KW",
+                "KG",
+                "LA",
+                "LV",
+                "LB",
+                "LS",
+                "LR",
+                "LY",
+                "LI",
+                "LT",
+                "LU",
+                "MO",
+                "MK",
+                "MG",
+                "MW",
+                "MY",
+                "MV",
+                "ML",
+                "MT",
+                "MH",
+                "MQ",
+                "MR",
+                "MU",
+                "YT",
+                "MX",
+                "FM",
+                "MD",
+                "MC",
+                "MN",
+                "ME",
+                "MS",
+                "MA",
+                "MZ",
+                "MM",
+                "NA",
+                "NR",
+                "NP",
+                "NL",
+                "NC",
+                "NZ",
+                "NI",
+                "NE",
+                "NG",
+                "NU",
+                "NF",
+                "MP",
+                "NO",
+                "OM",
+                "PK",
+                "PW",
+                "PS",
+                "PA",
+                "PG",
+                "PY",
+                "PE",
+                "PH",
+                "PN",
+                "PL",
+                "PT",
+                "PR",
+                "QA",
+                "RE",
+                "RO",
+                "RU",
+                "RW",
+                "BL",
+                "SH",
+                "KN",
+                "LC",
+                "MF",
+                "PM",
+                "VC",
+                "WS",
+                "SM",
+                "ST",
+                "SA",
+                "SN",
+                "RS",
+                "SC",
+                "SL",
+                "SG",
+                "SX",
+                "SK",
+                "SI",
+                "SB",
+                "SO",
+                "ZA",
+                "GS",
+                "SS",
+                "ES",
+                "LK",
+                "SD",
+                "SR",
+                "SJ",
+                "SZ",
+                "SE",
+                "CH",
+                "SY",
+                "TW",
+                "TJ",
+                "TZ",
+                "TH",
+                "TL",
+                "TG",
+                "TK",
+                "TO",
+                "TT",
+                "TN",
+                "TR",
+                "TM",
+                "TC",
+                "TV",
+                "UG",
+                "UA",
+                "AE",
+                "GB",
+                "US",
+                "UM",
+                "UY",
+                "UZ",
+                "VU",
+                "VE",
+                "VN",
+                "VG",
+                "VI",
+                "WF",
+                "EH",
+                "YE",
+                "ZM",
+                "ZW",
+                "XZ"
+              ]
+            }
+          },
+          {
+            "name": "lifeStage",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "sex",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "referenceID",
+            "type": "string",
+            "format": "default"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "fields": "taxonID",
+            "reference": {
+              "resource": "taxon",
+              "fields": "ID"
+            }
+          },
+          {
+            "fields": "referenceID",
+            "reference": {
+              "resource": "reference",
+              "fields": "ID"
+            }
+          }
+        ]
+      },
+      "profile": "tabular-data-resource"
+    }
+  ]
+}</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: any</p>
+
+
+        <h1 id="resource-14">/dataset</h1>
 
     
 
@@ -3810,7 +5448,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op6-request-params">Parameters</h3>
+        <h3 id="op14-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -3851,21 +5489,63 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op6-responses" class="clear">Response 200</h3>
+            <h3 id="op14-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
+</code>
+    <code class="json">{
+  "offset": 0,
+  "limit": 1,
+  "total": 224,
+  "result": [
+    {
+      "created": "2019-10-09T16:31:10.506634",
+      "createdBy": 0,
+      "modified": "2019-10-09T16:31:10.506634",
+      "modifiedBy": 0,
+      "key": 1,
+      "type": "thematic",
+      "title": "Catalogue of Life",
+      "alias": "CoL",
+      "origin": "managed",
+      "importFrequency": "never"
+    }
+  ],
+  "last": false,
+  "empty": false
+}
 </code>
 </pre>
                     <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-DatasetResultSet">DatasetResultSet</a></p>
+                    <p>Content: any</p>
 
     <pre class="example"><code class="http">
 POST //dataset HTTP/1.1
 Host: api.col.plus
 Content-Type: application/json
+</code>
+    <code class="json"># Request body for an uploaded dataset
+{
+  "title": "Example uploaded dataset",
+  "license": "cc0",
+  "type": "taxonomic",
+  "origin": "uploaded",
+  "dataFormat": "coldp"
+}
+
+# Request body for an externally hosted dataset
+{
+  "title": "Example externally hosted dataset",
+  "license": "cc0",
+  "type": "nomenclatural",
+  "origin": "external",
+  "dataFormat": "acef",
+  "dataAccess": "https://github.com/Sp2000/data-unit-tests/archive/master.zip",
+  "importFrequency": "monthly"
+}
 </code>
 </pre>
 
@@ -3874,42 +5554,43 @@ Content-Type: application/json
 </p>
 
 
-    <h3 id="op7-request-body">Body</h3>
+    <h3 id="op15-request-body">Body</h3>
             <p><code>application/json</code></p>
-            <p>Content: <a href="#model-Dataset">Dataset</a></p>
+            <p>Content: any</p>
 
 
 
-            <h3 id="op7-responses" class="clear">Response 201</h3>
+            <h3 id="op15-responses" class="clear">Response 201</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
+    <code class="json">2051</code>
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: integer</p>
 
 
-        <h2 id="resource-7">/dataset/{dkey}</h2>
+        <h2 id="resource-15">/dataset/{key}</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey} HTTP/1.1
+GET //dataset/{key} HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}</h3>
     <p><p>Retrieves the dataset with the specified key.</p>
 </p>
 
 
 
-        <h3 id="op8-request-params">Parameters</h3>
+        <h3 id="op16-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -3921,7 +5602,7 @@ Host: api.col.plus
         </tr>
         </thead><tbody>
                 <tr>
-                    <td>{dkey}</td>
+                    <td>{key}</td>
                     <td>integer</td>
                     <td></td>
                     <td>yes</td>
@@ -3932,30 +5613,45 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op8-responses" class="clear">Response 200</h3>
+            <h3 id="op16-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
+</code>
+    <code class="json">{
+  "created": "2019-10-09T20:10:55.839898",
+  "createdBy": 100,
+  "modified": "2019-10-09T20:10:55.839898",
+  "modifiedBy": 100,
+  "key": 2051,
+  "type": "nomenclatural",
+  "title": "Example externally hosted dataset",
+  "license": "cc0",
+  "dataFormat": "acef",
+  "dataAccess": "https://github.com/Sp2000/data-unit-tests/archive/master.zip",
+  "origin": "external",
+  "importFrequency": "monthly"
+}
 </code>
 </pre>
                     <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-Dataset">Dataset</a></p>
+                    <p>Content: any</p>
 
     <pre class="example"><code class="http">
-DELETE //dataset/{dkey} HTTP/1.1
+DELETE //dataset/{key} HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">DELETE</code> http://api.col.plus/dataset/{dkey}</h3>
+        <h3><code class="prettyprint">DELETE</code> http://api.col.plus/dataset/{key}</h3>
     <p><p>Deletes the dataset with the specified database key.</p>
 </p>
 
 
 
-        <h3 id="op9-request-params">Parameters</h3>
+        <h3 id="op17-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -3967,7 +5663,7 @@ Host: api.col.plus
         </tr>
         </thead><tbody>
                 <tr>
-                    <td>{dkey}</td>
+                    <td>{key}</td>
                     <td>integer</td>
                     <td></td>
                     <td>yes</td>
@@ -3978,26 +5674,40 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op9-responses" class="clear">Response 204</h3>
+            <h3 id="op17-responses" class="clear">Response 204</h3>
     <p><p>Dataset deleted.</p>
 </p>
-            <h3 id="op9-responses" class="clear">Response 404</h3>
-    <p><p>Specified key does not exist.</p>
+            <h3 id="op17-responses" class="clear">Response 404</h3>
+    <p><p>Specified dataset key does not exist.</p>
 </p>
 
     <pre class="example"><code class="http">
-PUT //dataset/{dkey} HTTP/1.1
+PUT //dataset/{key} HTTP/1.1
 Host: api.col.plus
+Content-Type: application/json
+</code>
+    <code class="json">{
+	"type": "nomenclatural",
+	"title": "Testing new title",
+	"license": "cc0",
+	"dataFormat": "coldp",
+	"dataAccess": "https://github.com/Sp2000/data-unit-tests/archive/master.zip",
+	"origin": "external",
+	"importFrequency": "monthly"
+}
 </code>
 </pre>
 
-        <h3><code class="prettyprint">PUT</code> http://api.col.plus/dataset/{dkey}</h3>
+        <h3><code class="prettyprint">PUT</code> http://api.col.plus/dataset/{key}</h3>
     <p><p>Updates the dataset specified through the JSON request body.</p>
 </p>
 
 
+    <h3 id="op18-request-body">Body</h3>
+            <p><code>application/json</code></p>
+            <p>Content: any</p>
 
-        <h3 id="op10-request-params">Parameters</h3>
+        <h3 id="op18-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4009,7 +5719,7 @@ Host: api.col.plus
         </tr>
         </thead><tbody>
                 <tr>
-                    <td>{dkey}</td>
+                    <td>{key}</td>
                     <td>integer</td>
                     <td></td>
                     <td>yes</td>
@@ -4020,30 +5730,434 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op10-responses" class="clear">Response 204</h3>
-    
-            <h3 id="op10-responses" class="clear">Response 404</h3>
-    
+            <h3 id="op18-responses" class="clear">Response 204</h3>
+    <p><p>Dataset updated.</p>
+</p>
+            <h3 id="op18-responses" class="clear">Response 404</h3>
+    <p><p>Specified dataset key does not exist.</p>
+</p>
 
 
-        <h2 id="resource-8">/dataset/{dkey}/verbatim</h2>
+        <h2 id="resource-16">/dataset/{key}/import</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/verbatim HTTP/1.1
+GET //dataset/{key}/import HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/verbatim</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/import</h3>
+    <p><p>Imports dataset {key}</p>
+</p>
+
+
+
+
+
+            <h3 id="op19-responses" class="clear">Response 200</h3>
+    <p><p>Import started for dataset {key}.</p>
+</p>
+
+
+        <h2 id="resource-17">/dataset/{key}/import/{attempt}</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //dataset/{key}/import/{attempt} HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/import/{attempt}</h3>
+    <p><p>Imports dataset {key}</p>
+</p>
+
+
+
+
+
+            <h3 id="op20-responses" class="clear">Response 200</h3>
+    <p><p>Import started for dataset {key}.</p>
+</p>
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
+Content-Type: application/json
+</code>
+    <code class="json"># import attempt processing
+{
+  "datasetKey": 1140,
+  "attempt": 2,
+  "state": "processing",
+  "started": "2019-10-09T21:30:08.611",
+  "downloadUri": "https://raw.githubusercontent.com/Sp2000/colplus-repo/master/ACEF/140.tar.gz",
+  "download": "2019-10-09T21:30:10",
+  "md5": "FD4D41F0B279ADAB297873A3578EBC6C",
+  "usagesCount": 0
+}
+
+# import attempt finished
+{
+  "datasetKey": 1140,
+  "attempt": 1,
+  "state": "finished",
+  "started": "2019-10-09T16:51:32.3",
+  "finished": "2019-10-09T16:58:05.159",
+  "nameCount": 63329,
+  "taxonCount": 14746,
+  "synonymCount": 48583,
+  "referenceCount": 60248,
+  "distributionCount": 56162,
+  "vernacularCount": 953,
+  "namesByTypeCount": {
+    "scientific": 63329
+  },
+  "namesByStatusCount": {
+    "manuscript": 303
+  },
+  "namesByOriginCount": {
+    "source": 62920,
+    "denormed classification": 409
+  },
+  "namesByRankCount": {
+    "species": 52958,
+    "variety": 7537,
+    "subspecies": 1229,
+    "form": 1196,
+    "genus": 340,
+    "family": 51,
+    "order": 14,
+    "class": 2,
+    "kingdom": 1,
+    "phylum": 1
+  },
+  "distributionsByGazetteerCount": {
+    "iso": 45305,
+    "text": 10857
+  },
+  "vernacularsByLanguageCount": {
+    "deu": 45,
+    "spa": 36,
+    "eng": 28
+  },
+  "usagesByStatusCount": {
+    "synonym": 43636,
+    "accepted": 14440,
+    "ambiguous synonym": 4946,
+    "provisionally accepted": 306,
+    "misapplied": 1
+  },
+  "taxaByRankCount": {
+    "species": 13219,
+    "variety": 603,
+    "subspecies": 483,
+    "genus": 340,
+    "family": 51,
+    "form": 32,
+    "order": 14,
+    "class": 2,
+    "kingdom": 1,
+    "phylum": 1
+  },
+  "issuesCount": {
+    "name match inserted": 62495,
+    "citation container title unparsed": 60248,
+    "citation authors unparsed": 30812,
+    "partial date": 14337,
+    "distribution area invalid": 10857,
+    "taxonomic status doubtful": 4946,
+    "unmatched reference brackets": 1515,
+    "duplicate name": 826,
+    "name match variant": 302,
+    "vernacular country invalid": 27,
+    "parsed name differs": 8,
+    "partially parsable name": 7,
+    "unparsable authorship": 6,
+    "escaped characters": 4,
+    "name match ambiguous": 3,
+    "indetermined": 1,
+    "unmatched name brackets": 1,
+    "truncated name": 1,
+    "derived taxonomic status": 1
+  },
+  "downloadUri": "https://raw.githubusercontent.com/Sp2000/colplus-repo/master/ACEF/140.tar.gz",
+  "download": "2019-10-09T16:51:32",
+  "md5": "FD4D41F0B279ADAB297873A3578EBC6C",
+  "verbatimCount": 138195,
+  "verbatimByTypeCount": {
+    "acef:Synonyms": 48583,
+    "acef:Distribution": 14074,
+    "acef:CommonNames": 953,
+    "acef:AcceptedInfraSpecificTaxa": 1118,
+    "acef:Reference": 60248,
+    "acef:AcceptedSpecies": 13219
+  },
+  "verbatimByTermCount": {
+    "acef:Synonyms": {
+      "acef:ID": 48583,
+      "acef:Genus": 48583,
+      "acef:AuthorString": 39669,
+      "acef:SpeciesEpithet": 48583,
+      "acef:AcceptedTaxonID": 48583,
+      "acef:Sp2000NameStatus": 48583,
+      "acef:InfraSpeciesMarker": 8835,
+      "acef:InfraSpeciesEpithet": 8844,
+      "acef:InfraSpeciesAuthorString": 8836
+    },
+    "acef:Reference": {
+      "acef:Year": 60248,
+      "acef:Author": 60248,
+      "acef:Details": 60248,
+      "acef:ReferenceID": 60248
+    },
+    "acef:CommonNames": {
+      "acef:Country": 32,
+      "acef:Language": 109,
+      "acef:CommonName": 953,
+      "acef:AcceptedTaxonID": 953
+    },
+    "acef:Distribution": {
+      "acef:StandardInUse": 14074,
+      "acef:AcceptedTaxonID": 14074,
+      "acef:DistributionElement": 14074
+    },
+    "acef:AcceptedSpecies": {
+      "acef:Class": 13219,
+      "acef:Genus": 13219,
+      "acef:Order": 13219,
+      "acef:Family": 13219,
+      "acef:Phylum": 13219,
+      "acef:Kingdom": 13219,
+      "acef:LTSDate": 13219,
+      "acef:HasModern": 13219,
+      "acef:IsExtinct": 13219,
+      "acef:AuthorString": 13209,
+      "acef:LTSSpecialist": 13219,
+      "acef:AdditionalData": 832,
+      "acef:HasPreHolocene": 13219,
+      "acef:SpeciesEpithet": 13219,
+      "acef:AcceptedTaxonID": 13219,
+      "acef:Sp2000NameStatus": 13219
+    },
+    "acef:AcceptedInfraSpecificTaxa": {
+      "acef:LTSDate": 1118,
+      "acef:HasModern": 1118,
+      "acef:IsExtinct": 1118,
+      "acef:LTSSpecialist": 1118,
+      "acef:AdditionalData": 204,
+      "acef:HasPreHolocene": 1118,
+      "acef:AcceptedTaxonID": 1118,
+      "acef:ParentSpeciesID": 1118,
+      "acef:Sp2000NameStatus": 1118,
+      "acef:InfraSpeciesMarker": 1118,
+      "acef:InfraSpeciesEpithet": 1118,
+      "acef:InfraSpeciesAuthorString": 936
+    }
+  },
+  "usagesCount": 63329
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: any</p>
+            <h3 id="op20-responses" class="clear">Response 404</h3>
+    <p><p>Dataset and/or attempt not found.</p>
+</p>
+
+
+        <h2 id="resource-18">/dataset/{key}/import/{attempt}/tree</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //dataset/{key}/import/{attempt}/tree HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/import/{attempt}/tree</h3>
+    <p><p>Gets the tree for dataset {key}</p>
+</p>
+
+
+
+
+
+            <h3 id="op21-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "parallel": false
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: any</p>
+
+
+        <h2 id="resource-19">/dataset/{key}/import/{attempt}/names</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //dataset/{key}/import/{attempt}/names HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/import/{attempt}/names</h3>
+    <p><p>Gets the names for dataset {key}</p>
+</p>
+
+
+
+
+
+            <h3 id="op22-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "parallel": false
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: any</p>
+
+
+        <h2 id="resource-20">/dataset/{key}/texttree</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //dataset/{key}/texttree HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/texttree</h3>
+    <p><p>Returns a plain text classification tree for dataset {key}.</p>
+</p>
+
+
+
+
+
+            <h3 id="op23-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
+Content-Type: text/plain
+</code>
+    <code class="json">Animalia [kingdom]
+  Arthropoda [phylum]
+    Diplopoda [class]
+      Julida [order]
+        Juloidea [superfamily]
+          Julidae [family]
+            Leptoiulus [genus]
+              Leptoiulus trilineatus (C.L.Koch, 1847) [species]
+                Leptoiulus trilineatus nigra Attems, 1927 [subspecies]
+                  *Leptoiulus trilineatus nigra (Verhoeff, 1898) [subspecies]
+</code>
+</pre>
+                    <p><code>text/plain</code></p>
+                    <p>Content: any</p>
+            <h3 id="op23-responses" class="clear">Response 404</h3>
+    <p><p>Dataset not found</p>
+</p>
+
+
+        <h2 id="resource-21">/dataset/{key}/treediff</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //dataset/{key}/treediff HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/treediff</h3>
+    <p><p>Returns a plain text diff of the classification tree for dataset {key}.</p>
+</p>
+
+
+
+
+
+            <h3 id="op24-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
+Content-Type: text/plain
+</code>
+    <code class="json">--- /home/col/bin/dev/metrics/dataset/2050/tree/1.txt	2019-10-09 21:43:18.083256660 +0000
++++ /home/col/bin/dev/metrics/dataset/2050/tree/2.txt	2019-10-09 21:58:41.338271290 +0000
+@@ -7,4 +7,5 @@
+             Leptoiulus [genus]
+               Leptoiulus trilineatus (C.L.Koch, 1847) [species]
++                Leptoiulus examplus (Null & Void, 1500) [species]
+                 Leptoiulus trilineatus nigra Attems, 1927 [subspecies]
+                   *Leptoiulus trilineatus nigra (Verhoeff, 1898) [subspecies]
+</code>
+</pre>
+                    <p><code>text/plain</code></p>
+                    <p>Content: any</p>
+            <h3 id="op24-responses" class="clear">Response 404</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 404 Not Found
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "code": 404,
+  "message": "At least 2 successful imports must exist to provide a diff"
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: any</p>
+
+
+        <h2 id="resource-22">/dataset/{key}/verbatim</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //dataset/{key}/verbatim HTTP/1.1
+Host: api.col.plus
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/verbatim</h3>
     <p><p>Page through all verbatim records of the dataset</p>
 </p>
 
 
 
-        <h3 id="op11-request-params">Parameters</h3>
+        <h3 id="op25-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4084,11 +6198,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op11-responses" class="clear">Response 200</h3>
+            <h3 id="op25-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -4096,24 +6210,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-VerbatimRecordResultSet">VerbatimRecordResultSet</a></p>
 
 
-        <h2 id="resource-9">/dataset/{dkey}/verbatim/{key}</h2>
+        <h2 id="resource-23">/dataset/{key}/verbatim/{key}</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/verbatim/{key} HTTP/1.1
+GET //dataset/{key}/verbatim/{key} HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/verbatim/{key}</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/verbatim/{key}</h3>
     <p><p>Get the verbatim representation of a source record by its dwca core id</p>
 </p>
 
 
 
-        <h3 id="op12-request-params">Parameters</h3>
+        <h3 id="op26-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4136,11 +6250,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op12-responses" class="clear">Response 200</h3>
+            <h3 id="op26-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4177,24 +6291,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-VerbatimRecord">VerbatimRecord</a></p>
 
 
-        <h2 id="resource-10">/dataset/{dkey}/taxon</h2>
+        <h2 id="resource-24">/dataset/{key}/taxon</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/taxon HTTP/1.1
+GET //dataset/{key}/taxon HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/taxon</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/taxon</h3>
     <p><p>Paging parameters.</p>
 </p>
 
 
 
-        <h3 id="op13-request-params">Parameters</h3>
+        <h3 id="op27-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4253,11 +6367,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op13-responses" class="clear">Response 200</h3>
+            <h3 id="op27-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -4265,24 +6379,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-ResultSet">ResultSet</a></p>
 
 
-        <h2 id="resource-11">/dataset/{dkey}/taxon/{id}</h2>
+        <h2 id="resource-25">/dataset/{key}/taxon/{id}</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/taxon/{id} HTTP/1.1
+GET //dataset/{key}/taxon/{id} HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/taxon/{id}</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/taxon/{id}</h3>
     <p><p>Retrieves the taxon with the specified id.</p>
 </p>
 
 
 
-        <h3 id="op14-request-params">Parameters</h3>
+        <h3 id="op28-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4305,11 +6419,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op14-responses" class="clear">Response 200</h3>
+            <h3 id="op28-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4348,18 +6462,18 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Taxon">Taxon</a></p>
 
 
-        <h2 id="resource-12">/dataset/{dkey}/taxon/{id}/info</h2>
+        <h2 id="resource-26">/dataset/{key}/taxon/{id}/info</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/taxon/{id}/info HTTP/1.1
+GET //dataset/{key}/taxon/{id}/info HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/taxon/{id}/info</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/taxon/{id}/info</h3>
     <p><p>Returns a TaxonInfo object containing all details about the taxon with the specified key and its supplementary information.</p>
 </p>
 
@@ -4367,11 +6481,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op15-responses" class="clear">Response 200</h3>
+            <h3 id="op29-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4418,18 +6532,18 @@ Content-Type: application/json
                     <p>Content: <a href="#model-TaxonInfo">TaxonInfo</a></p>
 
 
-        <h2 id="resource-13">/dataset/{dkey}/taxon/{id}/classification</h2>
+        <h2 id="resource-27">/dataset/{key}/taxon/{id}/classification</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/taxon/{id}/classification HTTP/1.1
+GET //dataset/{key}/taxon/{id}/classification HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/taxon/{id}/classification</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/taxon/{id}/classification</h3>
     <p><p>Returns the taxonomic ancestry of the taxon with the specified key, i.e. all ancestral taxa up to the taxon&rsquo;s kingdom starting with the direct parent taxon.</p>
 </p>
 
@@ -4437,11 +6551,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op16-responses" class="clear">Response 200</h3>
+            <h3 id="op30-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -4510,18 +6624,18 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Taxon">Taxon[]</a></p>
 
 
-        <h2 id="resource-14">/dataset/{dkey}/taxon/{id}/children</h2>
+        <h2 id="resource-28">/dataset/{key}/taxon/{id}/children</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/taxon/{id}/children HTTP/1.1
+GET //dataset/{key}/taxon/{id}/children HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/taxon/{id}/children</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/taxon/{id}/children</h3>
     <p><p>Page through all direct children of the taxon regardless of the rank.</p>
 </p>
 
@@ -4529,11 +6643,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op17-responses" class="clear">Response 200</h3>
+            <h3 id="op31-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -4541,18 +6655,18 @@ Content-Type: application/json
                     <p>Content: <a href="#model-TaxonResultSet">TaxonResultSet</a></p>
 
 
-        <h2 id="resource-15">/dataset/{dkey}/taxon/{id}/synonyms</h2>
+        <h2 id="resource-29">/dataset/{key}/taxon/{id}/synonyms</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/taxon/{id}/synonyms HTTP/1.1
+GET //dataset/{key}/taxon/{id}/synonyms HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/taxon/{id}/synonyms</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/taxon/{id}/synonyms</h3>
     <p><p>get list of all synonyms chronologically arranged by homotypic groups. Nested homotypic names are based on the same original name in sublists. Example given for synonymy of Agoseris grandiflora (Nutt.) Greene Example: Barkhausia lessingii Hook. &amp; Arn. nom. illeg. is a homotypical synonym of Agoseris apargioides (Less.) Greene</p>
 </p>
 
@@ -4560,11 +6674,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op18-responses" class="clear">Response 200</h3>
+            <h3 id="op32-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -4753,18 +6867,18 @@ Content-Type: application/json
                     <p>Content: Name[][]</p>
 
 
-        <h2 id="resource-16">/dataset/{dkey}/taxon/{id}/verbatim</h2>
+        <h2 id="resource-30">/dataset/{key}/taxon/{id}/verbatim</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/taxon/{id}/verbatim HTTP/1.1
+GET //dataset/{key}/taxon/{id}/verbatim HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/taxon/{id}/verbatim</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/taxon/{id}/verbatim</h3>
     <p><p>Retrieves the verbatim DarwinCore record of the taxon with the specified key,</p>
 </p>
 
@@ -4772,11 +6886,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op19-responses" class="clear">Response 200</h3>
+            <h3 id="op33-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4813,24 +6927,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-VerbatimRecord">VerbatimRecord</a></p>
 
 
-        <h2 id="resource-17">/dataset/{dkey}/name</h2>
+        <h2 id="resource-31">/dataset/{key}/name</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/name HTTP/1.1
+GET //dataset/{key}/name HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/name</h3>
     <p><p>Paging parameters.</p>
 </p>
 
 
 
-        <h3 id="op20-request-params">Parameters</h3>
+        <h3 id="op34-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4871,11 +6985,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op20-responses" class="clear">Response 200</h3>
+            <h3 id="op34-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -4883,24 +6997,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-NameResultSet">NameResultSet</a></p>
 
 
-        <h2 id="resource-18">/dataset/{dkey}/name/{id}</h2>
+        <h2 id="resource-32">/dataset/{key}/name/{id}</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/name/{id} HTTP/1.1
+GET //dataset/{key}/name/{id} HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{id}</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/name/{id}</h3>
     <p><p>Retrieves the name with the specified id.</p>
 </p>
 
 
 
-        <h3 id="op21-request-params">Parameters</h3>
+        <h3 id="op35-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -4923,11 +7037,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op21-responses" class="clear">Response 200</h3>
+            <h3 id="op35-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4963,18 +7077,18 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Name">Name</a></p>
 
 
-        <h2 id="resource-19">/dataset/{dkey}/name/{id}/synonyms</h2>
+        <h2 id="resource-33">/dataset/{key}/name/{id}/synonyms</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/name/{id}/synonyms HTTP/1.1
+GET //dataset/{key}/name/{id}/synonyms HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{id}/synonyms</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/name/{id}/synonyms</h3>
     <p><p>Retrieves all names in the same homotypic group as the name with the specified key.</p>
 </p>
 
@@ -4982,11 +7096,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op22-responses" class="clear">Response 200</h3>
+            <h3 id="op36-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -5049,18 +7163,18 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Name">Name[]</a></p>
 
 
-        <h2 id="resource-20">/dataset/{dkey}/name/{id}/publishedIn</h2>
+        <h2 id="resource-34">/dataset/{key}/name/{id}/publishedIn</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/name/{id}/publishedIn HTTP/1.1
+GET //dataset/{key}/name/{id}/publishedIn HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{id}/publishedIn</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/name/{id}/publishedIn</h3>
     <p><p>Retrieves the literature reference for the name with the specified key.</p>
 </p>
 
@@ -5068,11 +7182,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op23-responses" class="clear">Response 200</h3>
+            <h3 id="op37-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5096,24 +7210,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Reference">Reference</a></p>
 
 
-        <h2 id="resource-21">/dataset/{dkey}/name/{id}/relations</h2>
+        <h2 id="resource-35">/dataset/{key}/name/{id}/relations</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/name/{id}/relations HTTP/1.1
+GET //dataset/{key}/name/{id}/relations HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{id}/relations</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/name/{id}/relations</h3>
     <p><p>Retrieves nomenclatural relations for the name or its homotypical group</p>
 </p>
 
 
 
-        <h3 id="op24-request-params">Parameters</h3>
+        <h3 id="op38-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -5136,11 +7250,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op24-responses" class="clear">Response 200</h3>
+            <h3 id="op38-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -5165,18 +7279,18 @@ Content-Type: application/json
                     <p>Content: <a href="#model-NameRelation">NameRelation[]</a></p>
 
 
-        <h2 id="resource-22">/dataset/{dkey}/name/{id}/verbatim</h2>
+        <h2 id="resource-36">/dataset/{key}/name/{id}/verbatim</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/name/{id}/verbatim HTTP/1.1
+GET //dataset/{key}/name/{id}/verbatim HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/name/{id}/verbatim</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/name/{id}/verbatim</h3>
     <p><p>Retrieves the verbatim DarwinCore record of the name with the specified key,</p>
 </p>
 
@@ -5184,11 +7298,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op25-responses" class="clear">Response 200</h3>
+            <h3 id="op39-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5225,24 +7339,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-VerbatimRecord">VerbatimRecord</a></p>
 
 
-        <h2 id="resource-23">/dataset/{dkey}/reference</h2>
+        <h2 id="resource-37">/dataset/{key}/reference</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/reference HTTP/1.1
+GET //dataset/{key}/reference HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/reference</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/reference</h3>
     <p><p>Paging parameters.</p>
 </p>
 
 
 
-        <h3 id="op26-request-params">Parameters</h3>
+        <h3 id="op40-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -5283,11 +7397,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op26-responses" class="clear">Response 200</h3>
+            <h3 id="op40-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -5295,24 +7409,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-ResultSet">ResultSet</a></p>
 
 
-        <h2 id="resource-24">/dataset/{dkey}/reference/{id}</h2>
+        <h2 id="resource-38">/dataset/{key}/reference/{id}</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{dkey}/reference/{id} HTTP/1.1
+GET //dataset/{key}/reference/{id} HTTP/1.1
 Host: api.col.plus
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{dkey}/reference/{id}</h3>
+        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/reference/{id}</h3>
     <p><p>get reference details by id</p>
 </p>
 
 
 
-        <h3 id="op27-request-params">Parameters</h3>
+        <h3 id="op41-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -5335,11 +7449,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op27-responses" class="clear">Response 200</h3>
+            <h3 id="op41-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5363,7 +7477,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Reference">Reference</a></p>
 
 
-        <h1 id="resource-25">/colsource</h1>
+        <h1 id="resource-39">/colsource</h1>
 
     
 
@@ -5392,7 +7506,7 @@ type: ColSource[]</p>
 
 
 
-        <h1 id="resource-26">/decision</h1>
+        <h1 id="resource-40">/decision</h1>
 
     
 
@@ -5425,7 +7539,7 @@ type: Decision[]</p>
 
 
 
-        <h1 id="resource-27">/sector</h1>
+        <h1 id="resource-41">/sector</h1>
 
     
 
@@ -5454,7 +7568,7 @@ type: Sector[]</p>
 
 
 
-        <h1 id="resource-28">/importer</h1>
+        <h1 id="resource-42">/importer</h1>
 
     
 
@@ -5471,7 +7585,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op31-request-params">Parameters</h3>
+        <h3 id="op45-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -5521,11 +7635,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op31-responses" class="clear">Response 200</h3>
+            <h3 id="op45-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -5533,7 +7647,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-DatasetImportResultSet">DatasetImportResultSet</a></p>
 
 
-        <h2 id="resource-29">/importer/queue</h2>
+        <h2 id="resource-43">/importer/queue</h2>
 
     
 
@@ -5550,7 +7664,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op32-request-params">Parameters</h3>
+        <h3 id="op46-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -5600,11 +7714,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op32-responses" class="clear">Response 200</h3>
+            <h3 id="op46-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -5612,7 +7726,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-ImportRequest">ImportRequest[]</a></p>
 
 
-        <h1 id="resource-30">/name/search</h1>
+        <h1 id="resource-44">/name/search</h1>
 
     
 
@@ -5629,7 +7743,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op33-request-params">Parameters</h3>
+        <h3 id="op47-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -5769,11 +7883,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op33-responses" class="clear">Response 200</h3>
+            <h3 id="op47-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6026,7 +8140,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-NameSearchResultSet">NameSearchResultSet</a></p>
 
 
-        <h1 id="resource-31">/name/suggest</h1>
+        <h1 id="resource-45">/name/suggest</h1>
 
     
 
@@ -6043,7 +8157,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op34-request-params">Parameters</h3>
+        <h3 id="op48-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -6093,11 +8207,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op34-responses" class="clear">Response 200</h3>
+            <h3 id="op48-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -6105,7 +8219,7 @@ Content-Type: application/json
                     <p>Content: string</p>
 
 
-        <h1 id="resource-32">/name/matching</h1>
+        <h1 id="resource-46">/name/matching</h1>
 
     
 
@@ -6123,7 +8237,7 @@ Eventually should be exposed in public API.</p>
 
 
 
-        <h3 id="op35-request-params">Parameters</h3>
+        <h3 id="op49-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -6182,11 +8296,11 @@ Eventually should be exposed in public API.</p>
         </tbody></table>
 
 
-            <h3 id="op35-responses" class="clear">Response 200</h3>
+            <h3 id="op49-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -6194,13 +8308,13 @@ Content-Type: application/json
                     <p>Content: <a href="#model-NameMatch">NameMatch</a></p>
 
 
-        <h1 id="resource-33">/parser</h1>
+        <h1 id="resource-47">/parser</h1>
 
     
 
 
 
-        <h2 id="resource-34">/parser/name</h2>
+        <h2 id="resource-48">/parser/name</h2>
 
     
 
@@ -6217,7 +8331,7 @@ Host: api.col.plus
 
 
 
-        <h3 id="op36-request-params">Parameters</h3>
+        <h3 id="op50-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -6240,11 +8354,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op36-responses" class="clear">Response 200</h3>
+            <h3 id="op50-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -6319,7 +8433,7 @@ with one name per line, or as plain/text content in the request body.</p>
 </p>
 
 
-    <h3 id="op37-request-body">Body</h3>
+    <h3 id="op51-request-body">Body</h3>
             <p><code>application/json</code></p>
             <p>Content: any</p>
             <p><code>multipart/form-data</code></p>
@@ -6329,11 +8443,11 @@ with one name per line, or as plain/text content in the request body.</p>
 
 
 
-            <h3 id="op37-responses" class="clear">Response 200</h3>
+            <h3 id="op51-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -6396,7 +8510,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Name">Name[]</a></p>
 
 
-        <h1 id="resource-35">/vocab</h1>
+        <h1 id="resource-49">/vocab</h1>
 
     
 
@@ -6416,11 +8530,11 @@ Any of the names can be used as valid subresources to list the actual enumeratio
 
 
 
-            <h3 id="op38-responses" class="clear">Response 200</h3>
+            <h3 id="op52-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">["continent","country","areastandard","cslreftype","nametype","origin","language","frequency","rank","nomacttype","coverage","nomstatus","dataformat","importstate","issue","gazetteer","cslvariable","typestatus","lifezone","distributionstatus","taxonomicstatus","kingdom","datasettype","license","nomcode","namepart"]
@@ -6430,7 +8544,7 @@ Content-Type: application/json
                     <p>Content: string[]</p>
 
 
-        <h2 id="resource-36">/vocab/{name}</h2>
+        <h2 id="resource-50">/vocab/{name}</h2>
 
     
 
@@ -6449,11 +8563,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op39-responses" class="clear">Response 200</h3>
+            <h3 id="op53-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 8, 2019 4:05:05 PM CDT
+Date: Wednesday, October 9, 2019 4:59:57 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]
