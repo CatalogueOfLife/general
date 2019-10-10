@@ -110,11 +110,11 @@ types: !include inc/types.raml
         type: integer
         required: false
       min:
-        description: the minimum number of species
+        description: the minimum number of estimated species
         type: integer
         required: false
       max:
-        description: the maximum number of species
+        description: the maximum number of estimated species
         type: integer
         required: false
     responses:
@@ -172,23 +172,214 @@ types: !include inc/types.raml
       datasetKey:
         type: integer
         description: Filter by dataset
+        required: false
       state:
         type: ImportState
         description: filters listed import metrics by their state, e.g. the last failed import
+        required: false
+      running:
+        type: boolean
+        description: if only a list of running imports should be returned
+        required: false
     responses:
       200:
         body: DatasetImportResultSet
-  /queue:
+  post:
+    displayName: Start an import
+    description: Starts an import process
+    body:
+      application/json:
+        required: true
+        type: ImportRequest
+        example: |
+          {
+            "datasetKey": 1163,
+            "priority": true,
+            "force": true
+          }
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+              {
+                "datasetKey": 1163,
+                "force": true,
+                "priority": true,
+                "createdBy": 100,
+                "created": "2019-10-10T20:23:09.617",
+                "started": "2019-10-10T20:23:09.633"
+              }
+  /{key}:
     get:
-      description: Retrieve import metrics sorted chronologically descending.
-      is: [paged,filteredByDataset]
-      queryParameters:
-        state:
-          type: ImportState
-          description: filters listed import metrics by their state, e.g. the last failed import
+      displayName: Gets the import status and import metrics
+      description: Returns import status and metrics for dataset {key}
       responses:
         200:
-          body: ImportRequest[]
+          body:
+            application/json:
+              example: |
+                # inserting import
+                {
+                  "datasetKey": 1140,
+                  "attempt": 4,
+                  "state": "inserting",
+                  "started": "2019-10-10T20:40:08.724",
+                  "downloadUri": "https://raw.githubusercontent.com/Sp2000/colplus-repo/master/ACEF/140.tar.gz",
+                  "download": "2019-10-10T20:40:09",
+                  "md5": "FD4D41F0B279ADAB297873A3578EBC6C",
+                  "usagesCount": 0
+                }
+
+                # completed import
+                {
+                  "datasetKey": 2050,
+                  "attempt": 2,
+                  "state": "finished",
+                  "started": "2019-10-09T21:58:38.858",
+                  "finished": "2019-10-09T21:58:41.856",
+                  "nameCount": 106,
+                  "taxonCount": 84,
+                  "synonymCount": 22,
+                  "referenceCount": 0,
+                  "distributionCount": 0,
+                  "vernacularCount": 0,
+                  "namesByTypeCount": {
+                    "scientific": 106
+                  },
+                  "namesByOriginCount": {
+                    "denormed classification": 55,
+                    "source": 51
+                  },
+                  "namesByRankCount": {
+                    "species": 33,
+                    "genus": 17,
+                    "order": 13,
+                    "family": 13,
+                    "subspecies": 10,
+                    "variety": 8,
+                    "class": 4,
+                    "phylum": 3,
+                    "kingdom": 2,
+                    "superfamily": 2,
+                    "subgenus": 1
+                  },
+                  "usagesByStatusCount": {
+                    "accepted": 84,
+                    "synonym": 22
+                  },
+                  "taxaByRankCount": {
+                    "species": 22,
+                    "genus": 17,
+                    "order": 13,
+                    "family": 13,
+                    "subspecies": 5,
+                    "class": 4,
+                    "phylum": 3,
+                    "kingdom": 2,
+                    "superfamily": 2,
+                    "variety": 2,
+                    "subgenus": 1
+                  },
+                  "issuesCount": {
+                    "duplicate name": 28,
+                    "name match variant": 4,
+                    "doubtful name": 1,
+                    "null epithet": 1,
+                    "name match inserted": 1
+                  },
+                  "download": "2019-10-09T21:58:38",
+                  "md5": "CDEFD4617558457733F782D1ACACD284",
+                  "verbatimCount": 102,
+                  "verbatimByTypeCount": {
+                    "col:Name": 51,
+                    "col:Synonym": 22,
+                    "col:Taxon": 29
+                  },
+                  "verbatimByTermCount": {
+                    "col:Name": {
+                      "col:ID": 51,
+                      "col:code": 51,
+                      "col:link": 34,
+                      "col:rank": 51,
+                      "col:genus": 51,
+                      "col:remarks": 34,
+                      "col:authorship": 50,
+                      "col:scientificName": 51,
+                      "col:specificEpithet": 51,
+                      "col:infraspecificEpithet": 17,
+                      "http://unknown.org/col/databaseID": 51
+                    },
+                    "col:Taxon": {
+                      "col:ID": 29,
+                      "col:link": 14,
+                      "col:class": 29,
+                      "col:genus": 29,
+                      "col:order": 29,
+                      "col:family": 29,
+                      "col:nameID": 29,
+                      "col:phylum": 29,
+                      "col:kingdom": 29,
+                      "col:remarks": 14,
+                      "col:lifezone": 5,
+                      "col:parentID": 4,
+                      "col:subgenus": 2,
+                      "col:accordingTo": 29,
+                      "col:provisional": 29,
+                      "col:superfamily": 5,
+                      "col:accordingToDate": 29,
+                      "http://unknown.org/col/fossil": 29,
+                      "http://unknown.org/col/recent": 29,
+                      "http://unknown.org/col/databaseID": 29
+                    },
+                    "col:Synonym": {
+                      "col:nameID": 22,
+                      "col:status": 22,
+                      "col:remarks": 22,
+                      "col:taxonID": 22,
+                      "http://unknown.org/col/databaseID": 22
+                    }
+                  },
+                  "usagesCount": 106
+                }
+        404:
+          body:
+            application/json:
+              example: |
+                {
+                  "code": 404,
+                  "message": "HTTP 404 Not Found"
+                }
+    post:
+      displayName: Import a dataset
+      description: |
+        Triggers an import for dataset {key}
+        Optionally a compressed archive of data (zip or gzip) can be included
+      body:
+        application/octet-stream:
+          required: false
+        application/zip:
+          required: false
+        application/gzip:
+          required: false
+      responses:
+        201:
+          body:
+            application/json:
+              example: |
+                {
+                  "datasetKey": 2050,
+                  "force": true,
+                  "priority": true,
+                  "createdBy": 100,
+                  "created": "2019-10-10T20:49:01.592",
+                  "started": "2019-10-10T20:49:01.596"
+                }
+    delete:
+      displayName: Cancel an import
+      description: Deletes an import from the importer queue
+      responses:
+        204:
 /name/search:
   get:
     displayName: Name search

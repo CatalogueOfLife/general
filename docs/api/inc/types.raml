@@ -553,9 +553,13 @@ ImportRequest:
     force:
       type: boolean
       description: If true forces a new import even if the data archive has not changed.
+    priority:
+      type: boolean
+      description: If true prioritizes the import over automated background imports
     created:
       type: datetime
       description: datetime the request was created/scheduled
+      required: false
 DatasetImport:
   type: object
   description: Metrics and import details about a single dataset import event.
