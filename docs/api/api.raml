@@ -100,6 +100,58 @@ types: !include inc/types.raml
           body:
             application/json:
               type: Decision[]
+/estimate:
+  displayName: Gets species estimates
+  description: Returns species estimates
+  get:
+    queryParameters:
+      datasetKey:
+        description: the dataset key
+        type: integer
+        required: false
+      min:
+        description: the minimum number of species
+        type: integer
+        required: false
+      max:
+        description: the maximum number of species
+        type: integer
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "offset": 0,
+                "limit": 1,
+                "total": 1266,
+                "result": [
+                  {
+                    "created": "2015-10-08T22:51:08",
+                    "createdBy": 0,
+                    "modified": "2018-04-09T17:54:39",
+                    "modifiedBy": 0,
+                    "key": 68,
+                    "datasetKey": 3,
+                    "target": {
+                      "id": "061950e4-9782-4d1a-9c87-dcf375788e6b",
+                      "name": "Animalia",
+                      "rank": "kingdom",
+                      "code": "zoological"
+                    },
+                    "estimate": 1525728,
+                    "type": "described species living",
+                    "referenceId": "27"
+                  }
+                ],
+                "last": false,
+                "empty": false
+              }
+  /broken:
+    displayName: Gets a list of broken species estimates
+    description: Returns a list of species estimates that do not match any taxa
+    get: # TODO
 /sector:
   get:
     description: |
