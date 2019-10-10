@@ -70,6 +70,7 @@ types: !include inc/types.raml
       application/json:
         example: |
           {
+            "datasetKey": "3",
             "subjectDatasetKey": "1140",
             "subject": {
               "id": "12749-syn-1",
@@ -284,6 +285,65 @@ types: !include inc/types.raml
           body:
             application/json:
               type: Name[]
+/user:
+  /{userKey}:
+    get:
+      displayName: Gets user information
+      description: Returns username, first name, last name, country
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "key": 1,
+                  "username": "L",
+                  "firstname": "Carl",
+                  "lastname": "Linnaeus",
+                  "country": "SE"
+                }
+        404:
+          body:
+            application/json:
+              example: |
+                {
+                  "code": 404,
+                  "message": "HTTP 404 Not Found"
+                }
+  /me:
+    get:
+      displayName: Gets logged in user's information
+      description: Returns username, first name, last name, country
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "key": 1,
+                  "username": "L",
+                  "firstname": "Carl",
+                  "lastname": "Linnaeus",
+                  "email": "l@col.plus",
+                  "country": "SE",
+                  "roles": [
+                    "user",
+                    "editor",
+                    "admin"
+                  ],
+                  "lastLogin": "1777-10-10T18:59:21.734"
+                }
+/version:
+  get:
+    displayName: Returns the CoL+ API version
+    description: The CoL+ API version is the GitHub commit hash and time (e.g., https://github.com/Sp2000/colplus-backend/tree/70d8d5b).
+    responses:
+      200:
+        body:
+          text/plain:
+            example:  |
+              "70d8d5b  2019-10-09T14:26:15+0000"
+            type: string
 /vocab:
   get:
     description: |
