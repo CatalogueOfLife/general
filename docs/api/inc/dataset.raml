@@ -376,6 +376,56 @@
                     "code": 404,
                     "message": "At least 2 successful imports must exist to provide a diff"
                   }
+    /namesdiff:
+      get:
+        displayName: Plain text diff of names
+        description: Returns a plain text diff of the names for dataset {key}
+        responses:
+          200:
+            body:
+              text/plain:
+    /logo:
+      get:
+        displayName: Get the dataset logo
+        description: Returns the logo image for dataset {key}
+        responses:
+          200:
+            body:
+              image/bmp:
+              image/gif:
+              image/jpg:
+              image/png:
+              image/psd:
+              image/tiff:
+          404:
+            body:
+              application/json:
+                example: |
+                  {
+                    "code": 404,
+                    "message": "Dataset 1140 has no logo"
+                  }
+      post:
+        displayName: Post the dataset logo
+        description: Sets the logo image for dataset {key}
+        body:
+          application/octet-stream:
+          image/bmp:
+          image/gif:
+          image/jpg:
+          image/png:
+          image/psd:
+          image/tiff:
+        responses:
+          201:
+          400:
+            body:
+              application/json:
+                example: |
+                  {
+                    "code": 400,
+                    "message": "Image format not supported"
+                  }
     /verbatim:
       get:
         description: Page through all verbatim records of the dataset

@@ -283,7 +283,7 @@ ReferenceTopicType:
     See http://api.col.plus/vocab/gazetteer
 TaxonomicStatusType:
   type: string
-  enum: ["accepted", "doubtful"]
+  enum: ["accepted", "doubtful", "ambiguous synonym"]
   description: >
     Taxonomic status enumeration for both accepted taxa and synonyms.
     See http://api.col.plus/vocab/taxonomicstatus
@@ -710,7 +710,7 @@ Decision:
     key:
       type: integer
       description: primary key
-    sectorKey:
+    datasetKey:
       type: integer
       description: primary key
     subject:

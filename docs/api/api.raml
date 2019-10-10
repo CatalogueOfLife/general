@@ -15,36 +15,90 @@ traits: !include inc/traits.raml
 types: !include inc/types.raml
 /admin: !include inc/admin.raml
 /assembly: !include inc/assembly.raml
-/datapackage: !include inc/datapackage.raml
-/dataset: !include inc/dataset.raml
+/broken:
+  get:
+    description: |
+      List of broken editorial decisions.
+    queryParameters:
+      datasetKey:
+        type: integer
+        description: Filter by dataset
+    responses:
+      200:
+        body:
+          application/json:
+            type: Decision[]
 /colsource:
   get:
     description: |
       List of CoL sources.
-      queryParameters:
-        datasetKey:
-          description: Filter by dataset
-      responses:
-        200:
-          body:
-            application/json:
-              type: ColSource[]
+    queryParameters:
+      datasetKey:
+        description: Filter by dataset
+    responses:
+      200:
+        body:
+          application/json:
+            type: ColSource[]
+/datapackage: !include inc/datapackage.raml
+/dataset: !include inc/dataset.raml
 /decision:
   get:
     description: |
       List of editorial decisions.
-      queryParameters:
-        datasetKey:
+    queryParameters:
+      datasetKey:
+        type: integer
+        description: Filter by dataset
+      sectorKey:
+        type: integer
+        description: Filter by sector
+    responses:
+      200:
+        body:
+          application/json:
+            type: Decision[]
+            example: |
+              [
+                {
+                  "created": "2019-10-10T18:12:03.457967",
+                  "createdBy": 100,
+                  "modified": "2019-10-10T18:12:03.457967",
+                  "modifiedBy": 100,
+                  "key": 6,
+                  "datasetKey": 3,
+                  "subject": {
+                    "id": "12749-syn-1",
+                    "name": "Acrophorus hookeri",
+                    "authorship": "Moore",
+                    "rank": "species"
+                  },
+                  "subjectDatasetKey": 1140,
+                  "mode": "block",
+                  "status": "ambiguous synonym"
+                }
+              ]
+  post:
+    body:
+      application/json:
+        example: |
+          {
+            "subjectDatasetKey": "1140",
+            "subject": {
+              "id": "12749-syn-1",
+              "name": "Acrophorus hookeri",
+              "authorship": "Moore",
+              "rank": "species"
+            },
+            "mode": "block",
+            "status": "ambiguous synonym"
+          }
+    responses:
+      200:
+        body:
           type: integer
-          description: Filter by dataset
-        sectorKey:
-          type: integer
-          description: Filter by sector
-      responses:
-        200:
-          body:
-            application/json:
-              type: Decision[]
+          description: the decision key
+          example: '6'
 /sector:
   get:
     description: |
@@ -52,11 +106,11 @@ types: !include inc/types.raml
       queryParameters:
         sourceKey:
           description: Filter by CoL source.
-      responses:
-        200:
-          body:
-            application/json:
-              type: Sector[]
+    responses:
+      200:
+        body:
+          application/json:
+            type: Sector[]
 /importer:
   get:
     description: Retrieve import metrics sorted chronologically descending.
