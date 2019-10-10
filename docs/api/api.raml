@@ -15,19 +15,6 @@ traits: !include inc/traits.raml
 types: !include inc/types.raml
 /admin: !include inc/admin.raml
 /assembly: !include inc/assembly.raml
-/broken:
-  get:
-    description: |
-      List of broken editorial decisions.
-    queryParameters:
-      datasetKey:
-        type: integer
-        description: Filter by dataset
-    responses:
-      200:
-        body:
-          application/json:
-            type: Decision[]
 /colsource:
   get:
     description: |
@@ -99,6 +86,19 @@ types: !include inc/types.raml
           type: integer
           description: the decision key
           example: '6'
+  /broken:
+    get:
+      description: |
+        List of broken editorial decisions.
+      queryParameters:
+        datasetKey:
+          type: integer
+          description: Filter by dataset
+      responses:
+        200:
+          body:
+            application/json:
+              type: Decision[]
 /sector:
   get:
     description: |
