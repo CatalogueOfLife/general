@@ -113,6 +113,330 @@
       key:
         type: integer
         description: dataset key
+    /duplicate:
+      displayName: Get list of paired duplicates
+      description: Returns a list of paired duplicates
+      get:
+        queryParameters:
+          entity:
+            required: false
+            description: TODO
+          mode:
+            required: false
+            description: TODO
+          minSize:
+            type: integer
+            required: false
+            description: TODO
+          sectorKey:
+            type: integer
+            required: false
+            description: TODO
+          category:
+            required: false
+            description: TODO
+          rank:
+            required: false
+            description: the taxonomic rank
+          status:
+            required: false
+            description: the taxonomic status
+          acceptedDifferent:
+            type: boolean
+            required: false
+            description: if the accepted names are different
+          authorshipDifferent:
+            type: boolean
+            required: false
+            description: if the author strings are different
+          rankDiferent:
+            type: boolean
+            required: false
+            description: if the taxonomic ranks are different
+          codeDiferent:
+            type: boolean
+            required: false
+            description: if the nomenclatural codes are different
+          withDecision:
+            type: boolean
+            required: false
+            description: if the pair of duplicates has a decision
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "key": "abbevillea fenzliana",
+                  "usages": [
+                    {
+                      "usage": {
+                        "created": "2019-10-09T21:58:41.095853",
+                        "createdBy": 10,
+                        "modified": "2019-10-09T21:58:41.095853",
+                        "modifiedBy": 10,
+                        "datasetKey": 2050,
+                        "id": "B6-2-B6-4",
+                        "verbatimKey": 79,
+                        "name": {
+                          "created": "2019-10-09T21:58:40.912813",
+                          "createdBy": 10,
+                          "modified": "2019-10-09T21:58:40.912813",
+                          "modifiedBy": 10,
+                          "datasetKey": 2050,
+                          "id": "B6-4",
+                          "verbatimKey": 64,
+                          "homotypicNameId": "B6-4",
+                          "nameIndexId": "9QE3",
+                          "scientificName": "Abbevillea fenzliana",
+                          "authorship": "O.Berg",
+                          "rank": "species",
+                          "genus": "Abbevillea",
+                          "specificEpithet": "fenzliana",
+                          "candidatus": false,
+                          "combinationAuthorship": {
+                            "authors": [
+                              "O.Berg"
+                            ]
+                          },
+                          "code": "botanical",
+                          "origin": "source",
+                          "type": "scientific",
+                          "webpage": "https://github.com/Sp2000/colplus-backend/issues/195",
+                          "remarks": "Test for duplicate SYN-SYN (diff parent, diff authors)",
+                          "parsed": true,
+                          "formattedName": "<i>Abbevillea</i> <i>fenzliana</i> O.Berg, Test for duplicate SYN-SYN (diff parent, diff authors)"
+                        },
+                        "status": "synonym",
+                        "origin": "source",
+                        "parentId": "B6-2",
+                        "remarks": "Test for duplicate SYN-SYN (diff parent, diff authors)",
+                        "accepted": {
+                          "created": "2019-10-09T21:58:41.095853",
+                          "createdBy": 10,
+                          "modified": "2019-10-09T21:58:41.095853",
+                          "modifiedBy": 10,
+                          "datasetKey": 2050,
+                          "id": "B6-2",
+                          "verbatimKey": 54,
+                          "name": {
+                            "created": "2019-10-09T21:58:40.912813",
+                            "createdBy": 10,
+                            "modified": "2019-10-09T21:58:40.912813",
+                            "modifiedBy": 10,
+                            "datasetKey": 2050,
+                            "id": "B6-2",
+                            "verbatimKey": 93,
+                            "homotypicNameId": "B6-2",
+                            "nameIndexId": "9QE8",
+                            "scientificName": "Campomanesia guaviroba",
+                            "authorship": "(DC.) Bertoni",
+                            "rank": "species",
+                            "genus": "Campomanesia",
+                            "specificEpithet": "guaviroba",
+                            "candidatus": false,
+                            "combinationAuthorship": {
+                              "authors": [
+                                "Bertoni"
+                              ]
+                            },
+                            "basionymAuthorship": {
+                              "authors": [
+                                "DC."
+                              ]
+                            },
+                            "code": "botanical",
+                            "origin": "source",
+                            "type": "scientific",
+                            "parsed": true,
+                            "formattedName": "<i>Campomanesia</i> <i>guaviroba</i> (DC.) Bertoni"
+                          },
+                          "status": "accepted",
+                          "origin": "source",
+                          "parentId": "x4E",
+                          "accordingTo": "GSD141",
+                          "accordingToDate": "2019-04-11",
+                          "bareName": false,
+                          "synonym": false,
+                          "taxon": true
+                        },
+                        "homotypic": false,
+                        "bareName": false,
+                        "synonym": true,
+                        "taxon": false
+                      },
+                      "classification": [
+                        {
+                          "id": "B6-2",
+                          "name": "Campomanesia guaviroba",
+                          "authorship": "(DC.) Bertoni",
+                          "rank": "species"
+                        },
+                        {
+                          "id": "x4E",
+                          "name": "Campomanesia",
+                          "rank": "genus"
+                        },
+                        {
+                          "id": "x4C",
+                          "name": "Myrtaceae",
+                          "rank": "family"
+                        },
+                        {
+                          "id": "x4A",
+                          "name": "Myrtales",
+                          "rank": "order"
+                        },
+                        {
+                          "id": "x38",
+                          "name": "Magnoliopsida",
+                          "rank": "class"
+                        },
+                        {
+                          "id": "x36",
+                          "name": "Tracheophyta",
+                          "rank": "phylum"
+                        },
+                        {
+                          "id": "x34",
+                          "name": "Plantae",
+                          "rank": "kingdom"
+                        }
+                      ]
+                    },
+                    {
+                      "usage": {
+                        "created": "2019-10-09T21:58:41.095853",
+                        "createdBy": 10,
+                        "modified": "2019-10-09T21:58:41.095853",
+                        "modifiedBy": 10,
+                        "datasetKey": 2050,
+                        "id": "B6-1-B6-3",
+                        "verbatimKey": 48,
+                        "name": {
+                          "created": "2019-10-09T21:58:40.912813",
+                          "createdBy": 10,
+                          "modified": "2019-10-09T21:58:40.912813",
+                          "modifiedBy": 10,
+                          "datasetKey": 2050,
+                          "id": "B6-3",
+                          "verbatimKey": 15,
+                          "homotypicNameId": "B6-3",
+                          "nameIndexId": "9QE3",
+                          "scientificName": "Abbevillea fenzliana",
+                          "authorship": "Berg",
+                          "rank": "species",
+                          "genus": "Abbevillea",
+                          "specificEpithet": "fenzliana",
+                          "candidatus": false,
+                          "combinationAuthorship": {
+                            "authors": [
+                              "Berg"
+                            ]
+                          },
+                          "code": "botanical",
+                          "origin": "source",
+                          "type": "scientific",
+                          "webpage": "https://github.com/Sp2000/colplus-backend/issues/195",
+                          "remarks": "Test for duplicate SYN-SYN (diff parent, diff authors)",
+                          "parsed": true,
+                          "formattedName": "<i>Abbevillea</i> <i>fenzliana</i> Berg, Test for duplicate SYN-SYN (diff parent, diff authors)"
+                        },
+                        "status": "synonym",
+                        "origin": "source",
+                        "parentId": "B6-1",
+                        "remarks": "Test for duplicate SYN-SYN (diff parent, diff authors)",
+                        "accepted": {
+                          "created": "2019-10-09T21:58:41.095853",
+                          "createdBy": 10,
+                          "modified": "2019-10-09T21:58:41.095853",
+                          "modifiedBy": 10,
+                          "datasetKey": 2050,
+                          "id": "B6-1",
+                          "verbatimKey": 73,
+                          "name": {
+                            "created": "2019-10-09T21:58:40.912813",
+                            "createdBy": 10,
+                            "modified": "2019-10-09T21:58:40.912813",
+                            "modifiedBy": 10,
+                            "datasetKey": 2050,
+                            "id": "B6-1",
+                            "verbatimKey": 34,
+                            "homotypicNameId": "B6-1",
+                            "nameIndexId": "9QEL",
+                            "scientificName": "Campomanesia lineatifolia",
+                            "authorship": "Ruiz & Pav.",
+                            "rank": "species",
+                            "genus": "Campomanesia",
+                            "specificEpithet": "lineatifolia",
+                            "candidatus": false,
+                            "combinationAuthorship": {
+                              "authors": [
+                                "Ruiz",
+                                "Pav."
+                              ]
+                            },
+                            "code": "botanical",
+                            "origin": "source",
+                            "type": "scientific",
+                            "parsed": true,
+                            "formattedName": "<i>Campomanesia</i> <i>lineatifolia</i> Ruiz & Pav."
+                          },
+                          "status": "accepted",
+                          "origin": "source",
+                          "parentId": "x4E",
+                          "accordingTo": "GSD141",
+                          "accordingToDate": "2019-04-11",
+                          "bareName": false,
+                          "synonym": false,
+                          "taxon": true
+                        },
+                        "homotypic": false,
+                        "bareName": false,
+                        "synonym": true,
+                        "taxon": false
+                      },
+                      "classification": [
+                        {
+                          "id": "B6-1",
+                          "name": "Campomanesia lineatifolia",
+                          "authorship": "Ruiz & Pav.",
+                          "rank": "species"
+                        },
+                        {
+                          "id": "x4E",
+                          "name": "Campomanesia",
+                          "rank": "genus"
+                        },
+                        {
+                          "id": "x4C",
+                          "name": "Myrtaceae",
+                          "rank": "family"
+                        },
+                        {
+                          "id": "x4A",
+                          "name": "Myrtales",
+                          "rank": "order"
+                        },
+                        {
+                          "id": "x38",
+                          "name": "Magnoliopsida",
+                          "rank": "class"
+                        },
+                        {
+                          "id": "x36",
+                          "name": "Tracheophyta",
+                          "rank": "phylum"
+                        },
+                        {
+                          "id": "x34",
+                          "name": "Plantae",
+                          "rank": "kingdom"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
     /import:
       get:
         displayName: Import dataset
@@ -328,62 +652,6 @@
                   {
                     "parallel": false
                   }
-    /texttree:
-      get:
-        displayName: Plain text classification tree
-        description: Returns a plain text classification tree for dataset {key}.
-        responses:
-          200:
-            body:
-              text/plain:
-                example: |
-                  Animalia [kingdom]
-                    Arthropoda [phylum]
-                      Diplopoda [class]
-                        Julida [order]
-                          Juloidea [superfamily]
-                            Julidae [family]
-                              Leptoiulus [genus]
-                                Leptoiulus trilineatus (C.L.Koch, 1847) [species]
-                                  Leptoiulus trilineatus nigra Attems, 1927 [subspecies]
-                                    *Leptoiulus trilineatus nigra (Verhoeff, 1898) [subspecies]
-          404:
-            description: Dataset not found
-    /treediff:
-      get:
-        displayName: Plain text diff of classification tree between import attempts
-        description: Returns a plain text diff of the classification tree for dataset {key}.
-        responses:
-          200:
-            body:
-              text/plain:
-                example: |
-                  --- /home/col/bin/dev/metrics/dataset/2050/tree/1.txt	2019-10-09 21:43:18.083256660 +0000
-                  +++ /home/col/bin/dev/metrics/dataset/2050/tree/2.txt	2019-10-09 21:58:41.338271290 +0000
-                  @@ -7,4 +7,5 @@
-                               Leptoiulus [genus]
-                                 Leptoiulus trilineatus (C.L.Koch, 1847) [species]
-                  +                Leptoiulus examplus (Null & Void, 1500) [species]
-                                   Leptoiulus trilineatus nigra Attems, 1927 [subspecies]
-                                     *Leptoiulus trilineatus nigra (Verhoeff, 1898) [subspecies]
-
-          404:
-            body:
-              application/json:
-                description: Dataset not found or not imported more than once
-                example: |
-                  {
-                    "code": 404,
-                    "message": "At least 2 successful imports must exist to provide a diff"
-                  }
-    /namesdiff:
-      get:
-        displayName: Plain text diff of names
-        description: Returns a plain text diff of the names for dataset {key}
-        responses:
-          200:
-            body:
-              text/plain:
     /logo:
       get:
         displayName: Get the dataset logo
@@ -426,27 +694,79 @@
                     "code": 400,
                     "message": "Image format not supported"
                   }
-    /verbatim:
+    /name:
       get:
-        description: Page through all verbatim records of the dataset
-        is: [paged]
-        queryParameters:
-          type:
-            type: string
-            description: Optional filter by rowType of verbatim record, i.e. which file
+        is: [paged,filteredByDataset]
         responses:
           200:
-            body: VerbatimRecordResultSet
-      /{key}:
+            body: NameResultSet
+      /{id}:
         get:
-          description: Get the verbatim representation of a source record by its dwca core id
+          displayName: Get name
+          description: Retrieves the name with the specified id.
           responses:
             200:
-              body: VerbatimRecord
+              body: Name
         uriParameters:
-          key:
+          id:
             type: string
-            description: internal key of the record
+            description: name identifier as given by the source
+        /synonyms:
+          get:
+            displayName: Get homotypic synonyms
+            description: Retrieves all names in the same homotypic group as the name with the specified key.
+            responses:
+              200:
+                body: Name[]
+        /publishedIn:
+          get:
+            displayName: Get literature reference
+            description: Retrieves the literature reference for the name with the specified key.
+            responses:
+              200:
+                body: Reference
+        /relations:
+          get:
+            displayName: Get nomenclatural name relations
+            description: Retrieves nomenclatural relations for the name or its homotypical group
+            queryParameters:
+              homotypic:
+                type: boolean
+                description: if true also includes all acts about related, homotypic names
+            responses:
+              200:
+                body: NameRelation[]
+        /verbatim:
+          get:
+            displayName: Get verbatim record
+            description: Retrieves the verbatim DarwinCore record of the name with the specified key,
+            responses:
+              200:
+                body: VerbatimRecord
+    /namesdiff:
+      get:
+        displayName: Plain text diff of names
+        description: Returns a plain text diff of the names for dataset {key}
+        responses:
+          200:
+            body:
+              text/plain:
+    /reference:
+      get:
+        is: [paged,filteredByDataset]
+        responses:
+          200:
+            body: ResultSet
+      /{id}:
+        get:
+          description: get reference details by id
+          responses:
+            200:
+              body: Reference
+        uriParameters:
+          id:
+            type: string
+            description: reference id
     /taxon:
       get:
         is: [paged,filteredByDataset]
@@ -700,68 +1020,72 @@
             responses:
               200:
                 body: VerbatimRecord
-    /name:
+    /texttree:
       get:
-        is: [paged,filteredByDataset]
+        displayName: Plain text classification tree
+        description: Returns a plain text classification tree for dataset {key}.
         responses:
           200:
-            body: NameResultSet
-      /{id}:
-        get:
-          displayName: Get name
-          description: Retrieves the name with the specified id.
-          responses:
-            200:
-              body: Name
-        uriParameters:
-          id:
-            type: string
-            description: name identifier as given by the source
-        /synonyms:
-          get:
-            displayName: Get homotypic synonyms
-            description: Retrieves all names in the same homotypic group as the name with the specified key.
-            responses:
-              200:
-                body: Name[]
-        /publishedIn:
-          get:
-            displayName: Get literature reference
-            description: Retrieves the literature reference for the name with the specified key.
-            responses:
-              200:
-                body: Reference
-        /relations:
-          get:
-            displayName: Get nomenclatural name relations
-            description: Retrieves nomenclatural relations for the name or its homotypical group
-            queryParameters:
-              homotypic:
-                type: boolean
-                description: if true also includes all acts about related, homotypic names
-            responses:
-              200:
-                body: NameRelation[]
-        /verbatim:
-          get:
-            displayName: Get verbatim record
-            description: Retrieves the verbatim DarwinCore record of the name with the specified key,
-            responses:
-              200:
-                body: VerbatimRecord
-    /reference:
+            body:
+              text/plain:
+                example: |
+                  Animalia [kingdom]
+                    Arthropoda [phylum]
+                      Diplopoda [class]
+                        Julida [order]
+                          Juloidea [superfamily]
+                            Julidae [family]
+                              Leptoiulus [genus]
+                                Leptoiulus trilineatus (C.L.Koch, 1847) [species]
+                                  Leptoiulus trilineatus nigra Attems, 1927 [subspecies]
+                                    *Leptoiulus trilineatus nigra (Verhoeff, 1898) [subspecies]
+          404:
+            description: Dataset not found
+    /treediff:
       get:
-        is: [paged,filteredByDataset]
+        displayName: Plain text diff of classification tree between import attempts
+        description: Returns a plain text diff of the classification tree for dataset {key}.
         responses:
           200:
-            body: ResultSet
-      /{id}:
+            body:
+              text/plain:
+                example: |
+                  --- /home/col/bin/dev/metrics/dataset/2050/tree/1.txt	2019-10-09 21:43:18.083256660 +0000
+                  +++ /home/col/bin/dev/metrics/dataset/2050/tree/2.txt	2019-10-09 21:58:41.338271290 +0000
+                  @@ -7,4 +7,5 @@
+                               Leptoiulus [genus]
+                                 Leptoiulus trilineatus (C.L.Koch, 1847) [species]
+                  +                Leptoiulus examplus (Null & Void, 1500) [species]
+                                   Leptoiulus trilineatus nigra Attems, 1927 [subspecies]
+                                     *Leptoiulus trilineatus nigra (Verhoeff, 1898) [subspecies]
+
+          404:
+            body:
+              application/json:
+                description: Dataset not found or not imported more than once
+                example: |
+                  {
+                    "code": 404,
+                    "message": "At least 2 successful imports must exist to provide a diff"
+                  }
+    /verbatim:
+      get:
+        description: Page through all verbatim records of the dataset
+        is: [paged]
+        queryParameters:
+          type:
+            type: string
+            description: Optional filter by rowType of verbatim record, i.e. which file
+        responses:
+          200:
+            body: VerbatimRecordResultSet
+      /{key}:
         get:
-          description: get reference details by id
+          description: Get the verbatim representation of a source record by its dwca core id
           responses:
             200:
-              body: Reference
+              body: VerbatimRecord
         uriParameters:
-          id:
+          key:
             type: string
-            description: reference id
+            description: internal key of the record
