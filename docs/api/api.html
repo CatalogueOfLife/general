@@ -2222,6 +2222,12 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
 </td>
                                 </tr>
                             </tbody></table>
+                        <h2 id="model-Rank">Rank</h2>
+
+
+    <p><p>An ordered taxonomic rank enumeration with the most frequently used values. See: <a href="http://api.col.plus/vocab/rank">http://api.col.plus/vocab/rank</a></p>
+</p>
+
                         <h2 id="model-Reference">Reference</h2>
 
     <pre class="example"><code class="json">{
@@ -2624,6 +2630,142 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>the resulting Serials</p>
+</td>
+                                </tr>
+                            </tbody></table>
+                        <h2 id="model-SimpleName">SimpleName</h2>
+
+
+    <p><p>A small class representing a name with an id. It can act as a reference to a scientific name in a dataset. It combines the source ID with the full scientific name in order to best deal with changing identifiers in sources.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>name ID</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>name</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the scientific name</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>rank</td>
+                                    <td><a href="#model-Rank">Rank</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the taxonomic rank</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>code</td>
+                                    <td><a href="#model-NomCodeType">NomCodeType</a></td>
+                                    <td>bacterial, botanical, cultivated, viral, zoological, unknown</td>
+                                    <td>yes</td>
+                                    <td><p>the nomenclatural code</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>status</td>
+                                    <td><a href="#model-TaxonomicStatus">TaxonomicStatus</a></td>
+                                    <td>ACCEPTED, PROVISIONALLY_ACCEPTED, SYNONYM, AMBIGUOUS_SYNONYM, MISAPPLIED</td>
+                                    <td>no</td>
+                                    <td><p>the taxonomic status</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>parent</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the parent</p>
+</td>
+                                </tr>
+                            </tbody></table>
+                        <h2 id="model-SpeciesEstimate">SpeciesEstimate</h2>
+
+
+    <p><p>A class representing species estimates.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>key</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>primary key</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>datasetKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>primary key</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>target</td>
+                                    <td><a href="#model-SimpleName">SimpleName</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the scientific name</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>estimate</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the estimated number of species</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>estimateType</td>
+                                    <td><a href="#model-EstimateType">EstimateType</a></td>
+                                    <td>DESCRIBED_SPECIES_LIVING, DESCRIBED_SPECIES_EXTINCT, ESTIMATED_SPECIES</td>
+                                    <td>no</td>
+                                    <td><p>the type of species estimate</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>referenceId</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the species estimate reference ID</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>note</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>remarks on the species estimate</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -3383,6 +3525,15 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
 </p>
 
 
+            <h2 id="model-EstimateType">EstimateType</h2>
+
+
+            <p><strong>Enumeration</strong>: <em>DESCRIBED_SPECIES_LIVING</em>, <em>DESCRIBED_SPECIES_EXTINCT</em>, <em>ESTIMATED_SPECIES</em></p>
+
+    <p><p>An enumeration of species estimate types</p>
+</p>
+
+
             <h2 id="model-FrequencyType">FrequencyType</h2>
 
 
@@ -3562,6 +3713,15 @@ Includes the special case of isonyms which are identical names.</dd>
 </p>
 
 
+            <h2 id="model-NomCode">NomCode</h2>
+
+
+            <p><strong>Enumeration</strong>: <em>ICNP</em>, <em>ICN</em>, <em>ICNCP</em>, <em>ICVCN</em>, <em>ICZN</em></p>
+
+    <p><p>Enumeration representing the different nomenclatoral codes found in biology for scientific names.</p>
+</p>
+
+
             <h2 id="model-NomCodeType">NomCodeType</h2>
 
 
@@ -3635,6 +3795,15 @@ Sources:</p>
 </p>
 
 
+            <h2 id="model-TaxonomicStatus">TaxonomicStatus</h2>
+
+
+            <p><strong>Enumeration</strong>: <em>ACCEPTED</em>, <em>PROVISIONALLY_ACCEPTED</em>, <em>SYNONYM</em>, <em>AMBIGUOUS_SYNONYM</em>, <em>MISAPPLIED</em></p>
+
+    <p><p>The taxonomic status of an accepted taxon. For synonyms only a nomenclatural status is allowed.</p>
+</p>
+
+
             <h2 id="model-TaxonomicStatusType">TaxonomicStatusType</h2>
 
 
@@ -3677,7 +3846,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{"gbifSync":true,"importer":false}</code>
@@ -3733,7 +3902,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: text/plain
 </code>
 </pre>
@@ -3764,7 +3933,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: text/plain
 </code>
 </pre>
@@ -3795,7 +3964,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: text/plain
 </code>
 </pre>
@@ -3832,7 +4001,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json-assembly-idle
 </code>
     <code class="json">{
@@ -3846,7 +4015,7 @@ Content-Type: application/json-assembly-idle
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json-assembly-running
 </code>
     <code class="json">{
@@ -3894,7 +4063,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -3970,7 +4139,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json-dataset-not-imported-yet
 </code>
     <code class="json">{
@@ -3983,7 +4152,7 @@ Content-Type: application/json-dataset-not-imported-yet
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json-dataset-still-importing
 </code>
     <code class="json">{
@@ -3996,7 +4165,7 @@ Content-Type: application/json-dataset-still-importing
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json-sector-does-not-exist
 </code>
     <code class="json">{
@@ -4009,7 +4178,7 @@ Content-Type: application/json-sector-does-not-exist
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json-only-draft-catalogue
 </code>
     <code class="json">{
@@ -4070,7 +4239,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4096,7 +4265,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4132,7 +4301,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: text/plain
 </code>
     <code class="json">Execute DROP SQL
@@ -4163,7 +4332,7 @@ Export completed
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4207,7 +4376,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4222,7 +4391,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4279,7 +4448,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -4311,7 +4480,7 @@ for the <a href="https://github.com/Sp2000/coldp">Catalogue of Life Data Package
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5553,7 +5722,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5624,7 +5793,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">2051</code>
@@ -5677,7 +5846,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6265,7 +6434,7 @@ Host: api.col.plus
 </p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json"># import attempt processing
@@ -6472,7 +6641,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6507,7 +6676,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6542,7 +6711,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: image/bmp
 </code>
 </pre>
@@ -6550,7 +6719,7 @@ Content-Type: image/bmp
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: image/gif
 </code>
 </pre>
@@ -6558,7 +6727,7 @@ Content-Type: image/gif
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: image/jpg
 </code>
 </pre>
@@ -6566,7 +6735,7 @@ Content-Type: image/jpg
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: image/png
 </code>
 </pre>
@@ -6574,7 +6743,7 @@ Content-Type: image/png
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: image/psd
 </code>
 </pre>
@@ -6582,7 +6751,7 @@ Content-Type: image/psd
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: image/tiff
 </code>
 </pre>
@@ -6592,7 +6761,7 @@ Content-Type: image/tiff
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6640,7 +6809,7 @@ Content-Type: application/octet-stream
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6715,7 +6884,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -6767,7 +6936,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6826,7 +6995,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -6912,7 +7081,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6980,7 +7149,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -7028,7 +7197,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7088,7 +7257,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: text/plain
 </code>
 </pre>
@@ -7158,7 +7327,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -7210,7 +7379,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7314,7 +7483,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -7366,7 +7535,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7428,7 +7597,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7498,7 +7667,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -7590,7 +7759,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -7621,7 +7790,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -7833,7 +8002,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7893,7 +8062,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: text/plain
 </code>
     <code class="json">Animalia [kingdom]
@@ -7938,7 +8107,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: text/plain
 </code>
     <code class="json">--- /home/col/bin/dev/metrics/dataset/2050/tree/1.txt	2019-10-09 21:43:18.083256660 +0000
@@ -7957,7 +8126,7 @@ Content-Type: text/plain
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8032,7 +8201,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -8084,7 +8253,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8174,7 +8343,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -8235,7 +8404,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">6</code>
@@ -8288,7 +8457,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -8358,7 +8527,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8412,6 +8581,49 @@ Host: api.col.plus
 
 
 
+            <h3 id="op51-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
+Content-Type: application/json
+</code>
+    <code class="json">[
+  {
+      "created": "2015-10-08T20:25:55",
+      "createdBy": 0,
+      "modifiedBy": 0,
+      "key": 26,
+      "datasetKey": 3,
+      "target": {
+        "name": "Echiura",
+        "rank": "phylum",
+        "code": "zoological"
+      },
+      "estimate": 236,
+      "type": "described species living",
+      "referenceId": "3"
+    },
+    {
+      "created": "2015-10-08T20:28:37",
+      "createdBy": 0,
+      "modifiedBy": 0,
+      "key": 31,
+      "datasetKey": 3,
+      "target": {
+        "name": "Loricifera",
+        "rank": "phylum",
+        "code": "zoological"
+      },
+      "estimate": 30,
+      "type": "described species living",
+      "referenceId": "3"
+    }
+]
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-SpeciesEstimate">SpeciesEstimate[]</a></p>
 
 
         <h1 id="resource-47">/sector</h1>
@@ -8440,7 +8652,7 @@ description: Filter by CoL source.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -8528,7 +8740,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -8563,7 +8775,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8603,7 +8815,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json"># inserting import
@@ -8737,7 +8949,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8776,7 +8988,7 @@ Optionally a compressed archive of data (zip or gzip) can be included</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8971,7 +9183,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9295,7 +9507,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -9384,7 +9596,7 @@ Eventually should be exposed in public API.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -9442,7 +9654,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -9531,7 +9743,7 @@ with one name per line, or as plain/text content in the request body.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -9623,7 +9835,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9641,7 +9853,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9677,7 +9889,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9723,7 +9935,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: text/plain
 </code>
     <code class="json">"70d8d5b  2019-10-09T14:26:15+0000"
@@ -9757,7 +9969,7 @@ Any of the names can be used as valid subresources to list the actual enumeratio
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">["continent","country","areastandard","cslreftype","nametype","origin","language","frequency","rank","nomacttype","coverage","nomstatus","dataformat","importstate","issue","gazetteer","cslvariable","typestatus","lifezone","distributionstatus","taxonomicstatus","kingdom","datasettype","license","nomcode","namepart"]
@@ -9790,7 +10002,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 10, 2019 3:49:27 PM CDT
+Date: Tuesday, October 15, 2019 3:11:11 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]

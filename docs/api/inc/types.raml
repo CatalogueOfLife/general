@@ -65,6 +65,11 @@ IssueType:
     Not all flagged issues are highlighting data problems. Some simply flag the fact that data was modified during imports,
     for example "vernacular name transliterated" is added then a latin transliteration of a vernacular name was automatically generated.
     See http://api.col.plus/vocab/issue for the latest full list.
+NomCode:
+  type: string
+  enum: ["ICNP", "ICN", "ICNCP", "ICVCN", "ICZN"]
+  description: >
+    Enumeration representing the different nomenclatoral codes found in biology for scientific names.
 NomCodeType:
   type: string
   enum: ["bacterial", "botanical", "cultivated", "viral", "zoological", "unknown"]
@@ -281,6 +286,12 @@ ReferenceTopicType:
   description: >
     Enumeration of types of CoL relevant information that is treated in a publication
     See http://api.col.plus/vocab/gazetteer
+TaxonomicStatus:
+  type: string
+  enum: [ACCEPTED, PROVISIONALLY_ACCEPTED, SYNONYM, AMBIGUOUS_SYNONYM, MISAPPLIED]
+  description: >
+    The taxonomic status of an accepted taxon.
+    For synonyms only a nomenclatural status is allowed.
 TaxonomicStatusType:
   type: string
   enum: ["accepted", "doubtful", "ambiguous synonym"]
@@ -1328,6 +1339,12 @@ NameRelation:
       "relatedNameId": "1655",
       "publishedInId": "786"
     }
+Rank:
+  description: >
+    An ordered taxonomic rank enumeration with the most frequently used values.
+    See: http://api.col.plus/vocab/rank
+  type: string
+  enum: []
 Reference:
   type: VerbatimIdObject
   description: |
@@ -1493,6 +1510,66 @@ SerialResultSet:
     results:
       type: Serial[]
       description: the resulting Serials
+SimpleName:
+  type: object
+  description: >
+    A small class representing a name with an id. It can act as a reference to a scientific name in a dataset.
+    It combines the source ID with the full scientific name in order to best deal with changing identifiers in sources.
+  properties:
+    id:
+      type: string
+      description: name ID
+      required: false
+    name:
+      type: string
+      description: the scientific name
+    rank:
+      type: Rank
+      description: the taxonomic rank
+    code:
+      type: NomCodeType
+      description: the nomenclatural code
+    status:
+      type: TaxonomicStatus
+      description: the taxonomic status
+      required: false
+    parent:
+      type: string
+      description: the parent
+      required: false
+SpeciesEstimate:
+  type: object
+  description: >
+    A class representing species estimates.
+  properties:
+    key:
+      type: integer
+      description: primary key
+    datasetKey:
+      type: integer
+      description: primary key
+    target:
+      type: SimpleName
+      description: the scientific name
+    estimate:
+      type: integer
+      description: the estimated number of species
+    estimateType:
+      type: EstimateType
+      description: the type of species estimate
+      required: false
+    referenceId:
+      type: string
+      description: the species estimate reference ID
+    note:
+      type: string
+      description: remarks on the species estimate
+      required: false
+EstimateType:
+  type: string
+  enum: [DESCRIBED_SPECIES_LIVING, DESCRIBED_SPECIES_EXTINCT, ESTIMATED_SPECIES]
+  description: >
+    An enumeration of species estimate types
 Taxon:
   type: VerbatimIdObject
   description: >

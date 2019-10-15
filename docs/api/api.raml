@@ -151,7 +151,45 @@ types: !include inc/types.raml
   /broken:
     displayName: Gets a list of broken species estimates
     description: Returns a list of species estimates that do not match any taxa
-    get: # TODO
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                [
+                  {
+                      "created": "2015-10-08T20:25:55",
+                      "createdBy": 0,
+                      "modifiedBy": 0,
+                      "key": 26,
+                      "datasetKey": 3,
+                      "target": {
+                        "name": "Echiura",
+                        "rank": "phylum",
+                        "code": "zoological"
+                      },
+                      "estimate": 236,
+                      "type": "described species living",
+                      "referenceId": "3"
+                    },
+                    {
+                      "created": "2015-10-08T20:28:37",
+                      "createdBy": 0,
+                      "modifiedBy": 0,
+                      "key": 31,
+                      "datasetKey": 3,
+                      "target": {
+                        "name": "Loricifera",
+                        "rank": "phylum",
+                        "code": "zoological"
+                      },
+                      "estimate": 30,
+                      "type": "described species living",
+                      "referenceId": "3"
+                    }
+                ]
+              type: SpeciesEstimate[]
 /sector:
   get:
     description: |
