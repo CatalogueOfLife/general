@@ -31,9 +31,9 @@ The driving use cases dealing with nomenclature are:
 When dealing with real data one has to work with a wide variety of name strings. These *scientific names*, excluding vernacular names, often do not follow simple latin binomials which can be represented in a parsed form. They can also contain nomenclatural (e.g. *nom.illeg.*), taxonomic (e.g. *s.str.*) or informal (e.g. *cf.*) notes. To work with a wide variety of names we coarsely classify them based on their syntactic nature:
 
  - 	```SCIENTIFIC```: A scientific latin name that might contain authorship but is not any of the other name types below. Notho taxa are considered scientific names.
+ -  ```VIRUS```: A virus name which is never parsed into epithets. The entire name is kept in the scientificName property
  - 	```HYBRID_FORMULA```: A hybrid *formula*, not a named hybrid which falls under scientific.
  - 	```INFORMAL```: A scientific name with some informal addition like "cf." or indetermined like Abies spec.
- - 	```VIRUS```: A virus name which is never parsed into epithets. The entire name is kept in the scientificName property
  - 	```OTU```: Operational Taxonomic Unit such as Barcode Index Numbers
  - 	```PLACEHOLDER```: A placeholder name like "incertae sedis" or "unknown genus" which you often find in databases.
  - 	```NO_NAME```: A text which surely is not a scientific name at all.
@@ -63,7 +63,7 @@ The name class holds parsed names and is free of taxonomic judgements. A name co
  - ```specificEpithet```**#** the specific part of a binomial
  - ```infraspecificEpithet```**#** the lowest, infraspecific part of a trinomial. 
  - ```cultivarEpithet```**#** cultivar name
- - ```strain```**#** bacterial strain name
+ - ```appendedPhrase```**#** phrases that should be appended to the name, e.g. for bacterial strains
  - ```candidatus```**#** A boolean flag to indicate a bacterial candidate name. Candidatus is a provisional status for incompletely described procaryotes and such names are usually prefixed with the italic term *Candidatus*.
  - ```notho```**#** The part of the named hybrid which is considered a hybrid for notho taxa.
  - ```authorship``` **+** Full authorship string including basionym and combination authors, ex- sanctioning authors and years.
@@ -184,7 +184,10 @@ We provide a [Darwin Core Archive extension definition](https://github.com/Sp200
 - ```SUPERFLUOUS```: Current name was superfluous at its time of publication,
    i. e. it was based on the same type as the related, previously published name (ICN article 52). The current, superfluous name is available but illegitimate. Includes the special case of isonyms which are identical, homotypic names.
 
+- ```HOMOTYPIC```: A relation indicating two homotypic names, i.e. objective or nomenclatural synonymy, but not further specifying why.
 
+- ```TYPE```: Current name is the type name (species or genus) of the related higher ranked name.
+   
 
 ## Name status
 The name status can in many cases be derived from a names relation if existing.
@@ -200,6 +203,10 @@ The name class also offers an unrestricted remarks field which should be used to
 We use [BioCode terminology](https://archive.bgbm.org/IAPT/biocode/biocode.html#Table) as much as possible
 and avoid the term valid entirely as it is very overloaded and used for different things in both codes.
 
+
+ - ```ESTABLISHED```: *nomen validum*. A properly established name according to the rules of nomenclature.
+    - Botany: validly published name
+    - Zoology: available name
 
  - ```NOT_ESTABLISHED```: *nomen invalidum*. A name that was not validly published according to the rules of the code, or a name that was not accepted by the author in the original publication, for example,
    if the name was suggested as a synonym of an accepted name.
