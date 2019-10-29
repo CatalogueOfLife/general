@@ -535,7 +535,30 @@ types: !include inc/types.raml
       200:
         body:
           application/json:
-            type: NameMatch 
+            type: NameMatch
+            example: |
+              {
+                "name": {
+                  "created": "2019-10-13T10:58:24.938404",
+                  "createdBy": 11,
+                  "modified": "2019-10-13T10:58:24.938404",
+                  "modifiedBy": 11,
+                  "datasetKey": 2,
+                  "id": "5SYL",
+                  "sectorKey": 4433,
+                  "homotypicNameId": "5SYL",
+                  "scientificName": "Atta",
+                  "rank": "genus",
+                  "uninomial": "Atta",
+                  "candidatus": false,
+                  "nomStatus": "doubtful",
+                  "origin": "name matching",
+                  "type": "scientific",
+                  "parsed": true,
+                  "formattedName": "<i>Atta</i>"
+                },
+                "type": "exact"
+              }
 /parser:
   /name:
     get:
