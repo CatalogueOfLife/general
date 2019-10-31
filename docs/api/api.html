@@ -148,6 +148,61 @@
     <p><p>UUID data type represented as 32 hexadecimal (base 16) digits. Example 123e4567-e89b-12d3-a456-426655440000</p>
 </p>
 
+                        <h2 id="model-AssemblyState">AssemblyState</h2>
+
+
+    
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>LOG</td>
+                                    <td>object</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>a LoggerFactory logger</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>running</td>
+                                    <td><a href="#model-SectorImport">SectorImport</a></td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>running sector syncs</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>queued</td>
+                                    <td><a href="#model-SectorImport">SectorImport[]</a></td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>queued sector syncs</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>failed</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>number of failed sector syncs</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>completed</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>number of completed sector syncs</p>
+</td>
+                                </tr>
+                            </tbody></table>
                         <h2 id="model-Authorship">Authorship</h2>
 
 
@@ -2769,6 +2824,11 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
 </td>
                                 </tr>
                             </tbody></table>
+                        <h2 id="model-SectorImport">SectorImport</h2>
+
+
+    
+
                         <h2 id="model-SerialResultSet">SerialResultSet</h2>
 
 
@@ -3878,7 +3938,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{"gbifSync":true,"importer":false}</code>
@@ -3901,7 +3961,7 @@ Content-Type: application/json
 
     <h3 id="op2-request-body">Body</h3>
             <p><code>application/json</code></p>
-            <p>Content: string</p>
+            <p>Content: <a href="#model-BackgroundProcesses">BackgroundProcesses</a></p>
 
 
 
@@ -3934,7 +3994,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: text/plain
 </code>
 </pre>
@@ -3965,12 +4025,12 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: text/plain
 </code>
 </pre>
                     <p><code>text/plain</code></p>
-                    <p>Content: string</p>
+                    <p>Content: boolean</p>
 
 
         <h2 id="resource-5">/admin/reindex</h2>
@@ -3996,7 +4056,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: text/plain
 </code>
 </pre>
@@ -4033,7 +4093,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json-assembly-idle
 </code>
     <code class="json">{
@@ -4047,7 +4107,7 @@ Content-Type: application/json-assembly-idle
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json-assembly-running
 </code>
     <code class="json">{
@@ -4069,7 +4129,7 @@ Content-Type: application/json-assembly-running
 </code>
 </pre>
                     <p><code>application/json-assembly-running</code></p>
-                    <p>Content: any</p>
+                    <p>Content: <a href="#model-AssemblyState">AssemblyState</a></p>
 
 
         <h2 id="resource-8">/assembly/{catKey}/sync</h2>
@@ -4095,7 +4155,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4171,7 +4231,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json-dataset-not-imported-yet
 </code>
     <code class="json">{
@@ -4184,7 +4244,7 @@ Content-Type: application/json-dataset-not-imported-yet
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json-dataset-still-importing
 </code>
     <code class="json">{
@@ -4197,7 +4257,7 @@ Content-Type: application/json-dataset-still-importing
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json-sector-does-not-exist
 </code>
     <code class="json">{
@@ -4210,7 +4270,7 @@ Content-Type: application/json-sector-does-not-exist
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json-only-draft-catalogue
 </code>
     <code class="json">{
@@ -4271,7 +4331,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4297,7 +4357,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4333,7 +4393,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: text/plain
 </code>
     <code class="json">Execute DROP SQL
@@ -4364,7 +4424,7 @@ Export completed
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4408,7 +4468,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4423,7 +4483,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4480,7 +4540,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -4512,7 +4572,7 @@ for the <a href="https://github.com/Sp2000/coldp">Catalogue of Life Data Package
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5754,7 +5814,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5825,7 +5885,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">2051</code>
@@ -5878,7 +5938,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6466,7 +6526,7 @@ Host: api.col.plus
 </p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json"># import attempt processing
@@ -6673,7 +6733,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6708,7 +6768,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6743,7 +6803,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: image/bmp
 </code>
 </pre>
@@ -6751,7 +6811,7 @@ Content-Type: image/bmp
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: image/gif
 </code>
 </pre>
@@ -6759,7 +6819,7 @@ Content-Type: image/gif
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: image/jpg
 </code>
 </pre>
@@ -6767,7 +6827,7 @@ Content-Type: image/jpg
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: image/png
 </code>
 </pre>
@@ -6775,7 +6835,7 @@ Content-Type: image/png
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: image/psd
 </code>
 </pre>
@@ -6783,7 +6843,7 @@ Content-Type: image/psd
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: image/tiff
 </code>
 </pre>
@@ -6793,7 +6853,7 @@ Content-Type: image/tiff
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6841,7 +6901,7 @@ Content-Type: application/octet-stream
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6916,7 +6976,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -6968,7 +7028,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7027,7 +7087,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -7113,7 +7173,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:32 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7181,7 +7241,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -7229,7 +7289,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7289,7 +7349,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: text/plain
 </code>
 </pre>
@@ -7359,7 +7419,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -7411,7 +7471,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7515,7 +7575,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -7567,7 +7627,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7629,7 +7689,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7699,7 +7759,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -7791,7 +7851,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -7822,7 +7882,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -8034,7 +8094,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8094,7 +8154,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: text/plain
 </code>
     <code class="json">Animalia [kingdom]
@@ -8139,7 +8199,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: text/plain
 </code>
     <code class="json">--- /home/col/bin/dev/metrics/dataset/2050/tree/1.txt	2019-10-09 21:43:18.083256660 +0000
@@ -8158,7 +8218,7 @@ Content-Type: text/plain
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8233,7 +8293,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -8285,7 +8345,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8375,7 +8435,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -8436,7 +8496,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">6</code>
@@ -8489,7 +8549,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -8559,7 +8619,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8617,7 +8677,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -8684,7 +8744,7 @@ description: Filter by CoL source.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -8772,7 +8832,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -8807,7 +8867,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8847,7 +8907,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json"># inserting import
@@ -8981,7 +9041,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9020,7 +9080,7 @@ Optionally a compressed archive of data (zip or gzip) can be included</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9215,7 +9275,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9539,7 +9599,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -9628,7 +9688,7 @@ Eventually should be exposed in public API.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9709,7 +9769,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -9798,7 +9858,7 @@ with one name per line, or as plain/text content in the request body.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -9890,7 +9950,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9908,7 +9968,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9944,7 +10004,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9990,7 +10050,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: text/plain
 </code>
     <code class="json">"70d8d5b  2019-10-09T14:26:15+0000"
@@ -10024,7 +10084,7 @@ Any of the names can be used as valid subresources to list the actual enumeratio
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">["continent","country","areastandard","cslreftype","nametype","origin","language","frequency","rank","nomacttype","coverage","nomstatus","dataformat","importstate","issue","gazetteer","cslvariable","typestatus","lifezone","distributionstatus","taxonomicstatus","kingdom","datasettype","license","nomcode","namepart"]
@@ -10057,7 +10117,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 4:39:33 PM CDT
+Date: Thursday, October 31, 2019 5:08:55 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]

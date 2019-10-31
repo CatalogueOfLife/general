@@ -12,6 +12,29 @@ uuid:
   maxLength: 36
   pattern: ^[0-9abcdef]{8}-[0-9abcdef]{4}-[0-9abcdef]{4}-[0-9abcdef]{4}-[0-9abcdef]{12}$
   description: UUID data type represented as 32 hexadecimal (base 16) digits. Example 123e4567-e89b-12d3-a456-426655440000
+AssemblyState:
+  type: object
+  properties:
+    LOG:
+      type: object
+      description: a LoggerFactory logger
+      required: false
+    running:
+      type: SectorImport
+      description: running sector syncs
+      required: false
+    queued:
+      type: SectorImport[]
+      description: queued sector syncs
+      required: false
+    failed:
+      type: integer
+      description: number of failed sector syncs
+      required: false
+    completed:
+      type: integer
+      description: number of completed sector syncs
+      required: false
 Authorship:
   type: object
   properties:
@@ -1531,6 +1554,8 @@ Serial:
         "publisher-place": "Göttingen"
       }
     }
+SectorImport:
+  type: object #TODO: add SectorImport
 SerialResultSet:
   type: ResultSet
   description: >

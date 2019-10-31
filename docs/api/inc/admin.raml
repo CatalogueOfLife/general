@@ -13,7 +13,7 @@
         Update background resource processes.
       body:
         application/json:
-          type: string
+          type: BackgroundProcesses
           example: '{"gbifSync":false,"importer":true}'
       responses:
         204:
@@ -35,7 +35,7 @@
         200:
           body:
             text/plain:
-              type: string
+              type: boolean
   /reindex:
     post:
       description: |
