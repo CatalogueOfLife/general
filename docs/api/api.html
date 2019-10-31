@@ -136,27 +136,61 @@
 
 
             <h1 id="model">Data Model</h1>
-                        <h2 id="model-uuid">uuid</h2>
-
-
-    <p><p>UUID data type represented as 32 hexadecimal (base 16) digits. Example 123e4567-e89b-12d3-a456-426655440000</p>
-</p>
-
                         <h2 id="model-isocode">isocode</h2>
 
 
     <p><p>2 or 3 letter codes as used by ISO country or languages</p>
 </p>
 
-                        <h2 id="model-Error">Error</h2>
+                        <h2 id="model-uuid">uuid</h2>
 
-    <pre class="example"><code class="json">{
-  "status": 404,
-  "message": "Name 467324, version 7 not found"
-}
-</code></pre>
 
-    <p><p>An error response.</p>
+    <p><p>UUID data type represented as 32 hexadecimal (base 16) digits. Example 123e4567-e89b-12d3-a456-426655440000</p>
+</p>
+
+                        <h2 id="model-Authorship">Authorship</h2>
+
+
+    
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>authors</td>
+                                    <td>string[]</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>list of contributing authors</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>exAuthors</td>
+                                    <td>string[]</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>list of authors excluding ex- authors</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>year</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Year of publication</p>
+</td>
+                                </tr>
+                            </tbody></table>
+                        <h2 id="model-BackgroundProcesses">BackgroundProcesses</h2>
+
+
+    <p><p>Static class of background processes</p>
 </p>
 
                             <table><thead>
@@ -169,19 +203,19 @@
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>status</td>
-                                    <td>integer</td>
+                                    <td>gbifSync</td>
+                                    <td>boolean</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>http status code</p>
+                                    <td><p>whether the GBIF sync is enabled</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>message</td>
-                                    <td>string</td>
+                                    <td>importer</td>
+                                    <td>boolean</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>Error message</p>
+                                    <td><p>whether the importer scheduler is enabled</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -569,54 +603,6 @@ Dataset used to build the provisional catalogue will be trusted and insert their
                                     <td></td>
                                     <td>no</td>
                                     <td><p>datetime the dataset was deleted from the Clearinghouse</p>
-</td>
-                                </tr>
-                            </tbody></table>
-                        <h2 id="model-ImportRequest">ImportRequest</h2>
-
-
-    <p><p>Request to import a dataset.</p>
-</p>
-
-                            <table><thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Pattern</th>
-                                <th>Required</th>
-                                <th>Description</th>
-                            </tr>
-                            </thead><tbody>
-                                <tr>
-                                    <td>datasetKey</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Primary key for the source dataset</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>force</td>
-                                    <td>boolean</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>If true forces a new import even if the data archive has not changed.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>priority</td>
-                                    <td>boolean</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>If true prioritizes the import over automated background imports</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>created</td>
-                                    <td>datetime</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>datetime the request was created/scheduled</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -1067,10 +1053,11 @@ Dataset used to build the provisional catalogue will be trusted and insert their
 </td>
                                 </tr>
                             </tbody></table>
-                        <h2 id="model-Authorship">Authorship</h2>
+                        <h2 id="model-Distribution">Distribution</h2>
 
 
-    
+    <p><p>An area distribution record</p>
+</p>
 
                             <table><thead>
                             <tr>
@@ -1082,27 +1069,128 @@ Dataset used to build the provisional catalogue will be trusted and insert their
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>authors</td>
-                                    <td>string[]</td>
+                                    <td>datasetKey</td>
+                                    <td>integer</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>list of contributing authors</p>
+                                    <td><p>Key to the source dataset this record belongs to</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>exAuthors</td>
+                                    <td>area</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the geographic area the distribution refers to as defined in the corresponding area standard.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>gazetteer</td>
+                                    <td><a href="#model-GazetteerType">GazetteerType</a></td>
+                                    <td>tdwg, iso, fao, fao-fishing, longhurst, teow, iho, text</td>
+                                    <td>yes</td>
+                                    <td><p>The standard of area names the area value refers to.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>status</td>
+                                    <td><a href="#model-DistributionStatusType">DistributionStatusType</a></td>
+                                    <td>native, domesticated, alien, uncertain</td>
+                                    <td>yes</td>
+                                    <td><p>The status of the species distribution</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>referenceIds</td>
                                     <td>string[]</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>list of authors excluding ex- authors</p>
+                                    <td><p>Links to references supporting the distribution record</p>
+</td>
+                                </tr>
+                            </tbody></table>
+                        <h2 id="model-Error">Error</h2>
+
+    <pre class="example"><code class="json">{
+  "status": 404,
+  "message": "Name 467324, version 7 not found"
+}
+</code></pre>
+
+    <p><p>An error response.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>status</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>http status code</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>year</td>
+                                    <td>message</td>
                                     <td>string</td>
                                     <td></td>
+                                    <td>yes</td>
+                                    <td><p>Error message</p>
+</td>
+                                </tr>
+                            </tbody></table>
+                        <h2 id="model-ImportRequest">ImportRequest</h2>
+
+
+    <p><p>Request to import a dataset.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>datasetKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Primary key for the source dataset</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>force</td>
+                                    <td>boolean</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>If true forces a new import even if the data archive has not changed.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>priority</td>
+                                    <td>boolean</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>If true prioritizes the import over automated background imports</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>created</td>
+                                    <td>datetime</td>
+                                    <td></td>
                                     <td>no</td>
-                                    <td><p>Year of publication</p>
+                                    <td><p>datetime the request was created/scheduled</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -1442,6 +1530,46 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
 </td>
                                 </tr>
                             </tbody></table>
+                        <h2 id="model-NameMatch">NameMatch</h2>
+
+
+    <p><p>A name matching result</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>name</td>
+                                    <td><a href="#model-Name">Name</a></td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the matching name</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>type</td>
+                                    <td><a href="#model-MatchType">MatchType</a></td>
+                                    <td>exact, variant, inserted, ambiguous, none</td>
+                                    <td>yes</td>
+                                    <td><p>the type of matching</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>alternatives</td>
+                                    <td><a href="#model-Name">Name[]</a></td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>alternatively matching names</p>
+</td>
+                                </tr>
+                            </tbody></table>
                         <h2 id="model-NameResultSet">NameResultSet</h2>
 
 
@@ -1495,6 +1623,151 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>the resulting names</p>
+</td>
+                                </tr>
+                            </tbody></table>
+                        <h2 id="model-NameRef">NameRef</h2>
+
+
+    <p><p>A reference to a name based on ids and the name itself</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the names id within its dataset</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>indexNameId</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the name id from the matching name index record</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>name</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the literal name</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>authorship</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the literal, full authorship</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>rank</td>
+                                    <td><a href="#model-RankType">RankType</a></td>
+                                    <td>domain, superkingdom, kingdom, subkingdom, infrakingdom, superphylum, phylum, subphylum, infraphylum, superclass, class, subclass, infraclass, parvclass, superlegion, legion, sublegion, infralegion, supercohort, cohort, subcohort, infracohort, magnorder, superorder, grandorder, order, suborder, infraorder, parvorder, superfamily, family, subfamily, infrafamily, supertribe, tribe, subtribe, infratribe, suprageneric name, genus, subgenus, infragenus, supersection, section, subsection, superseries, series, subseries, infrageneric name, species aggregate, species, infraspecific name, grex, subspecies, cultivar group, convariety, infrasubspecific name, proles, natio, aberration, morph, variety, subvariety, form, subform, pathovar, biovar, chemovar, morphovar, phagovar, serovar, chemoform, forma specialis, cultivar, strain, other, unranked</td>
+                                    <td>no</td>
+                                    <td><p>the rank</p>
+</td>
+                                </tr>
+                            </tbody></table>
+                        <h2 id="model-NameRelation">NameRelation</h2>
+
+    <pre class="example"><code class="json">{
+  "key": 721141,
+  "datasetKey": 15,
+  "type": "basionym",
+  "nameId": "78612",
+  "relatedNameId": "1655",
+  "publishedInId": "786"
+}
+</code></pre>
+
+    <p><p>A published act which affects the nomenclatural status of a scientific name or the typification of a nominal taxon.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>datasetKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Key to the source dataset this record belongs to</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>verbatimKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Key to the verbatim record this object was derived from</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>key</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Primary key for the record</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>type</td>
+                                    <td><a href="#model-NameRelationType">NameRelationType</a></td>
+                                    <td>spelling correction, basionym, based on, replacement name, conserved, later homonym, superfluous, homotypic</td>
+                                    <td>yes</td>
+                                    <td><p>Coarse classification of the nomenclatural act.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>nameId</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>key to the name the act is about</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>relatedNameId</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>id to the other, related name</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>publishedInId</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Key to reference in which the relation was published</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>note</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>A desription of the details of the nomenclatural act</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -2037,10 +2310,10 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
 </td>
                                 </tr>
                             </tbody></table>
-                        <h2 id="model-NameMatch">NameMatch</h2>
+                        <h2 id="model-NameSuggestion">NameSuggestion</h2>
 
 
-    <p><p>A name matching result</p>
+    <p><p>Captures the information for a single auto-complete suggestion</p>
 </p>
 
                             <table><thead>
@@ -2053,99 +2326,74 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>name</td>
-                                    <td><a href="#model-Name">Name</a></td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>the matching name</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>type</td>
-                                    <td><a href="#model-MatchType">MatchType</a></td>
-                                    <td>exact, variant, inserted, ambiguous, none</td>
-                                    <td>yes</td>
-                                    <td><p>the type of matching</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>alternatives</td>
-                                    <td><a href="#model-Name">Name[]</a></td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>alternatively matching names</p>
-</td>
-                                </tr>
-                            </tbody></table>
-                        <h2 id="model-NameRef">NameRef</h2>
-
-
-    <p><p>A reference to a name based on ids and the name itself</p>
-</p>
-
-                            <table><thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Pattern</th>
-                                <th>Required</th>
-                                <th>Description</th>
-                            </tr>
-                            </thead><tbody>
-                                <tr>
-                                    <td>id</td>
+                                    <td>match</td>
                                     <td>string</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>the names id within its dataset</p>
+                                    <td><p>The suggestion</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>indexNameId</td>
-                                    <td>string</td>
+                                    <td>vernacularName</td>
+                                    <td>boolean</td>
                                     <td></td>
-                                    <td>no</td>
-                                    <td><p>the name id from the matching name index record</p>
+                                    <td>yes</td>
+                                    <td><p>Whether or not the suggestion is a vernacular name</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>name</td>
+                                    <td>acceptedName</td>
                                     <td>string</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>the literal name</p>
+                                    <td><p>The accepted name if the suggestion is anything but an accepted name, null/absent otherwise</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>authorship</td>
+                                    <td>usageId</td>
                                     <td>string</td>
                                     <td></td>
-                                    <td>no</td>
-                                    <td><p>the literal, full authorship</p>
+                                    <td>yes</td>
+                                    <td><p>The usage ID (the taxon ID in case of a vernacular name)</p>
 </td>
                                 </tr>
                                 <tr>
                                     <td>rank</td>
                                     <td><a href="#model-RankType">RankType</a></td>
                                     <td>domain, superkingdom, kingdom, subkingdom, infrakingdom, superphylum, phylum, subphylum, infraphylum, superclass, class, subclass, infraclass, parvclass, superlegion, legion, sublegion, infralegion, supercohort, cohort, subcohort, infracohort, magnorder, superorder, grandorder, order, suborder, infraorder, parvorder, superfamily, family, subfamily, infrafamily, supertribe, tribe, subtribe, infratribe, suprageneric name, genus, subgenus, infragenus, supersection, section, subsection, superseries, series, subseries, infrageneric name, species aggregate, species, infraspecific name, grex, subspecies, cultivar group, convariety, infrasubspecific name, proles, natio, aberration, morph, variety, subvariety, form, subform, pathovar, biovar, chemovar, morphovar, phagovar, serovar, chemoform, forma specialis, cultivar, strain, other, unranked</td>
-                                    <td>no</td>
-                                    <td><p>the rank</p>
+                                    <td>yes</td>
+                                    <td><p>The rank of the suggested name (or the rank of the accepted name in case of a vernacular name)</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>status</td>
+                                    <td><a href="#model-TaxonomicStatusType">TaxonomicStatusType</a></td>
+                                    <td>accepted, doubtful, ambiguous synonym</td>
+                                    <td>yes</td>
+                                    <td><p>The taxonomic status of the suggested</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>nomCode</td>
+                                    <td><a href="#model-NomCodeType">NomCodeType</a></td>
+                                    <td>bacterial, botanical, cultivated, viral, zoological, unknown</td>
+                                    <td>yes</td>
+                                    <td><p>The nomenclatural code of the suggested name</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>score</td>
+                                    <td>number</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The relevance score assigned to the suggestion by the search engine</p>
 </td>
                                 </tr>
                             </tbody></table>
-                        <h2 id="model-NameRelation">NameRelation</h2>
+                        <h2 id="model-NameSuggestResponse">NameSuggestResponse</h2>
 
-    <pre class="example"><code class="json">{
-  "key": 721141,
-  "datasetKey": 15,
-  "type": "basionym",
-  "nameId": "78612",
-  "relatedNameId": "1655",
-  "publishedInId": "786"
-}
-</code></pre>
 
-    <p><p>A published act which affects the nomenclatural status of a scientific name or the typification of a nominal taxon.</p>
+    <p><p>Contains all suggestions matching the search phrase (q)</p>
 </p>
 
                             <table><thead>
@@ -2158,67 +2406,11 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>datasetKey</td>
-                                    <td>integer</td>
+                                    <td>suggestions</td>
+                                    <td><a href="#model-NameSuggestion">NameSuggestion[]</a></td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>Key to the source dataset this record belongs to</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>verbatimKey</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Key to the verbatim record this object was derived from</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>key</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Primary key for the record</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>type</td>
-                                    <td><a href="#model-NameRelationType">NameRelationType</a></td>
-                                    <td>spelling correction, basionym, based on, replacement name, conserved, later homonym, superfluous, homotypic</td>
-                                    <td>yes</td>
-                                    <td><p>Coarse classification of the nomenclatural act.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>nameId</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>key to the name the act is about</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>relatedNameId</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>id to the other, related name</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>publishedInId</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Key to reference in which the relation was published</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>note</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>A desription of the details of the nomenclatural act</p>
+                                    <td><p>A list of suggestions matching the search phrase</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -2936,92 +3128,6 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
 </td>
                                 </tr>
                             </tbody></table>
-                        <h2 id="model-TaxonResultSet">TaxonResultSet</h2>
-
-
-    <p><p>A paging resultset for Taxa.</p>
-</p>
-
-                            <table><thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Pattern</th>
-                                <th>Required</th>
-                                <th>Description</th>
-                            </tr>
-                            </thead><tbody>
-                                <tr>
-                                    <td>result</td>
-                                    <td>object[]</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Result page</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>offset</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>The offset applied during request. Can be less than requested if the limit is reached.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>limit</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>The maximum number of records returned. Can be less than requested if the limit is reached.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>total</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>The total number of records available.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>results</td>
-                                    <td><a href="#model-Taxon">Taxon[]</a></td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>the resulting Taxa</p>
-</td>
-                                </tr>
-                            </tbody></table>
-                        <h2 id="model-TaxonReference">TaxonReference</h2>
-
-
-    <p><p>A reference referring to a specific taxon and annotated with a certain topic.</p>
-</p>
-
-                            <table><thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Pattern</th>
-                                <th>Required</th>
-                                <th>Description</th>
-                            </tr>
-                            </thead><tbody>
-                                <tr>
-                                    <td>reference</td>
-                                    <td><a href="#model-Reference">Reference</a></td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>topic</td>
-                                    <td><a href="#model-ReferenceTopicType">ReferenceTopicType[]</a></td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td></td>
-                                </tr>
-                            </tbody></table>
                         <h2 id="model-TaxonInfo">TaxonInfo</h2>
 
     <pre class="example"><code class="json">{
@@ -3112,6 +3218,92 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td>no</td>
                                     <td><p>A map of reference keys used by the other objects in this class to the actual full Reference instance.</p>
 </td>
+                                </tr>
+                            </tbody></table>
+                        <h2 id="model-TaxonResultSet">TaxonResultSet</h2>
+
+
+    <p><p>A paging resultset for Taxa.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>result</td>
+                                    <td>object[]</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Result page</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>offset</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The offset applied during request. Can be less than requested if the limit is reached.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>limit</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The maximum number of records returned. Can be less than requested if the limit is reached.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>total</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The total number of records available.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>results</td>
+                                    <td><a href="#model-Taxon">Taxon[]</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the resulting Taxa</p>
+</td>
+                                </tr>
+                            </tbody></table>
+                        <h2 id="model-TaxonReference">TaxonReference</h2>
+
+
+    <p><p>A reference referring to a specific taxon and annotated with a certain topic.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>reference</td>
+                                    <td><a href="#model-Reference">Reference</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>topic</td>
+                                    <td><a href="#model-ReferenceTopicType">ReferenceTopicType[]</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td></td>
                                 </tr>
                             </tbody></table>
                         <h2 id="model-VerbatimRecord">VerbatimRecord</h2>
@@ -3332,166 +3524,6 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>Links to references supporting the vernacular name record</p>
-</td>
-                                </tr>
-                            </tbody></table>
-                        <h2 id="model-Distribution">Distribution</h2>
-
-
-    <p><p>An area distribution record</p>
-</p>
-
-                            <table><thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Pattern</th>
-                                <th>Required</th>
-                                <th>Description</th>
-                            </tr>
-                            </thead><tbody>
-                                <tr>
-                                    <td>datasetKey</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Key to the source dataset this record belongs to</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>area</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>the geographic area the distribution refers to as defined in the corresponding area standard.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>gazetteer</td>
-                                    <td><a href="#model-GazetteerType">GazetteerType</a></td>
-                                    <td>tdwg, iso, fao, fao-fishing, longhurst, teow, iho, text</td>
-                                    <td>yes</td>
-                                    <td><p>The standard of area names the area value refers to.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>status</td>
-                                    <td><a href="#model-DistributionStatusType">DistributionStatusType</a></td>
-                                    <td>native, domesticated, alien, uncertain</td>
-                                    <td>yes</td>
-                                    <td><p>The status of the species distribution</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>referenceIds</td>
-                                    <td>string[]</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Links to references supporting the distribution record</p>
-</td>
-                                </tr>
-                            </tbody></table>
-                        <h2 id="model-NameSuggestion">NameSuggestion</h2>
-
-
-    <p><p>Captures the information for a single auto-complete suggestion</p>
-</p>
-
-                            <table><thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Pattern</th>
-                                <th>Required</th>
-                                <th>Description</th>
-                            </tr>
-                            </thead><tbody>
-                                <tr>
-                                    <td>match</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>The suggestion</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>vernacularName</td>
-                                    <td>boolean</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Whether or not the suggestion is a vernacular name</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>acceptedName</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>The accepted name if the suggestion is anything but an accepted name, null/absent otherwise</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>usageId</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>The usage ID (the taxon ID in case of a vernacular name)</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>rank</td>
-                                    <td><a href="#model-RankType">RankType</a></td>
-                                    <td>domain, superkingdom, kingdom, subkingdom, infrakingdom, superphylum, phylum, subphylum, infraphylum, superclass, class, subclass, infraclass, parvclass, superlegion, legion, sublegion, infralegion, supercohort, cohort, subcohort, infracohort, magnorder, superorder, grandorder, order, suborder, infraorder, parvorder, superfamily, family, subfamily, infrafamily, supertribe, tribe, subtribe, infratribe, suprageneric name, genus, subgenus, infragenus, supersection, section, subsection, superseries, series, subseries, infrageneric name, species aggregate, species, infraspecific name, grex, subspecies, cultivar group, convariety, infrasubspecific name, proles, natio, aberration, morph, variety, subvariety, form, subform, pathovar, biovar, chemovar, morphovar, phagovar, serovar, chemoform, forma specialis, cultivar, strain, other, unranked</td>
-                                    <td>yes</td>
-                                    <td><p>The rank of the suggested name (or the rank of the accepted name in case of a vernacular name)</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>status</td>
-                                    <td><a href="#model-TaxonomicStatusType">TaxonomicStatusType</a></td>
-                                    <td>accepted, doubtful, ambiguous synonym</td>
-                                    <td>yes</td>
-                                    <td><p>The taxonomic status of the suggested</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>nomCode</td>
-                                    <td><a href="#model-NomCodeType">NomCodeType</a></td>
-                                    <td>bacterial, botanical, cultivated, viral, zoological, unknown</td>
-                                    <td>yes</td>
-                                    <td><p>The nomenclatural code of the suggested name</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>score</td>
-                                    <td>number</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>The relevance score assigned to the suggestion by the search engine</p>
-</td>
-                                </tr>
-                            </tbody></table>
-                        <h2 id="model-NameSuggestResponse">NameSuggestResponse</h2>
-
-
-    <p><p>Contains all suggestions matching the search phrase (q)</p>
-</p>
-
-                            <table><thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Pattern</th>
-                                <th>Required</th>
-                                <th>Description</th>
-                            </tr>
-                            </thead><tbody>
-                                <tr>
-                                    <td>suggestions</td>
-                                    <td><a href="#model-NameSuggestion">NameSuggestion[]</a></td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>A list of suggestions matching the search phrase</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -3846,13 +3878,13 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{"gbifSync":true,"importer":false}</code>
 </pre>
                     <p><code>application/json</code></p>
-                    <p>Content: any</p>
+                    <p>Content: <a href="#model-BackgroundProcesses">BackgroundProcesses</a></p>
 
     <pre class="example"><code class="http">
 PUT //admin/background HTTP/1.1
@@ -3902,7 +3934,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: text/plain
 </code>
 </pre>
@@ -3933,7 +3965,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: text/plain
 </code>
 </pre>
@@ -3964,7 +3996,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: text/plain
 </code>
 </pre>
@@ -4001,7 +4033,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json-assembly-idle
 </code>
     <code class="json">{
@@ -4015,7 +4047,7 @@ Content-Type: application/json-assembly-idle
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json-assembly-running
 </code>
     <code class="json">{
@@ -4063,7 +4095,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4139,7 +4171,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json-dataset-not-imported-yet
 </code>
     <code class="json">{
@@ -4152,7 +4184,7 @@ Content-Type: application/json-dataset-not-imported-yet
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json-dataset-still-importing
 </code>
     <code class="json">{
@@ -4165,7 +4197,7 @@ Content-Type: application/json-dataset-still-importing
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json-sector-does-not-exist
 </code>
     <code class="json">{
@@ -4178,7 +4210,7 @@ Content-Type: application/json-sector-does-not-exist
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json-only-draft-catalogue
 </code>
     <code class="json">{
@@ -4239,7 +4271,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4265,7 +4297,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4301,7 +4333,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: text/plain
 </code>
     <code class="json">Execute DROP SQL
@@ -4332,7 +4364,7 @@ Export completed
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4376,7 +4408,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4391,7 +4423,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4448,7 +4480,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -4480,7 +4512,7 @@ for the <a href="https://github.com/Sp2000/coldp">Catalogue of Life Data Package
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5722,7 +5754,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5793,7 +5825,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">2051</code>
@@ -5846,7 +5878,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6434,7 +6466,7 @@ Host: api.col.plus
 </p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
     <code class="json"># import attempt processing
@@ -6641,7 +6673,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6676,7 +6708,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6711,7 +6743,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: image/bmp
 </code>
 </pre>
@@ -6719,7 +6751,7 @@ Content-Type: image/bmp
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: image/gif
 </code>
 </pre>
@@ -6727,7 +6759,7 @@ Content-Type: image/gif
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: image/jpg
 </code>
 </pre>
@@ -6735,7 +6767,7 @@ Content-Type: image/jpg
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: image/png
 </code>
 </pre>
@@ -6743,7 +6775,7 @@ Content-Type: image/png
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: image/psd
 </code>
 </pre>
@@ -6751,7 +6783,7 @@ Content-Type: image/psd
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: image/tiff
 </code>
 </pre>
@@ -6761,7 +6793,7 @@ Content-Type: image/tiff
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6809,7 +6841,7 @@ Content-Type: application/octet-stream
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6884,7 +6916,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -6936,7 +6968,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6995,7 +7027,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -7081,7 +7113,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:32 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7149,7 +7181,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -7197,7 +7229,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7257,7 +7289,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: text/plain
 </code>
 </pre>
@@ -7327,7 +7359,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -7379,7 +7411,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7483,7 +7515,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -7535,7 +7567,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7597,7 +7629,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7667,7 +7699,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -7759,7 +7791,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -7790,7 +7822,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -8002,7 +8034,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8062,7 +8094,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: text/plain
 </code>
     <code class="json">Animalia [kingdom]
@@ -8107,7 +8139,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: text/plain
 </code>
     <code class="json">--- /home/col/bin/dev/metrics/dataset/2050/tree/1.txt	2019-10-09 21:43:18.083256660 +0000
@@ -8126,7 +8158,7 @@ Content-Type: text/plain
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8201,7 +8233,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -8253,7 +8285,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8343,7 +8375,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -8404,7 +8436,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">6</code>
@@ -8457,7 +8489,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -8527,7 +8559,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8585,7 +8617,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -8652,7 +8684,7 @@ description: Filter by CoL source.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -8740,7 +8772,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -8775,7 +8807,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8815,7 +8847,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json"># inserting import
@@ -8949,7 +8981,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8988,7 +9020,7 @@ Optionally a compressed archive of data (zip or gzip) can be included</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9183,7 +9215,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9507,7 +9539,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -9596,7 +9628,7 @@ Eventually should be exposed in public API.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9677,7 +9709,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -9766,7 +9798,7 @@ with one name per line, or as plain/text content in the request body.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -9858,7 +9890,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9876,7 +9908,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9912,7 +9944,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9958,7 +9990,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: text/plain
 </code>
     <code class="json">"70d8d5b  2019-10-09T14:26:15+0000"
@@ -9992,7 +10024,7 @@ Any of the names can be used as valid subresources to list the actual enumeratio
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">["continent","country","areastandard","cslreftype","nametype","origin","language","frequency","rank","nomacttype","coverage","nomstatus","dataformat","importstate","issue","gazetteer","cslvariable","typestatus","lifezone","distributionstatus","taxonomicstatus","kingdom","datasettype","license","nomcode","namepart"]
@@ -10025,7 +10057,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Tuesday, October 29, 2019 3:00:44 PM CDT
+Date: Thursday, October 31, 2019 4:39:33 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]
