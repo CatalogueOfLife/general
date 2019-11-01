@@ -514,6 +514,7 @@ GazetteerType:
     : Free text not following any standard
 ImportMetrics:
   type: object
+  description: Statistical information about data imports.
   properties:
     datasetKey:
       type: integer
@@ -1438,6 +1439,29 @@ NameSuggestResponse:
         suggestions:
           type: NameSuggestion[]
           description: A list of suggestions matching the search phrase
+Page:
+  description: |
+    A page used for requesting or responding to a pageable service.
+  type: object
+  properties:
+    MAX_LIMIT:
+      type: integer
+      description: the maximum number of records to display is 1000
+      required: false
+    DEFAULT_LIMIT:
+      type: integer
+      description: the default number of records to display is 10
+      required: false
+    DEFAULT_OFFSET:
+      type: integer
+      description: the default pagination offset is 0
+      required: false
+    offset:
+      type: integer
+      description: the pagination offset
+    limit:
+      type: integer
+      description: the number of records to display
 Rank:
   description: >
     An ordered taxonomic rank enumeration with the most frequently used values.
@@ -1490,6 +1514,17 @@ ReferenceResultSet:
     results:
       type: Reference[]
       description: the resulting References
+ResultPage:
+  type: Page
+  description: |
+    A generic paging response wrapping a list payload
+  properties:
+    total:
+      type: integer
+      description: the total number of results
+    result:
+      type: object[]
+      description: the list of results
 Sector:
   type: object
   description: |
@@ -1624,7 +1659,9 @@ SectorImport:
       description: the sector ID
     ignoredUsageCount:
       type: integer
-      description: the number of ignored scientific name usages
+      description: |
+       The number of ignored scientific name usages, which could be explicitly blocked by a decision or
+       implicitly excluded (e.g., hybrid formulas, placeholders, no_names, etc).
     usagesCount:
       type: integer
       description: the number of scientific name usages
