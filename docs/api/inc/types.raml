@@ -1525,6 +1525,16 @@ ResultPage:
     result:
       type: object[]
       description: the list of results
+    last:
+      type: boolean
+      description: if it is the last page
+    empty:
+      type: boolean
+      description: if the query returned zero results
+    size:
+      type: integer
+      description: the size of the results
+      required: false
 Sector:
   type: object
   description: |
