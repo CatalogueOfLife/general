@@ -15,9 +15,17 @@ uuid:
 AssemblyState:
   type: object
   properties:
-    LOG:
-      type: object
-      description: a LoggerFactory logger
+    completed:
+      type: integer
+      description: number of completed sector syncs
+      required: false
+    failed:
+      type: integer
+      description: number of failed sector syncs
+      required: false
+    idle:
+      type: boolean
+      description: if assembly sync is idle
       required: false
     running:
       type: SectorImport
@@ -26,14 +34,6 @@ AssemblyState:
     queued:
       type: SectorImport[]
       description: queued sector syncs
-      required: false
-    failed:
-      type: integer
-      description: number of failed sector syncs
-      required: false
-    completed:
-      type: integer
-      description: number of completed sector syncs
       required: false
 Authorship:
   type: object
@@ -512,6 +512,53 @@ GazetteerType:
 
     text
     : Free text not following any standard
+ImportMetrics:
+  type: object
+  properties:
+    datasetKey:
+      type: integer
+      description: the dataset ID
+    attempt:
+      type: integer
+      description: the number of import attempts
+    state:
+      type: ImportState
+      description: the state of the import
+    started:
+      type: datetime
+      description: the date and time the import started
+    finished:
+      type: datetime
+      description: the date and time the import finished
+      required: false
+    nameCount:
+      type: integer
+      description: the number of names imported
+      required: false
+    taxonCount:
+      type: integer
+      description: the number of taxa imported
+      required: false
+    synonymCount:
+      type: integer
+      description: the number of synonyms imported
+      required: false
+    referenceCount:
+      type: integer
+      description: the number of references imported
+      required: false
+    distributionCount:
+      type: integer
+      description: the number of distribution records imported
+      required: false
+    mediaCount:
+      type: integer
+      description: the number of media records imported
+      required: false
+    vernacularCount:
+      type: integer
+      description: the number of common names imported
+      required: false
 ImportRequest:
   type: object
   description: Request to import a dataset.
@@ -1555,7 +1602,32 @@ Serial:
       }
     }
 SectorImport:
-  type: object #TODO: add SectorImport
+  type: ImportMetrics
+  description: |
+    A sector import into assembly.
+  properties:
+    attempt:
+      type: integer
+      description: the number of attempts
+    state:
+      type: string
+      enum: ["waiting", "preparing", "copying", "deleting", "relinking", "indexing", "finished", "canceled", "failed"]
+      description: the current status of the sector sync
+    taxonCount:
+      type: integer
+      description: the number of taxa in the sector sync
+    type:
+      type: string
+      description: the type of sector sync
+    sectorKey:
+      type: integer
+      description: the sector ID
+    ignoredUsageCount:
+      type: integer
+      description: the number of ignored scientific name usages
+    usagesCount:
+      type: integer
+      description: the number of scientific name usages
 SerialResultSet:
   type: ResultSet
   description: >

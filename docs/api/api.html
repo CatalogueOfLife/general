@@ -163,11 +163,27 @@
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>LOG</td>
-                                    <td>object</td>
+                                    <td>completed</td>
+                                    <td>integer</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>a LoggerFactory logger</p>
+                                    <td><p>number of completed sector syncs</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>failed</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>number of failed sector syncs</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>idle</td>
+                                    <td>boolean</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>if assembly sync is idle</p>
 </td>
                                 </tr>
                                 <tr>
@@ -184,22 +200,6 @@
                                     <td></td>
                                     <td>no</td>
                                     <td><p>queued sector syncs</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>failed</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>number of failed sector syncs</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>completed</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>number of completed sector syncs</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -1198,6 +1198,117 @@ Dataset used to build the provisional catalogue will be trusted and insert their
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>Error message</p>
+</td>
+                                </tr>
+                            </tbody></table>
+                        <h2 id="model-ImportMetrics">ImportMetrics</h2>
+
+
+    
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>datasetKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the dataset ID</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>attempt</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the number of import attempts</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>state</td>
+                                    <td><a href="#model-ImportState">ImportState</a></td>
+                                    <td>downloading, processing, inserting, unchanged, finished, canceled, failed</td>
+                                    <td>yes</td>
+                                    <td><p>the state of the import</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>started</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the date and time the import started</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>finished</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the date and time the import finished</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>nameCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the number of names imported</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>taxonCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the number of taxa imported</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>synonymCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the number of synonyms imported</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>referenceCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the number of references imported</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>distributionCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the number of distribution records imported</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>mediaCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the number of media records imported</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>vernacularCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the number of common names imported</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -2827,8 +2938,147 @@ Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Direc
                         <h2 id="model-SectorImport">SectorImport</h2>
 
 
-    
+    <p><p>A sector import into assembly.</p>
+</p>
 
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>datasetKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the dataset ID</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>attempt</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the number of import attempts</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>state</td>
+                                    <td><a href="#model-ImportState">ImportState</a></td>
+                                    <td>waiting, preparing, copying, deleting, relinking, indexing, finished, canceled, failed</td>
+                                    <td>yes</td>
+                                    <td><p>the state of the import</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>started</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the date and time the import started</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>finished</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the date and time the import finished</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>nameCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the number of names imported</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>taxonCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the number of taxa imported</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>synonymCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the number of synonyms imported</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>referenceCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the number of references imported</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>distributionCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the number of distribution records imported</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>mediaCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the number of media records imported</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>vernacularCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the number of common names imported</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>type</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the type of sector sync</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>sectorKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the sector ID</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>ignoredUsageCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the number of ignored scientific name usages</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>usagesCount</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>the number of scientific name usages</p>
+</td>
+                                </tr>
+                            </tbody></table>
                         <h2 id="model-SerialResultSet">SerialResultSet</h2>
 
 
@@ -3938,7 +4188,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{"gbifSync":true,"importer":false}</code>
@@ -3994,7 +4244,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: text/plain
 </code>
 </pre>
@@ -4025,7 +4275,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: text/plain
 </code>
 </pre>
@@ -4056,7 +4306,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: text/plain
 </code>
 </pre>
@@ -4093,7 +4343,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json-assembly-idle
 </code>
     <code class="json">{
@@ -4107,7 +4357,7 @@ Content-Type: application/json-assembly-idle
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json-assembly-running
 </code>
     <code class="json">{
@@ -4155,7 +4405,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4231,7 +4481,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json-dataset-not-imported-yet
 </code>
     <code class="json">{
@@ -4244,7 +4494,7 @@ Content-Type: application/json-dataset-not-imported-yet
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json-dataset-still-importing
 </code>
     <code class="json">{
@@ -4257,7 +4507,7 @@ Content-Type: application/json-dataset-still-importing
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json-sector-does-not-exist
 </code>
     <code class="json">{
@@ -4270,7 +4520,7 @@ Content-Type: application/json-sector-does-not-exist
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json-only-draft-catalogue
 </code>
     <code class="json">{
@@ -4331,7 +4581,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4357,7 +4607,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4393,7 +4643,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: text/plain
 </code>
     <code class="json">Execute DROP SQL
@@ -4424,7 +4674,7 @@ Export completed
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4468,7 +4718,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4483,7 +4733,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4540,7 +4790,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -4572,7 +4822,7 @@ for the <a href="https://github.com/Sp2000/coldp">Catalogue of Life Data Package
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5814,7 +6064,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5885,7 +6135,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">2051</code>
@@ -5938,7 +6188,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6526,7 +6776,7 @@ Host: api.col.plus
 </p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json"># import attempt processing
@@ -6733,7 +6983,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6768,7 +7018,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6803,7 +7053,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: image/bmp
 </code>
 </pre>
@@ -6811,7 +7061,7 @@ Content-Type: image/bmp
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: image/gif
 </code>
 </pre>
@@ -6819,7 +7069,7 @@ Content-Type: image/gif
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: image/jpg
 </code>
 </pre>
@@ -6827,7 +7077,7 @@ Content-Type: image/jpg
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: image/png
 </code>
 </pre>
@@ -6835,7 +7085,7 @@ Content-Type: image/png
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: image/psd
 </code>
 </pre>
@@ -6843,7 +7093,7 @@ Content-Type: image/psd
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: image/tiff
 </code>
 </pre>
@@ -6853,7 +7103,7 @@ Content-Type: image/tiff
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6901,7 +7151,7 @@ Content-Type: application/octet-stream
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6976,7 +7226,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -7028,7 +7278,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7087,7 +7337,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -7173,7 +7423,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7241,7 +7491,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -7289,7 +7539,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7349,7 +7599,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: text/plain
 </code>
 </pre>
@@ -7419,7 +7669,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -7471,7 +7721,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7575,7 +7825,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -7627,7 +7877,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7689,7 +7939,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7759,7 +8009,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -7851,7 +8101,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -7882,7 +8132,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -8094,7 +8344,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8154,7 +8404,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: text/plain
 </code>
     <code class="json">Animalia [kingdom]
@@ -8199,7 +8449,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: text/plain
 </code>
     <code class="json">--- /home/col/bin/dev/metrics/dataset/2050/tree/1.txt	2019-10-09 21:43:18.083256660 +0000
@@ -8218,7 +8468,7 @@ Content-Type: text/plain
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8293,7 +8543,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -8345,7 +8595,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8435,7 +8685,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -8496,7 +8746,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">6</code>
@@ -8549,7 +8799,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -8619,7 +8869,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8677,7 +8927,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -8744,7 +8994,7 @@ description: Filter by CoL source.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -8832,7 +9082,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -8867,7 +9117,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8907,7 +9157,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json"># inserting import
@@ -9041,7 +9291,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9080,7 +9330,7 @@ Optionally a compressed archive of data (zip or gzip) can be included</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9275,7 +9525,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9599,7 +9849,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
 </pre>
@@ -9688,7 +9938,7 @@ Eventually should be exposed in public API.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9769,7 +10019,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -9858,7 +10108,7 @@ with one name per line, or as plain/text content in the request body.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -9950,7 +10200,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9968,7 +10218,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -10004,7 +10254,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -10050,7 +10300,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: text/plain
 </code>
     <code class="json">"70d8d5b  2019-10-09T14:26:15+0000"
@@ -10084,7 +10334,7 @@ Any of the names can be used as valid subresources to list the actual enumeratio
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">["continent","country","areastandard","cslreftype","nametype","origin","language","frequency","rank","nomacttype","coverage","nomstatus","dataformat","importstate","issue","gazetteer","cslvariable","typestatus","lifezone","distributionstatus","taxonomicstatus","kingdom","datasettype","license","nomcode","namepart"]
@@ -10117,7 +10367,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, October 31, 2019 5:08:55 PM CDT
+Date: Friday, November 1, 2019 12:10:34 PM CDT
 Content-Type: application/json
 </code>
     <code class="json">["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]
