@@ -357,6 +357,54 @@ After the first few examples we will start omitting parsed fields of the name in
 }
 ```
 
+## Abies Section Grandes
+```json5
+{
+  "id": 1234,
+  "homotypicNameId": 1234,
+  "scientificName": "Abies sect. Grandes",
+  "authorship": "A.E.Murray",
+  "rank": "section",
+  "genus": "Abies",
+  "infragenericEpithet": "Grandes",
+  "combinationAuthorship": {
+    "authors": [
+      "A.E.Murray"
+    ]
+  },
+  "code": "botanical",
+  "origin": "source",
+  "type": "scientific",
+  "publishedInId": 6,
+  "publishedInPage": "4",
+  "parsed": true
+}
+```
+
+## Subgenus Afrostrandius
+```json5
+{
+  "id": 1234,
+  "homotypicNameId": 1234,
+  "scientificName": "Onthophagus (Afrostrandius)",
+  "authorship": "Moretto, 2009",
+  "rank": "subgenus",
+  "genus": "Onthophagus",
+  "infragenericEpithet": "Afrostrandius",
+  "combinationAuthorship": {
+    "year": "2009",
+    "authors": [
+      "Moretto"
+    ]
+  },
+  "code": "zoological",
+  "origin": "source",
+  "type": "scientific",
+  "publishedInId": 6,
+  "parsed": true
+}
+```
+
 ## Virus species Garlic virus B
 ```json5
 {
