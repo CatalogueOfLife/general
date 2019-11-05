@@ -13,6 +13,7 @@
                   "idle": true
                 }
             application/json-assembly-running:
+              type: AssemblyState
               example: |
                 {
                   "running": {
@@ -38,6 +39,7 @@
         200:
           body:
             application/json:
+              type: ResultPage
               example: |
                 {
                   "offset": 0,

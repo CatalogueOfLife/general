@@ -1,55 +1,582 @@
 # to be included for traits like this:
 # types: !include inc/types.raml
-uuid:
-  type: string
-  minLength: 36
-  maxLength: 36
-  pattern: ^[0-9abcdef]{8}-[0-9abcdef]{4}-[0-9abcdef]{4}-[0-9abcdef]{4}-[0-9abcdef]{12}$
-  description: UUID data type represented as 32 hexadecimal (base 16) digits. Example 123e4567-e89b-12d3-a456-426655440000
 isocode:
   type: string
   minLength: 2
   maxLength: 3
   pattern: ^[a-z]{2,3}$
   description: 2 or 3 letter codes as used by ISO country or languages
-RankType:
+uuid:
   type: string
-  enum: ["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]
-  description: >
-    Enumeration of all possible rank values across all codes.
-    See http://api.col.plus/vocab/rank for the complete list in use
-
-    There is the need to deal with old ranks not accepted anymore.
-    The list given is intended to be interoperable between name providers for bacteria, viruses, fungi, plants, and animals.
-    The enumeration attempts to strike a balance between listing all possible rank terms, and remaining comprehensible.
-    Not included in the list are the botanical "notho-" ranks, which are used to designate hybrids (nothospecies, nothogenus) as this information is handled by the Name.notho property already.
-
-    Sources:
-
-     - [GBIF](https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/Rank.java)
-     - [TCS](https://github.com/tdwg/tcs/blob/master/TCS101/v101.xsd#L860)
-     - [TaxCat2](http://mansfeld.ipk-gatersleben.de/apex/f?p=185:78:::NO::P77_TAXCAT,P77_DB_CHECKBOX1,77_TAXCAT2RAD,77_SHOWRAD:%25,,0,s_All)
-     - [NOMEN](https://raw.githubusercontent.com/SpeciesFileGroup/nomen/master/src/ontology/nomen.owl)
-
-     TODO: extract all values from sources
+  minLength: 36
+  maxLength: 36
+  pattern: ^[0-9abcdef]{8}-[0-9abcdef]{4}-[0-9abcdef]{4}-[0-9abcdef]{4}-[0-9abcdef]{12}$
+  description: UUID data type represented as 32 hexadecimal (base 16) digits. Example 123e4567-e89b-12d3-a456-426655440000
+AssemblyState:
+  type: object
+  properties:
+    completed:
+      type: integer
+      description: number of completed sector syncs
+      required: false
+    failed:
+      type: integer
+      description: number of failed sector syncs
+      required: false
+    idle:
+      type: boolean
+      description: if assembly sync is idle
+      required: false
+    running:
+      type: SectorImport
+      description: running sector syncs
+      required: false
+    queued:
+      type: SectorImport[]
+      description: queued sector syncs
+      required: false
+Authorship:
+  type: object
+  properties:
+    authors:
+      type: string[]
+      description: list of contributing authors
+    exAuthors:
+      type: string[]
+      description: list of authors excluding ex- authors
+      required: false
+    year:
+      type: string
+      description: Year of publication
+      required: false
+BackgroundProcesses:
+  type: object
+  properties:
+    gbifSync:
+      type: boolean
+      description: whether the GBIF sync is enabled
+    importer:
+      type: boolean
+      description: whether the importer scheduler is enabled
+  description: |
+    Static class of background processes
 CatalogueType:
   type: string
   enum: ["scrutinized", "provisional"]
   description: >
     Assembled catalogues in the CoL
     See http://api.col.plus/vocab/catalogue for the latest full list.
+ColSource:
+  type: object
+  description: |
+      A citable source for a CoL data provider
+  properties:
+    key:
+      type: integer
+      description: primary key
+    datasetKey:
+      type: integer
+      description: key to the dataset this source belongs to
+    title:
+      type: string
+      description: Full name of the source. Defaults to dataset title.
+    alias:
+      type: string
+      description: Short alias for the source to show in trees etc.
+    description:
+      type: string
+      description: Free text describing the source supporting markdown formatting
+      required: false
+    organisation:
+      type: string
+      description: Organisation which has compiled or is owning the source
+      required: false
+    contactPerson:
+      type: string
+      description: Contact person of the source
+      required: false
+    authorsAndEditors:
+      type: string[]
+      description: Optional author(s) and editor(s) of the source
+      required: false
+    version:
+      type: string
+      description: Latest version number of the source used in the Catalogue of Life
+      required: false
+    released:
+      type: date-only
+      description: Latest release date of the source used in the Catalogue of Life
+      required: false
+    homepage:
+      type: string
+      description: Homepage URL of the source
+      required: false
+    group:
+      type: string
+      description: taxonomic group in english language
+      required: false
+    coverage:
+      type: DatasetType
+      description: global vs regional sources
+    citation:
+      type: string
+      description: full bibliographic citation to be used
+      required: false
+    livingSpeciesCount:
+      type: integer
+      required: false
+    livingInfraspecificCount:
+      type: integer
+      required: false
+    extinctSpeciesCount:
+      type: integer
+      required: false
+    extinctInfraspecificCount:
+      type: integer
+      required: false
+    synonymsCount:
+      type: integer
+      required: false
+    vernacularsCount:
+      type: integer
+      required: false
+    namesCount:
+      type: integer
+      required: false
+    created:
+      type: datetime
+      description: datetime the source was registered in the Clearinghouse
+Dataset:
+  type: object
+  description: Metadata about the source dataset, e.g. a GSD
+  properties:
+    key:
+      type: integer
+      description: Primary key for the source dataset
+    type:
+      type: DatasetType
+      description: coarse classification of datasets
+    title:
+      type: string
+      description: Full name of the source dataset
+    gbifKey:
+      type: uuid
+      description: GBIF dataset key
+      required: false
+    gbifPublisherKey:
+      type: uuid
+      description: GBIF publisher key in case of GBIF datasets
+      required: false
+    description:
+      type: string
+      description: Free text describing the source dataset supporting markdown formatting
+      required: false
+    organisation:
+      type: string
+      description: Organisation which has compiled or is owning the source dataset
+      required: false
+    contactPerson:
+      type: string
+      description: Contact person of the source dataset
+      required: false
+    authorsAndEditors:
+      type: string[]
+      description: Optional author(s) and editor(s) of the source dataset
+      required: false
+    license:
+      type: LicenseType
+      description: License this dataset falls under
+    version:
+      type: string
+      description: Latest version number of the source dataset used in the Catalogue of Life
+      required: false
+    released:
+      type: date-only
+      description: Latest release date of the source dataset used in the Catalogue of Life
+      required: false
+    homepage:
+      type: string
+      description: Homepage URL of the source
+      required: false
+    logo:
+      type: string
+      description: URL to a logo image of the dataset
+      required: false
+    dataFormat:
+      type: string
+      enum: ["dwca", "tcs", "xls", "other"]
+      description: data format
+      required: false
+    dataAccess:
+      type: string
+      description: URL to access the source data
+      required: false
+    importFrequency:
+      type: FrequencyType
+      description: the configured frequency the source is visited for new imports
+    code:
+      type: NomCodeType
+      description: a default nomenclatural code to be used when importing
+      required: false
+    catalogue:
+      type: CatalogueType
+      description: |
+        If the dataset participates in any of the 2 catalouge assemblies this is indicated here.
+        All scrutinized sources will also be included as provisional ones.
+        Dataset used to build the provisional catalogue will be trusted and insert their names into the names index.
+    notes:
+      type: string
+      description: any notes
+      required: false
+    created:
+      type: datetime
+      description: datetime the dataset was registered in the Clearinghouse
+    modified:
+      type: datetime
+      description: datetime the data from this dataset was last changed in the Clearinghouse
+      required: false
+    deleted:
+      type: datetime
+      description: datetime the dataset was deleted from the Clearinghouse
+      required: false
+DatasetImport:
+  type: object
+  description: Metrics and import details about a single dataset import event.
+  properties:
+    datasetKey:
+      type: integer
+      description: Primary key for the source dataset
+    attempt:
+      type: integer
+      description: Sequential attempt number starting with 1 for each dataset
+    state:
+      type: ImportState
+      description: State of the import, e.g.indicating if still running, success or failure.
+    downloadUri:
+      type: string
+      description: Last modification date of the downloaded file
+    download:
+      type: datetime
+      description: Last modification date of the downloaded file
+    started:
+      type: datetime
+      description: date time the import started
+    finished:
+      type: datetime
+      description: date time the import finished
+      required: false
+    error:
+      type: string
+      description: Error message
+      required: false
+    verbatimCount:
+      type: integer
+      description: count of all verbatim records
+    nameCount:
+      type: integer
+      description: count of all name records
+    taxonCount:
+      type: integer
+      description: count of all taxon (accepted name) records
+    referenceCount:
+      type: integer
+      description: count of all reference records
+    vernacularCount:
+      type: integer
+      description: count of all vernacular names
+    distributionCount:
+      type: integer
+      description: count of all distribution records
+    issuesCount:
+      type: object
+      description: count of verbatim recorbs by issues
+      required: false
+    namesByRankCount:
+      type: object
+      description: count of names by rank
+      required: false
+    taxaByRankCount:
+      type: object
+      description: count of taxa by rank
+      required: false
+    namesByTypeCount:
+      type: object
+      description: count of names by name type
+      required: false
+    vernacularsByLanguageCount:
+      type: object
+      description: count of vernacular names by language
+      required: false
+    distributionsByGazetteerCount:
+      type: object
+      description: count of distributions by gazetteer kind
+      required: false
+    namesByOriginCount:
+      type: object
+      description: count of names by their origin
+      required: false
+    usagesByStatusCount:
+      type: object
+      description: count of name usages by their taxonomic status
+      required: false
+    namesByStatusCount:
+      type: object
+      description: count of names by their name status
+      required: false
+    nameRelationsByTypeCount:
+      type: object
+      description: count of name relations by their type
+      required: false
+    verbatimByTypeCount:
+      type: object
+      description: count of verbatim records by their rowType
+      required: false
+  example: |
+    {
+        "datasetKey": 101,
+        "attempt": 1,
+        "state": "finished",
+        "downloadUri": "https://raw.githubusercontent.com/Sp2000/colplus-repo/master/ACEF/assembly/101.tar.gz",
+        "download": "2018-02-28T03:40:02",
+        "started": "2018-02-28T03:40:01.433",
+        "finished": "2018-02-28T03:52:27.201",
+        "verbatimCount": 169988,
+        "nameCount": 179025,
+        "taxonCount": 147971,
+        "referenceCount": 1711,
+        "vernacularCount": 0,
+        "distributionCount": 137999,
+        "issuesCount": {
+            "DISTRIBUTION_GAZETEER_INVALID": 3,
+            "DISTRIBUTION_STATUS_INVALID": 2,
+            "LIFEZONE_INVALID": 1
+        },
+        "namesByRankCount": {
+            "SPECIES": 169988,
+            "GENUS": 8878,
+            "FAMILY": 155,
+            "KINGDOM": 1,
+            "PHYLUM": 1,
+            "CLASS": 1,
+            "ORDER": 1
+        },
+        "namesByTypeCount": {
+            "SCIENTIFIC": 179025
+        },
+        "distributionsByGazetteerCount": {
+            "TEXT": 137999
+        },
+        "namesByOriginCount": {
+            "SOURCE": 169988,
+            "DENORMED_CLASSIFICATION": 9037
+        }
+    }
+DatasetImportResultSet:
+  type: ResultSet
+  description: >
+    A paging resultset for DatasetImport.
+  properties:
+    results:
+      type: DatasetImport[]
+      description: the resulting import metrics
+DatasetResultSet:
+  type: ResultSet
+  description: >
+    A paging resultset for Datasets.
+  properties:
+    results:
+      type: Dataset[]
+      description: the resulting Datasets
+DatasetObject:
+  type: object
+  description: >
+    An object which is part of a specific dataset.
+  properties:
+    datasetKey:
+      type: integer
+      description: Key to the source dataset this record belongs to
+      required: true
 DatasetType:
   type: string
   enum: ["nomenclator","taxonomic","national","personal","other"]
   description: >
     Enumeration of kind of datasets
     See http://api.col.plus/vocab/datasettype for the latest full list.
+Decision:
+  type: object
+  properties:
+    key:
+      type: integer
+      description: primary key
+    datasetKey:
+      type: integer
+      description: primary key
+    subject:
+      type: NameRef
+      description: the name usage this decision is about
+    status:
+      type: TaxonomicStatusType
+      description: the new status
+      required: false
+    name:
+      type: string
+      description: the new scientific name
+      required: false
+    authorship:
+      type: string
+      description: the new authorship
+      required: false
+    created:
+      type: datetime
+      description: datetime the decision was created
+    deleted:
+      type: datetime
+      description: datetime the decision was deleted
+      required: false
+Distribution:
+  type: DatasetObject
+  description: An area distribution record
+  properties:
+    area:
+      type: string
+      description: the geographic area the distribution refers to as defined in the corresponding area standard.
+    gazetteer:
+      type: GazetteerType
+      description: The standard of area names the area value refers to.
+    status:
+      type: DistributionStatusType
+      description: The status of the species distribution
+    referenceIds:
+      type: string[]
+      description: Links to references supporting the distribution record
+      required: false
+DistributionStatusType:
+  type: string
+  enum: ["native", "domesticated", "alien", "uncertain"]
+  description: >
+    CoL distribution status enumeration
+    See http://api.col.plus/vocab/distributionstatus
+Error:
+  type: object
+  description: >
+    An error response.
+  properties:
+    status:
+      type: integer
+      description: http status code
+    message:
+      type: string
+      description: Error message
+  example: |
+    {
+      "status": 404,
+      "message": "Name 467324, version 7 not found"
+    }
 FrequencyType:
   type: string
   enum: ["never", "once", "daily", "weekly", "monthly", "yearly"]
   description: >
     Enumeration of frequencies for scheduling dataset imports.
-    See http://api.col.plus/vocab/frequency for the latest full list.    
+    See http://api.col.plus/vocab/frequency for the latest full list.
+GazetteerType:
+  type: string
+  enum: ["tdwg", "iso", "fao", "fao-fishing", "longhurst", "teow", "iho", "text"]
+  description: |
+    List of supported distribution area standards.
+    See http://api.col.plus/vocab/gazetteer
+
+    tdwg
+    : [World Geographical Scheme for Recording Plant Distributions](http://www.tdwg.org/standards/109) published by TDWG at level 3 or 4.
+
+    iso
+    : [ISO 3166-1](https://www.iso.org/obp/ui/) country codes given either as alpha-2, alpha-3 or numeric codes
+
+    fao
+    : [FAO ISO codes](http://www.fao.org/countryprofiles/iso3list/en/)
+
+    fao-fishing
+    : [FAO Fishing Areas](http://www.fao.org/fishery/cwp/handbook/H/en)
+
+    longhurst
+    : [Longhurst Biogeographical Provinces](http://www.marineregions.org/sources.php#longhurst), a partition of the world oceans into provinces
+    as defined by Longhurst, A.R. (2006). Ecological Geography of the Sea. 2nd Edition.
+
+    teow
+    : [Terrestrial Ecoregions of the World](https://www.worldwildlife.org/publications/terrestrial-ecoregions-of-the-world)
+      (TEOW) is a biogeographic regionalization of the Earth's terrestrial biodiversity.
+      See Olson et al. 2001. Terrestrial ecoregions of the world: a new map of life on Earth. Bioscience 51(11):933-938.
+
+    iho
+    : IAO sea areas as boundaries of the major oceans and seas of the world.
+      See Limits of Oceans & Seas, Special Publication No. 23 published by the International Hydrographic Organization in 1953.
+
+    text
+    : Free text not following any standard
+ImportMetrics:
+  type: object
+  description: Statistical information about data imports.
+  properties:
+    datasetKey:
+      type: integer
+      description: the dataset ID
+    attempt:
+      type: integer
+      description: the number of import attempts
+    state:
+      type: ImportState
+      description: the state of the import
+    started:
+      type: datetime
+      description: the date and time the import started
+    finished:
+      type: datetime
+      description: the date and time the import finished
+      required: false
+    nameCount:
+      type: integer
+      description: the number of names imported
+      required: false
+    taxonCount:
+      type: integer
+      description: the number of taxa imported
+      required: false
+    synonymCount:
+      type: integer
+      description: the number of synonyms imported
+      required: false
+    referenceCount:
+      type: integer
+      description: the number of references imported
+      required: false
+    distributionCount:
+      type: integer
+      description: the number of distribution records imported
+      required: false
+    mediaCount:
+      type: integer
+      description: the number of media records imported
+      required: false
+    vernacularCount:
+      type: integer
+      description: the number of common names imported
+      required: false
+ImportRequest:
+  type: object
+  description: Request to import a dataset.
+  properties:
+    datasetKey:
+      type: integer
+      description: Primary key for the source dataset
+    force:
+      type: boolean
+      description: If true forces a new import even if the data archive has not changed.
+    priority:
+      type: boolean
+      description: If true prioritizes the import over automated background imports
+    created:
+      type: datetime
+      description: datetime the request was created/scheduled
+      required: false
 ImportState:
   type: string
   enum: ["downloading","processing","inserting","unchanged","finished","canceled","failed"]
@@ -240,46 +767,6 @@ LifezoneType:
   description: >
     Coarse classification of the environment an organism lives in.
     See http://api.col.plus/vocab/lifezone
-GazetteerType:
-  type: string
-  enum: ["tdwg", "iso", "fao", "fao-fishing", "longhurst", "teow", "iho", "text"]
-  description: |
-    List of supported distribution area standards.
-    See http://api.col.plus/vocab/gazetteer
-
-    tdwg
-    : [World Geographical Scheme for Recording Plant Distributions](http://www.tdwg.org/standards/109) published by TDWG at level 3 or 4.
-
-    iso
-    : [ISO 3166-1](https://www.iso.org/obp/ui/) country codes given either as alpha-2, alpha-3 or numeric codes
-
-    fao
-    : [FAO ISO codes](http://www.fao.org/countryprofiles/iso3list/en/)
-
-    fao-fishing
-    : [FAO Fishing Areas](http://www.fao.org/fishery/cwp/handbook/H/en)
-
-    longhurst
-    : [Longhurst Biogeographical Provinces](http://www.marineregions.org/sources.php#longhurst), a partition of the world oceans into provinces
-    as defined by Longhurst, A.R. (2006). Ecological Geography of the Sea. 2nd Edition.
-
-    teow
-    : [Terrestrial Ecoregions of the World](https://www.worldwildlife.org/publications/terrestrial-ecoregions-of-the-world)
-      (TEOW) is a biogeographic regionalization of the Earth's terrestrial biodiversity.
-      See Olson et al. 2001. Terrestrial ecoregions of the world: a new map of life on Earth. Bioscience 51(11):933-938.
-
-    iho
-    : IAO sea areas as boundaries of the major oceans and seas of the world.
-      See Limits of Oceans & Seas, Special Publication No. 23 published by the International Hydrographic Organization in 1953.
-
-    text
-    : Free text not following any standard
-DistributionStatusType:
-  type: string
-  enum: ["native", "domesticated", "alien", "uncertain"]
-  description: >
-    CoL distribution status enumeration
-    See http://api.col.plus/vocab/distributionstatus
 ReferenceTopicType:
   type: string
   enum: ["nomen", "taxon", "vernacular", "distribution"]
@@ -310,27 +797,11 @@ MatchType:
   description: Enumeration of the kind of matches possible.
 OriginType:
   type: string
-  enum: ["source", "denormed_classification", "verbatim_parent", "verbatim_accepted","verbatim_basionym",
-  "proparte","autonym","implicit_name","missing_accepted","basionym_placeholder","ex_author_synonym","other"]
+  enum: ["source", "denormed classification", "verbatim parent", "verbatim accepted","verbatim basionym",
+  "proparte","autonym","implicit name","missing accepted","basionym placeholder","ex author synonym","name matching","other"]
   description: >
     Enumeration of the kind of matches possible.
     See http://api.col.plus/vocab/origin
-Error:
-  type: object
-  description: >
-    An error response.
-  properties:
-    status:
-      type: integer
-      description: http status code
-    message:
-      type: string
-      description: Error message
-  example: |
-    {
-      "status": 404,
-      "message": "Name 467324, version 7 not found"
-    }
 ResultSet:
   type: object
   description: >
@@ -353,417 +824,11 @@ ResultSet:
       type: integer
       description: >
         The total number of records available.
-DatasetObject:
-  type: object
+EstimateType:
+  type: string
+  enum: [DESCRIBED_SPECIES_LIVING, DESCRIBED_SPECIES_EXTINCT, ESTIMATED_SPECIES]
   description: >
-    An object which is part of a specific dataset.
-  properties:
-    datasetKey:
-      type: integer
-      description: Key to the source dataset this record belongs to
-      required: true
-VerbatimObject:
-  type: DatasetObject
-  properties:
-    verbatimKey:
-      type: integer
-      description: Key to the verbatim record this object was derived from
-      required: false
-VerbatimIdObject:
-  type: VerbatimObject
-  properties:
-    id:
-      type: string
-      description: Primary id for the record
-VerbatimKeyObject:
-  type: VerbatimObject
-  properties:
-    key:
-      type: integer
-      description: Primary key for the record
-ColSource:
-  type: object
-  description: |
-      A citable source for a CoL data provider
-  properties:
-    key:
-      type: integer
-      description: primary key
-    datasetKey:
-      type: integer
-      description: key to the dataset this source belongs to
-    title:
-      type: string
-      description: Full name of the source. Defaults to dataset title.
-    alias:
-      type: string
-      description: Short alias for the source to show in trees etc.
-    description:
-      type: string
-      description: Free text describing the source supporting markdown formatting
-      required: false
-    organisation:
-      type: string
-      description: Organisation which has compiled or is owning the source
-      required: false
-    contactPerson:
-      type: string
-      description: Contact person of the source
-      required: false
-    authorsAndEditors:
-      type: string[]
-      description: Optional author(s) and editor(s) of the source
-      required: false
-    version:
-      type: string
-      description: Latest version number of the source used in the Catalogue of Life
-      required: false
-    released:
-      type: date-only
-      description: Latest release date of the source used in the Catalogue of Life
-      required: false
-    homepage:
-      type: string
-      description: Homepage URL of the source
-      required: false
-    group:
-      type: string
-      description: taxonomic group in english language
-      required: false
-    coverage:
-      type: DatasetType
-      description: global vs regional sources
-    citation:
-      type: string
-      description: full bibliographic citation to be used
-      required: false
-    livingSpeciesCount:
-      type: integer
-      required: false
-    livingInfraspecificCount:
-      type: integer
-      required: false
-    extinctSpeciesCount:
-      type: integer
-      required: false
-    extinctInfraspecificCount:
-      type: integer
-      required: false
-    synonymsCount:
-      type: integer
-      required: false
-    vernacularsCount:
-      type: integer
-      required: false
-    namesCount:
-      type: integer
-      required: false
-    created:
-      type: datetime
-      description: datetime the source was registered in the Clearinghouse
-Dataset:
-  type: object
-  description: Metadata about the source dataset, e.g. a GSD
-  properties:
-    key:
-      type: integer
-      description: Primary key for the source dataset
-    type:
-      type: DatasetType
-      description: coarse classification of datasets
-    title:
-      type: string
-      description: Full name of the source dataset
-    gbifKey:
-      type: uuid
-      description: GBIF dataset key
-      required: false
-    gbifPublisherKey:
-      type: uuid
-      description: GBIF publisher key in case of GBIF datasets
-      required: false
-    description:
-      type: string
-      description: Free text describing the source dataset supporting markdown formatting
-      required: false
-    organisation:
-      type: string
-      description: Organisation which has compiled or is owning the source dataset
-      required: false
-    contactPerson:
-      type: string
-      description: Contact person of the source dataset
-      required: false
-    authorsAndEditors:
-      type: string[]
-      description: Optional author(s) and editor(s) of the source dataset
-      required: false
-    license:
-      type: LicenseType
-      description: License this dataset falls under
-    version:
-      type: string
-      description: Latest version number of the source dataset used in the Catalogue of Life
-      required: false
-    released:
-      type: date-only
-      description: Latest release date of the source dataset used in the Catalogue of Life
-      required: false
-    homepage:
-      type: string
-      description: Homepage URL of the source
-      required: false
-    logo:
-      type: string
-      description: URL to a logo image of the dataset
-      required: false
-    dataFormat:
-      type: string
-      enum: ["dwca", "tcs", "xls", "other"]
-      description: data format
-      required: false
-    dataAccess:
-      type: string
-      description: URL to access the source data
-      required: false
-    importFrequency:
-      type: FrequencyType
-      description: the configured frequency the source is visited for new imports
-    code:
-      type: NomCodeType
-      description: a default nomenclatural code to be used when importing
-      required: false
-    catalogue:
-      type: CatalogueType
-      description: | 
-        If the dataset participates in any of the 2 catalouge assemblies this is indicated here. 
-        All scrutinized sources will also be included as provisional ones. 
-        Dataset used to build the provisional catalogue will be trusted and insert their names into the names index.
-    notes:
-      type: string
-      description: any notes
-      required: false
-    created:
-      type: datetime
-      description: datetime the dataset was registered in the Clearinghouse
-    modified:
-      type: datetime
-      description: datetime the data from this dataset was last changed in the Clearinghouse
-      required: false
-    deleted:
-      type: datetime
-      description: datetime the dataset was deleted from the Clearinghouse
-      required: false
-ImportRequest:
-  type: object
-  description: Request to import a dataset.
-  properties:
-    datasetKey:
-      type: integer
-      description: Primary key for the source dataset
-    force:
-      type: boolean
-      description: If true forces a new import even if the data archive has not changed.
-    priority:
-      type: boolean
-      description: If true prioritizes the import over automated background imports
-    created:
-      type: datetime
-      description: datetime the request was created/scheduled
-      required: false
-DatasetImport:
-  type: object
-  description: Metrics and import details about a single dataset import event.
-  properties:
-    datasetKey:
-      type: integer
-      description: Primary key for the source dataset
-    attempt:
-      type: integer
-      description: Sequential attempt number starting with 1 for each dataset
-    state:
-      type: ImportState
-      description: State of the import, e.g.indicating if still running, success or failure.
-    downloadUri:
-      type: string
-      description: Last modification date of the downloaded file
-    download:
-      type: datetime
-      description: Last modification date of the downloaded file
-    started:
-      type: datetime
-      description: date time the import started
-    finished:
-      type: datetime
-      description: date time the import finished
-      required: false
-    error:
-      type: string
-      description: Error message
-      required: false
-    verbatimCount:
-      type: integer
-      description: count of all verbatim records
-    nameCount:
-      type: integer
-      description: count of all name records
-    taxonCount:
-      type: integer
-      description: count of all taxon (accepted name) records
-    referenceCount:
-      type: integer
-      description: count of all reference records
-    vernacularCount:
-      type: integer
-      description: count of all vernacular names
-    distributionCount:
-      type: integer
-      description: count of all distribution records
-    issuesCount:
-      type: object
-      description: count of verbatim recorbs by issues
-      required: false
-    namesByRankCount:
-      type: object
-      description: count of names by rank
-      required: false
-    taxaByRankCount:
-      type: object
-      description: count of taxa by rank
-      required: false
-    namesByTypeCount:
-      type: object
-      description: count of names by name type
-      required: false
-    vernacularsByLanguageCount:
-      type: object
-      description: count of vernacular names by language
-      required: false
-    distributionsByGazetteerCount:
-      type: object
-      description: count of distributions by gazetteer kind
-      required: false
-    namesByOriginCount:
-      type: object
-      description: count of names by their origin
-      required: false
-    usagesByStatusCount:
-      type: object
-      description: count of name usages by their taxonomic status
-      required: false
-    namesByStatusCount:
-      type: object
-      description: count of names by their name status
-      required: false
-    nameRelationsByTypeCount:
-      type: object
-      description: count of name relations by their type
-      required: false
-    verbatimByTypeCount:
-      type: object
-      description: count of verbatim records by their rowType
-      required: false
-  example: | 
-    {
-        "datasetKey": 101,
-        "attempt": 1,
-        "state": "finished",
-        "downloadUri": "https://raw.githubusercontent.com/Sp2000/colplus-repo/master/ACEF/assembly/101.tar.gz",
-        "download": "2018-02-28T03:40:02",
-        "started": "2018-02-28T03:40:01.433",
-        "finished": "2018-02-28T03:52:27.201",
-        "verbatimCount": 169988,
-        "nameCount": 179025,
-        "taxonCount": 147971,
-        "referenceCount": 1711,
-        "vernacularCount": 0,
-        "distributionCount": 137999,
-        "issuesCount": {
-            "DISTRIBUTION_GAZETEER_INVALID": 3,
-            "DISTRIBUTION_STATUS_INVALID": 2,
-            "LIFEZONE_INVALID": 1
-        },
-        "namesByRankCount": {
-            "SPECIES": 169988,
-            "GENUS": 8878,
-            "FAMILY": 155,
-            "KINGDOM": 1,
-            "PHYLUM": 1,
-            "CLASS": 1,
-            "ORDER": 1
-        },
-        "namesByTypeCount": {
-            "SCIENTIFIC": 179025
-        },
-        "distributionsByGazetteerCount": {
-            "TEXT": 137999
-        },
-        "namesByOriginCount": {
-            "SOURCE": 169988,
-            "DENORMED_CLASSIFICATION": 9037
-        }
-    }
-DatasetImportResultSet:
-  type: ResultSet
-  description: >
-    A paging resultset for DatasetImport.
-  properties:
-    results:
-      type: DatasetImport[]
-      description: the resulting import metrics
-DatasetResultSet:
-  type: ResultSet
-  description: >
-    A paging resultset for Datasets.
-  properties:
-    results:
-      type: Dataset[]
-      description: the resulting Datasets
-Decision:
-  type: object
-  properties:
-    key:
-      type: integer
-      description: primary key
-    datasetKey:
-      type: integer
-      description: primary key
-    subject:
-      type: NameRef
-      description: the name usage this decision is about
-    status:
-      type: TaxonomicStatusType
-      description: the new status
-      required: false
-    name:
-      type: string
-      description: the new scientific name
-      required: false
-    authorship:
-      type: string
-      description: the new authorship
-      required: false
-    created:
-      type: datetime
-      description: datetime the decision was created
-    deleted:
-      type: datetime
-      description: datetime the decision was deleted
-      required: false
-Authorship:
-  type: object
-  properties:
-    authors:
-      type: string[]
-      description: list of contributing authors
-    exAuthors:
-      type: string[]
-      description: list of authors excluding ex- authors
-      required: false
-    year:
-      type: string
-      description: Year of publication
-      required: false
+    An enumeration of species estimate types
 Name:
   type: VerbatimIdObject
   description: |
@@ -988,6 +1053,22 @@ Name:
         "parsed": true,
         "authorship": "(Ach. ex Pers.) Cooke, 1885"
     }
+NameMatch:
+  type: object
+  description: >
+    A name matching result
+  properties:
+    name:
+      type: Name
+      description: the matching name
+      required: false
+    type:
+      type: MatchType
+      description: the type of matching
+    alternatives:
+      type: Name[]
+      description: alternatively matching names
+      required: false
 NameResultSet:
   type: ResultSet
   description: >
@@ -996,6 +1077,60 @@ NameResultSet:
     results:
       type: Name[]
       description: the resulting names
+NameRef:
+  type: object
+  description: >
+    A reference to a name based on ids and the name itself
+  properties:
+    id:
+      type: string
+      description: the names id within its dataset
+    indexNameId:
+      type: string
+      description: the name id from the matching name index record
+      required: false
+    name:
+      type: string
+      description: the literal name
+    authorship:
+      type: string
+      description: the literal, full authorship
+      required: false
+    rank:
+      type: RankType
+      description: the rank
+      required: false
+NameRelation:
+  type: VerbatimKeyObject
+  description: A published act which affects the nomenclatural status of a scientific name or the typification of a nominal taxon.
+  properties:
+    type:
+      type: NameRelationType
+      description: Coarse classification of the nomenclatural act.
+    nameId:
+      type: string
+      description: key to the name the act is about
+    relatedNameId:
+      type: string
+      description: id to the other, related name
+      required: false
+    publishedInId:
+      type: string
+      description: Key to reference in which the relation was published
+      required: false
+    note:
+      type: string
+      description: A desription of the details of the nomenclatural act
+      required: false
+  example: |
+    {
+      "key": 721141,
+      "datasetKey": 15,
+      "type": "basionym",
+      "nameId": "78612",
+      "relatedNameId": "1655",
+      "publishedInId": "786"
+    }
 NameSearchResult:
   type: Name
   description: |
@@ -1037,7 +1172,7 @@ NameSearchResultSet:
                 "rank": "genus",
                 "uninomial": "Aagaardia",
                 "candidatus": false,
-                "origin": "denormed_classification",
+                "origin": "denormed classification",
                 "type": "scientific",
                 "acceptedName": true,
                 "taxa": [
@@ -1185,7 +1320,7 @@ NameSearchResultSet:
                 "rank": "genus",
                 "uninomial": "Abago",
                 "candidatus": false,
-                "origin": "denormed_classification",
+                "origin": "denormed classification",
                 "type": "scientific",
                 "acceptedName": true,
                 "taxa": [
@@ -1229,7 +1364,7 @@ NameSearchResultSet:
                 "rank": "genus",
                 "uninomial": "Abaristophora",
                 "candidatus": false,
-                "origin": "denormed_classification",
+                "origin": "denormed classification",
                 "type": "scientific",
                 "acceptedName": true,
                 "taxa": [
@@ -1269,76 +1404,64 @@ NameSearchResultSet:
         ],
         "last": false
     }
-NameMatch:
+NameSuggestion:
+    type: object
+    description: Captures the information for a single auto-complete suggestion
+    properties:
+        match:
+            type: string
+            description: The suggestion
+        vernacularName:
+            type: boolean
+            description: Whether or not the suggestion is a vernacular name
+        acceptedName:
+            type: string
+            description: The accepted name if the suggestion is anything but an accepted name, null/absent otherwise
+        usageId:
+            type: string
+            description: The usage ID (the taxon ID in case of a vernacular name)
+        rank:
+            type: RankType
+            description: The rank of the suggested name (or the rank of the accepted name in case of a vernacular name)
+        status:
+            type: TaxonomicStatusType
+            description: The taxonomic status of the suggested
+        nomCode:
+            type: NomCodeType
+            description: The nomenclatural code of the suggested name
+        score:
+            type: number
+            description: The relevance score assigned to the suggestion by the search engine
+NameSuggestResponse:
+    type: object
+    description: Contains all suggestions matching the search phrase (q)
+    properties:
+        suggestions:
+          type: NameSuggestion[]
+          description: A list of suggestions matching the search phrase
+Page:
+  description: |
+    A page used for requesting or responding to a pageable service.
   type: object
-  description: >
-    A name matching result
   properties:
-    name:
-      type: Name
-      description: the matching name
+    MAX_LIMIT:
+      type: integer
+      description: the maximum number of records to display is 1000
       required: false
-    type:
-      type: MatchType
-      description: the type of matching
-    alternatives:
-      type: Name[]
-      description: alternatively matching names
+    DEFAULT_LIMIT:
+      type: integer
+      description: the default number of records to display is 10
       required: false
-NameRef:
-  type: object
-  description: >
-    A reference to a name based on ids and the name itself
-  properties:
-    id:
-      type: string
-      description: the names id within its dataset
-    indexNameId:
-      type: string
-      description: the name id from the matching name index record
+    DEFAULT_OFFSET:
+      type: integer
+      description: the default pagination offset is 0
       required: false
-    name:
-      type: string
-      description: the literal name
-    authorship:
-      type: string
-      description: the literal, full authorship
-      required: false
-    rank:
-      type: RankType
-      description: the rank
-      required: false
-NameRelation:
-  type: VerbatimKeyObject
-  description: A published act which affects the nomenclatural status of a scientific name or the typification of a nominal taxon.
-  properties:
-    type:
-      type: NameRelationType
-      description: Coarse classification of the nomenclatural act.
-    nameId:
-      type: string
-      description: key to the name the act is about
-    relatedNameId:
-      type: string
-      description: id to the other, related name
-      required: false
-    publishedInId:
-      type: string
-      description: Key to reference in which the relation was published
-      required: false
-    note:
-      type: string
-      description: A desription of the details of the nomenclatural act
-      required: false
-  example: |
-    {
-      "key": 721141,
-      "datasetKey": 15,
-      "type": "basionym",
-      "nameId": "78612",
-      "relatedNameId": "1655",
-      "publishedInId": "786"
-    }
+    offset:
+      type: integer
+      description: the pagination offset
+    limit:
+      type: integer
+      description: the number of records to display
 Rank:
   description: >
     An ordered taxonomic rank enumeration with the most frequently used values.
@@ -1391,6 +1514,27 @@ ReferenceResultSet:
     results:
       type: Reference[]
       description: the resulting References
+ResultPage:
+  type: Page
+  description: |
+    A generic paging response wrapping a list payload
+  properties:
+    total:
+      type: integer
+      description: the total number of results
+    result:
+      type: object[]
+      description: the list of results
+    last:
+      type: boolean
+      description: if it is the last page
+    empty:
+      type: boolean
+      description: if the query returned zero results
+    size:
+      type: integer
+      description: the size of the results
+      required: false
 Sector:
   type: object
   description: |
@@ -1502,6 +1646,35 @@ Serial:
         "publisher-place": "Göttingen"
       }
     }
+SectorImport:
+  type: ImportMetrics
+  description: |
+    A sector import into assembly.
+  properties:
+    attempt:
+      type: integer
+      description: the number of attempts
+    state:
+      type: string
+      enum: ["waiting", "preparing", "copying", "deleting", "relinking", "indexing", "finished", "canceled", "failed"]
+      description: the current status of the sector sync
+    taxonCount:
+      type: integer
+      description: the number of taxa in the sector sync
+    type:
+      type: string
+      description: the type of sector sync
+    sectorKey:
+      type: integer
+      description: the sector ID
+    ignoredUsageCount:
+      type: integer
+      description: |
+       The number of ignored scientific name usages, which could be explicitly blocked by a decision or
+       implicitly excluded (e.g., hybrid formulas, placeholders, no_names, etc).
+    usagesCount:
+      type: integer
+      description: the number of scientific name usages
 SerialResultSet:
   type: ResultSet
   description: >
@@ -1565,11 +1738,6 @@ SpeciesEstimate:
       type: string
       description: remarks on the species estimate
       required: false
-EstimateType:
-  type: string
-  enum: [DESCRIBED_SPECIES_LIVING, DESCRIBED_SPECIES_EXTINCT, ESTIMATED_SPECIES]
-  description: >
-    An enumeration of species estimate types
 Taxon:
   type: VerbatimIdObject
   description: >
@@ -1652,23 +1820,6 @@ Taxon:
         "fossil": false,
         "recent": true
     }
-TaxonResultSet:
-  type: ResultSet
-  description: >
-    A paging resultset for Taxa.
-  properties:
-    results:
-      type: Taxon[]
-      description: the resulting Taxa
-TaxonReference:
-  type: object
-  description: >
-    A reference referring to a specific taxon and annotated with a certain topic.
-  properties:
-    reference:
-      type: Reference
-    topic:
-      type: ReferenceTopicType[]
 TaxonInfo:
   type: object
   description: >
@@ -1729,6 +1880,42 @@ TaxonInfo:
             }
         ]
     }
+TaxonResultSet:
+  type: ResultSet
+  description: >
+    A paging resultset for Taxa.
+  properties:
+    results:
+      type: Taxon[]
+      description: the resulting Taxa
+TaxonReference:
+  type: object
+  description: >
+    A reference referring to a specific taxon and annotated with a certain topic.
+  properties:
+    reference:
+      type: Reference
+    topic:
+      type: ReferenceTopicType[]
+VerbatimObject:
+  type: DatasetObject
+  properties:
+    verbatimKey:
+      type: integer
+      description: Key to the verbatim record this object was derived from
+      required: false
+VerbatimIdObject:
+  type: VerbatimObject
+  properties:
+    id:
+      type: string
+      description: Primary id for the record
+VerbatimKeyObject:
+  type: VerbatimObject
+  properties:
+    key:
+      type: integer
+      description: Primary key for the record
 VerbatimRecord:
   type: DatasetObject
   description: >
@@ -1809,56 +1996,23 @@ VernacularName:
     referenceIds:
       type: string[]
       description: Links to references supporting the vernacular name record
-Distribution:
-  type: DatasetObject
-  description: An area distribution record
-  properties:
-    area:
-      type: string
-      description: the geographic area the distribution refers to as defined in the corresponding area standard.
-    gazetteer:
-      type: GazetteerType
-      description: The standard of area names the area value refers to.
-    status:
-      type: DistributionStatusType
-      description: The status of the species distribution
-    referenceIds:
-      type: string[]
-      description: Links to references supporting the distribution record
-      required: false
-NameSuggestion:
-    type: object
-    description: Captures the information for a single auto-complete suggestion
-    properties:
-        match:
-            type: string
-            description: The suggestion
-        vernacularName:
-            type: boolean
-            description: Whether or not the suggestion is a vernacular name
-        acceptedName:
-            type: string
-            description: The accepted name if the suggestion is anything but an accepted name, null/absent otherwise
-        usageId:
-            type: string
-            description: The usage ID (the taxon ID in case of a vernacular name)
-        rank:
-            type: RankType
-            description: The rank of the suggested name (or the rank of the accepted name in case of a vernacular name)
-        status:
-            type: TaxonomicStatusType
-            description: The taxonomic status of the suggested
-        nomCode:
-            type: NomCodeType
-            description: The nomenclatural code of the suggested name
-        score:
-            type: number
-            description: The relevance score assigned to the suggestion by the search engine
-NameSuggestResponse:
-    type: object
-    description: Contains all suggestions matching the search phrase (q)
-    properties:
-        suggestions:
-          type: NameSuggestion[]
-          description: A list of suggestions matching the search phrase
-        
+RankType:
+  type: string
+  enum: ["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]
+  description: >
+    Enumeration of all possible rank values across all codes.
+    See http://api.col.plus/vocab/rank for the complete list in use
+
+    There is the need to deal with old ranks not accepted anymore.
+    The list given is intended to be interoperable between name providers for bacteria, viruses, fungi, plants, and animals.
+    The enumeration attempts to strike a balance between listing all possible rank terms, and remaining comprehensible.
+    Not included in the list are the botanical "notho-" ranks, which are used to designate hybrids (nothospecies, nothogenus) as this information is handled by the Name.notho property already.
+
+    Sources:
+
+     - [GBIF](https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/Rank.java)
+     - [TCS](https://github.com/tdwg/tcs/blob/master/TCS101/v101.xsd#L860)
+     - [TaxCat2](http://mansfeld.ipk-gatersleben.de/apex/f?p=185:78:::NO::P77_TAXCAT,P77_DB_CHECKBOX1,77_TAXCAT2RAD,77_SHOWRAD:%25,,0,s_All)
+     - [NOMEN](https://raw.githubusercontent.com/SpeciesFileGroup/nomen/master/src/ontology/nomen.owl)
+
+     TODO: extract all values from sources
