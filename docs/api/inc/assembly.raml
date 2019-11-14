@@ -162,36 +162,19 @@
                     "code": 404,
                     "message": "HTTP 404 Not Found"
                   }
-  /{catKey}/exportAC:
+  /{catKey}/release:
     post:
       description: |
-        Export the annual checklist to Assembly_Global format for the legacy Catalogue of Life web portal.
+        Starts a new catalogue release job that copies the given catalogue into a new dataset. 
+        The released catalogue will finally be exported into an archive in the download directory.
+        Only one job can run at a time.
       responses:
         201:
           body:
             text/plain:
-              description: Exports the draft catalogue as an annual checklist and may take a while to run.
-              example: |
-                Execute DROP SQL
-                Exporting databases.csv
-                Create reference int keys
-                Exporting references.csv
-                Exporting estimates.csv
-                Create usage int keys using a reusable sequence
-                Exporting specialists.csv
-                Lifezones
-                Exporting lifezone.csv
-                Create a flattened classification table for all usages incl taxa AND synonyms
-                Exporting families.csv
-                Scientific_names
-                Exporting scientific_names.csv
-                Exporting common_names.csv
-                Exporting distribution.csv
-                Exporting scientific_name_references.csv
-                Cleanup
-                Zip up archive and move to download
-                Clean up temp files
-                Export completed
+              type: integer
+              description: The key of newly created release dataset
+              example: 3031
         400:
           body:
             application/json:
@@ -201,6 +184,14 @@
                   "code": 400,
                   "message": "Only the draft CoL can be assembled at this stage"
                 }
+    get:
+      description: |
+        Returns the status of the currently running release job 
+      responses:
+        200:
+          body:
+            text/plain:
+              type: string
   /{catKey}/rematch:
     post:
       description: |

@@ -39,7 +39,16 @@
   /reindex:
     post:
       description: |
-        Reindex elastic search.
+        Reindex dataset(s) or sectors into the search index.
+      responses:
+        200:
+          body:
+            text/plain:
+              type: string
+  /rematch:
+    post:
+      description: |
+        Rematch 
       responses:
         200:
           body:
