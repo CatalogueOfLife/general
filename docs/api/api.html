@@ -128,7 +128,7 @@
     <div class="content">
 
         <h1 id="introduction">CoL Clearinghouse API (v1)</h1>
-        <h3><code>http://api.col.plus</code></h3>
+        <h3><code>http://api.catalogue.life</code></h3>
 
     <p><p>Public API of the Clearinghouse for taxonomy and nomenclature. The API currently gives access to staged source datasets for editorial review. The full Catalogue of Life and its versions is handled separately. In addition there is a secured, non public admin API, e.g. to request dataset to be (re)imported.</p>
 </p>
@@ -4326,11 +4326,11 @@ Sources:</p>
 
     <pre class="example"><code class="http">
 GET //admin/background HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/admin/background</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/admin/background</h3>
     <p><p>Background resource processes.</p>
 </p>
 
@@ -4342,7 +4342,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{"gbifSync":true,"importer":false}</code>
@@ -4352,13 +4352,13 @@ Content-Type: application/json
 
     <pre class="example"><code class="http">
 PUT //admin/background HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 Content-Type: application/json
 </code>
     <code class="json">{"gbifSync":false,"importer":true}</code>
 </pre>
 
-        <h3><code class="prettyprint">PUT</code> http://api.col.plus/admin/background</h3>
+        <h3><code class="prettyprint">PUT</code> http://api.catalogue.life/admin/background</h3>
     <p><p>Update background resource processes.</p>
 </p>
 
@@ -4382,11 +4382,11 @@ Content-Type: application/json
 
     <pre class="example"><code class="http">
 POST //admin/logo-update HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">POST</code> http://api.col.plus/admin/logo-update</h3>
+        <h3><code class="prettyprint">POST</code> http://api.catalogue.life/admin/logo-update</h3>
     <p><p>Update the GSD logos.</p>
 </p>
 
@@ -4398,7 +4398,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: text/plain
 </code>
 </pre>
@@ -4413,11 +4413,11 @@ Content-Type: text/plain
 
     <pre class="example"><code class="http">
 POST //admin/sector-count-update HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">POST</code> http://api.col.plus/admin/sector-count-update</h3>
+        <h3><code class="prettyprint">POST</code> http://api.catalogue.life/admin/sector-count-update</h3>
     <p><p>Update the sector counts.</p>
 </p>
 
@@ -4429,7 +4429,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: text/plain
 </code>
 </pre>
@@ -4444,11 +4444,11 @@ Content-Type: text/plain
 
     <pre class="example"><code class="http">
 POST //admin/reindex HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">POST</code> http://api.col.plus/admin/reindex</h3>
+        <h3><code class="prettyprint">POST</code> http://api.catalogue.life/admin/reindex</h3>
     <p><p>Reindex dataset(s) or sectors into the search index.</p>
 </p>
 
@@ -4460,7 +4460,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: text/plain
 </code>
 </pre>
@@ -4475,11 +4475,11 @@ Content-Type: text/plain
 
     <pre class="example"><code class="http">
 POST //admin/rematch HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">POST</code> http://api.col.plus/admin/rematch</h3>
+        <h3><code class="prettyprint">POST</code> http://api.catalogue.life/admin/rematch</h3>
     <p><p>Rematch</p>
 </p>
 
@@ -4491,7 +4491,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: text/plain
 </code>
 </pre>
@@ -4512,11 +4512,11 @@ Content-Type: text/plain
 
     <pre class="example"><code class="http">
 GET //assembly/{catKey} HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/assembly/{catKey}</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/assembly/{catKey}</h3>
     <p><p>Get the assembly status for catalogue {catKey}</p>
 </p>
 
@@ -4528,7 +4528,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json-assembly-idle
 </code>
     <code class="json">{
@@ -4542,7 +4542,7 @@ Content-Type: application/json-assembly-idle
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json-assembly-running
 </code>
     <code class="json">{
@@ -4574,11 +4574,11 @@ Content-Type: application/json-assembly-running
 
     <pre class="example"><code class="http">
 GET //assembly/{catKey}/sync HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/assembly/{catKey}/sync</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/assembly/{catKey}/sync</h3>
     <p><p>Get the assembly sync status for catalogue {catKey}</p>
 </p>
 
@@ -4590,7 +4590,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4639,7 +4639,7 @@ Content-Type: application/json
 
     <pre class="example"><code class="http">
 POST //assembly/{catKey}/sync HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4649,7 +4649,7 @@ Content-Type: application/json
 </code>
 </pre>
 
-        <h3><code class="prettyprint">POST</code> http://api.col.plus/assembly/{catKey}/sync</h3>
+        <h3><code class="prettyprint">POST</code> http://api.catalogue.life/assembly/{catKey}/sync</h3>
     <p><p>Sync a sector to catalogue {catKey}</p>
 </p>
 
@@ -4666,7 +4666,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json-dataset-not-imported-yet
 </code>
     <code class="json">{
@@ -4679,7 +4679,7 @@ Content-Type: application/json-dataset-not-imported-yet
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json-dataset-still-importing
 </code>
     <code class="json">{
@@ -4692,7 +4692,7 @@ Content-Type: application/json-dataset-still-importing
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json-sector-does-not-exist
 </code>
     <code class="json">{
@@ -4705,7 +4705,7 @@ Content-Type: application/json-sector-does-not-exist
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json-only-draft-catalogue
 </code>
     <code class="json">{
@@ -4727,11 +4727,11 @@ Content-Type: application/json-only-draft-catalogue
 
     <pre class="example"><code class="http">
 DELETE //assembly/{catKey}/sync/{sectorKey} HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">DELETE</code> http://api.col.plus/assembly/{catKey}/sync/{sectorKey}</h3>
+        <h3><code class="prettyprint">DELETE</code> http://api.catalogue.life/assembly/{catKey}/sync/{sectorKey}</h3>
     <p><p>Delete sector {sectorKey} from catalogue {catKey}.</p>
 </p>
 
@@ -4750,11 +4750,11 @@ Host: api.col.plus
 
     <pre class="example"><code class="http">
 GET //assembly/{catKey}/sync/{sectorKey}/{attempt} HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/assembly/{catKey}/sync/{sectorKey}/{attempt}</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/assembly/{catKey}/sync/{sectorKey}/{attempt}</h3>
     <p><p>Get info on sector {sectorKey} sync {attempt} number from catalogue {catKey}.</p>
 </p>
 
@@ -4766,7 +4766,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4792,7 +4792,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4812,11 +4812,11 @@ Content-Type: application/json
 
     <pre class="example"><code class="http">
 POST //assembly/{catKey}/release HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">POST</code> http://api.col.plus/assembly/{catKey}/release</h3>
+        <h3><code class="prettyprint">POST</code> http://api.catalogue.life/assembly/{catKey}/release</h3>
     <p><p>Starts a new catalogue release job that copies the given catalogue into a new dataset.
 The released catalogue will finally be exported into an archive in the download directory.
 Only one job can run at a time.</p>
@@ -4830,7 +4830,7 @@ Only one job can run at a time.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: text/plain
 </code>
     <code class="json">3031</code>
@@ -4841,7 +4841,7 @@ Content-Type: text/plain
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4855,11 +4855,11 @@ Content-Type: application/json
 
     <pre class="example"><code class="http">
 GET //assembly/{catKey}/release HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/assembly/{catKey}/release</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/assembly/{catKey}/release</h3>
     <p><p>Returns the status of the currently running release job</p>
 </p>
 
@@ -4871,7 +4871,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: text/plain
 </code>
 </pre>
@@ -4886,7 +4886,7 @@ Content-Type: text/plain
 
     <pre class="example"><code class="http">
 POST //assembly/{catKey}/rematch HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4895,7 +4895,7 @@ Content-Type: application/json
 </code>
 </pre>
 
-        <h3><code class="prettyprint">POST</code> http://api.col.plus/assembly/{catKey}/rematch</h3>
+        <h3><code class="prettyprint">POST</code> http://api.catalogue.life/assembly/{catKey}/rematch</h3>
     <p><p>Rematches all of the broken sectors and decisions in the {catKey} catalogue assembly.</p>
 </p>
 
@@ -4910,7 +4910,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4925,7 +4925,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4938,18 +4938,39 @@ Content-Type: application/json
                     <p>Content: any</p>
 
 
-        <h1 id="resource-14">/datapackage</h1>
+        <h2 id="resource-14">/assembly/{catKey}/export</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+POST //assembly/{catKey}/export HTTP/1.1
+Host: api.catalogue.life
+</code>
+</pre>
+
+        <h3><code class="prettyprint">POST</code> http://api.catalogue.life/assembly/{catKey}/export</h3>
+    <p><p>Exports the assembled catalogue in the CoL AC format usable for conversion to the download API</p>
+</p>
+
+
+
+
+
+
+
+        <h1 id="resource-15">/datapackage</h1>
 
     
 
 
     <pre class="example"><code class="http">
 GET //datapackage HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/datapackage</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/datapackage</h3>
     <p><p>Returns the frictionless data package specificiations
 for the <a href="https://github.com/Sp2000/coldp">Catalogue of Life Data Package (CoLDP)</a>.</p>
 </p>
@@ -4958,11 +4979,11 @@ for the <a href="https://github.com/Sp2000/coldp">Catalogue of Life Data Package
 
 
 
-            <h3 id="op15-responses" class="clear">Response 200</h3>
+            <h3 id="op16-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6142,24 +6163,24 @@ Content-Type: application/json
                     <p>Content: any</p>
 
 
-        <h1 id="resource-15">/dataset</h1>
+        <h1 id="resource-16">/dataset</h1>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset</h3>
     <p><p>Paging parameters.</p>
 </p>
 
 
 
-        <h3 id="op16-request-params">Parameters</h3>
+        <h3 id="op17-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -6200,11 +6221,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op16-responses" class="clear">Response 200</h3>
+            <h3 id="op17-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6235,7 +6256,7 @@ Content-Type: application/json
 
     <pre class="example"><code class="http">
 POST //dataset HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 Content-Type: application/json
 </code>
     <code class="json"># Request body for an uploaded dataset
@@ -6260,22 +6281,22 @@ Content-Type: application/json
 </code>
 </pre>
 
-        <h3><code class="prettyprint">POST</code> http://api.col.plus/dataset</h3>
+        <h3><code class="prettyprint">POST</code> http://api.catalogue.life/dataset</h3>
     <p><p>Creates a new dataset specified through the JSON request body and returns the database key of the new dataset.</p>
 </p>
 
 
-    <h3 id="op17-request-body">Body</h3>
+    <h3 id="op18-request-body">Body</h3>
             <p><code>application/json</code></p>
             <p>Content: any</p>
 
 
 
-            <h3 id="op17-responses" class="clear">Response 201</h3>
+            <h3 id="op18-responses" class="clear">Response 201</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">2051</code>
@@ -6284,80 +6305,19 @@ Content-Type: application/json
                     <p>Content: integer</p>
 
 
-        <h2 id="resource-16">/dataset/{key}</h2>
+        <h2 id="resource-17">/dataset/{key}</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key} HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}</h3>
     <p><p>Retrieves the dataset with the specified key.</p>
-</p>
-
-
-
-        <h3 id="op18-request-params">Parameters</h3>
-        <table><thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Pattern</th>
-            <th>Required</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-        </thead><tbody>
-                <tr>
-                    <td>{key}</td>
-                    <td>integer</td>
-                    <td></td>
-                    <td>yes</td>
-                    <td></td>
-                    <td><p>dataset key</p>
-</td>
-                </tr>
-        </tbody></table>
-
-
-            <h3 id="op18-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
-Content-Type: application/json
-</code>
-    <code class="json">{
-  "created": "2019-10-09T20:10:55.839898",
-  "createdBy": 100,
-  "modified": "2019-10-09T20:10:55.839898",
-  "modifiedBy": 100,
-  "key": 2051,
-  "type": "nomenclatural",
-  "title": "Example externally hosted dataset",
-  "license": "cc0",
-  "dataFormat": "acef",
-  "dataAccess": "https://github.com/Sp2000/data-unit-tests/archive/master.zip",
-  "origin": "external",
-  "importFrequency": "monthly"
-}
-</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: any</p>
-
-    <pre class="example"><code class="http">
-DELETE //dataset/{key} HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">DELETE</code> http://api.col.plus/dataset/{key}</h3>
-    <p><p>Deletes the dataset with the specified database key.</p>
 </p>
 
 
@@ -6385,38 +6345,43 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op19-responses" class="clear">Response 204</h3>
-    <p><p>Dataset deleted.</p>
-</p>
-            <h3 id="op19-responses" class="clear">Response 404</h3>
-    <p><p>Specified dataset key does not exist.</p>
-</p>
-
-    <pre class="example"><code class="http">
-PUT //dataset/{key} HTTP/1.1
-Host: api.col.plus
+            <h3 id="op19-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
-	"type": "nomenclatural",
-	"title": "Testing new title",
-	"license": "cc0",
-	"dataFormat": "coldp",
-	"dataAccess": "https://github.com/Sp2000/data-unit-tests/archive/master.zip",
-	"origin": "external",
-	"importFrequency": "monthly"
+  "created": "2019-10-09T20:10:55.839898",
+  "createdBy": 100,
+  "modified": "2019-10-09T20:10:55.839898",
+  "modifiedBy": 100,
+  "key": 2051,
+  "type": "nomenclatural",
+  "title": "Example externally hosted dataset",
+  "license": "cc0",
+  "dataFormat": "acef",
+  "dataAccess": "https://github.com/Sp2000/data-unit-tests/archive/master.zip",
+  "origin": "external",
+  "importFrequency": "monthly"
 }
 </code>
 </pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: any</p>
 
-        <h3><code class="prettyprint">PUT</code> http://api.col.plus/dataset/{key}</h3>
-    <p><p>Updates the dataset specified through the JSON request body.</p>
+    <pre class="example"><code class="http">
+DELETE //dataset/{key} HTTP/1.1
+Host: api.catalogue.life
+</code>
+</pre>
+
+        <h3><code class="prettyprint">DELETE</code> http://api.catalogue.life/dataset/{key}</h3>
+    <p><p>Deletes the dataset with the specified database key.</p>
 </p>
 
 
-    <h3 id="op20-request-body">Body</h3>
-            <p><code>application/json</code></p>
-            <p>Content: any</p>
 
         <h3 id="op20-request-params">Parameters</h3>
         <table><thead>
@@ -6442,14 +6407,70 @@ Content-Type: application/json
 
 
             <h3 id="op20-responses" class="clear">Response 204</h3>
-    <p><p>Dataset updated.</p>
+    <p><p>Dataset deleted.</p>
 </p>
             <h3 id="op20-responses" class="clear">Response 404</h3>
     <p><p>Specified dataset key does not exist.</p>
 </p>
 
+    <pre class="example"><code class="http">
+PUT //dataset/{key} HTTP/1.1
+Host: api.catalogue.life
+Content-Type: application/json
+</code>
+    <code class="json">{
+	"type": "nomenclatural",
+	"title": "Testing new title",
+	"license": "cc0",
+	"dataFormat": "coldp",
+	"dataAccess": "https://github.com/Sp2000/data-unit-tests/archive/master.zip",
+	"origin": "external",
+	"importFrequency": "monthly"
+}
+</code>
+</pre>
 
-        <h2 id="resource-17">/dataset/{key}/duplicate</h2>
+        <h3><code class="prettyprint">PUT</code> http://api.catalogue.life/dataset/{key}</h3>
+    <p><p>Updates the dataset specified through the JSON request body.</p>
+</p>
+
+
+    <h3 id="op21-request-body">Body</h3>
+            <p><code>application/json</code></p>
+            <p>Content: any</p>
+
+        <h3 id="op21-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+                <tr>
+                    <td>{key}</td>
+                    <td>integer</td>
+                    <td></td>
+                    <td>yes</td>
+                    <td></td>
+                    <td><p>dataset key</p>
+</td>
+                </tr>
+        </tbody></table>
+
+
+            <h3 id="op21-responses" class="clear">Response 204</h3>
+    <p><p>Dataset updated.</p>
+</p>
+            <h3 id="op21-responses" class="clear">Response 404</h3>
+    <p><p>Specified dataset key does not exist.</p>
+</p>
+
+
+        <h2 id="resource-18">/dataset/{key}/duplicate</h2>
 
     <p><p>Returns a list of paired duplicates</p>
 </p>
@@ -6457,7 +6478,7 @@ Content-Type: application/json
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/duplicate HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -6736,15 +6757,15 @@ Content-Type: application/json
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/duplicate</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/duplicate</h3>
     
 
 
-    <h3 id="op21-request-body">Body</h3>
+    <h3 id="op22-request-body">Body</h3>
             <p><code>application/json</code></p>
             <p>Content: any</p>
 
-        <h3 id="op21-request-params">Parameters</h3>
+        <h3 id="op22-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -6868,42 +6889,18 @@ Content-Type: application/json
 
 
 
-        <h2 id="resource-18">/dataset/{key}/import</h2>
+        <h2 id="resource-19">/dataset/{key}/import</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/import HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/import</h3>
-    <p><p>Imports dataset {key}</p>
-</p>
-
-
-
-
-
-            <h3 id="op22-responses" class="clear">Response 200</h3>
-    <p><p>Import started for dataset {key}.</p>
-</p>
-
-
-        <h2 id="resource-19">/dataset/{key}/import/{attempt}</h2>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET //dataset/{key}/import/{attempt} HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/import/{attempt}</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/import</h3>
     <p><p>Imports dataset {key}</p>
 </p>
 
@@ -6914,9 +6911,33 @@ Host: api.col.plus
             <h3 id="op23-responses" class="clear">Response 200</h3>
     <p><p>Import started for dataset {key}.</p>
 </p>
+
+
+        <h2 id="resource-20">/dataset/{key}/import/{attempt}</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //dataset/{key}/import/{attempt} HTTP/1.1
+Host: api.catalogue.life
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/import/{attempt}</h3>
+    <p><p>Imports dataset {key}</p>
+</p>
+
+
+
+
+
+            <h3 id="op24-responses" class="clear">Response 200</h3>
+    <p><p>Import started for dataset {key}.</p>
+</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json"># import attempt processing
@@ -7095,59 +7116,24 @@ Content-Type: application/json
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: any</p>
-            <h3 id="op23-responses" class="clear">Response 404</h3>
+            <h3 id="op24-responses" class="clear">Response 404</h3>
     <p><p>Dataset and/or attempt not found.</p>
 </p>
 
 
-        <h2 id="resource-20">/dataset/{key}/import/{attempt}/tree</h2>
+        <h2 id="resource-21">/dataset/{key}/import/{attempt}/tree</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/import/{attempt}/tree HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/import/{attempt}/tree</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/import/{attempt}/tree</h3>
     <p><p>Gets the tree for dataset {key}</p>
-</p>
-
-
-
-
-
-            <h3 id="op24-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
-Content-Type: application/json
-</code>
-    <code class="json">{
-  "parallel": false
-}
-</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: any</p>
-
-
-        <h2 id="resource-21">/dataset/{key}/import/{attempt}/names</h2>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET //dataset/{key}/import/{attempt}/names HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/import/{attempt}/names</h3>
-    <p><p>Gets the names for dataset {key}</p>
 </p>
 
 
@@ -7158,7 +7144,7 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7170,19 +7156,19 @@ Content-Type: application/json
                     <p>Content: any</p>
 
 
-        <h2 id="resource-22">/dataset/{key}/logo</h2>
+        <h2 id="resource-22">/dataset/{key}/import/{attempt}/names</h2>
 
     
 
 
     <pre class="example"><code class="http">
-GET //dataset/{key}/logo HTTP/1.1
-Host: api.col.plus
+GET //dataset/{key}/import/{attempt}/names HTTP/1.1
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/logo</h3>
-    <p><p>Returns the logo image for dataset {key}</p>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/import/{attempt}/names</h3>
+    <p><p>Gets the names for dataset {key}</p>
 </p>
 
 
@@ -7193,7 +7179,42 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
+Content-Type: application/json
+</code>
+    <code class="json">{
+  "parallel": false
+}
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: any</p>
+
+
+        <h2 id="resource-23">/dataset/{key}/logo</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //dataset/{key}/logo HTTP/1.1
+Host: api.catalogue.life
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/logo</h3>
+    <p><p>Returns the logo image for dataset {key}</p>
+</p>
+
+
+
+
+
+            <h3 id="op27-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: image/bmp
 </code>
 </pre>
@@ -7201,7 +7222,7 @@ Content-Type: image/bmp
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: image/gif
 </code>
 </pre>
@@ -7209,7 +7230,7 @@ Content-Type: image/gif
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: image/jpg
 </code>
 </pre>
@@ -7217,7 +7238,7 @@ Content-Type: image/jpg
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: image/png
 </code>
 </pre>
@@ -7225,7 +7246,7 @@ Content-Type: image/png
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: image/psd
 </code>
 </pre>
@@ -7233,17 +7254,17 @@ Content-Type: image/psd
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: image/tiff
 </code>
 </pre>
                     <p><code>image/tiff</code></p>
                     <p>Content: any</p>
-            <h3 id="op26-responses" class="clear">Response 404</h3>
+            <h3 id="op27-responses" class="clear">Response 404</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7257,17 +7278,17 @@ Content-Type: application/json
 
     <pre class="example"><code class="http">
 POST //dataset/{key}/logo HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 Content-Type: application/octet-stream
 </code>
 </pre>
 
-        <h3><code class="prettyprint">POST</code> http://api.col.plus/dataset/{key}/logo</h3>
+        <h3><code class="prettyprint">POST</code> http://api.catalogue.life/dataset/{key}/logo</h3>
     <p><p>Sets the logo image for dataset {key}</p>
 </p>
 
 
-    <h3 id="op27-request-body">Body</h3>
+    <h3 id="op28-request-body">Body</h3>
             <p><code>application/octet-stream</code></p>
             <p>Content: any</p>
             <p><code>image/bmp</code></p>
@@ -7285,13 +7306,13 @@ Content-Type: application/octet-stream
 
 
 
-            <h3 id="op27-responses" class="clear">Response 201</h3>
+            <h3 id="op28-responses" class="clear">Response 201</h3>
     
-            <h3 id="op27-responses" class="clear">Response 400</h3>
+            <h3 id="op28-responses" class="clear">Response 400</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7304,24 +7325,24 @@ Content-Type: application/json
                     <p>Content: any</p>
 
 
-        <h2 id="resource-23">/dataset/{key}/name</h2>
+        <h2 id="resource-24">/dataset/{key}/name</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/name HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/name</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/name</h3>
     <p><p>Paging parameters.</p>
 </p>
 
 
 
-        <h3 id="op28-request-params">Parameters</h3>
+        <h3 id="op29-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -7362,11 +7383,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op28-responses" class="clear">Response 200</h3>
+            <h3 id="op29-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
 </pre>
@@ -7374,24 +7395,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-NameResultSet">NameResultSet</a></p>
 
 
-        <h2 id="resource-24">/dataset/{key}/name/{id}</h2>
+        <h2 id="resource-25">/dataset/{key}/name/{id}</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/name/{id} HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/name/{id}</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/name/{id}</h3>
     <p><p>Retrieves the name with the specified id.</p>
 </p>
 
 
 
-        <h3 id="op29-request-params">Parameters</h3>
+        <h3 id="op30-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -7414,11 +7435,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op29-responses" class="clear">Response 200</h3>
+            <h3 id="op30-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7454,18 +7475,18 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Name">Name</a></p>
 
 
-        <h2 id="resource-25">/dataset/{key}/name/{id}/synonyms</h2>
+        <h2 id="resource-26">/dataset/{key}/name/{id}/synonyms</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/name/{id}/synonyms HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/name/{id}/synonyms</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/name/{id}/synonyms</h3>
     <p><p>Retrieves all names in the same homotypic group as the name with the specified key.</p>
 </p>
 
@@ -7473,11 +7494,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op30-responses" class="clear">Response 200</h3>
+            <h3 id="op31-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -7540,18 +7561,18 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Name">Name[]</a></p>
 
 
-        <h2 id="resource-26">/dataset/{key}/name/{id}/publishedIn</h2>
+        <h2 id="resource-27">/dataset/{key}/name/{id}/publishedIn</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/name/{id}/publishedIn HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/name/{id}/publishedIn</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/name/{id}/publishedIn</h3>
     <p><p>Retrieves the literature reference for the name with the specified key.</p>
 </p>
 
@@ -7559,11 +7580,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op31-responses" class="clear">Response 200</h3>
+            <h3 id="op32-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7587,24 +7608,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Reference">Reference</a></p>
 
 
-        <h2 id="resource-27">/dataset/{key}/name/{id}/relations</h2>
+        <h2 id="resource-28">/dataset/{key}/name/{id}/relations</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/name/{id}/relations HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/name/{id}/relations</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/name/{id}/relations</h3>
     <p><p>Retrieves nomenclatural relations for the name or its homotypical group</p>
 </p>
 
 
 
-        <h3 id="op32-request-params">Parameters</h3>
+        <h3 id="op33-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -7627,11 +7648,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op32-responses" class="clear">Response 200</h3>
+            <h3 id="op33-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -7656,18 +7677,18 @@ Content-Type: application/json
                     <p>Content: <a href="#model-NameRelation">NameRelation[]</a></p>
 
 
-        <h2 id="resource-28">/dataset/{key}/name/{id}/verbatim</h2>
+        <h2 id="resource-29">/dataset/{key}/name/{id}/verbatim</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/name/{id}/verbatim HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/name/{id}/verbatim</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/name/{id}/verbatim</h3>
     <p><p>Retrieves the verbatim DarwinCore record of the name with the specified key,</p>
 </p>
 
@@ -7675,11 +7696,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op33-responses" class="clear">Response 200</h3>
+            <h3 id="op34-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7716,18 +7737,18 @@ Content-Type: application/json
                     <p>Content: <a href="#model-VerbatimRecord">VerbatimRecord</a></p>
 
 
-        <h2 id="resource-29">/dataset/{key}/namesdiff</h2>
+        <h2 id="resource-30">/dataset/{key}/namesdiff</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/namesdiff HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/namesdiff</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/namesdiff</h3>
     <p><p>Returns a plain text diff of the names for dataset {key}</p>
 </p>
 
@@ -7735,11 +7756,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op34-responses" class="clear">Response 200</h3>
+            <h3 id="op35-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:45 AM Central European Standard Time
 Content-Type: text/plain
 </code>
 </pre>
@@ -7747,24 +7768,24 @@ Content-Type: text/plain
                     <p>Content: any</p>
 
 
-        <h2 id="resource-30">/dataset/{key}/reference</h2>
+        <h2 id="resource-31">/dataset/{key}/reference</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/reference HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/reference</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/reference</h3>
     <p><p>Paging parameters.</p>
 </p>
 
 
 
-        <h3 id="op35-request-params">Parameters</h3>
+        <h3 id="op36-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -7805,11 +7826,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op35-responses" class="clear">Response 200</h3>
+            <h3 id="op36-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
 </pre>
@@ -7817,24 +7838,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-ResultSet">ResultSet</a></p>
 
 
-        <h2 id="resource-31">/dataset/{key}/reference/{id}</h2>
+        <h2 id="resource-32">/dataset/{key}/reference/{id}</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/reference/{id} HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/reference/{id}</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/reference/{id}</h3>
     <p><p>get reference details by id</p>
 </p>
 
 
 
-        <h3 id="op36-request-params">Parameters</h3>
+        <h3 id="op37-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -7857,11 +7878,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op36-responses" class="clear">Response 200</h3>
+            <h3 id="op37-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7885,24 +7906,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Reference">Reference</a></p>
 
 
-        <h2 id="resource-32">/dataset/{key}/taxon</h2>
+        <h2 id="resource-33">/dataset/{key}/taxon</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/taxon HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/taxon</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/taxon</h3>
     <p><p>Paging parameters.</p>
 </p>
 
 
 
-        <h3 id="op37-request-params">Parameters</h3>
+        <h3 id="op38-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -7961,11 +7982,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op37-responses" class="clear">Response 200</h3>
+            <h3 id="op38-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
 </pre>
@@ -7973,24 +7994,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-ResultSet">ResultSet</a></p>
 
 
-        <h2 id="resource-33">/dataset/{key}/taxon/{id}</h2>
+        <h2 id="resource-34">/dataset/{key}/taxon/{id}</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/taxon/{id} HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/taxon/{id}</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/taxon/{id}</h3>
     <p><p>Retrieves the taxon with the specified id.</p>
 </p>
 
 
 
-        <h3 id="op38-request-params">Parameters</h3>
+        <h3 id="op39-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -8013,11 +8034,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op38-responses" class="clear">Response 200</h3>
+            <h3 id="op39-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8056,18 +8077,18 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Taxon">Taxon</a></p>
 
 
-        <h2 id="resource-34">/dataset/{key}/taxon/{id}/info</h2>
+        <h2 id="resource-35">/dataset/{key}/taxon/{id}/info</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/taxon/{id}/info HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/taxon/{id}/info</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/taxon/{id}/info</h3>
     <p><p>Returns a TaxonInfo object containing all details about the taxon with the specified key and its supplementary information.</p>
 </p>
 
@@ -8075,11 +8096,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op39-responses" class="clear">Response 200</h3>
+            <h3 id="op40-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8126,18 +8147,18 @@ Content-Type: application/json
                     <p>Content: <a href="#model-TaxonInfo">TaxonInfo</a></p>
 
 
-        <h2 id="resource-35">/dataset/{key}/taxon/{id}/classification</h2>
+        <h2 id="resource-36">/dataset/{key}/taxon/{id}/classification</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/taxon/{id}/classification HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/taxon/{id}/classification</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/taxon/{id}/classification</h3>
     <p><p>Returns the taxonomic ancestry of the taxon with the specified key, i.e. all ancestral taxa up to the taxon&rsquo;s kingdom starting with the direct parent taxon.</p>
 </p>
 
@@ -8145,11 +8166,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op40-responses" class="clear">Response 200</h3>
+            <h3 id="op41-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -8218,50 +8239,19 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Taxon">Taxon[]</a></p>
 
 
-        <h2 id="resource-36">/dataset/{key}/taxon/{id}/children</h2>
+        <h2 id="resource-37">/dataset/{key}/taxon/{id}/children</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/taxon/{id}/children HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/taxon/{id}/children</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/taxon/{id}/children</h3>
     <p><p>Page through all direct children of the taxon regardless of the rank.</p>
-</p>
-
-
-
-
-
-            <h3 id="op41-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
-Content-Type: application/json
-</code>
-</pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-TaxonResultSet">TaxonResultSet</a></p>
-
-
-        <h2 id="resource-37">/dataset/{key}/taxon/{id}/synonyms</h2>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET //dataset/{key}/taxon/{id}/synonyms HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/taxon/{id}/synonyms</h3>
-    <p><p>get list of all synonyms chronologically arranged by homotypic groups. Nested homotypic names are based on the same original name in sublists. Example given for synonymy of Agoseris grandiflora (Nutt.) Greene Example: Barkhausia lessingii Hook. &amp; Arn. nom. illeg. is a homotypical synonym of Agoseris apargioides (Less.) Greene</p>
 </p>
 
 
@@ -8272,7 +8262,38 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
+Content-Type: application/json
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: <a href="#model-TaxonResultSet">TaxonResultSet</a></p>
+
+
+        <h2 id="resource-38">/dataset/{key}/taxon/{id}/synonyms</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //dataset/{key}/taxon/{id}/synonyms HTTP/1.1
+Host: api.catalogue.life
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/taxon/{id}/synonyms</h3>
+    <p><p>get list of all synonyms chronologically arranged by homotypic groups. Nested homotypic names are based on the same original name in sublists. Example given for synonymy of Agoseris grandiflora (Nutt.) Greene Example: Barkhausia lessingii Hook. &amp; Arn. nom. illeg. is a homotypical synonym of Agoseris apargioides (Less.) Greene</p>
+</p>
+
+
+
+
+
+            <h3 id="op43-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -8461,18 +8482,18 @@ Content-Type: application/json
                     <p>Content: Name[][]</p>
 
 
-        <h2 id="resource-38">/dataset/{key}/taxon/{id}/verbatim</h2>
+        <h2 id="resource-39">/dataset/{key}/taxon/{id}/verbatim</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/taxon/{id}/verbatim HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/taxon/{id}/verbatim</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/taxon/{id}/verbatim</h3>
     <p><p>Retrieves the verbatim DarwinCore record of the taxon with the specified key,</p>
 </p>
 
@@ -8480,11 +8501,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op43-responses" class="clear">Response 200</h3>
+            <h3 id="op44-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8521,18 +8542,18 @@ Content-Type: application/json
                     <p>Content: <a href="#model-VerbatimRecord">VerbatimRecord</a></p>
 
 
-        <h2 id="resource-39">/dataset/{key}/texttree</h2>
+        <h2 id="resource-40">/dataset/{key}/texttree</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/texttree HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/texttree</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/texttree</h3>
     <p><p>Returns a plain text classification tree for dataset {key}.</p>
 </p>
 
@@ -8540,11 +8561,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op44-responses" class="clear">Response 200</h3>
+            <h3 id="op45-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: text/plain
 </code>
     <code class="json">Animalia [kingdom]
@@ -8561,23 +8582,23 @@ Content-Type: text/plain
 </pre>
                     <p><code>text/plain</code></p>
                     <p>Content: any</p>
-            <h3 id="op44-responses" class="clear">Response 404</h3>
+            <h3 id="op45-responses" class="clear">Response 404</h3>
     <p><p>Dataset not found</p>
 </p>
 
 
-        <h2 id="resource-40">/dataset/{key}/treediff</h2>
+        <h2 id="resource-41">/dataset/{key}/treediff</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/treediff HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/treediff</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/treediff</h3>
     <p><p>Returns a plain text diff of the classification tree for dataset {key}.</p>
 </p>
 
@@ -8585,11 +8606,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op45-responses" class="clear">Response 200</h3>
+            <h3 id="op46-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: text/plain
 </code>
     <code class="json">--- /home/col/bin/dev/metrics/dataset/2050/tree/1.txt	2019-10-09 21:43:18.083256660 +0000
@@ -8604,11 +8625,11 @@ Content-Type: text/plain
 </pre>
                     <p><code>text/plain</code></p>
                     <p>Content: any</p>
-            <h3 id="op45-responses" class="clear">Response 404</h3>
+            <h3 id="op46-responses" class="clear">Response 404</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, November 14, 2019 10:27:31 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8621,24 +8642,24 @@ Content-Type: application/json
                     <p>Content: any</p>
 
 
-        <h2 id="resource-41">/dataset/{key}/verbatim</h2>
+        <h2 id="resource-42">/dataset/{key}/verbatim</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/verbatim HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/verbatim</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/verbatim</h3>
     <p><p>Page through all verbatim records of the dataset</p>
 </p>
 
 
 
-        <h3 id="op46-request-params">Parameters</h3>
+        <h3 id="op47-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -8679,11 +8700,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op46-responses" class="clear">Response 200</h3>
+            <h3 id="op47-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
 </pre>
@@ -8691,24 +8712,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-VerbatimRecordResultSet">VerbatimRecordResultSet</a></p>
 
 
-        <h2 id="resource-42">/dataset/{key}/verbatim/{key}</h2>
+        <h2 id="resource-43">/dataset/{key}/verbatim/{key}</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //dataset/{key}/verbatim/{key} HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/dataset/{key}/verbatim/{key}</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/dataset/{key}/verbatim/{key}</h3>
     <p><p>Get the verbatim representation of a source record by its dwca core id</p>
 </p>
 
 
 
-        <h3 id="op47-request-params">Parameters</h3>
+        <h3 id="op48-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -8731,11 +8752,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op47-responses" class="clear">Response 200</h3>
+            <h3 id="op48-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8772,24 +8793,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-VerbatimRecord">VerbatimRecord</a></p>
 
 
-        <h1 id="resource-43">/decision</h1>
+        <h1 id="resource-44">/decision</h1>
 
     
 
 
     <pre class="example"><code class="http">
 GET //decision HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/decision</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/decision</h3>
     <p><p>List of editorial decisions.</p>
 </p>
 
 
 
-        <h3 id="op48-request-params">Parameters</h3>
+        <h3 id="op49-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -8821,11 +8842,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op48-responses" class="clear">Response 200</h3>
+            <h3 id="op49-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -8854,7 +8875,7 @@ Content-Type: application/json
 
     <pre class="example"><code class="http">
 POST //decision HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8872,21 +8893,21 @@ Content-Type: application/json
 </code>
 </pre>
 
-        <h3><code class="prettyprint">POST</code> http://api.col.plus/decision</h3>
+        <h3><code class="prettyprint">POST</code> http://api.catalogue.life/decision</h3>
     
 
 
-    <h3 id="op49-request-body">Body</h3>
+    <h3 id="op50-request-body">Body</h3>
             <p><code>application/json</code></p>
             <p>Content: any</p>
 
 
 
-            <h3 id="op49-responses" class="clear">Response 200</h3>
+            <h3 id="op50-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">6</code>
@@ -8895,24 +8916,24 @@ Content-Type: application/json
                     <p>Content: integer</p>
 
 
-        <h2 id="resource-44">/decision/broken</h2>
+        <h2 id="resource-45">/decision/broken</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //decision/broken HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/decision/broken</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/decision/broken</h3>
     <p><p>List of broken editorial decisions.</p>
 </p>
 
 
 
-        <h3 id="op50-request-params">Parameters</h3>
+        <h3 id="op51-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -8935,11 +8956,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op50-responses" class="clear">Response 200</h3>
+            <h3 id="op51-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
 </pre>
@@ -8947,7 +8968,7 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Decision">Decision[]</a></p>
 
 
-        <h1 id="resource-45">/estimate</h1>
+        <h1 id="resource-46">/estimate</h1>
 
     <p><p>Returns species estimates</p>
 </p>
@@ -8955,16 +8976,16 @@ Content-Type: application/json
 
     <pre class="example"><code class="http">
 GET //estimate HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/estimate</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/estimate</h3>
     
 
 
 
-        <h3 id="op51-request-params">Parameters</h3>
+        <h3 id="op52-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -9005,11 +9026,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op51-responses" class="clear">Response 200</h3>
+            <h3 id="op52-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9044,7 +9065,7 @@ Content-Type: application/json
                     <p>Content: any</p>
 
 
-        <h2 id="resource-46">/estimate/broken</h2>
+        <h2 id="resource-47">/estimate/broken</h2>
 
     <p><p>Returns a list of species estimates that do not match any taxa</p>
 </p>
@@ -9052,22 +9073,22 @@ Content-Type: application/json
 
     <pre class="example"><code class="http">
 GET //estimate/broken HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/estimate/broken</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/estimate/broken</h3>
     
 
 
 
 
 
-            <h3 id="op52-responses" class="clear">Response 200</h3>
+            <h3 id="op53-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -9108,18 +9129,18 @@ Content-Type: application/json
                     <p>Content: <a href="#model-SpeciesEstimate">SpeciesEstimate[]</a></p>
 
 
-        <h1 id="resource-47">/sector</h1>
+        <h1 id="resource-48">/sector</h1>
 
     
 
 
     <pre class="example"><code class="http">
 GET //sector HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/sector</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/sector</h3>
     <p><p>List of taxonomic sectors in the CoL.
 queryParameters:
 sourceKey:
@@ -9130,11 +9151,11 @@ description: Filter by CoL source.</p>
 
 
 
-            <h3 id="op53-responses" class="clear">Response 200</h3>
+            <h3 id="op54-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
 </pre>
@@ -9142,24 +9163,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Sector">Sector[]</a></p>
 
 
-        <h1 id="resource-48">/importer</h1>
+        <h1 id="resource-49">/importer</h1>
 
     
 
 
     <pre class="example"><code class="http">
 GET //importer HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/importer</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/importer</h3>
     <p><p>Retrieve import metrics sorted chronologically descending.</p>
 </p>
 
 
 
-        <h3 id="op54-request-params">Parameters</h3>
+        <h3 id="op55-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -9218,11 +9239,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op54-responses" class="clear">Response 200</h3>
+            <h3 id="op55-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
 </pre>
@@ -9231,7 +9252,7 @@ Content-Type: application/json
 
     <pre class="example"><code class="http">
 POST //importer HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9242,22 +9263,22 @@ Content-Type: application/json
 </code>
 </pre>
 
-        <h3><code class="prettyprint">POST</code> http://api.col.plus/importer</h3>
+        <h3><code class="prettyprint">POST</code> http://api.catalogue.life/importer</h3>
     <p><p>Starts an import process</p>
 </p>
 
 
-    <h3 id="op55-request-body">Body</h3>
+    <h3 id="op56-request-body">Body</h3>
             <p><code>application/json</code></p>
             <p>Content: <a href="#model-ImportRequest">ImportRequest</a></p>
 
 
 
-            <h3 id="op55-responses" class="clear">Response 201</h3>
+            <h3 id="op56-responses" class="clear">Response 201</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9274,18 +9295,18 @@ Content-Type: application/json
                     <p>Content: any</p>
 
 
-        <h2 id="resource-49">/importer/{key}</h2>
+        <h2 id="resource-50">/importer/{key}</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //importer/{key} HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/importer/{key}</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/importer/{key}</h3>
     <p><p>Returns import status and metrics for dataset {key}</p>
 </p>
 
@@ -9293,11 +9314,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op56-responses" class="clear">Response 200</h3>
+            <h3 id="op57-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json"># inserting import
@@ -9427,11 +9448,11 @@ Content-Type: application/json
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: any</p>
-            <h3 id="op56-responses" class="clear">Response 404</h3>
+            <h3 id="op57-responses" class="clear">Response 404</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9445,18 +9466,18 @@ Content-Type: application/json
 
     <pre class="example"><code class="http">
 POST //importer/{key} HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 Content-Type: application/octet-stream
 </code>
 </pre>
 
-        <h3><code class="prettyprint">POST</code> http://api.col.plus/importer/{key}</h3>
+        <h3><code class="prettyprint">POST</code> http://api.catalogue.life/importer/{key}</h3>
     <p><p>Triggers an import for dataset {key}
 Optionally a compressed archive of data (zip or gzip) can be included</p>
 </p>
 
 
-    <h3 id="op57-request-body">Body</h3>
+    <h3 id="op58-request-body">Body</h3>
             <p><code>application/octet-stream</code></p>
             <p>Content: any</p>
             <p><code>application/zip</code></p>
@@ -9466,11 +9487,11 @@ Optionally a compressed archive of data (zip or gzip) can be included</p>
 
 
 
-            <h3 id="op57-responses" class="clear">Response 201</h3>
+            <h3 id="op58-responses" class="clear">Response 201</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9488,11 +9509,11 @@ Content-Type: application/json
 
     <pre class="example"><code class="http">
 DELETE //importer/{key} HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">DELETE</code> http://api.col.plus/importer/{key}</h3>
+        <h3><code class="prettyprint">DELETE</code> http://api.catalogue.life/importer/{key}</h3>
     <p><p>Deletes an import from the importer queue</p>
 </p>
 
@@ -9500,34 +9521,34 @@ Host: api.col.plus
 
 
 
-            <h3 id="op58-responses" class="clear">Response 204</h3>
+            <h3 id="op59-responses" class="clear">Response 204</h3>
     
 
 
-        <h1 id="resource-50">/nameusage</h1>
+        <h1 id="resource-51">/nameusage</h1>
 
     
 
 
 
-        <h2 id="resource-51">/nameusage/search</h2>
+        <h2 id="resource-52">/nameusage/search</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //nameusage/search HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/nameusage/search</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/nameusage/search</h3>
     <p><p>Executes a name search.</p>
 </p>
 
 
 
-        <h3 id="op59-request-params">Parameters</h3>
+        <h3 id="op60-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -9667,11 +9688,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op59-responses" class="clear">Response 200</h3>
+            <h3 id="op60-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9924,24 +9945,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-NameSearchResultSet">NameSearchResultSet</a></p>
 
 
-        <h2 id="resource-52">/nameusage/suggest</h2>
+        <h2 id="resource-53">/nameusage/suggest</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //nameusage/suggest HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/nameusage/suggest</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/nameusage/suggest</h3>
     <p><p>Name suggestion service (a.k.a. auto-complete)</p>
 </p>
 
 
 
-        <h3 id="op60-request-params">Parameters</h3>
+        <h3 id="op61-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -9991,11 +10012,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op60-responses" class="clear">Response 200</h3>
+            <h3 id="op61-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
 </pre>
@@ -10003,25 +10024,25 @@ Content-Type: application/json
                     <p>Content: string</p>
 
 
-        <h1 id="resource-53">/name/matching</h1>
+        <h1 id="resource-54">/name/matching</h1>
 
     
 
 
     <pre class="example"><code class="http">
 GET //name/matching HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/name/matching</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/name/matching</h3>
     <p><p>Match name against the name index.
 Eventually should be exposed in public API.</p>
 </p>
 
 
 
-        <h3 id="op61-request-params">Parameters</h3>
+        <h3 id="op62-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -10080,11 +10101,11 @@ Eventually should be exposed in public API.</p>
         </tbody></table>
 
 
-            <h3 id="op61-responses" class="clear">Response 200</h3>
+            <h3 id="op62-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -10115,30 +10136,30 @@ Content-Type: application/json
                     <p>Content: <a href="#model-NameMatch">NameMatch</a></p>
 
 
-        <h1 id="resource-54">/parser</h1>
+        <h1 id="resource-55">/parser</h1>
 
     
 
 
 
-        <h2 id="resource-55">/parser/name</h2>
+        <h2 id="resource-56">/parser/name</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //parser/name HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/parser/name</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/parser/name</h3>
     <p><p>List parsed names.</p>
 </p>
 
 
 
-        <h3 id="op62-request-params">Parameters</h3>
+        <h3 id="op63-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -10161,11 +10182,11 @@ Host: api.col.plus
         </tbody></table>
 
 
-            <h3 id="op62-responses" class="clear">Response 200</h3>
+            <h3 id="op63-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -10229,18 +10250,18 @@ Content-Type: application/json
 
     <pre class="example"><code class="http">
 POST //parser/name HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 Content-Type: application/json
 </code>
 </pre>
 
-        <h3><code class="prettyprint">POST</code> http://api.col.plus/parser/name</h3>
+        <h3><code class="prettyprint">POST</code> http://api.catalogue.life/parser/name</h3>
     <p><p>List parsed names. The names to be parsed can be specified as a JSON array in the request body; a file upload
 with one name per line, or as plain/text content in the request body.</p>
 </p>
 
 
-    <h3 id="op63-request-body">Body</h3>
+    <h3 id="op64-request-body">Body</h3>
             <p><code>application/json</code></p>
             <p>Content: any</p>
             <p><code>multipart/form-data</code></p>
@@ -10250,11 +10271,11 @@ with one name per line, or as plain/text content in the request body.</p>
 
 
 
-            <h3 id="op63-responses" class="clear">Response 200</h3>
+            <h3 id="op64-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -10317,24 +10338,24 @@ Content-Type: application/json
                     <p>Content: <a href="#model-Name">Name[]</a></p>
 
 
-        <h1 id="resource-56">/user</h1>
+        <h1 id="resource-57">/user</h1>
 
     
 
 
 
-        <h2 id="resource-57">/user/{userKey}</h2>
+        <h2 id="resource-58">/user/{userKey}</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //user/{userKey} HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/user/{userKey}</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/user/{userKey}</h3>
     <p><p>Returns username, first name, last name, country</p>
 </p>
 
@@ -10342,11 +10363,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op64-responses" class="clear">Response 200</h3>
+            <h3 id="op65-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -10360,11 +10381,11 @@ Content-Type: application/json
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: any</p>
-            <h3 id="op64-responses" class="clear">Response 404</h3>
+            <h3 id="op65-responses" class="clear">Response 404</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -10377,18 +10398,18 @@ Content-Type: application/json
                     <p>Content: any</p>
 
 
-        <h2 id="resource-58">/user/me</h2>
+        <h2 id="resource-59">/user/me</h2>
 
     
 
 
     <pre class="example"><code class="http">
 GET //user/me HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/user/me</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/user/me</h3>
     <p><p>Returns username, first name, last name, country</p>
 </p>
 
@@ -10396,11 +10417,11 @@ Host: api.col.plus
 
 
 
-            <h3 id="op65-responses" class="clear">Response 200</h3>
+            <h3 id="op66-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -10408,7 +10429,7 @@ Content-Type: application/json
   "username": "L",
   "firstname": "Carl",
   "lastname": "Linnaeus",
-  "email": "l@col.plus",
+  "email": "l@catalogue.life",
   "country": "SE",
   "roles": [
     "user",
@@ -10423,53 +10444,19 @@ Content-Type: application/json
                     <p>Content: any</p>
 
 
-        <h1 id="resource-59">/version</h1>
+        <h1 id="resource-60">/version</h1>
 
     
 
 
     <pre class="example"><code class="http">
 GET //version HTTP/1.1
-Host: api.col.plus
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/version</h3>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/version</h3>
     <p><p>The CoL+ API version is the GitHub commit hash and time (e.g., <a href="https://github.com/Sp2000/colplus-backend/tree/70d8d5b">https://github.com/Sp2000/colplus-backend/tree/70d8d5b</a>).</p>
-</p>
-
-
-
-
-
-            <h3 id="op66-responses" class="clear">Response 200</h3>
-    
-<pre class="example"><code class="http">
-HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:32 PM CET
-Content-Type: text/plain
-</code>
-    <code class="json">"70d8d5b  2019-10-09T14:26:15+0000"
-</code>
-</pre>
-                    <p><code>text/plain</code></p>
-                    <p>Content: string</p>
-
-
-        <h1 id="resource-60">/vocab</h1>
-
-    
-
-
-    <pre class="example"><code class="http">
-GET //vocab HTTP/1.1
-Host: api.col.plus
-</code>
-</pre>
-
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/vocab</h3>
-    <p><p>List of all available vocabularies by their unique lowercase form.
-Any of the names can be used as valid subresources to list the actual enumeration values.</p>
 </p>
 
 
@@ -10480,29 +10467,30 @@ Any of the names can be used as valid subresources to list the actual enumeratio
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:32 PM CET
-Content-Type: application/json
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
+Content-Type: text/plain
 </code>
-    <code class="json">["continent","country","areastandard","cslreftype","nametype","origin","language","frequency","rank","nomacttype","coverage","nomstatus","dataformat","importstate","issue","gazetteer","cslvariable","typestatus","lifezone","distributionstatus","taxonomicstatus","kingdom","datasettype","license","nomcode","namepart"]
+    <code class="json">"70d8d5b  2019-10-09T14:26:15+0000"
 </code>
 </pre>
-                    <p><code>application/json</code></p>
-                    <p>Content: string[]</p>
+                    <p><code>text/plain</code></p>
+                    <p>Content: string</p>
 
 
-        <h2 id="resource-61">/vocab/{name}</h2>
+        <h1 id="resource-61">/vocab</h1>
 
     
 
 
     <pre class="example"><code class="http">
-GET //vocab/{name} HTTP/1.1
-Host: api.col.plus
+GET //vocab HTTP/1.1
+Host: api.catalogue.life
 </code>
 </pre>
 
-        <h3><code class="prettyprint">GET</code> http://api.col.plus/vocab/{name}</h3>
-    <p><p>List of all enumeration values for the requested vocabulary.</p>
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/vocab</h3>
+    <p><p>List of all available vocabularies by their unique lowercase form.
+Any of the names can be used as valid subresources to list the actual enumeration values.</p>
 </p>
 
 
@@ -10513,7 +10501,40 @@ Host: api.col.plus
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 14, 2019 10:27:32 PM CET
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
+Content-Type: application/json
+</code>
+    <code class="json">["continent","country","areastandard","cslreftype","nametype","origin","language","frequency","rank","nomacttype","coverage","nomstatus","dataformat","importstate","issue","gazetteer","cslvariable","typestatus","lifezone","distributionstatus","taxonomicstatus","kingdom","datasettype","license","nomcode","namepart"]
+</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: string[]</p>
+
+
+        <h2 id="resource-62">/vocab/{name}</h2>
+
+    
+
+
+    <pre class="example"><code class="http">
+GET //vocab/{name} HTTP/1.1
+Host: api.catalogue.life
+</code>
+</pre>
+
+        <h3><code class="prettyprint">GET</code> http://api.catalogue.life/vocab/{name}</h3>
+    <p><p>List of all enumeration values for the requested vocabulary.</p>
+</p>
+
+
+
+
+
+            <h3 id="op69-responses" class="clear">Response 200</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 200 OK
+Date: Wednesday, November 27, 2019 at 9:33:46 AM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]
