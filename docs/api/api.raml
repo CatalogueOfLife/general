@@ -11,6 +11,28 @@ description:
     The API currently gives access to staged source datasets for editorial review.
     The full Catalogue of Life and its versions is handled separately.
     In addition there is a secured, non public admin API, e.g. to request dataset to be (re)imported.
+securitySchemes:
+  basic:
+    description: |
+      This API supports Basic Authentication over SSL.
+    type: Basic Authentication
+  jwt:
+    description: |
+      This API supports JSON Web Tokens which are issued by the API's user login method.
+      JWT is a special type of the Bearer token authentication.
+      See https://jwt.io/ for details.
+    type: x-custom
+    describedBy:
+      headers:
+        Authorization:
+          type: bearerJWT
+          description: |
+            Used to send the Bearer JWT token
+      responses:
+        401:
+          description: |
+            Bad or expired token. This can happen if the user revoked or expired an access token. To fix, re-authenticate the user.
+securedBy: [basic, jwt]
 traits: !include inc/traits.raml
 types: !include inc/types.raml
 /admin: !include inc/admin.raml
@@ -626,6 +648,29 @@ types: !include inc/types.raml
                   ],
                   "lastLogin": "1777-10-10T18:59:21.734"
                 }
+  /login:
+    get:
+      displayName: user login
+      description: Login as a user to gain a new JWT token
+      securedBy: [basic]
+      responses:
+        200:
+          body:
+            text/plain:
+              type: jwt
+              example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjEzMDA4MTkzODAsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773
+  /settings:
+    put:
+      displayName: Sets user settings
+      description: Updates the user settings
+      securedBy: [basic, jwt]
+      body:
+        application/json:
+          example: |
+              {
+                "mysetting1": "myvalue1",
+                "favoriteColor": "red"
+              }
 /version:
   get:
     displayName: Returns the CoL+ API version

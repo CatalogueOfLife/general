@@ -1,5 +1,9 @@
 # to be included for traits like this:
 # types: !include inc/types.raml
+jwt:
+  pattern: ^[a-zA-Z0-9+/]+={0,2}\.[a-zA-Z0-9+/]+={0,2}\.[a-zA-Z0-9+/]+={0,2}$
+bearerJWT:
+  pattern: ^Bearer [a-zA-Z0-9+/]+={0,2}\.[a-zA-Z0-9+/]+={0,2}\.[a-zA-Z0-9+/]+={0,2}$
 isocode:
   type: string
   minLength: 2
