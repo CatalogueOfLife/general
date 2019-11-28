@@ -69,7 +69,7 @@ CatalogueType:
   enum: ["scrutinized", "provisional"]
   description: >
     Assembled catalogues in the CoL
-    See http://api.col.plus/vocab/catalogue for the latest full list.
+    See https://api.catalogue.life/vocab/catalogue for the latest full list.
 ColSource:
   type: object
   description: |
@@ -380,7 +380,7 @@ DatasetImportResultSet:
   description: >
     A paging resultset for DatasetImport.
   properties:
-    results:
+    result:
       type: DatasetImport[]
       description: the resulting import metrics
 DatasetResultSet:
@@ -388,7 +388,7 @@ DatasetResultSet:
   description: >
     A paging resultset for Datasets.
   properties:
-    results:
+    result:
       type: Dataset[]
       description: the resulting Datasets
 DatasetObject:
@@ -405,7 +405,7 @@ DatasetType:
   enum: ["nomenclator","taxonomic","national","personal","other"]
   description: >
     Enumeration of kind of datasets
-    See http://api.col.plus/vocab/datasettype for the latest full list.
+    See https://api.catalogue.life/vocab/datasettype for the latest full list.
 Decision:
   type: object
   properties:
@@ -414,10 +414,16 @@ Decision:
       description: primary key
     datasetKey:
       type: integer
-      description: primary key
+      description: the catalogue the decision applies to
     subject:
       type: NameRef
       description: the name usage this decision is about
+    subjectDatasetKey:
+      type: integer
+      description: the dataset the subject belongs to
+    mode:
+      type: DecisionMode
+      description: the decision mode, e.g. block
     status:
       type: TaxonomicStatusType
       description: the new status
@@ -437,6 +443,20 @@ Decision:
       type: datetime
       description: datetime the decision was deleted
       required: false
+DecisionMode:
+  type: string
+  enum: ["block", "reviewed", "update", "update_recursive"]
+  description: >
+    THe kind of decision
+    See https://api.catalogue.life/vocab/editorialdecision$mode for the latest full list.
+DecisionResultSet:
+  type: ResultSet
+  description: >
+    A paging resultset for Decisions.
+  properties:
+    result:
+      type: Decision[]
+      description: the resulting Decisions
 Distribution:
   type: DatasetObject
   description: An area distribution record
@@ -459,7 +479,7 @@ DistributionStatusType:
   enum: ["native", "domesticated", "alien", "uncertain"]
   description: >
     CoL distribution status enumeration
-    See http://api.col.plus/vocab/distributionstatus
+    See https://api.catalogue.life/vocab/distributionstatus
 Error:
   type: object
   description: >
@@ -481,13 +501,13 @@ FrequencyType:
   enum: ["never", "once", "daily", "weekly", "monthly", "yearly"]
   description: >
     Enumeration of frequencies for scheduling dataset imports.
-    See http://api.col.plus/vocab/frequency for the latest full list.
+    See https://api.catalogue.life/vocab/frequency for the latest full list.
 GazetteerType:
   type: string
   enum: ["tdwg", "iso", "fao", "fao-fishing", "longhurst", "teow", "iho", "text"]
   description: |
     List of supported distribution area standards.
-    See http://api.col.plus/vocab/gazetteer
+    See https://api.catalogue.life/vocab/gazetteer
 
     tdwg
     : [World Geographical Scheme for Recording Plant Distributions](http://www.tdwg.org/standards/109) published by TDWG at level 3 or 4.
@@ -586,7 +606,7 @@ ImportState:
   enum: ["downloading","processing","inserting","unchanged","finished","canceled","failed"]
   description: >
     Enumeration of states of running or finished dataset imports.
-    See http://api.col.plus/vocab/importstate for the latest full list.
+    See https://api.catalogue.life/vocab/importstate for the latest full list.
 IssueType:
   type: string
   enum: ["unparsable name","partially parsable name","unparsable authorship","doubtful name","inconsistent authorship","inconsistent name","unusual characters","null epithet","subspecies assigned","lc monomial","indet cultivar","indet species","indet infraspecies","higher rank binomial","question marks removed","repl enclosing quote","missing genus","escaped characters","nomenclatural status invalid","nomenclatural code invalid","basionym author mismatch","basionym not unique","basionym derived","conflicting basionym combination","potential orthographic variant","homonym","published before genus","reference id invalid","id not unique","parent id invalid","accepted id invalid","basionym id invalid","accepted name missing","rank invalid","taxonomic status invalid","lifezone invalid","is fossil invalid","is recent invalid","url invalid","according to date invalid","chained synoym","taxonomic status mismatch","parent cycle","classification rank order invalid","classification not applied","vernacular name invalid","vernacular name transliterated","description invalid","distribution invalid","distribution area invalid","distribution country invalid","distribution status invalid","distribution gazeteer invalid","species profile invalid","multimedia invalid","bib reference invalid","alt identifier invalid","backbone match none","backbone match fuzzy","name not unique","parent name not unique","relationship missing","no species","name parent mismatch","orthographic variant"]
@@ -595,7 +615,7 @@ IssueType:
     The enumeration is in very active development and extended as new rules are implemented.
     Not all flagged issues are highlighting data problems. Some simply flag the fact that data was modified during imports,
     for example "vernacular name transliterated" is added then a latin transliteration of a vernacular name was automatically generated.
-    See http://api.col.plus/vocab/issue for the latest full list.
+    See https://api.catalogue.life/vocab/issue for the latest full list.
 NomCode:
   type: string
   enum: ["ICNP", "ICN", "ICNCP", "ICVCN", "ICZN"]
@@ -606,7 +626,7 @@ NomCodeType:
   enum: ["bacterial", "botanical", "cultivated", "viral", "zoological", "unknown"]
   description: >
     Nomenclatural code enumeration regardless of the exact version published.
-    See http://api.col.plus/vocab/nomcode
+    See https://api.catalogue.life/vocab/nomcode
 
     bacteriological
     : [Bacteriological code](https://www.ncbi.nlm.nih.gov/books/NBK8817/)
@@ -627,7 +647,7 @@ NomenclaturalStatusType:
   enum: ["ok", "unavailable", "illegitimate", "variant", "conserved", "rejected", "doubtful", "unevaluated"]
   description: >
     The status related to the latest nomenclatural act published for the name and its conformance to the rules of nomenclature.
-    See http://api.col.plus/vocab/nomstatus
+    See https://api.catalogue.life/vocab/nomstatus
 
     Generic nomenclatural status enumeration across all codes.
     Only the broader status concepts are captured and details of the nomenclatural status of a name should be given as free text.
@@ -676,13 +696,13 @@ NameType:
   enum: ["scientific", "virus", "hybrid-formula", "cultivar", "otu", "placeholder", "none"]
   description: >
     Classification of names, mostly based on their syntactic structure.
-    See http://api.col.plus/vocab/nametype
+    See https://api.catalogue.life/vocab/nametype
 NameRelationType:
   type: string
   enum: ["spelling correction","basionym","based on","replacement name","conserved","later homonym","superfluous","homotypic"]
   description: >
     Coarse classification of nomenclatural name relations.
-    See http://api.col.plus/vocab/nomreltype
+    See https://api.catalogue.life/vocab/nomreltype
 
      spelling correction
      : The current name is a spelling correction, called emendation in zoology, of the related name having the same type.
@@ -764,19 +784,19 @@ LicenseType:
   enum: ["cc0","cc by","cc by nc","unspecified"]
   description: >
     Enumeration of Creative Commons license types supported by the Clearinghouse.
-    See http://api.col.plus/vocab/license
+    See https://api.catalogue.life/vocab/license
 LifezoneType:
   type: string
   enum: ["brackish", "freshwater", "marine", "terrestrial"]
   description: >
     Coarse classification of the environment an organism lives in.
-    See http://api.col.plus/vocab/lifezone
+    See https://api.catalogue.life/vocab/lifezone
 ReferenceTopicType:
   type: string
   enum: ["nomen", "taxon", "vernacular", "distribution"]
   description: >
     Enumeration of types of CoL relevant information that is treated in a publication
-    See http://api.col.plus/vocab/gazetteer
+    See https://api.catalogue.life/vocab/gazetteer
 TaxonomicStatus:
   type: string
   enum: [ACCEPTED, PROVISIONALLY_ACCEPTED, SYNONYM, AMBIGUOUS_SYNONYM, MISAPPLIED]
@@ -788,13 +808,13 @@ TaxonomicStatusType:
   enum: ["accepted", "doubtful", "ambiguous synonym"]
   description: >
     Taxonomic status enumeration for both accepted taxa and synonyms.
-    See http://api.col.plus/vocab/taxonomicstatus
+    See https://api.catalogue.life/vocab/taxonomicstatus
 KingdomType:
   type: string
   enum: ["Animalia","Archaea","Bacteria","Chromista","Fungi","Plantae","Protozoa","Viruses"]
   description: >
     Enumeration of all kingdoms recognized in the Catalogue of Life.
-    See http://api.col.plus/vocab/kingdom
+    See https://api.catalogue.life/vocab/kingdom
 MatchType:
   type: string
   enum: ["exact", "variant", "inserted", "ambiguous", "none"]
@@ -805,7 +825,7 @@ OriginType:
   "proparte","autonym","implicit name","missing accepted","basionym placeholder","ex author synonym","name matching","other"]
   description: >
     Enumeration of the kind of matches possible.
-    See http://api.col.plus/vocab/origin
+    See https://api.catalogue.life/vocab/origin
 ResultSet:
   type: object
   description: >
@@ -1078,7 +1098,7 @@ NameResultSet:
   description: >
     A paging resultset for Names.
   properties:
-    results:
+    result:
       type: Name[]
       description: the resulting names
 NameRef:
@@ -1469,7 +1489,7 @@ Page:
 Rank:
   description: >
     An ordered taxonomic rank enumeration with the most frequently used values.
-    See: http://api.col.plus/vocab/rank
+    See: https://api.catalogue.life/vocab/rank
   type: string
   enum: []
 Reference:
@@ -1515,7 +1535,7 @@ ReferenceResultSet:
   description: >
     A paging resultset for References.
   properties:
-    results:
+    result:
       type: Reference[]
       description: the resulting References
 ResultPage:
@@ -1684,7 +1704,7 @@ SerialResultSet:
   description: >
     A paging resultset for Serials.
   properties:
-    results:
+    result:
       type: Serial[]
       description: the resulting Serials
 SimpleName:
@@ -1742,6 +1762,14 @@ SpeciesEstimate:
       type: string
       description: remarks on the species estimate
       required: false
+SpeciesEstimateResultSet:
+  type: ResultSet
+  description: >
+    A paging resultset for SpeciesEstimates.
+  properties:
+    result:
+      type: SpeciesEstimate[]
+      description: the resulting SpeciesEstimates
 Taxon:
   type: VerbatimIdObject
   description: >
@@ -1889,7 +1917,7 @@ TaxonResultSet:
   description: >
     A paging resultset for Taxa.
   properties:
-    results:
+    result:
       type: Taxon[]
       description: the resulting Taxa
 TaxonReference:
@@ -1978,7 +2006,7 @@ VerbatimRecordResultSet:
   description: >
     A paging resultset for VerbatimRecords.
   properties:
-    results:
+    result:
       type: VerbatimRecord[]
       description: the resulting VerbatimRecords
 VernacularName:
@@ -2005,7 +2033,7 @@ RankType:
   enum: ["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]
   description: >
     Enumeration of all possible rank values across all codes.
-    See http://api.col.plus/vocab/rank for the complete list in use
+    See https://api.catalogue.life/vocab/rank for the complete list in use
 
     There is the need to deal with old ranks not accepted anymore.
     The list given is intended to be interoperable between name providers for bacteria, viruses, fungi, plants, and animals.

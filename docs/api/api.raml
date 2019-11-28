@@ -42,39 +42,58 @@ types: !include inc/types.raml
 /decision:
   get:
     description: |
-      List of editorial decisions.
+      List of editorial decisions with optional filters.
     queryParameters:
       datasetKey:
         type: integer
-        description: Filter by dataset
-      sectorKey:
+        description: The catalogue dataset the decision applies to
+      subjectDatasetKey:
         type: integer
-        description: Filter by sector
+        description: The source dataset the subject belongs to
+      userKey:
+        type: integer
+        description: The user that last modified the decision
+      rank:
+        type: RankType
+        description: The rank of the subject
+      mode:
+        type: DecisionMode
+        description: The decision mode, e.g. BLOCK
+      broken:
+        type: boolean
+        description: if true only show decisions which cannot be linked to a source name usage
     responses:
       200:
         body:
           application/json:
-            type: Decision[]
+            type: DecisionResultSet
             example: |
-              [
                 {
-                  "created": "2019-10-10T18:12:03.457967",
-                  "createdBy": 100,
-                  "modified": "2019-10-10T18:12:03.457967",
-                  "modifiedBy": 100,
-                  "key": 6,
-                  "datasetKey": 3,
-                  "subject": {
-                    "id": "12749-syn-1",
-                    "name": "Acrophorus hookeri",
-                    "authorship": "Moore",
-                    "rank": "species"
-                  },
-                  "subjectDatasetKey": 1140,
-                  "mode": "block",
-                  "status": "ambiguous synonym"
-                }
-              ]
+                  "offset": 0,
+                  "limit": 1,
+                  "total": 224,
+                  "result": [
+                    {
+                      "created": "2019-10-10T18:12:03.457967",
+                      "createdBy": 100,
+                      "modified": "2019-10-10T18:12:03.457967",
+                      "modifiedBy": 100,
+                      "key": 6,
+                      "datasetKey": 3,
+                      "subject": {
+                        "id": "12749-syn-1",
+                        "name": "Acrophorus hookeri",
+                        "authorship": "Moore",
+                        "rank": "species"
+                      },
+                      "subjectDatasetKey": 1140,
+                      "mode": "block",
+                      "status": "ambiguous synonym"
+                    }
+                  ],
+                  "last": false,
+                  "empty": false
+                }            
   post:
     body:
       application/json:
@@ -97,28 +116,22 @@ types: !include inc/types.raml
           type: integer
           description: the decision key
           example: '6'
-  /broken:
-    get:
-      description: |
-        List of broken editorial decisions.
-      queryParameters:
-        datasetKey:
-          type: integer
-          description: Filter by dataset
-      responses:
-        200:
-          body:
-            application/json:
-              type: Decision[]
 /estimate:
   displayName: Gets species estimates
   description: Returns species estimates
   get:
+    description: |
+      List of species estimates with optional filters.
     queryParameters:
       datasetKey:
-        description: the dataset key
         type: integer
-        required: false
+        description: The catalogue dataset the estimate applies to
+      userKey:
+        type: integer
+        description: The user that last modified the estimate
+      rank:
+        type: RankType
+        description: The rank of the subject
       min:
         description: the minimum number of estimated species
         type: integer
@@ -127,10 +140,14 @@ types: !include inc/types.raml
         description: the maximum number of estimated species
         type: integer
         required: false
+      broken:
+        type: boolean
+        description: if true only show estimates which cannot be linked to their target name usage
     responses:
       200:
         body:
           application/json:
+            type: SpeciesEstimateResultSet
             example: |
               {
                 "offset": 0,
@@ -158,48 +175,56 @@ types: !include inc/types.raml
                 "last": false,
                 "empty": false
               }
-  /broken:
-    displayName: Gets a list of broken species estimates
-    description: Returns a list of species estimates that do not match any taxa
+  /{key}:
     get:
+      displayName: Get one species estimate by its key
+      description: Retrieves the estimate with the specified key.
       responses:
         200:
           body:
             application/json:
+              type: SpeciesEstimate
               example: |
-                [
-                  {
-                      "created": "2015-10-08T20:25:55",
-                      "createdBy": 0,
-                      "modifiedBy": 0,
-                      "key": 26,
-                      "datasetKey": 3,
-                      "target": {
-                        "name": "Echiura",
-                        "rank": "phylum",
-                        "code": "zoological"
-                      },
-                      "estimate": 236,
-                      "type": "described species living",
-                      "referenceId": "3"
-                    },
-                    {
-                      "created": "2015-10-08T20:28:37",
-                      "createdBy": 0,
-                      "modifiedBy": 0,
-                      "key": 31,
-                      "datasetKey": 3,
-                      "target": {
-                        "name": "Loricifera",
-                        "rank": "phylum",
-                        "code": "zoological"
-                      },
-                      "estimate": 30,
-                      "type": "described species living",
-                      "referenceId": "3"
-                    }
-                ]
-              type: SpeciesEstimate[]
+                {
+                  "created": "2015-10-08T22:51:08",
+                  "createdBy": 0,
+                  "modified": "2018-04-09T17:54:39",
+                  "modifiedBy": 0,
+                  "key": 68,
+                  "datasetKey": 3,
+                  "target": {
+                    "id": "061950e4-9782-4d1a-9c87-dcf375788e6b",
+                    "name": "Animalia",
+                    "rank": "kingdom",
+                    "code": "zoological"
+                  },
+                  "estimate": 1525728,
+                  "type": "described species living",
+                  "referenceId": "27"
+                }
+    delete:
+      displayName: Delete estimate
+      description: Deletes the estimate with the specified estimate key.
+      responses:
+        204:
+          description: Estimate deleted.
+        404:
+          description: Specified estimate key does not exist.
+    put:
+      displayName: Update estimate
+      description: Updates the estimate specified through the JSON request body.
+      body:
+        application/json:
+          type: SpeciesEstimate
+      responses:
+        204:
+          description: Estimate updated.
+        404:
+          description: Specified estimate key does not exist.
+    uriParameters:
+      key:
+        type: integer
+        description: species estimate key
 /sector:
   get:
     description: |
