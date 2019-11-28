@@ -284,10 +284,10 @@
 </td>
                                 </tr>
                             </tbody></table>
-                        <h2 id="model-ColSource">ColSource</h2>
+                        <h2 id="model-DataEntity">DataEntity</h2>
 
 
-    <p><p>A citable source for a CoL data provider</p>
+    <p><p>Abstract base class of all entities that we track creation and last modified for.</p>
 </p>
 
                             <table><thead>
@@ -300,172 +300,35 @@
                             </tr>
                             </thead><tbody>
                                 <tr>
-                                    <td>key</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>primary key</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>datasetKey</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>key to the dataset this source belongs to</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>title</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Full name of the source. Defaults to dataset title.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>alias</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Short alias for the source to show in trees etc.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>description</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Free text describing the source supporting markdown formatting</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>organisation</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Organisation which has compiled or is owning the source</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>contactPerson</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Contact person of the source</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>authorsAndEditors</td>
-                                    <td>string[]</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Optional author(s) and editor(s) of the source</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>version</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Latest version number of the source used in the Catalogue of Life</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>released</td>
-                                    <td>date-only</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Latest release date of the source used in the Catalogue of Life</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>homepage</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Homepage URL of the source</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>group</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>taxonomic group in english language</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>coverage</td>
-                                    <td><a href="#model-DatasetType">DatasetType</a></td>
-                                    <td>nomenclator, taxonomic, national, personal, other</td>
-                                    <td>yes</td>
-                                    <td><p>global vs regional sources</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>citation</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>full bibliographic citation to be used</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>livingSpeciesCount</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>livingInfraspecificCount</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>extinctSpeciesCount</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>extinctInfraspecificCount</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>synonymsCount</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>vernacularsCount</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>namesCount</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
                                     <td>created</td>
                                     <td>datetime</td>
                                     <td></td>
-                                    <td>yes</td>
-                                    <td><p>datetime the source was registered in the Clearinghouse</p>
+                                    <td>no</td>
+                                    <td><p>datetime the dataset was registered in the Clearinghouse</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>createdBy</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>key of the user that created the object initially</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modified</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the object was last changed</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modifiedBy</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>key of the user that last modified the object</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -485,19 +348,59 @@
                             </tr>
                             </thead><tbody>
                                 <tr>
+                                    <td>created</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the dataset was registered in the Clearinghouse</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>createdBy</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>key of the user that created the object initially</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modified</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the object was last changed</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modifiedBy</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>key of the user that last modified the object</p>
+</td>
+                                </tr>
+                                <tr>
                                     <td>key</td>
                                     <td>integer</td>
                                     <td></td>
-                                    <td>yes</td>
+                                    <td>no</td>
                                     <td><p>Primary key for the source dataset</p>
 </td>
                                 </tr>
                                 <tr>
                                     <td>type</td>
                                     <td><a href="#model-DatasetType">DatasetType</a></td>
-                                    <td>nomenclator, taxonomic, national, personal, other</td>
+                                    <td>nomenclatural, taxonomic, article, personal, otu, thematic, other</td>
                                     <td>yes</td>
                                     <td><p>coarse classification of datasets</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>origin</td>
+                                    <td><a href="#model-DatasetOriginType">DatasetOriginType</a></td>
+                                    <td>external, uploaded, managed</td>
+                                    <td>yes</td>
+                                    <td><p>Where does the data of the dataset origin from. If external a dataAccess url should be given.</p>
 </td>
                                 </tr>
                                 <tr>
@@ -599,7 +502,7 @@
                                 <tr>
                                     <td>dataFormat</td>
                                     <td>enum</td>
-                                    <td>dwca, tcs, xls, other</td>
+                                    <td>dwca, acef, tcs", coldp, proxy</td>
                                     <td>no</td>
                                     <td><p>data format</p>
 </td>
@@ -629,16 +532,6 @@
 </td>
                                 </tr>
                                 <tr>
-                                    <td>catalogue</td>
-                                    <td><a href="#model-CatalogueType">CatalogueType</a></td>
-                                    <td>scrutinized, provisional</td>
-                                    <td>yes</td>
-                                    <td><p>If the dataset participates in any of the 2 catalouge assemblies this is indicated here.
-All scrutinized sources will also be included as provisional ones.
-Dataset used to build the provisional catalogue will be trusted and insert their names into the names index.</p>
-</td>
-                                </tr>
-                                <tr>
                                     <td>notes</td>
                                     <td>string</td>
                                     <td></td>
@@ -647,19 +540,11 @@ Dataset used to build the provisional catalogue will be trusted and insert their
 </td>
                                 </tr>
                                 <tr>
-                                    <td>created</td>
-                                    <td>datetime</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>datetime the dataset was registered in the Clearinghouse</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>modified</td>
-                                    <td>datetime</td>
+                                    <td>locked</td>
+                                    <td>boolean</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>datetime the data from this dataset was last changed in the Clearinghouse</p>
+                                    <td><p>Indicates if a dataset is immutable and it&rsquo;s data cannot be changed.</p>
 </td>
                                 </tr>
                                 <tr>
@@ -1038,6 +923,38 @@ Dataset used to build the provisional catalogue will be trusted and insert their
                             </tr>
                             </thead><tbody>
                                 <tr>
+                                    <td>created</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the dataset was registered in the Clearinghouse</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>createdBy</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>key of the user that created the object initially</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modified</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the object was last changed</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modifiedBy</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>key of the user that last modified the object</p>
+</td>
+                                </tr>
+                                <tr>
                                     <td>key</td>
                                     <td>integer</td>
                                     <td></td>
@@ -1055,7 +972,7 @@ Dataset used to build the provisional catalogue will be trusted and insert their
                                 </tr>
                                 <tr>
                                     <td>subject</td>
-                                    <td><a href="#model-NameRef">NameRef</a></td>
+                                    <td><a href="#model-SimpleName">SimpleName</a></td>
                                     <td></td>
                                     <td>yes</td>
                                     <td><p>the name usage this decision is about</p>
@@ -1087,34 +1004,50 @@ Dataset used to build the provisional catalogue will be trusted and insert their
                                 </tr>
                                 <tr>
                                     <td>name</td>
+                                    <td><a href="#model-Name">Name</a></td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the new scientific name object</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>extinct</td>
+                                    <td>boolean</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>the new extinct flag</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>temporalRangeStart</td>
                                     <td>string</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>the new scientific name</p>
+                                    <td><p>the new temporalRangeStart</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>authorship</td>
+                                    <td>temporalRangeEnd</td>
                                     <td>string</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>the new authorship</p>
+                                    <td><p>the new temporalRangeEnd</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>created</td>
-                                    <td>datetime</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>datetime the decision was created</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>deleted</td>
-                                    <td>datetime</td>
+                                    <td>lifezones</td>
+                                    <td><a href="#model-LifezoneType">LifezoneType[]</a></td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>datetime the decision was deleted</p>
+                                    <td><p>the new lifezones</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>note</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>editorial notes</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -1181,6 +1114,38 @@ Dataset used to build the provisional catalogue will be trusted and insert their
                                 <th>Description</th>
                             </tr>
                             </thead><tbody>
+                                <tr>
+                                    <td>created</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the dataset was registered in the Clearinghouse</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>createdBy</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>key of the user that created the object initially</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modified</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the object was last changed</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modifiedBy</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>key of the user that last modified the object</p>
+</td>
+                                </tr>
                                 <tr>
                                     <td>datasetKey</td>
                                     <td>integer</td>
@@ -1542,6 +1507,38 @@ ICZN does not mention the term basionym but the notion is clearly present in zoo
                             </tr>
                             </thead><tbody>
                                 <tr>
+                                    <td>created</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the dataset was registered in the Clearinghouse</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>createdBy</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>key of the user that created the object initially</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modified</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the object was last changed</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modifiedBy</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>key of the user that last modified the object</p>
+</td>
+                                </tr>
+                                <tr>
                                     <td>datasetKey</td>
                                     <td>integer</td>
                                     <td></td>
@@ -1843,62 +1840,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
 </td>
                                 </tr>
                             </tbody></table>
-                        <h2 id="model-NameRef">NameRef</h2>
-
-
-    <p><p>A reference to a name based on ids and the name itself</p>
-</p>
-
-                            <table><thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Pattern</th>
-                                <th>Required</th>
-                                <th>Description</th>
-                            </tr>
-                            </thead><tbody>
-                                <tr>
-                                    <td>id</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>the names id within its dataset</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>indexNameId</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>the name id from the matching name index record</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>name</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>the literal name</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>authorship</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>the literal, full authorship</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>rank</td>
-                                    <td><a href="#model-RankType">RankType</a></td>
-                                    <td>domain, superkingdom, kingdom, subkingdom, infrakingdom, superphylum, phylum, subphylum, infraphylum, superclass, class, subclass, infraclass, parvclass, superlegion, legion, sublegion, infralegion, supercohort, cohort, subcohort, infracohort, magnorder, superorder, grandorder, order, suborder, infraorder, parvorder, superfamily, family, subfamily, infrafamily, supertribe, tribe, subtribe, infratribe, suprageneric name, genus, subgenus, infragenus, supersection, section, subsection, superseries, series, subseries, infrageneric name, species aggregate, species, infraspecific name, grex, subspecies, cultivar group, convariety, infrasubspecific name, proles, natio, aberration, morph, variety, subvariety, form, subform, pathovar, biovar, chemovar, morphovar, phagovar, serovar, chemoform, forma specialis, cultivar, strain, other, unranked</td>
-                                    <td>no</td>
-                                    <td><p>the rank</p>
-</td>
-                                </tr>
-                            </tbody></table>
                         <h2 id="model-NameRelation">NameRelation</h2>
 
     <pre class="example"><code class="json">{
@@ -2004,6 +1945,38 @@ Name object with some extra properties related to synonymy. See below.</p>
                                 <th>Description</th>
                             </tr>
                             </thead><tbody>
+                                <tr>
+                                    <td>created</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the dataset was registered in the Clearinghouse</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>createdBy</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>key of the user that created the object initially</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modified</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the object was last changed</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modifiedBy</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>key of the user that last modified the object</p>
+</td>
+                                </tr>
                                 <tr>
                                     <td>datasetKey</td>
                                     <td>integer</td>
@@ -2687,12 +2660,6 @@ For example &ldquo;non Mill.&rdquo;, &ldquo;auct. amer.&rdquo; or &ldquo;sensu l
 </td>
                                 </tr>
                             </tbody></table>
-                        <h2 id="model-Rank">Rank</h2>
-
-
-    <p><p>An ordered taxonomic rank enumeration with the most frequently used values. See: <a href="https://api.catalogue.life/vocab/rank">https://api.catalogue.life/vocab/rank</a></p>
-</p>
-
                         <h2 id="model-Reference">Reference</h2>
 
     <pre class="example"><code class="json">{
@@ -2730,6 +2697,38 @@ but not dealt with on the shared Reference instances.</p>
                                 <th>Description</th>
                             </tr>
                             </thead><tbody>
+                                <tr>
+                                    <td>created</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the dataset was registered in the Clearinghouse</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>createdBy</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>key of the user that created the object initially</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modified</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the object was last changed</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modifiedBy</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>key of the user that last modified the object</p>
+</td>
+                                </tr>
                                 <tr>
                                     <td>datasetKey</td>
                                     <td>integer</td>
@@ -2932,6 +2931,38 @@ see <a href="https://github.com/citation-style-language/schema/blob/master/csl-d
                             </tr>
                             </thead><tbody>
                                 <tr>
+                                    <td>created</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the dataset was registered in the Clearinghouse</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>createdBy</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>key of the user that created the object initially</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modified</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the object was last changed</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modifiedBy</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>key of the user that last modified the object</p>
+</td>
+                                </tr>
+                                <tr>
                                     <td>key</td>
                                     <td>integer</td>
                                     <td></td>
@@ -2940,193 +2971,59 @@ see <a href="https://github.com/citation-style-language/schema/blob/master/csl-d
 </td>
                                 </tr>
                                 <tr>
-                                    <td>colSourceKey</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>key to the ColSource this sector originates from</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>root</td>
-                                    <td><a href="#model-NameRef">NameRef</a></td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>A reference to the single root taxon from the col source for this sector. Can even be a species, but usually some higher taxon.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>exclude</td>
-                                    <td><a href="#model-NameRef">NameRef[]</a></td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Optional list of taxa within the descendants of root to exclude from this sector definition</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>attachment</td>
-                                    <td><a href="#model-NameRef">NameRef</a></td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>The attachment point in the CoL tree, i.e. the CoL parent taxon for the sector root</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>suppress</td>
-                                    <td><a href="#model-NameRef">NameRef[]</a></td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>Optional list of CoL tree taxa that should be suppressed when this sector is attached.
-E.g. the CoL management classification might define an alternative taxonomy that uses
-different taxa which are covered by this sector already.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>created</td>
-                                    <td>datetime</td>
-                                    <td></td>
-                                    <td>yes</td>
-                                    <td><p>datetime the sector was created</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>deleted</td>
-                                    <td>datetime</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>datetime the sector was deleted</p>
-</td>
-                                </tr>
-                            </tbody></table>
-                        <h2 id="model-Serial">Serial</h2>
-
-    <pre class="example"><code class="json">{
-  "key": 432561,
-  "datasetKey": 15,
-  "bph": "460.06",
-  "tl2": "11.084",
-  "call": "QK1.J55",
-  "oclc": 1754397,
-  "bhl": 68922,
-  "firstYear": 1799,
-  "lastYear": 1804,
-  "csl": {
-    "call-number": "QK1.J55",
-    "type":"journal",
-    "title":"Journal für die Botanik",
-    "title-short":"J. Bot. (Schrader)",
-    "editor":[{"family":"Schrader","given":"H. A."}],
-    "publisher-place": "Göttingen"
-  }
-}
-</code></pre>
-
-    <p><p>A journal or other serial used as a container for references.</p>
-<p>A serial is a publication in any medium issued under the same title in a succession of discrete parts,
-usually numbered (or dated) and appearing at regular or irregular intervals with no predetermined conclusion.
-Serial publications include print periodicals and newspapers, electronic magazines and journals, annuals (reports, yearbooks, etc.),
-proceedings and transactions, and numbered monographic series cataloged separately.</p>
-<p>When serials split, merge, or are absorbed, a title change may occur.</p>
-<p>A specific serial title is identified by a unique International Standard Serials Number (ISSN) and key title,
-assigned and maintained by the International Serials Data System (ISDS), a network of national serials data centers.
-Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Directory published annually by ProQuest and in The Serials Directory published by EBSCO.</p>
-</p>
-
-                            <table><thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Pattern</th>
-                                <th>Required</th>
-                                <th>Description</th>
-                            </tr>
-                            </thead><tbody>
-                                <tr>
                                     <td>datasetKey</td>
                                     <td>integer</td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>Key to the source dataset this record belongs to</p>
+                                    <td><p>key to the catalogue dataset this sector is attached to</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>aliases</td>
-                                    <td>string[]</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Alternative titles known for the serial</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>bph</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p><a href="http://huntbotanical.org/databases/show.php?1">BPH Online</a> identifier. Botanic periodicals published between 1665 and the present.</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>call</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>library of congress classification number</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>tl2</td>
-                                    <td>string</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>TL2 number</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>oclc</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>OCLC number</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>bhl</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>BHL title number</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>firstYear</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>First year the serial was published</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>lastYear</td>
-                                    <td>integer</td>
-                                    <td></td>
-                                    <td>no</td>
-                                    <td><p>Last year the serial was published. Empty for current journals</p>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>csl</td>
-                                    <td>object</td>
+                                    <td>target</td>
+                                    <td><a href="#model-SimpleName">SimpleName</a></td>
                                     <td></td>
                                     <td>yes</td>
-                                    <td><p>Serial metadata as <a href="https://github.com/citation-style-language/schema#csl-json-schema">CSL-JSON</a>, see <a href="https://github.com/citation-style-language/schema/blob/master/csl-data.json">CSL JSON schema</a></p>
+                                    <td><p>attachement point in the catalogue</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>notes</td>
+                                    <td>subjectDatasetKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>key to the source dataset this sector is attached to</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>subject</td>
+                                    <td><a href="#model-SimpleName">SimpleName</a></td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>root taxon of the sector in the source dataset</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>mode</td>
+                                    <td><a href="#model-SectorMode">SectorMode</a></td>
+                                    <td>attach, union, merge</td>
+                                    <td>yes</td>
+                                    <td><p>The mode a sector is attached to the catalogue.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>code</td>
+                                    <td><a href="#model-NomCodeType">NomCodeType</a></td>
+                                    <td>bacterial, botanical, cultivated, viral, zoological, unknown</td>
+                                    <td>yes</td>
+                                    <td><p>The nomenclatural code to apply to all names in this sector</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>note</td>
                                     <td>string</td>
                                     <td></td>
-                                    <td>no</td>
-                                    <td><p>Notes about the serial</p>
+                                    <td>yes</td>
+                                    <td><p>Editorial notes</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -3275,6 +3172,186 @@ implicitly excluded (e.g., hybrid formulas, placeholders, no_names, etc).</p>
 </td>
                                 </tr>
                             </tbody></table>
+                        <h2 id="model-SectorResultSet">SectorResultSet</h2>
+
+
+    <p><p>A paging resultset for Sectors.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>result</td>
+                                    <td>object[]</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Result page</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>offset</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The offset applied during request. Can be less than requested if the limit is reached.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>limit</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The maximum number of records returned. Can be less than requested if the limit is reached.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>total</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>The total number of records available.</p>
+</td>
+                                </tr>
+                            </tbody></table>
+                        <h2 id="model-Serial">Serial</h2>
+
+    <pre class="example"><code class="json">{
+  "key": 432561,
+  "datasetKey": 15,
+  "bph": "460.06",
+  "tl2": "11.084",
+  "call": "QK1.J55",
+  "oclc": 1754397,
+  "bhl": 68922,
+  "firstYear": 1799,
+  "lastYear": 1804,
+  "csl": {
+    "call-number": "QK1.J55",
+    "type":"journal",
+    "title":"Journal für die Botanik",
+    "title-short":"J. Bot. (Schrader)",
+    "editor":[{"family":"Schrader","given":"H. A."}],
+    "publisher-place": "Göttingen"
+  }
+}
+</code></pre>
+
+    <p><p>A journal or other serial used as a container for references.</p>
+<p>A serial is a publication in any medium issued under the same title in a succession of discrete parts,
+usually numbered (or dated) and appearing at regular or irregular intervals with no predetermined conclusion.
+Serial publications include print periodicals and newspapers, electronic magazines and journals, annuals (reports, yearbooks, etc.),
+proceedings and transactions, and numbered monographic series cataloged separately.</p>
+<p>When serials split, merge, or are absorbed, a title change may occur.</p>
+<p>A specific serial title is identified by a unique International Standard Serials Number (ISSN) and key title,
+assigned and maintained by the International Serials Data System (ISDS), a network of national serials data centers.
+Serials and annuals are listed in Ulrich&rsquo;s International Periodicals Directory published annually by ProQuest and in The Serials Directory published by EBSCO.</p>
+</p>
+
+                            <table><thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Pattern</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead><tbody>
+                                <tr>
+                                    <td>datasetKey</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Key to the source dataset this record belongs to</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>aliases</td>
+                                    <td>string[]</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Alternative titles known for the serial</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>bph</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p><a href="http://huntbotanical.org/databases/show.php?1">BPH Online</a> identifier. Botanic periodicals published between 1665 and the present.</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>call</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>library of congress classification number</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>tl2</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>TL2 number</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>oclc</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>OCLC number</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>bhl</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>BHL title number</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>firstYear</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>First year the serial was published</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>lastYear</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Last year the serial was published. Empty for current journals</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>csl</td>
+                                    <td>object</td>
+                                    <td></td>
+                                    <td>yes</td>
+                                    <td><p>Serial metadata as <a href="https://github.com/citation-style-language/schema#csl-json-schema">CSL-JSON</a>, see <a href="https://github.com/citation-style-language/schema/blob/master/csl-data.json">CSL JSON schema</a></p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>notes</td>
+                                    <td>string</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>Notes about the serial</p>
+</td>
+                                </tr>
+                            </tbody></table>
                         <h2 id="model-SerialResultSet">SerialResultSet</h2>
 
 
@@ -3355,9 +3432,17 @@ implicitly excluded (e.g., hybrid formulas, placeholders, no_names, etc).</p>
 </td>
                                 </tr>
                                 <tr>
-                                    <td>rank</td>
-                                    <td><a href="#model-Rank">Rank</a></td>
+                                    <td>authorship</td>
+                                    <td>string</td>
                                     <td></td>
+                                    <td>no</td>
+                                    <td><p>the scientific name authorship</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>rank</td>
+                                    <td><a href="#model-RankType">RankType</a></td>
+                                    <td>domain, superkingdom, kingdom, subkingdom, infrakingdom, superphylum, phylum, subphylum, infraphylum, superclass, class, subclass, infraclass, parvclass, superlegion, legion, sublegion, infralegion, supercohort, cohort, subcohort, infracohort, magnorder, superorder, grandorder, order, suborder, infraorder, parvorder, superfamily, family, subfamily, infrafamily, supertribe, tribe, subtribe, infratribe, suprageneric name, genus, subgenus, infragenus, supersection, section, subsection, superseries, series, subseries, infrageneric name, species aggregate, species, infraspecific name, grex, subspecies, cultivar group, convariety, infrasubspecific name, proles, natio, aberration, morph, variety, subvariety, form, subform, pathovar, biovar, chemovar, morphovar, phagovar, serovar, chemoform, forma specialis, cultivar, strain, other, unranked</td>
                                     <td>yes</td>
                                     <td><p>the taxonomic rank</p>
 </td>
@@ -3366,7 +3451,7 @@ implicitly excluded (e.g., hybrid formulas, placeholders, no_names, etc).</p>
                                     <td>code</td>
                                     <td><a href="#model-NomCodeType">NomCodeType</a></td>
                                     <td>bacterial, botanical, cultivated, viral, zoological, unknown</td>
-                                    <td>yes</td>
+                                    <td>no</td>
                                     <td><p>the nomenclatural code</p>
 </td>
                                 </tr>
@@ -3383,7 +3468,7 @@ implicitly excluded (e.g., hybrid formulas, placeholders, no_names, etc).</p>
                                     <td>string</td>
                                     <td></td>
                                     <td>no</td>
-                                    <td><p>the parent</p>
+                                    <td><p>the scientific name of the parent</p>
 </td>
                                 </tr>
                             </tbody></table>
@@ -3402,6 +3487,38 @@ implicitly excluded (e.g., hybrid formulas, placeholders, no_names, etc).</p>
                                 <th>Description</th>
                             </tr>
                             </thead><tbody>
+                                <tr>
+                                    <td>created</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the dataset was registered in the Clearinghouse</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>createdBy</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>key of the user that created the object initially</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modified</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the object was last changed</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modifiedBy</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>key of the user that last modified the object</p>
+</td>
+                                </tr>
                                 <tr>
                                     <td>key</td>
                                     <td>integer</td>
@@ -3553,6 +3670,38 @@ implicitly excluded (e.g., hybrid formulas, placeholders, no_names, etc).</p>
                                 <th>Description</th>
                             </tr>
                             </thead><tbody>
+                                <tr>
+                                    <td>created</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the dataset was registered in the Clearinghouse</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>createdBy</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>key of the user that created the object initially</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modified</td>
+                                    <td>datetime</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>datetime the object was last changed</p>
+</td>
+                                </tr>
+                                <tr>
+                                    <td>modifiedBy</td>
+                                    <td>integer</td>
+                                    <td></td>
+                                    <td>no</td>
+                                    <td><p>key of the user that last modified the object</p>
+</td>
+                                </tr>
                                 <tr>
                                     <td>datasetKey</td>
                                     <td>integer</td>
@@ -4060,19 +4209,19 @@ implicitly excluded (e.g., hybrid formulas, placeholders, no_names, etc).</p>
 
         <h1 id="vocabs">Vocabularies</h1>
 
-            <h2 id="model-CatalogueType">CatalogueType</h2>
+            <h2 id="model-DatasetOriginType">DatasetOriginType</h2>
 
 
-            <p><strong>Enumeration</strong>: <em>scrutinized</em>, <em>provisional</em></p>
+            <p><strong>Enumeration</strong>: <em>external</em>, <em>uploaded</em>, <em>managed</em></p>
 
-    <p><p>Assembled catalogues in the CoL See <a href="https://api.catalogue.life/vocab/catalogue">https://api.catalogue.life/vocab/catalogue</a> for the latest full list.</p>
+    <p><p>Enumeration of the origin of a dataset. See <a href="https://api.catalogue.life/vocab/datasetorigin">https://api.catalogue.life/vocab/datasetorigin</a></p>
 </p>
 
 
             <h2 id="model-DatasetType">DatasetType</h2>
 
 
-            <p><strong>Enumeration</strong>: <em>nomenclator</em>, <em>taxonomic</em>, <em>national</em>, <em>personal</em>, <em>other</em></p>
+            <p><strong>Enumeration</strong>: <em>nomenclatural</em>, <em>taxonomic</em>, <em>article</em>, <em>personal</em>, <em>otu</em>, <em>thematic</em>, <em>other</em></p>
 
     <p><p>Enumeration of kind of datasets See <a href="https://api.catalogue.life/vocab/datasettype">https://api.catalogue.life/vocab/datasettype</a> for the latest full list.</p>
 </p>
@@ -4335,7 +4484,7 @@ unevaluated : if the name status has not been evaluated yet</p>
 
             <p><strong>Enumeration</strong>: <em>source</em>, <em>denormed classification</em>, <em>verbatim parent</em>, <em>verbatim accepted</em>, <em>verbatim basionym</em>, <em>proparte</em>, <em>autonym</em>, <em>implicit name</em>, <em>missing accepted</em>, <em>basionym placeholder</em>, <em>ex author synonym</em>, <em>name matching</em>, <em>other</em></p>
 
-    <p><p>Enumeration of the kind of matches possible. See <a href="https://api.catalogue.life/vocab/origin">https://api.catalogue.life/vocab/origin</a></p>
+    <p><p>Enumeration of the how a record came to existance during an import into the Clearinghouse. See <a href="https://api.catalogue.life/vocab/origin">https://api.catalogue.life/vocab/origin</a></p>
 </p>
 
 
@@ -4363,6 +4512,15 @@ Sources:</p>
             <p><strong>Enumeration</strong>: <em>nomen</em>, <em>taxon</em>, <em>vernacular</em>, <em>distribution</em></p>
 
     <p><p>Enumeration of types of CoL relevant information that is treated in a publication See <a href="https://api.catalogue.life/vocab/gazetteer">https://api.catalogue.life/vocab/gazetteer</a></p>
+</p>
+
+
+            <h2 id="model-SectorMode">SectorMode</h2>
+
+
+            <p><strong>Enumeration</strong>: <em>attach</em>, <em>union</em>, <em>merge</em></p>
+
+    <p><p>The mode a sector is attached to the catalogue. See: <a href="https://api.catalogue.life/vocab/sector$mode">https://api.catalogue.life/vocab/sector$mode</a></p>
 </p>
 
 
@@ -4462,7 +4620,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{"gbifSync":true,"importer":false}</code>
@@ -4518,7 +4676,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: text/plain
 </code>
 </pre>
@@ -4549,7 +4707,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: text/plain
 </code>
 </pre>
@@ -4580,7 +4738,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: text/plain
 </code>
 </pre>
@@ -4611,7 +4769,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: text/plain
 </code>
 </pre>
@@ -4648,7 +4806,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json-assembly-idle
 </code>
     <code class="json">{
@@ -4662,7 +4820,7 @@ Content-Type: application/json-assembly-idle
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json-assembly-running
 </code>
     <code class="json">{
@@ -4710,7 +4868,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4786,7 +4944,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json-dataset-not-imported-yet
 </code>
     <code class="json">{
@@ -4799,7 +4957,7 @@ Content-Type: application/json-dataset-not-imported-yet
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json-dataset-still-importing
 </code>
     <code class="json">{
@@ -4812,7 +4970,7 @@ Content-Type: application/json-dataset-still-importing
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json-sector-does-not-exist
 </code>
     <code class="json">{
@@ -4825,7 +4983,7 @@ Content-Type: application/json-sector-does-not-exist
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json-only-draft-catalogue
 </code>
     <code class="json">{
@@ -4886,7 +5044,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4912,7 +5070,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4950,7 +5108,7 @@ Only one job can run at a time.</p>
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: text/plain
 </code>
     <code class="json">3031</code>
@@ -4961,7 +5119,7 @@ Content-Type: text/plain
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -4991,7 +5149,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: text/plain
 </code>
 </pre>
@@ -5030,7 +5188,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5045,7 +5203,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -5103,7 +5261,7 @@ for the <a href="https://github.com/Sp2000/coldp">Catalogue of Life Data Package
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6345,7 +6503,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -6379,17 +6537,7 @@ POST //dataset HTTP/1.1
 Host: api.catalogue.life
 Content-Type: application/json
 </code>
-    <code class="json"># Request body for an uploaded dataset
-{
-  "title": "Example uploaded dataset",
-  "license": "cc0",
-  "type": "taxonomic",
-  "origin": "uploaded",
-  "dataFormat": "coldp"
-}
-
-# Request body for an externally hosted dataset
-{
+    <code class="json">{
   "title": "Example externally hosted dataset",
   "license": "cc0",
   "type": "nomenclatural",
@@ -6408,7 +6556,7 @@ Content-Type: application/json
 
     <h3 id="op19-request-body">Body</h3>
             <p><code>application/json</code></p>
-            <p>Content: any</p>
+            <p>Content: <a href="#model-Dataset">Dataset</a></p>
 
 
 
@@ -6416,7 +6564,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">2051</code>
@@ -6469,7 +6617,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7057,7 +7205,7 @@ Host: api.catalogue.life
 </p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json"># import attempt processing
@@ -7264,7 +7412,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7299,7 +7447,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7334,7 +7482,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: image/bmp
 </code>
 </pre>
@@ -7342,7 +7490,7 @@ Content-Type: image/bmp
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: image/gif
 </code>
 </pre>
@@ -7350,7 +7498,7 @@ Content-Type: image/gif
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: image/jpg
 </code>
 </pre>
@@ -7358,7 +7506,7 @@ Content-Type: image/jpg
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: image/png
 </code>
 </pre>
@@ -7366,7 +7514,7 @@ Content-Type: image/png
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: image/psd
 </code>
 </pre>
@@ -7374,7 +7522,7 @@ Content-Type: image/psd
                     <p>Content: any</p>
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: image/tiff
 </code>
 </pre>
@@ -7384,7 +7532,7 @@ Content-Type: image/tiff
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7432,7 +7580,7 @@ Content-Type: application/octet-stream
     
 <pre class="example"><code class="http">
 HTTP/1.1 400 Bad Request
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7507,7 +7655,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
 </pre>
@@ -7559,7 +7707,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7618,7 +7766,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -7704,7 +7852,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7772,7 +7920,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -7820,7 +7968,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -7880,7 +8028,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: text/plain
 </code>
 </pre>
@@ -7950,7 +8098,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
 </pre>
@@ -8002,7 +8150,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8106,7 +8254,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
 </pre>
@@ -8158,7 +8306,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8220,7 +8368,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8290,7 +8438,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -8382,7 +8530,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
 </pre>
@@ -8413,7 +8561,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">[
@@ -8625,7 +8773,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8685,7 +8833,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: text/plain
 </code>
     <code class="json">Animalia [kingdom]
@@ -8730,7 +8878,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: text/plain
 </code>
     <code class="json">--- /home/col/bin/dev/metrics/dataset/2050/tree/1.txt	2019-10-09 21:43:18.083256660 +0000
@@ -8749,7 +8897,7 @@ Content-Type: text/plain
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8824,7 +8972,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
 </pre>
@@ -8876,7 +9024,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -8995,6 +9143,24 @@ Host: api.catalogue.life
                 <td><p>if true only show decisions which cannot be linked to a source name usage</p>
 </td>
             </tr>
+            <tr>
+                <td>offset</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of offset records. Defaults to zero</p>
+</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of maximum records to be returned. Defaults to 10 and can be no more than 1000.</p>
+</td>
+            </tr>
         </tbody></table>
 
 
@@ -9002,7 +9168,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9070,7 +9236,7 @@ Content-Type: application/json
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">6</code>
@@ -9081,7 +9247,7 @@ Content-Type: application/json
 
         <h1 id="resource-45">/estimate</h1>
 
-    <p><p>Returns species estimates</p>
+    <p><p>Species estimates are linked to a target taxon of a managed catalogue.</p>
 </p>
 
 
@@ -9092,7 +9258,7 @@ Host: api.catalogue.life
 </pre>
 
         <h3><code class="prettyprint">GET</code> http://api.catalogue.life/estimate</h3>
-    <p><p>List of species estimates with optional filters.</p>
+    <p><p>Page through species estimates with optional filters.</p>
 </p>
 
 
@@ -9162,6 +9328,24 @@ Host: api.catalogue.life
                 <td><p>if true only show estimates which cannot be linked to their target name usage</p>
 </td>
             </tr>
+            <tr>
+                <td>offset</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of offset records. Defaults to zero</p>
+</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of maximum records to be returned. Defaults to 10 and can be no more than 1000.</p>
+</td>
+            </tr>
         </tbody></table>
 
 
@@ -9169,7 +9353,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9248,7 +9432,7 @@ Host: api.catalogue.life
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9364,7 +9548,8 @@ Content-Type: application/json
 
         <h1 id="resource-47">/sector</h1>
 
-    
+    <p><p>Sectors are taxonomic groups that are represented by a subtree with a single root taxon. They link a subject (the root taxon in a source dataset)  to a target (the attachment point) in a managed catalogue.</p>
+</p>
 
 
     <pre class="example"><code class="http">
@@ -9374,26 +9559,145 @@ Host: api.catalogue.life
 </pre>
 
         <h3><code class="prettyprint">GET</code> http://api.catalogue.life/sector</h3>
-    <p><p>List of taxonomic sectors in the CoL.
-queryParameters:
-sourceKey:
-description: Filter by CoL source.</p>
+    <p><p>Page through sectors with optional filters.</p>
 </p>
 
 
 
+        <h3 id="op56-request-params">Parameters</h3>
+        <table><thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Pattern</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead><tbody>
+            <tr>
+                <td>id</td>
+                <td>string</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>The subjects taxon id</p>
+</td>
+            </tr>
+            <tr>
+                <td>datasetKey</td>
+                <td>integer</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>The catalogue dataset the sector is attached to</p>
+</td>
+            </tr>
+            <tr>
+                <td>subjectDatasetKey</td>
+                <td>integer</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>The source dataset the subject belongs to</p>
+</td>
+            </tr>
+            <tr>
+                <td>userKey</td>
+                <td>integer</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>The user that last modified the sector</p>
+</td>
+            </tr>
+            <tr>
+                <td>rank</td>
+                <td><a href="#model-RankType">RankType</a></td>
+                <td>domain, superkingdom, kingdom, subkingdom, infrakingdom, superphylum, phylum, subphylum, infraphylum, superclass, class, subclass, infraclass, parvclass, superlegion, legion, sublegion, infralegion, supercohort, cohort, subcohort, infracohort, magnorder, superorder, grandorder, order, suborder, infraorder, parvorder, superfamily, family, subfamily, infrafamily, supertribe, tribe, subtribe, infratribe, suprageneric name, genus, subgenus, infragenus, supersection, section, subsection, superseries, series, subseries, infrageneric name, species aggregate, species, infraspecific name, grex, subspecies, cultivar group, convariety, infrasubspecific name, proles, natio, aberration, morph, variety, subvariety, form, subform, pathovar, biovar, chemovar, morphovar, phagovar, serovar, chemoform, forma specialis, cultivar, strain, other, unranked</td>
+                <td>yes</td>
+                <td></td>
+                <td><p>The rank of the subject</p>
+</td>
+            </tr>
+            <tr>
+                <td>mode</td>
+                <td><a href="#model-SectorMode">SectorMode</a></td>
+                <td>attach, union, merge</td>
+                <td>yes</td>
+                <td></td>
+                <td><p>The sector mode, e.g. ATTACH</p>
+</td>
+            </tr>
+            <tr>
+                <td>broken</td>
+                <td>boolean</td>
+                <td></td>
+                <td>yes</td>
+                <td></td>
+                <td><p>if true only show decisions which cannot be linked to a source name usage</p>
+</td>
+            </tr>
+            <tr>
+                <td>offset</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of offset records. Defaults to zero</p>
+</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>integer</td>
+                <td></td>
+                <td>no</td>
+                <td></td>
+                <td><p>The requested number of maximum records to be returned. Defaults to 10 and can be no more than 1000.</p>
+</td>
+            </tr>
+        </tbody></table>
 
 
             <h3 id="op56-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
 </pre>
                     <p><code>application/json</code></p>
-                    <p>Content: <a href="#model-Sector">Sector[]</a></p>
+                    <p>Content: <a href="#model-SectorResultSet">SectorResultSet</a></p>
+
+    <pre class="example"><code class="http">
+POST //sector HTTP/1.1
+Host: api.catalogue.life
+Content-Type: application/json
+</code>
+</pre>
+
+        <h3><code class="prettyprint">POST</code> http://api.catalogue.life/sector</h3>
+    
+
+
+    <h3 id="op57-request-body">Body</h3>
+            <p><code>application/json</code></p>
+            <p>Content: <a href="#model-Sector">Sector</a></p>
+
+
+
+            <h3 id="op57-responses" class="clear">Response 201</h3>
+    
+<pre class="example"><code class="http">
+HTTP/1.1 201 Created
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
+Content-Type: application/json
+</code>
+    <code class="json">2051</code>
+</pre>
+                    <p><code>application/json</code></p>
+                    <p>Content: integer</p>
 
 
         <h1 id="resource-48">/importer</h1>
@@ -9413,7 +9717,7 @@ Host: api.catalogue.life
 
 
 
-        <h3 id="op57-request-params">Parameters</h3>
+        <h3 id="op58-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -9472,11 +9776,11 @@ Host: api.catalogue.life
         </tbody></table>
 
 
-            <h3 id="op57-responses" class="clear">Response 200</h3>
+            <h3 id="op58-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
 </pre>
@@ -9501,17 +9805,17 @@ Content-Type: application/json
 </p>
 
 
-    <h3 id="op58-request-body">Body</h3>
+    <h3 id="op59-request-body">Body</h3>
             <p><code>application/json</code></p>
             <p>Content: <a href="#model-ImportRequest">ImportRequest</a></p>
 
 
 
-            <h3 id="op58-responses" class="clear">Response 201</h3>
+            <h3 id="op59-responses" class="clear">Response 201</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9547,11 +9851,11 @@ Host: api.catalogue.life
 
 
 
-            <h3 id="op59-responses" class="clear">Response 200</h3>
+            <h3 id="op60-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json"># inserting import
@@ -9681,11 +9985,11 @@ Content-Type: application/json
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: any</p>
-            <h3 id="op59-responses" class="clear">Response 404</h3>
+            <h3 id="op60-responses" class="clear">Response 404</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9710,7 +10014,7 @@ Optionally a compressed archive of data (zip or gzip) can be included</p>
 </p>
 
 
-    <h3 id="op60-request-body">Body</h3>
+    <h3 id="op61-request-body">Body</h3>
             <p><code>application/octet-stream</code></p>
             <p>Content: any</p>
             <p><code>application/zip</code></p>
@@ -9720,11 +10024,11 @@ Optionally a compressed archive of data (zip or gzip) can be included</p>
 
 
 
-            <h3 id="op60-responses" class="clear">Response 201</h3>
+            <h3 id="op61-responses" class="clear">Response 201</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 201 Created
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -9754,7 +10058,7 @@ Host: api.catalogue.life
 
 
 
-            <h3 id="op61-responses" class="clear">Response 204</h3>
+            <h3 id="op62-responses" class="clear">Response 204</h3>
     
 
 
@@ -9781,7 +10085,7 @@ Host: api.catalogue.life
 
 
 
-        <h3 id="op62-request-params">Parameters</h3>
+        <h3 id="op63-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -9921,11 +10225,11 @@ Host: api.catalogue.life
         </tbody></table>
 
 
-            <h3 id="op62-responses" class="clear">Response 200</h3>
+            <h3 id="op63-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -10195,7 +10499,7 @@ Host: api.catalogue.life
 
 
 
-        <h3 id="op63-request-params">Parameters</h3>
+        <h3 id="op64-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -10245,11 +10549,11 @@ Host: api.catalogue.life
         </tbody></table>
 
 
-            <h3 id="op63-responses" class="clear">Response 200</h3>
+            <h3 id="op64-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
 </pre>
@@ -10275,7 +10579,7 @@ Eventually should be exposed in public API.</p>
 
 
 
-        <h3 id="op64-request-params">Parameters</h3>
+        <h3 id="op65-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -10334,11 +10638,11 @@ Eventually should be exposed in public API.</p>
         </tbody></table>
 
 
-            <h3 id="op64-responses" class="clear">Response 200</h3>
+            <h3 id="op65-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -10392,7 +10696,7 @@ Host: api.catalogue.life
 
 
 
-        <h3 id="op65-request-params">Parameters</h3>
+        <h3 id="op66-request-params">Parameters</h3>
         <table><thead>
         <tr>
             <th>Name</th>
@@ -10415,11 +10719,11 @@ Host: api.catalogue.life
         </tbody></table>
 
 
-            <h3 id="op65-responses" class="clear">Response 200</h3>
+            <h3 id="op66-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -10494,7 +10798,7 @@ with one name per line, or as plain/text content in the request body.</p>
 </p>
 
 
-    <h3 id="op66-request-body">Body</h3>
+    <h3 id="op67-request-body">Body</h3>
             <p><code>application/json</code></p>
             <p>Content: any</p>
             <p><code>multipart/form-data</code></p>
@@ -10504,11 +10808,11 @@ with one name per line, or as plain/text content in the request body.</p>
 
 
 
-            <h3 id="op66-responses" class="clear">Response 200</h3>
+            <h3 id="op67-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">[{
@@ -10596,11 +10900,11 @@ Host: api.catalogue.life
 
 
 
-            <h3 id="op67-responses" class="clear">Response 200</h3>
+            <h3 id="op68-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -10614,11 +10918,11 @@ Content-Type: application/json
 </pre>
                     <p><code>application/json</code></p>
                     <p>Content: any</p>
-            <h3 id="op67-responses" class="clear">Response 404</h3>
+            <h3 id="op68-responses" class="clear">Response 404</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 404 Not Found
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -10650,11 +10954,11 @@ Host: api.catalogue.life
 
 
 
-            <h3 id="op68-responses" class="clear">Response 200</h3>
+            <h3 id="op69-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">{
@@ -10696,11 +11000,11 @@ Host: api.catalogue.life
 
 
 
-            <h3 id="op69-responses" class="clear">Response 200</h3>
+            <h3 id="op70-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: text/plain
 </code>
     <code class="json">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjEzMDA4MTkzODAsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773</code>
@@ -10731,7 +11035,7 @@ Content-Type: application/json
 </p>
 
 
-    <h3 id="op70-request-body">Body</h3>
+    <h3 id="op71-request-body">Body</h3>
             <p><code>application/json</code></p>
             <p>Content: any</p>
 
@@ -10758,11 +11062,11 @@ Host: api.catalogue.life
 
 
 
-            <h3 id="op71-responses" class="clear">Response 200</h3>
+            <h3 id="op72-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: text/plain
 </code>
     <code class="json">"70d8d5b  2019-10-09T14:26:15+0000"
@@ -10792,11 +11096,11 @@ Any of the names can be used as valid subresources to list the actual enumeratio
 
 
 
-            <h3 id="op72-responses" class="clear">Response 200</h3>
+            <h3 id="op73-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">["continent","country","areastandard","cslreftype","nametype","origin","language","frequency","rank","nomacttype","coverage","nomstatus","dataformat","importstate","issue","gazetteer","cslvariable","typestatus","lifezone","distributionstatus","taxonomicstatus","kingdom","datasettype","license","nomcode","namepart"]
@@ -10825,11 +11129,11 @@ Host: api.catalogue.life
 
 
 
-            <h3 id="op73-responses" class="clear">Response 200</h3>
+            <h3 id="op74-responses" class="clear">Response 200</h3>
     
 <pre class="example"><code class="http">
 HTTP/1.1 200 OK
-Date: Thursday, November 28, 2019 at 5:20:36 PM Central European Standard Time
+Date: Thursday, November 28, 2019 at 10:52:04 PM Central European Standard Time
 Content-Type: application/json
 </code>
     <code class="json">["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]

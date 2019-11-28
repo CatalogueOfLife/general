@@ -41,6 +41,7 @@ types: !include inc/types.raml
 /dataset: !include inc/dataset.raml
 /decision:
   get:
+    is: paged
     description: |
       List of editorial decisions with optional filters.
     queryParameters:
@@ -117,11 +118,12 @@ types: !include inc/types.raml
           description: the decision key
           example: '6'
 /estimate:
-  displayName: Gets species estimates
-  description: Returns species estimates
+  displayName: Species estimates
+  description: Species estimates are linked to a target taxon of a managed catalogue.
   get:
+    is: paged
     description: |
-      List of species estimates with optional filters.
+      Page through species estimates with optional filters.
     queryParameters:
       datasetKey:
         type: integer
@@ -226,17 +228,53 @@ types: !include inc/types.raml
         type: integer
         description: species estimate key
 /sector:
+  displayName: Taxonomic sectors
+  description: > 
+      Sectors are taxonomic groups that are represented by a subtree with a single root taxon.
+      They link a subject (the root taxon in a source dataset) 
+      to a target (the attachment point) in a managed catalogue.
   get:
+    is: paged
     description: |
-      List of taxonomic sectors in the CoL.
-      queryParameters:
-        sourceKey:
-          description: Filter by CoL source.
+      Page through sectors with optional filters.
+    queryParameters:
+      id:
+        type: string
+        description: The subjects taxon id
+      datasetKey:
+        type: integer
+        description: The catalogue dataset the sector is attached to
+      subjectDatasetKey:
+        type: integer
+        description: The source dataset the subject belongs to
+      userKey:
+        type: integer
+        description: The user that last modified the sector
+      rank:
+        type: RankType
+        description: The rank of the subject
+      mode:
+        type: SectorMode
+        description: The sector mode, e.g. ATTACH
+      broken:
+        type: boolean
+        description: if true only show decisions which cannot be linked to a source name usage
     responses:
       200:
         body:
           application/json:
-            type: Sector[]
+            type: SectorResultSet            
+  post:
+    body:
+      application/json:
+        type: Sector
+    responses:
+      201:
+        body:
+          application/json:
+            description: the new sectors key
+            type: integer
+            example: 2051
 /importer:
   get:
     description: Retrieve import metrics sorted chronologically descending.

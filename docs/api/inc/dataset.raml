@@ -33,17 +33,8 @@
     description: Creates a new dataset specified through the JSON request body and returns the database key of the new dataset.
     body:
       application/json:
+        type: Dataset
         example: |
-          # Request body for an uploaded dataset
-          {
-            "title": "Example uploaded dataset",
-            "license": "cc0",
-            "type": "taxonomic",
-            "origin": "uploaded",
-            "dataFormat": "coldp"
-          }
-
-          # Request body for an externally hosted dataset
           {
             "title": "Example externally hosted dataset",
             "license": "cc0",

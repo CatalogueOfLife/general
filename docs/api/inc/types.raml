@@ -64,102 +64,40 @@ BackgroundProcesses:
       description: whether the importer scheduler is enabled
   description: |
     Static class of background processes
-CatalogueType:
-  type: string
-  enum: ["scrutinized", "provisional"]
-  description: >
-    Assembled catalogues in the CoL
-    See https://api.catalogue.life/vocab/catalogue for the latest full list.
-ColSource:
+DataEntity:
   type: object
-  description: |
-      A citable source for a CoL data provider
+  description: Abstract base class of all entities that we track creation and last modified for.
   properties:
-    key:
-      type: integer
-      description: primary key
-    datasetKey:
-      type: integer
-      description: key to the dataset this source belongs to
-    title:
-      type: string
-      description: Full name of the source. Defaults to dataset title.
-    alias:
-      type: string
-      description: Short alias for the source to show in trees etc.
-    description:
-      type: string
-      description: Free text describing the source supporting markdown formatting
-      required: false
-    organisation:
-      type: string
-      description: Organisation which has compiled or is owning the source
-      required: false
-    contactPerson:
-      type: string
-      description: Contact person of the source
-      required: false
-    authorsAndEditors:
-      type: string[]
-      description: Optional author(s) and editor(s) of the source
-      required: false
-    version:
-      type: string
-      description: Latest version number of the source used in the Catalogue of Life
-      required: false
-    released:
-      type: date-only
-      description: Latest release date of the source used in the Catalogue of Life
-      required: false
-    homepage:
-      type: string
-      description: Homepage URL of the source
-      required: false
-    group:
-      type: string
-      description: taxonomic group in english language
-      required: false
-    coverage:
-      type: DatasetType
-      description: global vs regional sources
-    citation:
-      type: string
-      description: full bibliographic citation to be used
-      required: false
-    livingSpeciesCount:
-      type: integer
-      required: false
-    livingInfraspecificCount:
-      type: integer
-      required: false
-    extinctSpeciesCount:
-      type: integer
-      required: false
-    extinctInfraspecificCount:
-      type: integer
-      required: false
-    synonymsCount:
-      type: integer
-      required: false
-    vernacularsCount:
-      type: integer
-      required: false
-    namesCount:
-      type: integer
-      required: false
     created:
       type: datetime
-      description: datetime the source was registered in the Clearinghouse
+      description: datetime the dataset was registered in the Clearinghouse
+      required: false
+    createdBy:
+      type: integer
+      description: key of the user that created the object initially
+      required: false
+    modified:
+      type: datetime
+      description: datetime the object was last changed
+      required: false
+    modifiedBy:
+      type: integer
+      description: key of the user that last modified the object
+      required: false
 Dataset:
-  type: object
+  type: DataEntity
   description: Metadata about the source dataset, e.g. a GSD
   properties:
     key:
       type: integer
       description: Primary key for the source dataset
+      required: false
     type:
       type: DatasetType
       description: coarse classification of datasets
+    origin:
+      type: DatasetOriginType
+      description: Where does the data of the dataset origin from. If external a dataAccess url should be given.
     title:
       type: string
       description: Full name of the source dataset
@@ -208,7 +146,7 @@ Dataset:
       required: false
     dataFormat:
       type: string
-      enum: ["dwca", "tcs", "xls", "other"]
+      enum: ["dwca", "acef", tcs", "coldp", "proxy"]
       description: data format
       required: false
     dataAccess:
@@ -222,22 +160,13 @@ Dataset:
       type: NomCodeType
       description: a default nomenclatural code to be used when importing
       required: false
-    catalogue:
-      type: CatalogueType
-      description: |
-        If the dataset participates in any of the 2 catalouge assemblies this is indicated here.
-        All scrutinized sources will also be included as provisional ones.
-        Dataset used to build the provisional catalogue will be trusted and insert their names into the names index.
     notes:
       type: string
       description: any notes
       required: false
-    created:
-      type: datetime
-      description: datetime the dataset was registered in the Clearinghouse
-    modified:
-      type: datetime
-      description: datetime the data from this dataset was last changed in the Clearinghouse
+    locked:
+      type: boolean
+      description: Indicates if a dataset is immutable and it's data cannot be changed.
       required: false
     deleted:
       type: datetime
@@ -400,14 +329,20 @@ DatasetObject:
       type: integer
       description: Key to the source dataset this record belongs to
       required: true
+DatasetOriginType:
+  type: string
+  enum: ["external", "uploaded", "managed"]
+  description: >
+    Enumeration of the origin of a dataset.
+    See https://api.catalogue.life/vocab/datasetorigin
 DatasetType:
   type: string
-  enum: ["nomenclator","taxonomic","national","personal","other"]
+  enum: ["nomenclatural","taxonomic","article","personal","otu","thematic","other"]
   description: >
     Enumeration of kind of datasets
     See https://api.catalogue.life/vocab/datasettype for the latest full list.
 Decision:
-  type: object
+  type: DataEntity
   properties:
     key:
       type: integer
@@ -416,7 +351,7 @@ Decision:
       type: integer
       description: the catalogue the decision applies to
     subject:
-      type: NameRef
+      type: SimpleName
       description: the name usage this decision is about
     subjectDatasetKey:
       type: integer
@@ -429,19 +364,28 @@ Decision:
       description: the new status
       required: false
     name:
-      type: string
-      description: the new scientific name
+      type: Name
+      description: the new scientific name object
       required: false
-    authorship:
-      type: string
-      description: the new authorship
+    extinct:
+      type: boolean
+      description: the new extinct flag
       required: false
-    created:
-      type: datetime
-      description: datetime the decision was created
-    deleted:
-      type: datetime
-      description: datetime the decision was deleted
+    temporalRangeStart:
+      type: string
+      description: the new temporalRangeStart
+      required: false
+    temporalRangeEnd:
+      type: string
+      description: the new temporalRangeEnd
+      required: false
+    lifezones:
+      type: LifezoneType[]
+      description: the new lifezones
+      required: false
+    note:
+      type: string
+      description: editorial notes
       required: false
 DecisionMode:
   type: string
@@ -458,7 +402,7 @@ DecisionResultSet:
       type: Decision[]
       description: the resulting Decisions
 Distribution:
-  type: DatasetObject
+  type: [ DataEntity, DatasetObject ]
   description: An area distribution record
   properties:
     area:
@@ -496,6 +440,11 @@ Error:
       "status": 404,
       "message": "Name 467324, version 7 not found"
     }
+EstimateType:
+  type: string
+  enum: [DESCRIBED_SPECIES_LIVING, DESCRIBED_SPECIES_EXTINCT, ESTIMATED_SPECIES]
+  description: >
+    An enumeration of species estimate types
 FrequencyType:
   type: string
   enum: ["never", "once", "daily", "weekly", "monthly", "yearly"]
@@ -616,6 +565,28 @@ IssueType:
     Not all flagged issues are highlighting data problems. Some simply flag the fact that data was modified during imports,
     for example "vernacular name transliterated" is added then a latin transliteration of a vernacular name was automatically generated.
     See https://api.catalogue.life/vocab/issue for the latest full list.
+KingdomType:
+  type: string
+  enum: ["Animalia","Archaea","Bacteria","Chromista","Fungi","Plantae","Protozoa","Viruses"]
+  description: >
+    Enumeration of all kingdoms recognized in the Catalogue of Life.
+    See https://api.catalogue.life/vocab/kingdom
+LicenseType:
+  type: string
+  enum: ["cc0","cc by","cc by nc","unspecified"]
+  description: >
+    Enumeration of Creative Commons license types supported by the Clearinghouse.
+    See https://api.catalogue.life/vocab/license
+LifezoneType:
+  type: string
+  enum: ["brackish", "freshwater", "marine", "terrestrial"]
+  description: >
+    Coarse classification of the environment an organism lives in.
+    See https://api.catalogue.life/vocab/lifezone
+MatchType:
+  type: string
+  enum: ["exact", "variant", "inserted", "ambiguous", "none"]
+  description: Enumeration of the kind of matches possible.
 NomCode:
   type: string
   enum: ["ICNP", "ICN", "ICNCP", "ICVCN", "ICZN"]
@@ -690,171 +661,8 @@ NomenclaturalStatusType:
 
     unevaluated
     : if the name status has not been evaluated yet
-
-NameType:
-  type: string
-  enum: ["scientific", "virus", "hybrid-formula", "cultivar", "otu", "placeholder", "none"]
-  description: >
-    Classification of names, mostly based on their syntactic structure.
-    See https://api.catalogue.life/vocab/nametype
-NameRelationType:
-  type: string
-  enum: ["spelling correction","basionym","based on","replacement name","conserved","later homonym","superfluous","homotypic"]
-  description: >
-    Coarse classification of nomenclatural name relations.
-    See https://api.catalogue.life/vocab/nomreltype
-
-     spelling correction
-     : The current name is a spelling correction, called emendation in zoology, of the related name having the same type.
-       Intentional changes in the original spelling of an available name, whether justified or unjustified.
-       The binomial authority remains unchanged.
-       Valid emendations include changes made to correct:
-          a) typographical errors in the original work describing the species,
-          b) errors in transliteration from non-Latin languages,
-          c) names that included diacritics, hyphens
-          d) endings of species to match the gender of the generic name, particularly when the combination has been changed
-       
-       For example, Hieronima and Hyeronima are orthographical variants of Hieronyma.
-       One of the spellings must be treated as the correct one. In this case, the spelling Hieronyma has been conserved
-       and is to be used as the correct spelling.
-       
-       Botany (Article 61).: An inadvertent use of one of the other spellings has no consequences:
-       the name is to be treated as if it were correctly spelled.
-       
-       Zoology (Art. 32-33 ): Orthographical variants in the formal sense do not exist;
-       a misspelling or orthographic error is treated as a lapsus, a form of inadvertent error.
-       The first reviser is allowed to choose one variant for mandatory further use, but in other ways,
-       these errors generally have no further formal standing.
-
-     basionym
-     : The current name has a basionym and therefore is either
-       a recombination (combinatio nova, comb. nov.) of the name pointed to
-        (and the name pointed to is not, itself, a recombination),
-       or a change in rank (status novus, stat. nov.).
-
-     based on
-     : The current name is the validation of a name that was not fully published before.
-       Covers the use of ex in botanical author strings.
-       
-       ICN Art. 46.4: e.g. if this name object represents G. tomentosum Nutt. ex Seem.
-       then the related name should be G. tomentosum Nutt.
-
-     replacement name
-     : Current name is replacement for the related name.
-       Also called 'Nomen Novum' or 'avowed substitute'
-       ICN: Article 7.3
-       ICZN: Article 60.3.
-
-     conserved
-     : The current name or spelling is conserved / protected against the related name
-       or the related name is suppressed / rejected in favor of the current name.
-      
-       A spelling which has been conserved relates two homotypic names, otherwise
-       the related names should be based on different types.
-      
-       Based on an individual publication but more often
-       due to actions of the ICZN or ICBN exercising its Plenary Powers.
-      
-       ICN: Conservation is covered under Article 14 and Appendix II and Appendix III (this name is nomina conservanda).
-       ICZN: Reversal of precedence under Article 23.9 (this name is nomen protectum and the target name is nomen oblitum)
-             or suppression via plenary power Article 81.
-
-     later homonym
-     : Current name has same spelling as related name
-       but was published later and has priority over it (unless conserved or sanctioned)
-       and is based on a different type. Called a junior homonym in zoology.
-       This includes botanical parahomonyms which differ slightly in spelling
-       but are similar enough that they are likely to be confused (Art 53.3).
-       The zoological code has a set of spelling variations (article 58) that are considered to be identical.
-       When acts of conservation or suppression have occurred then the terms 'Conserved Later Homonym'and 'Rejected Earlier Homonym' should be used.
-       Two identical and homotypic names (isonyms) should be indicated with the superfluous relation type.
-       ICN: Article 53
-       ICZN: Chapter 12, Article 52.
-
-     superfluous
-     : Current name was superfluous at its time of publication,
-       i. e. it was based on the same type as the related, previously published name (ICN article 52).
-       The current, superfluous name is available but illegitimate. 
-       Includes the special case of isonyms which are identical names.
-
-     homotypic
-     : A relation indicating two homotypic names, i.e. objective or nomenclatural synonymy, but not further specifying why.
-LicenseType:
-  type: string
-  enum: ["cc0","cc by","cc by nc","unspecified"]
-  description: >
-    Enumeration of Creative Commons license types supported by the Clearinghouse.
-    See https://api.catalogue.life/vocab/license
-LifezoneType:
-  type: string
-  enum: ["brackish", "freshwater", "marine", "terrestrial"]
-  description: >
-    Coarse classification of the environment an organism lives in.
-    See https://api.catalogue.life/vocab/lifezone
-ReferenceTopicType:
-  type: string
-  enum: ["nomen", "taxon", "vernacular", "distribution"]
-  description: >
-    Enumeration of types of CoL relevant information that is treated in a publication
-    See https://api.catalogue.life/vocab/gazetteer
-TaxonomicStatus:
-  type: string
-  enum: [ACCEPTED, PROVISIONALLY_ACCEPTED, SYNONYM, AMBIGUOUS_SYNONYM, MISAPPLIED]
-  description: >
-    The taxonomic status of an accepted taxon.
-    For synonyms only a nomenclatural status is allowed.
-TaxonomicStatusType:
-  type: string
-  enum: ["accepted", "doubtful", "ambiguous synonym"]
-  description: >
-    Taxonomic status enumeration for both accepted taxa and synonyms.
-    See https://api.catalogue.life/vocab/taxonomicstatus
-KingdomType:
-  type: string
-  enum: ["Animalia","Archaea","Bacteria","Chromista","Fungi","Plantae","Protozoa","Viruses"]
-  description: >
-    Enumeration of all kingdoms recognized in the Catalogue of Life.
-    See https://api.catalogue.life/vocab/kingdom
-MatchType:
-  type: string
-  enum: ["exact", "variant", "inserted", "ambiguous", "none"]
-  description: Enumeration of the kind of matches possible.
-OriginType:
-  type: string
-  enum: ["source", "denormed classification", "verbatim parent", "verbatim accepted","verbatim basionym",
-  "proparte","autonym","implicit name","missing accepted","basionym placeholder","ex author synonym","name matching","other"]
-  description: >
-    Enumeration of the kind of matches possible.
-    See https://api.catalogue.life/vocab/origin
-ResultSet:
-  type: object
-  description: >
-    A paging resultset without the actual type specific result payload.
-  properties:
-    result:
-      type: object[]
-      description: Result page
-    offset:
-      type: integer
-      description: >
-        The offset applied during request.
-        Can be less than requested if the limit is reached.
-    limit:
-      type: integer
-      description: >
-        The maximum number of records returned.
-        Can be less than requested if the limit is reached.
-    total:
-      type: integer
-      description: >
-        The total number of records available.
-EstimateType:
-  type: string
-  enum: [DESCRIBED_SPECIES_LIVING, DESCRIBED_SPECIES_EXTINCT, ESTIMATED_SPECIES]
-  description: >
-    An enumeration of species estimate types
 Name:
-  type: VerbatimIdObject
+  type: [ DataEntity, VerbatimIdObject ]
   description: |
     A scientific name.
     CoL deals and categorizes the following types of names:
@@ -1101,29 +909,6 @@ NameResultSet:
     result:
       type: Name[]
       description: the resulting names
-NameRef:
-  type: object
-  description: >
-    A reference to a name based on ids and the name itself
-  properties:
-    id:
-      type: string
-      description: the names id within its dataset
-    indexNameId:
-      type: string
-      description: the name id from the matching name index record
-      required: false
-    name:
-      type: string
-      description: the literal name
-    authorship:
-      type: string
-      description: the literal, full authorship
-      required: false
-    rank:
-      type: RankType
-      description: the rank
-      required: false
 NameRelation:
   type: VerbatimKeyObject
   description: A published act which affects the nomenclatural status of a scientific name or the typification of a nominal taxon.
@@ -1463,6 +1248,101 @@ NameSuggestResponse:
         suggestions:
           type: NameSuggestion[]
           description: A list of suggestions matching the search phrase
+NameType:
+  type: string
+  enum: ["scientific", "virus", "hybrid-formula", "cultivar", "otu", "placeholder", "none"]
+  description: >
+    Classification of names, mostly based on their syntactic structure.
+    See https://api.catalogue.life/vocab/nametype
+NameRelationType:
+  type: string
+  enum: ["spelling correction","basionym","based on","replacement name","conserved","later homonym","superfluous","homotypic"]
+  description: >
+    Coarse classification of nomenclatural name relations.
+    See https://api.catalogue.life/vocab/nomreltype
+
+     spelling correction
+     : The current name is a spelling correction, called emendation in zoology, of the related name having the same type.
+       Intentional changes in the original spelling of an available name, whether justified or unjustified.
+       The binomial authority remains unchanged.
+       Valid emendations include changes made to correct:
+          a) typographical errors in the original work describing the species,
+          b) errors in transliteration from non-Latin languages,
+          c) names that included diacritics, hyphens
+          d) endings of species to match the gender of the generic name, particularly when the combination has been changed
+       
+       For example, Hieronima and Hyeronima are orthographical variants of Hieronyma.
+       One of the spellings must be treated as the correct one. In this case, the spelling Hieronyma has been conserved
+       and is to be used as the correct spelling.
+       
+       Botany (Article 61).: An inadvertent use of one of the other spellings has no consequences:
+       the name is to be treated as if it were correctly spelled.
+       
+       Zoology (Art. 32-33 ): Orthographical variants in the formal sense do not exist;
+       a misspelling or orthographic error is treated as a lapsus, a form of inadvertent error.
+       The first reviser is allowed to choose one variant for mandatory further use, but in other ways,
+       these errors generally have no further formal standing.
+
+     basionym
+     : The current name has a basionym and therefore is either
+       a recombination (combinatio nova, comb. nov.) of the name pointed to
+        (and the name pointed to is not, itself, a recombination),
+       or a change in rank (status novus, stat. nov.).
+
+     based on
+     : The current name is the validation of a name that was not fully published before.
+       Covers the use of ex in botanical author strings.
+       
+       ICN Art. 46.4: e.g. if this name object represents G. tomentosum Nutt. ex Seem.
+       then the related name should be G. tomentosum Nutt.
+
+     replacement name
+     : Current name is replacement for the related name.
+       Also called 'Nomen Novum' or 'avowed substitute'
+       ICN: Article 7.3
+       ICZN: Article 60.3.
+
+     conserved
+     : The current name or spelling is conserved / protected against the related name
+       or the related name is suppressed / rejected in favor of the current name.
+      
+       A spelling which has been conserved relates two homotypic names, otherwise
+       the related names should be based on different types.
+      
+       Based on an individual publication but more often
+       due to actions of the ICZN or ICBN exercising its Plenary Powers.
+      
+       ICN: Conservation is covered under Article 14 and Appendix II and Appendix III (this name is nomina conservanda).
+       ICZN: Reversal of precedence under Article 23.9 (this name is nomen protectum and the target name is nomen oblitum)
+             or suppression via plenary power Article 81.
+
+     later homonym
+     : Current name has same spelling as related name
+       but was published later and has priority over it (unless conserved or sanctioned)
+       and is based on a different type. Called a junior homonym in zoology.
+       This includes botanical parahomonyms which differ slightly in spelling
+       but are similar enough that they are likely to be confused (Art 53.3).
+       The zoological code has a set of spelling variations (article 58) that are considered to be identical.
+       When acts of conservation or suppression have occurred then the terms 'Conserved Later Homonym'and 'Rejected Earlier Homonym' should be used.
+       Two identical and homotypic names (isonyms) should be indicated with the superfluous relation type.
+       ICN: Article 53
+       ICZN: Chapter 12, Article 52.
+
+     superfluous
+     : Current name was superfluous at its time of publication,
+       i. e. it was based on the same type as the related, previously published name (ICN article 52).
+       The current, superfluous name is available but illegitimate. 
+       Includes the special case of isonyms which are identical names.
+
+     homotypic
+     : A relation indicating two homotypic names, i.e. objective or nomenclatural synonymy, but not further specifying why.
+OriginType:
+  type: string
+  enum: ["source", "denormed classification", "verbatim parent", "verbatim accepted","verbatim basionym",
+  "proparte","autonym","implicit name","missing accepted","basionym placeholder","ex author synonym","name matching","other"]
+  description: >
+    Enumeration of the how a record came to existance during an import into the Clearinghouse.
+    See https://api.catalogue.life/vocab/origin
 Page:
   description: |
     A page used for requesting or responding to a pageable service.
@@ -1486,14 +1366,56 @@ Page:
     limit:
       type: integer
       description: the number of records to display
-Rank:
-  description: >
-    An ordered taxonomic rank enumeration with the most frequently used values.
-    See: https://api.catalogue.life/vocab/rank
+ReferenceTopicType:
   type: string
-  enum: []
+  enum: ["nomen", "taxon", "vernacular", "distribution"]
+  description: >
+    Enumeration of types of CoL relevant information that is treated in a publication
+    See https://api.catalogue.life/vocab/gazetteer
+ResultSet:
+  type: object
+  description: >
+    A paging resultset without the actual type specific result payload.
+  properties:
+    result:
+      type: object[]
+      description: Result page
+    offset:
+      type: integer
+      description: >
+        The offset applied during request.
+        Can be less than requested if the limit is reached.
+    limit:
+      type: integer
+      description: >
+        The maximum number of records returned.
+        Can be less than requested if the limit is reached.
+    total:
+      type: integer
+      description: >
+        The total number of records available.
+RankType:
+  type: string
+  enum: ["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]
+  description: >
+    Enumeration of all possible rank values across all codes.
+    See https://api.catalogue.life/vocab/rank for the complete list in use
+
+    There is the need to deal with old ranks not accepted anymore.
+    The list given is intended to be interoperable between name providers for bacteria, viruses, fungi, plants, and animals.
+    The enumeration attempts to strike a balance between listing all possible rank terms, and remaining comprehensible.
+    Not included in the list are the botanical "notho-" ranks, which are used to designate hybrids (nothospecies, nothogenus) as this information is handled by the Name.notho property already.
+
+    Sources:
+
+     - [GBIF](https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/Rank.java)
+     - [TCS](https://github.com/tdwg/tcs/blob/master/TCS101/v101.xsd#L860)
+     - [TaxCat2](http://mansfeld.ipk-gatersleben.de/apex/f?p=185:78:::NO::P77_TAXCAT,P77_DB_CHECKBOX1,77_TAXCAT2RAD,77_SHOWRAD:%25,,0,s_All)
+     - [NOMEN](https://raw.githubusercontent.com/SpeciesFileGroup/nomen/master/src/ontology/nomen.owl)
+
+     TODO: extract all values from sources
 Reference:
-  type: VerbatimIdObject
+  type: [ DataEntity, VerbatimIdObject ]
   description: |
     A (literature) reference mostly given in [CSL-JSON](https://github.com/citation-style-language/schema#csl-json-schema).
     A reference can be linked to a serial, e.g. a journal, that defines the content for the CSL container attributes.
@@ -1560,38 +1482,77 @@ ResultPage:
       description: the size of the results
       required: false
 Sector:
-  type: object
+  type: DataEntity
   description: |
       A taxonomic sector in the Catalogue of Life      
   properties:
     key:
       type: integer
       description: primary key
-    colSourceKey:
+    datasetKey:
       type: integer
-      description: key to the ColSource this sector originates from
-    root:
-      type: NameRef
-      description: A reference to the single root taxon from the col source for this sector. Can even be a species, but usually some higher taxon.
-    exclude:
-      type: NameRef[]
-      description: Optional list of taxa within the descendants of root to exclude from this sector definition
-    attachment:
-      type: NameRef
-      description: The attachment point in the CoL tree, i.e. the CoL parent taxon for the sector root
-    suppress:
-      type: NameRef[]
+      description: key to the catalogue dataset this sector is attached to
+    target:
+      type: SimpleName
+      description: attachement point in the catalogue
+    subjectDatasetKey:
+      type: integer
+      description: key to the source dataset this sector is attached to
+    subject:  
+      type: SimpleName
+      description: root taxon of the sector in the source dataset
+    mode:
+      type: SectorMode
+      description: The mode a sector is attached to the catalogue.
+    code: 
+      type: NomCodeType
+      description: The nomenclatural code to apply to all names in this sector
+    note: 
+      type: string
+      description: Editorial notes
+SectorImport:
+  type: ImportMetrics
+  description: |
+    A sector import into assembly.
+  properties:
+    attempt:
+      type: integer
+      description: the number of attempts
+    state:
+      type: string
+      enum: ["waiting", "preparing", "copying", "deleting", "relinking", "indexing", "finished", "canceled", "failed"]
+      description: the current status of the sector sync
+    taxonCount:
+      type: integer
+      description: the number of taxa in the sector sync
+    type:
+      type: string
+      description: the type of sector sync
+    sectorKey:
+      type: integer
+      description: the sector ID
+    ignoredUsageCount:
+      type: integer
       description: |
-          Optional list of CoL tree taxa that should be suppressed when this sector is attached.
-          E.g. the CoL management classification might define an alternative taxonomy that uses
-          different taxa which are covered by this sector already.
-    created:
-      type: datetime
-      description: datetime the sector was created
-    deleted:
-      type: datetime
-      description: datetime the sector was deleted
-      required: false
+       The number of ignored scientific name usages, which could be explicitly blocked by a decision or
+       implicitly excluded (e.g., hybrid formulas, placeholders, no_names, etc).
+    usagesCount:
+      type: integer
+      description: the number of scientific name usages
+SectorMode:
+  description: >
+    The mode a sector is attached to the catalogue.
+    See: https://api.catalogue.life/vocab/sector$mode
+  type: string
+  enum: [attach, union, merge]
+SectorResultSet:
+  type: ResultSet
+  description: >
+    A paging resultset for Sectors.
+  properties:
+    result:
+      type: Sector[]
+      description: the resulting sectors
 Serial:
   type: DatasetObject
   description: |
@@ -1670,35 +1631,6 @@ Serial:
         "publisher-place": "Göttingen"
       }
     }
-SectorImport:
-  type: ImportMetrics
-  description: |
-    A sector import into assembly.
-  properties:
-    attempt:
-      type: integer
-      description: the number of attempts
-    state:
-      type: string
-      enum: ["waiting", "preparing", "copying", "deleting", "relinking", "indexing", "finished", "canceled", "failed"]
-      description: the current status of the sector sync
-    taxonCount:
-      type: integer
-      description: the number of taxa in the sector sync
-    type:
-      type: string
-      description: the type of sector sync
-    sectorKey:
-      type: integer
-      description: the sector ID
-    ignoredUsageCount:
-      type: integer
-      description: |
-       The number of ignored scientific name usages, which could be explicitly blocked by a decision or
-       implicitly excluded (e.g., hybrid formulas, placeholders, no_names, etc).
-    usagesCount:
-      type: integer
-      description: the number of scientific name usages
 SerialResultSet:
   type: ResultSet
   description: >
@@ -1720,22 +1652,27 @@ SimpleName:
     name:
       type: string
       description: the scientific name
+    authorship:
+      type: string
+      description: the scientific name authorship
+      required: false
     rank:
-      type: Rank
+      type: RankType
       description: the taxonomic rank
     code:
       type: NomCodeType
       description: the nomenclatural code
+      required: false
     status:
       type: TaxonomicStatus
       description: the taxonomic status
       required: false
     parent:
       type: string
-      description: the parent
+      description: the scientific name of the parent
       required: false
 SpeciesEstimate:
-  type: object
+  type: DataEntity
   description: >
     A class representing species estimates.
   properties:
@@ -1771,7 +1708,7 @@ SpeciesEstimateResultSet:
       type: SpeciesEstimate[]
       description: the resulting SpeciesEstimates
 Taxon:
-  type: VerbatimIdObject
+  type: [ DataEntity, VerbatimIdObject ]
   description: >
     A taxon concept, i.e. an accepted name. Not used for synonyms.
   properties:
@@ -1912,6 +1849,18 @@ TaxonInfo:
             }
         ]
     }
+TaxonomicStatus:
+  type: string
+  enum: [ACCEPTED, PROVISIONALLY_ACCEPTED, SYNONYM, AMBIGUOUS_SYNONYM, MISAPPLIED]
+  description: >
+    The taxonomic status of an accepted taxon.
+    For synonyms only a nomenclatural status is allowed.
+TaxonomicStatusType:
+  type: string
+  enum: ["accepted", "doubtful", "ambiguous synonym"]
+  description: >
+    Taxonomic status enumeration for both accepted taxa and synonyms.
+    See https://api.catalogue.life/vocab/taxonomicstatus
 TaxonResultSet:
   type: ResultSet
   description: >
@@ -2028,23 +1977,3 @@ VernacularName:
     referenceIds:
       type: string[]
       description: Links to references supporting the vernacular name record
-RankType:
-  type: string
-  enum: ["domain","superkingdom","kingdom","subkingdom","infrakingdom","superphylum","phylum","subphylum","infraphylum","superclass","class","subclass","infraclass","parvclass","superlegion","legion","sublegion","infralegion","supercohort","cohort","subcohort","infracohort","magnorder","superorder","grandorder","order","suborder","infraorder","parvorder","superfamily","family","subfamily","infrafamily","supertribe","tribe","subtribe","infratribe","suprageneric name","genus","subgenus","infragenus","supersection","section","subsection","superseries","series","subseries","infrageneric name","species aggregate","species","infraspecific name","grex","subspecies","cultivar group","convariety","infrasubspecific name","proles","natio","aberration","morph","variety","subvariety","form","subform","pathovar","biovar","chemovar","morphovar","phagovar","serovar","chemoform","forma specialis","cultivar","strain","other","unranked"]
-  description: >
-    Enumeration of all possible rank values across all codes.
-    See https://api.catalogue.life/vocab/rank for the complete list in use
-
-    There is the need to deal with old ranks not accepted anymore.
-    The list given is intended to be interoperable between name providers for bacteria, viruses, fungi, plants, and animals.
-    The enumeration attempts to strike a balance between listing all possible rank terms, and remaining comprehensible.
-    Not included in the list are the botanical "notho-" ranks, which are used to designate hybrids (nothospecies, nothogenus) as this information is handled by the Name.notho property already.
-
-    Sources:
-
-     - [GBIF](https://github.com/gbif/gbif-api/blob/master/src/main/java/org/gbif/api/vocabulary/Rank.java)
-     - [TCS](https://github.com/tdwg/tcs/blob/master/TCS101/v101.xsd#L860)
-     - [TaxCat2](http://mansfeld.ipk-gatersleben.de/apex/f?p=185:78:::NO::P77_TAXCAT,P77_DB_CHECKBOX1,77_TAXCAT2RAD,77_SHOWRAD:%25,,0,s_All)
-     - [NOMEN](https://raw.githubusercontent.com/SpeciesFileGroup/nomen/master/src/ontology/nomen.owl)
-
-     TODO: extract all values from sources
