@@ -127,7 +127,7 @@ However, at a particular stage of WoRMS Mollusca growth, the Clearinghouse shoul
 The Extended Catalogue of Life (eCat) could also be used to create sectors if they have passed a review and were recommended by the Taxonomy Group and CoL Editorial Board to fill gap areas, or as a replacement for existing Proto GSDs. It does create a [circular dependency](https://github.com/Sp2000/colplus-backend/issues/140) though which needs to be addressed.
 
 ## Discussion Threads
-The Clearinghouse provides generic [discussion threads](https://github.com/Sp2000/colplus/blob/master/docs/EDITORIAL-TOOLS.md#discussion-page) that consist of a description which can link out to any number of name, taxon or reference entities, status and a flat comments timeline. A discussion can be used for numerous things, e.g. to capture feedback and to communicate data issues betweem data reviewers and  data providers.
+The Clearinghouse provides generic [discussion threads](https://github.com/Sp2000/colplus/blob/master/docs/EDITORIAL-TOOLS.md#discussion-page) that consist of a description which can link out to any number of name, taxon or reference entities, status and a flat comments timeline. A discussion can be used for numerous things, e.g. to capture feedback and to communicate data issues between data reviewers and  data providers.
 
 A number of names from a dataset sharing the same problem can thus be grouped as a discussion which keeps track of its state (e.g. under review, accepted, done). By using a discussion linked to records with issues we can track matching editorial decisions and recognise issues that still need editorial attention from those which have been addressed already. 
 
