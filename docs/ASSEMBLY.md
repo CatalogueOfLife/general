@@ -1,5 +1,5 @@
 # Catalogue Assembly
-The Catalogue of Life intends to produce two aggregated catalogues that are assembled from various underlying sources. A *scrutinized catalogue* (sCat, The Catalogue of Life as we know it) which is stitched together from many curated, non overlapping sources, each representing a single, authoritative view on a certain taxonomic *sector*. And a *provisional catalogue* (pCat) which extends the scrutinized catalogue by adding many more names and taxa by mostly automated merging of information from a wider and overlapping range of taxonomic and nomenclatural sources.
+The Catalogue of Life intends to produce two aggregated catalogues that are assembled from various underlying sources. A *scrutinized catalogue* (sCat, The Catalogue of Life as we know it) which is stitched together from many curated, non overlapping sources, each representing a single, authoritative view on a certain taxonomic *sector*. And an *extended catalogue* (eCat) which extends the scrutinized catalogue by adding many more names and taxa by mostly automated merging of information from a wider and overlapping range of taxonomic and nomenclatural sources.
 
 Both of these assembly processes are semi-automated and need editorial work and reviewing in order to build a high quality catalogue. This is especially true for the scrutinized catalogue.
 
