@@ -71,7 +71,7 @@ All data passes a number of steps before it ends up in the public Catalogue of L
 
  1. Structural conversion of sources to standard formats
  2. Data import into the Clearinghouse with data interpretations & issue flagging
- 3. Define relevant sectors from dataset and attach them to the CoL management cssification (MC)
+ 3. Define relevant sectors from dataset and attach them to the CoL management classification (MC)
  4. Review of sector including duplicate detection across all sectors, online report back to editors and data providers, fixes in the source dataset and reimport revised version until accepted or with a scheduled new update
  5. Review of draft sCat by editorial board and data providers. Final adhoc fixes via taxonomic editor.
  6. Release sCat, archiving previous release
