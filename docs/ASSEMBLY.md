@@ -31,7 +31,7 @@ In order to add new datasets the URL to their data needs to be registered manual
 Dataset registration will also include a few more settings that determine how a dataset is imported into the Clearinghouse and which can be changed at any time. Currently this includes:
 
  - catalogue: indicates a dataset is to be considered as a source for the scrutinized or extended catalogue
- - [type](https://github.com/Sp2000/colplus-backend/blob/master/colplus-api/src/main/java/org/col/api/vocab/DatasetType.java): indicates the primary focus of a dataset; whether it is primarily a nomenclatural list, a global or regional taxonomic checklist, a personal uploaded list of names or something other (e.g. a list of type specimens, paper on ecology of North Sea, Red List, etc.)
+ - [type](https://github.com/Sp2000/colplus-backend/blob/master/colplus-api/src/main/java/org/col/api/vocab/DatasetType.java): indicates the primary focus of a dataset; whether it is primarily a nomenclatural list, a global or regional taxonomic checklist, a personal uploaded list of names or something else (e.g. a list of type specimens, paper on ecology of North Sea, Red List, etc.)
  - [code](https://github.com/gbif/name-parser/blob/master/name-parser-api/src/main/java/org/gbif/nameparser/api/NomCode.java#L29): the nomenclatural code context which should be applied to all data in case the dataset is restricted to a single code. This allows for better parsing and interpretation of names data in ambiguous situations.
  - importFrequency: an indication how frequently new dataset versions should be imported into the Clearinghouse
 
