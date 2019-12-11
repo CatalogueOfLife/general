@@ -47,7 +47,7 @@ A dataset import does many things. Most notably:
  - normalize citation strings creating a single reference for the same citation
  - generic data cleaning: resolve character encodings, replace xml, unicode or html entities, remove html tags
  - parse names into individual parts
- - flag data issues of different severity (info/warning/error). This is a large set of checks that will be [continously extended](https://github.com/Sp2000/colplus-backend/issues?q=is%3Aissue+label%3A%22issue+rules%22). Example checks are:
+ - flag data issues of different severity (info/warning/error). This is a large set of checks that will be [continuously extended](https://github.com/Sp2000/colplus-backend/issues?q=is%3Aissue+label%3A%22issue+rules%22). Example checks are:
     - parsed name inconsistencies
     - referential integrity problems (id terms)
     - [potential chresonyms](https://github.com/Sp2000/colplus-backend/issues/117)
