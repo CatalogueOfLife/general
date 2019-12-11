@@ -35,7 +35,7 @@ Dataset registration will also include a few more settings that determine how a 
  - [code](https://github.com/gbif/name-parser/blob/master/name-parser-api/src/main/java/org/gbif/nameparser/api/NomCode.java#L29): the nomenclatural code context which should be applied to all data in case the dataset is restricted to a single code. This allows for better parsing and interpretation of names data in ambiguous situations.
  - importFrequency: an indication how frequently new dataset versions should be imported into the Clearinghouse
 
-Dataset metadata will be extracted from the data if available for both ACEF and DwC-A, but can also be changed by editorial decision.
+Dataset metadata will be extracted from the data if available for ACEF, DwC-A and CoLdp, but can also be changed by editorial decision.
 
 ## Dataset Import
 Once registered a dataset can be imported into the Clearinghouse. Imports can be triggered manually or automatically scheduled by the system, preferring datasets that have not been imported for a long time. An import queue is managed internally which can be queried and modified via the admin API.
