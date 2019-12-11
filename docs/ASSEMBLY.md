@@ -149,8 +149,8 @@ Before releasing the draft final edits can be applied using the taxonomic editor
 When released a new immutable dataset is created which will feed the public portal and the last release will be archived as a regular dataset which can be accessed.
 
 
-# Assembling the Provisional Catalogue
-Assembling a Provisional Catalogue of Life (pCat) with a much broader names base is done by merging many overlapping datasets onto the scrutinized catalogue. 
+# Assembling the Extended Catalogue
+Assembling an Extended Catalogue of Life (eCat) with a much broader names base is done by merging many overlapping datasets onto the scrutinized catalogue. 
 
 
 ## Names Index
