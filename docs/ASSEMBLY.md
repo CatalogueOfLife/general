@@ -5,13 +5,13 @@ Both of these assembly processes are semi-automated and need editorial work and 
 
 
 # Source Datasets
-The first step towards the assembly of both catalogues is to get the source datasets into a common structure and to make sure there are no obvious syntactical or semantic errors. At the heart of the Clearinghouse is a dataset store that efficiently stores entire, self contained datasets and exposes them in a rich API. Datasets in the store can be of 3 kinds:
+The first step towards the assembly of both catalogues is to get the source datasets into a common structure and to make sure there are no obvious syntactical or semantic errors. At the heart of the CoL taxonomic and names Clearinghouse is a dataset store that efficiently stores entire, self contained datasets and exposes them in a rich API. Datasets in the store can be of 3 kinds:
 
  - externally managed and published on a public URL
  - externally managed and manually uploaded
  - managed within the Clearinghouse using the taxonomic editor
 
-For external datasets the CoL Clearinghouse is used to register URL accessible datasets in various standard formats and import them into a common database model. The Clearinghouse importer interprets literal string data into well known enumerations, objects and relations, thereby flagging rectified or detected potential problems in the entire range of basic string reading to very specific taxonomic integrity checks.
+For external datasets the CoL taxonomic and names Clearinghouse is used to register URL accessible datasets in various standard formats and import them into a common database model. The Clearinghouse importer interprets literal string data into well known enumerations, objects and relations, thereby flagging rectified or detected potential problems in the entire range of basic string reading to very specific taxonomic integrity checks.
 
 The content of each dataset in the [Clearinghouse can be browsed and searched](https://sp2000.github.io/colplus/api/api.html) on its own with the primary purpose to allow a quality assesment and detailed data review. For that reason every record also keeps track of the exact verbatim data as it came in and all fallged importing issues can be used for filters to navigate data.
 
