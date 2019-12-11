@@ -132,7 +132,7 @@ The Clearinghouse provides generic [discussion threads](https://github.com/Sp200
 A number of names from a dataset sharing the same problem can thus be grouped as a discussion which keeps track of its state (e.g. under review, accepted, done). By using a discussion linked to records with issues we can track matching editorial decisions and recognise issues that still need editorial attention from those which have been addressed already. 
 
 ## The sCat draft
-A draft sCat is always kept up to date with all configured sectors and editorial decisions. This provides the editorial board with a full dataset representing the latest version of the assembly. Whenever a new sector is mapped, its definitions changed or editorial decisions are added or removed the draft will be updated asyncroneously, always reporting whether its in sync with all decisions.
+A draft sCat is always kept up to date with all configured sectors and editorial decisions. This provides the editorial board with a full dataset representing the latest version of the assembly. Whenever a new sector is mapped, its definitions changed or editorial decisions are added or removed the draft will be updated asynchronously, always reporting whether its in sync with all decisions.
 
 When a sector is attached to a higher part of the management classification it becomes the authority for that part of the tree and defines the included classification which can be different from the then hidden MC. 
 
