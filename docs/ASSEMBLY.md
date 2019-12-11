@@ -5,7 +5,7 @@ Both of these assembly processes are semi-automated and need editorial work and 
 
 
 # Source Datasets
-The first step towards the assembly of both catalogues is to get the source datasets into a common structure and to make sure there are no obvious syntactical or semantic errors. At the heart of the CoL taxonomic and names Clearinghouse is a dataset store that efficiently stores entire, self contained datasets and exposes them in a rich API. Datasets in the store can be of 3 kinds:
+The first step towards the assembly of both catalogues is to get the source datasets into a common structure and to make sure there are no obvious syntactic or semantic errors. At the heart of the CoL taxonomic and names Clearinghouse is a dataset store that efficiently stores entire, self contained datasets and exposes them in a rich API. Datasets in the store can be of 3 kinds:
 
  - externally managed and published on a public URL
  - externally managed and manually uploaded
