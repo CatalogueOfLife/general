@@ -774,7 +774,7 @@
           200:
             body:
               application/json:
-                type: ResultSet
+                type: TaxonResultSet
       /{id}:
         get:
           displayName: Get taxon
@@ -1011,6 +1011,46 @@
             responses:
               200:
                 body: VerbatimRecord
+    /tree:
+      get:
+        is: [paged, catalogueScoped]
+        description: Page through all root taxa of the dataset
+        responses:
+          200:
+            body:
+              application/json:
+                type: TreeNodeResultSet
+      /{id}:
+        get:
+          is: catalogueScoped
+          description: List taxon and all its parents in the classification
+          responses:
+            200:
+              body:
+                application/json:
+                  type: TreeNode[]
+        delete:
+          description: Recursively deletes the taxon and all its descendants.
+          responses:
+            204:
+              description: Taxon deleted.
+        uriParameters:
+          id:
+            type: string
+            description: taxon identifier as coming from the source
+        /children:
+          get:
+            is: [paged, catalogueScoped]
+            queryParameters:
+              insertPlaceholder:
+                type: boolean
+                required: true
+                default: false
+                description: Whether or not to insert virtual incertae sedis placeholder taxa to group children of varying ranks
+            description: Page through all direct children of the taxon regardless of the rank.
+            responses:
+              200:
+                body: TreeNodeResultSet
     /texttree:
       get:
         displayName: Plain text classification tree

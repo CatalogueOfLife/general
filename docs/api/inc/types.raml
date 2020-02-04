@@ -1718,8 +1718,8 @@ Taxon:
     status:
       type: TaxonomicStatusType
       description: the taxonomic status of the taxon
-    parentKey:
-      type: integer
+    parentId:
+      type: string
       description: key to next higher taxon in the classification
       required: false
     accordingTo:
@@ -1784,7 +1784,7 @@ Taxon:
         },
         "status": "accepted",
         "origin": "source",
-        "parentKey": 209098,
+        "parentId": "209098",
         "accordingTo": "Govaerts R.",
         "fossil": false,
         "recent": true
@@ -1878,6 +1878,67 @@ TaxonReference:
       type: Reference
     topic:
       type: ReferenceTopicType[]
+TreeNode:
+  type: object
+  description: >
+    A simplified taxon used to efficiently navigate a taxonomic tree
+  properties:
+    datasetKey:
+      type: integer
+      description: The dataset key the taxon belongs to
+    id:
+      type: string
+      description: Dataset scoped unique id
+    parentId:
+      type: string
+      description: id of the next higher taxon in the classification
+      required: false
+    name:
+      type: string
+      description: scientific name for this taxon
+    rank:
+      type: RankType
+      description: the rank of the taxon name
+    status:
+      type: TaxonomicStatusType
+      description: the taxonomic status of the taxon
+    childCount:
+      type: integer
+      description: number of direct children
+      required: false
+    estimates:
+      type: object[]
+      description: list of species estimates about this taxon
+      required: false
+    sectorKey:
+      type: integer
+      description: key of the catalogue sector this taxon belongs to, i.e. derived from
+      required: false
+    decision:
+      type: object
+      description: editorial decision about the taxon, i.e. a decision with the taxon as its subject
+      required: false
+    datasetSectors:
+      type: object
+      description: A map that indicates the number of unique sectors and datasets found in the subtree. A map of dataset keys to unique sector counts from that dataset for all descendants.
+      required: false
+  example: |
+    {
+        "id": "Kew-114621",
+        "parentId": "209098",
+        "datasetKey": 24,
+        "name": "Lithocarpus mariae",
+        "rank": "species",
+        "status": "accepted"
+    }
+TreeNodeResultSet:
+  type: ResultSet
+  description: >
+    A paging resultset for TreeNodes.
+  properties:
+    result:
+      type: TreeNode[]
+      description: the resulting TreeNodes
 VerbatimObject:
   type: DatasetObject
   properties:

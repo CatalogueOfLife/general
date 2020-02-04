@@ -25,7 +25,16 @@ filteredByDataset:
   queryParameters:
       datasetKey:
         type: integer
-        description: The database key of the dataset
+        description: The key of the dataset
+catalogueScoped:
+  usage: Apply this to any method that allows results to be scoped by a certain catalogue dataset.
+  description: Query parameter.
+  queryParameters:
+      catalogueKey:
+        type: integer
+        default: 3
+        required: true
+        description: The dataset key of the catalogue
 classification:
   usage: Apply this to any method that accepts a classification given as major rank parameters
   description: Linnean classification parameters, given as monomials without authorship.
