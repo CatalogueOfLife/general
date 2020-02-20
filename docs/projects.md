@@ -29,17 +29,5 @@ Released datasets should probably not clutter the dataset search and other place
 ## Parameter names
 All catalogue parameters should be renamed to project, i.e. in particular
  - sector
+ - tbd ...
 
-
-
-
-
-# Assembly process
-
- - 
- - release assigns ids
- - 
-
-# Ideas
- - keep project drafts in their own partition
- - place latest release in the "public" partition
