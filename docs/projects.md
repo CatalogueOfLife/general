@@ -20,6 +20,11 @@ If possible it makes sense to expose all sectors and decisions for all projects 
 
 Projects must also be viewable by the public. We could restrict access to released versions, but it is probably benefitial to allow users to see the latest draft state. E.g. for GSDs to assess how their data is represented in the CoL before it is released.
 
+## Dataset origin
+Currently we have external, uploaded or managed origins of a dataset which can be changed.
+Instead I would propose to only have external and managed and make this an immutable setting that is fixed when creating a new dataset.
+Uploading of archives could be a function for both. 
+
 ## Releases
 A project can release the current state into a new immutable dataset with a new id. Releasing copies the entire dataset with metadata, data and all sector definitions, decisions & estimates. Identifiers for names, taxa and references are assigned a stable id at this point only. This allows data in the draft to be frequently changed and most importantly records to be fully deleted without preserving their id, e.g. when sorting out duplicates.
 Released datasets still have 'origin=MANAGED' but also a flag 'locked=true'. We should consider to use a new origin 'RELEASE for them with a new 'projectKey' property that points to the current draft so we can better group them.
