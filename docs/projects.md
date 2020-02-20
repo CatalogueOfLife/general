@@ -33,6 +33,5 @@ Released datasets should probably not clutter the dataset search and other place
 
 ## Parameter names
 All catalogue parameters should be renamed to project, i.e. in particular
- - sector
  - tbd ...
 
