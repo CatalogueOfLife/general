@@ -21,7 +21,7 @@ is the ultimate goal the project contributes to.
  3. providing (infrastructural) support to the completion and strengthening of taxonomic and nomenclature content authorities
  4. ensuring a sustainable, robust, and more dynamic IT infrastructure for maintaining the Catalogue of Life. 
 
-Specifically [the project](docs/project-proposal.pdf) will establish a clearinghouse for taxonomy and nomenclature 
+Specifically [the project](docs/project-proposal.pdf) will establish a [clearinghouse for taxonomy and nomenclature](https://data.catalogue.life) 
 and rebuild all existing infrastructure of the Catalogue of Life including 
 webservices, the portal and the software for the assembly of the catalogue and its editorial work.
 
@@ -38,7 +38,7 @@ and the Netherlands Ministry of Education, Science, and Culture.
 Green: *Public Clearinghouse*;  Orange: *Restricted editorial access*;  Red: *External tools*
 
 
-The clearinghouse will cover [scientific names](docs/NAMES.md) across all life and provide a single taxonomic view grounded in the consensus classification of the Catalogue of Life along with provisional taxonomic sources. 
+The [clearinghouse](https://data.catalogue.life) will cover [scientific names](docs/NAMES.md) across all life and provide a single taxonomic view grounded in the consensus classification of the Catalogue of Life along with provisional taxonomic sources. 
 It will be based around a strict separation of nomenclature and taxonomy and allow the merging, addition and conflict resolution of data, 
 completing information missing in other sources. 
 
