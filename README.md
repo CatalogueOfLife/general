@@ -64,11 +64,12 @@ The clearinghouse and its [associated components](docs/ASSEMBLY.md) will replace
 CoL+ manages several github repositories within the [Species 2000 organisation](https://github.com/Sp2000) which are responsible for specific tasks.
 Please check the individual repositories and their issue management for more details:
 
- - [colplus](https://github.com/Sp2000/colplus): the overarching project repository that contains:
+ - [general](https://github.com/CatalogueOfLife/general): the overarching project repository that contains:
     - issues reaching out to the [CoL Global Team](https://github.com/Sp2000/colplus/issues?q=is%3Aissue+is%3Aopen+label%3A%22Global+Team%22)
+ - [coldp](https://github.com/CatalogueOfLife/coldp): Catalogue of Life Data Package specification of a richer & recommended exchange format for the Clearinghouse and Catalogue of Life, replacing DwC-A and the CoL submission format (ACEF).
+ - [backend](https://github.com/CatalogueOfLife/backend): the Java backend with various Maven modules that primarily provide standalone JSON webservices as shaded jars using the Dropwizard framework
     - [API documentation](https://sp2000.github.io/colplus/api/api.html) using RAML
- - [coldp](https://github.com/Sp2000/coldp): Catalogue of Life Data Package specification of a richer & recommended exchange format for the Clearinghouse and Catalogue of Life, replacing DwC-A and the CoL submission format (ACEF).
- - [colplus-backend](https://github.com/Sp2000/colplus-backend): the Java backend with various Maven modules that primarily provide standalone JSON webservices as shaded jars using the Dropwizard framework
- - [colplus-frontend](https://github.com/Sp2000/colplus-frontend): void repository to contain all frontend code written in [React](https://reactjs.org/) on top of the API services.
+ - [clearinghouse-ui](https://github.com/CatalogueOfLife/clearinghouse-ui): repository containing all frontend code written in [React](https://reactjs.org/) on top of the API services.
+ - [portal](https://github.com/CatalogueOfLife/portal): the public facing website for Catalogue of Life built using [Jekyll](https://jekyllrb.com/)
  - [colplus-deploy](https://github.com/Sp2000/colplus-deploy): private repository with credentials and deploy scripts for GBIF
- - [colplus-repo](https://github.com/Sp2000/colplus-repo): a data repository that hosts DwC or ACEF archives primarily as per GSD dumps from the current CoL Assembly DB
+ - [data](https://github.com/CatalogueOfLife/data): a data repository that hosts DwC or ACEF archives primarily as per GSD dumps from the current CoL Assembly DB
