@@ -28,6 +28,7 @@ These features are not arranged in a particular order. The following milestones 
 
 ### User Management
  - UI: admin & project section to manage user roles and editor permissions per dataset
+ - UI: show user info and personal settings
 
 ### Name Parser Configs
  - UI: admin section to manage name parser configs
@@ -48,8 +49,7 @@ These features are not arranged in a particular order. The following milestones 
  - API: keep name & taxon ids stable based on name index ids during project releases
 
 ### Stable Taxon Ids
-Prerequisite:
- - Stable Name Ids
+Prerequisite: Stable Name Ids
 
 - Keep stable taxon ids independent from the name, comparing synonymies and included taxa instead
 
@@ -67,39 +67,42 @@ Prerequisite:
  - API/UI: generate a DOI for exports and store exports and DOI metadata
 
 ### Extended Catalogue Assembly
- Prerequisite:
- - Stable Name Ids
- - Continuous Indexing for Plazi
- - Sync Merge Mode
+ Prerequisite: Stable Name Ids, Continuous Indexing for Plazi, Sync Merge Mode
 
  - API/UI: provenance matrix for a name usage
 
 ### Extended Catalogue Release
- Prerequisite:
- - Extended Catalogue Assembly
+ Prerequisite: Extended Catalogue Assembly
 
  - DATA: content management
  - DATA: data review/audit
 
 ### Taxon Matching 
  - API: port gbif nub lookup code
- - UI: batch matching interface
 
-### Basic Portal
- Prerequisite:
- - Stable Name Ids
- - Taxon/Name Details
+### Public Portal
+ Prerequisite: Stable Name Ids, Taxon/Name Details
 
- - UI: dataset detail
- - DATA: static content
+ - [All UI & content issues]( https://github.com/CatalogueOfLife/portal/milestone/1)
+ - [All API issues](https://github.com/CatalogueOfLife/backend/milestone/16) inlcuding also all prerequisites
 
 ### Extended Portal
- Prerequisite:
- - Extended Catalogue Assembly
+ Prerequisite: Extended Catalogue Assembly, Public Portal
 
+ - [All UI & content issues]( https://github.com/CatalogueOfLife/portal/milestone/2)
 
 ### Legacy Docker Services
  - Geoff: run historical annual editions via their historical AC interface in docker
+
+### CoL Directory Service
+ - API/UI: manage CoL team members and other roles
+ - API: [create mailinglists for team](https://github.com/CatalogueOfLife/general/issues/73)
+ - UI: Show CoL team members in portal
+
+### Hosting Migration
+ Prerequisite: Legacy Docker Services
+
+ - GBIF: [migrate DNS](https://github.com/CatalogueOfLife/general/issues/70)
 
 ### User Discussion
  - API/UI: manage discussion threads
@@ -124,15 +127,15 @@ Prerequisite:
 
 
 
-
-## Milestones
+## Milestones 2020
 
 ### Milestone: Extended Catalogue
 
 ### Milestone: CoL Portal
 
 
-## Milestones Phase 2
+
+## Milestones 2021
 
 ### Milestone: User comments
 
