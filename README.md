@@ -34,7 +34,7 @@ and the Netherlands Ministry of Education, Science, and Culture.
 
 
 ## A clearinghouse for taxonomy and nomenclature
-![](docs/overview.png)
+![](docs/design/overview.png)
 Green: *Public Clearinghouse*;  Orange: *Restricted editorial access*;  Red: *External tools*
 
 
