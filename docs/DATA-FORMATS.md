@@ -1,8 +1,11 @@
 # Data formats
-The Clearinghouse supports a variety of data formats.
-If possible we recommend the extended Darwin Core Archive format to share 
-taxonomic, nomenclatural or just bibliographical data.
+The Clearinghouse supports a variety of data formats for both imports and exports.
+The recommended format is ColDP.
 
+
+## Catalogue of Life Data Package
+The recommended format that is least lossy and most expressive is the [Catalogue of Life Data Package (ColDP)](https://github.com/CatalogueOfLife/coldp/blob/master/README.md). It is a CSV/TSV file based archive that is more relational and normalised than Darwin Core archives.
+It also supports sharing literature references as BibTex, taxonomic treatments as individual files and offers various other imrovements over classic DwC.
 
 
 ## Darwin Core Archive
@@ -11,21 +14,31 @@ The recommended format for providing data to the Clearinghouse is in the form of
 
 
 ## ACEF
-The [CoL Data Submission Format](ACEF.md) (formerly known as Annual Checklist Exchange Format, ACEF) 
-is supported when provided as a zipped archive of column separated files.
+The [CoL Data Submission Format](img/ACEF-ERD.png) (formerly known as Annual Checklist Exchange Format, ACEF) 
+is supported when provided as a zipped archive of column separated files. It is the legacy format of CoL, but provides relational references.
+It is very limited when it comes to higher taxa and nomenclature.
 
 
-## TCS
-The TDWG Taxonomic Concept Schema in XML is considered to be used for transfering nomenclatural data.
+## TextTree
+The most simple way to share taxonomic trees with unstructured names in a [very human readable format](https://github.com/gbif/text-tree/blob/master/README.md).
+No references or extension data is supported, but synonyms and basionyms can be included in the tree.
+
+
+## Excel Spreadsheet
+It is possible to import data directly from Excel spreadsheets if they conform to some simple conventions.
+Sharing data with Excel spreadsheets is not a new format, but rather a different serialisation of the already supported format ColDP, DwC-A or ACEF.
+All data must be available in a single spreadsheet using the modern XSLX format.
+Each CSV data file is represented in Excel as a separate Sheet with a required header row that informs about the column semantics.
+[ColDP already provides some templates](https://github.com/CatalogueOfLife/coldp/tree/master/templates) to be used for sharing.
 
 
 ## General file recommendations
 For all text files we strongly recommend to use the UTF-8 character encoding.
 
- - Use a **TAB column delimitor** for column seperated files
+ - If you can prefer tab separated **TSV files** over CSV files
  - Do not quote values e.g. by using a quotation mark which is common for CSV files
  - Make sure to **replace all TAB characters** by a simple spaces
- - Use a **header row** if possible
+ - Use a **header row** 
  - **NULL values** should be given as an **empty string**, not ```\N``` or ```NULL```
  - **boolean** values should be encoded either as ```0```/```1``` or ```false```/```true```
  - **decimals** should follow the international convention and use a dot as the decimal separator (not a comma) and no thousands separator at all

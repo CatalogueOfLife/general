@@ -41,6 +41,7 @@ These features are not arranged in a particular order. The following milestones 
  - UI: show taxon children
  - UI: merge name information into taxon pages
  - UI/API: show related names on via NamesIndex
+ - UI: show type material
 
 ### NamesIndex Management
  - UI/API: merge/split/modify names in the names index
@@ -122,6 +123,12 @@ Prerequisite: Stable Name Ids
  - API/UI: offer GSD specific review queue pages
 
 ### Improved import issues
+
+### Source Dataset Patch Forms
+ - UI: https://github.com/CatalogueOfLife/clearinghouse-ui/issues/573
+
+### Manually Match Decisions & Sectors
+ - UI: https://github.com/CatalogueOfLife/clearinghouse-ui/issues/523
 
 
 
