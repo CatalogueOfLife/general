@@ -3,8 +3,8 @@ The Clearinghouse supports a variety of data formats for both imports and export
 The recommended format is ColDP.
 
 
-## Catalogue of Life Data Package
-The recommended format that is least lossy and most expressive is the [Catalogue of Life Data Package (ColDP)](https://github.com/CatalogueOfLife/coldp/blob/master/README.md). It is a CSV/TSV file based archive that is more relational and normalised than Darwin Core archives.
+## ColDP
+The [Catalogue of Life Data Package (ColDP)](https://github.com/CatalogueOfLife/coldp/blob/master/README.md) is the recommended format that is least lossy and most expressive. It is a CSV/TSV file based archive that is more relational and normalised than Darwin Core archives.
 It also supports sharing literature references as BibTex, taxonomic treatments as individual files and offers various other imrovements over classic DwC.
 
 
@@ -14,8 +14,8 @@ The recommended format for providing data to the Clearinghouse is in the form of
 
 
 ## ACEF
-The [CoL Data Submission Format](img/ACEF-ERD.png) (formerly known as Annual Checklist Exchange Format, ACEF) 
-is supported when provided as a zipped archive of column separated files. It is the legacy format of CoL, but provides relational references.
+The [CoL Data Submission Format](CoL_Standard_Dataset_v7_23Sep2014.pdf) (formerly known as Annual Checklist Exchange Format, ACEF) 
+is supported when provided as a zipped archive of column separated files. It is the legacy format of CoL, but provides a [relational model fcussing on species](ACEF-ERD.png).
 It is very limited when it comes to higher taxa and nomenclature.
 
 
