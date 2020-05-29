@@ -9,8 +9,7 @@ It also supports sharing literature references as BibTex, taxonomic treatments a
 
 
 ## Darwin Core Archive
-The recommended format for providing data to the Clearinghouse is in the form of
-[Darwin Core Archives](DWCA.md). These archives package up column separated files, e.g. CSV or TAB delimited files.
+Another well known format in the biodiversity community are [Darwin Core Archives](https://dwc.tdwg.org/text/). Similar to ColDP these archives package up column separated files, e.g. CSV or TAB delimited files, but are restricted by a *star schema* that especially limits sharing of structured references. Only Taxon core [DwC archives known as checklists](https://github.com/gbif/ipt/wiki/BestPracticesChecklists) are supported.
 
 
 ## ACEF
