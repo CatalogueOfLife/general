@@ -2,7 +2,7 @@
 # Nomenclature & Names Index
 The Clearinghouse separates taxonomy from names and nomenclature.
 Names are not restricted to available names, but the names index should
-also cover for example naked names that might appear in literature or on specimen labels somewhere. CoL+ has decided to base its model on the work done by TDWG with [Darwin Core](https://github.com/tdwg/dwc) and the Taxon Concept Schema ([TCS](https://github.com/tdwg/tcs)) which is in use by many nomenclators already, e.g. IPNI. You can also explore the Postgres [database schema](dbschema.png).
+also cover for example naked names that might appear in literature or on specimen labels somewhere. CoL+ has decided to base its model on the work done by TDWG with [Darwin Core](https://github.com/tdwg/dwc) and the Taxon Concept Schema ([TCS](https://github.com/tdwg/tcs)) which is in use by many nomenclators already, e.g. IPNI. You can also explore the Postgres [database schema](design/dbschema.png).
 
 The driving use cases dealing with nomenclature are:
 
