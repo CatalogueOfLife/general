@@ -79,7 +79,7 @@ The name class holds parsed names and is free of taxonomic judgements. A name co
  - ```fossil``` true if the type specimen of the name is a fossil
  - ```remarks``` Any informal note about the nomenclature of the name, e.g. nom. illeg.
  
-Please see our [API docs](https://sp2000.github.io/colplus/api/api.html#model-Name) for more details.
+Please see our [API docs](http://api.catalogueoflife.org/#model-Name) for more up to date details.
 
 ### Authorship class
 This class is only used as part of a Name instance and not on its own. It therefore has no keys and is not shared between names.
