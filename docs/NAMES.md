@@ -301,7 +301,7 @@ To avoid all spelling mistakes found on labels and in databases to enter the nam
 
 
 # Examples
-TDWG's [Taxon Concept Schema guide](http://www.tdwg.org/fileadmin/_migrated/content_uploads/UserGuidev_1.3.pdf) provides great examples which we exploited here as CoL+ JSON to illustrate various use cases. The guide is well worth reading on its own.
+TDWG's [Taxon Concept Schema guide](https://github.com/tdwg/tcs/blob/master/TCS101/UserGuidev_1.3.pdf) provides great examples which we exploited here as CoL+ JSON to illustrate various use cases. The guide is well worth reading on its own.
 
 After the first few examples we will start omitting parsed fields of the name instance to concentrate on the important parts. If it says parsed=true at the bottom of an object please imagine the missing fields would be present.
 
