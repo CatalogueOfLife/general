@@ -9,4 +9,5 @@ In order to release COL to the public we need to do the following steps manually
   - regenerate legacy idmap - how?
   - regenerate sitemaps - how?
   - switch release to public
+  - deploy www portal
   - announce on Twitter, Facebook and Mailing List
