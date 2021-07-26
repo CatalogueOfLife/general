@@ -22,7 +22,7 @@ The content of each dataset in the [Clearinghouse can be browsed and searched](h
 Datasets that should be added to the CoL need to be present in the dataset store.
 If managed externally the data needs to be accessible in a standard format, ideally from a public URL. The URL should remain the same if new versions of the dataset are published. This allows a continuous importer to keep the version in the dataset store up to date. DwC Archives, the CoL ACEF format, and the CoL data package are handled currently. It is expected to also cover TCS or newly defined formats in the future. Converting data from highly custom formats into DwC-A or ACEF is expected to be done either by the publishing source directly or with the help of the CoL data manager & the GBIF helpdesk. For sources in relational databases, Excel spreadsheets or CSVs the GBIF IPT can be used to assist in this task. 
 
-All existing GSDs inside the CoL have been exported from the CoL global assembly database into [ACEF compliant files](https://github.com/Sp2000/colplus-repo) so that the current version of the data is immediately available even if the original sources are not yet published in a standard format. This can be repeated at any time and should at least be done once more when leaving behind the old workbench.
+All existing GSDs inside the CoL have been exported from the CoL global assembly database into [ACEF compliant files](https://github.com/CatalogueOfLife/data) so that the current version of the data is immediately available even if the original sources are not yet published in a standard format. This can be repeated at any time and should at least be done once more when leaving behind the old workbench.
 
 
 ## Dataset registration
@@ -31,7 +31,7 @@ In order to add new datasets the URL to their data needs to be registered manual
 Dataset registration will also include a few more settings that determine how a dataset is imported into the Clearinghouse and which can be changed at any time. Currently this includes:
 
  - catalogue: indicates a dataset is to be considered as a source for the scrutinized or extended catalogue
- - [type](https://github.com/Sp2000/colplus-backend/blob/master/colplus-api/src/main/java/org/col/api/vocab/DatasetType.java): indicates the primary focus of a dataset; whether it is primarily a nomenclatural list, a global or regional taxonomic checklist, a personal uploaded list of names or something else (e.g. a list of type specimens, paper on ecology of North Sea, Red List, etc.)
+ - [type](https://github.com/CatalogueOfLife/backend/blob/master/colplus-api/src/main/java/org/col/api/vocab/DatasetType.java): indicates the primary focus of a dataset; whether it is primarily a nomenclatural list, a global or regional taxonomic checklist, a personal uploaded list of names or something else (e.g. a list of type specimens, paper on ecology of North Sea, Red List, etc.)
  - [code](https://github.com/gbif/name-parser/blob/master/name-parser-api/src/main/java/org/gbif/nameparser/api/NomCode.java#L29): the nomenclatural code context which should be applied to all data in case the dataset is restricted to a single code. This allows for better parsing and interpretation of names data in ambiguous situations.
  - importFrequency: an indication how frequently new dataset versions should be imported into the Clearinghouse
 
@@ -42,20 +42,20 @@ Once registered a dataset can be imported into the Clearinghouse. Imports can be
 
 A dataset import does many things. Most notably:
  - convert the data into the [native CoL data model](dbschema.png) with a separation of [names](NAMES.md), taxa, synonyms, name relations, distributions and references. Scientific names are parsed into their individual components.
- - [unescape character entities](https://github.com/Sp2000/colplus-backend/issues/60) in raw data
+ - [unescape character entities](https://github.com/CatalogueOfLife/backend/issues/60) in raw data
  - normalize flat classifications into a parent child relation with a single record for higher taxa with the same name & classification
  - normalize citation strings creating a single reference for the same citation
  - generic data cleaning: resolve character encodings, replace xml, unicode or html entities, remove html tags
  - parse names into individual parts
- - flag data issues of different severity (info/warning/error). This is a large set of checks that will be [continuously extended](https://github.com/Sp2000/colplus-backend/issues?q=is%3Aissue+label%3A%22issue+rules%22). Example checks are:
+ - flag data issues of different severity (info/warning/error). This is a large set of checks that will be [continuously extended](https://github.com/CatalogueOfLife/backend/issues?q=is%3Aissue+label%3A%22issue+rules%22). Example checks are:
     - parsed name inconsistencies
     - referential integrity problems (id terms)
-    - [potential chresonyms](https://github.com/Sp2000/colplus-backend/issues/117)
+    - [potential chresonyms](https://github.com/CatalogueOfLife/backend/issues/117)
     - duplicate names or references
     - classification loops, synonyms of synonyms, etc.
-    - [potential data truncation](https://github.com/Sp2000/colplus-backend/issues/120)
+    - [potential data truncation](https://github.com/CatalogueOfLife/backend/issues/120)
  - match names against the names index, adding or removing names for trusted datasets
- - generate dataset import statistics: number of names by status, rank, issues etc. enabling time series for historic imports. Track [diffs of all names](https://github.com/Sp2000/colplus-backend/issues/138)  between versions
+ - generate dataset import statistics: number of names by status, rank, issues etc. enabling time series for historic imports. Track [diffs of all names](https://github.com/CatalogueOfLife/backend/issues/138)  between versions
 
 
 ## Taxonomic Editor
@@ -118,16 +118,16 @@ Alternatively if the sources deviate a lot from APG IV this might be better done
 ## Data Review
 Entire datasets or specific sectors can be reviewed to find problems and report them back to the data provider. Once revised at the source the updated dataset can be reimported into the Clearinghouse. 
 
-A dataset and sector summary will help identifying problems. For certain issues like duplicates or potential chresonyms a comparison view of several names is needed that allows the editor to block names from entering the Catalogue, modify their status or provide a [minor orthographic correction](https://github.com/Sp2000/colplus-backend/issues/139) (e.g. misspelled genus name in a single binomial; misspelled species epithet ("crista galli" ->  "crista-galli"); misspelled species author; etc.).
+A dataset and sector summary will help identifying problems. For certain issues like duplicates or potential chresonyms a comparison view of several names is needed that allows the editor to block names from entering the Catalogue, modify their status or provide a [minor orthographic correction](https://github.com/CatalogueOfLife/backend/issues/139) (e.g. misspelled genus name in a single binomial; misspelled species epithet ("crista galli" ->  "crista-galli"); misspelled species author; etc.).
 
 Trusted sources that already have a review process implemented themselves can be marked to be included in the CoL automatically with every new dataset version imported. However, those automated datasets should pass data integrity checks with each update and detected cases should be reported to the CoL editor and data provider for correction in the source database. In some cases, manual acceptance of updated sectors for inclusion into the CoL needs to take place everytime through an editorial decision. A new sector (i.e. "sister taxon") from an existing data provider always requires manual acceptance by creating that new sector. A newly added child in the accepted sector does not need manual acceptance. For example, if WoRMS contains a sector providing the phylum Mollusca, there is no need for manual acceptance of growing number of children even at higher ranks like classes, orders, etc. 
 
 However, at a particular stage of WoRMS Mollusca growth, the Clearinghouse should detect and report overlap with extinct taxa originating from PaleoBioDB. Editorial decisions will then be needed on whether to block order †Ammonoidea from WoRMS Mollusca and continue taking it from PaleoBioDB, or switch to WoRMS Mollusca as an authorised provider for ammonits, thereby deleting the previous PaleoBioDB data from the CoL. 
 
-The Extended Catalogue of Life (eCat) could also be used to create sectors if they have passed a review and were recommended by the Taxonomy Group and CoL Editorial Board to fill gap areas, or as a replacement for existing Proto GSDs. It does create a [circular dependency](https://github.com/Sp2000/colplus-backend/issues/140) though which needs to be addressed.
+The Extended Catalogue of Life (eCat) could also be used to create sectors if they have passed a review and were recommended by the Taxonomy Group and CoL Editorial Board to fill gap areas, or as a replacement for existing Proto GSDs. It does create a [circular dependency](https://github.com/CatalogueOfLife/backend/issues/140) though which needs to be addressed.
 
 ## Discussion Threads
-The Clearinghouse provides generic [discussion threads](https://github.com/Sp2000/colplus/blob/master/docs/EDITORIAL-TOOLS.md#discussion-page) that consist of a description which can link out to any number of name, taxon or reference entities, status and a flat comments timeline. A discussion can be used for numerous things, e.g. to capture feedback and to communicate data issues between data reviewers and  data providers.
+The Clearinghouse provides generic discussion threads that consist of a description which can link out to any number of name, taxon or reference entities, status and a flat comments timeline. A discussion can be used for numerous things, e.g. to capture feedback and to communicate data issues between data reviewers and  data providers.
 
 A number of names from a dataset sharing the same problem can thus be grouped as a discussion which keeps track of its state (e.g. under review, accepted, done). By using a discussion linked to records with issues we can track matching editorial decisions and recognise issues that still need editorial attention from those which have been addressed already. 
 

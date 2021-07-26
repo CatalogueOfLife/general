@@ -20,7 +20,7 @@ In order to find DOIs and BHL pages it is useful to know the metadata in a bette
 ## CSL JSON / Citeproc-js
 There are various standards existing so sharing becomes simpler and with tools ready to be used. Specifically for JSON Rod Page put together a nice [overview](https://github.com/rdmpage/bibliographic-metadata-json).
 
-After [consultations](https://github.com/Sp2000/colplus/issues/23) we have settled on the [CSL JSON](http://citeproc-js.readthedocs.io/en/latest/csl-json/markup.html) standard used by citeproc-js and [CrossRef](https://github.com/CrossRef/rest-api-doc/blob/master/api_format.md) to represent reference metadata. Further CSL resources:
+After [consultations](https://github.com/CatalogueOfLife/general/issues/23) we have settled on the [CSL JSON](http://citeproc-js.readthedocs.io/en/latest/csl-json/markup.html) standard used by citeproc-js and [CrossRef](https://github.com/CrossRef/rest-api-doc/blob/master/api_format.md) to represent reference metadata. Further CSL resources:
 
  - A mapping from [Zotero to CSL](https://aurimasv.github.io/z2csl/typeMap.xml)
 

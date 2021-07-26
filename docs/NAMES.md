@@ -144,7 +144,7 @@ Sources consulted:
 CoL follows the TCS name relations and distinguishes between the following type of directed relations. 
 A relation optionally comes with a reference if the underlying nomenclatural act is different from the publishedIn reference for the name.
 
-We provide a [Darwin Core Archive extension definition](https://github.com/Sp2000/colplus/blob/master/dwca/name_relation.xml) supporting publishing name relations as part of a DwC Checklist Archive with tools like the [GBIF IPT](https://www.gbif.org/ipt).
+We provide a [Darwin Core Archive extension definition](https://github.com/CatalogueOfLife/general/blob/master/dwca/name_relation.xml) supporting publishing name relations as part of a DwC Checklist Archive with tools like the [GBIF IPT](https://www.gbif.org/ipt).
 
 
  - ```SPELLING_CORRECTION```: The current name is a spelling correction, called emendation in zoology, of the related name. Intentional changes in the original spelling of an available name, whether justified or unjustified. The binomial authority remains unchanged. Valid emendations include changes made to correct:

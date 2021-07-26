@@ -1,4 +1,4 @@
-# Catalogue of Life Plus (CoL+)
+# Catalogue of Life (COL)
 
 
 The [Catalogue of Life](http://www.catalogueoflife.org/) has the mission to catalogue all known species as 
@@ -65,11 +65,11 @@ CoL+ manages several github repositories within the [Species 2000 organisation](
 Please check the individual repositories and their issue management for more details:
 
  - [general](https://github.com/CatalogueOfLife/general): the overarching project repository that contains:
-    - issues reaching out to the [CoL Global Team](https://github.com/Sp2000/colplus/issues?q=is%3Aissue+is%3Aopen+label%3A%22Global+Team%22)
+    - issues reaching out to the [CoL Global Team](https://github.com/CatalogueOfLife/general/issues?q=is%3Aissue+is%3Aopen+label%3A%22Global+Team%22)
  - [coldp](https://github.com/CatalogueOfLife/coldp): Catalogue of Life Data Package specification of a richer & recommended exchange format for the Clearinghouse and Catalogue of Life, replacing DwC-A and the CoL submission format (ACEF).
  - [backend](https://github.com/CatalogueOfLife/backend): the Java backend with various Maven modules that primarily provide standalone JSON webservices as shaded jars using the Dropwizard framework
     - [API documentation](https://sp2000.github.io/colplus/api/api.html) using RAML
- - [clearinghouse-ui](https://github.com/CatalogueOfLife/clearinghouse-ui): repository containing all frontend code written in [React](https://reactjs.org/) on top of the API services.
+ - [checklistbank](https://github.com/CatalogueOfLife/checklistbank): repository containing all frontend code written in [React](https://reactjs.org/) on top of the API services.
  - [portal](https://github.com/CatalogueOfLife/portal): the public facing website for Catalogue of Life built using [Jekyll](https://jekyllrb.com/)
- - [colplus-deploy](https://github.com/Sp2000/colplus-deploy): private repository with credentials and deploy scripts for GBIF
+ - [deploy](https://github.com/CatalogueOfLife/deploy): private repository with credentials and deploy scripts for GBIF
  - [data](https://github.com/CatalogueOfLife/data): a data repository that hosts DwC or ACEF archives primarily as per GSD dumps from the current CoL Assembly DB

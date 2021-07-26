@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="/style/human.xsl"?>
 <thesaurus 
-	dc:URI="http://rs.col.plus/vocab/reltype/" 
+	dc:URI="http://rs.catalogueoflife.org/vocab/reltype/" 
 	dc:description="" 
 	dc:title="CoL Name Relation Type Vocabulary"
-  dc:issued="2018-06-09"
-  dc:relation="https://github.com/Sp2000/colplus/blob/master/docs/NAMES.md"
+  dc:issued="2020-07-26"
+  dc:relation="https://github.com/CatalogueOfLife/general/blob/master/docs/NAMES.md"
 
 	xmlns="http://rs.gbif.org/thesaurus/" xmlns:dc="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://rs.gbif.org/thesaurus/  http://rs.gbif.org/schema/thesaurus.xsd">
 	
  <concept dc:identifier="SpellingCorrection" 
-	   dc:URI="http://rs.col.plus/vocab/reltype/SpellingCorrection"
+	   dc:URI="http://rs.catalogueoflife.org/vocab/reltype/SpellingCorrection"
      dc:description="The current name is a spelling correction, called emendation in zoology, of the related name. Intentional changes in the original spelling of an available name, whether justified or unjustified. The binomial authority remains unchanged. Valid emendations include changes made to correct:
       a) typographical errors in the original work describing the species,
       b) errors in transliteration from non-Latin languages,
@@ -27,7 +27,7 @@
  </concept>
 
  <concept dc:identifier="Basionym" 
-     dc:URI="http://rs.col.plus/vocab/reltype/Basionym"
+     dc:URI="http://rs.catalogueoflife.org/vocab/reltype/Basionym"
      dc:description="Has basionym relation pointing back to the basionym. ">
   <preferred>
      <term dc:source="CoL" dc:title="basionym" xml:lang="en"/>
@@ -39,7 +39,7 @@
  </concept>
 
   <concept dc:identifier="BasedOn" 
-     dc:URI="http://rs.col.plus/vocab/reltype/BasedOn"
+     dc:URI="http://rs.catalogueoflife.org/vocab/reltype/BasedOn"
      dc:description="The current name is the validation of a name that was not fully published before.
         Covers the use of ex in botanical author strings (ICN Art. 46.4).
         E.g. if this name object represents G. tomentosum Nutt. ex Seem. then the related name should be G. tomentosum Nutt.">
@@ -51,7 +51,7 @@
  </concept>
 
   <concept dc:identifier="ReplacementName" 
-     dc:URI="http://rs.col.plus/vocab/reltype/ReplacementName"
+     dc:URI="http://rs.catalogueoflife.org/vocab/reltype/ReplacementName"
      dc:description="Current name is a replacement for the related name.
       Also called 'Nomen Novum' or 'avowed substitute'
       ICN: Article 7.3
@@ -67,7 +67,7 @@
  </concept>
 
   <concept dc:identifier="Conserved" 
-     dc:URI="http://rs.col.plus/vocab/reltype/Conserved"
+     dc:URI="http://rs.catalogueoflife.org/vocab/reltype/Conserved"
      dc:relation=""
      dc:description="The current name is conserved against the related name or the related name is suppressed in favor of the current name.
         Acts taken by the official committee.        
@@ -83,7 +83,7 @@
  </concept>
 
   <concept dc:identifier="LaterHomonym" 
-     dc:URI="http://rs.col.plus/vocab/reltype/LaterHomonym"
+     dc:URI="http://rs.catalogueoflife.org/vocab/reltype/LaterHomonym"
      dc:description="Current name has same spelling as related name but was published later and has priority over it (unless conserved or sanctioned).
         Called a junior homonym in zoology.        
         ICN: Article 53, ICZN: Chapter 12, Article 52.">
@@ -96,7 +96,7 @@
  </concept>
 
   <concept dc:identifier="Superfluous" 
-     dc:URI="http://rs.col.plus/vocab/reltype/Superfluous"
+     dc:URI="http://rs.catalogueoflife.org/vocab/reltype/Superfluous"
      dc:description="Current name was superfluous at its time of publication, 
       i. e. it was based on the same type as the related, previously published name (ICN article 52).
       The current, superfluous name is available but illegitimate.">
