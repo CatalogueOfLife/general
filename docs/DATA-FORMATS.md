@@ -11,6 +11,44 @@ It also supports sharing literature references as BibTex, taxonomic treatments a
 ## Darwin Core Archive
 Another well known format in the biodiversity community are [Darwin Core Archives](https://dwc.tdwg.org/text/). Similar to ColDP these archives package up column separated files, e.g. CSV or TAB delimited files, but are restricted by a *star schema* that especially limits sharing of structured references. Only Taxon core [DwC archives known as checklists](https://github.com/gbif/ipt/wiki/BestPracticesChecklists) are supported.
 
+COL supports a few extensions to the GBIF DwC-A Checklist format:
+
+### Name relations extension
+A new [name relation extension](../dwca/name_relation.xml) with using the namespace http://rs.catalogueoflife.org/terms/dwc
+which mimicks the [ColDP name relations](https://github.com/CatalogueOfLife/coldp/blob/master/README.md#namerelation) entity.
+
+```
+Namespace: http://rs.catalogueoflife.org/terms/dwc
+rowType: http://rs.catalogueoflife.org/terms/dwc/NameRelations
+
+relatedNameUsageID: http://rs.catalogueoflife.org/terms/dwc/relatedNameUsageID
+relationType: http://rs.catalogueoflife.org/terms/dwc/relationType
+publishedIn: http://rs.catalogueoflife.org/terms/dwc/publishedIn
+publishedInID: http://rs.catalogueoflife.org/terms/dwc/publishedInID
+relationRemarks: http://rs.catalogueoflife.org/terms/dwc/relationRemarks
+```
+
+### EML COL metadata
+In addition to the GBIF EML profile COL supports a few custom properties inside the `<additionalMetadata>` block
+which are defined in the ColDP [metadata.yaml](https://github.com/CatalogueOfLife/coldp/blob/master/metadata.yaml) profile and missing from regular EML files:
+
+```
+<dataset>
+  ...
+  <additionalMetadata>
+    <metadata>
+      <gbif>...</gbif>
+      <col>
+        <confidence>5</confidence>
+        <completeness>95</completeness>
+        <version>v.48 (06/2018)</version>
+      </col>
+    </metadata>
+  </additionalMetadata>
+</dataset>
+```
+
+
 
 ## ACEF
 The [CoL Data Submission Format](CoL_Standard_Dataset_v7_23Sep2014.pdf) (formerly known as Annual Checklist Exchange Format, ACEF) 
@@ -21,6 +59,20 @@ It is very limited when it comes to higher taxa and nomenclature.
 ## TextTree
 The most simple way to share taxonomic trees with unstructured names in a [very human readable format](https://github.com/gbif/text-tree/blob/master/README.md).
 No references or extension data is supported, but synonyms and basionyms can be included in the tree.
+
+
+## Newick Trees
+The Newick format is a simple format to represent graph-theoretical trees with edge lengths using parentheses and commas.
+It is often used for sharing phylogenetic trees.
+The New Hampshire eXtended format (which we implement) uses Newick comments to encode additional key value pairs, i.e. the id, scientificName ond rank specifically:
+ 
+ - `:ND=` [string]  node identifier - if this is being used, it has to be unique within each phylogeny
+ - `:S=` [string] species name of the species/phylum at this node
+ - `:R=` [string] rank
+ 
+
+https://en.wikipedia.org/wiki/Newick_format
+http://www.phylosoft.org/NHX/
 
 
 ## Excel Spreadsheet
