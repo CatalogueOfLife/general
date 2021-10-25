@@ -14,19 +14,9 @@ Another well known format in the biodiversity community are [Darwin Core Archive
 COL supports a few extensions to the GBIF DwC-A Checklist format:
 
 ### Name relations extension
-A new [name relation extension](../dwca/name_relation.xml) with using the namespace http://rs.catalogueoflife.org/terms/dwc
+A new [name relation extension](../dwca/name_relation.xml) with the rowType http://rs.catalogueoflife.org/terms/dwc/NameRelations 
 which mimicks the [ColDP name relations](https://github.com/CatalogueOfLife/coldp/blob/master/README.md#namerelation) entity.
 
-```
-Namespace: http://rs.catalogueoflife.org/terms/dwc
-rowType: http://rs.catalogueoflife.org/terms/dwc/NameRelations
-
-relatedNameUsageID: http://rs.catalogueoflife.org/terms/dwc/relatedNameUsageID
-relationType: http://rs.catalogueoflife.org/terms/dwc/relationType
-publishedIn: http://rs.catalogueoflife.org/terms/dwc/publishedIn
-publishedInID: http://rs.catalogueoflife.org/terms/dwc/publishedInID
-relationRemarks: http://rs.catalogueoflife.org/terms/dwc/relationRemarks
-```
 
 ### EML COL metadata
 In addition to the GBIF EML profile COL supports a few custom properties inside the `<additionalMetadata>` block
