@@ -11,11 +11,9 @@ It also supports sharing literature references as BibTex, taxonomic treatments a
 ## Darwin Core Archive
 Another well known format in the biodiversity community are [Darwin Core Archives](https://dwc.tdwg.org/text/). Similar to ColDP these archives package up column separated files, e.g. CSV or TAB delimited files, but are restricted by a *star schema* that especially limits sharing of structured references. Only Taxon core [DwC archives known as checklists](https://github.com/gbif/ipt/wiki/BestPracticesChecklists) are supported.
 
-COL supports a few extensions to the GBIF DwC-A Checklist format:
-
 ### Name relations extension
-A new [name relation extension](../dwca/name_relation.xml) with the rowType http://rs.catalogueoflife.org/terms/dwc/NameRelations 
-which mimicks the [ColDP name relations](https://github.com/CatalogueOfLife/coldp/blob/master/README.md#namerelation) entity.
+A new [name relation extension](https://rs.gbif.org/sandbox/extension/col-name-relation.xml) with the rowType http://rs.catalogueoflife.org/terms/dwc/NameRelation 
+which mimicks the [ColDP name relation](https://github.com/CatalogueOfLife/coldp/blob/master/README.md#namerelation) entity.
 
 
 ### EML COL metadata
