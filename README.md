@@ -17,7 +17,7 @@ COL, in partnership with the [Global Biodiversity Information Facility (GBIF)](h
 
 ##  Github repositories
 
-CoL+ manages several github repositories within the [Species 2000 organisation](https://github.com/Sp2000) which are responsible for specific tasks.
+COL manages several github repositories within the [Catalogue of Life organisation](https://github.com/catalogueOfLife) which are responsible for specific tasks.
 Please check the individual repositories and their issue management for more details:
 
  - [general](https://github.com/CatalogueOfLife/general): the overarching project repository that contains:
