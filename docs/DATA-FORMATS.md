@@ -1,5 +1,5 @@
 # Data formats
-The Clearinghouse supports a variety of data formats for both imports and exports.
+ClecklistBank supports a variety of data formats for both imports and exports.
 The recommended format is ColDP.
 
 
