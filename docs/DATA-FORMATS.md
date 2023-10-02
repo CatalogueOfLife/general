@@ -1,5 +1,5 @@
 # Data formats
-ClecklistBank supports a variety of data formats for both imports and exports.
+ChlecklistBank supports a variety of data formats for both imports and exports.
 The recommended format is ColDP.
 
 
