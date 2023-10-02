@@ -1,5 +1,5 @@
 # Data formats
-ChlecklistBank supports a variety of data formats for both imports and exports.
+ChecklistBank supports a variety of data formats for both imports and exports.
 The recommended format is ColDP.
 
 
