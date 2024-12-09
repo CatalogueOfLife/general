@@ -24,7 +24,7 @@ Please check the individual repositories and their issue management for more det
     - issues reaching out to the [CoL Global Team](https://github.com/CatalogueOfLife/general/issues?q=is%3Aissue+is%3Aopen+label%3A%22Global+Team%22)
  - [coldp](https://github.com/CatalogueOfLife/coldp): Catalogue of Life Data Package specification of a richer & recommended exchange format for Catalogue of Life and ChecklistBank, replacing DwC-A and the CoL submission format (ACEF).
  - [backend](https://github.com/CatalogueOfLife/backend): the Java backend with various Maven modules that primarily provide standalone JSON webservices as shaded jars using the Dropwizard framework
-    - [API documentation](https://sp2000.github.io/colplus/api/api.html) using RAML
+    - [API documentation and examples](https://github.com/CatalogueOfLife/backend/blob/master/API.md)
  - [checklistbank](https://github.com/CatalogueOfLife/checklistbank): repository containing all frontend code written in [React](https://reactjs.org/) on top of the API services.
  - [portal](https://github.com/CatalogueOfLife/portal): the public facing website for Catalogue of Life built using [Jekyll](https://jekyllrb.com/)
  - [deploy](https://github.com/CatalogueOfLife/deploy): private repository with credentials and deploy scripts for GBIF
